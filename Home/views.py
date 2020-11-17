@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import render
 
 # Create your views here.
@@ -7,3 +8,7 @@ def index(request):
         return render(request, "Home/index2.html")
     else:
         return render(request, "Home/login.html")
+
+def logout_(request):
+    logout(request)
+    return render(request, "Home/login.html")
