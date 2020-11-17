@@ -1,8 +1,10 @@
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from uuslug import slugify
+from uuslug import uuslug as slugify
 
 
 class Usuario(models.Model):
@@ -14,8 +16,10 @@ class Usuario(models.Model):
         return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreComercial)
 
 class Tienda(models.Model):
-    usuario=models.CharField(max_length=300)
+    usuario=models.ForeignKey(Usuario,on_delete=models.CharField)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
+    descripcion=RichTextUploadingField(null=True,blank=True)
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.usuario.nombreComercial, instance=self)
