@@ -8,8 +8,6 @@ class Usuario(models.Model):
     nombreCompleto=models.CharField(max_length=60)
     nombreComercial=models.CharField(max_length=70)
 
-
-
 class Direccion(models.Model):
     usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
     direccion = models.CharField(max_length=60,null=True)
