@@ -6,6 +6,16 @@ from django.db import models
 # Create your models here.
 from uuslug import uuslug as slugify
 
+class Pais(models.Model):
+    nombre=models.CharField(max_length=60)
+
+class Provincia(models.Model):
+    pais=models.ForeignKey(Pais,on_delete=models.CASCADE)
+    nombre=models.CharField(max_length=60)
+
+class Ciudad(models.Model):
+    provincia=models.ForeignKey(Provincia,on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=60)
 
 class Usuario(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
@@ -27,5 +37,6 @@ class Tienda(models.Model):
 
 class Direccion(models.Model):
     tienda=models.ForeignKey(Tienda,on_delete=models.CASCADE,null=True)
+    ciudad=models.ForeignKey(Ciudad,on_delete=models.CASCADE,null=True,blank=True)
     direccion = models.CharField(max_length=60,null=True)
     telefono = models.CharField(max_length=10,blank=True)
