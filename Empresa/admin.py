@@ -20,7 +20,7 @@ class AdminTiendas(admin.ModelAdmin):
     list_display = Attr(Establecimiento)
     inlines = [DireccionInline]
 
-@admin.register(Usuario)
+@admin.register(UsuarioEmpresa)
 class AdminUsuario(admin.ModelAdmin):
-    list_display = Attr(Usuario)
-    list_display_links = Attr(Usuario)
+    list_display = Attr(UsuarioEmpresa)
+    list_display_links = Attr(UsuarioEmpresa)
