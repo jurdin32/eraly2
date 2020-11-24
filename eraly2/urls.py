@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 from Empresa.views import empresa, eliminar_empresa, direcciones
 from Home.views import *
+from Producto.views import productos, categorias, proveedores, kardex
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,10 @@ urlpatterns = [
     path("",index),
     path("business/",empresa),
     path("directions/",direcciones),
+    path("products/",productos),
+    path("category/",categorias),
+    path("suppliers/",proveedores),
+    path("kardex/", kardex),
     path("business/remove/",eliminar_empresa),
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
