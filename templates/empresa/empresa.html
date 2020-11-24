@@ -76,8 +76,8 @@
                     </button>
                 </div>
                 <div class="modal-body" style="text-align: center">
-                    <i class="fa fa-exclamation-triangle" style="font-size: 20px; color: darkorange"></i><br>
-                    <p id="mensaje">¿Esta seguro que desea Eliminar los establecimientos seleccionados?</p>
+                    <i class="fa fa-exclamation-triangle" style="font-size: 50px; color: darkorange"></i><br>
+                    <p id="mensaje"></p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
@@ -190,14 +190,20 @@
                 var URLactual = window.location.href;
                 console.log(URLactual + "remove/?ids=" + valores)
                 location.href = URLactual + "remove/?ids=" + valores
+                $("#eliminarRegistro").removeAttr('disabled')
             }
             else{
                 $("#eliminarRegistro").attr('disabled','disabled')
             }
         });
         $('#delete').click(function (){
-            if(valores.length>0) {
+            if(valores.length<=0){
                 $("#mensaje").text("Debe seleccionar al menos un registro")
+                $("#eliminarRegistro").attr('disabled','disabled')
+            }
+            else{
+                $("#mensaje").text("¿Esta seguro que desea Eliminar los establecimientos seleccionados?")
+                $("#eliminarRegistro").removeAttr('disabled')
             }
         })
     </script>
