@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Empresa.views import empresa
+from Empresa.views import empresa, eliminar_empresa
 from Home.views import *
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("",index),
     path("business/",empresa),
+    path("business/remove/",eliminar_empresa),
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

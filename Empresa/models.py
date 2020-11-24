@@ -15,6 +15,12 @@ class Establecimiento(models.Model):
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     descripcion = RichTextUploadingField(null=True, blank=True)
 
+    def __str__(self):
+        if self.nombreComercial:
+            return self.nombreComercial
+        else:
+            return self.representateLegal
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombreComercial, instance=self)
         super(Establecimiento, self).save(*args, **kwargs)
@@ -27,7 +33,7 @@ class Direccion(models.Model):
     telefono = models.CharField(max_length=10,blank=True)
 
     def __str__(self):
-        return "%s|%s|%s"%(self.ciudad.nombre,self.direccion,self.telefono)
+        return "Ciudad: %s <br>Dirección: %s <br> Teléfono: %s"%(self.ciudad.nombre,self.direccion,self.telefono)
 
 
 class UsuarioEmpresa(models.Model):

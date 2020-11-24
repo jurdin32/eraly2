@@ -3,6 +3,7 @@
     {% load static %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <!--Crear establecimientos -->
     <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -16,7 +17,7 @@
                         <div class="x_content">
                             <br>
                             <form class="form-label-left input_mask" method="post">
-                                    {% csrf_token %}
+                                {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left"
                                            value="{{ request.user.username }}" readonly name="username" id="username"
@@ -32,12 +33,14 @@
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="representateLegal" id="representateLegal"
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal"
+                                           id="representateLegal"
                                            placeholder="Representate Legal">
                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial" id="nombreComercial"
+                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial"
+                                           id="nombreComercial"
                                            placeholder="Nombre Comercial">
                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                 </div>
@@ -63,6 +66,26 @@
             </div>
         </div>
     </div>
+    <!--borrar establecimientos -->
+    <div class="modal fade bs-example-modal-lg" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Mensaje!</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 20px; color: darkorange"></i><br>
+                    <p id="mensaje">¿Esta seguro que desea Eliminar los establecimientos seleccionados?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                  <button type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12 ">
@@ -78,8 +101,10 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
                                         class="fa fa-file-o"> </i> Registra Nuevo</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-edit"> </i> Modificar Registro</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trash"> </i> Eliminar Registro</a>
+                                <a class="dropdown-item" href="/business/edit/"><i class="fa fa-edit"> </i> Modificar
+                                    Registro</a>
+                                <a class="dropdown-item" id="delete" href="#" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
+                                    Registro</a>
                             </div>
                         </li>
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -105,7 +130,6 @@
                                 <th class="column-title">RUC</th>
                                 <th class="column-title">Descripción</th>
                                 <th class="column-title">Dirección</th>
-                                <th class="column-title no-link last"><span class="nobr">Acciones</span>
                                 </th>
                                 <th class="bulk-actions" colspan="7">
                                     <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
@@ -116,22 +140,24 @@
 
                             <tbody>
                             {% for empresa in empresas %}
-                            <tr class="even pointer">
-                                <td class="a-center ">
-                                    <input type="checkbox" value="1" class="flat" name="table_records">
-                                </td>
-                                <td class=" ">{{ empresa.id }}</td>
-                                <td class=" ">{{ empresa.usuario.username }}</td>
-                                <td class=" ">{{ empresa.representateLegal}}</td>
-                                <td class=" ">{{ empresa.nombreComercial}}</td>
-                                <td class=" ">{{ empresa.ruc }}</td>
-                                <td class=" ">{{ empresa.descripcion|safe }}</td>
-                                <td class=" ">
-                                    {{ empresa.direccion_set }}
-                                </td>
-                                <td class=" last"><a href="#">View</a>
-                                </td>
-                            </tr>
+                                <tr class="even pointer">
+                                    <td class="a-center">
+                                        <input type="checkbox" value="{{ empresa.id }}" class="flat table_records"
+                                               name="table_records">
+                                    </td>
+                                    <td class=" ">{{ empresa.id }}</td>
+                                    <td class=" ">{{ empresa.usuario.username }}</td>
+                                    <td class=" ">{{ empresa.representateLegal }}</td>
+                                    <td class=" ">{{ empresa.nombreComercial }}</td>
+                                    <td class=" ">{{ empresa.ruc }}</td>
+                                    <td class=" ">{{ empresa.descripcion|safe }}</td>
+                                    <td class=" ">{% for direccion in empresa.direccion_set.all %}
+                                        {{ direccion|safe }} <a><i class="fa fa-edit"></i></a>
+                                        <a><i class="fa fa-trash"></i></a><br>
+                                        <div class="ln_solid"></div>
+                                    {% endfor %}
+                                    </td>
+                                </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -140,4 +166,39 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script_index %}
+    <script>
+        function removeItemFromArr(arr, item) {
+            var i = arr.indexOf(item);
+            if (i !== -1) {
+                arr.splice(i, 1);
+            }
+        }
+
+        let valores = []
+        $('.table_records').on('ifChecked', function (event) {
+            valores.push($(this).val())
+            console.log(valores)
+        });
+        $('.table_records').on('ifUnchecked', function () {
+            valores.splice( $.inArray($(this).val(),valores),1);
+            console.log(valores)
+        });
+        $("#eliminarRegistro").click(function (){
+            if(valores.length>0) {
+                var URLactual = window.location.href;
+                console.log(URLactual + "remove/?ids=" + valores)
+                location.href = URLactual + "remove/?ids=" + valores
+            }
+            else{
+                $("#eliminarRegistro").attr('disabled','disabled')
+            }
+        });
+        $('#delete').click(function (){
+            if(valores.length>0) {
+                $("#mensaje").text("Debe seleccionar al menos un registro")
+            }
+        })
+    </script>
 {% endblock %}

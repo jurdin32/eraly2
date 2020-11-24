@@ -1,3 +1,6 @@
+from http.client import HTTPResponse
+
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -15,5 +18,19 @@ def empresa(request):
         establecimiento.save()
     contexto={
         "empresas":Establecimiento.objects.filter(usuario=request.user)
+    }
+    return render(request, "empresa/empresa.html", contexto)
+
+def eliminar_empresa(request):
+    ids=[]
+    if(request.GET.get('ids')):
+        ids=request.GET['ids'].split()
+        for id in ids:
+            try:
+                Establecimiento.objects.get(id=id).delete()
+            except:
+                return HttpResponseRedirect("/business/")
+    contexto = {
+        "empresas": Establecimiento.objects.filter(usuario=request.user)
     }
     return render(request, "empresa/empresa.html", contexto)
