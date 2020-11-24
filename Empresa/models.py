@@ -8,7 +8,7 @@ from Home.models import Ciudad, Usuario
 
 
 class Establecimiento(models.Model):
-    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     ruc=models.CharField(max_length=13)
     nombreComercial=models.CharField(max_length=60)
     representateLegal=models.CharField(max_length=60)

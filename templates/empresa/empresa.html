@@ -1,5 +1,8 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
+    {% load static %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -9,17 +12,54 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h4>Text in a modal</h4>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
-                        augue laoreet rutrum faucibus dolor auctor.</p>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque
-                        nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                </div>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" method="post">
 
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left"
+                                           value="{{ request.user.username }}" readonly name="username" id="username"
+                                           placeholder="Username">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc"
+                                           placeholder="RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal" id="representateLegal"
+                                           placeholder="Representate Legal">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial" id="nombreComercial"
+                                           placeholder="Nombre Comercial">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                                    <script>
+                                        CKEDITOR.replace('descripcion');
+                                    </script>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,7 +76,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Opciones</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i class="fa fa-file-o"> </i> Registra Nuevo</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                        class="fa fa-file-o"> </i> Registra Nuevo</a>
                                 <a class="dropdown-item" href="#"><i class="fa fa-edit"> </i> Modificar Registro</a>
                                 <a class="dropdown-item" href="#"><i class="fa fa-trash"> </i> Eliminar Registro</a>
                             </div>
@@ -57,13 +98,13 @@
                                 <th>
                                     <input type="checkbox" id="check-all" class="flat">
                                 </th>
-                                <th class="column-title">Invoice</th>
-                                <th class="column-title">Invoice Date</th>
-                                <th class="column-title">Order</th>
-                                <th class="column-title">Bill to Name</th>
-                                <th class="column-title">Status</th>
-                                <th class="column-title">Amount</th>
-                                <th class="column-title no-link last"><span class="nobr">Action</span>
+                                <th class="column-title">Id</th>
+                                <th class="column-title">Username</th>
+                                <th class="column-title">Representante Legal</th>
+                                <th class="column-title">Nombre Comercial</th>
+                                <th class="column-title">RUC</th>
+                                <th class="column-title">Dirección</th>
+                                <th class="column-title no-link last"><span class="nobr">Acciones</span>
                                 </th>
                                 <th class="bulk-actions" colspan="7">
                                     <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
