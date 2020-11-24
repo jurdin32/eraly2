@@ -34,3 +34,7 @@ def eliminar_empresa(request):
         "empresas": Establecimiento.objects.filter(usuario=request.user)
     }
     return render(request, "empresa/empresa.html", contexto)
+
+
+def direcciones(request):
+    return render(request, "tables_dynamic.html")
