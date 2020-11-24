@@ -101,7 +101,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
                                         class="fa fa-file-o"> </i> Registra Nuevo</a>
-                                <a class="dropdown-item" href="/business/edit/"><i class="fa fa-edit"> </i> Modificar
+                                <a class="dropdown-item" href="#" id="modificar"><i class="fa fa-edit"> </i> Modificar
                                     Registro</a>
                                 <a class="dropdown-item" id="delete" href="#" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
                                     Registro</a>
@@ -156,6 +156,7 @@
                                         <a><i class="fa fa-trash"></i></a><br>
                                         <div class="ln_solid"></div>
                                     {% endfor %}
+                                    <a><i class="fa fa-plus-circle"></i></a><br>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -205,6 +206,7 @@
                 $("#mensaje").text("¿Esta seguro que desea Eliminar los establecimientos seleccionados?")
                 $("#eliminarRegistro").removeAttr('disabled')
             }
-        })
+        });
+
     </script>
 {% endblock %}
