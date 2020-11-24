@@ -1,0 +1,122 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de establecimientos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Text in a modal</h4>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel
+                        augue laoreet rutrum faucibus dolor auctor.</p>
+                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>Establecimientos Registrados</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Opciones</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i class="fa fa-file-o"> </i> Registra Nuevo</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-edit"> </i> Modificar Registro</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash"> </i> Eliminar Registro</a>
+                            </div>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+
+                    <p>Puede seleccionar uno o varios</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings">
+                                <th>
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="column-title">Invoice</th>
+                                <th class="column-title">Invoice Date</th>
+                                <th class="column-title">Order</th>
+                                <th class="column-title">Bill to Name</th>
+                                <th class="column-title">Status</th>
+                                <th class="column-title">Amount</th>
+                                <th class="column-title no-link last"><span class="nobr">Action</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
+                                            class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                    <input type="checkbox" value="1" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">121000040</td>
+                                <td class=" ">May 23, 2014 11:47:56 PM</td>
+                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                                <td class=" ">John Blank L</td>
+                                <td class=" ">Paid</td>
+                                <td class="a-right a-right ">$7.45</td>
+                                <td class=" last"><a href="#">View</a>
+                                </td>
+                            </tr>
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                    <input type="checkbox" value="2" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">121000040</td>
+                                <td class=" ">May 23, 2014 11:47:56 PM</td>
+                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                                <td class=" ">John Blank L</td>
+                                <td class=" ">Paid</td>
+                                <td class="a-right a-right ">$7.45</td>
+                                <td class=" last"><a href="#">View</a>
+                                </td>
+                            </tr>
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                    <input type="checkbox" value="3" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">121000040</td>
+                                <td class=" ">May 23, 2014 11:47:56 PM</td>
+                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                                <td class=" ">John Blank L</td>
+                                <td class=" ">Paid</td>
+                                <td class="a-right a-right ">$7.45</td>
+                                <td class=" last"><a href="#">View</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'channels',
     'ckeditor',
+    'Empresa',
     'ckeditor_uploader',
     'Home','Producto',
 ]
@@ -75,7 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'eraly2.wsgi.application'
-
+#ASGI_APPLICATION = "eraly2.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

@@ -19,23 +19,17 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{% static '/vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
 
+    <link href="{% static '/vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/static/favicon_eraly.png"/>
     <!-- Custom Theme Style -->
     <link href="{% static '/build/css/custom.min.css' %}" rel="stylesheet">
     <style>
-        body{
-            background-color: white;
-        }
-        .left_col, .sidebar-footer{
-            background-color: #125CA1;
-        }
-        .nav_title, .sidebar-footer>a, .sidebar-footer>a:hover{
-            background-color: #146ABB;
-            color: whitesmoke;
-        }
-        .side-menu{
-            background-color: #125CA1;
+       .nav li li.current-page a{
+            color: #e4c010;
         }
     </style>
+
 </head>
 
 <body class="nav-md">
@@ -79,13 +73,22 @@
                                 </li>
                             </ul>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-product-hunt"></i> Productos <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-product-hunt"></i> Productos <span
+                                        class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/proveedores/">Proveedores</a></li>
                                         <li><a href="/category/">Categorías</a></li>
-                                        <li><a href="/">Productos</a></li>
-                                        <li><a href="/">Kardex</a></li>
-                                        <li><a href="/">Reporte Gráfico</a></li>
+                                        <li><a href="/products/">Productos</a></li>
+                                        <li><a href="/kardex/">Kardex</a></li>
+                                        <li><a href="/graphic_report/">Reporte Gráfico</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-file-o"></i> Ventas <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/proformas/">Proformas</a></li>
+                                        <li><a href="/Facturacion/">Facturación</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -111,6 +114,12 @@
                 </div>
                 <nav class="nav navbar-nav">
                     <ul class=" navbar-right">
+                        <li class="nav-item dropdown open" style="padding-left: 15px;">
+                            <a href="javascript:;" class="user-profile" aria-haspopup="true"
+                               id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                {{ request.user.username }}
+                            </a>
+                        </li>
                         <li role="presentation" class="nav-item dropdown open">
                             <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1"
                                data-toggle="dropdown" aria-expanded="false">
@@ -121,7 +130,7 @@
                                 aria-labelledby="navbarDropdown1">
                                 <li class="nav-item">
                                     <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
+
                                         <span>
                             <span>{{ request.user }}</span>
                             <span class="time">3 mins ago</span>
@@ -133,7 +142,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
                                         <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -145,7 +153,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
                                         <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -157,7 +164,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
                                         <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -627,6 +633,7 @@
 <script src="{% static '/vendors/nprogress/nprogress.js' %}"></script>
 <!-- Chart.js -->
 <script src="{% static '/vendors/Chart.js/dist/Chart.min.js' %}"></script>
+<script src="{% static '/vendors/iCheck/icheck.min.js' %}"></script>
 <!-- jQuery Sparklines -->
 <script src="{% static '/vendors/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
 <!-- Flot -->
@@ -644,6 +651,7 @@
 <!-- bootstrap-daterangepicker -->
 <script src="{% static '/vendors/moment/min/moment.min.js' %}"></script>
 <script src="{% static '/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="{% static '/build/js/custom.min.js' %}"></script>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Home.models import Usuario, Direccion, Tienda, Pais, Provincia, Ciudad
+from Home.models import Usuario, Pais, Provincia, Ciudad
 from eraly2.snippers import Attr
 
 
@@ -9,21 +9,6 @@ from eraly2.snippers import Attr
 class AdminUsuario(admin.ModelAdmin):
     list_display = Attr(Usuario)
     list_display_links = Attr(Usuario)
-
-class DireccionInline(admin.StackedInline):
-    extra = 0
-    model = Direccion
-
-@admin.register(Direccion)
-class AdminDirecciones(admin.ModelAdmin):
-    list_display = Attr(Direccion)
-    list_display_links = Attr(Direccion)
-
-@admin.register(Tienda)
-class AdminTiendas(admin.ModelAdmin):
-    list_display_links = Attr(Tienda)
-    list_display = Attr(Tienda)
-    inlines = [DireccionInline]
 
 class ProvinciaInline(admin.StackedInline):
     model = Provincia
