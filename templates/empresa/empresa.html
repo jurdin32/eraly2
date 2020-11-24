@@ -126,7 +126,10 @@
                                 <td class=" ">{{ empresa.nombreComercial}}</td>
                                 <td class=" ">{{ empresa.ruc }}</td>
                                 <td class=" ">{{ empresa.descripcion|safe }}</td>
-                                <td class=" ">{{ empresa.direccion_set }}</td>
+                                <td class=" ">{% for direccion in empresa.direccion_set %}
+                                    {{ direccion }}
+                                {% endfor %}
+                                </td>
                                 <td class=" last"><a href="#">View</a>
                                 </td>
                             </tr>

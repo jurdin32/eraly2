@@ -26,6 +26,9 @@ class Direccion(models.Model):
     direccion = models.CharField(max_length=60,null=True)
     telefono = models.CharField(max_length=10,blank=True)
 
+    def __str__(self):
+        return "%s|%s|%s"%(self.ciudad.nombre,self.direccion,self.telefono)
+
 
 class UsuarioEmpresa(models.Model):
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
