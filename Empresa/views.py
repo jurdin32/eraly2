@@ -37,4 +37,4 @@ def eliminar_empresa(request):
 
 
 def direcciones(request):
-    return render(request, "tables_dynamic.html")
+    return render(request, "empresa/direcciones.html")
