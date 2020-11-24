@@ -16,7 +16,7 @@
                         <div class="x_content">
                             <br>
                             <form class="form-label-left input_mask" method="post">
-
+                                    {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left"
                                            value="{{ request.user.username }}" readonly name="username" id="username"
@@ -103,6 +103,7 @@
                                 <th class="column-title">Representante Legal</th>
                                 <th class="column-title">Nombre Comercial</th>
                                 <th class="column-title">RUC</th>
+                                <th class="column-title">Descripción</th>
                                 <th class="column-title">Dirección</th>
                                 <th class="column-title no-link last"><span class="nobr">Acciones</span>
                                 </th>
@@ -114,45 +115,22 @@
                             </thead>
 
                             <tbody>
+                            {% for empresa in empresas %}
                             <tr class="even pointer">
                                 <td class="a-center ">
                                     <input type="checkbox" value="1" class="flat" name="table_records">
                                 </td>
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM</td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class="a-right a-right ">$7.45</td>
+                                <td class=" ">{{ empresa.id }}</td>
+                                <td class=" ">{{ empresa.usuario.username }}</td>
+                                <td class=" ">{{ empresa.representateLegal}}</td>
+                                <td class=" ">{{ empresa.nombreComercial}}</td>
+                                <td class=" ">{{ empresa.ruc }}</td>
+                                <td class=" ">{{ empresa.descripcion|safe }}</td>
+                                <td class=" ">{{ empresa.direccion_set }}</td>
                                 <td class=" last"><a href="#">View</a>
                                 </td>
                             </tr>
-                            <tr class="even pointer">
-                                <td class="a-center ">
-                                    <input type="checkbox" value="2" class="flat" name="table_records">
-                                </td>
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM</td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class="a-right a-right ">$7.45</td>
-                                <td class=" last"><a href="#">View</a>
-                                </td>
-                            </tr>
-                            <tr class="even pointer">
-                                <td class="a-center ">
-                                    <input type="checkbox" value="3" class="flat" name="table_records">
-                                </td>
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM</td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class="a-right a-right ">$7.45</td>
-                                <td class=" last"><a href="#">View</a>
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
