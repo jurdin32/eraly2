@@ -36,5 +36,5 @@ class UsuarioEmpresa(models.Model):
     nombreCompleto=models.CharField(max_length=60)
     cedula=models.CharField(max_length=10,null=True,blank=True)
 
-    # def __str__(self):
-    #     return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)
+    def __str__(self):
+        return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)
