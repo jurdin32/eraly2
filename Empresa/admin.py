@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Empresa.models import Direccion, Establecimiento, Usuario
+from Empresa.models import *
 from eraly2.snippers import Attr
 
 
