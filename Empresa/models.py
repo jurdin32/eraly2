@@ -4,7 +4,7 @@ from django.db import models
 from uuslug import uuslug as slugify
 
 # Create your models here.
-from Home.models import Ciudad, Usuario
+from Home.models import Ciudad
 
 
 class Establecimiento(models.Model):
@@ -25,3 +25,12 @@ class Direccion(models.Model):
     ciudad=models.ForeignKey(Ciudad,on_delete=models.CASCADE,null=True,blank=True)
     direccion = models.CharField(max_length=60,null=True)
     telefono = models.CharField(max_length=10,blank=True)
+
+
+class Usuario(models.Model):
+    empresa=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
+    nombreCompleto=models.CharField(max_length=60)
+    cedula=models.CharField(max_length=10,null=True,blank=True)
+
+    def __str__(self):
+        return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)

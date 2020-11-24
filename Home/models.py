@@ -15,11 +15,3 @@ class Provincia(models.Model):
 class Ciudad(models.Model):
     provincia=models.ForeignKey(Provincia,on_delete=models.CASCADE)
     nombre = models.CharField(max_length=60)
-
-class Usuario(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
-    nombreCompleto=models.CharField(max_length=60)
-    cedula=models.CharField(max_length=10,null=True,blank=True)
-
-    def __str__(self):
-        return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)

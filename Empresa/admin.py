@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Empresa.models import Direccion, Establecimiento
+from Empresa.models import Direccion, Establecimiento, Usuario
 from eraly2.snippers import Attr
 
 
@@ -19,3 +19,8 @@ class AdminTiendas(admin.ModelAdmin):
     list_display_links = Attr(Establecimiento)
     list_display = Attr(Establecimiento)
     inlines = [DireccionInline]
+
+@admin.register(Usuario)
+class AdminUsuario(admin.ModelAdmin):
+    list_display = Attr(Usuario)
+    list_display_links = Attr(Usuario)

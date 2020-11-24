@@ -1,14 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from Home.models import Usuario, Pais, Provincia, Ciudad
+from Home.models import  Pais, Provincia, Ciudad
 from eraly2.snippers import Attr
 
-
-@admin.register(Usuario)
-class AdminUsuario(admin.ModelAdmin):
-    list_display = Attr(Usuario)
-    list_display_links = Attr(Usuario)
 
 class ProvinciaInline(admin.StackedInline):
     model = Provincia
