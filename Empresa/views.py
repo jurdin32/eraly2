@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -20,6 +20,12 @@ def empresa(request):
         "empresas":Establecimiento.objects.filter(usuario=request.user)
     }
     return render(request, "empresa/empresa.html", contexto)
+
+def modificar_empresa(request):
+    est=Establecimiento.objects.get(id=request.GET.get("est"))
+    response=JsonResponse({"data":est})
+    print(response.content)
+    return response.content
 
 def eliminar_empresa(request):
     ids=[]

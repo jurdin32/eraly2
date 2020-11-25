@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Empresa.views import empresa, eliminar_empresa, direcciones
+from Empresa.views import empresa, eliminar_empresa, direcciones, modificar_empresa
 from Home.views import *
 from Producto.views import productos, categorias, proveedores, kardex
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("",index),
     path("business/",empresa),
+    path("business/edit/",modificar_empresa),
     path("directions/",direcciones),
     path("products/",productos),
     path("category/",categorias),

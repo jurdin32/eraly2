@@ -3,7 +3,7 @@
     {% load static %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-    <!--Crear establecimientos -->
+    <!--Crear y modificar establecimientos -->
     <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -16,7 +16,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br>
-                            <form class="form-label-left input_mask" method="post">
+                            <form id="formRegistrar" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left"
@@ -101,7 +101,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
                                         class="fa fa-file-o"> </i> Registra Nuevo</a>
-                                <a class="dropdown-item" href="#" id="modificar"><i class="fa fa-edit"> </i> Modificar
+                                <a class="dropdown-item" href="#" id="modificarRegistro"><i class="fa fa-edit"> </i> Modificar
                                     Registro</a>
                                 <a class="dropdown-item" id="delete" href="#" data-toggle="modal"
                                    data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
@@ -190,17 +190,39 @@
                 console.log(URLactual + "remove/?ids=" + valores)
                 location.href = URLactual + "remove/?ids=" + valores
                 $("#eliminarRegistro").removeAttr('disabled')
+                $("#eliminarRegistro").show()
             } else {
+                $("#eliminarRegistro").show()
                 $("#eliminarRegistro").attr('disabled', 'disabled')
             }
         });
         $('#delete').click(function () {
             if (valores.length <= 0) {
                 $("#mensaje").text("Debe seleccionar al menos un registro")
+                $("#eliminarRegistro").show()
                 $("#eliminarRegistro").attr('disabled', 'disabled')
             } else {
                 $("#mensaje").text("¿Esta seguro que desea Eliminar los establecimientos seleccionados?")
+                $("#eliminarRegistro").show()
                 $("#eliminarRegistro").removeAttr('disabled')
+
+            }
+        });
+        $("#modificarRegistro").click(function(){
+            if (valores.length == 1) {
+                var URLactual = window.location.href;
+                URLactual=URLactual+"edit/?est="+valores
+               $('#registro').modal('show')
+                $("#formRegistrar").attr("action",URLactual)
+                $.get(URLactual,function(data){
+                    console.log(data)
+                })
+
+            }
+            else{
+                $("#eliminar").modal('show')
+                 $("#mensaje").text("Para editar solo debe seleccionar un registro, es posible que haya seleccionado más de uno, o no selecciono nínguno")
+                $("#eliminarRegistro").hide()
             }
         });
 
