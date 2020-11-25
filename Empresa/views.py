@@ -1,3 +1,4 @@
+import json
 from http.client import HTTPResponse
 
 from django.http import HttpResponseRedirect, JsonResponse
@@ -23,9 +24,16 @@ def empresa(request):
 
 def modificar_empresa(request):
     est=Establecimiento.objects.get(id=request.GET.get("est"))
-    response=JsonResponse({"data":est})
-    print(response.content)
-    return response.content
+    establecimiento={
+        'id':est.id,
+        'ruc':est.ruc,
+        'nombreComercial':est.nombreComercial,
+        'representanteLegal':est.representateLegal,
+        'descripcion':est.descripcion
+    }
+    json_object = json.dumps(establecimiento, indent = 4)
+    print(json_object)
+    return HTTPResponse(json_object)
 
 def eliminar_empresa(request):
     ids=[]
