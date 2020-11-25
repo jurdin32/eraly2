@@ -101,8 +101,6 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
                                         class="fa fa-file-o"> </i> Registra Nuevo</a>
-                                <a class="dropdown-item" href="#" id="modificarRegistro"><i class="fa fa-edit"> </i> Modificar
-                                    Registro</a>
                                 <a class="dropdown-item" id="delete" href="#" data-toggle="modal"
                                    data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
                                     Registro</a>
@@ -131,8 +129,9 @@
                                 <th class="column-title">RUC</th>
                                 <th class="column-title">Descripción</th>
                                 <th class="column-title text-center">Dirección</th>
+                                <th class="column-title text-center">Opciones</th>
                                 </th>
-                                <th class="bulk-actions" colspan="7">
+                                <th class="bulk-actions" colspan="8">
                                     <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
                                             class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                 </th>
@@ -142,19 +141,22 @@
                             <tbody>
                             {% for empresa in empresas %}
                                 <tr class="even pointer">
-                                    <td class="a-center">
+                                    <td class="a-center" style="vertical-align: middle">
                                         <input type="checkbox" value="{{ empresa.id }}" class="flat table_records"
                                                name="table_records">
                                     </td>
-                                    <td class=" ">{{ empresa.id }}</td>
-                                    <td class=" ">{{ empresa.usuario.username }}</td>
-                                    <td class=" ">{{ empresa.representateLegal }}</td>
-                                    <td class=" ">{{ empresa.nombreComercial }}</td>
-                                    <td class=" ">{{ empresa.ruc }}</td>
-                                    <td class=" ">{{ empresa.descripcion|safe }}</td>
+                                    <td class=" " style="vertical-align: middle">{{ empresa.id }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.usuario.username }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.representateLegal }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.nombreComercial }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.ruc }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.descripcion|safe }}</td>
                                     <td class="text-center" style="vertical-align: middle">{% for direccion in empresa.direccion_set.all %}
                                         {{ direccion|safe }}
                                     {% endfor %}
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <a href="/business/edit/{{ empresa.id }}"><i class="fa fa-edit"></i> </a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -205,26 +207,7 @@
                 $("#mensaje").text("¿Esta seguro que desea Eliminar los establecimientos seleccionados?")
                 $("#eliminarRegistro").show()
                 $("#eliminarRegistro").removeAttr('disabled')
-
             }
         });
-        $("#modificarRegistro").click(function(){
-            if (valores.length == 1) {
-                var URLactual = window.location.href;
-                URLactual=URLactual+"edit/?est="+valores
-               $('#registro').modal('show')
-                $("#formRegistrar").attr("action",URLactual)
-                $.get(URLactual,function(data){
-                    console.log(data)
-                })
-
-            }
-            else{
-                $("#eliminar").modal('show')
-                 $("#mensaje").text("Para editar solo debe seleccionar un registro, es posible que haya seleccionado más de uno, o no selecciono nínguno")
-                $("#eliminarRegistro").hide()
-            }
-        });
-
     </script>
 {% endblock %}

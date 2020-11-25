@@ -1,7 +1,8 @@
 import json
-from http.client import HTTPResponse
 
-from django.http import HttpResponseRedirect, JsonResponse
+from django.core import serializers
+from django.core.serializers import serialize
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,18 +23,13 @@ def empresa(request):
     }
     return render(request, "empresa/empresa.html", contexto)
 
-def modificar_empresa(request):
-    est=Establecimiento.objects.get(id=request.GET.get("est"))
-    establecimiento={
-        'id':est.id,
-        'ruc':est.ruc,
-        'nombreComercial':est.nombreComercial,
-        'representanteLegal':est.representateLegal,
-        'descripcion':est.descripcion
+def modificar_empresa(request,id):
+    if request.POST:
+        print(request.POST)
+    contexto={
+        "establecimiento":Establecimiento.objects.get(id=id)
     }
-    json_object = json.dumps(establecimiento, indent = 4)
-    print(json_object)
-    return HTTPResponse(json_object)
+    return render(request, 'empresa/editarEmpresa.html')
 
 def eliminar_empresa(request):
     ids=[]

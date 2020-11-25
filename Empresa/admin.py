@@ -1,3 +1,4 @@
+import admin_thumbnails
 from django.contrib import admin
 
 # Register your models here.
@@ -15,9 +16,10 @@ class AdminDirecciones(admin.ModelAdmin):
     list_display_links = Attr(Direccion)
 
 @admin.register(Establecimiento)
+@admin_thumbnails.thumbnail('logo')
 class AdminTiendas(admin.ModelAdmin):
     list_display_links = Attr(Establecimiento)
-    list_display = Attr(Establecimiento)
+    list_display = ["previa"]+Attr(Establecimiento)
     inlines = [DireccionInline]
 
 @admin.register(UsuarioEmpresa)

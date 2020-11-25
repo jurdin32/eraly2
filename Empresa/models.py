@@ -1,6 +1,7 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.safestring import mark_safe
 from uuslug import uuslug as slugify
 
 # Create your models here.
@@ -8,12 +9,19 @@ from Home.models import Ciudad
 
 
 class Establecimiento(models.Model):
+    logo=models.ImageField(upload_to="logos/establecimientos",null=True,blank=True)
+    banner=models.ImageField(upload_to="banner/establecimientos",null=True,blank=True)
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     ruc=models.CharField(max_length=13)
     nombreComercial=models.CharField(max_length=60)
     representateLegal=models.CharField(max_length=60)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     descripcion = RichTextUploadingField(null=True, blank=True)
+
+    def previa(self):
+        return mark_safe('<a href="/admin/Empresa/establecimiento/%s/change/"><img src="/media/%s" style="width: 50px" alt=""></a>'%(self.id,self.logo))
+
+
 
     def __str__(self):
         if self.nombreComercial:

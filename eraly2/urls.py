@@ -27,7 +27,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("",index),
     path("business/",empresa),
-    path("business/edit/",modificar_empresa),
+    path("business/edit/<int:id>/",modificar_empresa),
     path("directions/",direcciones),
     path("products/",productos),
     path("category/",categorias),
