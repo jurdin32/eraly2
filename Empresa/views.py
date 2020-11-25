@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Empresa.models import Establecimiento
+from Empresa.models import Establecimiento, Direccion
 
 
 def empresa(request):
@@ -37,4 +37,7 @@ def eliminar_empresa(request):
 
 
 def direcciones(request):
-    return render(request, "empresa/direcciones.html")
+    contexto={
+       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user)
+    }
+    return render(request, "empresa/direcciones.html",contexto)

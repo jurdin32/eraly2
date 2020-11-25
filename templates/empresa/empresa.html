@@ -80,8 +80,8 @@
                     <p id="mensaje"></p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                  <button type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</button>
                 </div>
             </div>
         </div>
@@ -103,7 +103,8 @@
                                         class="fa fa-file-o"> </i> Registra Nuevo</a>
                                 <a class="dropdown-item" href="#" id="modificar"><i class="fa fa-edit"> </i> Modificar
                                     Registro</a>
-                                <a class="dropdown-item" id="delete" href="#" data-toggle="modal" data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
+                                <a class="dropdown-item" id="delete" href="#" data-toggle="modal"
+                                   data-target="#eliminar"><i class="fa fa-trash"> </i> Eliminar
                                     Registro</a>
                             </div>
                         </li>
@@ -129,7 +130,7 @@
                                 <th class="column-title">Nombre Comercial</th>
                                 <th class="column-title">RUC</th>
                                 <th class="column-title">Descripción</th>
-                                <th class="column-title">Dirección</th>
+                                <th class="column-title text-center">Dirección</th>
                                 </th>
                                 <th class="bulk-actions" colspan="7">
                                     <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
@@ -151,12 +152,9 @@
                                     <td class=" ">{{ empresa.nombreComercial }}</td>
                                     <td class=" ">{{ empresa.ruc }}</td>
                                     <td class=" ">{{ empresa.descripcion|safe }}</td>
-                                    <td class=" ">{% for direccion in empresa.direccion_set.all %}
-                                        {{ direccion|safe }} <a><i class="fa fa-edit"></i></a>
-                                        <a><i class="fa fa-trash"></i></a><br>
-                                        <div class="ln_solid"></div>
+                                    <td class="text-center" style="vertical-align: middle">{% for direccion in empresa.direccion_set.all %}
+                                        {{ direccion|safe }}
                                     {% endfor %}
-                                    <a><i class="fa fa-plus-circle"></i></a><br>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -183,26 +181,24 @@
             console.log(valores)
         });
         $('.table_records').on('ifUnchecked', function () {
-            valores.splice( $.inArray($(this).val(),valores),1);
+            valores.splice($.inArray($(this).val(), valores), 1);
             console.log(valores)
         });
-        $("#eliminarRegistro").click(function (){
-            if(valores.length>0) {
+        $("#eliminarRegistro").click(function () {
+            if (valores.length > 0) {
                 var URLactual = window.location.href;
                 console.log(URLactual + "remove/?ids=" + valores)
                 location.href = URLactual + "remove/?ids=" + valores
                 $("#eliminarRegistro").removeAttr('disabled')
-            }
-            else{
-                $("#eliminarRegistro").attr('disabled','disabled')
+            } else {
+                $("#eliminarRegistro").attr('disabled', 'disabled')
             }
         });
-        $('#delete').click(function (){
-            if(valores.length<=0){
+        $('#delete').click(function () {
+            if (valores.length <= 0) {
                 $("#mensaje").text("Debe seleccionar al menos un registro")
-                $("#eliminarRegistro").attr('disabled','disabled')
-            }
-            else{
+                $("#eliminarRegistro").attr('disabled', 'disabled')
+            } else {
                 $("#mensaje").text("¿Esta seguro que desea Eliminar los establecimientos seleccionados?")
                 $("#eliminarRegistro").removeAttr('disabled')
             }

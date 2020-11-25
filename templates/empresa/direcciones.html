@@ -18,25 +18,29 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
+                                        <thead style="background-color: #415468; color: whitesmoke">
+                                            <tr>
+                                                <th>Establecimiento</th>
+                                                <th>Pais</th>
+                                                <th>Provincia</th>
+                                                <th>Ciudad</th>
+                                                <th>Dirección</th>
+                                                <th>Teléfono</th>
+                                                <th>Opciones</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        {% for direccion in direcciones %}
+                                            <tr>
+                                                <td>{{ direccion.establecimiento.nombreComercial }} - {{ direccion.establecimiento.representateLegal }}</td>
+                                                <td>{{ direccion.ciudad.provincia.pais}}</td>
+                                                <td>{{ direccion.ciudad.provincia}}</td>
+                                                <td>{{ direccion.ciudad}}</td>
+                                                <td>{{ direccion.direccion}}</td>
+                                                <td>{{direccion.telefono}}</td>
+                                                <td></td>
+                                            </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
