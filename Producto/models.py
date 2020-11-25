@@ -39,21 +39,8 @@ class Subcategorias(models.Model):
     class Meta:
         verbose_name_plural = "2. Subcategorias "
 
-class DetallesProducto(models.Model):
-    icono=models.CharField(max_length=10)
-    nombre=models.CharField(max_length=50)
-    descripcion=models.CharField(max_length=100)
-    categoria_id=models.ForeignKey(Categorias, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s | %s'%(self.nombre, self.categoria_id)
-
-
-    class Meta:
-        verbose_name_plural = "3. Detalles del Producto "
-
 class Productos(models.Model):
-    subcategoria_id=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
+    subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
     nombre=models.CharField(max_length=100)
     talla=models.CharField(max_length=10)
     dimension=models.CharField(max_length=50)
@@ -64,10 +51,24 @@ class Productos(models.Model):
         return '%s'%(self.nombre)
 
     class Meta:
-        verbose_name_plural = "4. Producto "
+        verbose_name_plural = "3. Producto "
+
+
+class DetallesProducto(models.Model):
+    producto=models.ForeignKey(Productos,on_delete=models.CASCADE,null=True,blank=True)
+    precioCompra=models.DecimalField(max_digits=9,decimal_places=4,default=0)
+    iva=models.DecimalField(max_digits=9,decimal_places=4,default=0)
+    pc=models.DecimalField(max_digits=9,decimal_places=4,default=0)
+
+    def __str__(self):
+        return '%s | %s'%(self.producto.nombre, self.pc)
+
+
+    class Meta:
+        verbose_name_plural = "4. Detalles del Producto "
 
 class Colores(models.Model):
-    producto_id=models.ForeignKey(Productos, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     nombre=models.CharField(max_length=50)
     codigoColor=models.CharField(max_length=50)
 
@@ -78,16 +79,16 @@ class Colores(models.Model):
         verbose_name_plural = "5. Color Producto "
 
 class Precios(models.Model):
-    producto_id=models.ForeignKey(Productos, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     precioVenta=models.DecimalField(max_digits=5, decimal_places=2)
     detalle=models.CharField(max_length=50)
 
 
     class Meta:
-        verbose_name_plural = "6. Color Producto "
+        verbose_name_plural = "6. Precios Producto "
 
 class Kardex(models.Model):
-    producto_id=models.ForeignKey(Productos, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     tipo=models.CharField(max_length=50)
     fecha=models.DateTimeField(auto_now = True)
     cantidad=models.IntegerField(default=0)
