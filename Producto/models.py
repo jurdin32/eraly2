@@ -31,10 +31,6 @@ class ActividadProveedor(models.Model):
     nombre = models.CharField(max_length=60)
     detalle = models.TextField(max_length=200)
 
-# class DatosProveedor(models.Model):
-#     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
-#     tipo = models.CharField(choices=contacto_chosse, max_length=30, null=True, blank=True)
-#     detalle = models.TextField(max_length=300)
 
 class Categorias(models.Model):
     icono=models.CharField(max_length=10)

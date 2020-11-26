@@ -1,9 +1,26 @@
 from django.contrib import admin
 
 # Register your models here.
-from Producto.models import Proveedor, DireccionProveedor, Categorias, Subcategorias, DetallesProducto, Productos, \
-    Colores, Precios, Kardex, ImagenesProducto
+from Producto.models import *
 from eraly2.snippers import Attr
+
+
+@admin.register(Proveedor)
+class Proveedor(admin.ModelAdmin):
+    list_display = Attr(Proveedor)
+    list_display_links = Attr(Proveedor)
+
+@admin.register(TipoProveedor)
+class TipoProveedor(admin.ModelAdmin):
+    list_display = Attr(TipoProveedor)
+    list_display_links = Attr(TipoProveedor)
+
+@admin.register(ActividadProveedor)
+class ActividadProveedor(admin.ModelAdmin):
+    list_display = Attr(ActividadProveedor)
+    list_display_links = Attr(ActividadProveedor)
+
+
 
 class DireccionInline(admin.StackedInline):
     model = DireccionProveedor
@@ -14,6 +31,7 @@ class AdminProveedor(admin.ModelAdmin):
     list_display = Attr(Proveedor)
     list_display_links = Attr(Proveedor)
     inlines = [DireccionInline]
+
 
 @admin.register(Categorias)
 class Categorias(admin.ModelAdmin):
