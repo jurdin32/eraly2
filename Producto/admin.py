@@ -4,19 +4,13 @@ from django.contrib import admin
 from Producto.models import *
 from eraly2.snippers import Attr
 
-
-@admin.register(Proveedor)
-class Proveedor(admin.ModelAdmin):
-    list_display = Attr(Proveedor)
-    list_display_links = Attr(Proveedor)
-
 @admin.register(TipoProveedor)
-class TipoProveedor(admin.ModelAdmin):
+class AdminTipoProveedor(admin.ModelAdmin):
     list_display = Attr(TipoProveedor)
     list_display_links = Attr(TipoProveedor)
 
 @admin.register(ActividadProveedor)
-class ActividadProveedor(admin.ModelAdmin):
+class AdminActividadProveedor(admin.ModelAdmin):
     list_display = Attr(ActividadProveedor)
     list_display_links = Attr(ActividadProveedor)
 
