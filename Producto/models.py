@@ -16,10 +16,10 @@ tipo_proveedor_chosse=(
 class Proveedor(models.Model):
     logo=models.ImageField(upload_to='proveedor', null=True, blank=True, help_text='100x100')
     ruc=models.IntegerField(max_length=13)
-    nombre_fantasia=models.CharField(max_length=60)
-    representante=models.CharField(max_length=60)
-    tipo_proveedor=models.CharField(max_length=60)
-    tipo_actividad=models.CharField(max_length=60)
+    nombre_fantasia=models.CharField(max_length=60,null=True,blank=True)
+    representante=models.CharField(max_length=60,null=True,blank=True)
+    tipo_proveedor=models.CharField(max_length=60,null=True,blank=True)
+    tipo_actividad=models.CharField(max_length=60,null=True,blank=True)
     detalle=models.CharField(max_length=60)
 
 class TipoProveedor(models.Model):
@@ -51,10 +51,11 @@ class DireccionProveedor(models.Model):
 
 
 class Subcategorias(models.Model):
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     icono=models.CharField(max_length=10)
     nombre=models.CharField(max_length=50)
     descripcion=models.CharField(max_length=100)
-    categoria_id=models.ForeignKey(Categorias, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return '%s' % (self.categoria_id)
@@ -122,7 +123,7 @@ class Kardex(models.Model):
         verbose_name_plural = "7. Kardex "
 
 class ImagenesProducto(models.Model):
-    producto_id=models.ForeignKey(Productos, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='100x100')
 
     def __str__(self):
