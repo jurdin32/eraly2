@@ -44,6 +44,7 @@ class DireccionInline(admin.StackedInline):
     extra = 0
 
 
+
 @admin.register(Proveedor)
 class AdminProveedor(admin.ModelAdmin):
     list_display = Attr(Proveedor)
