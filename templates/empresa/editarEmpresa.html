@@ -1,1 +1,108 @@
 {% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {% load static %}
+    <div class="">
+        <div class="row">
+
+						<div class="col-md-6 col-sm-6 offset-md-3">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2><small>Registro de establecimientos</small></h2>
+									<ul class="nav navbar-right panel_toolbox">
+                                        <li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevas Direcciones</a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a></li>
+											</ul>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre de usuario <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="username" value="{{ request.user.username }}" readonly required="required" class="form-control ">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Acceso <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="slug"  readonly class="form-control" placeholder="Se crea automáticamente">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">RUC <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="ruc" name="ruc" maxlength="13" required="required" class="form-control">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nombre Comercial</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="nombreComercial" class="form-control" type="text" name="nombreComercial">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante Legal</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="representanteLegal" class="form-control" type="text" name="representanteLegal">
+											</div>
+										</div>
+
+										<div class="ln_solid"></div>
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<button class="btn btn-success" type="reset">Limpiar Formulario</button>
+												<button type="submit" class="btn btn-danger">Guardar</button>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Dropzone multiple file uploader</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <p>Drag multiple files to the box below for multi upload or click to select files. This is for
+                            demonstration purposes only, the files are not uploaded to any server.</p>
+                        <form action="form_upload.html" class="dropzone"></form>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_index %}
+    <script src="{% static '/vendors/dropzone/dist/min/dropzone.min.js' %}"></script>
+{% endblock %}
