@@ -54,8 +54,6 @@ class DireccionProveedor(models.Model):
     telefono=models.CharField(max_length=10)
 
 
-
-
 class Subcategorias(models.Model):
     icono=models.CharField(max_length=10)
     nombre=models.CharField(max_length=50)
