@@ -6,20 +6,21 @@ from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from Empresa.models import Establecimiento, Direccion
+from Empresa.models import Establecimiento, Direccion, UsuarioEmpresa
 
 
 def empresa(request):
     if request.POST:
         print(request.POST)
-        establecimiento=Establecimiento(usuario=request.user,ruc=request.POST['ruc'],
+        establecimiento=Establecimiento.objects.create(usuario=request.user,ruc=request.POST['ruc'],
                         representateLegal=request.POST['representateLegal'],
                         nombreComercial=request.POST['nombreComercial'],
                         descripcion=request.POST['descripcion']
                         )
         establecimiento.save()
+        UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
     contexto={
-        "empresas":Establecimiento.objects.filter(usuario=request.user)
+        "empresas":UsuarioEmpresa.objects.filter(user=request.user)
     }
     return render(request, "empresa/empresa.html", contexto)
 
@@ -29,7 +30,7 @@ def modificar_empresa(request,id):
     contexto={
         "establecimiento":Establecimiento.objects.get(id=id)
     }
-    return render(request, 'empresa/editarEmpresa.html')
+    return render(request, 'empresa/editarEmpresa.html',contexto)
 
 def eliminar_empresa(request):
     ids=[]

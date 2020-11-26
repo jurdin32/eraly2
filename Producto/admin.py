@@ -60,11 +60,15 @@ class AdminProveedor(admin.ModelAdmin):
 
     }
 
+class SubcategoriasInline(admin.StackedInline):
+    model = Subcategorias
+    extra = 0
 
 @admin.register(Categorias)
 class AdminCategorias(admin.ModelAdmin):
     list_display = Attr(Categorias)
     list_display_links = Attr(Categorias)
+    inlines = [SubcategoriasInline]
     formfield_overrides = {
         models.CharField: {
             'widget': TextInput(attrs={'style': 'width:90%'})

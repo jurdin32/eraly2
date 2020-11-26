@@ -142,21 +142,21 @@
                             {% for empresa in empresas %}
                                 <tr class="even pointer">
                                     <td class="a-center" style="vertical-align: middle">
-                                        <input type="checkbox" value="{{ empresa.id }}" class="flat table_records"
+                                        <input type="checkbox" value="{{ empresa.establecimiento.id }}" class="flat table_records"
                                                name="table_records">
                                     </td>
-                                    <td class=" " style="vertical-align: middle">{{ empresa.id }}</td>
-                                    <td class=" " style="vertical-align: middle" >{{ empresa.usuario.username }}</td>
-                                    <td class=" " style="vertical-align: middle" >{{ empresa.representateLegal }}</td>
-                                    <td class=" " style="vertical-align: middle" >{{ empresa.nombreComercial }}</td>
-                                    <td class=" " style="vertical-align: middle" >{{ empresa.ruc }}</td>
-                                    <td class=" " style="vertical-align: middle" >{{ empresa.descripcion|safe }}</td>
-                                    <td class="text-center" style="vertical-align: middle">{% for direccion in empresa.direccion_set.all %}
+                                    <td class=" " style="vertical-align: middle">{{ empresa.establecimiento.id }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.user.username }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.establecimiento.representateLegal }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.establecimiento.nombreComercial }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.establecimiento.ruc }}</td>
+                                    <td class=" " style="vertical-align: middle" >{{ empresa.establecimiento.descripcion|safe }}</td>
+                                    <td class="text-center" style="vertical-align: middle">{% for direccion in empresa.establecimiento.direccion_set.all %}
                                         {{ direccion|safe }}
                                     {% endfor %}
                                     </td>
                                     <td style="text-align: center; vertical-align: middle">
-                                        <a href="/business/edit/{{ empresa.id }}"><i class="fa fa-edit"></i> </a>
+                                        <a href="/business/edit/{{ empresa.establecimiento.id }}"><i class="fa fa-edit"></i> </a>
                                     </td>
                                 </tr>
                             {% endfor %}

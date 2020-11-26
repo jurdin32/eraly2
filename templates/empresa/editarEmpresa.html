@@ -4,69 +4,121 @@
     <div class="">
         <div class="row">
 
-						<div class="col-md-6 col-sm-6 offset-md-3">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2><small>Registro de establecimientos</small></h2>
-									<ul class="nav navbar-right panel_toolbox">
-                                        <li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevas Direcciones</a>
-											<ul class="dropdown-menu" role="menu">
-												<li><a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a></li>
-											</ul>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
-								</div>
-								<div class="x_content">
-									<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre de usuario <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="username" value="{{ request.user.username }}" readonly required="required" class="form-control ">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Acceso <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="slug"  readonly class="form-control" placeholder="Se crea automáticamente">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">RUC <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="ruc" name="ruc" maxlength="13" required="required" class="form-control">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nombre Comercial</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="nombreComercial" class="form-control" type="text" name="nombreComercial">
-											</div>
-										</div>
-                                        <div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante Legal</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="representanteLegal" class="form-control" type="text" name="representanteLegal">
-											</div>
-										</div>
+            <div class="col-md-6 col-sm-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>Registro de establecimientos</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Nuevos Establecimientos</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left"
+                              novalidate="">
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre de
+                                    usuario <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="username" value="{{ request.user.username }}" readonly
+                                           required="required" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Acceso
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="slug" value="{{ establecimiento.slug }}" readonly
+                                           class="form-control" placeholder="Se crea automáticamente">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">RUC <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="ruc" value="{{ establecimiento.ruc }}" name="ruc"
+                                           maxlength="13" required="required" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nombre
+                                    Comercial</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input id="nombreComercial" value="{{ establecimiento.nombreComercial }}"
+                                           required="required" class="form-control" type="text" name="nombreComercial">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante
+                                    Legal</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input id="representanteLegal" value="{{ establecimiento.representateLegal }}"
+                                           required="required" class="form-control" type="text"
+                                           name="representanteLegal">
+                                </div>
+                            </div>
 
-										<div class="ln_solid"></div>
-										<div class="item form-group">
-											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button class="btn btn-success" type="reset">Limpiar Formulario</button>
-												<button type="submit" class="btn btn-danger">Guardar</button>
-											</div>
-										</div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button class="btn btn-success" type="reset">Limpiar Formulario</button>
+                                    <button type="submit" class="btn btn-danger">Guardar</button>
+                                </div>
+                            </div>
 
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>Direcciones de establecimientos</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">Nuevas Direcciones</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="dashboard-widget-content">
+                            <ul class="list-unstyled timeline widget">
+                                {% for direccion in establecimiento.direccion_set.all %}
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>{{ direccion.ciudad.provincia.pais.nombre }} - {{ direccion.ciudad.provincia.nombre }} - {{ direccion.ciudad.nombre }} </a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>Teléfono:</span> <a>{{ direccion.telefono }}</a>
+                                            </div>
+                                            <p class="excerpt">{{ direccion.direccion }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="clearfix"></div>
 
