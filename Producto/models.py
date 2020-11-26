@@ -5,15 +5,36 @@ from django.utils.safestring import mark_safe
 
 from Home.models import Ciudad
 
-class Proveedor(models.Model):
-    ruc=models.CharField(max_length=10)
-    nombreComercial=models.CharField(max_length=60)
+contacto_chosse=(
+    ('celular','celular'),('correo','correo'),('web','web')
+)
 
-class DireccionProveedor(models.Model):
+tipo_proveedor_chosse=(
+    ('productos/bienes','productos/bienes'),('servicios','servicios'),('recursos','recursos')
+)
+
+class Proveedor(models.Model):
+    logo=models.ImageField(upload_to='proveedor', null=True, blank=True, help_text='100x100')
+    ruc=models.IntegerField(max_length=13)
+    nombre_fantasia=models.CharField(max_length=60)
+    representante=models.CharField(max_length=60)
+    tipo_proveedor=models.CharField(max_length=60)
+    tipo_actividad=models.CharField(max_length=60)
+    detalle=models.CharField(max_length=60)
+
+class TipoProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
-    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
-    direccion=models.CharField(max_length=60)
-    telefono=models.CharField(max_length=10)
+    detalle = models.CharField(choices=tipo_proveedor_chosse, max_length=30, null=True, blank=True)
+
+class ActividadProveedor(models.Model):
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
+    nombre = models.CharField(max_length=60)
+    detalle = models.TextField(max_length=200)
+
+# class DatosProveedor(models.Model):
+#     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
+#     tipo = models.CharField(choices=contacto_chosse, max_length=30, null=True, blank=True)
+#     detalle = models.TextField(max_length=300)
 
 class Categorias(models.Model):
     icono=models.CharField(max_length=10)
@@ -25,6 +46,14 @@ class Categorias(models.Model):
 
     class Meta:
         verbose_name_plural = "1. Categorias "
+
+class DireccionProveedor(models.Model):
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
+    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    direccion=models.CharField(max_length=60)
+    telefono=models.CharField(max_length=10)
+
+
 
 
 class Subcategorias(models.Model):
