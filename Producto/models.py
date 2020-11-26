@@ -24,7 +24,7 @@ class Proveedor(models.Model):
     representante=models.CharField(max_length=60,null=True,blank=True)
     tipo_proveedor=models.CharField(max_length=60,null=True,blank=True)
     tipo_actividad=models.CharField(max_length=60,null=True,blank=True)
-    detalle=models.CharField(max_length=60)
+    detalle=models.TextField()
 
 class TipoProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
@@ -33,7 +33,7 @@ class TipoProveedor(models.Model):
 class ActividadProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
     nombre = models.CharField(max_length=60)
-    detalle = models.TextField(max_length=200)
+    detalle = models.TextField()
 
 
 class Categorias(models.Model):

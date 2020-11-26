@@ -1,3 +1,4 @@
+import admin_thumbnails
 from django.contrib import admin
 
 # Register your models here.
@@ -6,6 +7,9 @@ from django.forms import TextInput, Textarea, Select
 from Producto.models import *
 from eraly2.snippers import Attr
 
+class TipoProveedorInline(admin.StackedInline):
+    model = TipoProveedor
+    extra = 0
 
 @admin.register(TipoProveedor)
 class AdminTipoProveedor(admin.ModelAdmin):
@@ -17,6 +21,9 @@ class AdminTipoProveedor(admin.ModelAdmin):
         },
     }
 
+class ActvidadProveedorInline(admin.StackedInline):
+    model = ActividadProveedor
+    extra = 0
 
 @admin.register(ActividadProveedor)
 class AdminActividadProveedor(admin.ModelAdmin):
@@ -38,7 +45,7 @@ class DireccionInline(admin.StackedInline):
 class AdminProveedor(admin.ModelAdmin):
     list_display = Attr(Proveedor)
     list_display_links = Attr(Proveedor)
-    inlines = [DireccionInline]
+    inlines = [ActvidadProveedorInline,TipoProveedorInline,DireccionInline]
     formfield_overrides = {
         models.CharField: {
             'widget': TextInput(attrs={'style': 'width:90%'})
@@ -90,6 +97,21 @@ class AdminMarca(admin.ModelAdmin):
         },
     }
 
+class PreciosProductoInline(admin.StackedInline):
+    model = Precios
+    extra = 0
+
+class ImagenesProductoInline(admin.StackedInline):
+    model = ImagenesProducto
+    extra = 0
+
+class ColoresProductoInline(admin.StackedInline):
+    model = Colores
+    extra = 0
+
+class KardexInline(admin.StackedInline):
+    model = Kardex
+    extra = 0
 
 @admin.register(Productos)
 class AdminProductos(admin.ModelAdmin):
@@ -100,6 +122,7 @@ class AdminProductos(admin.ModelAdmin):
             'widget': TextInput(attrs={'style': 'width:90%'})
         },
     }
+    inlines = [ColoresProductoInline,PreciosProductoInline,ImagenesProductoInline,KardexInline]
 
 
 @admin.register(Colores)
@@ -129,6 +152,7 @@ class AdminKardex(admin.ModelAdmin):
 
 
 @admin.register(ImagenesProducto)
+@admin_thumbnails.thumbnail('imagen')
 class AdminImagenesProducto(admin.ModelAdmin):
     list_display = Attr(ImagenesProducto)
     list_display_links = Attr(ImagenesProducto)
@@ -138,3 +162,4 @@ class AdminImagenesProducto(admin.ModelAdmin):
 class AdminDireccion(admin.ModelAdmin):
     list_display = Attr(DireccionProveedor)
     list_display_links = Attr(DireccionProveedor)
+
