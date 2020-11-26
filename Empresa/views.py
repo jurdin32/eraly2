@@ -16,6 +16,7 @@ def empresa(request):
                         representateLegal=request.POST['representateLegal'],
                         nombreComercial=request.POST['nombreComercial'],
                         descripcion=request.POST['descripcion']
+
                         )
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
