@@ -1,3 +1,5 @@
+from ckeditor_uploader.fields import RichTextUploadingField
+from colorfield.fields import ColorField
 from django.db import models
 
 # Create your models here.
@@ -68,7 +70,7 @@ class Subcategorias(models.Model):
 
 class Marca(models.Model):
     nombre=models.CharField(max_length=40)
-    imagen=models.ImageField(upload_to="marca/imagenes")
+    imagen=models.ImageField(upload_to="marca/imagenes",null=True,blank=True)
 
     def __str__(self):
         return self.nombre
@@ -78,10 +80,11 @@ class Productos(models.Model):
     subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
     Marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=100)
-    talla=models.CharField(max_length=10)
-    dimension=models.CharField(max_length=50)
-    descripcion=models.CharField(max_length=100)
-    estado=models.CharField(max_length=50)
+    talla=models.CharField(max_length=10,null=True,blank=True)
+    dimension=models.CharField(max_length=200,null=True,blank=True)
+    detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional")
+    descripcion = RichTextUploadingField()
+    estado=models.BooleanField(default=True)
 
     def __str__(self):
         return '%s'%(self.nombre)
@@ -93,8 +96,12 @@ class Productos(models.Model):
 class DetallesProducto(models.Model):
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE,null=True,blank=True)
     precioCompra=models.DecimalField(max_digits=9,decimal_places=4,default=0)
-    iva=models.DecimalField(max_digits=9,decimal_places=4,default=0)
-    pc=models.DecimalField(max_digits=9,decimal_places=4,default=0)
+    iva=models.DecimalField(max_digits=9,decimal_places=4,default=0,help_text="Calculado automaticamente")
+    pc=models.DecimalField(max_digits=9,decimal_places=4,default=0,help_text="Calculado automaticamente")
+
+    def clean(self):
+        self.iva=float(self.precioCompra)*0.12
+        self.pc=float(self.precioCompra) + float(self.iva)
 
     def __str__(self):
         return '%s | %s'%(self.producto.nombre, self.pc)
@@ -106,7 +113,10 @@ class DetallesProducto(models.Model):
 class Colores(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     nombre=models.CharField(max_length=50)
-    codigoColor=models.CharField(max_length=50)
+    codigoColor=ColorField(default="#fff")
+
+    def color(self):
+        return mark_safe('<div style="background-color: %s; height: 30px; width: 100px"></div>'%self.codigoColor)
 
     def __str__(self):
         return '%s'%(self.nombre)
@@ -128,7 +138,7 @@ class Kardex(models.Model):
     tipo=models.CharField(max_length=50)
     fecha=models.DateTimeField(auto_now = True)
     cantidad=models.IntegerField(default=0)
-    descripcion=models.CharField(max_length=150)
+    descripcion=models.TextField()
 
 
     class Meta:
