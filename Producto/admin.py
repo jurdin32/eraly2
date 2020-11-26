@@ -33,6 +33,9 @@ class AdminActividadProveedor(admin.ModelAdmin):
         models.CharField: {
             'widget': TextInput(attrs={'style': 'width:90%'})
         },
+        models.TextField: {
+            'widget': Textarea(attrs={'style': 'width:90%'})
+        },
     }
 
 
@@ -48,8 +51,13 @@ class AdminProveedor(admin.ModelAdmin):
     inlines = [ActvidadProveedorInline,TipoProveedorInline,DireccionInline]
     formfield_overrides = {
         models.CharField: {
-            'widget': TextInput(attrs={'style': 'width:90%'})
+            'widget': TextInput(attrs={'style': 'width:90%'}),
+
         },
+        models.TextField: {
+            'widget': Textarea(attrs={'style': 'width:90%'})
+        },
+
     }
 
 

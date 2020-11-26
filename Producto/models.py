@@ -22,13 +22,16 @@ class Proveedor(models.Model):
     ruc=models.CharField(max_length=13)
     nombre_fantasia=models.CharField(max_length=60,null=True,blank=True)
     representante=models.CharField(max_length=60,null=True,blank=True)
-    tipo_proveedor=models.CharField(max_length=60,null=True,blank=True)
-    tipo_actividad=models.CharField(max_length=60,null=True,blank=True)
-    detalle=models.TextField()
+
+    def __str__(self):
+        return self.nombre_fantasia
 
 class TipoProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
     detalle = models.CharField(choices=tipo_proveedor_chosse, max_length=30, null=True, blank=True)
+
+    def __str__(self):
+        return self.proveedor.nombre_fantasia
 
 class ActividadProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
@@ -52,14 +55,14 @@ class DireccionProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     direccion=models.CharField(max_length=60)
-    telefono=models.CharField(max_length=10)
+    telefono=models.CharField(max_length=60)
 
 
 class Subcategorias(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     icono=models.CharField(max_length=20)
     nombre=models.CharField(max_length=50)
-    descripcion=models.CharField(max_length=100)
+    descripcion=models.TextField()
 
 
     def __str__(self):
