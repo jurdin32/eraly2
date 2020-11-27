@@ -98,7 +98,7 @@ class Productos(models.Model):
 
 class DetallesProducto(models.Model):
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE,null=True,blank=True)
-    precioCompra=models.DecimalField(max_digits=9,decimal_places=4,default=0)
+    precioCompra=models.DecimalField(max_digits=9,decimal_places=2,default=0)
     iva=models.DecimalField(max_digits=9,decimal_places=4,default=0,help_text="Calculado automaticamente")
     pc=models.DecimalField(max_digits=9,decimal_places=4,default=0,help_text="Calculado automaticamente")
 
