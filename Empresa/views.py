@@ -70,6 +70,26 @@ def crear_direcciones(request,idEmpresa):
 
 def direcciones(request):
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user)
+       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+        "provincias":Provincia.objects.all(),
+    }
+    return render(request, "empresa/direcciones.html",contexto)
+
+def modificar_direcciones(request,id):
+    mensaje=""
+    tipo=""
+    if request.POST:
+        direccion=Direccion.objects.get(id=id)
+        direccion.ciudad_id=request.POST['ciudad']
+        direccion.telefono=request.POST['telefono']
+        direccion.direccion=request.POST['direccion']
+        direccion.save()
+        mensaje="El registro de direcciones fue modificado existosamente..!"
+        tipo="success"
+    contexto={
+       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+        "provincias":Provincia.objects.all(),
+        "mensaje":mensaje,
+        "tipo": tipo,
     }
     return render(request, "empresa/direcciones.html",contexto)

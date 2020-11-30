@@ -18,7 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Empresa.views import empresa, eliminar_empresa, direcciones, modificar_empresa, crear_direcciones
+from Empresa.views import empresa, eliminar_empresa, direcciones, modificar_empresa, crear_direcciones, \
+    modificar_direcciones
 from Home.views import *
 from Producto.views import productos, categorias, proveedores, kardex
 
@@ -35,6 +36,7 @@ urlpatterns = [
     path("kardex/", kardex),
     path("business/remove/",eliminar_empresa),
     path("business/direcction/<int:idEmpresa>/",crear_direcciones),
+    path("directions/edit/<int:id>/",modificar_direcciones),
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
