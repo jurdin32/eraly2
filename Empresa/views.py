@@ -29,8 +29,16 @@ def empresa(request):
 def modificar_empresa(request,id):
     mensaje=''
     tipo=''
+    establecimiento = Establecimiento.objects.get(id=id)
     if request.POST:
-        establecimiento= Establecimiento.objects.get(id=id)
+        try:
+            establecimiento.logo=request.FILES['logo']
+            print('viene con logo')
+        except:pass
+        try:
+            print('viene con banner')
+            establecimiento.banner=request.FILES['banner']
+        except: pass
         establecimiento.ruc=request.POST['ruc']
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
@@ -112,3 +120,6 @@ def eliminar_direcciones(request,id):
 
     }
     return render(request, "empresa/direcciones.html",contexto)
+
+def subir_logo():
+    pass

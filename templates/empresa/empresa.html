@@ -132,8 +132,7 @@
                                 <th class="column-title text-center">Opciones</th>
                                 </th>
                                 <th class="bulk-actions" colspan="8">
-                                    <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span
-                                            class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Seleccionados ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                                 </th>
                             </tr>
                             </thead>
@@ -155,8 +154,10 @@
                                         {{ direccion|safe }}
                                     {% endfor %}
                                     </td>
-                                    <td style="text-align: center; vertical-align: middle">
-                                        <a href="/business/edit/{{ empresa.establecimiento.id }}"><i class="fa fa-edit"></i> </a>
+                                    <td style="text-align: center; vertical-align: middle; font-size: 18px">
+                                        <a href="/business/edit/{{ empresa.establecimiento.id }}" data-toggle="tooltip" data-original-title="Modificar" >
+                                            <i class="fa fa-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -210,4 +211,5 @@
             }
         });
     </script>
+
 {% endblock %}
