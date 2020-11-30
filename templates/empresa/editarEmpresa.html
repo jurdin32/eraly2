@@ -1,10 +1,67 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load static %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <!--Crear direcciones de los establecimientos -->
+    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de establecimientos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" method="post" action="/business/direcction/">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="direccion" id="direccion"
+                                           placeholder="RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal"
+                                           id="representateLegal"
+                                           placeholder="Representate Legal">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial"
+                                           id="nombreComercial"
+                                           placeholder="Nombre Comercial">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <div class="">
         <div class="row">
-            <p>12 (UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL) --</p>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-8 col-sm-8">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><small>Registro de establecimientos</small></h2>
@@ -13,7 +70,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">Nuevos Establecimientos</a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a>
+                                    <li><a class="dropdown-item" href="/business/"><i class="fa fa-plus-circle"> </i> Agregar</a>
                                     </li>
                                 </ul>
                             </li>
@@ -21,13 +78,13 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left"
-                              novalidate="">
+                        <form  data-parsley-validate="" class="form-horizontal form-label-left" method="post">
+                            {% csrf_token %}
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre de
                                     usuario <span class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-9 col-sm-9 ">
                                     <input type="text" id="username" value="{{ request.user.username }}" readonly
                                            required="required" class="form-control ">
                                 </div>
@@ -36,7 +93,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Acceso
                                     <span class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-9 col-sm-9 ">
                                     <input type="text" id="slug" value="{{ establecimiento.slug }}" readonly
                                            class="form-control" placeholder="Se crea automáticamente">
                                 </div>
@@ -45,7 +102,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">RUC <span
                                         class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-9 col-sm-9 ">
                                     <input type="text" id="ruc" value="{{ establecimiento.ruc }}" name="ruc"
                                            maxlength="13" required="required" class="form-control">
                                 </div>
@@ -53,7 +110,7 @@
                             <div class="item form-group">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nombre
                                     Comercial</label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-9 col-sm-9 ">
                                     <input id="nombreComercial" value="{{ establecimiento.nombreComercial }}"
                                            required="required" class="form-control" type="text" name="nombreComercial">
                                 </div>
@@ -62,17 +119,23 @@
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante
                                     Legal</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input id="representanteLegal" value="{{ establecimiento.representateLegal }}"
+                                    <input id="representateLegal" value="{{ establecimiento.representateLegal }}"
                                            required="required" class="form-control" type="text"
-                                           name="representanteLegal">
+                                           name="representateLegal">
                                 </div>
                             </div>
-
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripción</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <textarea required="required" name="descripcion" id="descripcion" cols="30" rows="10">{{ establecimiento.descripcion }}</textarea>
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
-                                <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <button class="btn btn-success" type="reset">Limpiar Formulario</button>
-                                    <button type="submit" class="btn btn-danger">Guardar</button>
+                                <div class="col-md-9 col-sm-9 offset-md-6">
+                                    <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar</button>
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar</button>
+                                    <a href="/business/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
                                 </div>
                             </div>
 
@@ -80,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-4 col-sm-4">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><small>Direcciones de establecimientos</small></h2>
@@ -89,7 +152,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Nuevas Direcciones</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"> </i> Agregar</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i class="fa fa-plus-circle"> </i> Agregar</a>
                                 </div>
                             </li>
                         </ul>
@@ -99,19 +162,21 @@
                         <div class="dashboard-widget-content">
                             <ul class="list-unstyled timeline widget">
                                 {% for direccion in establecimiento.direccion_set.all %}
-                                <li>
-                                    <div class="block">
-                                        <div class="block_content">
-                                            <h2 class="title">
-                                                <a>{{ direccion.ciudad.provincia.pais.nombre }} - {{ direccion.ciudad.provincia.nombre }} - {{ direccion.ciudad.nombre }} </a>
-                                            </h2>
-                                            <div class="byline">
-                                                <span>Teléfono:</span> <a>{{ direccion.telefono }}</a>
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a>{{ direccion.ciudad.provincia.pais.nombre }}
+                                                        - {{ direccion.ciudad.provincia.nombre }}
+                                                        - {{ direccion.ciudad.nombre }} </a>
+                                                </h2>
+                                                <div class="byline">
+                                                    <span>Teléfono:</span> <a>{{ direccion.telefono }}</a>
+                                                </div>
+                                                <p class="excerpt">{{ direccion.direccion }}</p>
                                             </div>
-                                            <p class="excerpt">{{ direccion.direccion }}</p>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -154,7 +219,9 @@
         </div>
     </div>
 {% endblock %}
-
 {% block script_index %}
-    <script src="{% static '/vendors/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <script>
+        CKEDITOR.replace('descripcion');
+    </script>
 {% endblock %}

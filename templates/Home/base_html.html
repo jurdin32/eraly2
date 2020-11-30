@@ -671,6 +671,16 @@
     <script src="{% static '/vendors/jszip/dist/jszip.min.js'%}"></script>
     <script src="{% static '/vendors/pdfmake/build/pdfmake.min.js'%}"></script>
     <script src="{% static '/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+    <script src="{% static 'toastr/toastr.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
+    <script src="{% static 'toastr/customToastr.js'%}"></script>
+
+    {% if mensaje %}
+        <script>
+        toastr.{{ tipo }}("{{ mensaje }}")
+        </script>
+    {% endif %}
+
 
 <!-- Custom Theme Scripts -->
 <script src="{% static '/build/js/custom.min.js' %}"></script>
