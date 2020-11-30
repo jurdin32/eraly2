@@ -40,7 +40,7 @@
                                             <th>Ciudad</th>
                                             <th>Dirección</th>
                                             <th>Teléfono</th>
-                                            <th>Opciones</th>
+                                            <th style="text-align: center">Opciones</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +53,11 @@
                                                 <td>{{ direccion.ciudad }}</td>
                                                 <td>{{ direccion.direccion }}</td>
                                                 <td>{{ direccion.telefono }}</td>
-                                                <td></td>
+                                                <td style="text-align: center">
+                                                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar" class="text-primary"> <i class="fa fa-edit"></i></a>
+                                                    <span> | </span>
+                                                    <a href="" class="text-danger" data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar"> <i class="fa fa-trash"></i></a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
