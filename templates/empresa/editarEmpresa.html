@@ -19,23 +19,27 @@
                             <form class="form-label-left input_mask" method="post" action="/business/direcction/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="direccion" id="direccion"
-                                           placeholder="RUC">
-                                    <span class="fa fa-credit-card-alt form-control-feedback left"
-                                          aria-hidden="true"></span>
+                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades" name="ciudad" multiple>
+                                        {% for provincia in provincias %}
+                                            <optgroup label="{{ provincia.nombre }}"></optgroup>
+                                            {% for ciudad in provincia.ciudad_set.all %}
+                                                <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </select>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="representateLegal"
-                                           id="representateLegal"
-                                           placeholder="Representate Legal">
-                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    <input type="text" class="form-control has-feedback-left" name="direccion"
+                                           id="direccion"
+                                           placeholder="Aquí la dirección">
+                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial"
-                                           id="nombreComercial"
-                                           placeholder="Nombre Comercial">
-                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    <input type="text" class="form-control has-feedback-left" name="telefono"
+                                           id="telefono"
+                                           placeholder="Ingrese Teléfono">
+                                    <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -220,8 +224,14 @@
     </div>
 {% endblock %}
 {% block script_index %}
-
     <script>
         CKEDITOR.replace('descripcion');
+    </script>
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <script>
+        $(".js-example-basic-single").select2({
+             maximumSelectionLength: 1
+        });
     </script>
 {% endblock %}

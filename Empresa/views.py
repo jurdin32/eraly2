@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from Empresa.models import Establecimiento, Direccion, UsuarioEmpresa
-from Home.models import Pais
+from Home.models import Pais, Ciudad, Provincia
 
 
 def empresa(request):
@@ -46,7 +46,7 @@ def modificar_empresa(request,id):
         "establecimiento":Establecimiento.objects.get(id=id),
         "mensaje":mensaje,
         "tipo":tipo,
-        "pais":Pais.objects.all()
+        "provincias":Provincia.objects.all()
     }
     return render(request, 'empresa/editarEmpresa.html',contexto)
 
