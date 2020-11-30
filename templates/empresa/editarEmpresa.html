@@ -20,7 +20,7 @@
                                   action="/business/direcction/{{ establecimiento.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades"
+                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
                                             name="ciudad" multiple>
                                         {% for provincia in provincias %}
                                             <optgroup label="{{ provincia.nombre }}"></optgroup>
@@ -33,7 +33,7 @@
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name="direccion"
-                                           id="direccion"
+                                           id="direccion" required="required"
                                            placeholder="Aquí la dirección">
                                     <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
                                 </div>
