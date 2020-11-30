@@ -93,3 +93,22 @@ def modificar_direcciones(request,id):
         "tipo": tipo,
     }
     return render(request, "empresa/direcciones.html",contexto)
+
+def eliminar_direcciones(request,id):
+    mensaje=""
+    tipo=""
+    try:
+        direccion= Direccion.objects.get(id=id)
+        direccion.delete()
+        mensaje="El registro se ha eliminado Exitosamente..!"
+        tipo="success"
+    except:
+        pass
+    contexto={
+       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+        "provincias":Provincia.objects.all(),
+        "mensaje":mensaje,
+        "tipo":tipo,
+
+    }
+    return render(request, "empresa/direcciones.html",contexto)
