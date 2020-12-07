@@ -94,7 +94,8 @@
                                         <thead style="background-color: #2A3F54; color: white">
                                             <th style="text-align: center">Logo</th>
                                             <th style="text-align: center">RUC</th>
-                                            <th>Nombre</th>
+                                            <th>Nombre de Fantasía</th>
+                                            <th>Representante Legal</th>
                                             <th>Tipo de Proveedor</th>
                                             <th style="text-align: center">Tipo de Actividad</th>
                                             <th style="text-align: center">Opciones</th>
@@ -107,11 +108,15 @@
                                             <td style="vertical-align: middle">{{ proveedor.nombre_fantasia }}</td>
                                             <td style="vertical-align: middle">{{ proveedor.representante }}</td>
 
-                                            <td style="text-align: center">
-                                                {% for actividad in proveedor.actividadproveedor_set.all %}
-                                                    <p>{{ actividad }}</p>
+                                            <td style="text-align: center; vertical-align: middle">
+                                                {% for tipo in proveedor.tipoproveedor_set.all %}
+                                                    <label class="alert alert-success no-padding" style="padding: 2px !important;">{{ tipo.detalle|capfirst }}</label>
                                                 {% endfor %}
-                                                
+                                            </td>
+                                            <td style="text-align: center; vertical-align: middle">
+                                                 {% for actividad in proveedor.actividadproveedor_set.all %}
+                                                    <label class="alert alert-danger no-padding" style="padding: 2px !important;">{{ actividad.nombre|capfirst }}</label>
+                                                {% endfor %}
                                             </td>
                                             <td style="text-align: center; font-size: 20px">
                                                     <a href="/suppliers/edit/"><i class="fa fa-edit text-primary"></i></a>
