@@ -1,13 +1,89 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
+    {% load static %}
+    <!--Crear y modificar establecimientos -->
+    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de establecimientos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form id="formRegistrar" class="form-label-left input_mask" method="post">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="js-example-basic-single" style="width: 100%" id="establecimiento" required="required"
+                                            name="establecimiento" multiple>
+                                        {% for establecimiento in establecimientos %}
+                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="file" class="form-control has-feedback-left" name="logo" id="logo"
+                                           placeholder="Aquí el logo (opcional)">
+                                    <span class="fa fa-image form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
 
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc"
+                                           placeholder="RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal"
+                                           id="representateLegal"
+                                           placeholder="Representate Legal">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial"
+                                           id="nombreComercial"
+                                           placeholder="Nombre Comercial">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Proveedor <small>del establecimientos</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Opciones</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                        class="fa fa-file-o"> </i> Registra Nuevo</a>
+                            </div>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -16,38 +92,33 @@
                                 <div class="card-box table-responsive">
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">
-                                            <th>Logo</th>
-                                            <th>RUC</th>
+                                            <th style="text-align: center">Logo</th>
+                                            <th style="text-align: center">RUC</th>
                                             <th>Nombre</th>
                                             <th>Tipo de Proveedor</th>
-                                            <th>Tipo de Actividad</th>
-                                            <th>Detalle</th>
-                                            <th>Teléfono/Celular</th>
-                                            <th>Datos Electrónicos</th>
-                                             <th>Ver</th>
+                                            <th style="text-align: center">Tipo de Actividad</th>
+                                            <th style="text-align: center">Opciones</th>
                                         </thead>
                                         <tbody>
+                                        {% for proveedor in proveedores %}
                                         <tr>
+                                            <td style="text-align: center; vertical-align: middle"><img style="width: 50px;" src="/media/{{ proveedor.logo }}" alt="image"></td>
+                                            <td style="text-align: center; vertical-align: middle">{{ proveedor.ruc }}</td>
+                                            <td style="vertical-align: middle">{{ proveedor.nombre_fantasia }}</td>
+                                            <td style="vertical-align: middle">{{ proveedor.representante }}</td>
 
-                                            <td>
-                                                <div class="image view view-first">
-                                                    <img style="width: 100px; display: block;" src="/static/logo.png" alt="image">
-                                                </div>
+                                            <td style="text-align: center">
+                                                {% for actividad in proveedor.actividadproveedor_set.all %}
+                                                    <p>{{ actividad }}</p>
+                                                {% endfor %}
+                                                
                                             </td>
-                                            <td>info</td>
-                                            <td>info</td>
-                                            <td>info</td>
-
-                                            <td>info</td>
-                                            <td>info</td>
-                                            <td>info</td>
-                                            <td>info</td>
-                                            <td>
-                                                <div class="fa-hover col-md-3 col-sm-4  ">
-                                                    <a href="#/eye"><i class="fa fa-eye"></i></a>
-                                                </div>
+                                            <td style="text-align: center; font-size: 20px">
+                                                    <a href="/suppliers/edit/"><i class="fa fa-edit text-primary"></i></a>
+                                                    <a href="/suppliers/delete/"><i class="fa fa-trash text-danger"></i></a>
                                             </td>
                                         </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -61,9 +132,16 @@
 
 {% endblock %}
 {% block script_index %}
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
         $(document).ready(function () {
             $("#datatable").DataTable();
         });
+
+        $("#establecimiento").select2({
+            maximumSelectionLength: 1
+        });
     </script>
+
 {% endblock %}
