@@ -29,17 +29,18 @@
                                            placeholder="Aquí el logo (opcional)">
                                     <span class="fa fa-image form-control-feedback left"
                                           aria-hidden="true"></span>
+                                    <span>Es Opcional</span>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc"
+                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc" required="required"
                                            placeholder="RUC">
                                     <span class="fa fa-credit-card-alt form-control-feedback left"
                                           aria-hidden="true"></span>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="representateLegal"
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal" required="required"
                                            id="representateLegal"
                                            placeholder="Representate Legal">
                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
@@ -49,6 +50,7 @@
                                            id="nombreComercial"
                                            placeholder="Nombre Comercial">
                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    <span>Es opcinal</span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -103,7 +105,12 @@
                                         <tbody>
                                         {% for proveedor in proveedores %}
                                         <tr>
-                                            <td style="text-align: center; vertical-align: middle"><img style="width: 50px;" src="/media/{{ proveedor.logo }}" alt="image"></td>
+                                        {% if proveedor.logo %}
+                                        <td style="text-align: center; vertical-align: middle"><img style="width: 50px;" src="/media/{{ proveedor.logo }}" alt="image"></td>
+                                        {% else %}
+                                            <td style="text-align: center; vertical-align: middle">No registrado</td>
+                                        {% endif %}
+
                                             <td style="text-align: center; vertical-align: middle">{{ proveedor.ruc }}</td>
                                             <td style="vertical-align: middle">{{ proveedor.nombre_fantasia }}</td>
                                             <td style="vertical-align: middle">{{ proveedor.representante }}</td>
@@ -148,5 +155,4 @@
             maximumSelectionLength: 1
         });
     </script>
-
 {% endblock %}
