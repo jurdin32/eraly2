@@ -32,8 +32,13 @@ def proveedores(request):
 
 def editarProveedor(request,id):
     proveedor=Proveedor.objects.get(id=id)
+    if request.POST:
+        print(request.POST)
+        #proveedor.establecimiento_id=request.POST['establecimiento']
+
     contexto={
         "proveedor":proveedor,
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
     }
     return render(request, "producto/editarProveedores.html",contexto)
 

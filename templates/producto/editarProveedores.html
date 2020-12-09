@@ -3,8 +3,8 @@
     {% load static %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-    <!--Crear direcciones de los establecimientos -->
-    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--Crear actividad -->
+    <div class="modal fade bs-example-modal-lg" id="registroActividad" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,8 +89,15 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id="username" value="{{ proveedor.establecimiento }}" readonly
-                                           required="required" class="form-control ">
+                                    <select class="js-example-basic-single form-control" name="establecimiento" id="establecimiento"multiple>
+                                        {% for establecimiento in establecimientos %}
+                                            {% if proveedor.establecimiento == establecimiento %}
+                                                <option selected value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                            {% else %}
+                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -152,7 +159,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Nueva Actividad</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"></i> Agregar</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registroActividad" ><i class="fa fa-plus-circle"></i> Agregar</a>
                                 </div>
                             </li>
                         </ul>
@@ -211,14 +218,44 @@
                         </div>
                     </div>
                 </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>Direcciones del Proveedor</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">Nueva dirección</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"></i> Agregar</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="dashboard-widget-content">
+
+                            <ul class="list-unstyled timeline widget">
+                                {% for direccion in proveedor.direccionproveedor_set.all %}
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>{{  direccion }}</a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block script_index %}
-    <script>
-        CKEDITOR.replace('descripcion');
-    </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>

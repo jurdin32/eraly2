@@ -57,6 +57,9 @@ class DireccionProveedor(models.Model):
     direccion=models.CharField(max_length=60)
     telefono=models.CharField(max_length=60)
 
+    def __str__(self):
+        return "%s - %s: %s,  Telf.:%s"%(self.ciudad.nombre, self.ciudad.provincia.nombre, self.direccion,self.telefono)
+
 
 class Subcategorias(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
