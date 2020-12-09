@@ -20,7 +20,8 @@
                                   action="/business/direcction/{{ establecimiento.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
+                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades"
+                                            required="required"
                                             name="ciudad" multiple>
                                         {% for provincia in provincias %}
                                             <optgroup label="{{ provincia.nombre }}"></optgroup>
@@ -62,8 +63,6 @@
 
     <div class="">
         <div class="row">
-        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
             <div class="col-md-8 col-sm-8">
                 <div class="x_panel">
                     <div class="x_title">
@@ -71,34 +70,36 @@
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">Nuevos Establecimientos</a>
+                                   aria-haspopup="true" aria-expanded="false">Nuevos Proveedores</a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a class="dropdown-item" href="/business/"><i class="fa fa-plus-circle"> </i>
+                                    <li><a class="dropdown-item" href="/suppliers/"><i class="fa fa-plus-circle"> </i>
                                         Agregar</a>
                                     </li>
-
                                 </ul>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre de
-                                    usuario <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Establecimiento
+                                    <span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id="username" value="{{ request.user.username }}" readonly
+                                    <input type="text" id="username" value="{{ proveedor.establecimiento }}" readonly
                                            required="required" class="form-control ">
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Acceso
-                                    <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Logo
+                                    <span class="required"> (Opcional)</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id="slug" value="{{ establecimiento.slug }}" readonly
-                                           class="form-control" placeholder="Se crea automáticamente">
+                                    <input type="file" id="logo" class="form-control">
+                                    <span>Actualmente: {{ proveedor.logo }}</span>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -106,7 +107,7 @@
                                         class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" id="ruc" value="{{ establecimiento.ruc }}" name="ruc"
+                                    <input type="text" id="ruc" value="{{ proveedor.ruc }}" name="ruc"
                                            maxlength="13" required="required" class="form-control">
                                 </div>
                             </div>
@@ -114,115 +115,131 @@
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Nombre
                                     Comercial</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input id="nombreComercial" value="{{ establecimiento.nombreComercial }}"
+                                    <input id="nombreComercial" value="{{ proveedor.nombre_fantasia }}"
                                            required="required" class="form-control" type="text" name="nombreComercial">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante
                                     Legal</label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input id="representateLegal" value="{{ establecimiento.representateLegal }}"
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input id="representateLegal" value="{{ proveedor.representate }}"
                                            required="required" class="form-control" type="text"
                                            name="representateLegal">
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripción</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <textarea required="required" name="descripcion" id="descripcion" cols="30"
-                                              rows="10">{{ establecimiento.descripcion }}</textarea>
-                                </div>
-                            </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
-                                <div class="col-md-9 col-sm-9 offset-md-6">
+                                <div class="col-md-9 col-sm-9 offset-md-8">
                                     <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                     </button>
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                     </button>
-                                    <a href="/business/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                                    <a href="/suppliers/" class="btn btn-primary"><i class="fa fa-reply"> </i>
+                                        Volver</a>
                                 </div>
                             </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Cargue aquí su Logo y Banner</small></h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <div class="dashboard-widget-content">
-                            <ul class="list-unstyled timeline widget">
-                                    <li style="padding: 20px">
-                                        {% if establecimiento.logo %}
-                                            <span>Logo Actual: {{ establecimiento.logo }}</span>
-                                            <div style="padding: 10px;">
-                                                <img style="width: 100px; height: 100px; display: block;" src="/media/{{ establecimiento.logo }}" alt="image">
-                                            </div>
-
-                                        {% endif %}
-
-                                        <input type="file" name="logo" id="logo">
-                                    </li>
-                                    <li style="padding: 20px">
-                                        {% if establecimiento.banner %}
-                                            <span>Banner Actual: {{ establecimiento.banner }}</span><br>
-                                            <div style="padding: 10px">
-                                                <img style="width: 100%; display: block;" src="/media/{{ establecimiento.banner }}" alt="image">
-                                            </div>
-                                        {% endif %}
-                                        <input type="file" name="banner" id="banner">
-                                    </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2><small>Direcciones de establecimientos</small></h2>
+                        <h2>Recent Activities <small>Sessions</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false">Nuevas Direcciones</a>
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
-                                            class="fa fa-plus-circle"> </i> Agregar</a>
-                                    <a class="dropdown-item" href="/directions/"><i class="fa fa-edit"> </i>
-                                        Modificar/Eliminar</a>
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
                                 </div>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <div class="dashboard-widget-content">
+
                             <ul class="list-unstyled timeline widget">
-                                {% for direccion in establecimiento.direccion_set.all %}
-                                    <li>
-                                        <div class="block">
-                                            <div class="block_content">
-                                                <h2 class="title">
-                                                    <a>{{ direccion.ciudad.provincia.pais.nombre }}
-                                                        - {{ direccion.ciudad.provincia.nombre }}
-                                                        - {{ direccion.ciudad.nombre }} </a>
-                                                </h2>
-                                                <div class="byline">
-                                                    <span>Teléfono:</span> <a>{{ direccion.telefono }}</a>
-                                                </div>
-                                                <p class="excerpt">{{ direccion.direccion }}</p>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>13 hours ago</span> by <a>Jane Smith</a>
                                             </div>
+                                            <p class="excerpt">Film festivals used to be do-or-die moments for movie
+                                                makers. They were where you met the producers that could fund your
+                                                project, and if the buyers liked your flick, they’d pay to Fast-forward
+                                                and… <a>Read&nbsp;More</a>
+                                            </p>
                                         </div>
-                                    </li>
-                                {% endfor %}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>13 hours ago</span> by <a>Jane Smith</a>
+                                            </div>
+                                            <p class="excerpt">Film festivals used to be do-or-die moments for movie
+                                                makers. They were where you met the producers that could fund your
+                                                project, and if the buyers liked your flick, they’d pay to Fast-forward
+                                                and… <a>Read&nbsp;More</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>13 hours ago</span> by <a>Jane Smith</a>
+                                            </div>
+                                            <p class="excerpt">Film festivals used to be do-or-die moments for movie
+                                                makers. They were where you met the producers that could fund your
+                                                project, and if the buyers liked your flick, they’d pay to Fast-forward
+                                                and… <a>Read&nbsp;More</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>13 hours ago</span> by <a>Jane Smith</a>
+                                            </div>
+                                            <p class="excerpt">Film festivals used to be do-or-die moments for movie
+                                                makers. They were where you met the producers that could fund your
+                                                project, and if the buyers liked your flick, they’d pay to Fast-forward
+                                                and… <a>Read&nbsp;More</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
         </div>
     </div>
 {% endblock %}

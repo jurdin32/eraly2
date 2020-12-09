@@ -30,6 +30,13 @@ def proveedores(request):
     }
     return render(request, "producto/proveedores.html",contexto)
 
+def editarProveedor(request,id):
+    proveedor=Proveedor.objects.get(id=id)
+    contexto={
+        "proveedor":proveedor,
+    }
+    return render(request, "producto/editarProveedores.html",contexto)
+
 def productos(request):
     contexto={
 
