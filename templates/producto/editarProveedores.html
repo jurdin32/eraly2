@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Registro de Direcciones</h4>
+                    <h4 class="modal-title" id="myModalLabel">Registro de Actividad</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -20,29 +20,16 @@
                                   action="/business/direcction/{{ establecimiento.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades"
-                                            required="required"
-                                            name="ciudad" multiple>
-                                        {% for provincia in provincias %}
-                                            <optgroup label="{{ provincia.nombre }}"></optgroup>
-                                            {% for ciudad in provincia.ciudad_set.all %}
-                                                <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
-                                            {% endfor %}
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="direccion"
-                                           id="direccion" required="required"
-                                           placeholder="Aquí la dirección">
+                                    <input type="text" class="form-control has-feedback-left" name="nombreActividad"
+                                           id="nombreActividad" required="required"
+                                           placeholder="Nombre de la Actividad">
                                     <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="telefono"
-                                           id="telefono"
-                                           placeholder="Ingrese Teléfono">
-                                    <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                                    <textarea type="text" class="form-control has-feedback-left" name="detalleActividad"
+                                           id="detalleActividad" required="required" style="height: 250px; resize: none"
+                                              placeholder="Detalle de la Actividad"></textarea>
+                                    <span class="fa fa-file-text-o form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
