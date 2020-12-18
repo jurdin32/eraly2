@@ -65,7 +65,7 @@
                                   action="/suppliers/type/{{ proveedor.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select name="tipo" id="tipo" class="js-example-basic-single form-control" style="width: 100%">
+                                    <select name="detalle" required="required" id="tipo" class="js-example-basic-single form-control" style="width: 100%" multiple>
                                         <option value="productos/bienes">Productos/Bienes</option>
                                         <option value="servicios">Servicios</option>
                                         <option value="recursos">Recursos</option>
