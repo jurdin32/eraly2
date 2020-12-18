@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 from Empresa.views import *
 from Home.views import *
-from Producto.views import productos, categorias, proveedores, kardex, editarProveedor
+from Producto.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,7 +37,10 @@ urlpatterns = [
 
     path("suppliers/",proveedores),
     path("suppliers/edit/<int:id>/",editarProveedor),
-
+    path("suppliers/activity/<int:id>/",actividadesProveedor),
+    path("suppliers/activity/delete/<int:id>/",eliminarActividades),
+    path("suppliers/type/<int:id>/",tipoProveedor),
+    path("suppliers/type/delete/<int:id>/",eliminartipoProveedor),
 
     path("kardex/", kardex),
     path("business/remove/",eliminar_empresa),
