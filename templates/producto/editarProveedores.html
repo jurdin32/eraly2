@@ -145,6 +145,27 @@
         </div>
     </div>
 
+    <!-- Borrar informacion-->
+    <div class="modal fade bs-example-modal-lg" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Mensaje Accion Irreversible!</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 50px; color: darkorange"></i><br>
+                    <p id="mensaje">Tenga en cuenta que al eliminar el registro, ¡este se perder por completo! y no podrá volver a recuperarse, aún asi ¿Desea eliminar el registro seleccionado?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <a type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="">
         <div class="row">
             <div class="col-md-8 col-sm-8">
@@ -259,6 +280,7 @@
                                         <div class="block_content">
                                             <h2 class="title">
                                                 <a>{{ actividad.nombre }}</a>
+                                                <a class="ee" data-uri="/suppliers/activity/delete/{{ actividad.id }}/" data-toggle="modal" data-target="#eliminar" href="#"> <i class="fa fa-trash text-danger"></i></a>
                                             </h2>
                                             <p class="excerpt">{{ actividad.detalle }}</p>
                                         </div>
@@ -293,6 +315,8 @@
                                         <div class="block_content">
                                             <h2 class="title">
                                                 <a>{{  tipo.detalle|capfirst }}</a>
+                                                <a class="ee" data-uri="/suppliers/type/delete/{{ tipo.id }}/" data-toggle="modal" data-target="#eliminar" href="#"> <i class="fa fa-trash text-danger"></i></a>
+
                                             </h2>
                                         </div>
                                     </div>
@@ -326,6 +350,7 @@
                                         <div class="block_content">
                                             <h2 class="title">
                                                 <a>{{  direccion }}</a>
+                                                <a class="ee" data-uri="/suppliers/direction/delete/{{ direccion.id }}/" data-toggle="modal" data-target="#eliminar" href="#"> <i class="fa fa-trash text-danger"></i></a>
                                             </h2>
                                         </div>
                                     </div>
@@ -346,5 +371,8 @@
         $(".js-example-basic-single").select2({
             maximumSelectionLength: 1
         });
+        $(".ee").click(function (){
+            $("#eliminarRegistro").attr("href",$(this).data('uri'))
+        })
     </script>
 {% endblock %}
