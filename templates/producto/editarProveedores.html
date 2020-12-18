@@ -48,6 +48,53 @@
         </div>
     </div>
 
+    <!--Crear actividad -->
+    <div class="modal fade bs-example-modal-lg" id="registroTipos" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro Tipo de Proveedor</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" method="post"
+                                  action="/suppliers/type/{{ proveedor.id }}/">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select name="tipo" id="tipo">
+                                        <option value="productos/bienes">Productos/Bienes</option>
+                                        <option value="servicios">Servicios</option>
+                                        <option value="recursos">Recursos</option>
+                                    </select>
+                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <textarea type="text" class="form-control has-feedback-left" name="detalleActividad"
+                                           id="detalleActividad" required="required" style="height: 250px; resize: none"
+                                              placeholder="Detalle de la Actividad"></textarea>
+                                    <span class="fa fa-file-text-o form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="">
         <div class="row">
             <div class="col-md-8 col-sm-8">
