@@ -65,18 +65,11 @@
                                   action="/suppliers/type/{{ proveedor.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select name="tipo" id="tipo">
+                                    <select name="tipo" id="tipo" class="js-example-basic-single form-control" style="width: 100%">
                                         <option value="productos/bienes">Productos/Bienes</option>
                                         <option value="servicios">Servicios</option>
                                         <option value="recursos">Recursos</option>
                                     </select>
-                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <textarea type="text" class="form-control has-feedback-left" name="detalleActividad"
-                                           id="detalleActividad" required="required" style="height: 250px; resize: none"
-                                              placeholder="Detalle de la Actividad"></textarea>
-                                    <span class="fa fa-file-text-o form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -227,7 +220,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Nuevo Tipo</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"></i> Agregar</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registroTipos"><i class="fa fa-plus-circle"></i> Agregar</a>
                                 </div>
                             </li>
                         </ul>
