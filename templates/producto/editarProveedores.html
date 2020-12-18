@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <!--Crear actividad -->
+    <!--Crear tipo -->
     <div class="modal fade bs-example-modal-lg" id="registroTipos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -70,6 +70,63 @@
                                         <option value="servicios">Servicios</option>
                                         <option value="recursos">Recursos</option>
                                     </select>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!--Crear direcciones de los proveedores -->
+    <div class="modal fade bs-example-modal-lg" id="registroDirecciones" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Direcciones</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" method="post"
+                                  action="/suppliers/direction/{{ proveedor.id }}/">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
+                                            name="ciudad" multiple>
+                                        {% for provincia in provincias %}
+                                            <optgroup label="{{ provincia.nombre }}"></optgroup>
+                                            {% for ciudad in provincia.ciudad_set.all %}
+                                                <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="direccion"
+                                           id="direccion" required="required"
+                                           placeholder="Aquí la dirección">
+                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="telefono"
+                                           id="telefono"
+                                           placeholder="Ingrese Teléfono">
+                                    <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -132,7 +189,7 @@
                                     <span class="required"> (Opcional)</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="file" id="logo" class="form-control">
+                                    <input type="file" name="logo" id="logo" class="form-control" style="height: 50px">
                                     <span>Actualmente: {{ proveedor.logo }}</span>
                                 </div>
                             </div>
@@ -253,7 +310,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Nueva dirección</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="fa fa-plus-circle"></i> Agregar</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registroDirecciones"><i class="fa fa-plus-circle"></i> Agregar</a>
                                 </div>
                             </li>
                         </ul>

@@ -41,6 +41,7 @@ urlpatterns = [
     path("suppliers/activity/delete/<int:id>/",eliminarActividades),
     path("suppliers/type/<int:id>/",tipoProveedor),
     path("suppliers/type/delete/<int:id>/",eliminartipoProveedor),
+    path("suppliers/direction/<int:id>/",direccionProveedor),
 
     path("kardex/", kardex),
     path("business/remove/",eliminar_empresa),

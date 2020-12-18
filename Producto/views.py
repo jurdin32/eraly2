@@ -1,7 +1,8 @@
 from django.shortcuts import render
 # Create your views here.
 from Empresa.models import Establecimiento
-from Producto.models import Proveedor, ActividadProveedor, TipoProveedor
+from Home.models import Provincia
+from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor
 
 
 def proveedores(request):
@@ -24,6 +25,7 @@ def proveedores(request):
     contexto={
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'proveedores': Proveedor.objects.filter(establecimiento__usuario=request.user),
+        'provincias': Provincia.objects.all(),
         'mensaje':mensaje,
         'tipo':tipo,
 
@@ -48,6 +50,7 @@ def editarProveedor(request,id):
     contexto={
         "proveedor":proveedor,
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'provincias': Provincia.objects.all(),
         'mensaje':mensaje,
         'tipo':tipo
     }
@@ -64,6 +67,7 @@ def actividadesProveedor(request,id):
         tipo = 'success'
     contexto={
         "proveedor": proveedor,
+        'provincias': Provincia.objects.all(),
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'mensaje': mensaje,
         'tipo': tipo
@@ -80,6 +84,7 @@ def eliminarActividades(request,id):
     tipo = 'success'
     contexto = {
         "proveedor": proveedor,
+        'provincias': Provincia.objects.all(),
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'mensaje': mensaje,
         'tipo': tipo
@@ -95,6 +100,7 @@ def tipoProveedor(request,id):
         mensaje = "El registro se ha registrado el nuevo tipo..!"
         tipo = 'success'
     contexto = {
+        'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'mensaje': mensaje,
@@ -111,6 +117,25 @@ def eliminartipoProveedor(request,id):
     mensaje = "El registro se ha eliminado el  tipo..!"
     tipo = 'success'
     contexto = {
+        "proveedor": proveedor,
+        'provincias': Provincia.objects.all(),
+        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'mensaje': mensaje,
+        'tipo': tipo
+    }
+    return render(request, "producto/editarProveedores.html", contexto)
+
+
+def direccionProveedor(request,id):
+    mensaje = ""
+    tipo = ""
+    proveedor = Proveedor.objects.get(id=id)
+    if request.POST:
+        DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
+        mensaje = "Se ha registrado la nueva dirección..!"
+        tipo = 'success'
+    contexto = {
+        'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'mensaje': mensaje,
