@@ -17,7 +17,7 @@
                         <div class="x_content">
                             <br>
                             <form class="form-label-left input_mask" method="post"
-                                  action="/business/direcction/{{ establecimiento.id }}/">
+                                  action="/suppliers/activity/{{ proveedor.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name="nombreActividad"
@@ -68,7 +68,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post"
+                        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post" action="/suppliers/edit/{{ proveedor.id }}/"
                               enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="item form-group">
@@ -117,7 +117,7 @@
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Representante
                                     Legal</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input id="representateLegal" value="{{ proveedor.representate }}"
+                                    <input id="representateLegal" value="{{ proveedor.representante }}"
                                            required="required" class="form-control" type="text"
                                            name="representateLegal">
                                 </div>
