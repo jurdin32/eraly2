@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from Empresa.models import Establecimiento
 from Home.models import Provincia
-from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor
+from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias
 from django.contrib import messages
 def proveedores(request):
     if request.POST:
@@ -118,9 +118,16 @@ def productos(request):
 
 def categorias(request):
     contexto={
-
+        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
     }
     return render(request, "producto/categorias.html",contexto)
+
+def subcategorias(request,id):
+    contexto={
+        'categoria':Categorias.objects.get(id=id),
+        'subcategorias':Subcategorias.objects.filter(categoria_id=id),
+    }
+    return render(request, "producto/subcategorias.html",contexto)
 
 def kardex(request):
     contexto={
