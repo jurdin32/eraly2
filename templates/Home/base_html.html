@@ -10,10 +10,11 @@
 
     <title>Eraly Desktop</title>
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link href="{% static '/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css'%}" rel="stylesheet">
-    <link href="{% static '/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css'%}" rel="stylesheet">
-    <link href="{% static '/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css'%}" rel="stylesheet">
-    <link href="{% static '/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static '/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static '/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static '/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,7 +31,7 @@
     <!-- Custom Theme Style -->
     <link href="{% static '/build/css/custom.min.css' %}" rel="stylesheet">
     <style>
-       .nav li li.current-page a{
+        .nav li li.current-page a {
             color: #e4c010;
         }
     </style>
@@ -656,32 +657,40 @@
 <!-- bootstrap-daterangepicker -->
 <script src="{% static '/vendors/moment/min/moment.min.js' %}"></script>
 <script src="{% static '/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
-<script src="{% static '/vendors/datatables.net/js/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
-    <script src="{% static '/vendors/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-buttons/js/buttons.flash.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-buttons/js/buttons.html5.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-buttons/js/buttons.print.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-responsive/js/dataTables.responsive.min.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'%}"></script>
-    <script src="{% static '/vendors/datatables.net-scroller/js/dataTables.scroller.min.js'%}"></script>
-    <script src="{% static '/vendors/jszip/dist/jszip.min.js'%}"></script>
-    <script src="{% static '/vendors/pdfmake/build/pdfmake.min.js'%}"></script>
-    <script src="{% static '/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
-    <script src="{% static 'toastr/toastr.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
-    <script src="{% static 'toastr/customToastr.js'%}"></script>
+<script src="{% static '/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+<script src="{% static '/vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+<script src="{% static '/vendors/jszip/dist/jszip.min.js' %}"></script>
+<script src="{% static '/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+<script src="{% static '/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+<script src="{% static 'toastr/toastr.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
+<script src="{% static 'toastr/customToastr.js' %}"></script>
 
-    {% if mensaje %}
-        <script>
+{% if mensaje %}
+    <script>
         toastr.{{ tipo }}("{{ mensaje }}")
-        </script>
-    {% endif %}
+    </script>
+{% endif %}
 
-
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <script>
+                toastr.{{ message.tags }}("{{ message }}")
+            </script>
+        {% endfor %}
+    </ul>
+{% endif %}
 <!-- Custom Theme Scripts -->
 <script src="{% static '/build/js/custom.min.js' %}"></script>
 <script src="{% static '/vendors/dropzone/dist/min/dropzone.min.js' %}"></script>

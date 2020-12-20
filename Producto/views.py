@@ -1,13 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # Create your views here.
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor
-
-
+from django.contrib import messages
 def proveedores(request):
-    mensaje=""
-    tipo=""
     if request.POST:
         try:
             if request.FILES:
@@ -17,24 +15,17 @@ def proveedores(request):
                 Proveedor.objects.create(establecimiento_id=request.POST['establecimiento'],
                                          ruc=request.POST['ruc'], nombre_fantasia=request.POST['nombreComercial'],
                                          representante=request.POST['representateLegal']).save()
-            mensaje = "El registro se ha creado exitosamente..! "
-            tipo = "success"
-        except Exception as error:
-            mensaje="Al parecer ocurrio un error: "+str(error)
-            tipo="danger"
+            messages.add_message(request, messages.SUCCESS, "El registro se ha creado éxitosamente..!")
+        except:
+            messages.add_message(request, messages.ERROR, "Al parecer ocurrio un error..!")
     contexto={
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'proveedores': Proveedor.objects.filter(establecimiento__usuario=request.user),
         'provincias': Provincia.objects.all(),
-        'mensaje':mensaje,
-        'tipo':tipo,
-
     }
     return render(request, "producto/proveedores.html",contexto)
 
 def editarProveedor(request,id):
-    mensaje = ""
-    tipo = ""
     proveedor=Proveedor.objects.get(id=id)
     if request.POST:
         print(request.POST)
@@ -45,103 +36,79 @@ def editarProveedor(request,id):
         if request.FILES:
             proveedor.logo=request.FILES['logo']
         proveedor.save()
-        mensaje="El registro se ha Modificado exitosamente..!"
-        tipo='success'
+        messages.add_message(request, messages.INFO, "El registro se ha modificado éxitosamente..!")
     contexto={
         "proveedor":proveedor,
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
         'provincias': Provincia.objects.all(),
-        'mensaje':mensaje,
-        'tipo':tipo
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
+def eliminarProveedor(request,id):
+    proveedor=Proveedor.objects.get(id=id)
+    proveedor.delete()
+    messages.add_message(request, messages.WARNING, "El Proveedor se ha eliminado..!")
+    return HttpResponseRedirect('/suppliers/')
+
+
 def actividadesProveedor(request,id):
-    mensaje = ""
-    tipo = ""
+
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
         print(request.POST)
         ActividadProveedor.objects.create(proveedor_id=id,nombre=request.POST['nombreActividad'],detalle=request.POST['detalleActividad']).save()
-        mensaje = "Se ha creado nueva actividad para el proveedor..!"
-        tipo = 'success'
+        messages.add_message(request, messages.SUCCESS, "Se ha registrado Nueva actividad del Proveedor..!")
     contexto={
         "proveedor": proveedor,
         'provincias': Provincia.objects.all(),
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'mensaje': mensaje,
-        'tipo': tipo
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
 def eliminarActividades(request,id):
-    mensaje = ""
-    tipo = ""
     actividad=ActividadProveedor.objects.get(id=id)
-    proveedor = actividad.proveedor
+    proveedor = actividad.proveedor.id
     actividad.delete()
-    mensaje = "El registro se ha borrado..!"
-    tipo = 'success'
-    contexto = {
-        "proveedor": proveedor,
-        'provincias': Provincia.objects.all(),
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'mensaje': mensaje,
-        'tipo': tipo
-    }
-    return render(request, "producto/editarProveedores.html", contexto)
+    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
+    return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
 def tipoProveedor(request,id):
-    mensaje = ""
-    tipo = ""
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
         TipoProveedor.objects.create(proveedor_id=id,detalle=request.POST['detalle']).save()
-        mensaje = "El registro se ha registrado el nuevo tipo..!"
-        tipo = 'success'
+        messages.add_message(request, messages.SUCCESS, "Se ha registrado el nuevo tipo..!")
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'mensaje': mensaje,
-        'tipo': tipo
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
 def eliminartipoProveedor(request,id):
-    mensaje = ""
-    tipo = ""
     tp=TipoProveedor.objects.get(id=id)
-    proveedor=tp.proveedor
+    proveedor=tp.proveedor.id
     tp.delete()
-    mensaje = "El registro se ha eliminado el  tipo..!"
-    tipo = 'success'
-    contexto = {
-        "proveedor": proveedor,
-        'provincias': Provincia.objects.all(),
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'mensaje': mensaje,
-        'tipo': tipo
-    }
-    return render(request, "producto/editarProveedores.html", contexto)
-
+    messages.add_message(request,messages.WARNING,"El registro se ha eliminado..!")
+    return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
 def direccionProveedor(request,id):
-    mensaje = ""
-    tipo = ""
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
         DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
-        mensaje = "Se ha registrado la nueva dirección..!"
-        tipo = 'success'
+        messages.add_message(request, messages.SUCCESS, "Se ha registrado la nueva dirección..!")
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'mensaje': mensaje,
-        'tipo': tipo
     }
     return render(request, "producto/editarProveedores.html", contexto)
+
+def eliminarDireccionProveedores(request,id):
+    tp=DireccionProveedor.objects.get(id=id)
+    proveedor=tp.proveedor.id
+    tp.delete()
+    messages.add_message(request,messages.WARNING,"El registro se ha eliminado..!")
+    return HttpResponseRedirect('/suppliers/edit/%s/'%proveedor)
 
 def productos(request):
     contexto={

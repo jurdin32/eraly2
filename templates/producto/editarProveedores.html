@@ -105,7 +105,7 @@
                                   action="/suppliers/direction/{{ proveedor.id }}/">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
+                                    <select class="js-example-basic-single" style="width: 75%" id="ciudades" required="required"
                                             name="ciudad" multiple>
                                         {% for provincia in provincias %}
                                             <optgroup label="{{ provincia.nombre }}"></optgroup>
@@ -242,9 +242,7 @@
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
-                                <div class="col-md-9 col-sm-9 offset-md-8">
-                                    <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
-                                    </button>
+                                <div class="col-md-9 col-sm-9">
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                     </button>
                                     <a href="/suppliers/" class="btn btn-primary"><i class="fa fa-reply"> </i>
@@ -367,10 +365,22 @@
 {% block script_index %}
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <script src="/static/select2/js/i18n/es.js"></script>
     <script>
         $(".js-example-basic-single").select2({
-            maximumSelectionLength: 1
+            language: "es",
+            maximumSelectionLength: 1,
+            placeholder: "Seleccione",
+             width: 'resolve'
         });
+
+        $(".js-example-basic-single").select2({
+            language: "es",
+            maximumSelectionLength: 1,
+            placeholder: "Seleccione",
+             width: 'resolve'
+        });
+
         $(".ee").click(function (){
             $("#eliminarRegistro").attr("href",$(this).data('uri'))
         })
