@@ -5,6 +5,10 @@ from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias
 from django.contrib import messages
+
+from eraly2.settings import BASE_DIR
+
+
 def proveedores(request):
     if request.POST:
         try:
@@ -119,15 +123,28 @@ def productos(request):
 def categorias(request):
     contexto={
         'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'iconos':iconos_text()
     }
+
     return render(request, "producto/categorias.html",contexto)
 
+def iconos_text():
+    iconos=[]
+    for icono in open(str(BASE_DIR)+"/static/iconos.txt",'r').readlines():
+        icono=icono.strip().replace("(alias)","")
+        iconos.append(icono)
+    return iconos
+
 def subcategorias(request,id):
+
     contexto={
         'categoria':Categorias.objects.get(id=id),
         'subcategorias':Subcategorias.objects.filter(categoria_id=id),
     }
+
     return render(request, "producto/subcategorias.html",contexto)
+
+
 
 def kardex(request):
     contexto={
