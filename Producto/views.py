@@ -120,13 +120,6 @@ def productos(request):
     }
     return render(request, "producto/productos.html",contexto)
 
-def categorias(request):
-    contexto={
-        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
-        'iconos':iconos_text()
-    }
-
-    return render(request, "producto/categorias.html",contexto)
 
 def iconos_text():
     iconos=[]
@@ -134,6 +127,30 @@ def iconos_text():
         icono=icono.strip().replace("(alias)","")
         iconos.append(icono)
     return iconos
+
+def categorias(request):
+    if request.POST:
+        Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
+                                  nombre=request.POST["nombre"], descripcion=request.POST['detalle']).save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
+    contexto={
+        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'iconos':iconos_text(),
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
+    }
+    return render(request, "producto/categorias.html",contexto)
+
+def editarCategoria(request,id):
+    if request.POST:
+        print(request.POST)
+        categoria=Categorias.objects.get(id=id)
+        categoria.establecimiento_id=request.POST['establecimiento']
+        categoria.icono="fa "+request.POST["icono"]
+        categoria.nombre=request.POST["nombre"]
+        categoria.descripcion=request.POST['detalle']
+        categoria.save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
+    return  HttpResponseRedirect('/category/')
 
 def subcategorias(request,id):
 

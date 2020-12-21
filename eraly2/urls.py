@@ -34,6 +34,9 @@ urlpatterns = [
 
     path("products/",productos),
     path("category/",categorias),
+    path("category/edit/<int:id>/",editarCategoria),
+
+
     path("category/<int:id>/",subcategorias),
 
     path("suppliers/",proveedores),

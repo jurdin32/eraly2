@@ -17,7 +17,14 @@
                             <form class="form-label-left input_mask" id="frmRegistrar" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single form-control" name="icono" id="icono" style="width: 100%" multiple>
+                                    <select class="form-control" name="establecimiento" id="establecimiento">
+                                        {% for establecimiento in establecimientos %}
+                                            <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="form-control" name="icono" id="icono">
                                         {% for icono in iconos %}
                                             <option value="{{ icono }}">{{ icono }}</option>
                                         {% endfor %}
@@ -65,8 +72,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Opciones</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
-                                            class="fa fa-file-o"> </i> Registra Nuevo</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registrar" id="modal_registrar" >
+                                        <i class="fa fa-file-o"> </i> Registra Nuevo</a>
                                 </div>
                             </li>
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -103,7 +110,7 @@
                                                 <td>{{ categoria.establecimiento }}</td>
                                                 <td>{{ categoria.nombre }}</td>
                                                 <td>{{ categoria.descripcion }}</td>
-                                                <td><a id="modal_modificar" href="#" data-toggle="modal" data-target="#registrar" data-icono="{{ categoria.icono }}" data-nombre="{{ categoria.nombre }}" data-descripcion="{{ categoria.descripcion }}">
+                                                <td><a id="modal_modificar" href="#" data-toggle="modal" data-establecimiento="{{ categoria.establecimiento.id }}" data-id="{{ categoria.id }}" data-target="#registrar" data-icono="{{ categoria.icono }}" data-nombre="{{ categoria.nombre }}" data-descripcion="{{ categoria.descripcion }}">
                                                     <i class="fa fa-edit"></i> Editar</a></td>
                                             </tr>
                                         {% endfor %}
@@ -122,7 +129,7 @@
 {% block script_index %}
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
-    <script src="/static/select2/js/i18n/es.js"></script>
+    <script src="{% static 'select2/js/i18n/es.js' %}"></script>
     <script>
         $(document).ready(function () {
             $("#datatableCategoria").DataTable({
@@ -130,18 +137,21 @@
                     url: "{% static 'Spanish_dt.json' %}"
                 }
             });
-            $(".js-example-basic-single").select2({
-                language: "es",
-                maximumSelectionLength: 1,
-                placeholder: "Seleccione",
-                width: "resolve",
-            });
             $("#modal_modificar").click(function (){
-                $("#icono").val($(this).data('icono'));
-                $('#icono').trigger('change');
+                var icono=$(this).data('icono').replace("fa ","")
+                var establecimiento=$(this).data('establecimiento')
+                console.log(icono)
+                $("#icono option:contains("+icono+")").attr('selected', true);
+                $("#establecimiento option[value="+ establecimiento +"]").attr("selected",true);
                 $("#nombre").val($(this).data('nombre'))
                 $("#detalle").text($(this).data('descripcion'))
+                $("#frmRegistrar").attr("action","/category/edit/"+$(this).data('id')+"/")
             });
+            $("#modal_registrar").click(function (){
+                $("#nombre").val("")
+                $("#detalle").text("")
+                $("#frmRegistrar").attr("action","/category/")
+            })
         });
     </script>
 {% endblock %}
