@@ -17,14 +17,14 @@
                             <form class="form-label-left input_mask" id="frmRegistrar" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="form-control" name="establecimiento" id="establecimiento">
+                                    <select class="form-control js-example-basic-single" style="width: 100%" name="establecimiento" id="establecimiento" multiple>
                                         {% for establecimiento in establecimientos %}
                                             <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="form-control" name="icono" id="icono">
+                                    <select class="form-control js-example-basic-single" style="width: 100%" name="icono" id="icono" multiple>
                                         {% for icono in iconos %}
                                             <option value="{{ icono }}">{{ icono }}</option>
                                         {% endfor %}
@@ -59,24 +59,43 @@
         </div>
     </div>
 
+    <div class="modal fade bs-example-modal-lg" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Mensaje!</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 50px; color: darkorange"></i><br>
+                    <p>Esta seguro que desea eliminar este proveedor, tenga en cuenta que si elimina este registro, todos los datos relacionados tambien serán eliminados</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <a type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Categoria de Produtos <small>del establecimientos</small></h2>
+                        <h2>Categoria de Produtos<small>del establecimientos</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Opciones</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registrar" id="modal_registrar" >
+                                    <a class="dropdown-item modal_registrar" href="#" data-toggle="modal" data-target="#registrar" >
                                         <i class="fa fa-file-o"> </i> Registra Nuevo</a>
                                 </div>
                             </li>
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li><a class="collapse-link"><i class="fa fa-archive"></i></a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -93,7 +112,7 @@
                                             <th>Establecimiento</th>
                                             <th>Nombre de la Categoria</th>
                                             <th>Descripción</th>
-                                            <th>Opciones</th>
+                                            <th style="text-align: center">Opciones</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -110,8 +129,10 @@
                                                 <td>{{ categoria.establecimiento }}</td>
                                                 <td>{{ categoria.nombre }}</td>
                                                 <td>{{ categoria.descripcion }}</td>
-                                                <td><a id="modal_modificar" href="#" data-toggle="modal" data-establecimiento="{{ categoria.establecimiento.id }}" data-id="{{ categoria.id }}" data-target="#registrar" data-icono="{{ categoria.icono }}" data-nombre="{{ categoria.nombre }}" data-descripcion="{{ categoria.descripcion }}">
-                                                    <i class="fa fa-edit"></i> Editar</a></td>
+                                                <td style="text-align: center"><a class="modal_modificar" href="#" data-toggle="modal" data-establecimiento="{{ categoria.establecimiento.id }}" data-id="{{ categoria.id }}" data-target="#registrar" data-icono="{{ categoria.icono }}" data-nombre="{{ categoria.nombre }}" data-detalle="{{ categoria.descripcion }}">
+                                                    <i class="fa fa-edit"></i> Editar</a><span> | </span>
+                                                    <a href="#" data-toggle="modal" data-target="#eliminar" data-id="{{ categoria.id }}" class="eliminar"> <i class="fa fa-trash-o text-danger"></i> Eliminar</a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
@@ -131,27 +152,39 @@
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script src="{% static 'select2/js/i18n/es.js' %}"></script>
     <script>
+        $(".js-example-basic-single").select2({
+            maximumSelectionLength: 1
+        })
+
+
         $(document).ready(function () {
             $("#datatableCategoria").DataTable({
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
                 }
             });
-            $("#modal_modificar").click(function (){
+            $(".modal_modificar").click(function (){
+                $("#nombre").val("")
+                $("#detalle").text("")
                 var icono=$(this).data('icono').replace("fa ","")
                 var establecimiento=$(this).data('establecimiento')
-                console.log(icono)
-                $("#icono option:contains("+icono+")").attr('selected', true);
-                $("#establecimiento option[value="+ establecimiento +"]").attr("selected",true);
+
+                $("#icono").val(icono).trigger('change');
+                $("#establecimiento").val(establecimiento).trigger('change');
                 $("#nombre").val($(this).data('nombre'))
-                $("#detalle").text($(this).data('descripcion'))
+                $("#detalle").text($(this).data('detalle'))
                 $("#frmRegistrar").attr("action","/category/edit/"+$(this).data('id')+"/")
             });
-            $("#modal_registrar").click(function (){
+            $(".modal_registrar").click(function (){
                 $("#nombre").val("")
                 $("#detalle").text("")
                 $("#frmRegistrar").attr("action","/category/")
-            })
+            });
+
+            $(".eliminar").click(function(){
+               $("#eliminarRegistro").attr("href","/category/remove/"+$(this).data('id')+"/")
+            });
+
         });
     </script>
 {% endblock %}

@@ -152,15 +152,42 @@ def editarCategoria(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
 
-def subcategorias(request,id):
+def eliminarCategoria(request,id):
+    cat = Categorias.objects.get(id=id)
+    cat.delete()
+    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
+    return HttpResponseRedirect('/category/')
 
+
+def subcategorias(request,id):
+    if request.POST:
+        Subcategorias.objects.create(categoria_id=id, icono="fa "+request.POST["icono"],nombre=request.POST["nombre"],
+                                     descripcion=request.POST['detalle']).save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
         'categoria':Categorias.objects.get(id=id),
         'subcategorias':Subcategorias.objects.filter(categoria_id=id),
+        'iconos': iconos_text(),
     }
-
     return render(request, "producto/subcategorias.html",contexto)
 
+def editarSubCategoria(request,id):
+    categoria = Subcategorias.objects.get(id=id)
+    if request.POST:
+        print(request.POST)
+        categoria.icono="fa "+request.POST["icono"]
+        categoria.nombre=request.POST["nombre"]
+        categoria.descripcion=request.POST['detalle']
+        categoria.save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
+    return  HttpResponseRedirect('/category/%s'%categoria.categoria_id)
+
+def eliminarSubcategoria(request,id):
+    sub = Subcategorias.objects.get(id=id)
+    cat = sub.categoria.id
+    sub.delete()
+    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
+    return HttpResponseRedirect('/category/%s' % cat)
 
 
 def kardex(request):

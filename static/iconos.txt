@@ -336,3 +336,4 @@
  fa-file-video-o
  fa-file-word-o
  fa-file-zip-o (alias)
+ fa-phone-mobile
