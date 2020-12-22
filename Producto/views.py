@@ -3,11 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 from Empresa.models import Establecimiento
 from Home.models import Provincia
-from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias
+from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
+    Productos
 from django.contrib import messages
-
 from eraly2.settings import BASE_DIR
-
 
 def proveedores(request):
     if request.POST:
@@ -114,13 +113,6 @@ def eliminarDireccionProveedores(request,id):
     messages.add_message(request,messages.WARNING,"El registro se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/edit/%s/'%proveedor)
 
-def productos(request):
-    contexto={
-
-    }
-    return render(request, "producto/productos.html",contexto)
-
-
 def iconos_text():
     iconos=[]
     for icono in open(str(BASE_DIR)+"/static/iconos.txt",'r').readlines():
@@ -195,3 +187,9 @@ def kardex(request):
 
     }
     return render(request, "producto/kardex.html",contexto)
+
+def productos(request):
+    contexto={
+        "productos":Productos.objects.filter(establecimiento__usuario=request.user),
+    }
+    return render(request, "producto/productos.html",contexto)

@@ -82,6 +82,8 @@ class Marca(models.Model):
         return self.nombre
 
 class Productos(models.Model):
+    imagen=models.ImageField(upload_to="productos",null=True,blank=True, help_text="imagen de 100px x 100px")
+    codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
     subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
     Marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
