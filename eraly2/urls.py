@@ -33,6 +33,8 @@ urlpatterns = [
     path("directions/",direcciones),
 
     path("products/",productos),
+    path("products/edit/<int:id>/",productos_detalles),
+
     path("category/",categorias),
     path("category/edit/<int:id>/",editarCategoria),
     path("category/remove/<int:id>/",eliminarCategoria),

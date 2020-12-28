@@ -4,7 +4,7 @@ from django.shortcuts import render
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
-    Productos
+    Productos, Marca
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
 
@@ -193,3 +193,26 @@ def productos(request):
         "productos":Productos.objects.filter(establecimiento__usuario=request.user),
     }
     return render(request, "producto/productos.html",contexto)
+
+def productos_detalles(request,id):
+    producto=Productos.objects.get(id=id)
+    if request.POST:
+        print(request.POST)
+        producto.establecimiento_id=request.POST['establecimiento']
+        producto.subcategoria_id=request.POST['categoria']
+        producto.nombre = request.POST['nombre']
+        producto.marca_id=request.POST['marca']
+        producto.talla=request.POST['talla[]']
+        producto.descripcion=request.POST['descripcion']
+        producto.detallesTecnicos=request.POST['tecnicos']
+        if request.FILES:
+            producto.imagen=request.POST['imagen']
+        producto.save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
+    contexto={
+        'producto':producto,
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'marcas':Marca.objects.all()
+    }
+    return render(request, 'producto/editarProducto.html',contexto)
