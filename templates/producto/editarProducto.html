@@ -184,6 +184,36 @@
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <div class="col-md-12 col-sm-12">
+                                    <span>Descripción del Producto</span>
+                                    <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><small>Detalles del Producto</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="item form-group">
+                                <div class="col-md-12 col-sm-12">
+                                    <span>Detalles Técnicos</span>
+                                    <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
+                                </button>
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
+                                </button>
+                                <a href="/products/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -211,11 +241,12 @@
                                             <tbody>
                                             {% for color in producto.colores_set.all %}
                                                 <tr>
-                                                    <td style="width: 50px"><p><i class="fa fa-square" style="color: {{ color.codigoColor }}"></i></p></td>
+                                                    <td style="width: 50px"><p><i class="fa fa-square"
+                                                                                  style="color: {{ color.codigoColor }}"></i>
+                                                    </p></td>
                                                     <td><p>{{ color.nombre }}</p></td>
                                                 </tr>
                                             {% endfor %}
-
 
 
                                             </tbody>
@@ -250,38 +281,6 @@
                             </div>
                         </div>
 
-                    </div>
-
-                </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2><small>Detalles del Producto</small></h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <div class="item form-group">
-                                <div class="col-md-12 col-sm-12">
-                                    <span>Descripción del Producto</span>
-                                    <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
-                                </div>
-                            </div>
-                            <div class="ln_solid"></div>
-                            <div class="item form-group">
-                                <div class="col-md-12 col-sm-12">
-                                    <span>Detalles Técnicos</span>
-                                    <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
-                                </div>
-                            </div>
-                            <div class="ln_solid"></div>
-                            <div class="item form-group">
-                                <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
-                                </button>
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
-                                </button>
-                                <a href="/products/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
