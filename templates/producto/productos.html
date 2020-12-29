@@ -1,6 +1,6 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
-
+{% load productosTags %}
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -12,7 +12,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Opciones</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                    <a class="dropdown-item" href="/products/new/"><i
                                             class="fa fa-file-o"> </i> Registrar Nuevo</a>
                                 </div>
                             </li>
@@ -49,7 +49,7 @@
                                                 <img style="width: 50px;height: 50px;" src="/media/{{ producto.imagen }}" alt="image">
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.id }}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ producto.codigo }}</td>
+                                            <td style="text-align: center; vertical-align: middle">{% if producto.codigo  %}{{ producto.codigo }}{% else %} <i>Sin código</i> {% endif %}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.subcategoria.categoria.nombre }}: {{ producto.subcategoria.nombre }}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.nombre }}</td>
                                             <td style="text-align: justify; vertical-align: middle">
@@ -73,7 +73,7 @@
                                                 {% endfor %}
 
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle"> 0 </td>
+                                            <td style="text-align: center; vertical-align: middle"> {% stock producto.id %} </td>
                                             <td style="text-align: center; vertical-align: middle; font-size: 20px">
                                                 <a href="/products/edit/{{ producto.id }}/"><i class="fa fa-edit"></i></a>
                                                 <a href=""><i class="fa fa-trash text-danger"></i></a>

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
-    Productos, Marca
+    Productos, Marca, Colores, Precios
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
 
@@ -194,6 +194,34 @@ def productos(request):
     }
     return render(request, "producto/productos.html",contexto)
 
+def registarProducto(request):
+    producto = Productos()
+    contexto = {
+        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'categorias': Categorias.objects.filter(establecimiento__usuario=request.user),
+        'marcas': Marca.objects.all()
+    }
+    if request.POST:
+        producto.establecimiento_id=request.POST['establecimiento']
+        producto.subcategoria_id=request.POST['categoria']
+        producto.nombre = request.POST['nombre']
+        if request.POST.get('marca'):
+            producto.marca_id = request.POST['marca']
+        else:
+            producto.marca = None
+        producto.talla = recorrertallas(request)
+        producto.codigo=request.POST['codigo']
+        producto.descripcion=request.POST['descripcion']
+        producto.detallesTecnicos=request.POST['tecnicos']
+        if request.FILES:
+            producto.imagen=request.FILES['imagen']
+        producto.save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
+        return HttpResponseRedirect("/products/")
+    else:
+        return render(request, "producto/crearProducto.html",contexto)
+
+
 def productos_detalles(request,id):
     producto=Productos.objects.get(id=id)
     if request.POST:
@@ -201,9 +229,13 @@ def productos_detalles(request,id):
         producto.establecimiento_id=request.POST['establecimiento']
         producto.subcategoria_id=request.POST['categoria']
         producto.nombre = request.POST['nombre']
-        producto.marca_id=request.POST['marca']
+        if request.POST.get('marca'):
+            producto.marca_id=request.POST['marca']
+        else:
+            producto.marca=None
         producto.talla = recorrertallas(request)
         producto.descripcion=request.POST['descripcion']
+        producto.codigo = request.POST['codigo']
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
             producto.imagen=request.FILES['imagen']
@@ -222,3 +254,34 @@ def recorrertallas(request):
     for i in request.POST.getlist('talla[]'):
         valores+=i+","
     return (valores)
+
+def registrarColores(request,id):
+    if request.POST:
+        Colores.objects.create(producto_id=id, codigoColor=request.POST['color'],nombre=request.POST['nombre']).save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
+    return HttpResponseRedirect("/products/edit/%s/"%id)
+
+
+def eliminarColorProducto(request,id):
+    color=Colores.objects.get(id=id)
+    producto=color.producto.id
+    color.delete()
+    messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
+    return HttpResponseRedirect("/products/edit/%s/"%producto)
+
+def registrarPrecios(request,id):
+    if request.POST:
+        precio=float(str(request.POST['precio']))
+        print(precio)
+        Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle']).save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
+    return HttpResponseRedirect("/products/edit/%s/"%id)
+
+def eliminarPrecios(request,id):
+    precio=Precios.objects.get(id=id)
+    producto=precio.producto.id
+    precio.delete()
+    messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
+    return HttpResponseRedirect("/products/edit/%s/"%producto)
+
+

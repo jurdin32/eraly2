@@ -186,8 +186,9 @@
                                     <select name="marca" id="marca" class="js-example-basic-single form-control"
                                             style="width: 100%" multiple>
                                         {% for marca in marcas %}
-                                            {% if producto.marca == marca %}
-                                                <option selected="selected" value="{{ marca.id }}">{{ marca.nombre }}</option>
+                                            {% if producto.Marca == marca %}
+                                                <option selected="selected"
+                                                        value="{{ marca.id }}">{{ marca.nombre }}</option>
                                             {% else %}
                                                 <option value="{{ marca.id }}">{{ marca.nombre }}</option>
                                             {% endif %}
@@ -201,6 +202,7 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="talla[]" id="talla" class="js-example-basic-single2 form-control"
                                             style="width: 100%" multiple>
+                                         <option><option>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -236,7 +238,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><small>Detalles tecnicos del Producto</small></h2>
+                            <h2><small>Detalles Tecnicos del Producto</small></h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -255,85 +257,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2><small>Colores (Solo si aplica)</small></h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                               aria-haspopup="true" aria-expanded="false">Nuevos Colores</a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a class="dropdown-item" data-toggle="modal"
-                                                       data-target="#registroColores"><i
-                                                        class="fa fa-plus-circle"> </i>
-                                                    Agregar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="item form-group">
-                                        <table class="tile_info">
-                                            <tbody>
-                                            {% for color in producto.colores_set.all %}
-                                                <tr>
-                                                    <td style="width: 50px"><p><i class="fa fa-square"
-                                                                                  style="color: {{ color.codigoColor }}"></i>
-                                                    </p></td>
-                                                    <td><p>{{ color.nombre }}</p>
-                                                    </td>
-                                                    <td><a href="/products/colors/delete/{{ color.id }}/"><i
-                                                            class="fa fa-trash text-danger"></i></a></td>
-                                                </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2><small>Precios (Al menos 1)</small></h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                               aria-haspopup="true" aria-expanded="false">Nuevos Precios</a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a class="dropdown-item" data-toggle="modal"
-                                                       data-target="#registroPrecios"><i
-                                                        class="fa fa-plus-circle"> </i>
-                                                    Agregar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="item form-group">
-                                        <table class="countries_list" style="font-size: 16px">
-                                            <tbody>
-                                            {% for precio in producto.precios_set.all %}
-                                                <tr>
-                                                    <td><a href="/products/prices/delete/{{ precio.id }}/"><i class="fa fa-trash text-danger"></i></a></td>
-                                                    <td>{{ precio.detalle }}</td>
-                                                    <td class="fs15 fw700 text-right">$ {{ precio.precioVenta }}</td>
-                                                </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </form>
@@ -350,7 +273,8 @@
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
         $(".js-example-basic-single").select2({
-            maximumSelectionLength: 1
+            maximumSelectionLength: 1,
+            placeholder: "Seleccione"
         });
         $(".js-example-basic-single2").select2();
 
