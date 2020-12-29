@@ -88,7 +88,7 @@ class Productos(models.Model):
     subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
     Marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=100)
-    talla=models.CharField(max_length=10,null=True,blank=True)
+    talla=models.CharField(max_length=50,null=True,blank=True)
     dimension=models.CharField(max_length=200,null=True,blank=True)
     detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional")
     descripcion = RichTextUploadingField()

@@ -202,11 +202,11 @@ def productos_detalles(request,id):
         producto.subcategoria_id=request.POST['categoria']
         producto.nombre = request.POST['nombre']
         producto.marca_id=request.POST['marca']
-        producto.talla=request.POST['talla[]']
+        producto.talla = recorrertallas(request)
         producto.descripcion=request.POST['descripcion']
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
-            producto.imagen=request.POST['imagen']
+            producto.imagen=request.FILES['imagen']
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     contexto={
@@ -216,3 +216,9 @@ def productos_detalles(request,id):
         'marcas':Marca.objects.all()
     }
     return render(request, 'producto/editarProducto.html',contexto)
+
+def recorrertallas(request):
+    valores=''
+    for i in request.POST.getlist('talla[]'):
+        valores+=i+","
+    return (valores)

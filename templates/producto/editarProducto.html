@@ -294,5 +294,10 @@
             maximumSelectionLength: 1
         });
         $(".js-example-basic-single2").select2();
+
+        tallas='{{ producto.talla }}'.split(",");
+        $(".js-example-basic-single2").val(tallas).trigger('change');
+
+
     </script>
 {% endblock %}
