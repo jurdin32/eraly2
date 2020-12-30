@@ -142,12 +142,11 @@ class Precios(models.Model):
         verbose_name_plural = "6. Precios Producto "
 
 class Kardex(models.Model):
+    fecha = models.DateTimeField(auto_now=True)
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     tipo=models.CharField(max_length=50)
-    fecha=models.DateTimeField(auto_now = True)
     cantidad=models.IntegerField(default=0)
     descripcion=models.TextField()
-
 
     class Meta:
         verbose_name_plural = "7. Kardex "

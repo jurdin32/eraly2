@@ -1,16 +1,12 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
-
+{% load productosTags %}
     <div class="">
-
-        <div class="clearfix"></div>
-
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Productos <small>del establecimientos</small></h2>
-
+                        <h2>Productos <small>de los establecimientos</small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -18,27 +14,27 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
+                                        <thead style="background-color: #2A3F54; color: whitesmoke">
                                         <tr>
-                                            <th>Imagen</th>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th style="text-align: center">Id</th>
+                                            <th>Producto</th>
+                                            <th style="text-align: center">Ingresos</th>
+                                            <th style="text-align: center">Egresos</th>
+                                            <th style="text-align: center">Stock</th>
+                                            <th style="text-align: center">Detalles</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for kard in kardex %}
                                         <tr>
-                                            <td>url</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td style="text-align: center">{{ kard.id }}</td>
+                                            <td > {{ kard.nombre }}</td>
+                                            <td style="text-align: center">{% ingresos kard.id %}</td>
+                                            <td style="text-align: center">{% egresos kard.id %}</td>
+                                            <td style="text-align: center">{% stock kard.id %}</td>
+                                            <td style="text-align: center"><a href=""><i class="fa fa-area-chart text-primary"></i></a></td>
                                         </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

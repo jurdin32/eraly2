@@ -181,13 +181,6 @@ def eliminarSubcategoria(request,id):
     messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
     return HttpResponseRedirect('/category/%s' % cat)
 
-
-def kardex(request):
-    contexto={
-
-    }
-    return render(request, "producto/kardex.html",contexto)
-
 def productos(request):
     contexto={
         "productos":Productos.objects.filter(establecimiento__usuario=request.user),
@@ -283,5 +276,12 @@ def eliminarPrecios(request,id):
     precio.delete()
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
+
+
+def kardex(request):
+    contexto={
+        'kardex':Productos.objects.filter(establecimiento__usuario=request.user)
+    }
+    return render(request, "producto/kardex.html",contexto)
 
 
