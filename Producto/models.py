@@ -144,12 +144,15 @@ class Precios(models.Model):
 class Kardex(models.Model):
     fecha = models.DateTimeField(auto_now=True)
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
-    tipo=models.CharField(max_length=50)
+    tipo=models.CharField(max_length=1)
     cantidad=models.IntegerField(default=0)
     descripcion=models.TextField()
 
     class Meta:
         verbose_name_plural = "7. Kardex "
+
+    def __str__(self):
+        return self.producto.nombre
 
 class ImagenesProducto(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)

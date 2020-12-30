@@ -4,7 +4,7 @@ from django.shortcuts import render
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
-    Productos, Marca, Colores, Precios
+    Productos, Marca, Colores, Precios, Kardex
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
 
@@ -283,5 +283,13 @@ def kardex(request):
         'kardex':Productos.objects.filter(establecimiento__usuario=request.user)
     }
     return render(request, "producto/kardex.html",contexto)
+
+
+def kardex_producto(request,id):
+    contexto={
+        'kardex':Kardex.objects.filter(producto_id=id),
+        'producto':id,
+    }
+    return render(request, "producto/kardex_producto.html",contexto)
 
 

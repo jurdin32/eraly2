@@ -1,0 +1,87 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {% load productosTags %}
+    <div class="">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Productos <small>de los establecimientos</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead style="background-color: #2A3F54; color: whitesmoke">
+                                        <tr>
+                                            <th style="text-align: center">Id</th>
+                                            <th>Producto</th>
+                                            <th style="text-align: center">Fecha</th>
+                                            <th style="text-align: center">Tipo de transacción</th>
+                                            <th>Detalles</th>
+                                            <th style="text-align: center">Cantidad</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for kard in kardex %}
+                                            <tr>
+                                                <td style="text-align: center">{{ kard.id }}</td>
+                                                <td> {{ kard }}</td>
+                                                <td style="text-align: center">{{ kard.fecha }}</td>
+                                                <td style="text-align: center">{% if kard.tipo == "I" %}
+                                                    Ingreso{% else %}Egreso{% endif %} </td>
+                                                <td>{{ kard.descripcion }}</td>
+                                                <td style="text-align: center">{{ kard.cantidad }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 ">
+              <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                  <h2>Rata de Ingreso</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p style="text-align: center">Total: {% stock producto %}</p>
+                    <canvas id="myChart" style="width: 100%"></canvas>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block script_index %}
+    <script>
+        $(document).ready(function () {
+            $("#datatable").DataTable();
+        });
+    </script>
+    <script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Egresos', 'Ingresos'],
+        datasets: [{
+            data: [{% egresos producto %}, {% ingresos producto %},],
+            backgroundColor: [
+                '#16b4d6',
+                '#c70d88',
+            ],
+            borderWidth: 1
+        }]
+    }
+});
+</script>
+{% endblock %}

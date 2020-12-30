@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from Empresa.views import *
 from Home.views import *
 from Producto.views import *
+from Ventas.views import proformas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -63,10 +64,17 @@ urlpatterns = [
     path("suppliers/direction/delete/<int:id>/",eliminarDireccionProveedores),
 
     path("kardex/", kardex),
+    path("kardex/products/<int:id>/", kardex_producto),
+
+
     path("business/remove/",eliminar_empresa),
     path("business/direcction/<int:idEmpresa>/",crear_direcciones),
     path("directions/edit/<int:id>/",modificar_direcciones),
     path("directions/delete/<int:id>/",eliminar_direcciones),
+    path("proforms/",proformas),
+
+
+
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
