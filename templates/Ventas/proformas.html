@@ -11,21 +11,30 @@
                 <div class="modal-body">
                     <div class="x_panel">
                         <div class="x_content">
-                            <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                <table class="table table-bordered table-striped" id="tproductos">
-
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-striped" id="tproductos" style="text-align: center">
+                                    <thead>
+                                        <tr style="background-color: #2A3F54; color: whitesmoke">
+                                            <th>Id</th>
+                                            <th>Detalle del Producto</th>
+                                            <th>Stock</th>
+                                            <th>Precio</th>
+                                            <th>Seleccionar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        {% for producto in productos %}
+                                        <td>Id</td>
+                                            <td>Detalle del Producto</td>
+                                            <td>Stock</td>
+                                            <td>Precio</td>
+                                            <td><a href=""><i class="fa fa-check-circle text-danger" style="font-size: 20px"></i></a></td>
+                                        {% endfor %}
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="ln_solid"></div>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
-                                    </button>
-                                    <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
-                                    <button type="submit" class="btn btn-success">Registrar Datos</button>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -174,7 +183,7 @@
     <script>
         function agregarFila() {
             document.getElementById("tabla").insertRow(-1).innerHTML = '' +
-                '<td></td><td></td><td></td><td></td><td></td><td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
+                '<td></td><td></td><td style="text-align: center;"><input min="1" max="5" class="form-control" style="text-align: center" value="1" type="number"/></td><td></td><td></td><td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
                 '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
         }
 
