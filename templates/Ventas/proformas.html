@@ -9,31 +9,39 @@
                 </div>
                 <div class="x_content">
 
-                    <section class="content invoice">
+                    <section class="content invoice" style="padding: 20px">
                         <!-- title row -->
                         <!-- info row -->
-                        <div class="row invoice-info">
+                    <img class="img-thumbnail" src="/media/{{ establecimiento.banner }}" style="width: 100%" alt="">
+                        <div class="row invoice-info" style="padding-top: 10px">
                             <div class="col-sm-4 invoice-col">
-                                Seleccione el Establecimiento
+                                {% if establecimientos %}
+                                    Seleccione el Establecimiento
+                                {% endif %}
                                 <address>
-                                    <select name="establecimiento" id="establecimiento">
+                                    {% for establecimiento in establecimientos %}
+                                        <a class="btn btn-success" href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
+                                    {% endfor %}
+                                    {% if establecimiento %}
+                                        <br><span style="font-size: 20px; font-weight: bold">{{ establecimiento.nombreComercial|upper }}</span>
+                                        <br><span style="font-weight: bold">R.U.C.:</span>{{ establecimiento.ruc }}
+                                    {% endif %}
+                                    {% for direccion in establecimiento.direccion_set.all %}
+                                        <br><span style="font-weight: bold">Dirección:</span> {{ direccion.direccion }}
+                                        <br><span style="font-weight: bold">Ciudad:</span> {{ direccion.ciudad.provincia }} - {{ direccion.ciudad }}
+                                        <br><span style="font-weight: bold">Teléfono:</span> {{ direccion.telefono}}
+                                    {% endfor %}
 
-                                    </select>
-                                    <br>795 Freedom Ave, Suite 600
-                                    <br>New York, CA 94107
-                                    <br>Phone: 1 (804) 123-9876
-                                    <br>Email: ironadmin.com
                                 </address>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col">
-                                To
+                                <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
                                 <address>
-                                    <strong>John Doe</strong>
-                                    <br>795 Freedom Ave, Suite 600
-                                    <br>New York, CA 94107
-                                    <br>Phone: 1 (804) 123-9876
-                                    <br>Email: jon@ironadmin.com
+                                    <strong>Nombre: </strong> Nombre completo
+                                    <br><strong>Dirección: </strong>Direccion del cliente
+                                    <br><strong>Ciudad: </strong>Ciudad del Cliente
+                                    <br><strong>Teléfono:: </strong>Telefono del cliente
                                 </address>
                             </div>
                             <!-- /.col -->

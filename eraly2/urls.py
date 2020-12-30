@@ -71,7 +71,7 @@ urlpatterns = [
     path("business/direcction/<int:idEmpresa>/",crear_direcciones),
     path("directions/edit/<int:id>/",modificar_direcciones),
     path("directions/delete/<int:id>/",eliminar_direcciones),
-    path("proforms/",proformas),
+    path("proforms/<id>/",proformas),
 
 
 
