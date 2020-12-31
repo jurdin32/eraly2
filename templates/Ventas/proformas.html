@@ -58,9 +58,9 @@
                 <div class="x_content">
 
                     <section class="content invoice" style="padding: 20px">
-                        <!-- title row -->
-                        <!-- info row -->
+                        <!--
                         <img class="img-thumbnail" src="/media/{{ establecimiento.banner }}" style="width: 100%" alt="">
+                        -->
                         <div class="row invoice-info" style="padding-top: 10px">
                             <div class="col-sm-4 invoice-col">
                                 {% if establecimientos %}
@@ -187,18 +187,24 @@
 {% endblock %}
 {% block script_index %}
     <script>
+        var ids=[]
         function agregarFila(id, nombre, precio, stock) {
             if (parseInt(stock) > 0) {
-                document.getElementById("tabla").insertRow(-1).innerHTML = '' +
-                    '<td>' + id + '</td>' +
-                    '<td>' + nombre + '</td>' +
-                    '<td style="text-align: center;"><input min="1" max="' + stock + '" class="form-control" style="text-align: center" value="1" type="number"/></td>' +
-                    '<td style="text-align: right">' + precio + '</td>' +
-                    '<td></td>' +
-                    '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
-                    '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
-
-                toastr.success("Se agrego a la Lista de Productos")
+                if (ids.indexOf(parseInt(id))<0) {
+                    ids.push(parseInt(id))
+                    document.getElementById("tabla").insertRow(-1).innerHTML = '' +
+                        '<td style="text-align: center">' + id + '</td>' +
+                        '<td>' + nombre + '</td>' +
+                        '<td style="text-align: center;"><input min="1" max="' + stock + '" class="form-control" style="text-align: center" value="1" type="number"/></td>' +
+                        '<td style="text-align: right">' + precio + '</td>' +
+                        '<td></td>' +
+                        '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
+                        '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
+                    toastr.success("Se agrego a la Lista de Productos")
+                }
+                else{
+                    toastr.info("Este item ya esta en la Lista..!")
+                }
 
             }
             else{
@@ -206,8 +212,10 @@
             }
         }
 
-        function eliminarFila(value) {
+        function eliminarFila(value,id) {
             $(value).parents('tr').eq(0).remove();
+            ids.pop(parseInt(id))
+            toastr.error("Item removido de la Lista....!")
         }
 
 
