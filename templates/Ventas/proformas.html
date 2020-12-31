@@ -12,26 +12,32 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <div class="col-md-12 col-sm-12">
-                                <table class="table table-bordered table-striped" id="tproductos" style="text-align: center">
+                                <table class="table table-bordered table-striped" id="tproductos"
+                                       style="text-align: center">
                                     <thead>
-                                        <tr style="background-color: #2A3F54; color: whitesmoke">
-                                            <th>Id</th>
-                                            <th>Detalle del Producto</th>
-                                            <th>Stock</th>
-                                            <th>Precio</th>
-                                            <th>Seleccionar</th>
-                                        </tr>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th>Id</th>
+                                        <th>Detalle del Producto</th>
+                                        <th>Stock</th>
+                                        <th>Precio</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        {% for producto in productos %}
-                                        <td>Id</td>
-                                            <td>Detalle del Producto</td>
+
+                                    {% for producto in productos %}
+                                        <tr>
+                                            <td>{{ producto.id }}</td>
+                                            <td style="text-align: justify">{{ producto.nombre }}</td>
                                             <td>Stock</td>
                                             <td>Precio</td>
-                                            <td><a href=""><i class="fa fa-check-circle text-danger" style="font-size: 20px"></i></a></td>
-                                        {% endfor %}
+                                            <td>
+                                                <a href=""><i class="fa fa-check-circle text-danger"
+                                                              style="font-size: 20px"></i></a>
+                                            </td>
                                         </tr>
+                                    {% endfor %}
+
                                     </tbody>
                                 </table>
                             </div>
