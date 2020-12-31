@@ -33,13 +33,12 @@
                                             <td>{% stock producto.id %}</td>
                                             <td>{% precioProducto producto.id %}</td>
                                             <td>
-                                                <a href="#" data-dismiss="modal" onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                <a href="#" onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
                                                     <i class="fa fa-check-circle text-success" style="font-size: 20px"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                     {% endfor %}
-
                                     </tbody>
                                 </table>
                             </div>
@@ -199,9 +198,11 @@
                     '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
                     '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
 
+                toastr.success("Se agrego a la Lista de Productos")
+
             }
             else{
-                alert("No hay stock")
+                toastr.error("Error, no hay stock disponible..!")
             }
         }
 
