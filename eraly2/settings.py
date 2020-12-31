@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'Empresa',
     'ckeditor_uploader',
-    'Home','Producto',
+    'Home','Producto','Personas','Ventas',
 ]
 
 MIDDLEWARE = [

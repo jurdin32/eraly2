@@ -234,8 +234,8 @@
 
         function suma(){
             var suma = 0;
-            $('.precios').each(function(){ //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas
-             suma += parseFloat($(this).text()) //numero de la celda 3
+            $('.precios').each(function(){
+             suma += parseFloat($(this).text())
             })
             $(".subtotal").text(suma.toFixed(2))
             var iva=suma*0.12
