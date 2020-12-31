@@ -88,6 +88,9 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 20px">
                                 <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
+                                <a href="#"><i style="font-size: 20px" class="fa fa-search text-success" ></i></a>
+                                <span style="font-size: 20px"> | </span>
+                                <a href="#"><i style="font-size: 20px" class="fa fa-plus-circle text-primary"></i></a>
                                 <address>
                                     <strong>Nombre: </strong> Nombre completo
                                     <br><strong>Dirección: </strong>Direccion del cliente
@@ -157,15 +160,15 @@
                                         <tbody>
                                         <tr>
                                             <th style="width:75%">Subtotal:</th>
-                                            <td>$0,00</td>
+                                            <td class="subtotal" style="text-align: right">$0,00</td>
                                         </tr>
                                         <tr>
                                             <th>IVA (12%):</th>
-                                            <td>$0,00</td>
+                                            <td class="iva" style="text-align: right">$0,00</td>
                                         </tr>
                                         <tr>
                                             <th>Total:</th>
-                                            <td>$0,00</td>
+                                            <td class="total" style="text-align: right">$0,00</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -195,11 +198,13 @@
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
                         '<td style="text-align: center">' + id + '</td>' +
                         '<td>' + nombre + '</td>' +
-                        '<td style="text-align: center;"><input min="1" max="' + stock + '" class="form-control" style="text-align: center" value="1" type="number"/></td>' +
-                        '<td style="text-align: right">' + precio + '</td>' +
-                        '<td></td>' +
+                        '<td style="text-align: center;">' +
+                        '   <input min="1" max="' + stock + '" class="form-control add" onkeyup="addCantidad($(this),'+precio+')" onkeypress="addCantidad($(this),'+precio+')" onchange="addCantidad($(this),'+precio+')" style="text-align: center;border: none;" value="1" type="number"/></td>' +
+                        '<td style="text-align: right">'+ precio +'</td>' +
+                        '<td style="text-align: right" class="precios">'+precio+'</td>' +
                         '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
                         '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
+                    suma()
                     toastr.success("Se agrego a la Lista de Productos")
                 }
                 else{
@@ -216,9 +221,28 @@
             $(value).parents('tr').eq(0).remove();
             ids.pop(parseInt(id))
             toastr.error("Item removido de la Lista....!")
+            suma()
         }
 
+        function addCantidad(add, precio){
+            var index=$(add).parent().parent().index()
+            var cantidad=$(add).val()
+            var valor= parseFloat(cantidad)*parseFloat(precio)
+            $("#tabla").children().children()[index].children[4].innerHTML = valor.toFixed(2) ;
+            suma()
+        }
 
+        function suma(){
+            var suma = 0;
+            $('.precios').each(function(){ //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas
+             suma += parseFloat($(this).text()) //numero de la celda 3
+            })
+            $(".subtotal").text(suma.toFixed(2))
+            var iva=suma*0.12
+            $(".iva").text(iva.toFixed(2))
+            var total=iva+suma
+            $(".total").text(total.toFixed(2))
+        }
     </script>
     <script>
         $(document).ready(function () {
