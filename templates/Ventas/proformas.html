@@ -1,5 +1,6 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
+    {% load productosTags %}
     <div class="modal fade bs-example-modal-lg" id="agregar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -29,11 +30,12 @@
                                         <tr>
                                             <td>{{ producto.id }}</td>
                                             <td style="text-align: justify">{{ producto.nombre }}</td>
-                                            <td>Stock</td>
-                                            <td>Precio</td>
+                                            <td>{% stock producto.id %}</td>
+                                            <td>{% precioProducto producto.id %}</td>
                                             <td>
-                                                <a href=""><i class="fa fa-check-circle text-danger"
-                                                              style="font-size: 20px"></i></a>
+                                                <a href="#" data-dismiss="modal" onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                    <i class="fa fa-check-circle text-danger" style="font-size: 20px"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -116,9 +118,8 @@
                                         <th style="text-align: right">Precio</th>
                                         <th style="text-align: right">Subtotal</th>
                                         <th style="text-align: center">
-                                            <a href="#" class="agregar" data-toggle="modal" data-target="#agregar"
-                                               onclick="agregarFila()"><i class="fa fa-plus-circle"
-                                                                          style="font-size: 20px;color: whitesmoke"></i></a>
+                                            <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
+                                                <i class="fa fa-plus-circle" style="font-size: 20px;color: whitesmoke"></i></a>
                                         </th>
                                     </tr>
                                     </thead>
@@ -187,10 +188,21 @@
 {% endblock %}
 {% block script_index %}
     <script>
-        function agregarFila() {
-            document.getElementById("tabla").insertRow(-1).innerHTML = '' +
-                '<td></td><td></td><td style="text-align: center;"><input min="1" max="5" class="form-control" style="text-align: center" value="1" type="number"/></td><td></td><td></td><td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
-                '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
+        function agregarFila(id, nombre, precio, stock) {
+            if (parseInt(stock) > 0) {
+                document.getElementById("tabla").insertRow(-1).innerHTML = '' +
+                    '<td>' + id + '</td>' +
+                    '<td>' + nombre + '</td>' +
+                    '<td style="text-align: center;"><input min="1" max="' + stock + '" class="form-control" style="text-align: center" value="1" type="number"/></td>' +
+                    '<td style="text-align: right">' + precio + '</td>' +
+                    '<td></td>' +
+                    '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this))">' +
+                    '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
+
+            }
+            else{
+                alert("No hay stock")
+            }
         }
 
         function eliminarFila(value) {

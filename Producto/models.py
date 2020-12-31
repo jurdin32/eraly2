@@ -136,6 +136,7 @@ class Precios(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     precioVenta=models.DecimalField(max_digits=9, decimal_places=2)
     detalle=models.CharField(max_length=50)
+    estado=models.BooleanField(default=True)
 
 
     class Meta:

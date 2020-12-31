@@ -1,9 +1,18 @@
 from django import template
 from django.db.models import Sum
 
-from Producto.models import Productos, Kardex
+from Producto.models import Productos, Kardex, Precios
 
 register = template.Library()
+
+@register.simple_tag
+def precioProducto(id):
+    try:
+        precio=Precios.objects.get(producto_id=id, estado=True)
+        return precio.precioVenta
+    except Exception as e:
+        print(e)
+        return 0.00
 
 @register.simple_tag
 def stock(id):
@@ -31,3 +40,4 @@ def egresos(id):
     if egresos==None:
         egresos=0
     return egresos
+
