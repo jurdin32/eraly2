@@ -12,6 +12,7 @@ def proformas(request,id=0):
     establecimientos=None
     productos=None
     clientes=None
+
     if int(id) > 0:
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
