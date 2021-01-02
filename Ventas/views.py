@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -16,7 +17,10 @@ def proformas(request,id=0):
         productos = Productos.objects.filter(establecimiento_id=id)
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
-
+        contador=establecimientos.count()
+        if contador == 1:
+            for esta in establecimientos:
+                return HttpResponseRedirect("/proforms/%s/"%esta.id)
     contexto={
         'establecimiento':establecimiento,
         'establecimientos':establecimientos,

@@ -10,5 +10,5 @@ class Clientes(models.Model):
     apellidos=models.CharField(max_length=60)
     direccion=models.CharField(max_length=60)
     ciudad=models.ForeignKey(Ciudad, on_delete=models.CASCADE)
-    telefono=models.CharField(max_length=13)
-    celular=models.CharField(max_length=13)
+    telefono=models.CharField(max_length=13,null=True,blank=True)
+    celular=models.CharField(max_length=13,null=True,blank=True)
