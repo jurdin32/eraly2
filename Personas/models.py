@@ -1,10 +1,12 @@
 from django.db import models
 
 # Create your models here.
+from Empresa.models import Establecimiento
 from Home.models import Ciudad
 
 
 class Clientes(models.Model):
+    establecimiento=models.ForeignKey(Establecimiento, on_delete=models.CASCADE,null=True,blank=True)
     cedula=models.CharField(max_length=13)
     nombres=models.CharField(max_length=60)
     apellidos=models.CharField(max_length=60)
