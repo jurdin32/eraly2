@@ -48,6 +48,57 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bs-example-modal-lg" id="clientes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Productos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-striped" id="tproductos"
+                                       style="text-align: center">
+                                    <thead>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th>Id</th>
+                                        <th>Cédula</th>
+                                        <th>Nombres y Apellidos</th>
+                                        <th>Ciudad</th>
+                                        <th>Teléfono</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for cliente in clientes %}
+                                        <tr>
+                                            <td>{{ cliente.id }}</td>
+                                            <td style="text-align: justify">{{ producto.nombre }}</td>
+                                            <td>{% stock producto.id %}</td>
+                                            <td>{% precioProducto producto.id %}</td>
+                                            <td></td>
+                                            <td>
+                                                <a href="#" onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                    <i class="fa fa-check-circle text-success" style="font-size: 20px"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="x_panel">
@@ -88,9 +139,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 20px">
                                 <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
-                                <a href="#"><i style="font-size: 20px" class="fa fa-search text-success" ></i></a>
-                                <span style="font-size: 20px"> | </span>
-                                <a href="#"><i style="font-size: 20px" class="fa fa-plus-circle text-primary"></i></a>
+                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#clientes">Buscas/Agregar</a>
                                 <address>
                                     <strong>Nombre: </strong> Nombre completo
                                     <br><strong>Dirección: </strong>Direccion del cliente
