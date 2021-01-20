@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load productosTags %}
+    {% load static %}
     <!-- lista de productos -->
     <div class="modal fade bs-example-modal-lg" id="agregar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -34,8 +35,10 @@
                                             <td>{% stock producto.id %}</td>
                                             <td>{% precioProducto producto.id %}</td>
                                             <td>
-                                                <a href="#" onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
-                                                    <i class="fa fa-check-circle text-success" style="font-size: 20px"></i>
+                                                <a href="#"
+                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                    <i class="fa fa-check-circle text-success"
+                                                       style="font-size: 20px"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -62,7 +65,58 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <div class="col-md-12 col-sm-12">
+                                <form action="/proforms/createCLient/{{ establecimiento.id }}/" method="post"
+                                      class="form-label-left input_mask">
+                                    {% csrf_token %}
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="cedula"
+                                               placeholder="Ingrese Cédula">
+                                        <span class="fa fa-credit-card form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="nombres" required="required"
+                                               placeholder="Ingrese Nombres">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="apellidos" required="required"
+                                               placeholder="Ingrese Apellidos">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="direccion"
+                                               placeholder="Ingrese Dirección">
+                                        <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
+                                                name="ciudad" multiple>
+                                            {% for provincia in provincias %}
+                                                <optgroup label="{{ provincia.nombre }}"></optgroup>
+                                                {% for ciudad in provincia.ciudad_set.all %}
+                                                    <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="telefono"
+                                               placeholder="Ingrese No. Telefono">
+                                        <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="celular"
+                                               placeholder="Ingrese No. Celular">
+                                        <span class="fa fa-mobile-phone form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <button class="btn btn-primary">Registrar</button>
+                                    </div>
 
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -71,7 +125,7 @@
         </div>
     </div>
 
-     <!-- lista de clientes -->
+    <!-- lista de clientes -->
     <div class="modal fade bs-example-modal-lg" id="listaClientes" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -93,6 +147,7 @@
                                         <th>Nombre</th>
                                         <th>Ciudad</th>
                                         <th>Telefono</th>
+                                        <th>Selec.</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -103,6 +158,17 @@
                                             <td>{{ cliente.nombres }} {{ cliente.apellidos }}</td>
                                             <td>{{ cliente.ciudad }}</td>
                                             <td>{{ cliente.telefono }}</td>
+                                            <td style="text-align: center">
+                                                <a data-dismiss="modal" href="#" class="cliente"
+                                                   data-id="{{ cliente.id }}"
+                                                   data-nombre="{{ cliente.nombres }} {{ cliente.apellidos }}"
+                                                   data-ciudad_id="{{ cliente.ciudad.id }}"
+                                                   data-ciudad="{{ cliente.ciudad.nombre }}"
+                                                   data-telefono="{{ cliente.telefono }}">
+                                                    <i style="font-size: 20px"
+                                                       class="fa fa-check-circle text-success"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -155,14 +221,18 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 20px">
                                 <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
-                                <a href="#" id="buscarCliente"><i style="font-size: 20px" class="fa fa-search text-success" ></i></a>
+                                <a href="#" id="buscarCliente"><i style="font-size: 20px"
+                                                                  class="fa fa-search text-success"></i></a>
                                 <span style="font-size: 20px"> | </span>
-                                <a href="#" data-toggle="modal" data-target="#agregarCliente"><i style="font-size: 20px" class="fa fa-plus-circle text-primary"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#agregarCliente"><i style="font-size: 20px"
+                                                                                                 class="fa fa-plus-circle text-primary"></i></a>
                                 <address>
-                                    <strong>Nombre: </strong> Nombre completo
-                                    <br><strong>Dirección: </strong>Direccion del cliente
-                                    <br><strong>Ciudad: </strong>Ciudad del Cliente
-                                    <br><strong>Teléfono:: </strong>Telefono del cliente
+                                    <strong>Nombre: </strong> <span id="nombreCliente">Nombre completo</span>
+                                    <br><strong>Dirección: </strong><span
+                                        id="direccionCliente">Direccion del cliente</span>
+                                    <br><strong>Ciudad: </strong><span id="ciudadCliente">Ciudad del Cliente</span>
+                                    <br><strong>Teléfono:: </strong><span
+                                        id="telefonoCLiente">Telefono del cliente</span>
                                 </address>
                             </div>
                             <!-- /.col -->
@@ -188,7 +258,8 @@
                                         <th style="text-align: right">Subtotal</th>
                                         <th style="text-align: center">
                                             <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
-                                                <i class="fa fa-plus-circle" style="font-size: 20px;color: whitesmoke"></i></a>
+                                                <i class="fa fa-plus-circle"
+                                                   style="font-size: 20px;color: whitesmoke"></i></a>
                                         </th>
                                     </tr>
                                     </thead>
@@ -204,7 +275,8 @@
                             <!-- accepted payments column -->
                             <div class="col-md-8">
                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 12px;">
-                                    Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.
+                                    Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
+                                    días.
                                 </p>
                                 <div class=" ">
                                     <button class="btn btn-danger pull-right" onclick="window.print();"><i
@@ -255,58 +327,59 @@
     </div>
 {% endblock %}
 {% block script_index %}
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
-        var ids=[]
+        var ids = []
+
         function agregarFila(id, nombre, precio, stock) {
-            if (parseInt(stock) > 0 && parseFloat(precio)>0) {
-                if (ids.indexOf(parseInt(id))<0) {
+            if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
+                if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
                         '<td style="text-align: center">' + id + '</td>' +
                         '<td>' + nombre + '</td>' +
                         '<td style="text-align: center;">' +
-                        '   <input min="1" max="' + stock + '" class="form-control add" onkeyup="addCantidad($(this),'+precio+')" onkeypress="addCantidad($(this),'+precio+')" onchange="addCantidad($(this),'+precio+')" style="text-align: center;border: none;" value="1" type="number"/></td>' +
-                        '<td style="text-align: right">'+ precio +'</td>' +
-                        '<td style="text-align: right" class="precios">'+precio+'</td>' +
+                        '   <input min="1" max="' + stock + '" class="form-control add" onkeyup="addCantidad($(this),' + precio + ')" onkeypress="addCantidad($(this),' + precio + ')" onchange="addCantidad($(this),' + precio + ')" style="text-align: center;border: none;" value="1" type="number"/></td>' +
+                        '<td style="text-align: right">' + precio + '</td>' +
+                        '<td style="text-align: right" class="precios">' + precio + '</td>' +
                         '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
                         '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
                     suma()
                     toastr.success("Se agrego a la Lista de Productos")
-                }
-                else{
+                } else {
                     toastr.info("Este item ya esta en la Lista..!")
                 }
 
-            }
-            else{
+            } else {
                 toastr.error("Error, no hay stock disponible..!")
             }
         }
 
-        function eliminarFila(value,id) {
+        function eliminarFila(value, id) {
             $(value).parents('tr').eq(0).remove();
             ids.pop(parseInt(id))
             toastr.error("Item removido de la Lista....!")
             suma()
         }
 
-        function addCantidad(add, precio){
-            var index=$(add).parent().parent().index()
-            var cantidad=$(add).val()
-            var valor= parseFloat(cantidad)*parseFloat(precio)
-            $("#tabla").children().children()[index].children[4].innerHTML = valor.toFixed(2) ;
+        function addCantidad(add, precio) {
+            var index = $(add).parent().parent().index()
+            var cantidad = $(add).val()
+            var valor = parseFloat(cantidad) * parseFloat(precio)
+            $("#tabla").children().children()[index].children[4].innerHTML = valor.toFixed(2);
             suma()
         }
 
-        function suma(){
+        function suma() {
             var suma = 0;
-            $('.precios').each(function(){
-             suma += parseFloat($(this).text())
+            $('.precios').each(function () {
+                suma += parseFloat($(this).text())
             })
             $(".subtotal").text(suma.toFixed(2))
-            var iva=suma*0.12
+            var iva = suma * 0.12
             $(".iva").text(iva.toFixed(2))
-            var total=iva+suma
+            var total = iva + suma
             $(".total").text(total.toFixed(2))
         }
     </script>
@@ -314,15 +387,21 @@
         $(document).ready(function () {
             $("#tproductos").DataTable();
             $("#tClientes").DataTable();
-            $("#buscarCliente").attr("data-toggle","modal")
-            $("#buscarCliente").attr("data-target","#listaClientes")
-            buscar= document.getElementById("buscarCliente")
-            buscar.addEventListener('click',function (){
-               $.get("/client/get/{{establecimiento.id}}/",function ( data ) {
-                   $("#modal").html("")
-                   $("#modal").html(data)
-               })
+            $("#buscarCliente").attr("data-toggle", "modal")
+            $("#buscarCliente").attr("data-target", "#listaClientes")
+
+            $(".cliente").click(function () {
+                $("#nombreCliente").text($(this).data('nombre'))
+                $("#direccionCliente").text($(this).data('direccion'))
+                $("#ciudadCliente").text($(this).data('ciudad'))
+                $("#telefonoCLiente").text($(this).data('telefono'))
+                toastr.success("El Cliente se agrego")
+            })
+
+            $(".js-example-basic-single").select2({
+                maximumSelectionLength: 1
             });
+
         });
     </script>
 {% endblock %}
