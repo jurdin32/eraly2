@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from Empresa.views import *
 from Home.views import *
 from Producto.views import *
-from Ventas.views import proformas
+from Ventas.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -72,8 +72,6 @@ urlpatterns = [
     path("directions/edit/<int:id>/",modificar_direcciones),
     path("directions/delete/<int:id>/",eliminar_direcciones),
     path("proforms/<id>/",proformas),
-
-
 
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

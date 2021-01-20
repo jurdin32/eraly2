@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load productosTags %}
+    <!-- lista de productos -->
     <div class="modal fade bs-example-modal-lg" id="agregar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -48,6 +49,72 @@
             </div>
         </div>
     </div>
+    <!-- lista de registro de productos -->
+    <div class="modal fade bs-example-modal-lg" id="agregarCliente" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Clientes</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- lista de clientes -->
+    <div class="modal fade bs-example-modal-lg" id="listaClientes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Clientes</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-striped" id="tClientes"
+                                       style="text-align: center">
+                                    <thead>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th>Id</th>
+                                        <th>Cedula</th>
+                                        <th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Telefono</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for cliente in clientes %}
+                                        <tr>
+                                            <td>{{ cliente.id }}</td>
+                                            <td>{{ cliente.cedula }}</td>
+                                            <td>{{ cliente.nombres }} {{ cliente.apellidos }}</td>
+                                            <td>{{ cliente.ciudad }}</td>
+                                            <td>{{ cliente.telefono }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="x_panel">
@@ -88,9 +155,9 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 20px">
                                 <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
-                                <a href="#"><i style="font-size: 20px" class="fa fa-search text-success" ></i></a>
+                                <a href="#" id="buscarCliente"><i style="font-size: 20px" class="fa fa-search text-success" ></i></a>
                                 <span style="font-size: 20px"> | </span>
-                                <a href="#"><i style="font-size: 20px" class="fa fa-plus-circle text-primary"></i></a>
+                                <a href="#" data-toggle="modal" data-target="#agregarCliente"><i style="font-size: 20px" class="fa fa-plus-circle text-primary"></i></a>
                                 <address>
                                     <strong>Nombre: </strong> Nombre completo
                                     <br><strong>Dirección: </strong>Direccion del cliente
@@ -191,7 +258,7 @@
     <script>
         var ids=[]
         function agregarFila(id, nombre, precio, stock) {
-            if (parseInt(stock) > 0) {
+            if (parseInt(stock) > 0 && parseFloat(precio)>0) {
                 if (ids.indexOf(parseInt(id))<0) {
                     ids.push(parseInt(id))
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
@@ -246,6 +313,16 @@
     <script>
         $(document).ready(function () {
             $("#tproductos").DataTable();
+            $("#tClientes").DataTable();
+            $("#buscarCliente").attr("data-toggle","modal")
+            $("#buscarCliente").attr("data-target","#listaClientes")
+            buscar= document.getElementById("buscarCliente")
+            buscar.addEventListener('click',function (){
+               $.get("/client/get/{{establecimiento.id}}/",function ( data ) {
+                   $("#modal").html("")
+                   $("#modal").html(data)
+               })
+            });
         });
     </script>
 {% endblock %}
