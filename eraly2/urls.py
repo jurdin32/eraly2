@@ -73,6 +73,7 @@ urlpatterns = [
     path("directions/delete/<int:id>/",eliminar_direcciones),
     path("proforms/<id>/",proformas),
     path("proforms/createCLient/<id>/",registroClienteFacturaProforma),
+    path("proforms/create/<id>/",registrarDocumento),
 
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -227,6 +227,7 @@
                                 <a href="#" data-toggle="modal" data-target="#agregarCliente"><i style="font-size: 20px"
                                                                                                  class="fa fa-plus-circle text-primary"></i></a>
                                 <address>
+                                    <span id="idCliente" hidden></span>
                                     <strong>Nombre: </strong> <span id="nombreCliente">Nombre completo</span>
                                     <br><strong>Dirección: </strong><span
                                         id="direccionCliente">Direccion del cliente</span>
@@ -238,8 +239,8 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 10px">
                                 <br><strong>Fecha: </strong>
-                                <br><span style="font-size: 20px; font-weight: bold">No.: <span
-                                    style="color: indianred">00000000000000001</span></span>
+                                <br><span>No.:</span><span id="numeroDocumento" style="font-size: 20px; font-weight: bold"><span
+                                    style="color: indianred">{{ contadorProforma }}</span></span>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -279,12 +280,7 @@
                                     días.
                                 </p>
                                 <div class=" ">
-                                    <button class="btn btn-danger pull-right" onclick="window.print();"><i
-                                            class="fa fa-print"></i>
-                                        Print
-                                    </button>
-                                    <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit
-                                        Payment
+                                    <button class="btn btn-danger pull-right" id="registrarDocumento"><i class="fa fa-credit-card"></i> Registrar
                                     </button>
                                     <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i
                                             class="fa fa-download"></i> Generate PDF
@@ -314,12 +310,7 @@
                             </div>
                             <!-- /.col -->
                         </div>
-                        <!-- /.row -->
 
-                        <!-- this row will not appear when printing -->
-                        <div class="row no-print">
-
-                        </div>
                     </section>
                 </div>
             </div>
@@ -391,6 +382,7 @@
             $("#buscarCliente").attr("data-target", "#listaClientes")
 
             $(".cliente").click(function () {
+                $("#idCliente").text($(this).data('id'))
                 $("#nombreCliente").text($(this).data('nombre'))
                 $("#direccionCliente").text($(this).data('direccion'))
                 $("#ciudadCliente").text($(this).data('ciudad'))
@@ -400,6 +392,27 @@
 
             $(".js-example-basic-single").select2({
                 maximumSelectionLength: 1
+            });
+
+            $("#registrarDocumento").click(function (){
+                data={
+                    establecimiento:'{{ establecimiento.id }}',
+                    cliente:$("#idCliente").text(),
+                    csrfmiddlewaretoken:$('input[name="csrfmiddlewaretoken"]').val(),
+                    tipo:"P",
+                    numero:$("#numeroDocumento").text(),
+                    subtotal:$(".subtotal").text(),
+                    iva:$(".iva").text(),
+                    total:$(".total").text(),
+                }
+                $.post("/proforms/create/{{ establecimiento.id }}/",data,function (result){
+                    if (result == 1){
+                        toastr.success("La proforma se ha generado correctamente.!")
+                    }
+                    else{
+                        toastr.error("Ocurrio un error inesperado.!")
+                    }
+                })
             });
 
         });

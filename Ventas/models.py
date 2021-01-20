@@ -1,12 +1,15 @@
 from django.db import models
 
 # Create your models here.
+from Empresa.models import Establecimiento
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex
 
 
 class Facturas(models.Model):
+    establecimiento=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
     tipo=models.CharField(max_length=20, default="F")
+    numero=models.CharField(max_length=20,null=True,blank=True)
     fecha=models.DateField(auto_now_add=True)
     cliente=models.ForeignKey(Clientes,on_delete=models.CASCADE)
     subtotal=models.DecimalField(max_digits=9, decimal_places=2)
