@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.generic.edit import ProcessFormView
 
 from Empresa.models import Establecimiento
 from Home.models import Provincia
@@ -15,7 +16,7 @@ def proformas(request,id=0):
     establecimientos=None
     productos=None
     clientes=None
-
+    contador=0
     if int(id) > 0:
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
