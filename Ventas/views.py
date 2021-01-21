@@ -105,10 +105,15 @@ def crearDocumentoPDF_Proforma(request, id):
     return render_pdf_view(request,'Ventas/rptProforma.html',contexto)
 
 def crearDocumentoPDF_Factura(request, id):
+    detalles=DetalleFactura.objects.filter(factura_id=id)
     contexto={
-        'documento':Facturas.objects.get(id=id)
+        'documento':Facturas.objects.get(id=id),
+        'detalles':detalles,
+        'items':(10 - detalles.count())*"*"
     }
+    print((10 - detalles.count()))
     return render_pdf_view(request,'Ventas/rptFactura.html',contexto)
+    #return render(request,'Ventas/rptFactura.html',contexto)
 
 def listaDocumentos(request):
     contexto={

@@ -34,6 +34,7 @@
                                             <th style="text-align: center">Subtotal</th>
                                             <th style="text-align: center">IVA</th>
                                             <th style="text-align: center">Total</th>
+                                            <th style="text-align: center">Opciones</th>
                                             
                                         </tr>
                                         </thead>
@@ -52,7 +53,19 @@
                                                     <td>{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
                                                     <td>{{ documento.subtotal }}</td>
                                                     <td>{{ documento.iva }}</td>
-                                                    <td>{{ documento.total }}</td></tr>
+                                                    <td>{{ documento.total }}</td>
+                                                    <td style="text-align: center">
+                                                        <a class="btn btn-primary" href=""><i class="fa fa-binoculars"></i> Ver</a>
+                                                        {% if documento.tipo == "F" %}
+                                                            <a class="btn btn-success" target="_blank" href="/document/fac/{{ documento.id }}/"><i class="fa fa-print"></i> Imprimir</a>
+                                                        {% else %}
+                                                            <a class="btn btn-success" target="_blank" href="/document/proform/{{ documento.id }}/"><i class="fa fa-print"></i> Imprimir</a>
+                                                            <a class="btn btn-danger" href=""><i class="fa fa-credit-card-alt"></i> Facturar</a>
+                                                        {% endif %}
+
+
+                                                    </td>
+                                                </tr>
                                             {% endfor %}
                                             
                                         </tbody>

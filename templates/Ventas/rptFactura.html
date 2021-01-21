@@ -1,10 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        @page {
+
+            size: A4 landscape;
+            @frame columna1_frame {
+            left: 28.35pt;
+            width: 364.25pt;
+            top: 200pt;
+            height: 369.85pt;
+        }
+
+        @frame columna2_frame {
+        right: 28.35pt;
+        width: 364.25pt;
+        top: 200pt;
+        height: 369.85pt;
+        }
+        }
+    </style>
+
+    <title>Document</title>
 </head>
 <body>
+<div id="columna1_content">
+    <table border="1px">
+        {% comment %}<tr style="padding:5px;">
+        <td style="text-align: center; width:80px"></td>
+        <td style="width: 200px"></td>
+        <td style="text-align: center;width:60px"></td>
+        <td style="text-align: right;width: 80px"></td>
+        <td style="text-align: right; width:80px"></td>
+        <td style="text-align: right; width:80px"></td>
+    </tr>{% endcomment %}
+        {% for detalle in detalles %}
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
+                <td style="text-align: center; width:80px"> {{ detalle.producto.id }}</td>
+                <td>{{ detalle.producto|truncatechars:64 }}</td>
+                <td style="text-align: center; width:60px">{{ detalle.cantidad }}</td>
+                <td style="text-align: right; width:80px">{{ detalle.subtotal }}</td>
+                <td style="text-align: right; width:80px">{{ detalle.iva }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.total }}</td>
+            </tr>
+        {% endfor %}
+        {% for item in items %}
+            <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px; color: white">
+                <td style="text-align: center"> {{ item }}</td>
+                <td>{{ item }}</td>
+                <td style="text-align: center">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+            </tr>
+        {% endfor %}
 
+    </table>
+    <br>
+    <br>
+    <table>
+        <tr style="padding-left: 2px; padding-right: 2px">
+            <td colspan="5" rowspan="3"></td>
+            <td style="text-align: right">Subtotal</td>
+            <td style="text-align: right"> {{ documento.subtotal }}</td>
+        </tr>
+        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+            <td style="text-align: right"> IVA</td>
+            <td style="text-align: right"> {{ documento.iva }}</td>
+        </tr>
+        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+            <td style="text-align: right"> Total</td>
+            <td style="text-align: right"> {{ documento.total }}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="columna2_content">
+    <table border="1px">
+        {% comment %}<tr style="padding:5px;">
+        <td style="text-align: center; width:80px"></td>
+        <td style="width: 200px"></td>
+        <td style="text-align: center;width:60px"></td>
+        <td style="text-align: right;width: 80px"></td>
+        <td style="text-align: right; width:80px"></td>
+        <td style="text-align: right; width:80px"></td>
+    </tr>{% endcomment %}
+        {% for detalle in detalles %}
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
+                <td style="text-align: center; width:80px"> {{ detalle.producto.id }}</td>
+                <td>{{ detalle.producto|truncatechars:64 }}</td>
+                <td style="text-align: center; width:60px">{{ detalle.cantidad }}</td>
+                <td style="text-align: right; width:80px">{{ detalle.subtotal }}</td>
+                <td style="text-align: right; width:80px">{{ detalle.iva }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.total }}</td>
+            </tr>
+        {% endfor %}
+        {% for item in items %}
+            <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px; color: white">
+                <td style="text-align: center"> {{ item }}</td>
+                <td>{{ item }}</td>
+                <td style="text-align: center">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+                <td style="text-align: right">{{ item }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <br>
+    <br>
+    <table>
+        <tr style="padding-left: 2px; padding-right: 2px">
+            <td colspan="5" rowspan="3"></td>
+            <td style="text-align: right">Subtotal</td>
+            <td style="text-align: right"> {{ documento.subtotal }}</td>
+        </tr>
+        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+            <td style="text-align: right"> IVA</td>
+            <td style="text-align: right"> {{ documento.iva }}</td>
+        </tr>
+        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+            <td style="text-align: right"> Total</td>
+            <td style="text-align: right"> {{ documento.total }}</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

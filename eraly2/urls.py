@@ -80,7 +80,7 @@ urlpatterns = [
     path("billing/<id>/",facturas),
 
     path("document/proform/<int:id>/",crearDocumentoPDF_Proforma),
-    path("document/fac/<int:id>/",crearDocumentoPDF_Proforma),
+    path("document/fac/<int:id>/",crearDocumentoPDF_Factura),
     path("document/list/",listaDocumentos),
 
     path("logout_/",logout_),
