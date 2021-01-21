@@ -102,10 +102,12 @@ def registroClienteFacturaProforma(request,id):
 
 def crearDocumentoPDF_Proforma(request, id):
     documento=Facturas.objects.get(id=id)
+    detalles=DetalleFactura.objects.filter(factura_id=id)
     contexto={
         'documento':documento,
-        'detalles':DetalleFactura.objects.filter(factura_id=id),
+        'detalles':detalles,
         'site': Site.objects.last(),
+        'items': (12 - detalles.count()) * "*",
     }
     return export_pdf(request,'Ventas/rptProforma.html',contexto)
     #return render(request, 'Ventas/rptProforma.html', contexto)

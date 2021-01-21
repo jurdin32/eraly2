@@ -11,6 +11,7 @@ from Home.models import Ciudad
 class Establecimiento(models.Model):
     logo=models.ImageField(upload_to="logos/establecimientos",null=True,blank=True)
     banner=models.ImageField(upload_to="banner/establecimientos",null=True,blank=True)
+    pie_pagina=models.ImageField(upload_to="pie/establecimientos",null=True,blank=True)
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     ruc=models.CharField(max_length=13)
     nombreComercial=models.CharField(max_length=60)
