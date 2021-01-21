@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
@@ -10,7 +11,8 @@ from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos
 from Ventas.models import Facturas, DetalleFactura
-from eraly2.snippers import render_pdf_view
+from eraly2.settings import BASE_DIR
+from eraly2.snippers import render_pdf_view, export_pdf
 
 
 def proformas(request,id=0):
@@ -99,17 +101,22 @@ def registroClienteFacturaProforma(request,id):
     return HttpResponseRedirect("/proforms/%s/"%id)
 
 def crearDocumentoPDF_Proforma(request, id):
+    documento=Facturas.objects.get(id=id)
     contexto={
-        'documento':Facturas.objects.get(id=id)
+        'documento':documento,
+        'detalles':DetalleFactura.objects.filter(factura_id=id),
+        'site': Site.objects.last(),
     }
-    return render_pdf_view(request,'Ventas/rptProforma.html',contexto)
+    return export_pdf(request,'Ventas/rptProforma.html',contexto)
+    #return render(request, 'Ventas/rptProforma.html', contexto)
 
 def crearDocumentoPDF_Factura(request, id):
     detalles=DetalleFactura.objects.filter(factura_id=id)
     contexto={
         'documento':Facturas.objects.get(id=id),
         'detalles':detalles,
-        'items':(10 - detalles.count())*"*"
+        'items':(10 - detalles.count())*"*",
+        'site':Site.objects.last(),
     }
     print((10 - detalles.count()))
     return render_pdf_view(request,'Ventas/rptFactura.html',contexto)

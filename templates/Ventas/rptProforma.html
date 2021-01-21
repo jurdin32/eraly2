@@ -3,8 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        @page  {
+            size: A4 portrait;
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+        }
+        body{
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
+    <img src="{{ site }}/media/{{ documento.establecimiento.banner}}" style="width: 793.70px; margin: -8px" alt="">
+<div style="padding: 20px; padding-top: 30px;">
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 20%; padding: 5px">Nombre:</td>
+            <td style="width: 60%; padding: 5px"><i>{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</i>
+                <br>------------------------------------------------------------------------------</td>
+            <td colspan="3" style="text-align: center; width: 20%; padding: 5px; border: 1px black solid; background-color: darkorange">Fecha</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px">Cédula / RUC:</td>
+            <td style="padding: 5px"><i>{{documento.cliente.cedula }}<br>------------------------------------------------------------------------------</i></td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid; background-color: darkorange">Dia</td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid; background-color: darkorange">Mes</td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid; background-color: darkorange">Año</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px">Dirección:</td>
+            <td style="padding: 5px"><i>{{ documento.cliente.direccion }} - {{ documento.cliente.ciudad }} - {{ documento.cliente.ciudad.provincia }}</i>
+                <br>------------------------------------------------------------------------------</td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid">{{ documento.fecha|date:"d" }}</td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid">{{ documento.fecha|date:"M" }}</td>
+            <td style="text-align: center; padding: 5px; border: 1px black solid">{{ documento.fecha|date:"Y" }}</td>
+        </tr>
+        <tr style="text-align: center; font-size: 30px;"><td colspan="5" style="padding-top:20px ">PROFORMA</td></tr>
+    </table>
+    <table style="border: 1px solid darkorange; width: 100%">
+        <tr style="border: 1px solid darkorange;background: darkorange; padding: 5px">
+            <td style="border: 1px solid darkorange;background: darkorange; padding: 5px; width: 10%">CÓD</td>
+            <td style="border: 1px solid darkorange;background: darkorange; padding: 5px; width: 50%">DESCRIPCIÓN DEL PRODUCTO</td>
+            <td style="border: 1px solid darkorange;background: darkorange; padding: 5px; width: 10%">CANT.</td>
+            <td style="border: 1px solid darkorange;background: darkorange; padding: 5px; width: 10% ; text-align: right">P. UNIT.</td>
+            <td style="border: 1px solid darkorange;background: darkorange; padding: 5px; width: 10% ; text-align: right">TOTAL</td>
+        </tr>
+        <tr>
+            {% for detalle in detalles %}
+                <td style="border: 1px solid darkorange;padding: 5px; text-align: center">{{ detalle.producto.id }}</td>
+                <td style="border: 1px solid darkorange; padding: 5px">{{ detalle.producto.nombre }}</td>
+                <td style="border: 1px solid darkorange; padding: 5px; text-align: center">{{ detalle.cantidad }}</td>
+                <td style="border: 1px solid darkorange;padding: 5px ; text-align: right">{{ detalle.precioU }}</td>
+                <td style="border: 1px solid darkorange; padding: 5px ; text-align: right">{{ detalle.subtotal }}</td>
+            {% endfor %}
+            <tr style="">
+                <td colspan="3" rowspan="3" style="padding-top: 5px; text-align: center; font-size: 10px">Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.</td>
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">SUBT.:</td>
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">{{ documento.subtotal }}</td>
+            </tr>
+            <tr style="">
+
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">IVA:</td>
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">{{ documento.iva }}</td>
+            </tr>
+            <tr style="">
+
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">TOTAL:</td>
+                <td style="padding-top: 5px; border: 1px solid darkorange;background: darkorange; padding: 5px; ; text-align: right">{{ documento.total }}</td>
+            </tr>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>

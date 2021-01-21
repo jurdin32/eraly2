@@ -40,11 +40,11 @@
     </tr>{% endcomment %}
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                <td style="text-align: center; width:80px"> {{ detalle.producto.id }}</td>
-                <td>{{ detalle.producto|truncatechars:64 }}</td>
-                <td style="text-align: center; width:60px">{{ detalle.cantidad }}</td>
-                <td style="text-align: right; width:80px">{{ detalle.subtotal }}</td>
-                <td style="text-align: right; width:80px">{{ detalle.iva }}</td>
+                <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
+                <td>{{ detalle.producto|truncatechars:85 }}</td>
+                <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.iva }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.total }}</td>
             </tr>
         {% endfor %}
@@ -90,12 +90,12 @@
         <td style="text-align: right; width:80px"></td>
     </tr>{% endcomment %}
         {% for detalle in detalles %}
-            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                <td style="text-align: center; width:80px"> {{ detalle.producto.id }}</td>
-                <td>{{ detalle.producto|truncatechars:64 }}</td>
-                <td style="text-align: center; width:60px">{{ detalle.cantidad }}</td>
-                <td style="text-align: right; width:80px">{{ detalle.subtotal }}</td>
-                <td style="text-align: right; width:80px">{{ detalle.iva }}</td>
+           <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
+                <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
+                <td>{{ detalle.producto|truncatechars:85 }}</td>
+                <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
+                <td style="text-align: right; width:60px">{{ detalle.iva }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.total }}</td>
             </tr>
         {% endfor %}
