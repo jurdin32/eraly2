@@ -186,7 +186,7 @@
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>PROFORMAS</h2>
+                    <h2>FACTURAS</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -408,6 +408,7 @@
         }
     </script>
     <script>
+    var documento=0
         $(document).ready(function () {
             $("#tproductos").DataTable();
             $("#tClientes").DataTable();
@@ -432,7 +433,7 @@
                     establecimiento: '{{ establecimiento.id }}',
                     cliente: $("#idCliente").text(),
                     csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                    tipo: "P",
+                    tipo: "F",
                     numero: $("#numeroDocumento").text(),
                     subtotal: $(".subtotal").text(),
                     iva: $(".iva").text(),
@@ -446,13 +447,14 @@
                         toastr.success("La proforma se ha generado correctamente.!");
                         $("#registrarDocumento").attr('disabled', 'disabled');
                         $("#generarDocumento").removeAttr('disabled');
-                        $("#generarDocumento").attr("href",`/document/proform/${result}/`)
+                        $("#generarDocumento").attr("href",`/document/fac/${result}/`)
                     } else {
                         toastr.error("Ocurrio un error inesperado.!")
                         $("#generarDocumento").removeAttr('disabled');
                     }
                 })
             });
+
         });
     </script>
 {% endblock %}

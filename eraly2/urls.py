@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from ckeditor_demo.demo_application.tests.test_deprecation import generator_with_filename_and_request
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -73,7 +74,14 @@ urlpatterns = [
     path("directions/delete/<int:id>/",eliminar_direcciones),
     path("proforms/<id>/",proformas),
     path("proforms/createCLient/<id>/",registroClienteFacturaProforma),
-    path("proforms/create/<id>/",registrarDocumento),
+    path("proforms/create/<int:id>/",registrarDocumento),
+    path("proforms/detall/<int:id>/",registrarDetallesFacturaProforma),
+
+    path("billing/<id>/",facturas),
+
+    path("document/proform/<int:id>/",crearDocumentoPDF_Proforma),
+    path("document/fac/<int:id>/",crearDocumentoPDF_Proforma),
+    path("document/list/",listaDocumentos),
 
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
