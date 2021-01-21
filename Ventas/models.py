@@ -20,6 +20,7 @@ class Facturas(models.Model):
 class detalleFactura(models.Model):
     factura=models.ForeignKey(Facturas,on_delete=models.CASCADE)
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
+    precioU=models.DecimalField(max_digits=9, decimal_places=2,default=0)
     cantidad=models.IntegerField(default=0)
     subtotal=models.DecimalField(max_digits=9, decimal_places=2)
     iva = models.DecimalField(max_digits=9, decimal_places=2)
@@ -28,5 +29,5 @@ class detalleFactura(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if self.factura.tipo=="F":
-            Kardex(producto=self.producto,tipo="E",cantidad=self.cantidad,descripcion="Registrado segun factura de compra No. %s"%(self.factura_id)).save()
+            Kardex(producto=self.producto,tipo="E",cantidad=self.cantidad,descripcion="Registrado segun factura de compra No. %s"%(self.factura.numero)).save()
         super(detalleFactura, self).save()

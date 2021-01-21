@@ -75,12 +75,14 @@
                                               aria-hidden="true"></span>
                                     </div>
                                     <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" name="nombres" required="required"
+                                        <input type="text" class="form-control has-feedback-left" name="nombres"
+                                               required="required"
                                                placeholder="Ingrese Nombres">
                                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                     </div>
                                     <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" name="apellidos" required="required"
+                                        <input type="text" class="form-control has-feedback-left" name="apellidos"
+                                               required="required"
                                                placeholder="Ingrese Apellidos">
                                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                     </div>
@@ -90,7 +92,8 @@
                                         <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
                                     </div>
                                     <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                        <select class="js-example-basic-single" style="width: 100%" id="ciudades" required="required"
+                                        <select class="js-example-basic-single" style="width: 100%" id="ciudades"
+                                                required="required"
                                                 name="ciudad" multiple>
                                             {% for provincia in provincias %}
                                                 <optgroup label="{{ provincia.nombre }}"></optgroup>
@@ -114,8 +117,6 @@
                                     <div class="col-md-12 col-sm-12  form-group has-feedback">
                                         <button class="btn btn-primary">Registrar</button>
                                     </div>
-
-
                                 </form>
                             </div>
                         </div>
@@ -239,7 +240,8 @@
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 10px">
                                 <br><strong>Fecha: </strong>
-                                <br><span>No.:</span><span id="numeroDocumento" style="font-size: 20px; font-weight: bold"><span
+                                <br><span>No.:</span><span id="numeroDocumento"
+                                                           style="font-size: 20px; font-weight: bold"><span
                                     style="color: indianred">{{ contadorProforma }}</span></span>
                             </div>
                             <!-- /.col -->
@@ -278,12 +280,15 @@
                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 12px;">
                                     Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
                                     días.
+                                    <input class="form-control" id="detalleProductos" type="text">
                                 </p>
                                 <div class=" ">
-                                    <button class="btn btn-danger pull-right" id="registrarDocumento"><i class="fa fa-credit-card"></i> Registrar
+                                    <button class="btn btn-danger pull-right" id="registrarDocumento"><i
+                                            class="fa fa-credit-card"></i> Registrar
                                     </button>
-                                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i
-                                            class="fa fa-download"></i> Generate PDF
+                                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"
+                                            id="generarDocumento" disabled="disabled"><i
+                                            class="fa fa-download"></i> Generar PDF
                                     </button>
                                 </div>
                             </div>
@@ -324,6 +329,7 @@
         var ids = []
 
         function agregarFila(id, nombre, precio, stock) {
+
             if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
@@ -334,9 +340,10 @@
                         '   <input min="1" max="' + stock + '" class="form-control add" onkeyup="addCantidad($(this),' + precio + ')" onkeypress="addCantidad($(this),' + precio + ')" onchange="addCantidad($(this),' + precio + ')" style="text-align: center;border: none;" value="1" type="number"/></td>' +
                         '<td style="text-align: right">' + precio + '</td>' +
                         '<td style="text-align: right" class="precios">' + precio + '</td>' +
-                        '<td style="text-align: center"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
+                        '<td style="text-align: center" class="ii"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
                         '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
                     suma()
+                    detallesDocumento()
                     toastr.success("Se agrego a la Lista de Productos")
                 } else {
                     toastr.info("Este item ya esta en la Lista..!")
@@ -360,6 +367,7 @@
             var valor = parseFloat(cantidad) * parseFloat(precio)
             $("#tabla").children().children()[index].children[4].innerHTML = valor.toFixed(2);
             suma()
+            detallesDocumento()
         }
 
         function suma() {
@@ -372,6 +380,19 @@
             $(".iva").text(iva.toFixed(2))
             var total = iva + suma
             $(".total").text(total.toFixed(2))
+        }
+
+        function detallesDocumento(){
+            $("#tabla tr").each(function (index,fila){
+                if (index > 0){
+                    codigo= $(this).find('td').eq(0).text();
+                    cantidad = $(this).find('td').eq(2).find('input').val();
+                    precio = $(this).find('td').eq(3).text()
+                    console.log(cantidad)
+
+                }
+
+            })
         }
     </script>
     <script>
@@ -394,26 +415,30 @@
                 maximumSelectionLength: 1
             });
 
-            $("#registrarDocumento").click(function (){
-                data={
-                    establecimiento:'{{ establecimiento.id }}',
-                    cliente:$("#idCliente").text(),
-                    csrfmiddlewaretoken:$('input[name="csrfmiddlewaretoken"]').val(),
-                    tipo:"P",
-                    numero:$("#numeroDocumento").text(),
-                    subtotal:$(".subtotal").text(),
-                    iva:$(".iva").text(),
-                    total:$(".total").text(),
+            $("#registrarDocumento").click(function () {
+                data = {
+                    establecimiento: '{{ establecimiento.id }}',
+                    cliente: $("#idCliente").text(),
+                    csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                    tipo: "P",
+                    numero: $("#numeroDocumento").text(),
+                    subtotal: $(".subtotal").text(),
+                    iva: $(".iva").text(),
+                    total: $(".total").text(),
                 }
-                $.post("/proforms/create/{{ establecimiento.id }}/",data,function (result){
-                    if (result == 1){
-                        toastr.success("La proforma se ha generado correctamente.!")
-                    }
-                    else{
+                $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
+                    if (result == 1) {
+                        toastr.success("La proforma se ha generado correctamente.!");
+                        $("#registrarDocumento").attr('disabled', 'disabled');
+                        $("#generarDocumento").removeAttr('disabled');
+                    } else {
                         toastr.error("Ocurrio un error inesperado.!")
+                        $("#generarDocumento").removeAttr('disabled');
                     }
                 })
             });
+
+
 
         });
     </script>
