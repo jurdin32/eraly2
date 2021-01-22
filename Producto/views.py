@@ -293,6 +293,10 @@ def kardex_producto(request,id):
     return render(request, "producto/kardex_producto.html",contexto)
 
 def inventario(request):
+    if request.POST:
+        print(request.POST)
+        Kardex(producto_id=request.POST['producto'],tipo=request.POST['tipo'],cantidad=request.POST['cantidad'],descripcion=request.POST['detalle']).save()
+        messages.add_message(request, messages.SUCCESS, "Se ha registrado nuevo ingreso en kardex..!")
     contexto={
         'productos':Productos.objects.filter(establecimiento__usuario=request.user),
     }

@@ -29,36 +29,38 @@
                 <br>
                 <hr>
             </td>
-            <td colspan="3" style="text-align: center; width: 20%;border: 1px black solid"><strong>Fecha</strong></td>
+            <td style="color: white">********</td>
+            <td style="text-align: center; width: 20%;border: 1px black solid"><strong>Fecha</strong></td>
         </tr>
         <tr>
             <td style="padding: 5px"><strong>Cédula / RUC:</strong></td>
             <td style="padding: 5px; color: grey"><i>{{documento.cliente.cedula }}<br>
                 <hr></i></td>
-            <td style="text-align: center; border-bottom: 1px black solid;border-left: 1px black solid;border-right: 1px black solid; color: grey">{{ documento.fecha|date:"d" }}</td>
-            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"M" }}</td>
-            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"Y" }}</td>
+            <td style="color: white">********</td>
+            <td style="text-align: center;border: 1px black solid">{{ documento.fecha|date:"d/M/Y" }}</td>
         </tr>
         <tr>
             <td style="padding: 5px"><strong>Dirección:</strong></td>
             <td style="padding: 5px; color: grey"><i>{{ documento.cliente.direccion }} - {{ documento.cliente.ciudad }} - {{ documento.cliente.ciudad.provincia }}</i>
                 <br>
                 <hr></td>
-
+                <td style="color: white">********</td>
+            <td style="text-align: center"><strong>No.: </strong> <strong>{{ documento.numero }}</strong></td>
         </tr>
         <tr style="text-align: center; font-size: 30px;"><td colspan="5" style="padding-top:20px "><strong>PROFORMA</strong></td></tr>
     </table>
+    <br><br>
     <table style="width: 100%">
         <tr style="border: 1px solid #FC5603;background: #FC5603; padding: 5px">
-            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10%; text-align: center"><strong>CÓD</strong></td>
-            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 50%"><strong>DESCRIPCIÓN DEL PRODUCTO</strong></td>
-            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10%"><strong>CANT.</strong></td>
-            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right"><strong>P. UNIT.</strong></td>
-            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right"><strong>TOTAL</strong></td>
+            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10%; text-align: center; color: white"><strong>CÓD</strong></td>
+            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 50%; color: white"><strong>DESCRIPCIÓN DEL PRODUCTO</strong></td>
+            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10%; color: white; text-align: center"><strong>CANT.</strong></td>
+            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right; color: white"><strong>P. UNIT.</strong></td>
+            <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right; color: white"><strong>TOTAL</strong></td>
         </tr>
         <tr>
             {% for detalle in detalles %}
-                <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px; text-align: center; color: grey">{{ detalle.producto.id }}</td>
+                <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px; text-align: center; color: grey">{{ detalle.producto.id|stringformat:"04d"}}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; color: grey">{{ detalle.producto.nombre }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; text-align: center; color: grey">{{ detalle.cantidad }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px ; text-align: right; color: grey">{{ detalle.precioU }}</td>
@@ -76,19 +78,19 @@
         {% endfor %}
             <tr style="">
                 <td colspan="3" rowspan="3" style="padding-top: 5px; text-align: justify; font-size: 12px;color: grey"><strong>Observación:
-                    <br></strong>
+                    <br><br></strong>
                     <u>Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.</u>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right"><strong>SUBT.:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right; color: white;"><strong>SUBT.:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey ;text-align: right; color: grey">{{ documento.subtotal }}</td>
             </tr>
             <tr style="">
 
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right"><strong>IVA:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right; color: white;"><strong>IVA:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey; text-align: right; color: grey">{{ documento.iva }}</td>
             </tr>
             <tr style="">
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; padding: 5px; ; text-align: right"><strong>TOTAL:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; padding: 5px; ; text-align: right; color: white;"><strong>TOTAL:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey; text-align: right; color: grey">{{ documento.total }}</td>
             </tr>
         </tr>

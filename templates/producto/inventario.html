@@ -1,6 +1,62 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
 {% load productosTags %}
+
+     <div class="modal fade bs-example-modal-lg" id="ingresos" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registrar Ingreso/Egreso Automatico</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" method="post">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <p id="producto"></p>
+                                        <input type="hidden" id="tipo" name="tipo">
+                                        <input type="hidden" id="producto_id" name="producto">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <input type="number" class="form-control" name="cantidad" value="1" max="999999999999999999" step="0.01" placeholder="Ingrese Cantidad" onchange="setTwoNumberDecimal">
+                                        <span class="fa fa-dollar form-control-feedback right"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-right" name="detalle"
+                                               id="detalle" required="required" value="Ingreso Automático"
+                                               placeholder="Aqui el detalle de la transacción">
+                                        <span class="fa fa-text-height form-control-feedback right"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -59,14 +115,23 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
-                                                    {{ precios.precioVenta }}<br>
+                                                    <span class="badge badge-info" style="font-size: 13px">{{ precios.precioVenta }}</span><br>
                                                 {% endfor %}
 
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle"> {% stock producto.id %} </td>
+                                            <td style="text-align: center; vertical-align: middle"> <span class="badge badge-primary" style="font-size: 13px">{% stock producto.id %} </span></td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a href="" class="btn btn-app"><i class="fa fa-plus-circle"></i>Ingreso</a>
-                                                <a href="" class="btn btn-app"><i class="fa fa-minus-circle"></i>Egreso</a>
+                                                <a data-toggle="modal" data-target="#ingresos"
+                                                   data-producto_id="{{ producto.id }}"
+                                                   data-producto="{{ producto.nombre }}"
+                                                   data-tipo="I"
+                                                   href="#" class="btn btn-app datos"><i class="fa fa-plus-circle"></i>Ingreso</a>
+                                                <a href="" data-toggle="modal" data-target="#ingresos"
+                                                   data-producto_id="{{ producto.id }}"
+                                                   data-producto="{{ producto.nombre }}"
+                                                   data-tipo="E"
+                                                   class="btn btn-app datos">
+                                                    <i class="fa fa-minus-circle"></i>Egreso</a>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -87,5 +152,13 @@
         $(document).ready(function () {
             $("#datatable").DataTable();
         });
+
+
+        $(".datos").click(function () {
+            $("#producto_id").val($(this).data('producto_id'))
+            $("#producto").text($(this).data('producto'))
+            $("#tipo").val($(this).data('tipo'))
+        })
+
     </script>
 {% endblock %}
