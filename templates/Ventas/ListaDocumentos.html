@@ -43,20 +43,20 @@
                                         <tbody>
                                             {% for documento in documentos %}
                                                 <tr>
-                                                    <td>{{ documento.id }}</td>
-                                                    <td style="text-align: center">{{ documento.numero }}</td>
-                                                    <td style="text-align: center">{% if documento.tipo == "F" %}
+                                                    <td style="vertical-align: middle">{{ documento.id }}</td>
+                                                    <td style="text-align: center; vertical-align: middle">{{ documento.numero }}</td>
+                                                    <td style="text-align: center; vertical-align: middle">{% if documento.tipo == "F" %}
                                                         <span class="badge badge-info" style="font-size: 13px">Factura</span>
                                                         {% else %}
                                                         <span class="badge badge-warning" style="font-size: 13px">Proforma</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td style="text-align: center">{{ documento.fecha }}</td>
-                                                    <td>{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
-                                                    <td style="text-align: center">{{ documento.subtotal }}</td>
-                                                    <td style="text-align: center">{{ documento.iva }}</td>
-                                                    <td style="text-align: center">{{ documento.total }}</td>
-                                                    <td style="text-align: center">
+                                                    <td style="text-align: center; vertical-align: middle">{{ documento.fecha }}</td>
+                                                    <td style="vertical-align: middle">{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
+                                                    <td style="text-align: center; vertical-align: middle">{{ documento.subtotal }}</td>
+                                                    <td style="text-align: center; vertical-align: middle">{{ documento.iva }}</td>
+                                                    <td style="text-align: center;; vertical-align: middle"><span class="badge badge-danger" style="font-size: 13px">{{ documento.total }}</span></td>
+                                                    <td style="text-align: center; vertical-align: middle">
                                                         <a class="btn btn-primary btn-app" href=""><i class="fa fa-binoculars"></i>Revisar</a>
                                                     <td style="text-align: center">
                                                         {% if documento.tipo == "F" %}
