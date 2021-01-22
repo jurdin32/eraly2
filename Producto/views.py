@@ -292,4 +292,10 @@ def kardex_producto(request,id):
     }
     return render(request, "producto/kardex_producto.html",contexto)
 
+def inventario(request):
+    contexto={
+        'productos':Productos.objects.filter(establecimiento__usuario=request.user),
+    }
+    return render(request, 'producto/inventario.html',contexto)
+
 

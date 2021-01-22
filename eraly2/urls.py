@@ -66,6 +66,7 @@ urlpatterns = [
 
     path("kardex/", kardex),
     path("kardex/products/<int:id>/", kardex_producto),
+    path("inventory/", inventario),
 
 
     path("business/remove/",eliminar_empresa),
