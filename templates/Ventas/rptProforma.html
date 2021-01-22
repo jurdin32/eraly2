@@ -35,18 +35,16 @@
             <td style="padding: 5px"><strong>Cédula / RUC:</strong></td>
             <td style="padding: 5px; color: grey"><i>{{documento.cliente.cedula }}<br>
                 <hr></i></td>
-            <td style="text-align: center; border-left: 1px black solid; border-bottom: 1px solid black"><strong>Día</strong></td>
-            <td style="text-align: center; border-left: 1px black solid; border-bottom: 1px solid black"><strong>Mes</strong></td>
-            <td style="text-align: center; border-left: 1px black solid; border-bottom: 1px solid black; border-right: 1px black solid"><strong>Año</strong></td>
+            <td style="text-align: center; border-bottom: 1px black solid;border-left: 1px black solid;border-right: 1px black solid; color: grey">{{ documento.fecha|date:"d" }}</td>
+            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"M" }}</td>
+            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"Y" }}</td>
         </tr>
         <tr>
             <td style="padding: 5px"><strong>Dirección:</strong></td>
             <td style="padding: 5px; color: grey"><i>{{ documento.cliente.direccion }} - {{ documento.cliente.ciudad }} - {{ documento.cliente.ciudad.provincia }}</i>
                 <br>
                 <hr></td>
-            <td style="text-align: center; border-bottom: 1px black solid;border-left: 1px black solid;border-right: 1px black solid; color: grey">{{ documento.fecha|date:"d" }}</td>
-            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"M" }}</td>
-            <td style="text-align: center; border-bottom: 1px black solid; border-right: 1px black solid;color: grey">{{ documento.fecha|date:"Y" }}</td>
+
         </tr>
         <tr style="text-align: center; font-size: 30px;"><td colspan="5" style="padding-top:20px "><strong>PROFORMA</strong></td></tr>
     </table>
@@ -77,7 +75,10 @@
             </tr>
         {% endfor %}
             <tr style="">
-                <td colspan="3" rowspan="3" style="padding-top: 5px; text-align: center; font-size: 12px;border-left: 1px solid grey;border-bottom: 1px solid grey;color: grey">Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.</td>
+                <td colspan="3" rowspan="3" style="padding-top: 5px; text-align: justify; font-size: 12px;color: grey"><strong>Observación:
+                    <br></strong>
+                    <u>Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.</u>
+                </td>
                 <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right"><strong>SUBT.:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey ;text-align: right; color: grey">{{ documento.subtotal }}</td>
             </tr>

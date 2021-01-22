@@ -34,7 +34,9 @@
                                             <th style="text-align: center">Subtotal</th>
                                             <th style="text-align: center">IVA</th>
                                             <th style="text-align: center">Total</th>
-                                            <th style="text-align: center">Opciones</th>
+                                            <th style="text-align: center">Ver</th>
+                                            <th style="text-align: center">Imprimir</th>
+                                            <th style="text-align: center">Facturar</th>
                                             
                                         </tr>
                                         </thead>
@@ -42,28 +44,31 @@
                                             {% for documento in documentos %}
                                                 <tr>
                                                     <td>{{ documento.id }}</td>
-                                                    <td>{{ documento.numero }}</td>
-                                                    <td>{% if documento.tipo == "F" %}
-                                                        <span>Factura</span>
+                                                    <td style="text-align: center">{{ documento.numero }}</td>
+                                                    <td style="text-align: center">{% if documento.tipo == "F" %}
+                                                        <span class="badge badge-info" style="font-size: 13px">Factura</span>
                                                         {% else %}
-                                                        <span>Proforma</span>
+                                                        <span class="badge badge-warning" style="font-size: 13px">Proforma</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td>{{ documento.fecha }}</td>
+                                                    <td style="text-align: center">{{ documento.fecha }}</td>
                                                     <td>{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
-                                                    <td>{{ documento.subtotal }}</td>
-                                                    <td>{{ documento.iva }}</td>
-                                                    <td>{{ documento.total }}</td>
+                                                    <td style="text-align: center">{{ documento.subtotal }}</td>
+                                                    <td style="text-align: center">{{ documento.iva }}</td>
+                                                    <td style="text-align: center">{{ documento.total }}</td>
                                                     <td style="text-align: center">
-                                                        <a class="btn btn-primary" href=""><i class="fa fa-binoculars"></i> Ver</a>
+                                                        <a class="btn btn-primary btn-app" href=""><i class="fa fa-binoculars"></i>Revisar</a>
+                                                    <td style="text-align: center">
                                                         {% if documento.tipo == "F" %}
-                                                            <a class="btn btn-success" target="_blank" href="/document/fac/{{ documento.id }}/"><i class="fa fa-print"></i> Imprimir</a>
+                                                            <a class="btn btn-success btn-app" target="_blank" href="/document/fac/{{ documento.id }}/"><i class="fa fa-print"></i>Imprimir</a>
                                                         {% else %}
-                                                            <a class="btn btn-success" target="_blank" href="/document/proform/{{ documento.id }}/"><i class="fa fa-print"></i> Imprimir</a>
-                                                            <a class="btn btn-danger" href=""><i class="fa fa-credit-card-alt"></i> Facturar</a>
+                                                            <a class="btn btn-success btn-app" target="_blank" href="/document/proform/{{ documento.id }}/"><i class="fa fa-print"></i>Imprimir</a>
                                                         {% endif %}
-
-
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        {% if not documento.tipo == "F" %}
+                                                            <a class="btn btn-danger btn-app" href=""><i class="fa fa-credit-card-alt"></i>Facturar</a>
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endfor %}

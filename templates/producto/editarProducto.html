@@ -325,6 +325,16 @@
                                                     <td>{{ precio.detalle }}</td>
                                                     <td class="fs15 fw700 text-right">$ {{ precio.precioVenta }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>IVA:</td>
+                                                    <td></td>
+                                                    <td class="fs15 fw700 text-right">$ {{ precio.iva }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total:</td>
+                                                    <td></td>
+                                                    <td class="fs15 fw700 text-right">$ {{ precio.total }}</td>
+                                                </tr>
                                             {% endfor %}
                                             </tbody>
                                         </table>

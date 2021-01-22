@@ -95,7 +95,10 @@ class Productos(models.Model):
     estado=models.BooleanField(default=True)
 
     def __str__(self):
-        return '%s'%(self.nombre)
+        if self.talla:
+            return '%s, talla:%s' % (self.nombre, self.talla)
+        else:
+            return '%s'%(self.nombre)
 
     class Meta:
         verbose_name_plural = "3. Producto "
@@ -135,8 +138,17 @@ class Colores(models.Model):
 class Precios(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     precioVenta=models.DecimalField(max_digits=9, decimal_places=2)
+    iva=models.DecimalField(max_digits=9, decimal_places=2,default=0)
+    total=models.DecimalField(max_digits=9, decimal_places=2,default=0)
     detalle=models.CharField(max_length=50)
     estado=models.BooleanField(default=True)
+    
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.iva= float(self.precioVenta)*0.12
+        self.total = float(self.iva) + float(self.precioVenta)
+        
+        super(Precios, self).save()
 
 
     class Meta:
