@@ -93,8 +93,14 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-file-o"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/proforms/0/">Proformas</a></li>
-                                        <li><a href="/billing/0/">Facturación</a></li>
+                                        {% if establecimiento %}
+                                        <li><a href="/proforms/{{ establecimiento.id }}/">Proformas</a></li>
+                                        <li><a href="/billing/{{ establecimiento.id }}/">Facturación</a></li>
+                                        {% else %}
+                                            <li><a href="/proforms/0/">Proformas</a></li>
+                                            <li><a href="/billing/0/">Facturación</a></li>
+                                        {% endif %}
+
                                         <li><a href="/document/list/">Registro de Documentos</a></li>
                                     </ul>
                                 </li>
