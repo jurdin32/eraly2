@@ -1,0 +1,483 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {% load productosTags %}
+    {% load static %}
+    <!-- lista de productos -->
+    <div class="modal fade bs-example-modal-lg" id="agregar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Productos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-striped" id="tproductos"
+                                       style="text-align: center">
+                                    <thead>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th>Id</th>
+                                        <th>Detalle del Producto</th>
+                                        <th>Stock</th>
+                                        <th>Precio</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for producto in productos %}
+                                        <tr>
+                                            <td>{{ producto.id }}</td>
+                                            <td style="text-align: justify">{{ producto.nombre }}</td>
+                                            <td>{% stock producto.id %}</td>
+                                            <td>{% precioProducto producto.id %}</td>
+                                            <td>
+                                                <a href="#"
+                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                    <i class="fa fa-check-circle text-success"
+                                                       style="font-size: 20px"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- lista de registro de productos -->
+    <div class="modal fade bs-example-modal-lg" id="agregarCliente" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Clientes</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+                                <form action="/proforms/createCLient/{{ establecimiento.id }}/" method="post"
+                                      class="form-label-left input_mask">
+                                    {% csrf_token %}
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="cedula"
+                                               placeholder="Ingrese Cédula">
+                                        <span class="fa fa-credit-card form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="nombres"
+                                               required="required"
+                                               placeholder="Ingrese Nombres">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="apellidos"
+                                               required="required"
+                                               placeholder="Ingrese Apellidos">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="direccion"
+                                               placeholder="Ingrese Dirección">
+                                        <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <select class="js-example-basic-single" style="width: 100%" id="ciudades"
+                                                required="required"
+                                                name="ciudad" multiple>
+                                            {% for provincia in provincias %}
+                                                <optgroup label="{{ provincia.nombre }}"></optgroup>
+                                                {% for ciudad in provincia.ciudad_set.all %}
+                                                    <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="telefono"
+                                               placeholder="Ingrese No. Telefono">
+                                        <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" name="celular"
+                                               placeholder="Ingrese No. Celular">
+                                        <span class="fa fa-mobile-phone form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <button class="btn btn-primary">Registrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- lista de clientes -->
+    <div class="modal fade bs-example-modal-lg" id="listaClientes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Clientes</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-striped" id="tClientes"
+                                       style="text-align: center">
+                                    <thead>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th>Id</th>
+                                        <th>Cedula</th>
+                                        <th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Telefono</th>
+                                        <th>Selec.</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for cliente in clientes %}
+                                        <tr>
+                                            <td>{{ cliente.id }}</td>
+                                            <td>{{ cliente.cedula }}</td>
+                                            <td>{{ cliente.nombres }} {{ cliente.apellidos }}</td>
+                                            <td>{{ cliente.ciudad }}</td>
+                                            <td>{{ cliente.telefono }}</td>
+                                            <td style="text-align: center">
+                                                <a data-dismiss="modal" href="#" class="cliente"
+                                                   data-id="{{ cliente.id }}"
+                                                   data-nombre="{{ cliente.nombres }} {{ cliente.apellidos }}"
+                                                   data-ciudad_id="{{ cliente.ciudad.id }}"
+                                                   data-ciudad="{{ cliente.ciudad.nombre }}"
+                                                   data-telefono="{{ cliente.telefono }}">
+                                                    <i style="font-size: 20px"
+                                                       class="fa fa-check-circle text-success"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>PROFORMAS</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <section class="content invoice" style="padding: 20px">
+                        <!--
+                        <img class="img-thumbnail" src="/media/{{ establecimiento.banner }}" style="width: 100%" alt="">
+                        -->
+                        <div class="row invoice-info" style="padding-top: 10px">
+                            <div class="col-sm-4 invoice-col">
+                                {% if establecimientos %}
+                                    Seleccione el Establecimiento
+                                {% endif %}
+                                <address>
+                                    {% for establecimiento in establecimientos %}
+                                        <a class="btn btn-success"
+                                           href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
+                                    {% endfor %}
+                                    {% if establecimiento %}
+                                        <br>
+                                        <span style="font-size: 30px; font-weight: bold">{{ establecimiento.nombreComercial|upper }}</span>
+                                        <br><span style="font-weight: bold">R.U.C.:</span>{{ establecimiento.ruc }}
+                                    {% endif %}
+                                    {% for direccion in establecimiento.direccion_set.all %}
+                                        <br><span style="font-weight: bold">Dirección:</span> {{ direccion.direccion }}
+                                        <br><span style="font-weight: bold">Ciudad:</span>
+                                        {{ direccion.ciudad.provincia }} - {{ direccion.ciudad }}
+                                        <br><span style="font-weight: bold">Teléfono:</span> {{ direccion.telefono }}
+                                    {% endfor %}
+
+                                </address>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col" style="padding-top: 20px">
+                                <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
+                                <a href="#" id="buscarCliente"><i style="font-size: 20px"
+                                                                  class="fa fa-search text-success"></i></a>
+                                <span style="font-size: 20px"> | </span>
+                                <a href="#" data-toggle="modal" data-target="#agregarCliente"><i style="font-size: 20px"
+                                                                                                 class="fa fa-plus-circle text-primary"></i></a>
+                                <address>
+                                    {% if documento %}
+                                        <span id="idCliente" hidden>{{ documento.cliente.id }}</span>
+                                        {% else %}
+                                        <span id="idCliente" hidden></span>
+                                    {% endif %}
+
+                                    <strong>Nombre: </strong> <span id="nombreCliente">{{ documento.cliente.nombres}} {{ documento.cliente.apellidos }}</span>
+                                    <br><strong>Dirección: </strong><span
+                                        id="direccionCliente">{{ documento.cliente.direccion }}</span>
+                                    <br><strong>Ciudad: </strong><span id="ciudadCliente">{{ documento.cliente.ciudad }}</span>
+                                    <br><strong>Teléfono: </strong><span
+                                        id="telefonoCLiente">{{ documento.cliente.telefono }}</span>
+                                </address>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col" style="padding-top: 10px">
+                                <br><strong>Fecha:</strong> {{ documento.fecha }}
+                                <br><span>No.:</span><span id="numeroDocumento"
+                                                           style="font-size: 20px; font-weight: bold; color: indianred">{{ documento.numero }}<span
+                                    style="color: indianred">{{ contadorProforma }}</span></span>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="table">
+                                <table class="table table-striped table-bordered" id="tabla">
+                                    <thead>
+                                    <tr style="background-color: #2A3F54; color: whitesmoke">
+                                        <th style="text-align: center">Código</th>
+                                        <th style="width: 59%">Descripción</th>
+                                        <th style="text-align: center">Cantidad</th>
+                                        <th style="text-align: right">Precio</th>
+                                        <th style="text-align: right">Subtotal</th>
+                                        <th style="text-align: center">
+                                            <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
+                                                <i class="fa fa-plus-circle"
+                                                   style="font-size: 20px;color: whitesmoke"></i></a>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for detalle in detalles %}
+                                    <tr>
+                                        <td style="text-align: center">{{ detalle.producto.id }}</td>
+                                        <td>{{ detalle.producto.nombre }}</td>
+                                        <td style="text-align: center">
+                                            {% if documento %}
+                                            <input class="form-control add" min="1" max="{%  stock detalle.producto.id %}" type="number" value="{{ detalle.cantidad }}"
+                                                    onkeyup="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')" onkeypress="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')" onchange="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')"
+                                                   style="text-align: center; border: none">
+                                            {% endif %}
+                                        </td>
+                                        <td style="text-align: right" >{{ detalle.precioU|stringformat:"1.2f" }}</td>
+                                        <td style="text-align: right" class="precios">{{ detalle.subtotal|stringformat:"1.2f" }}</td>
+                                        <td style="text-align: center" class="ii">
+                                            <a href="#" class="eliminar" onclick="eliminarFila($(this),id)"><i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-md-8">
+                                <p class="text-muted well well-sm no-shadow" style="margin-top: 12px;">
+                                    Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
+                                    días.
+                                </p>
+                                <div class=" ">
+                                    <button class="btn btn-danger pull-right" id="registrarDocumento"><i
+                                            class="fa fa-credit-card"></i> Registrar
+                                    </button>
+                                    <a target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"
+                                            id="generarDocumento" disabled="disabled"><i
+                                            class="fa fa-download"></i> Generar PDF
+                                    </a>
+                                    <a href="/proforms/{{ establecimiento.id }}" class="btn btn-success pull-right" style="margin-right: 5px;"
+                                            id="nuevoDocumento" disabled="disabled"><i
+                                            class="fa fa-download"></i> Nuevo Documento
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th style="width:75%">Subtotal:</th>
+                                            <td class="subtotal" style="text-align: right">$0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IVA (12%):</th>
+                                            <td class="iva" style="text-align: right">$0,00</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td class="total" style="text-align: right">$0,00</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script_index %}
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <script>
+        var ids = []
+        suma()
+        function agregarFila(id, nombre, precio, stock) {
+
+            if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
+                if (ids.indexOf(parseInt(id)) < 0) {
+                    ids.push(parseInt(id))
+                    document.getElementById("tabla").insertRow(-1).innerHTML = '' +
+                        '<td style="text-align: center">' + id + '</td>' +
+                        '<td>' + nombre + '</td>' +
+                        '<td style="text-align: center;">' +
+                        '   <input min="1" max="' + stock + '" class="form-control add" onkeyup="addCantidad($(this),' + precio + ')" onkeypress="addCantidad($(this),' + precio + ')" onchange="addCantidad($(this),' + precio + ')" style="text-align: center;border: none;" value="1" type="number"/></td>' +
+                        '<td style="text-align: right">' + precio + '</td>' +
+                        '<td style="text-align: right" class="precios">' + precio + '</td>' +
+                        '<td style="text-align: center" class="ii"><a href="#" class="eliminar" onclick="eliminarFila($(this),id)">' +
+                        '<i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a></td>';
+                    suma()
+                    toastr.success("Se agrego a la Lista de Productos")
+                } else {
+                    toastr.info("Este item ya esta en la Lista..!")
+                }
+
+            } else {
+                toastr.error("Error, no hay stock disponible..!")
+            }
+        }
+
+        function eliminarFila(value, id) {
+            $(value).parents('tr').eq(0).remove();
+            ids.pop(parseInt(id))
+            toastr.error("Item removido de la Lista....!")
+            suma()
+        }
+
+        function addCantidad(add, precio) {
+            var index = $(add).parent().parent().index()
+            var cantidad = $(add).val()
+            var valor = parseFloat(cantidad) * parseFloat(precio)
+            $("#tabla").children().children()[index+1].children[4].innerHTML = valor.toFixed(2);
+            console.log('entro..!')
+            suma()
+        }
+
+        function suma() {
+            var suma = 0;
+            $('.precios').each(function () {
+                suma += parseFloat($(this).text())
+            })
+            $(".subtotal").text(suma.toFixed(2))
+            var iva = suma * 0.12
+            $(".iva").text(iva.toFixed(2))
+            var total = iva + suma
+            $(".total").text(total.toFixed(2))
+        }
+
+        function detallesDocumento(documento){
+            $("#tabla tr").each(function (index,fila){
+                if (index > 0){
+                    let codigo= parseInt($(this).find('td').eq(0).text());
+                    let cantidad = parseInt($(this).find('td').eq(2).find('input').val());
+                    let precio = parseFloat($(this).find('td').eq(3).text());
+                    let subtotal = parseFloat($(this).find('td').eq(4).text());
+                    if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0){
+                        $.post("/proforms/detall/{{ establecimiento.id }}/",{
+                            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                            factura_id:parseInt(documento),
+                            producto_id: codigo,
+                            precio:precio,
+                            cantidad:cantidad,
+                            subtotal:subtotal
+                        },function (data){
+                            console.log(data)
+                        });
+                    }
+                }
+
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#tproductos").DataTable();
+            $("#tClientes").DataTable();
+            $("#buscarCliente").attr("data-toggle", "modal")
+            $("#buscarCliente").attr("data-target", "#listaClientes")
+
+            $(".cliente").click(function () {
+                $("#idCliente").text($(this).data('id'))
+                $("#nombreCliente").text($(this).data('nombre'))
+                $("#direccionCliente").text($(this).data('direccion'))
+                $("#ciudadCliente").text($(this).data('ciudad'))
+                $("#telefonoCLiente").text($(this).data('telefono'))
+                toastr.success("El Cliente se agrego")
+            })
+
+            $(".js-example-basic-single").select2({
+                maximumSelectionLength: 1
+            });
+
+            $("#registrarDocumento").click(function () {
+                data = {
+                    establecimiento: '{{ establecimiento.id }}',
+                    cliente: $("#idCliente").text(),
+                    csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                    tipo: "P",
+                    numero: $("#numeroDocumento").text(),
+                    subtotal: $(".subtotal").text(),
+                    iva: $(".iva").text(),
+                    total: $(".total").text(),
+                }
+                $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
+                    console.log("Se registro: "+result)
+                    if (result >= 1) {
+                        detallesDocumento(result)
+                        console.log("Se registro: "+result)
+                        toastr.success("La proforma se ha generado correctamente.!");
+                        $("#registrarDocumento").attr('disabled', 'disabled');
+                        $("#generarDocumento").removeAttr('disabled');
+                        $("#generarDocumento").attr("href",`/document/proform/${result}/`)
+                    } else {
+                        toastr.error("Ocurrio un error inesperado.!")
+                        $("#generarDocumento").removeAttr('disabled');
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}

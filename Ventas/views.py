@@ -75,19 +75,34 @@ def facturas(request,id=0):
 
 
 def registrarDocumento(request,id):
-    try:
-        if request.POST:
-            documento = Facturas.objects.create(establecimiento_id=request.POST['establecimiento'],cliente_id=request.POST["cliente"],tipo=request.POST["tipo"],numero=request.POST["numero"],
+    factura=None
+    if request.POST:
+        try:
+            factura= Facturas.objects.get(numero = request.POST['numero'],tipo = request.POST["tipo"])
+            factura.establecimiento_id=request.POST['establecimiento']
+            factura.cliente_id=request.POST["cliente"]
+            factura.subtotal=request.POST["subtotal"]
+            factura.iva=request.POST["iva"]
+            factura.total=request.POST["total"]
+            factura.save()
+            return HttpResponse(factura.id)
+        except:
+            documento = Facturas.objects.create(establecimiento_id=request.POST['establecimiento'],
+                                                cliente_id=request.POST["cliente"],tipo=request.POST["tipo"],
+                                                numero=request.POST["numero"],
                  subtotal=request.POST["subtotal"],iva=request.POST["iva"],total=request.POST["total"])
             documento.save()
 
             print(documento)
             return HttpResponse(documento.id)
-    except:
-        return HttpResponse(0)
 
 def registrarDetallesFacturaProforma(request,id):
     if request.POST:
+        try:
+            detalles = DetalleFactura.objects.filter(factura_id=request.POST['factura_id'])
+            detalles.delete()
+        except:
+            print("El documento es nuevo")
         DetalleFactura(factura_id=request.POST['factura_id'],producto_id=request.POST['producto_id'],precioU=request.POST['precio'],cantidad=request.POST['cantidad'],
                        subtotal=request.POST['subtotal']).save()
         return HttpResponse("ok")
@@ -129,3 +144,15 @@ def listaDocumentos(request):
         'documentos':Facturas.objects.filter(establecimiento__usuario=request.user)
     }
     return render(request, 'Ventas/ListaDocumentos.html',contexto)
+
+
+def editarProformas(request,id):
+    documento=Facturas.objects.get(id=id)
+    contexto={
+        'documento':documento,
+        'detalles':DetalleFactura.objects.filter(factura=documento),
+        'establecimiento':documento.establecimiento,
+        'productos':Productos.objects.filter(establecimiento=documento.establecimiento),
+        'clientes':Clientes.objects.filter(establecimiento=documento.establecimiento),
+    }
+    return render(request, 'Ventas/edit_proformas.html',contexto)
