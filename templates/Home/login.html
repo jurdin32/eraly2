@@ -32,17 +32,18 @@
 
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form method="post" action="/">
+                {% csrf_token %}
                 <img src="{% static 'logo.png' %}" style="height: 40px" alt="">
               <h1></h1>
               <div>
-                <input type="text" class="form-control" placeholder="Correo Electrónico" required="" />
+                <input type="text" class="form-control" placeholder="usuario" name="username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="COntraseña" required="" />
+                <input type="password" class="form-control" placeholder="contraseña" name="password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="../index.html">Iniciar Sesión</a>
+                <button class="btn btn-default submit" href="/">Iniciar Sesión</button>
                 <a class="reset_pass" href="#">Olvido su contraseña?</a>
               </div>
 
