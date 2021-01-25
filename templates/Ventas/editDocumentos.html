@@ -186,7 +186,13 @@
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>PROFORMAS</h2>
+                    <h2>
+                        {% if documento.tipo == "F" %}
+                            FACTURAS
+                        {% else %}
+                            PROFORMAS
+                        {% endif %}
+                    </h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -264,11 +270,14 @@
                                         <th style="text-align: center">Cantidad</th>
                                         <th style="text-align: right">Precio</th>
                                         <th style="text-align: right">Subtotal</th>
+                                        {% if documento.estado == "E" %}
                                         <th style="text-align: center">
                                             <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
                                                 <i class="fa fa-plus-circle"
                                                    style="font-size: 20px;color: whitesmoke"></i></a>
                                         </th>
+                                        {% endif %}
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -285,9 +294,12 @@
                                         </td>
                                         <td style="text-align: right" >{{ detalle.precioU|stringformat:"1.2f" }}</td>
                                         <td style="text-align: right" class="precios">{{ detalle.subtotal|stringformat:"1.2f" }}</td>
+                                        {% if documento.estado == "E" %}
                                         <td style="text-align: center" class="ii">
                                             <a href="#" class="eliminar" onclick="eliminarFila($(this),id)"><i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a>
                                         </td>
+                                        {% endif %}
+
                                     </tr>
                                     {% endfor %}
 
@@ -302,9 +314,15 @@
                             <!-- accepted payments column -->
                             <div class="col-md-8">
                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 12px;">
-                                    Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
+                                    {% if documento.estado == "A" %}
+                                        EL ESTADO DE ESTE DOCUMENTO ES <strong>ANULADO</strong>
+                                    {% else %}
+                                        Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
                                     días.
+                                    {% endif %}
+
                                 </p>
+                                {% if documento.estado == "E" %}
                                 <div class=" ">
                                     <button class="btn btn-danger pull-right" id="registrarDocumento"><i
                                             class="fa fa-credit-card"></i> Registrar
@@ -318,6 +336,7 @@
                                             class="fa fa-download"></i> Nuevo Documento
                                     </a>
                                 </div>
+                             {% endif %}
                             </div>
                             <!-- /.col -->
                             <div class="col-md-4">
@@ -457,7 +476,11 @@
                     establecimiento: '{{ establecimiento.id }}',
                     cliente: $("#idCliente").text(),
                     csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                    tipo: "F",
+                {% if documento %}
+                    tipo:'{{ documento.id }}',
+                {% else %}
+                    tipo: "{{ documento.tipo }}",
+                {% endif %}
                     numero: $("#numeroDocumento").text(),
                     subtotal: $(".subtotal").text(),
                     iva: $(".iva").text(),

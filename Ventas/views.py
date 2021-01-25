@@ -9,7 +9,7 @@ from django.views.generic.edit import ProcessFormView
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Personas.models import Clientes
-from Producto.models import Productos
+from Producto.models import Productos, Kardex
 from Ventas.models import Facturas, DetalleFactura
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
@@ -77,8 +77,9 @@ def facturas(request,id=0):
 def registrarDocumento(request,id):
     factura=None
     if request.POST:
+        print(request.POST)
         try:
-            factura= Facturas.objects.get(numero = request.POST['numero'],tipo = request.POST["tipo"])
+            factura= Facturas.objects.get(id = request.POST["tipo"])
             factura.establecimiento_id=request.POST['establecimiento']
             factura.cliente_id=request.POST["cliente"]
             factura.subtotal=request.POST["subtotal"]
@@ -95,6 +96,7 @@ def registrarDocumento(request,id):
 
             print(documento)
             return HttpResponse(documento.id)
+        return HttpResponse(0)
 
 def registrarDetallesFacturaProforma(request,id):
     if request.POST:
@@ -146,7 +148,7 @@ def listaDocumentos(request):
     return render(request, 'Ventas/ListaDocumentos.html',contexto)
 
 
-def editarProformas(request,id):
+def editarDocumentos(request,id):
     documento=Facturas.objects.get(id=id)
     contexto={
         'documento':documento,
@@ -155,4 +157,20 @@ def editarProformas(request,id):
         'productos':Productos.objects.filter(establecimiento=documento.establecimiento),
         'clientes':Clientes.objects.filter(establecimiento=documento.establecimiento),
     }
-    return render(request, 'Ventas/edit_proformas.html',contexto)
+    return render(request, 'Ventas/editDocumentos.html', contexto)
+
+def anularDocumento(request,id):
+    documento= Facturas.objects.get(id=id)
+    if documento.estado=="E":
+        documento.estado="A"
+        for detalle in DetalleFactura.objects.filter(factura=documento):
+            Kardex(producto=detalle.producto, tipo="I", cantidad=detalle.cantidad,
+                   descripcion="Registrado segun anulación de factura de compra No. %s, Reposicion por devolucion de productos." % (
+                       documento.numero)).save()
+        messages.add_message(request, messages.INFO, "El Documento se ha anulado.!")
+        documento.save()
+
+    else:
+        messages.add_message(request, messages.ERROR, "No es posible deshabilitar una factura varias veces.!")
+    return HttpResponseRedirect('/document/list/')
+

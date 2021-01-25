@@ -15,6 +15,7 @@ class Facturas(models.Model):
     subtotal = models.DecimalField(max_digits=9, decimal_places=2)
     iva = models.DecimalField(max_digits=9, decimal_places=2)
     total = models.DecimalField(max_digits=9, decimal_places=2)
+    estado=models.CharField(max_length=1, default="E")
 
 
 class DetalleFactura(models.Model):

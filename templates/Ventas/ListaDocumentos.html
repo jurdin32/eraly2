@@ -55,11 +55,15 @@
                                                             <a class="btn btn-success btn-app" target="_blank" href="/document/proform/{{ documento.id }}/"><i class="fa fa-print"></i>Imprimir</a>
                                                         {% endif %}
                                                     </td>
-                                                    <td style="text-align: center">
-                                                        {% if  documento.tipo == "F" %}
-                                                            <a class="btn btn-danger btn-app" href=""><i class="fa fa-exclamation-triangle"></i>Anular</a>
+                                                    <td style="text-align: center;vertical-align: middle">
+                                                        {% if  documento.tipo == "F"%}
+                                                            {% if documento.estado == 'E' %}
+                                                            <a class="btn btn-danger btn-app" href="/giveBack/{{ documento.id }}/"><i class="fa fa-exclamation-triangle"></i>Anular</a>
                                                             {% else %}
-                                                            <a class="btn btn-danger btn-app" href=""><i class="fa fa-shopping-basket"></i>Facturar</a>
+                                                                <p class="text-danger;"><strong>ANULADO</strong></p>
+                                                            {% endif %}
+                                                        {% else %}
+                                                        <a class="btn btn-danger btn-app" href=""><i class="fa fa-shopping-basket"></i>Facturar</a>
                                                         {% endif %}
                                                     </td>
                                                 </tr>
