@@ -86,6 +86,10 @@ def registrarDocumento(request,id):
             factura.iva=request.POST["iva"]
             factura.total=request.POST["total"]
             factura.save()
+            for detalle in DetalleFactura.objects.filter(factura=factura):
+                Kardex(producto=detalle.producto, tipo="I", cantidad=detalle.cantidad,
+                       descripcion="Registrado segun modificación de factura de compra No. %s, Reposicion por devolucion de productos." % (
+                           factura.numero)).save()
             return HttpResponse(factura.id)
         except:
             documento = Facturas.objects.create(establecimiento_id=request.POST['establecimiento'],
