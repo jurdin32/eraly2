@@ -25,7 +25,7 @@ def empresa(request):
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
     contexto={
         "empresas":UsuarioEmpresa.objects.filter(user=request.user),
-        "logs":LogEntry.objects.all()
+        "logs":LogEntry.objects.filter(user=request.user)
     }
     return render(request, "empresa/empresa.html", contexto)
 

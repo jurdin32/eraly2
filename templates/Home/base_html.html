@@ -145,7 +145,6 @@
 
 
                                 {% for log in logs %}
-                                    {% if log.user == request.user %}
                                     <li class="nav-item">
                                         <a class="dropdown-item">
                                         <span>
@@ -157,8 +156,6 @@
                                         </span>
                                         </a>
                                     </li>
-                                    {% endif %}
-
                                 {% endfor %}
 
 
