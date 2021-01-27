@@ -69,7 +69,7 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
-                                                    {{ precios.total }}<br>
+                                                    <span class="badge badge-info" style="font-size: 13px">{{ precios.total }}</span><br>
                                                 {% endfor %}
 
                                             </td>
