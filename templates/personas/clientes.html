@@ -14,8 +14,39 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br>
-                            <form class="form-label-left input_mask" id="frmModificar" method="post" action="/business/direcction/{{ establecimiento.id }}/">
+                            <form class="form-label-left input_mask" id="frmModificar" method="post">
                                 {% csrf_token %}
+                            <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="js-establecimiento" style="width: 100%" required id="establecimiento" name="establecimiento" multiple>
+                                        {% for establecimiento in establecimientos %}
+                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="cedula"
+                                           id="cedula" required maxlength="13"
+                                           placeholder="Cedula o RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombres"
+                                           id="nombres" required
+                                           placeholder="Ingrese Nombres">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="apellidos"
+                                           id="apellidos" required
+                                           placeholder="Ingrese Apellidos">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="direccion"
+                                           id="direccion" required
+                                           placeholder="Aquí la dirección">
+                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <select class="js-example-basic-single" style="width: 100%" id="ciudades" name="ciudad" multiple>
                                         {% for provincia in provincias %}
@@ -27,15 +58,17 @@
                                     </select>
                                 </div>
 
+
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="direccion"
-                                           id="direccion" required
-                                           placeholder="Aquí la dirección">
-                                    <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                                    <input type="text" class="form-control has-feedback-left" name="celular"
+                                           id="celular" maxlength="13"
+                                           placeholder="Ingrese Celular">
+                                    <span class="fa fa-mobile-phone form-control-feedback left" aria-hidden="true"></span>
                                 </div>
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+
+                            <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name="telefono"
-                                           id="telefono" maxlength="10"
+                                           id="telefono" maxlength="13"
                                            placeholder="Ingrese Teléfono">
                                     <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
                                 </div>
@@ -66,7 +99,7 @@
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <i class="fa fa-exclamation-triangle" style="font-size: 50px; color: darkorange"></i><br>
-                    <p id="mensaje">Esta seguro que desea eliminar el registro, tenga en cuenta que todos los elementos relacionados tambien se Eliminarán.</p>
+                    <p id="mensaje">Esta seguro que desea deshabilitar este registro, tenga en cuenta que todos los elementos relacionados no se Eliminarán.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
@@ -96,6 +129,7 @@
                                             <th>Cédula</th>
                                             <th>Dirección</th>
                                             <th>Teléfono</th>
+                                            <th style="text-align: center">Estado</th>
                                             <th style="text-align: center">Opciones</th>
                                         </tr>
                                         </thead>
@@ -108,10 +142,31 @@
                                                 <td>{{ cliente.cedula }}</td>
                                                 <td>{{ cliente.direccion }} - {{ cliente.ciudad }} - {{ cliente.ciudad.provincia }} - {{ cliente.ciudad.provincia.pais }}</td>
                                                 <td>{{ cliente.telefono }}</td>
+                                                <td style="text-align: center">{% if cliente.estado %}
+                                                    <span class="badge badge-info" style="font-size: 13px">Activo</span>
+                                                {% else %}
+                                                    <span class="badge badge-danger" style="font-size: 13px">Deshabilitado</span>
+                                                {% endif %}</td>
                                                 <td style="text-align: center; font-size: 18px">
-                                                    <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i></a>
+                                                    <a href="#" data-id="{{ cliente.id }}"
+                                                       data-establecimiento="{{ cliente.establecimiento_id }}"
+                                                       data-ciudad="{{ cliente.ciudad_id }}"
+                                                       data-nombres="{{ cliente.nombres }}"
+                                                       data-cedula="{{ cliente.cedula }}"
+                                                       data-apellidos="{{ cliente.apellidos }}"
+                                                       data-direccion="{{ cliente.direccion }}"
+                                                       data-celular="{{ cliente.celular }}"
+                                                       data-telefono="{{ cliente.telefono }}"
+                                                       data-toggle="modal" data-target="#modificar" class="text-primary modificar">
+                                                        <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>
+                                                    </a>
                                                     <span> | </span>
-                                                    <a href="" class="text-danger eliminar" data-id="{{ direccion.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i></a>
+                                                    {% if cliente.estado %}
+                                                    <a href="" class="text-danger eliminar" data-id="{{ cliente.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i></a>
+                                                    {% else %}
+                                                        <a href="/clients/disable/{{ cliente.id }}/" class="text-success"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Habilitar Usuario" class="fa fa-check-circle"></i></a>
+                                                    {% endif %}
+
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -137,20 +192,31 @@
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
         $(".js-example-basic-single").select2({
-             maximumSelectionLength: 1
+            maximumSelectionLength: 1,
+            placeholder: "Ciudad",
+        });
+        $(".js-establecimiento").select2({
+            maximumSelectionLength: 1,
+            placeholder:"Establecimiento",
         });
     </script>
     <script>
     $(".modificar").click(function(){
-        var idCiudad=$(this).data("ciudad")
+        let idCiudad=$(this).data("ciudad")
+        let idEstablecimiento=$(this).data("establecimiento")
+        $("#nombres").val($(this).data("nombres"));
+        $("#apellidos").val($(this).data("apellidos"));
+        $("#cedula").val($(this).data("cedula"));
         $('#ciudades').val(idCiudad).trigger('change');
         $("#direccion").val($(this).data("direccion"));
+        $("#celular").val($(this).data("celular"));
         $("#telefono").val($(this).data("telefono"));
-        $("#frmModificar").attr("action","/directions/edit/"+$(this).data("id")+"/")
+        $("#establecimiento").val(idEstablecimiento).trigger('change');
+        $("#frmModificar").attr("action","/clients/"+$(this).data("id")+"/")
     })
 
     $(".eliminar").click(function (){
-        $("#eliminarRegistro").attr("href","/directions/delete/"+$(this).data("id")+"/")
+        $("#eliminarRegistro").attr("href","/clients/disable/"+$(this).data("id")+"/")
     })
     </script>
 {% endblock %}

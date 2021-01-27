@@ -14,6 +14,7 @@ class Clientes(models.Model):
     ciudad=models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     telefono=models.CharField(max_length=13,null=True,blank=True)
     celular=models.CharField(max_length=13,null=True,blank=True)
+    estado=models.BooleanField(default=True)
 
     def __str__(self):
         return "%s %s [%s]"%(self.nombres, self.apellidos, self.cedula)

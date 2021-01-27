@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 from Empresa.views import *
 from Home.views import *
-from Personas.views import registroCLientes
+from Personas.views import registroCLientes, deshabilitarCliente
 from Producto.views import *
 from Ventas.views import *
 
@@ -88,7 +88,8 @@ urlpatterns = [
     path("document/fac/<int:id>/",crearDocumentoPDF_Factura),
     path("document/list/",listaDocumentos),
 
-    path("clients/",registroCLientes),
+    path("clients/<int:id>/",registroCLientes),
+    path("clients/disable/<int:id>/",deshabilitarCliente),
 
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
