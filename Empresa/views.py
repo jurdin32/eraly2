@@ -42,6 +42,10 @@ def modificar_empresa(request,id):
             print('viene con banner')
             establecimiento.banner=request.FILES['banner']
         except: pass
+        try:
+            print('viene con pie de pagina')
+            establecimiento.pie_pagina=request.FILES['pie']
+        except: pass
         establecimiento.ruc=request.POST['ruc']
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
