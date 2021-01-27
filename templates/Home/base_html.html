@@ -143,17 +143,20 @@
                             <ul class="dropdown-menu list-unstyled msg_list" role="menu"
                                 aria-labelledby="navbarDropdown1">
 
-                                <li class="nav-item">
-                                    <a class="dropdown-item">
+
+                                {% for log in logs %}
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
                                         <span>
                                             <span>{{ request.user }}</span>
                                             <span class="time">3 mins ago</span>
                                         </span>
-                                        <span class="message">
+                                            <span class="message">
                                             Film festivals used to be do-or-die moments for movie makers. They were where...
                                         </span>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                {% endfor %}
 
 
                             </ul>
