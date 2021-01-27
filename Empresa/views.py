@@ -28,6 +28,7 @@ def empresa(request):
     }
     for log in LogEntry.objects.all():
         print(log.action_time)
+        print(log.action_time)
         print(log)
     return render(request, "empresa/empresa.html", contexto)
 
