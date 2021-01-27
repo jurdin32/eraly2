@@ -106,8 +106,8 @@
                                                 <td>{{ cliente.establecimiento }}</td>
                                                 <td>{{ cliente.nombres }} {{  cliente.apellidos }}</td>
                                                 <td>{{ cliente.cedula }}</td>
-                                                <td>{{ cliente.direccion }}</td>
-                                                <td>{{ direccion.telefono }}</td>
+                                                <td>{{ cliente.direccion }} - {{ cliente.ciudad }} - {{ cliente.ciudad.provincia }} - {{ cliente.ciudad.provincia.pais }}</td>
+                                                <td>{{ cliente.telefono }}</td>
                                                 <td style="text-align: center; font-size: 18px">
                                                     <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i></a>
                                                     <span> | </span>
