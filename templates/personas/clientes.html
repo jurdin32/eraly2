@@ -103,8 +103,8 @@
                                         {% for cliente in clientes %}
                                             <tr>
                                                 <td>{{ cliente.id }}</td>
+                                                <td>{{ cliente.establecimiento }}</td>
                                                 <td>{{ cliente.nombres }} {{  cliente.apellidos }}</td>
-                                                <td>{{ direccion.ciudad.provincia }}</td>
                                                 <td>{{ direccion.ciudad }}</td>
                                                 <td>{{ direccion.direccion }}</td>
                                                 <td>{{ direccion.telefono }}</td>
