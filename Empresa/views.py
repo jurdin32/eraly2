@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.contrib.admin.models import LogEntry
@@ -26,7 +27,7 @@ def empresa(request):
         "empresas":UsuarioEmpresa.objects.filter(user=request.user),
         "logs":LogEntry.objects.all()
     }
-    for log in LogEntry.objects.all():
+    for log in LogEntry.objects.filter(action_time=datetime.datetime.now()):
         print(log.action_time)
         print(log.action_time)
         print(log)
