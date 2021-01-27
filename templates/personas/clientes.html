@@ -80,7 +80,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Direcciones <small>de establecimientos</small></h2>
+                        <h2>Registro <small>de Clientes</small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -102,9 +102,8 @@
                                         <tbody>
                                         {% for cliente in clientes %}
                                             <tr>
-                                                <td>{{ direccion.establecimiento.nombreComercial }}
-                                                    - {{ direccion.establecimiento.representateLegal }}</td>
-                                                <td>{{ direccion.ciudad.provincia.pais }}</td>
+                                                <td>{{ cliente.id }}</td>
+                                                <td>{{ cliente.nombres }} {{  cliente.apellidos }}</td>
                                                 <td>{{ direccion.ciudad.provincia }}</td>
                                                 <td>{{ direccion.ciudad }}</td>
                                                 <td>{{ direccion.direccion }}</td>
