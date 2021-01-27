@@ -26,7 +26,6 @@
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
-                                            <th style="text-align: center">Ver</th>
                                             <th style="text-align: center">Imagen</th>
                                             <th style="text-align: center">Id</th>
                                             <th style="text-align: center">Código</th>
@@ -42,9 +41,6 @@
                                         <tbody>
                                         {% for producto in productos %}
                                             <tr>
-                                            <td style="text-align: center; vertical-align: middle; font-size: 20px">
-                                                <a href="#/eye"><i class="fa fa-eye"></i></a>
-                                            </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 <img style="width: 50px;height: 50px;" src="/media/{{ producto.imagen }}" alt="image">
                                             </td>
