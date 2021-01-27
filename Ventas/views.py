@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.generic.edit import ProcessFormView
 
 from Empresa.models import Establecimiento
-from Home.models import Provincia
+from Home.models import Provincia, ConfigurarDocumentos
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex
 from Ventas.models import Facturas, DetalleFactura
@@ -26,7 +26,8 @@ def proformas(request,id=0):
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
         clientes=Clientes.objects.filter(establecimiento_id=id)
-        proformaContador=str(Facturas.objects.filter(tipo="P").count()+1).zfill(10)
+        numero=ConfigurarDocumentos.objects.last()
+        proformaContador=str(numero.proformas).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
@@ -55,7 +56,8 @@ def facturas(request,id=0):
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
         clientes=Clientes.objects.filter(establecimiento_id=id)
-        proformaContador=str(Facturas.objects.filter(tipo="F").count()+1).zfill(10)
+        numero = ConfigurarDocumentos.objects.last()
+        proformaContador=str(numero.facturas).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)

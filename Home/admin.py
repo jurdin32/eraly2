@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Home.models import  Pais, Provincia, Ciudad
+from Home.models import Pais, Provincia, Ciudad, ConfigurarDocumentos
 from eraly2.snippers import Attr
 
 
@@ -29,3 +29,8 @@ class AdminProvincia(admin.ModelAdmin):
 class AdminCiudad(admin.ModelAdmin):
     list_display_links = Attr(Ciudad)
     list_display = Attr(Ciudad)
+
+@admin.register(ConfigurarDocumentos)
+class AdminConfigurarDocumentos(admin.ModelAdmin):
+    list_display = Attr(ConfigurarDocumentos)
+    list_display_links = Attr(ConfigurarDocumentos)

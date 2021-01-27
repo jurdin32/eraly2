@@ -24,3 +24,8 @@ class Ciudad(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class ConfigurarDocumentos(models.Model):
+    proformas= models.IntegerField(default=1)
+    facturas=models.IntegerField(default=1)
+
