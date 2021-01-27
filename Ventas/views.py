@@ -118,7 +118,9 @@ def registrarDetallesFacturaProforma(request,id):
 def registroClienteFacturaProforma(request,id):
     if request.POST:
         print(request.POST)
-        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'],apellidos=request.POST['apellidos'],ciudad_id=request.POST['ciudad'],
+        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'],
+                 apellidos=request.POST['apellidos'],ciudad_id=request.POST['ciudad'],
+                 direccion=request.POST['direccion'],
                  telefono=request.POST['telefono'],celular=request.POST['celular']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se Creado..!")
     return HttpResponseRedirect("/proforms/%s/"%id)
