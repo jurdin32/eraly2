@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.admin.models import LogEntry
 from django.core import serializers
 from django.core.serializers import serialize
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
@@ -22,7 +23,8 @@ def empresa(request):
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
     contexto={
-        "empresas":UsuarioEmpresa.objects.filter(user=request.user)
+        "empresas":UsuarioEmpresa.objects.filter(user=request.user),
+        "logs":LogEntry.objects.all()
     }
     return render(request, "empresa/empresa.html", contexto)
 
