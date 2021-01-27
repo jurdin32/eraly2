@@ -128,7 +128,7 @@ def crearDocumentoPDF_Proforma(request, id):
         'documento':documento,
         'detalles':detalles,
         'site': Site.objects.last(),
-        'items': (12 - detalles.count()) * "*",
+        'items': (10 - detalles.count()) * "*",
     }
     return export_pdf(request,'Ventas/rptProforma.html',contexto)
     #return render(request, 'Ventas/rptProforma.html', contexto)
