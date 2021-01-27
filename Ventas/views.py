@@ -27,7 +27,7 @@ def proformas(request,id=0):
         productos = Productos.objects.filter(establecimiento_id=id)
         clientes=Clientes.objects.filter(establecimiento_id=id)
         numero=ConfigurarDocumentos.objects.last()
-        proformaContador=str(numero.proformas).zfill(10)
+        proformaContador=str(numero.proformas + Facturas.objects.filter(tipo="P").count()).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
@@ -57,7 +57,7 @@ def facturas(request,id=0):
         productos = Productos.objects.filter(establecimiento_id=id)
         clientes=Clientes.objects.filter(establecimiento_id=id)
         numero = ConfigurarDocumentos.objects.last()
-        proformaContador=str(numero.facturas).zfill(10)
+        proformaContador=str(numero.facturas+Facturas.objects.filter(tipo="F").count()).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
