@@ -42,8 +42,8 @@ class ActividadProveedor(models.Model):
 class Categorias(models.Model):
     establecimiento=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
     icono=models.CharField(max_length=20, default='fa fa-')
-    nombre=models.CharField(max_length=50)
-    descripcion=models.CharField(max_length=100)
+    nombre=models.CharField(max_length=200)
+    descripcion=models.TextField(null=True,blank=True)
 
     def __str__(self):
         return '%s' % (self.nombre)
@@ -64,7 +64,7 @@ class DireccionProveedor(models.Model):
 class Subcategorias(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     icono=models.CharField(max_length=20)
-    nombre=models.CharField(max_length=50)
+    nombre=models.CharField(max_length=200)
     descripcion=models.TextField()
 
 
