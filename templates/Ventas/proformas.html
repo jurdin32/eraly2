@@ -390,6 +390,7 @@
                     let cantidad = parseInt($(this).find('td').eq(2).find('input').val());
                     let precio = parseFloat($(this).find('td').eq(3).text());
                     let subtotal = parseFloat($(this).find('td').eq(4).text());
+                    alert(index)
                     if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0){
                         $.post("/proforms/detall/{{ establecimiento.id }}/",{
                             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
