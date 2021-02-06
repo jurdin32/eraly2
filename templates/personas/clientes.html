@@ -185,7 +185,11 @@
 {% block script_index %}
     <script>
         $(document).ready(function () {
-            $("#datatable").DataTable();
+            $("#datatable").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                }
+            });
         });
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>

@@ -171,7 +171,11 @@
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
         $(document).ready(function () {
-            $("#datatable").DataTable();
+            $("#datatable").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                }
+            });
         });
 
         $("#establecimiento").select2({

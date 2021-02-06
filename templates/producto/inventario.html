@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
 {% load productosTags %}
+{% load static %}
 
      <div class="modal fade bs-example-modal-lg" id="ingresos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -150,7 +151,11 @@
 {% block script_index %}
     <script>
         $(document).ready(function () {
-            $("#datatable").DataTable();
+            $("#datatable").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                }
+            });
         });
 
 

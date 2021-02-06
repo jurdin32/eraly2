@@ -1,5 +1,6 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
+    {% load static %}
 {% load productosTags %}
     <div class="">
         <div class="row">
@@ -50,7 +51,11 @@
 {% block script_index %}
     <script>
         $(document).ready(function () {
-            $("#datatable").DataTable();
+            $("#datatable").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                }
+            });
         });
     </script>
 {% endblock %}

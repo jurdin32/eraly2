@@ -58,14 +58,17 @@
             <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right; color: white"><strong>P. UNIT.</strong></td>
             <td style="border: 1px solid #FC5603;background: #FC5603; padding: 5px; width: 10% ; text-align: right; color: white"><strong>TOTAL</strong></td>
         </tr>
-        <tr>
+
             {% for detalle in detalles %}
+            <tr>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px; text-align: center; color: grey">{{ detalle.producto.id|stringformat:"04d"}}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; color: grey">{{ detalle.producto.nombre }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; text-align: center; color: grey">{{ detalle.cantidad }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px ; text-align: right; color: grey">{{ detalle.precioU }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; border-right: 1px solid grey;  padding: 5px ; text-align: right; color: grey">{{ detalle.subtotal }}</td>
+            </tr>
             {% endfor %}
+
             {% for item in items %}
             <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; border-bottom: 1px grey solid;border-left: 1px solid grey; color:white; padding: 12px"> {{ item }}</td>
