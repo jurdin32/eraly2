@@ -398,7 +398,6 @@
                         cantidad: cantidad,
                         subtotal: subtotal
                     }
-                    alert({datos})
                     if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0){
                         $.post("/proforms/detall/{{ establecimiento.id }}/",datos,function (data){
                             console.log(data)
