@@ -91,6 +91,9 @@ urlpatterns = [
     path("clients/<int:id>/",registroCLientes),
     path("clients/disable/<int:id>/",deshabilitarCliente),
 
+
+    path("accounts_receivable",cuentasCobrar),
+
     path("logout_/",logout_),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

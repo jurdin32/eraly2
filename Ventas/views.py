@@ -188,3 +188,5 @@ def anularDocumento(request,id):
         messages.add_message(request, messages.ERROR, "No es posible deshabilitar una factura varias veces.!")
     return HttpResponseRedirect('/document/list/')
 
+def cuentasCobrar(request):
+    return 0
