@@ -33,7 +33,7 @@
                                             {% if precio.producto == producto %}
                                             <tr>
                                             <td>{{ producto.id }}</td>
-                                            <td style="text-align: justify">{{ producto.nombre }}(<span style="font-size: 9px; color: #0b97c4">{{ precio.detalle }}</span>)</td>
+                                            <td style="text-align: justify">{{ producto.nombre }} (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)</td>
                                             <td>{% stock producto.id %}</td>
                                             <td>{{ precio.precioVenta }}</td>
                                             <td>
