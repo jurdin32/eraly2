@@ -73,6 +73,7 @@ def facturas(request,id=0):
         'clientes':clientes,
         'provincias':Provincia.objects.all(),
         'contadorProforma':proformaContador,
+        'precios': Precios.objects.all(),
     }
     return render(request, 'Ventas/facturas.html', contexto)
 
