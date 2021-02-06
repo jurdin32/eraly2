@@ -29,7 +29,9 @@
                                     <tbody>
 
                                     {% for producto in productos %}
-                                        <tr>
+                                        {% for precio in precios %}
+                                            {% if precio.producto == producto %}
+                                            <tr>
                                             <td>{{ producto.id }}</td>
                                             <td style="text-align: justify">{{ producto.nombre }}</td>
                                             <td>{% stock producto.id %}</td>
@@ -42,6 +44,8 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                            {% endif %}
+                                        {% endfor %}
                                     {% endfor %}
                                     </tbody>
                                 </table>

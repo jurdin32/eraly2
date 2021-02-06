@@ -9,7 +9,7 @@ from django.views.generic.edit import ProcessFormView
 from Empresa.models import Establecimiento
 from Home.models import Provincia, ConfigurarDocumentos
 from Personas.models import Clientes
-from Producto.models import Productos, Kardex
+from Producto.models import Productos, Kardex, Precios
 from Ventas.models import Facturas, DetalleFactura
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
@@ -42,6 +42,7 @@ def proformas(request,id=0):
         'clientes':clientes,
         'provincias':Provincia.objects.all(),
         'contadorProforma':proformaContador,
+        'precios':Precios.objects.all(),
     }
     return render(request, 'Ventas/proformas.html', contexto)
 
