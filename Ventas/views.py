@@ -75,6 +75,12 @@ def facturas(request,id=0):
     }
     return render(request, 'Ventas/facturas.html', contexto)
 
+def eliminarregistrosFacturaProforma(id):
+    try:
+        detalles = DetalleFactura.objects.filter(factura_id=id)
+        detalles.delete()
+    except:
+        pass
 
 def registrarDocumento(request,id):
     factura=None
@@ -92,6 +98,7 @@ def registrarDocumento(request,id):
                 Kardex(producto=detalle.producto, tipo="I", cantidad=detalle.cantidad,
                        descripcion="Registrado segun modificación de factura de compra No. %s, Reposicion por devolucion de productos." % (
                            factura.numero)).save()
+            eliminarregistrosFacturaProforma(factura.id)
             return HttpResponse(factura.id)
         except:
             documento = Facturas.objects.create(establecimiento_id=request.POST['establecimiento'],
@@ -104,13 +111,10 @@ def registrarDocumento(request,id):
             return HttpResponse(documento.id)
         return HttpResponse(0)
 
+
+
 def registrarDetallesFacturaProforma(request,id):
     if request.POST:
-        try:
-            detalles = DetalleFactura.objects.filter(factura_id=request.POST['factura_id'])
-            detalles.delete()
-        except:
-            print("El documento es nuevo")
         DetalleFactura(factura_id=request.POST['factura_id'],producto_id=request.POST['producto_id'],precioU=request.POST['precio'],cantidad=request.POST['cantidad'],
                        subtotal=request.POST['subtotal']).save()
         return HttpResponse("ok")
