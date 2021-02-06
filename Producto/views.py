@@ -303,3 +303,5 @@ def inventario(request):
     return render(request, 'producto/inventario.html',contexto)
 
 
+
+

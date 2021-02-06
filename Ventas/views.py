@@ -189,4 +189,5 @@ def anularDocumento(request,id):
     return HttpResponseRedirect('/document/list/')
 
 def cuentasCobrar(request):
+
     return 0
