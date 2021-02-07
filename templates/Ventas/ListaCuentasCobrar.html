@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Registro de establecimientos</h4>
+                    <h4 class="modal-title" id="myModalLabel">Registro de Cuentas</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -19,33 +19,18 @@
                             <form id="formRegistrar" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="js-example-basic-single" style="width: 100%" id="establecimiento" required="required"
-                                            name="establecimiento" multiple>
-                                        {% for establecimiento in establecimientos %}
-                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input type="file" class="form-control has-feedback-left" name="logo" id="logo"
-                                           placeholder="Aquí el logo (opcional)" style="height: 50px">
-                                    <span class="fa fa-image form-control-feedback left"
-                                          aria-hidden="true"></span>
-                                    <span>Es Opcional</span>
-                                </div>
-
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc" required="required"
-                                           placeholder="RUC">
+                                    <input type="text" class="form-control has-feedback-left" name="factura_numero" id="factura_numero"
+                                           placeholder="Factura de Venta">
                                     <span class="fa fa-credit-card-alt form-control-feedback left"
                                           aria-hidden="true"></span>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="representateLegal" required="required"
-                                           id="representateLegal"
-                                           placeholder="Representate Legal">
-                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    <select name="cliente" id="cliente" class="form-control" style="width: 100%">
+                                        {% for cliente in clientes %}
+                                            <option value="{{ cliente.id }}">{{ cliente.nombres }} {{ cliente.apellidos }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name="nombreComercial"
@@ -137,6 +122,9 @@
 
 {% endblock %}
 {% block script_index %}
+<script src="{% static 'select2/js/select2.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+
     <script>
         $(document).ready(function () {
             $("#listaCuentas").DataTable({
@@ -145,6 +133,9 @@
                 },
                 pageLength : 100,
             });
+        });
+        $("#cliente").select2({
+            maximumSelectionLength: 1,
         });
     </script>
 {% endblock %}

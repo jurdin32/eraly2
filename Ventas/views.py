@@ -190,6 +190,7 @@ def anularDocumento(request,id):
 
 def cuentasCobrar(request):
     contexto={
-        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user)
+        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user),
+        'clientes':Clientes.objects.filter(establecimiento__usuario=request.user)
     }
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
