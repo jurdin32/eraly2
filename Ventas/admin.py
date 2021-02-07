@@ -13,3 +13,13 @@ class AdminFacturas(admin.ModelAdmin):
 class AdminFacturas(admin.ModelAdmin):
     list_display = Attr(DetalleFactura)
     list_display_links = Attr(DetalleFactura)
+
+@admin.register(CuentasCobrar)
+class AdminCuentasCobrar(admin.ModelAdmin):
+    list_display = Attr(CuentasCobrar)
+    list_display_links = Attr(CuentasCobrar)
+
+@admin.register(Recibos)
+class AdminRecibos(admin.ModelAdmin):
+    list_display = Attr(Recibos)
+    list_display_links = Attr(Recibos)
