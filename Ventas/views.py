@@ -189,5 +189,7 @@ def anularDocumento(request,id):
     return HttpResponseRedirect('/document/list/')
 
 def cuentasCobrar(request):
+    contexto={
 
-    return 0
+    }
+    return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)

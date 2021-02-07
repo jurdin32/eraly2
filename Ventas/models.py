@@ -37,3 +37,19 @@ class DetalleFactura(models.Model):
             Kardex(producto=self.producto, tipo="E", cantidad=self.cantidad,
                    descripcion="Registrado segun factura de compra No. %s" % (self.factura.numero)).save()
         super(DetalleFactura, self).save()
+
+
+class CuentasCobrar(models.Model):
+    fecha=models.DateField(auto_now_add=True)
+    factura_numero=models.CharField(max_length=20,null=True,blank=True)
+    cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE)
+    cantidad = models.DecimalField(max_digits=9, decimal_places=2,default=0)
+
+class Recibos(models.Model):
+    fecha= models.DateField(auto_now_add=True)
+    cuenta= models.ForeignKey(CuentasCobrar,on_delete=models.CASCADE)
+    cantidad = models.DecimalField(max_digits=9, decimal_places=2,default=0)
+    formaPago = models.CharField(max_length=20)
+    numeroCheque = models.CharField(max_length=20, null=True,blank=True)
+    rebidoPor =models.CharField(max_length=60)
+    recibiDe = models.CharField(max_length=60)
