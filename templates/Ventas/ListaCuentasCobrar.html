@@ -2,12 +2,94 @@
 {% block contenido_index %}
 {% load static %}
 {% load VentasTags %}
+
+    <!--Crear  registro -->
+    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de establecimientos</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form id="formRegistrar" class="form-label-left input_mask" method="post">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="js-example-basic-single" style="width: 100%" id="establecimiento" required="required"
+                                            name="establecimiento" multiple>
+                                        {% for establecimiento in establecimientos %}
+                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input type="file" class="form-control has-feedback-left" name="logo" id="logo"
+                                           placeholder="Aquí el logo (opcional)" style="height: 50px">
+                                    <span class="fa fa-image form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                    <span>Es Opcional</span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="ruc" id="ruc" required="required"
+                                           placeholder="RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left"
+                                          aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="representateLegal" required="required"
+                                           id="representateLegal"
+                                           placeholder="Representate Legal">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombreComercial"
+                                           id="nombreComercial"
+                                           placeholder="Nombre Comercial">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                    <span>Es opcinal</span>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Productos <small>del establecimientos</small></h2>
+                        <h2>Cuentas <small>por cobrar</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Opciones</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                        class="fa fa-file-o"> </i> Registra Nuevo</a>
+                            </div>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
