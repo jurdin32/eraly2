@@ -18,56 +18,28 @@
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
                                             <th style="text-align: center">ID</th>
-                                            <th style="text-align: center">Numero</th>
-                                            <th style="text-align: center">Tipo</th>
-                                            <th style="text-align: center">Fecha</th>
+                                             <th style="text-align: center">Fecha</th>
+                                            <th style="text-align: center">Factura</th>
                                             <th style="text-align: center">Cliente</th>
-                                            <th style="text-align: center">Subtotal</th>
-                                            <th style="text-align: center">IVA</th>
-                                            <th style="text-align: center">Total</th>
+                                            <th style="text-align: center">Valor Total</th>
+                                            <th style="text-align: center">Valor Cancelado</th>
+                                            <th style="text-align: center">Total a la fecha</th>
                                             <th style="text-align: center">Ver</th>
-                                            <th style="text-align: center">Imprimir</th>
-                                            <th style="text-align: center">Facturar</th>
-                                            
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {% for documento in documentos %}
-                                                <tr>
-                                                    <td style="vertical-align: middle">{{ documento.id }}</td>
-                                                    <td style="text-align: center; vertical-align: middle">{{ documento.numero }}</td>
-                                                    <td style="text-align: center; vertical-align: middle">{% if documento.tipo == "F" %}
-                                                        <span class="badge badge-info" style="font-size: 13px">Factura</span>
-                                                        {% else %}
-                                                        <span class="badge badge-warning" style="font-size: 13px">Proforma</span>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td style="text-align: center; vertical-align: middle">{{ documento.fecha }}</td>
-                                                    <td style="vertical-align: middle">{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
-                                                    <td style="text-align: center; vertical-align: middle">{{ documento.subtotal }}</td>
-                                                    <td style="text-align: center; vertical-align: middle">{{ documento.iva }}</td>
-                                                    <td style="text-align: center;; vertical-align: middle"><span class="badge badge-danger" style="font-size: 13px">{{ documento.total }}</span></td>
-                                                    <td style="text-align: center; vertical-align: middle">
-                                                        <a class="btn btn-primary btn-app" href="/proforms/edit/{{ documento.id }}/"><i class="fa fa-binoculars"></i>Revisar</a>
-                                                    <td style="text-align: center">
-                                                        {% if documento.tipo == "F" %}
-                                                            <a class="btn btn-success btn-app" target="_blank" href="/document/fac/{{ documento.id }}/"><i class="fa fa-print"></i>Imprimir</a>
-                                                        {% else %}
-                                                            <a class="btn btn-success btn-app" target="_blank" href="/document/proform/{{ documento.id }}/"><i class="fa fa-print"></i>Imprimir</a>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td style="text-align: center;vertical-align: middle">
-                                                        {% if  documento.tipo == "F"%}
-                                                            {% if documento.estado == 'E' %}
-                                                            <a class="btn btn-danger btn-app" href="/giveBack/{{ documento.id }}/"><i class="fa fa-exclamation-triangle"></i>Anular</a>
-                                                            {% else %}
-                                                                <p class="text-danger;"><strong>ANULADO</strong></p>
-                                                            {% endif %}
-                                                        {% else %}
-                                                        <a class="btn btn-danger btn-app" href=""><i class="fa fa-shopping-basket"></i>Facturar</a>
-                                                        {% endif %}
-                                                    </td>
-                                                </tr>
+                                            {% for cuenta in cuentas %}
+                                               <tr>
+                                                   <td>{{ cuenta.id }}</td>
+                                                   <td>{{ cuenta.fecha }}</td>
+                                                   <td>{{ cuenta.factura_numero }}</td>
+                                                   <td>{{ cuenta.cliente.nombres }} {{ cliente.apellidos }}</td>
+                                                   <td>valor total</td>
+                                                   <td>valor cancelado</td>
+                                                   <td>total a la fecha</td>
+
+                                                   <td>ver</td>
+                                               </tr>
                                             {% endfor %}
                                             
                                         </tbody>
