@@ -189,6 +189,9 @@ def anularDocumento(request,id):
     return HttpResponseRedirect('/document/list/')
 
 def cuentasCobrar(request):
+    if request.POST:
+        CuentasCobrar(cantidad=request.POST['cantidad'], cliente_id=request.POST['cliente'],factura_numero=request.POST['factura_numero']).save()
+        messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
         'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user),
         'clientes':Clientes.objects.filter(establecimiento__usuario=request.user)
