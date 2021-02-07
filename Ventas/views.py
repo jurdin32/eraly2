@@ -10,7 +10,7 @@ from Empresa.models import Establecimiento
 from Home.models import Provincia, ConfigurarDocumentos
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
-from Ventas.models import Facturas, DetalleFactura
+from Ventas.models import Facturas, DetalleFactura, CuentasCobrar
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
 
@@ -190,6 +190,6 @@ def anularDocumento(request,id):
 
 def cuentasCobrar(request):
     contexto={
-
+        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user)
     }
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
