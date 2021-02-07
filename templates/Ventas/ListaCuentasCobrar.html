@@ -1,7 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
 {% load static %}
-{% load productosTags %}
+{% load VentasTags %}
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -35,8 +35,8 @@
                                                    <td style="text-align: center; vertical-align: middle">{{ cuenta.factura_numero }}</td>
                                                    <td style="vertical-align: middle">{{ cuenta.cliente.nombres }} {{ cliente.apellidos }}</td>
                                                    <td style="text-align: center; vertical-align: middle">{{ cuenta.cantidad }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">valor cancelado</td>
-                                                   <td style="text-align: center; vertical-align: middle">total a la fecha</td>
+                                                   <td style="text-align: center; vertical-align: middle">{% pagos cuenta.id %}</td>
+                                                   <td style="text-align: center; vertical-align: middle">{% saldos cuenta.id %}</td>
 
                                                    <td style="text-align: center"><a href="" class="btn btn-app"><i class="fa fa-binoculars"></i></a></td>
                                                </tr>
