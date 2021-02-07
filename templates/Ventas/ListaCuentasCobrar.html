@@ -34,9 +34,9 @@
                                                    <td style="text-align: center; vertical-align: middle">{{ cuenta.fecha }}</td>
                                                    <td style="text-align: center; vertical-align: middle">{{ cuenta.factura_numero }}</td>
                                                    <td style="vertical-align: middle">{{ cuenta.cliente.nombres }} {{ cuenta.cliente.apellidos }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{{ cuenta.cantidad }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{% pagos cuenta.id %}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{% saldos cuenta.id %}</td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-danger">{{ cuenta.cantidad }}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-info">{% pagos cuenta.id %}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{% saldos cuenta.id %}</span></td>
 
                                                    <td style="text-align: center"><a href="" class="btn btn-app"><i class="fa fa-binoculars"></i></a></td>
                                                </tr>
