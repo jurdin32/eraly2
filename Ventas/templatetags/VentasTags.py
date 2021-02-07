@@ -23,4 +23,4 @@ def saldos(id_cuenta):
         xpagos=Recibos.objects.filter(cuenta_id=id_cuenta).aggregate(Sum('cantidad'))['cantidad__sum']
     except:
         xpagos =0
-    return cuenta - xpagos
+    return cuenta - float(xpagos)
