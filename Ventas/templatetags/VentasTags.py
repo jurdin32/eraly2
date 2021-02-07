@@ -15,7 +15,7 @@ def pagos(id_cuenta):
             xpagos=0
     except:
         xpagos =0
-    return xpagos
+    return round(xpagos,2)
 
 @register.simple_tag
 def saldos(id_cuenta):
@@ -29,4 +29,5 @@ def saldos(id_cuenta):
         xpagos =0
 
     print(cuenta,xpagos)
-    return cuenta - xpagos
+    total=cuenta - xpagos
+    return round(total,2)
