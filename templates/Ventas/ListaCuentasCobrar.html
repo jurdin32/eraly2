@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select name="cliente" id="cliente" class="form-control" style="width: 100%">
+                                    <select name="cliente" id="cliente" multiple class="form-control" style="width: 100%">
                                         {% for cliente in clientes %}
                                             <option value="{{ cliente.id }}">{{ cliente.nombres }} {{ cliente.apellidos }}</option>
                                         {% endfor %}
