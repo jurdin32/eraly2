@@ -130,9 +130,16 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
-                                                <option value="P">Producto</option>
+                                        {% if producto.tipo == "P" %}
+                                            <option selected value="P">Producto</option>
+                                        {% elif producto.tipo == "S" %}
+                                            <option selected value="S">Servicios</option>
+                                        {% elif  producto.tipo == "B" %}
+                                            <option value="B">Bienes</option>
+                                        {% endif %}
+                                            <option value="P">Producto</option>
                                             <option value="S">Servicios</option>
-                                            <option value="P">Bienes</option>
+                                            <option value="B">Bienes</option>
                                     </select>
                                     <span>Establecimiento es Obligatorio</span>
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>

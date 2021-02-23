@@ -82,6 +82,7 @@ class Marca(models.Model):
         return self.nombre
 
 class Productos(models.Model):
+    tipo=models.CharField(max_length=2, default="P")
     imagen=models.ImageField(upload_to="productos",null=True,blank=True, help_text="imagen de 100px x 100px")
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
