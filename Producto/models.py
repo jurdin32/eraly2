@@ -181,5 +181,16 @@ class ImagenesProducto(models.Model):
     class Meta:
         verbose_name_plural = "8. Imagenes de Producto "
 
+class Promociones(models.Model):
+    fecha_inicio=models.DateField()
+    fecha_finalizacion=models.DateField()
+    precio=models.ForeignKey(Precios, on_delete=models.CASCADE)
+    porcentaje=models.IntegerField(default=0)
+    valor=models.DecimalField(max_digits=9,decimal_places=2, default=0)
+
+
+
+
+
 
 
