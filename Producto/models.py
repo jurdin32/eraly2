@@ -151,6 +151,9 @@ class Precios(models.Model):
         
         super(Precios, self).save()
 
+    def __str__(self):
+        return "%s - %s"%(self.total, self.producto.nombre)
+
 
     class Meta:
         verbose_name_plural = "6. Precios Producto "
@@ -187,6 +190,8 @@ class Promociones(models.Model):
     precio=models.ForeignKey(Precios, on_delete=models.CASCADE)
     porcentaje=models.IntegerField(default=0)
     valor=models.DecimalField(max_digits=9,decimal_places=2, default=0)
+    estado=models.BooleanField(default=True)
+
 
 
 
