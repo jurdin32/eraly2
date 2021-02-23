@@ -127,6 +127,20 @@
                                            name="representateLegal">
                                 </div>
                             </div>
+                            <hr>
+                            <label for="">Datos para la tienda virtual, (Opcionales)</label>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Ubicacion Geografica (GPS)</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" name="ubicacion" id="ubicacion" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Correo Electrónico</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="email" name="email" id="email" class="form-control">
+                                </div>
+                            </div>
                             <div class="item form-group">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Descripción</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -134,6 +148,33 @@
                                               rows="10">{{ establecimiento.descripcion }}</textarea>
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Sitio Web</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" name="web" id="web" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Facebook</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" name="facebook" id="facebook" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Instagram</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" name="instagram" id="instaagram" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Youtube</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" name="youtube" id="youtube" class="form-control">
+                                </div>
+                            </div>
+
+
+
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-9 col-sm-9 offset-md-6">
@@ -160,7 +201,7 @@
                                         {% if establecimiento.logo %}
                                             <span>Logo Actual: {{ establecimiento.logo }}</span>
                                             <div style="padding: 10px;">
-                                                <img style="width: 100px; height: 100px; display: block;" src="/media/{{ establecimiento.logo }}" alt="image">
+                                                <img style="width: 100px; display: block;" src="/media/{{ establecimiento.logo }}" alt="image">
                                             </div>
 
                                         {% endif %}
@@ -170,8 +211,8 @@
                                     <li style="padding: 20px">
                                         {% if establecimiento.banner %}
                                             <span>Banner Actual: {{ establecimiento.banner }}</span><br>
-                                            <div style="padding: 10px">
-                                                <img style="width: 100%; display: block;" src="/media/{{ establecimiento.banner }}" alt="image">
+                                            <div style="padding: 10px; text-align: center">
+                                                <img style="width: 100px; display: block;" src="/media/{{ establecimiento.banner }}" alt="image">
                                             </div>
                                         {% endif %}
                                         <input type="file" name="banner" id="banner">

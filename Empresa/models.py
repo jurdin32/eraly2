@@ -18,6 +18,7 @@ class Establecimiento(models.Model):
     representateLegal=models.CharField(max_length=60)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     descripcion = RichTextUploadingField(null=True, blank=True)
+
     ubicacion_gps = models.CharField(max_length=300,null=True,blank=True)
     correo_electronico=models.EmailField(max_length=600,null=True,blank=True)
     web=models.CharField(max_length=400,null=True,blank=True)
