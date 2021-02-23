@@ -2,14 +2,12 @@ import datetime
 import json
 
 from django.contrib.admin.models import LogEntry
-from django.core import serializers
-from django.core.serializers import serialize
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from Empresa.models import Establecimiento, Direccion, UsuarioEmpresa
-from Home.models import Pais, Ciudad, Provincia
+from Home.models import Provincia
 
 
 def empresa(request):
@@ -18,9 +16,14 @@ def empresa(request):
         establecimiento=Establecimiento.objects.create(usuario=request.user,ruc=request.POST['ruc'],
                         representateLegal=request.POST['representateLegal'],
                         nombreComercial=request.POST['nombreComercial'],
-                        descripcion=request.POST['descripcion']
-
-                        )
+                        descripcion=request.POST['descripcion'],
+                        ubicacion_gps=request.POST['ubicacion'],
+                        correo_electronico = request.POST['email'],
+                        web = request.POST['web'],
+                        facebook = request.POST['facebook'],
+                        instagram = request.POST['instagram'],
+                        youtube = request.POST['youtube']
+                                                       )
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
     contexto={
@@ -50,6 +53,12 @@ def modificar_empresa(request,id):
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
         establecimiento.descripcion=request.POST['descripcion']
+        establecimiento.ubicacion_gps = request.POST['ubicacion']
+        establecimiento.correo_electronico = request.POST['email']
+        establecimiento.web = request.POST['web']
+        establecimiento.facebook = request.POST['facebook']
+        establecimiento.instagram = request.POST['instagram']
+        establecimiento.youtube = request.POST['youtube']
         establecimiento.save()
         usuarioEstablecimiento= UsuarioEmpresa.objects.get(establecimiento=establecimiento)
         usuarioEstablecimiento.nombreCompleto=request.POST['representateLegal']
