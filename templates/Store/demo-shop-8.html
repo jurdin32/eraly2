@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 	<head>
 
@@ -13,8 +14,8 @@
 		<meta name="author" content="okler.net">
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+		<link rel="shortcut icon" href="{% static 'Store/img/favicon.ico' %}" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="{% static 'Store/img/apple-touch-icon.png' %}">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -23,35 +24,36 @@
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../vendor/animate/animate.min.css">
-		<link rel="stylesheet" href="../vendor/simple-line-icons/css/simple-line-icons.min.css">
-		<link rel="stylesheet" href="../vendor/owl.carousel/assets/owl.carousel.min.css">
-		<link rel="stylesheet" href="../vendor/owl.carousel/assets/owl.theme.default.min.css">
-		<link rel="stylesheet" href="../vendor/magnific-popup/magnific-popup.min.css">
+		<link rel="stylesheet" href="{% static 'Store/vendor/bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/vendor/font-awesome/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/vendor/animate/animate.min.css' %}">
+		<link rel="stylesheet" href="{%  static 'Store/vendor/simple-line-icons/css/simple-line-icons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/vendor/owl.carousel/assets/owl.carousel.min.css' %}">
+		<link rel="stylesheet" href="{%  static 'Store/vendor/owl.carousel/assets/owl.theme.default.min.css' %}">
+		<link rel="stylesheet" href="{%  static 'Store/vendor/magnific-popup/magnific-popup.min.css' %}">
 
 		<!-- Theme CSS -->
-		<link rel="stylesheet" href="../css/theme.css">
-		<link rel="stylesheet" href="../css/theme-elements.css">
-		<link rel="stylesheet" href="../css/theme-blog.css">
-		<link rel="stylesheet" href="../css/theme-shop.css">
+		<link rel="stylesheet" href="{% static 'Store/css/theme.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/css/theme-elements.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/css/theme-blog.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/css/theme-shop.css' %}">
 
 		<!-- Current Page CSS -->
-		<link rel="stylesheet" href="../vendor/rs-plugin/css/settings.css">
-		<link rel="stylesheet" href="../vendor/rs-plugin/css/layers.css">
-		<link rel="stylesheet" href="../vendor/rs-plugin/css/navigation.css">
+		<link rel="stylesheet" href="{% static  'Store/vendor/rs-plugin/css/settings.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/layers.css' %}">
+		<link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/navigation.css' %}">
 
 		<!-- Skin CSS -->
-		<link rel="stylesheet" href="../css/skins/skin-shop-8.css"> 
+		<link rel="stylesheet" href="{% static 'Store/css/skins/skin-shop-8.css' %}">
 
-		<!-- Demo CSS -->		<link rel="stylesheet" href="../css/demos/demo-shop-8.css">
+		<!-- Demo CSS -->
+		<link rel="stylesheet" href="{% static 'Store/css/demos/demo-shop-8.css' %}">
 
 		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="../css/custom.css">
+		<link rel="stylesheet" href="{% static 'Store/css/custom.css' %}">
 
 		<!-- Head Libs -->
-		<script src="../vendor/modernizr/modernizr.min.js"></script>
+		<script src="{% static 'Store/vendor/modernizr/modernizr.min.js' %}"></script>
 
 	</head>
 	<body>
@@ -1639,41 +1641,41 @@
 		</div>
 
 		<!-- Vendor -->
-		<script src="../vendor/jquery/jquery.min.js"></script>
-		<script src="../vendor/jquery.appear/jquery.appear.min.js"></script>
-		<script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
-		<script src="../vendor/jquery-cookie/jquery-cookie.min.js"></script>
-		<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="../vendor/common/common.min.js"></script>
-		<script src="../vendor/jquery.validation/jquery.validation.min.js"></script>
-		<script src="../vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-		<script src="../vendor/jquery.gmap/jquery.gmap.min.js"></script>
-		<script src="../vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
-		<script src="../vendor/isotope/jquery.isotope.min.js"></script>
-		<script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
-		<script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-		<script src="../vendor/vide/vide.min.js"></script>
+		<script src="{% static 'Store/vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.appear/jquery.appear.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery-cookie/jquery-cookie.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/common/common.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.validation/jquery.validation.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.gmap/jquery.gmap.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/jquery.lazyload/jquery.lazyload.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/isotope/jquery.isotope.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/vide/vide.min.js' %}"></script>
 		
 		<!-- Theme Base, Components and Settings -->
-		<script src="../js/theme.js"></script>
+		<script src="{% static 'Store/js/theme.js' %}"></script>
 
 
-		<script src="../vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-		<script src="../vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+		<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+		<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
 
 		<!-- Current Page Vendor and Views -->
-		<script src="../js/views/view.contact.js"></script>
+		<script src="{% static 'Store/js/views/view.contact.js' %}"></script>
 
 
 
 		<!-- Demo -->
-		<script src="../js/demos/demo-shop-8.js"></script>
+		<script src="{% static 'Store/js/demos/demo-shop-8.js' %}"></script>
 		
 		<!-- Theme Custom -->
-		<script src="../js/custom.js"></script>
+		<script src="{% static 'Store/js/custom.js' %}"></script>
 		
 		<!-- Theme Initialization Files -->
-		<script src="../js/theme.init.js"></script>
+		<script src="{% static 'Store/js/theme.init.js' %}"></script>
 
 
 

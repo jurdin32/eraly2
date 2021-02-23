@@ -23,6 +23,7 @@ from Empresa.views import *
 from Home.views import *
 from Personas.views import registroCLientes, deshabilitarCliente
 from Producto.views import *
+from Store.views import tienda
 from Ventas.views import *
 
 urlpatterns = [
@@ -95,6 +96,15 @@ urlpatterns = [
     path("accounts_receivable/",cuentasCobrar),
 
     path("logout_/",logout_),
+
+    #tienda
+    path("store/",tienda)
+
+
+
+
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
