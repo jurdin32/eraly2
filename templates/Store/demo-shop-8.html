@@ -701,44 +701,51 @@
 
 			<div role="main" class="main">
 			
-			<div class="banners-container">
-				<div class="container">
-					<div class="row">
-						<div class="slider-area">
-							<div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'loop': false}">
-								<a href="#" class="banner">
-									<img src="../img/demos/shop/slides/shop8/slide1.jpg" alt="Banner">
-								</a>
-								<a href="#" class="banner">
-									<img src="../img/demos/shop/slides/shop8/slide2.jpg" alt="Banner">
-								</a>
-							</div>
-						</div>
 
-						<div class="side-area">
-							<div class="row">
-								<div class="col-md-12 col-sm-4 col-xs-12">
-									<a href="#" class="banner">
-										<img src="../img/demos/shop/banners/shop8/banner1.jpg" alt="Banner">
-									</a>
-								</div>
+                <div class="slider-container rev_slider_wrapper"  >
+					<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 350, 'disableProgressBar': 'on'}">
+						<ul>
+							<li data-transition="fade">
+								<img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
 
-								<div class="col-md-12 col-sm-4 col-xs-12">
-									<a href="#" class="banner">
-										<img src="../img/demos/shop/banners/shop8/banner2.jpg" alt="Banner">
-									</a>
-								</div>
+									alt=""
+									data-bgposition="center center"
+									data-bgfit="cover"
+									data-bgrepeat="no-repeat"
+									class="rev-slidebg">
 
-								<div class="col-md-12 col-sm-4 col-xs-12">
-									<a href="#" class="banner">
-										<img src="../img/demos/shop/banners/shop8/banner3.jpg" alt="Banner">
-									</a>
-								</div>
-							</div>
-						</div>
+								<div class="tp-caption top-label"
+									data-x="227"
+									data-y="100"
+									data-start="500"
+									data-transform_in="y:[-300%];opacity:0;s:500;">Todo lo que buscas</div>
+
+
+								<div class="tp-caption main-label"
+									data-x="135"
+									data-y="130"
+									data-start="1500"
+									data-whitespace="nowrap"
+									data-transform_in="y:[100%];s:500;"
+									data-transform_out="opacity:0;s:500;"
+									data-mask_in="x:0px;y:0px;">ERALY STORE</div>
+
+								<div class="tp-caption bottom-label"
+									data-x="185"
+									data-y="200"
+									data-start="2000"
+									data-transform_in="y:[100%];opacity:0;s:500;">Desde la comodidad de tu hogar.</div>
+
+								<div class="tp-caption"
+									data-x="910"
+									data-y="130"
+									data-start="2500"
+									data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1300;"><img src="{% static 'Store/img/slides/slide-concept-2-1.png' %}" alt=""></div>
+
+							</li>
+						</ul>
 					</div>
 				</div>
-			</div>
 
 
 			<div class="homepage-bar">
