@@ -302,6 +302,10 @@ def inventario(request):
     }
     return render(request, 'producto/inventario.html',contexto)
 
-
+def promociones(request):
+    contexto={
+        'productos':Productos.objects.filter(establecimiento__usuario=request.user)
+    }
+    return render(request, 'producto/promociones.html',contexto)
 
 
