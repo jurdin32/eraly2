@@ -18,7 +18,12 @@ class Establecimiento(models.Model):
     representateLegal=models.CharField(max_length=60)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     descripcion = RichTextUploadingField(null=True, blank=True)
-    ubicacion_gps = models.CharField(max_length=300)
+    ubicacion_gps = models.CharField(max_length=300,null=True,blank=True)
+    correo_electronico=models.EmailField(max_length=600,null=True,blank=True)
+    web=models.CharField(max_length=400,null=True,blank=True)
+    facebook=models.CharField(max_length=400,null=True,blank=True)
+    instagram=models.CharField(max_length=400, null=True, blank=True)
+    youtube = models.CharField(max_length=400,null=True,blank=True)
 
     def previa(self):
         return mark_safe('<a href="/admin/Empresa/establecimiento/%s/change/"><img src="/media/%s" style="width: 50px" alt=""></a>'%(self.id,self.logo))
