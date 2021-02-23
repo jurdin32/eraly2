@@ -44,6 +44,8 @@ urlpatterns = [
     path("products/colors/delete/<int:id>/",eliminarColorProducto),
     path("products/prices/<int:id>/",registrarPrecios),
     path("products/prices/delete/<int:id>/",eliminarPrecios),
+    path("products/promo/",promociones),
+
 
 
     path("category/",categorias),
