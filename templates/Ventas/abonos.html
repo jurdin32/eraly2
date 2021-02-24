@@ -123,8 +123,8 @@
                                                    <td style="text-align: center; vertical-align: middle">{{ abono.cuenta.factura_numero }}</td>
                                                    <td style="vertical-align: middle">{{ abono.cuenta.cliente.nombres }} {{ abono.cuenta.cliente.apellidos }}</td>
                                                    <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.cantidad }}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.formaPago }}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.numeroCheque }}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-success">{{ abono.formaPago }}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-danger">{% if abono.numeroCheque %}{{ abono.numeroCheque }}{% else %}Se pago en efectivo{% endif %} </span></td>
                                                     <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.rebidoPor }}</span></td>
                                                     <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.recibiDe }}</span></td>
                                                    <td style="text-align: center"><a href="/accounts_receivable/print/{{ cuenta.id }}/" class="btn btn-app"><i class="fa fa-binoculars"></i> Imprimir</a></td>

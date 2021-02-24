@@ -200,6 +200,9 @@ def cuentasCobrar(request):
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
 
 def abonos(request,id):
+    if request.POST:
+        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
+        messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
         'abonos': Recibos.objects.filter(cuenta_id = id),
         'cuenta':CuentasCobrar.objects.get(id=id),
