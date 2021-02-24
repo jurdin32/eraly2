@@ -80,44 +80,44 @@
 
     <div class="">
         <div class="row">
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-money"></i>
+            <div class="animated flipInY  col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats bg-primary" style="color: white" >
+                    <div class="icon" style="color: white"><i class="fa fa-dollar"></i>
                     </div>
-                    <div class="count">{{ cuenta.cantidad }}</div>
+                    <div class="count" style="color: white">{{ cuenta.cantidad }}</div>
 
-                    <h3>Cuenta por Pagar</h3>
-                    <p>Total Inicial</p>
+                    <h3 style="color: white">Cuenta por Pagar</h3>
+                    <p style="color: white">Total Inicial</p>
                 </div>
             </div>
             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-dollar"></i>
+                <div class="tile-stats bg-success" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-dollar"></i>
                     </div>
-                    <div class="count">{% pagos cuenta.id %}</div>
+                    <div class="count" style="color: white">{% pagos cuenta.id %}</div>
 
-                    <h3>Total Pagos a la Fecha</h3>
-                    <p>Abonos del Cliente</p>
+                    <h3 style="color: white">Total Pagos a la Fecha</h3>
+                    <p style="color: white">Abonos del Cliente</p>
                 </div>
             </div>
             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+                <div class="tile-stats bg-warning" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-sort-amount-desc"></i>
                     </div>
-                    <div class="count">{% saldos cuenta.id %}</div>
+                    <div class="count" style="color: white">{% saldos cuenta.id %}</div>
 
-                    <h3>Por pagar</h3>
-                    <p>Falta por pagar</p>
+                    <h3 style="color:white">Por pagar</h3>
+                    <p style="color: white">Falta por pagar</p>
                 </div>
             </div>
             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-check-square-o"></i>
+                <div class="tile-stats bg-danger" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-check-square-o"></i>
                     </div>
-                    <div class="count">{% saldos cuenta.id %}</div>
+                    <div class="count" style="color: white">{% saldos cuenta.id %}</div>
 
-                    <h3>Saldo</h3>
-                    <p>Saldo a la Fecha</p>
+                    <h3 style="color:white">Saldo</h3>
+                    <p style="color: white">Saldo a la Fecha</p>
                 </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
                                                         class="badge badge-primary">{{ abono.recibiDe }}</span></td>
                                                 <td style="text-align: center"><a
                                                         href="/accounts_receivable/print/{{ cuenta.id }}/"
-                                                        class="btn btn-app"><i class="fa fa-binoculars"></i>
+                                                        class="btn btn-app"><i class="fa fa-print"></i>
                                                     Imprimir</a></td>
                                             </tr>
                                         {% endfor %}
