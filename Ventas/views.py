@@ -10,7 +10,7 @@ from Empresa.models import Establecimiento
 from Home.models import Provincia, ConfigurarDocumentos
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
-from Ventas.models import Facturas, DetalleFactura, CuentasCobrar
+from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
 
@@ -198,3 +198,13 @@ def cuentasCobrar(request):
         'clientes':Clientes.objects.filter(establecimiento__usuario=request.user)
     }
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
+
+def abonos(request,id):
+    if request.POST:
+        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
+        messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
+    contexto={
+        'abonos': Recibos.objects.filter(cuenta_id = id),
+        'cuenta':CuentasCobrar.objects.get(id=id),
+    }
+    return render(request, 'Ventas/abonos.html', contexto)
