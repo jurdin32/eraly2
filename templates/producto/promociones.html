@@ -2,6 +2,53 @@
 {% block contenido_index %}
 {% load static %}
 {% load productosTags %}
+    <div class="modal fade bs-example-modal-lg" id="registrar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Promociones</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" id="frmRegistrar" method="post">
+                                {% csrf_token %}
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="">Fecha de Inicio</label>
+                                    <input type="date" class="form-control" name='f1' id="f1" placeholder="Fecha Inicio">
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="">Fecha de Finalización</label>
+                                    <input type="date" class="form-control " name='f2' id="f2" placeholder="Fecha Finalización">
+                                </div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="">Porcentaje</label>
+                                    <input type="number" step="0.001" class="form-control" name='porcentaje' id="porcentaje" placeholder="Porcentaje">
+                                </div>
+
+
+
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -31,6 +78,8 @@
                                             <th style="text-align: center">Imagen</th>
                                             <th style="text-align: center">Descripción</th>
                                             <th style="text-align: center">Precio Venta</th>
+                                            <th style="text-align: center">Porcentaje</th>
+                                            <th style="text-align: center">Precio Promo</th>
                                             <th style="text-align: center">Fecha Inicio</th>
                                             <th style="text-align: center">Fecha Finalización</th>
                                             <th style="text-align: center">Promocion</th>
@@ -44,19 +93,28 @@
                                             <td style="text-align: center; vertical-align: middle">
                                                 <img style="width: 50px;height: 50px;" src="/media/{{ producto.imagen }}" alt="image">
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle">{{ producto.nombre }}</td>
+                                            <td style="text-align: center; vertical-align: middle; width: 300px">{{ producto.nombre }}</td>
 
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
                                                     <span class="badge badge-info" style="font-size: 13px">{{ precios.total }}</span><br>
+                                                    <br>
                                                 {% endfor %}
+                                            </td>
+
+                                            <td style="text-align: center; vertical-align: middle">
 
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle">  </td>
-                                            <td style="text-align: center; vertical-align: middle">  </td>
-                                            <td style="text-align: center; vertical-align: middle">  </td>
+                                            <td style="text-align: center; vertical-align: middle">
+
+                                            </td>
+
+
+                                            <td style="text-align: center; vertical-align: middle;"> {% promocion_inicio producto.id %} </td>
+                                            <td style="text-align: center; vertical-align: middle"> {% promocion_finalizacion producto.id %}  </td>
+                                            <td style="text-align: center; vertical-align: middle"> {% promocion_estado producto.id %}</td>
                                             <td style="text-align: center; vertical-align: middle; font-size: 20px">
-                                                <a href="/products/edit/{{ producto.id }}/"><i class="fa fa-edit"></i></a>
+                                                <a href="" data-toggle="modal" data-target="#registrar" ><i class="fa fa-plus-circle text-primary"></i></a>
                                                 <a href=""><i class="fa fa-trash text-danger"></i></a>
                                             </td>
                                         </tr>
