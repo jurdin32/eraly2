@@ -96,6 +96,7 @@ urlpatterns = [
 
 
     path("accounts_receivable/",cuentasCobrar),
+    path("accounts_receivable/<int:id>/",abonos),
 
     path("logout_/",logout_),
 

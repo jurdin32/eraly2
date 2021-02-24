@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Registro de Cuentas</h4>
+                    <h4 class="modal-title" id="myModalLabel">Ingreso Caja</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -19,24 +19,44 @@
                             <form id="formRegistrar" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" name="factura_numero" id="factura_numero"
+                                    <input type="text" class="form-control has-feedback-left" value="{{ cuenta.factura_numero }}"
+                                           readonly="readonly" name="factura_numero" id="factura_numero"
                                            placeholder="Factura de Venta">
                                     <span class="fa fa-credit-card-alt form-control-feedback left"
                                           aria-hidden="true"></span>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select name="cliente" id="cliente" multiple required="required" class="form-control" style="width: 100%">
-                                        {% for cliente in clientes %}
-                                            <option value="{{ cliente.id }}">{{ cliente.nombres }} {{ cliente.apellidos }}</option>
-                                        {% endfor %}
-                                    </select>
+                                    <input type="text" class="form-control has-feedback-left" value="{{ cuenta.cliente.nombres }} {{ cuenta.cliente.apellidos }}"
+                                           readonly="readonly" name="cliente" id="cliente"
+                                           placeholder="Cliente">
+                                    <span class="fa fa-user form-control-feedback left"
+                                          aria-hidden="true"></span>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="number" class="form-control has-feedback-left" name="cantidad"
                                            id="cantidad" required="required" step="0.01"
-                                           placeholder="Ingrese la cantidad">
+                                           placeholder="Ingrese la cantidad a pagar">
                                     <span class="fa fa-dollar form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select name="formaPago" id="formaPago" class="form-control has-feedback-left">
+                                        <option value="EFECTIVO">Efectivo</option>
+                                        <option value="CHEQUE">Cheque</option>
+                                    </select>
+                                    <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="cheque"
+                                           id="cheque"
+                                           placeholder="Solo si aplica (Ingrese No. de Cheque)">
+                                    <span class="fa fa-ticket form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="recibidoDe"
+                                           id="recibidoDe" required="required"
+                                           placeholder="Nombre de la persona que realiza el Pago">
+                                    <span class="fa fa-ticket form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -83,27 +103,31 @@
                                     <table id="listaCuentas" class="table table-striped table-bordered" style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
-                                            <th style="text-align: center">ID</th>
-                                             <th style="text-align: center">Fecha</th>
+                                            <th style="text-align: center">Id</th>
+                                            <th style="text-align: center">Fecha</th>
                                             <th style="text-align: center">Factura</th>
                                             <th style="text-align: center">Cliente</th>
-                                            <th style="text-align: center">Valor Total</th>
-                                            <th style="text-align: center">Valor Cancelado</th>
-                                            <th style="text-align: center">Total a la fecha</th>
-                                            <th style="text-align: center">Ver pagos</th>
+                                            <th style="text-align: center">Valor Pagado</th>
+                                            <th style="text-align: center">Forma de Pago</th>
+                                            <th style="text-align: center">No. de Cheque</th>
+                                            <th style="text-align: center">Recibido Por</th>
+                                            <th style="text-align: center">Recibido De</th>
+                                            <th style="text-align: center">Imprimir</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {% for cuenta in cuentas %}
+                                            {% for abono in abonos %}
                                                <tr>
-                                                   <td style="text-align: center; vertical-align: middle">{{ cuenta.id }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{{ cuenta.fecha }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{{ cuenta.factura_numero }}</td>
-                                                   <td style="vertical-align: middle">{{ cuenta.cliente.nombres }} {{ cuenta.cliente.apellidos }}</td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-danger">{{ cuenta.cantidad }}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-info">{% pagos cuenta.id %}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{% saldos cuenta.id %}</span></td>
-                                                   <td style="text-align: center"><a href="/accounts_receivable/{{ cuenta.id }}/" class="btn btn-app"><i class="fa fa-binoculars"></i> Ver Abonos</a></td>
+                                                   <td style="text-align: center; vertical-align: middle">{{ abono.id }}</td>
+                                                   <td style="text-align: center; vertical-align: middle">{{ abono.fecha }}</td>
+                                                   <td style="text-align: center; vertical-align: middle">{{ abono.cuenta.factura_numero }}</td>
+                                                   <td style="vertical-align: middle">{{ abono.cuenta.cliente.nombres }} {{ abono.cuenta.cliente.apellidos }}</td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.cantidad }}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.formaPago }}</span></td>
+                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.numeroCheque }}</span></td>
+                                                    <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.rebidoPor }}</span></td>
+                                                    <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.recibiDe }}</span></td>
+                                                   <td style="text-align: center"><a href="/accounts_receivable/print/{{ cuenta.id }}/" class="btn btn-app"><i class="fa fa-binoculars"></i> Imprimir</a></td>
                                                </tr>
                                             {% endfor %}
                                             
