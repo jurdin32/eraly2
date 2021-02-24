@@ -170,6 +170,7 @@ def editarDocumentos(request,id):
         'establecimiento':documento.establecimiento,
         'productos':Productos.objects.filter(establecimiento=documento.establecimiento),
         'clientes':Clientes.objects.filter(establecimiento=documento.establecimiento),
+        'precios':Precios.objects.filter(producto__establecimiento__usuario=request.user),
     }
     return render(request, 'Ventas/editDocumentos.html', contexto)
 

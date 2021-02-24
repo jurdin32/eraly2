@@ -29,19 +29,23 @@
                                     <tbody>
 
                                     {% for producto in productos %}
-                                        <tr>
+                                        {% for precio in precios %}
+                                            {% if precio.producto == producto %}
+                                            <tr>
                                             <td>{{ producto.id }}</td>
-                                            <td style="text-align: justify">{{ producto.nombre }}</td>
+                                            <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }} (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)</td>
                                             <td>{% stock producto.id %}</td>
-                                            <td>{% precioProducto producto.id %}</td>
+                                            <td>{{ precio.precioVenta }}</td>
                                             <td>
                                                 <a href="#"
-                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{% precioProducto producto.id %}','{% stock producto.id %}')">
+                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{{precio.precioVenta }}','{% stock producto.id %}')">
                                                     <i class="fa fa-check-circle text-success"
                                                        style="font-size: 20px"></i>
                                                 </a>
                                             </td>
                                         </tr>
+                                            {% endif %}
+                                        {% endfor %}
                                     {% endfor %}
                                     </tbody>
                                 </table>
