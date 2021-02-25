@@ -8,13 +8,13 @@ def tienda(request):
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
 
-def eproductos(request):
+def _productos(request):
     contexto={
 
     }
     return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
 
-def edetalles(request):
+def _detalles(request):
     contexto={
 
     }
