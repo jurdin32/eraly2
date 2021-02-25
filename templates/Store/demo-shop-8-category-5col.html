@@ -1,3 +1,4 @@
+{% extends 'Store/demo-shop-8.html' %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +46,8 @@
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="../css/skins/skin-shop-8.css"> 
 
-		<!-- Demo CSS -->		<link rel="stylesheet" href="../css/demos/demo-shop-8.css">
+		<!-- Demo CSS -->
+		<link rel="stylesheet" href="../css/demos/demo-shop-8.css">
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="../css/custom.css">
@@ -698,1209 +700,1048 @@
 			<div id="mobile-menu-overlay"></div>
 
 			<div role="main" class="main">
-				
+
+                {% block content %}
 			
 
-			<section class="page-header mb-lg">
-
-				<div class="container">
-					<ul class="breadcrumb">
-						<li><a href="#">Home</a></li>
-
-						<li><a href="#">Fashion</a></li>
-						<li class="active">Dresses</li>
-					</ul>
-				</div>
-			</section>
-
-			<div class="container">
-				<div class="row">
-					<div class="col-md-9 col-md-push-3">
-						<div class="toolbar mb-none">
-							<div class="sorter">
-								<div class="sort-by">
-									<label>Sort by:</label>
-									<select>
-										<option value="Position">Position</option>
-										<option value="Name">Name</option>
-										<option value="Price">Price</option>
-									</select>
-									<a href="#" title="Set Desc Direction">
-										<img src="../img/demos/shop/i_asc_arrow.gif" alt="Set Desc Direction">
-									</a>
-								</div>
-
-								<div class="view-mode">
-									<span title="Grid">
-										<i class="fa fa-th"></i>
-									</span>
-									<a href="#" title="List">
-										<i class="fa fa-list-ul"></i>
-									</a>
-								</div>
-
-								<ul class="pagination">
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-								</ul>
-
-								<div class="limiter">
-									<label>Show:</label>
-									<select>
-										<option value="12">12</option>
-										<option value="24">24</option>
-										<option value="36">36</option>
-									</select>
-								</div>
-							</div>
-						</div>
-
-						<ul class="products-grid columns5 hide-addtolinks">
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product1.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product1-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-10%</span></div>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Blouse</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:60%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$99.00</span>
-											<span class="product-price">$89.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product2.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product2-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-25%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Women Blouse</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$120.00</span>
-											<span class="product-price">$90.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product3.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Dress</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:60%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$70.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product4.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-20%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:80%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$100.00</span>
-											<span class="product-price">$90.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product5.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product5-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Jacket</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:20%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$230.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product6.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product6-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-20%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Blue Jeans</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:100%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$220.00</span>
-											<span class="product-price">$180.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product7.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Black top</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$60.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product4.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-20%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:80%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$100.00</span>
-											<span class="product-price">$90.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product5.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product5-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Jacket</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:20%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$230.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product6.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product6-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-20%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Blue Jeans</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:100%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$220.00</span>
-											<span class="product-price">$180.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product8.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Pink Dress</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:60%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$90.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product9.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Woman Shirt</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:80%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$80.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product10.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product10-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="discount">-15%</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Dress</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:40%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="old-price">$120.00</span>
-											<span class="product-price">$99.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product11.jpg" alt="Product Name">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Woman Blouse</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$70.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="product">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product12.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product12-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-
-										<a href="#" class="product-quickview">
-											<i class="fa fa-share-square-o"></i>
-											<span>Quick View</span>
-										</a>
-										<div class="product-label"><span class="new">New</span></div>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:60%"></div>
-											</div>
-										</div>
-
-										<div class="product-price-box">
-											<span class="product-price">$80.00</span>
-										</div>
-
-										<div class="product-actions">
-											<a href="#" class="addtowishlist" title="Add to Wishlist">
-												<i class="fa fa-heart"></i>
-											</a>
-											<a href="#" class="addtocart" title="Add to Cart">
-												<i class="fa fa-shopping-cart"></i>
-												<span>Add to Cart</span>
-											</a>
-											<a href="#" class="comparelink" title="Add to Compare">
-												<i class="glyphicon glyphicon-signal"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</li>
-						</ul>
-
-						<div class="toolbar-bottom">
-							<div class="toolbar">
-								<div class="sorter">
-									<ul class="pagination">
-										<li class="active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-									</ul>
-
-									<div class="limiter">
-										<label>Show:</label>
-										<select>
-											<option value="12">12</option>
-											<option value="24">24</option>
-											<option value="36">36</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<aside class="col-md-3 col-md-pull-9 sidebar shop-sidebar">
-						<div class="panel-group">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
-											Categories
-										</a>
-									</h4>
-								</div>
-								<div id="panel-filter-category" class="accordion-body collapse in">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Top &amp; Blouses</a></li>
-											<li><a href="#">Accessories</a></li>
-											<li><a href="#">Pants &amp; Denim</a></li>
-											<li><a href="#">Dresses &amp; Skirts</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
-											Price
-										</a>
-									</h4>
-								</div>
-								<div id="panel-filter-price" class="accordion-body collapse in">
-									<div class="panel-body">
-										<div class="filter-price">
-                                            <div id="price-slider"></div>
-                                            <div class="filter-price-details">
-                                                <span>from</span>
-                                                <input type="text" id="price-range-low" class="form-control" placeholder="Min">
-                                                <span>to</span>
-                                                <input type="text" id="price-range-high" class="form-control" placeholder="Max">
-                                                <a href="#" class="btn btn-primary">FILTER</a>
+                    <section class="page-header mb-lg">
+
+                        <div class="container">
+                            <ul class="breadcrumb">
+                                <li><a href="#">Home</a></li>
+
+                                <li><a href="#">Fashion</a></li>
+                                <li class="active">Dresses</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-md-push-3">
+                                <div class="toolbar mb-none">
+                                    <div class="sorter">
+                                        <div class="sort-by">
+                                            <label>Sort by:</label>
+                                            <select>
+                                                <option value="Position">Position</option>
+                                                <option value="Name">Name</option>
+                                                <option value="Price">Price</option>
+                                            </select>
+                                            <a href="#" title="Set Desc Direction">
+                                                <img src="../img/demos/shop/i_asc_arrow.gif" alt="Set Desc Direction">
+                                            </a>
+                                        </div>
+
+                                        <div class="view-mode">
+                                            <span title="Grid">
+                                                <i class="fa fa-th"></i>
+                                            </span>
+                                            <a href="#" title="List">
+                                                <i class="fa fa-list-ul"></i>
+                                            </a>
+                                        </div>
+
+                                        <ul class="pagination">
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                        </ul>
+
+                                        <div class="limiter">
+                                            <label>Show:</label>
+                                            <select>
+                                                <option value="12">12</option>
+                                                <option value="24">24</option>
+                                                <option value="36">36</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="products-grid columns5 hide-addtolinks">
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product1.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product1-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-10%</span></div>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Blouse</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$99.00</span>
+                                                    <span class="product-price">$89.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-size">
-											Size
-										</a>
-									</h4>
-								</div>
-								<div id="panel-filter-size" class="accordion-body collapse in">
-									<div class="panel-body">
-										<ul class="configurable-filter-list">
-											<li>
-												<a href="#">S</a>
-											</li>
-											<li>
-												<a href="#">M</a>
-											</li>
-											<li>
-												<a href="#">L</a>
-											</li>
-											<li>
-												<a href="#">XL</a>
-											</li>
-											<li>
-												<a href="#">2XL</a>
-											</li>
-											<li>
-												<a href="#">3XL</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
-											Brands
-										</a>
-									</h4>
-								</div>
-								<div id="panel-filter-brand" class="accordion-body collapse in">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Nike</a></li>
-											<li><a href="#">Adidas</a></li>
-											<li><a href="#">Puma</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
-											color
-										</a>
-									</h4>
-								</div>
-								<div id="panel-filter-color" class="accordion-body collapse in">
-									<div class="panel-body">
-										<ul class="configurable-filter-list filter-list-color">
-											<li>
-												<a href="#">
-													<span style="background-color: #000"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #21284f"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #272725"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #006b20"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #68686a"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #1736a9"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #f6edd1"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #a69172"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #d8c7a7"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #fd9904"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #f56ab8"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #442937"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #bd1721"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #1226ad"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #cbcbcb"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #c7b89a"></span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span style="background-color: #fff"></span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
+                                    </li>
 
-						<h4>Featured</h4>
-						<div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5, 'dots': false, 'nav': true}">
-							<div>
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product13-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - S</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product2.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product2-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
 
-										<div class="product-price-box">
-											<span class="product-price">$220.00</span>
-										</div>
-									</div>
-								</div>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-25%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Women Blouse</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
 
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product14.jpg" alt="Product Name">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:80%"></div>
-											</div>
-										</div>
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$120.00</span>
+                                                    <span class="product-price">$90.00</span>
+                                                </div>
 
-										<div class="product-price-box">
-											<span class="product-price">$180.00</span>
-										</div>
-									</div>
-								</div>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product15.jpg" alt="Product Name">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 2XL</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product3.jpg" alt="Product Name">
+                                                </a>
 
-										<div class="product-price-box">
-											<span class="product-price">$240.00</span>
-										</div>
-									</div>
-								</div>
-							</div>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Dress</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
 
-							<div>
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product16.jpg" alt="Product Name">
-											<img src="../img/demos/shop/products/product16-2.jpg" alt="Product Name" class="product-hover-image">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 3XL</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:60%"></div>
-											</div>
-										</div>
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$70.00</span>
+                                                </div>
 
-										<div class="product-price-box">
-											<span class="product-price">$220.00</span>
-										</div>
-									</div>
-								</div>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product17.jpg" alt="Product Name">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - M</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:0%"></div>
-											</div>
-										</div>
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product4.jpg" alt="Product Name">
+                                                </a>
 
-										<div class="product-price-box">
-											<span class="product-price">$180.00</span>
-										</div>
-									</div>
-								</div>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-20%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:80%"></div>
+                                                    </div>
+                                                </div>
 
-								<div class="product product-sm">
-									<figure class="product-image-area">
-										<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-											<img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-										</a>
-									</figure>
-									<div class="product-details-area">
-										<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
-										<div class="product-ratings">
-											<div class="ratings-box">
-												<div class="rating" style="width:80%"></div>
-											</div>
-										</div>
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$100.00</span>
+                                                    <span class="product-price">$90.00</span>
+                                                </div>
 
-										<div class="product-price-box">
-											<span class="product-price">$240.00</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</aside>
-				</div>
-			</div>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
-			</div>
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product5.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product5-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
 
-			<footer id="footer">
-				<div class="container">
-					<div class="row">
-						<div class="footer-ribbon">
-							<span>Get in Touch</span>
-						</div>
-						
-						<div class="col-md-3">
-							<h4>My Account</h4>
-							<ul class="links">
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-about-us.html">About Us</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-contact-us.html">Contact Us</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-myaccount.html">My account</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="#">Orders history</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="#">Advanced search</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-3">
-							<div class="contact-details">
-								<h4>Contact Information</h4>
-								<ul class="contact">
-									<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong><br> 1234 Street Name, City, US</p></li>
-									<li><p><i class="fa fa-phone"></i> <strong>Phone:</strong><br> (123) 456-7890</p></li>
-									<li><p><i class="fa fa-envelope-o"></i> <strong>Email:</strong><br> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
-									<li><p><i class="fa fa-clock-o"></i> <strong>Working Days/Hours:</strong><br> Mon - Sun / 9:00AM - 8:00PM</p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<h4>Main Features</h4>
-							<ul class="features">
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Super Fast Template</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">1st Seller Template</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">19 Unique Shop Layouts</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Powerful Template Features</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Mobile &amp; Retina Optimized</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-3">
-							<div class="newsletter">
-								<h4>Be the First to Know</h4>
-								<p class="newsletter-info">Get all the latest information on Events,<br> Sales and Offers. Sign up for newsletter today.</p>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Jacket</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:20%"></div>
+                                                    </div>
+                                                </div>
 
-								<div class="alert alert-success hidden" id="newsletterSuccess">
-									<strong>Success!</strong> You've been added to our email list.
-								</div>
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$230.00</span>
+                                                </div>
 
-								<div class="alert alert-danger hidden" id="newsletterError"></div>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product6.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product6-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
 
-								<p>Enter your e-mail Address:</p>
-								<form id="newsletterForm" action="../php/newsletter-subscribe.php" method="POST">
-									<div class="input-group">
-										<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
-										<span class="input-group-btn">
-											<button class="btn btn-primary" type="submit">Submit</button>
-										</span>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-copyright">
-					<div class="container">
-						<a href="index.html" class="logo">
-							<img alt="Porto Website Template" class="img-responsive" src="../img/demos/shop/logo-footer.png">
-						</a>
-						<ul class="social-icons">
-							<li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-						</ul>
-						<img alt="Payments" src="../img/demos/shop/payments.png" class="footer-payment">
-						<p class="copyright-text">© Copyright 2017. All Rights Reserved.</p>
-					</div>
-				</div>
-			</footer>
-		</div>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-20%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Blue Jeans</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:100%"></div>
+                                                    </div>
+                                                </div>
 
-		<!-- Vendor -->
-		<script src="../vendor/jquery/jquery.min.js"></script>
-		<script src="../vendor/jquery.appear/jquery.appear.min.js"></script>
-		<script src="../vendor/jquery.easing/jquery.easing.min.js"></script>
-		<script src="../vendor/jquery-cookie/jquery-cookie.min.js"></script>
-		<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="../vendor/common/common.min.js"></script>
-		<script src="../vendor/jquery.validation/jquery.validation.min.js"></script>
-		<script src="../vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-		<script src="../vendor/jquery.gmap/jquery.gmap.min.js"></script>
-		<script src="../vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
-		<script src="../vendor/isotope/jquery.isotope.min.js"></script>
-		<script src="../vendor/owl.carousel/owl.carousel.min.js"></script>
-		<script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-		<script src="../vendor/vide/vide.min.js"></script>
-		
-		<!-- Theme Base, Components and Settings -->
-		<script src="../js/theme.js"></script>
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$220.00</span>
+                                                    <span class="product-price">$180.00</span>
+                                                </div>
 
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product7.jpg" alt="Product Name">
+                                                </a>
 
-		<!-- Current Page Vendor and Views -->
-		<script src="../js/views/view.contact.js"></script>
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Black top</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
 
-		<script src="../vendor/nouislider/nouislider.min.js"></script>
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$60.00</span>
+                                                </div>
 
-		<!-- Demo -->
-		<script src="../js/demos/demo-shop-8.js"></script>
-		
-		<!-- Theme Custom -->
-		<script src="../js/custom.js"></script>
-		
-		<!-- Theme Initialization Files -->
-		<script src="../js/theme.init.js"></script>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product4.jpg" alt="Product Name">
+                                                </a>
 
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-20%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:80%"></div>
+                                                    </div>
+                                                </div>
 
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$100.00</span>
+                                                    <span class="product-price">$90.00</span>
+                                                </div>
 
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product5.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product5-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
 
-		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
-			ga('create', 'UA-12345678-1', 'auto');
-			ga('send', 'pageview');
-		</script>
-		 -->
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Jacket</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:20%"></div>
+                                                    </div>
+                                                </div>
 
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$230.00</span>
+                                                </div>
 
-	</body>
-</html>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product6.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product6-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-20%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Blue Jeans</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:100%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$220.00</span>
+                                                    <span class="product-price">$180.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product8.jpg" alt="Product Name">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Pink Dress</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$90.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product9.jpg" alt="Product Name">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Woman Shirt</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:80%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$80.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product10.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product10-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="discount">-15%</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Dress</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:40%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="old-price">$120.00</span>
+                                                    <span class="product-price">$99.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product11.jpg" alt="Product Name">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Woman Blouse</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$70.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product12.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product12-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-label"><span class="new">New</span></div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$80.00</span>
+                                                </div>
+
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to Cart</span>
+                                                    </a>
+                                                    <a href="#" class="comparelink" title="Add to Compare">
+                                                        <i class="glyphicon glyphicon-signal"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="toolbar-bottom">
+                                    <div class="toolbar">
+                                        <div class="sorter">
+                                            <ul class="pagination">
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                            </ul>
+
+                                            <div class="limiter">
+                                                <label>Show:</label>
+                                                <select>
+                                                    <option value="12">12</option>
+                                                    <option value="24">24</option>
+                                                    <option value="36">36</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <aside class="col-md-3 col-md-pull-9 sidebar shop-sidebar">
+                                <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
+                                                    Categories
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="panel-filter-category" class="accordion-body collapse in">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="#">Top &amp; Blouses</a></li>
+                                                    <li><a href="#">Accessories</a></li>
+                                                    <li><a href="#">Pants &amp; Denim</a></li>
+                                                    <li><a href="#">Dresses &amp; Skirts</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
+                                                    Price
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="panel-filter-price" class="accordion-body collapse in">
+                                            <div class="panel-body">
+                                                <div class="filter-price">
+                                                    <div id="price-slider"></div>
+                                                    <div class="filter-price-details">
+                                                        <span>from</span>
+                                                        <input type="text" id="price-range-low" class="form-control" placeholder="Min">
+                                                        <span>to</span>
+                                                        <input type="text" id="price-range-high" class="form-control" placeholder="Max">
+                                                        <a href="#" class="btn btn-primary">FILTER</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-size">
+                                                    Size
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="panel-filter-size" class="accordion-body collapse in">
+                                            <div class="panel-body">
+                                                <ul class="configurable-filter-list">
+                                                    <li>
+                                                        <a href="#">S</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">M</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">L</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">XL</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">2XL</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">3XL</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
+                                                    Brands
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="panel-filter-brand" class="accordion-body collapse in">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="#">Nike</a></li>
+                                                    <li><a href="#">Adidas</a></li>
+                                                    <li><a href="#">Puma</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
+                                                    color
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="panel-filter-color" class="accordion-body collapse in">
+                                            <div class="panel-body">
+                                                <ul class="configurable-filter-list filter-list-color">
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #000"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #21284f"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #272725"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #006b20"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #68686a"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #1736a9"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #f6edd1"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #a69172"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #d8c7a7"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #fd9904"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #f56ab8"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #442937"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #bd1721"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #1226ad"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #cbcbcb"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #c7b89a"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span style="background-color: #fff"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4>Featured</h4>
+                                <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5, 'dots': false, 'nav': true}">
+                                    <div>
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product13-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - S</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$220.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product14.jpg" alt="Product Name">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:80%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$180.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product15.jpg" alt="Product Name">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 2XL</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$240.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product16.jpg" alt="Product Name">
+                                                    <img src="../img/demos/shop/products/product16-2.jpg" alt="Product Name" class="product-hover-image">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 3XL</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$220.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product17.jpg" alt="Product Name">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - M</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:0%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$180.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="product product-sm">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
+                                                </a>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:80%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$240.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </body>

@@ -771,316 +771,320 @@
 			<div id="mobile-menu-overlay"></div>
 
 			<div role="main" class="main">
+                {% block content %}
+                    <div class="slider-container rev_slider_wrapper"  >
+                        <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 350, 'disableProgressBar': 'on'}">
+                            <ul>
+                                <li data-transition="fade">
+                                    <img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
+
+                                        alt=""
+                                        data-bgposition="center center"
+                                        data-bgfit="cover"
+                                        data-bgrepeat="no-repeat"
+                                        class="rev-slidebg">
+
+                                    <div class="tp-caption top-label"
+                                        data-x="227"
+                                        data-y="100"
+                                        data-start="500"
+                                        data-transform_in="y:[-300%];opacity:0;s:500;">Todo lo que buscas</div>
 
 
-                <div class="slider-container rev_slider_wrapper"  >
-					<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 350, 'disableProgressBar': 'on'}">
-						<ul>
-							<li data-transition="fade">
-								<img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
+                                    <div class="tp-caption main-label"
+                                        data-x="135"
+                                        data-y="130"
+                                        data-start="1500"
+                                        data-whitespace="nowrap"
+                                        data-transform_in="y:[100%];s:500;"
+                                        data-transform_out="opacity:0;s:500;"
+                                        data-mask_in="x:0px;y:0px;">ERALY STORE</div>
 
-									alt=""
-									data-bgposition="center center"
-									data-bgfit="cover"
-									data-bgrepeat="no-repeat"
-									class="rev-slidebg">
+                                    <div class="tp-caption bottom-label"
+                                        data-x="185"
+                                        data-y="200"
+                                        data-start="2000"
+                                        data-transform_in="y:[100%];opacity:0;s:500;">Desde la comodidad de tu hogar.</div>
 
-								<div class="tp-caption top-label"
-									data-x="227"
-									data-y="100"
-									data-start="500"
-									data-transform_in="y:[-300%];opacity:0;s:500;">Todo lo que buscas</div>
+                                    <div class="tp-caption"
+                                        data-x="910"
+                                        data-y="130"
+                                        data-start="2500"
+                                        data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1300;"><img src="{% static 'Store/img/slides/slide-concept-2-1.png' %}" alt=""></div>
 
-
-								<div class="tp-caption main-label"
-									data-x="135"
-									data-y="130"
-									data-start="1500"
-									data-whitespace="nowrap"
-									data-transform_in="y:[100%];s:500;"
-									data-transform_out="opacity:0;s:500;"
-									data-mask_in="x:0px;y:0px;">ERALY STORE</div>
-
-								<div class="tp-caption bottom-label"
-									data-x="185"
-									data-y="200"
-									data-start="2000"
-									data-transform_in="y:[100%];opacity:0;s:500;">Desde la comodidad de tu hogar.</div>
-
-								<div class="tp-caption"
-									data-x="910"
-									data-y="130"
-									data-start="2500"
-									data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1300;"><img src="{% static 'Store/img/slides/slide-concept-2-1.png' %}" alt=""></div>
-
-							</li>
-						</ul>
-					</div>
-				</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
 
-			<div class="homepage-bar">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<i class="fa fa-truck bar-icon"></i>
-							<div class="bar-textarea">
-								<h3>Envío apróx. 3 a 5 días laborables</h3>
-								<p>Envío gratis en todos los pedidos superiores a $ 99</p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<i class="fa fa-dollar bar-icon"></i>
-							<div class="bar-textarea">
-								<h3>Pagos con tarjetas</h3>
-								<p>de Crédito o Débito</p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<i class="fa fa-support bar-icon"></i>
-							<div class="bar-textarea">
-								<h3>SOPORTE EN LÍNEA </h3>
-								<p>Via Chat o Llamada</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="container">
-				<div class="row">
-					<div class="col-md-9 normal">
-						<div class="tabs home-products-tab">
-							<ul class="nav nav-links">
-								<li class="active">
-									<a href="#featured" data-toggle="tab">Productos Destacados</a>
-								</li>
 
-							</ul>
-							<div class="tab-content">
-								<div id="featured" class="tab-pane active">
-									<ul class="products-grid columns4">
 
-                                        <div class="owl-carousel owl-theme" data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
+                    <div class="homepage-bar">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <i class="fa fa-truck bar-icon"></i>
+                                    <div class="bar-textarea">
+                                        <h3>Envío apróx. 3 a 5 días laborables</h3>
+                                        <p>Envío gratis en todos los pedidos superiores a $ 99</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fa fa-dollar bar-icon"></i>
+                                    <div class="bar-textarea">
+                                        <h3>Pagos con tarjetas</h3>
+                                        <p>de Crédito o Débito</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fa fa-support bar-icon"></i>
+                                    <div class="bar-textarea">
+                                        <h3>SOPORTE EN LÍNEA </h3>
+                                        <p>Via Chat o Llamada</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-											<div class="product">
-												<figure class="product-image-area">
-													<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-														<img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-														<img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
-													</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 normal">
+                                <div class="tabs home-products-tab">
+                                    <ul class="nav nav-links">
+                                        <li class="active">
+                                            <a href="#featured" data-toggle="tab">Productos Destacados</a>
+                                        </li>
 
-													<a href="#" class="product-quickview">
-														<i class="fa fa-share-square-o"></i>
-														<span>Quick View</span>
-													</a>
-													<div class="product-actions">
-														<a href="#" class="addtocart" title="Add to Cart">
-															<i class="fa fa-shopping-cart"></i>
-														</a>
-													</div>
-												</figure>
-												<div class="product-details-area">
-													<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 10 Plus</a></h2>
-													<div class="product-ratings">
-														<div class="ratings-box">
-															<div class="rating" style="width:60%"></div>
-														</div>
-													</div>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="featured" class="tab-pane active">
+                                            <ul class="products-grid columns4">
 
-													<div class="product-price-box">
-														<span class="product-price">$120.00</span>
-													</div>
-												</div>
-											</div>
+                                                <div class="owl-carousel owl-theme" data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
 
-                                            <div class="product">
-												<figure class="product-image-area">
-													<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-														<img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-														<img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
-													</a>
+                                                    <div class="product">
+                                                        <figure class="product-image-area">
+                                                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                            </a>
 
-													<a href="#" class="product-quickview">
-														<i class="fa fa-share-square-o"></i>
-														<span>Quick View</span>
-													</a>
-													<div class="product-actions">
-														<a href="#" class="addtocart" title="Add to Cart">
-															<i class="fa fa-shopping-cart"></i>
-														</a>
-													</div>
-												</figure>
-												<div class="product-details-area">
-													<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 20 Ultra</a></h2>
-													<div class="product-ratings">
-														<div class="ratings-box">
-															<div class="rating" style="width:60%"></div>
-														</div>
-													</div>
+                                                            <a href="#" class="product-quickview">
+                                                                <i class="fa fa-share-square-o"></i>
+                                                                <span>Quick View</span>
+                                                            </a>
+                                                            <div class="product-actions">
+                                                                <a href="#" class="addtocart" title="Add to Cart">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </a>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="product-details-area">
+                                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 10 Plus</a></h2>
+                                                            <div class="product-ratings">
+                                                                <div class="ratings-box">
+                                                                    <div class="rating" style="width:60%"></div>
+                                                                </div>
+                                                            </div>
 
-													<div class="product-price-box">
-														<span class="product-price">$120.00</span>
-													</div>
-												</div>
-											</div>
+                                                            <div class="product-price-box">
+                                                                <span class="product-price">$120.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product">
+                                                        <figure class="product-image-area">
+                                                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                            </a>
+
+                                                            <a href="#" class="product-quickview">
+                                                                <i class="fa fa-share-square-o"></i>
+                                                                <span>Quick View</span>
+                                                            </a>
+                                                            <div class="product-actions">
+                                                                <a href="#" class="addtocart" title="Add to Cart">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </a>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="product-details-area">
+                                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 20 Ultra</a></h2>
+                                                            <div class="product-ratings">
+                                                                <div class="ratings-box">
+                                                                    <div class="rating" style="width:60%"></div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="product-price-box">
+                                                                <span class="product-price">$120.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ul>
                                         </div>
-									</ul>
-								</div>
 
-							</div>
-						</div>
+                                    </div>
+                                </div>
 
-{#						<div class="banners-area mt-sm">#}
-{#							<div class="row">#}
-{#								<div class="col-sm-4">#}
-{#									<a href="#" class="banner">#}
-{#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner4.jpg' %}" alt="Banner">#}
-{#									</a>#}
-{#									<a href="#" class="banner">#}
-{#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner5.jpg' %}" alt="Banner">#}
-{#									</a>#}
-{#								</div>#}
-{#								<div class="col-sm-8">#}
-{#									<a href="#" class="banner">#}
-{#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner6.jpg' %}" alt="Banner">#}
-{#									</a>#}
-{#								</div>#}
-{#							</div>#}
-{#						</div>#}
+        {#						<div class="banners-area mt-sm">#}
+        {#							<div class="row">#}
+        {#								<div class="col-sm-4">#}
+        {#									<a href="#" class="banner">#}
+        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner4.jpg' %}" alt="Banner">#}
+        {#									</a>#}
+        {#									<a href="#" class="banner">#}
+        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner5.jpg' %}" alt="Banner">#}
+        {#									</a>#}
+        {#								</div>#}
+        {#								<div class="col-sm-8">#}
+        {#									<a href="#" class="banner">#}
+        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner6.jpg' %}" alt="Banner">#}
+        {#									</a>#}
+        {#								</div>#}
+        {#							</div>#}
+        {#						</div>#}
 
 
 
 
-{#						<div class="mb-xlg">#}
-{#							<h2 class="slider-title">#}
-{#			                    <span class="inline-title">OUR BRANDS</span>#}
-{#			                    <span class="line"></span>#}
-{#			                    <a href="#" class="view-all">View All</a>#}
-{#			                </h2>#}
-{##}
-{#							<div class="owl-carousel owl-theme manual clients-carousel owl-no-narrow">#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
-{#								</a>#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand2.png' %}" alt="Brand">#}
-{#								</a>#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand3.png' %}" alt="Brand">#}
-{#								</a>#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand4.png' %}" alt="Brand">#}
-{#								</a>#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand5.png' %}" alt="Brand">#}
-{#								</a>#}
-{#								<a href="#" title="Brand Name" class="client">#}
-{#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
-{#								</a>#}
-{#							</div>#}
-{#						</div>#}
-					</div>
+        {#						<div class="mb-xlg">#}
+        {#							<h2 class="slider-title">#}
+        {#			                    <span class="inline-title">OUR BRANDS</span>#}
+        {#			                    <span class="line"></span>#}
+        {#			                    <a href="#" class="view-all">View All</a>#}
+        {#			                </h2>#}
+        {##}
+        {#							<div class="owl-carousel owl-theme manual clients-carousel owl-no-narrow">#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand2.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand3.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand4.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand5.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#								<a href="#" title="Brand Name" class="client">#}
+        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
+        {#								</a>#}
+        {#							</div>#}
+        {#						</div>#}
+                            </div>
 
-					<aside class="col-md-3 sidebar shop-sidebar">
-						<div class="panel-group mb-xlg">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a class="accordion-toggle" data-toggle="collapse" href="#cat-list-container">
-											CATEGORÍA
-										</a>
-									</h4>
-								</div>
-								<div class="accordion-body collapse in" id="cat-list-container">
-									<div class="panel-body">
-										<ul class="category-list">
-											<li>
-												<a href="#">Moda</a>
-												<a href="#" class="plus"></a>
+                            <aside class="col-md-3 sidebar shop-sidebar">
+                                <div class="panel-group mb-xlg">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" href="#cat-list-container">
+                                                    CATEGORÍA
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="accordion-body collapse in" id="cat-list-container">
+                                            <div class="panel-body">
+                                                <ul class="category-list">
+                                                    <li>
+                                                        <a href="#">Moda</a>
+                                                        <a href="#" class="plus"></a>
 
-												<ul>
-													<li>
-														<a href="#">Women</a>
-														<a href="#" class="plus"></a>
-														<ul>
-															<li><a href="#">Tops &amp; Blouses</a></li>
-															<li><a href="#">Accessories</a></li>
-															<li><a href="#">Dresses &amp; Skirts</a></li>
-															<li><a href="#">Shoes &amp; Boots</a></li>
-														</ul>
-													</li>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#">Women</a>
+                                                                <a href="#" class="plus"></a>
+                                                                <ul>
+                                                                    <li><a href="#">Tops &amp; Blouses</a></li>
+                                                                    <li><a href="#">Accessories</a></li>
+                                                                    <li><a href="#">Dresses &amp; Skirts</a></li>
+                                                                    <li><a href="#">Shoes &amp; Boots</a></li>
+                                                                </ul>
+                                                            </li>
 
-													<li>
-														<a href="#">Electrónica</a>
-														<a href="#" class="plus"></a>
-														<ul>
-															<li><a href="#">Accessories</a></li>
-															<li><a href="#">Watch Fashion</a></li>
-															<li><a href="#">Tees, Knits &amp; Polos</a></li>
-															<li><a href="#">Pants &amp; Denim</a></li>
-														</ul>
-													</li>
+                                                            <li>
+                                                                <a href="#">Electrónica</a>
+                                                                <a href="#" class="plus"></a>
+                                                                <ul>
+                                                                    <li><a href="#">Accessories</a></li>
+                                                                    <li><a href="#">Watch Fashion</a></li>
+                                                                    <li><a href="#">Tees, Knits &amp; Polos</a></li>
+                                                                    <li><a href="#">Pants &amp; Denim</a></li>
+                                                                </ul>
+                                                            </li>
 
-													<li>
-														<a href="#">Kids Fashion</a>
-														<a href="#" class="plus"></a>
-														<ul>
-															<li><a href="#">Casual Shoes</a></li>
-															<li><a href="#">Spring &amp; Autumn</a></li>
-															<li><a href="#">Winter Sneakers</a></li>
-														</ul>
-													</li>
-													<li><a href="#">Specials</a></li>
-													<li><a href="#">Featured</a></li>
-													<li><a href="#">Just Arrived</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href="#">Electronics</a>
-												<a href="#" class="plus"></a>
-												<ul>
-													<li><a href="#">Smart TVs</a></li>
-													<li><a href="#">Cameras</a></li>
-													<li><a href="#">Games</a></li>
-													<li><a href="#">Phones</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Gifts</a></li>
-											<li><a href="#">Home &amp; Garden</a></li>
-											<li><a href="#">Music</a></li>
-											<li>
-												<a href="#">Motors</a>
-												<a href="#" class="plus"></a>
-												<ul>
-													<li><a href="#">Accessories</a></li>
-													<li><a href="#">Cars and Trucks</a></li>
-													<li><a href="#">Motorcycles &amp; Powersports</a></li>
-													<li><a href="#">Parts &amp; Accessories</a></li>
-													<li><a href="#">Boats</a></li>
-													<li><a href="#">Auto Tools &amp; Supplies</a></li>
-												</ul>
-											</li>
-											<li>
-												<a href="#">Hogar & Jardín</a>
-												<a href="#" class="plus"></a>
-												<ul>
-													<li><a href="#">Men</a></li>
-													<li><a href="#">Women</a></li>
-													<li><a href="#">Kids</a></li>
-													<li><a href="#">Fashion</a></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
+                                                            <li>
+                                                                <a href="#">Kids Fashion</a>
+                                                                <a href="#" class="plus"></a>
+                                                                <ul>
+                                                                    <li><a href="#">Casual Shoes</a></li>
+                                                                    <li><a href="#">Spring &amp; Autumn</a></li>
+                                                                    <li><a href="#">Winter Sneakers</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><a href="#">Specials</a></li>
+                                                            <li><a href="#">Featured</a></li>
+                                                            <li><a href="#">Just Arrived</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Electronics</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Smart TVs</a></li>
+                                                            <li><a href="#">Cameras</a></li>
+                                                            <li><a href="#">Games</a></li>
+                                                            <li><a href="#">Phones</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#">Gifts</a></li>
+                                                    <li><a href="#">Home &amp; Garden</a></li>
+                                                    <li><a href="#">Music</a></li>
+                                                    <li>
+                                                        <a href="#">Motors</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Accessories</a></li>
+                                                            <li><a href="#">Cars and Trucks</a></li>
+                                                            <li><a href="#">Motorcycles &amp; Powersports</a></li>
+                                                            <li><a href="#">Parts &amp; Accessories</a></li>
+                                                            <li><a href="#">Boats</a></li>
+                                                            <li><a href="#">Auto Tools &amp; Supplies</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Hogar & Jardín</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Men</a></li>
+                                                            <li><a href="#">Women</a></li>
+                                                            <li><a href="#">Kids</a></li>
+                                                            <li><a href="#">Fashion</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-						<hr class="mt-sm mb-xl">
-					</aside>
-				</div>
-			</div>
+                                <hr class="mt-sm mb-xl">
+                            </aside>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
 
             <div class="container">
                 <div class="row">
@@ -1096,7 +1100,7 @@
                                 <div id="featured" class="tab-pane active">
                                     <ul class="products-grid columns4">
 
-                                        <div class="owl-carousel owl-theme" data-plugin-options="{'items': 5, 'autoplay': false, 'autoplayTimeout': 3000}">
+                                        <div class="owl-carousel owl-theme" data-plugin-options="{'items':4 , 'autoplay': false, 'autoplayTimeout': 3000}">
 
                                             <div class="product">
                                                 <figure class="product-image-area">
