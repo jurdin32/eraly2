@@ -23,7 +23,7 @@ from Empresa.views import *
 from Home.views import *
 from Personas.views import registroCLientes, deshabilitarCliente
 from Producto.views import *
-from Store.views import tienda
+from Store.views import tienda, eproductos, edetalles
 from Ventas.views import *
 
 urlpatterns = [
@@ -101,7 +101,10 @@ urlpatterns = [
     path("logout_/",logout_),
 
     #tienda
-    path("store/",tienda)
+
+    path("store/",tienda),
+    path("store/eproducts/",eproductos),
+    path("store/edetails/",edetalles),
 
 
 
