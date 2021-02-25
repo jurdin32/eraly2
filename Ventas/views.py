@@ -208,3 +208,11 @@ def abonos(request,id):
         'cuenta':CuentasCobrar.objects.get(id=id),
     }
     return render(request, 'Ventas/abonos.html', contexto)
+
+def crearAbonosPDF(request, id):
+    recibo=Recibos.objects.get(id=id)
+    contexto={
+        'recibo':recibo,
+        'site': Site.objects.last(),
+    }
+    return export_pdf(request,'Ventas/rptAbonos.html',contexto)
