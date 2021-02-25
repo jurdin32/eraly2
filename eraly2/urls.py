@@ -23,7 +23,8 @@ from Empresa.views import *
 from Home.views import *
 from Personas.views import registroCLientes, deshabilitarCliente
 from Producto.views import *
-from Store.views import tienda, eproductos, edetalles
+from Store.views import *
+from Store.views import _productos, _detalles
 from Ventas.views import *
 
 urlpatterns = [
@@ -103,8 +104,8 @@ urlpatterns = [
     #tienda
 
     path("store/",tienda),
-    path("store/eproducts/",eproductos),
-    path("store/edetails/",edetalles),
+    path("store/products/",_productos),
+    path("store/details/",_detalles),
 
 
 
