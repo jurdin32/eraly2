@@ -1,7 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
-{% load static %}
-{% load VentasTags %}
+    {% load static %}
+    {% load VentasTags %}
 
     <!--Crear  registro -->
     <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
@@ -19,7 +19,8 @@
                             <form id="formRegistrar" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" value="{{ cuenta.factura_numero }}"
+                                    <input type="text" class="form-control has-feedback-left"
+                                           value="{{ cuenta.factura_numero }}"
                                            readonly="readonly" name="factura_numero" id="factura_numero"
                                            placeholder="Factura de Venta">
                                     <span class="fa fa-credit-card-alt form-control-feedback left"
@@ -27,7 +28,8 @@
                                 </div>
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" value="{{ cuenta.cliente.nombres }} {{ cuenta.cliente.apellidos }}"
+                                    <input type="text" class="form-control has-feedback-left"
+                                           value="{{ cuenta.cliente.nombres }} {{ cuenta.cliente.apellidos }}"
                                            readonly="readonly" name="cliente" id="cliente"
                                            placeholder="Cliente">
                                     <span class="fa fa-user form-control-feedback left"
@@ -78,29 +80,72 @@
 
     <div class="">
         <div class="row">
+            <div class="animated flipInY  col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats bg-primary" style="color: white" >
+                    <div class="icon" style="color: white"><i class="fa fa-dollar"></i>
+                    </div>
+                    <div class="count" style="color: white">{{ cuenta.cantidad }}</div>
+
+                    <h3 style="color: white">Cuenta por Pagar</h3>
+                    <p style="color: white">Total Inicial</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats bg-success" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-dollar"></i>
+                    </div>
+                    <div class="count" style="color: white">{% pagos cuenta.id %}</div>
+
+                    <h3 style="color: white">Total Pagos a la Fecha</h3>
+                    <p style="color: white">Abonos del Cliente</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats bg-warning" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-sort-amount-desc"></i>
+                    </div>
+                    <div class="count" style="color: white">{% saldos cuenta.id %}</div>
+
+                    <h3 style="color:white">Por pagar</h3>
+                    <p style="color: white">Falta por pagar</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats bg-danger" style="color: white">
+                    <div class="icon" style="color: white"><i class="fa fa-check-square-o"></i>
+                    </div>
+                    <div class="count" style="color: white">{% saldos cuenta.id %}</div>
+
+                    <h3 style="color:white">Saldo</h3>
+                    <p style="color: white">Saldo a la Fecha</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Cuentas <small>por cobrar</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Opciones</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
-                                        class="fa fa-file-o"> </i> Registra Nuevo</a>
-                            </div>
-                        </li>
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                    </ul>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">Opciones</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                            class="fa fa-file-o"> </i> Registra Nuevo</a>
+                                </div>
+                            </li>
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="listaCuentas" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="listaCuentas" class="table table-striped table-bordered"
+                                           style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
                                             <th style="text-align: center">Id</th>
@@ -116,21 +161,36 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {% for abono in abonos %}
-                                               <tr>
-                                                   <td style="text-align: center; vertical-align: middle">{{ abono.id }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{{ abono.fecha }}</td>
-                                                   <td style="text-align: center; vertical-align: middle">{{ abono.cuenta.factura_numero }}</td>
-                                                   <td style="vertical-align: middle">{{ abono.cuenta.cliente.nombres }} {{ abono.cuenta.cliente.apellidos }}</td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.cantidad }}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-success">{{ abono.formaPago }}</span></td>
-                                                   <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-danger">{% if abono.numeroCheque %}{{ abono.numeroCheque }}{% else %}Se pago en efectivo{% endif %} </span></td>
-                                                    <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.rebidoPor }}</span></td>
-                                                    <td style="text-align: center; vertical-align: middle"><span style="font-size: 12px" class="badge badge-primary">{{ abono.recibiDe }}</span></td>
-                                                   <td style="text-align: center"><a href="/accounts_receivable/print/{{ cuenta.id }}/" class="btn btn-app"><i class="fa fa-binoculars"></i> Imprimir</a></td>
-                                               </tr>
-                                            {% endfor %}
-                                            
+                                        {% for abono in abonos %}
+                                            <tr>
+                                                <td style="text-align: center; vertical-align: middle">{{ abono.id }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ abono.fecha }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ abono.cuenta.factura_numero }}</td>
+                                                <td style="vertical-align: middle">{{ abono.cuenta.cliente.nombres }} {{ abono.cuenta.cliente.apellidos }}</td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        style="font-size: 12px"
+                                                        class="badge badge-primary">{{ abono.cantidad }}</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        style="font-size: 12px"
+                                                        class="badge badge-success">{{ abono.formaPago }}</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        style="font-size: 12px"
+                                                        class="badge badge-danger">{% if abono.numeroCheque %}
+                                                    {{ abono.numeroCheque }}{% else %}Se pago en
+                                                    efectivo{% endif %} </span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        style="font-size: 12px"
+                                                        class="badge badge-primary">{{ abono.rebidoPor }}</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        style="font-size: 12px"
+                                                        class="badge badge-primary">{{ abono.recibiDe }}</span></td>
+                                                <td style="text-align: center"><a
+                                                        href="/accounts_receivable/print/{{ cuenta.id }}/"
+                                                        class="btn btn-app"><i class="fa fa-print"></i>
+                                                    Imprimir</a></td>
+                                            </tr>
+                                        {% endfor %}
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -144,8 +204,8 @@
 
 {% endblock %}
 {% block script_index %}
-<script src="{% static 'select2/js/select2.min.js' %}"></script>
-<link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
 
     <script>
         $(document).ready(function () {
@@ -153,7 +213,7 @@
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
                 },
-                pageLength : 100,
+                pageLength: 100,
             });
         });
         $("#cliente").select2({
