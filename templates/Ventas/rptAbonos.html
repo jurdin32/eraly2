@@ -9,9 +9,48 @@
             margin: -7px;
             padding: 0;
         }
+
+        #contenido{
+            padding: 20px;
+        }
+        body{
+            color:#8b8b8b ;
+        }
+
+
+
     </style>
 </head>
 <body>
 <img src="{{ site }}/media/{{ recibo.cuenta.cliente.establecimiento.banner }}" style="width: 792px" alt="">
+<div id="contenido" style="text-align: center">
+<h2>RECIBO DE PAGO</h2>
+<table style="width: 100%">
+    <tr>
+        <td style="width: 20%; text-align: left">Fecha</td><td style="width: 30%; text-align: left; border-bottom: 1px solid grey">Aqui la Fecha</td>
+        <td style="width: 25%; text-align: right">No. </td><td style="width: 25%; text-align: left; border-bottom: 1px solid grey">00001</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px">Recibi de:</td><td style="padding-top: 20px; text-align: left; border-bottom: 1px solid grey">Nombre de la persona</td>
+        <td style="padding-top: 20px; text-align: right">Cantidad: </td><td style="padding-top: 20px; text-align: left;"><div style="padding:5px; border: 1px solid grey; width: 95%">345,90</div></td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px">Cantidad</td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Aqui va la cantidad en letras.</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px">Concepto</td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Descripción del Pago.</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px">Recibido Por:</td>
+        <td style=" text-align: left; padding-top: 20px;"><br><br> Firma <br> Nombre <br> Domicilio
+            <br> Telefono</td>
+        <td style=" text-align: left; padding-top: 20px"> Forma de Pago:</td>
+        <td style=" text-align: left; padding-top: 20px; "><br><br>[x] Efectivo <br> [] Cheque <br> No.:
+            <br> [] Transferencia</td>
+    </tr>
+</table>
+</div>
 </body>
 </html>
