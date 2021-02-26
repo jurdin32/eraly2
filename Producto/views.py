@@ -240,7 +240,8 @@ def productos_detalles(request,id):
         'producto':producto,
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
         'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
-        'marcas':Marca.objects.all()
+        'marcas':Marca.objects.all(),
+        'imagenes':ImagenesProducto.objects.filter(producto_id=id)
     }
     return render(request, 'producto/editarProducto.html',contexto)
 
