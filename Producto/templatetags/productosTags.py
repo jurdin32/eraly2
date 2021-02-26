@@ -2,7 +2,7 @@ from django import template
 from django.db.models import Sum
 from django.utils.safestring import mark_safe
 
-from Producto.models import Productos, Kardex, Precios, Promociones
+from Producto.models import Productos, Kardex, Precios
 
 register = template.Library()
 
@@ -45,31 +45,6 @@ def egresos(id):
         egresos=0
     return egresos
 
-# para obtener los datos de la promocion segun el id =producto
-@register.simple_tag
-def promocion_inicio(id):
-    try:
-        return Promociones.objects.get(id=id).fecha_inicio
-    except:
-        return "No se ha creado"
-
-@register.simple_tag
-def promocion_finalizacion(id):
-    try:
-        return Promociones.objects.get(id=id).fecha_finalizacion
-    except:
-        return "No se ha creado"
-
-@register.simple_tag
-def promocion_estado(id):
-    try:
-        promo= Promociones.objects.get(producto_id=id).estado
-        if promo:
-            return mark_safe("<i style='font-size:20px' class='fa fa-check-square-o text-success'></i>")
-        else:
-            return mark_safe("<i style='font-size:20px'  class='fa fa-frown-o text-danger'></i>")
-    except:
-        return mark_safe("<i style='font-size:20px' class='fa fa-frown-o text-danger'></i>")
 # para obtener los datos de la promocion segun el id =producto
 @register.simple_tag
 def promocion_inicio(id):

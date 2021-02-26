@@ -303,13 +303,3 @@ def inventario(request):
         'productos':Productos.objects.filter(establecimiento__usuario=request.user),
     }
     return render(request, 'producto/inventario.html',contexto)
-
-def promociones(request):
-    if request.POST:
-        print(request.POST)
-    contexto={
-        'productos':Productos.objects.filter(establecimiento__usuario=request.user)
-    }
-    return render(request, 'producto/promociones.html',contexto)
-
-
