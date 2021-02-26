@@ -41,7 +41,7 @@
     </tr>
     <tr>
         <td style=" text-align: left; padding-top: 20px"><strong>Cantidad</strong></td>
-        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Aqui va la cantidad en letras.</td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">{{ abono }} UDS.</td>
     </tr>
     <tr>
         <td style=" text-align: left; padding-top: 20px"><strong>Concepto</strong></td>
@@ -49,10 +49,10 @@
     </tr>
     <tr>
         <td style=" text-align: left; padding-top: 20px"><strong>Recibido Por:</strong></td>
-        <td style=" text-align: left; padding-top: 20px;font-size: 13px;line-height: 12px"><br><br> <strong>Firma</strong> <br><br> {{ recibo.rebidoPor }} <br><br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
+        <td style=" text-align: left; padding-top: 20px;font-size: 13px;line-height: 12px"><br><br><br><br> <strong>Firma</strong> <br><br> {{ recibo.rebidoPor }} <br><br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
         <td style=" text-align: left; padding-top: 20px"><strong>Forma de Pago:</strong></td>
         <td style=" text-align: left; padding-top: 20px; ">
-            <br>
+            <br><br><br>
             {% if recibo.formaPago == "EFECTIVO" %}
             <br>[ x ] Efectivo
             <br><br>[   ] Cheque

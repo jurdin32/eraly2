@@ -13,7 +13,7 @@ from Producto.models import Productos, Kardex, Precios
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
-
+from nlt import numlet as nl
 
 def proformas(request,id=0):
     establecimiento=None
@@ -211,8 +211,11 @@ def abonos(request,id):
 
 def crearAbonosPDF(request, id):
     recibo=Recibos.objects.get(id=id)
+    resultado = nl.Numero(recibo.cantidad).a_letras
+    print(resultado)
     contexto={
         'recibo':recibo,
         'site': Site.objects.last(),
+        'abono':resultado
     }
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
