@@ -24,7 +24,7 @@ from Home.views import *
 from Personas.views import registroCLientes, deshabilitarCliente
 from Producto.views import *
 from Store.views import *
-from Store.views import _productos, _detalles
+from Store.views import _productos, _detalles, _tiendas
 from Ventas.views import *
 
 urlpatterns = [
@@ -107,6 +107,7 @@ urlpatterns = [
     path("store/",tienda),
     path("store/products/",_productos),
     path("store/details/",_detalles),
+    path("store/stores/",_tiendas),
 
 
 

@@ -19,3 +19,9 @@ def _detalles(request):
 
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
+
+def _tiendas(request):
+    contexto={
+
+    }
+    return render(request, 'Store/tiendas.html', contexto)
