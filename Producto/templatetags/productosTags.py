@@ -1,8 +1,7 @@
 from django import template
 from django.db.models import Sum
-from django.utils.safestring import mark_safe
 
-from Producto.models import Productos, Kardex, Precios
+from Producto.models import *
 
 register = template.Library()
 
