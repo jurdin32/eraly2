@@ -198,6 +198,7 @@ def registarProducto(request):
         producto.establecimiento_id=request.POST['establecimiento']
         producto.subcategoria_id=request.POST['categoria']
         producto.nombre = request.POST['nombre']
+        producto.tipo=request.POST['tipo']
         if request.POST.get('marca'):
             producto.marca_id = request.POST['marca']
         else:
@@ -222,6 +223,7 @@ def productos_detalles(request,id):
         producto.establecimiento_id=request.POST['establecimiento']
         producto.subcategoria_id=request.POST['categoria']
         producto.nombre = request.POST['nombre']
+        producto.tipo = request.POST['tipo']
         if request.POST.get('marca'):
             producto.marca_id=request.POST['marca']
         else:
