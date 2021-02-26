@@ -336,7 +336,7 @@
         var ids = []
 
         function agregarFila(id, nombre, precio, stock) {
-
+            precio=precio.replace(",",".")
             if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))

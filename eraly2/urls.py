@@ -98,6 +98,7 @@ urlpatterns = [
 
     path("accounts_receivable/",cuentasCobrar),
     path("accounts_receivable/<int:id>/",abonos),
+    path("accounts_receivable/print/<int:id>/",crearAbonosPDF),
 
     path("logout_/",logout_),
 

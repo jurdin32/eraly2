@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Abonos - Recibos</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: -7px;
+            padding: 0;
+        }
+
+        #contenido{
+            padding: 20px;
+        }
+        body{
+            color:#8b8b8b ;
+            font-size: 14px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        #footer{
+            bottom: 0px;
+            position: fixed;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+<img src="{{ site }}/media/{{ recibo.cuenta.cliente.establecimiento.banner }}" style="width: 792px" alt="">
+<div id="contenido" style="text-align: center">
+<h2>RECIBO DE PAGO</h2>
+<table style="width: 100%">
+    <tr>
+        <td style="width: 20%; text-align: left"><strong>Fecha</strong></td><td style="width: 30%; text-align: left; border-bottom: 1px solid grey">
+        {{  recibo.fecha }}</td>
+        <td style="width: 25%; text-align: right"><strong>No.</strong> </td><td style="width: 25%; text-align: left; border-bottom: 1px solid grey">
+        {{ recibo.id|stringformat:"010d" }}</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px"><strong>Recibi de:</strong></td><td style="padding-top: 20px; text-align: left; border-bottom: 1px solid grey">{{ recibo.recibiDe }}</td>
+        <td style="padding-top: 20px; text-align: right"><strong>Cantidad:</strong> </td><td style="padding-top: 20px; text-align: left;"><div style="padding:5px; border: 1px solid grey; width: 95%">
+        {{  recibo.cantidad }}</div></td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px"><strong>Cantidad</strong></td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">{{ abono }} UDS.</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px"><strong>Concepto</strong></td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Abono a la Cuenta {{ recibo.cuenta.id|stringformat:"010d" }}</td>
+    </tr>
+    <tr>
+        <td style=" text-align: left; padding-top: 20px"><strong>Recibido Por:</strong></td>
+        <td style=" text-align: left; padding-top: 20px;font-size: 13px;line-height: 12px"><br><br><br><br> <strong>Firma</strong> <br><br> {{ recibo.rebidoPor }} <br><br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
+        <td style=" text-align: left; padding-top: 20px"><strong>Forma de Pago:</strong></td>
+        <td style=" text-align: left; padding-top: 20px; ">
+            <br><br><br>
+            {% if recibo.formaPago == "EFECTIVO" %}
+            <br>[ x ] Efectivo
+            <br><br>[   ] Cheque
+            <br><br>[   ] Transferencia
+            {% elif recibo.formaPago == "CHEQUE" %}
+            <br>[ X ] Cheque
+            <br><br> No.: {{ recibo.numeroCheque }}
+            <br><br>[   ] Transferencia
+            <br><br>[   ] Efectivo
+
+            {% elif recibo.formaPago == "TRANSFERENCIA" %}
+            <br>[ X ] Transferencia
+            <br><br>[   ] Efectivo
+            <br><br>[   ] Cheque
+            {% endif %}
+
+        </td>
+    </tr>
+</table>
+</div>
+<div id="footer">
+    <img src="{{ site }}/media/{{ recibo.cuenta.cliente.establecimiento.pie_pagina }}" style="width: 792px" alt="">
+</div>
+</body>
+</html>
