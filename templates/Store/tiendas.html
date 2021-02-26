@@ -1,0 +1,113 @@
+{% extends 'Store/demo-shop-8.html' %}
+{% load static %}
+    {% block content %}
+        <div class="slider-container rev_slider_wrapper"  >
+            <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 270, 'disableProgressBar': 'on'}">
+                <ul>
+                    <li data-transition="fade">
+                        <img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
+
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            data-bgrepeat="no-repeat"
+                            class="rev-slidebg">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="homepage-bar">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 normal">
+                    <div class="tabs home-products-tab">
+                        <ul class="nav nav-links">
+                            <li class="active">
+                                <a href="#featured" data-toggle="tab">Productos Destacados</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div id="featured" class="tab-pane active">
+                                <ul class="products-grid columns4">
+
+                                    <div class="owl-carousel owl-theme" data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
+
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
+                                                    <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                </div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 10 Plus</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$120.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="product">
+                                            <figure class="product-image-area">
+                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
+                                                    <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
+                                                    <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                </a>
+
+                                                <a href="#" class="product-quickview">
+                                                    <i class="fa fa-share-square-o"></i>
+                                                    <span>Quick View</span>
+                                                </a>
+                                                <div class="product-actions">
+                                                    <a href="#" class="addtocart" title="Add to Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                </div>
+                                            </figure>
+                                            <div class="product-details-area">
+                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 20 Ultra</a></h2>
+                                                <div class="product-ratings">
+                                                    <div class="ratings-box">
+                                                        <div class="rating" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-price-box">
+                                                    <span class="product-price">$120.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
