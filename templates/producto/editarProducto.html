@@ -398,6 +398,40 @@
             </div>
         </div>
     </div>
+     <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>Galeria de imagenes </small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        {% for imagen in imagenes %}
+                            <div class="col-md-2">
+                            <div class="thumbnail">
+                                <div class="image view view-first">
+                                    <img style="width: 100%; display: block;" src="/media/{{ imagen.imagen}}" alt="image">
+                                    <div class="mask">
+                                        <p>Imagen {{ forloop.counter }} para el producto {{ producto.nombre }}</p>
+                                        <div class="tools tools-bottom">
+                                            <a href="#"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <p>Imagen {{ forloop.counter }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script_index %}}
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
