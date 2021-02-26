@@ -49,24 +49,24 @@
     </tr>
     <tr>
         <td style=" text-align: left; padding-top: 20px"><strong>Recibido Por:</strong></td>
-        <td style=" text-align: left; padding-top: 20px;font-size: 13px"><br><br> <strong>Firma</strong> <br> {{ recibo.rebidoPor }} <br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
+        <td style=" text-align: left; padding-top: 20px;font-size: 13px;line-height: 12px"><br><br> <strong>Firma</strong> <br><br> {{ recibo.rebidoPor }} <br><br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
         <td style=" text-align: left; padding-top: 20px"><strong>Forma de Pago:</strong></td>
         <td style=" text-align: left; padding-top: 20px; ">
             <br>
             {% if recibo.formaPago == "EFECTIVO" %}
             <br>[ x ] Efectivo
-            <br>[   ] Cheque
-            <br>[   ] Transferencia
+            <br><br>[   ] Cheque
+            <br><br>[   ] Transferencia
             {% elif recibo.formaPago == "CHEQUE" %}
             <br>[ X ] Cheque
-            <br> No.: {{ recibo.numeroCheque }}
-            <br>[   ] Transferencia
-            <br>[   ] Efectivo
+            <br><br> No.: {{ recibo.numeroCheque }}
+            <br><br>[   ] Transferencia
+            <br><br>[   ] Efectivo
 
             {% elif recibo.formaPago == "TRANSFERENCIA" %}
             <br>[ X ] Transferencia
-            <br>[   ] Efectivo
-            <br>[   ] Cheque
+            <br><br>[   ] Efectivo
+            <br><br>[   ] Cheque
             {% endif %}
 
         </td>
