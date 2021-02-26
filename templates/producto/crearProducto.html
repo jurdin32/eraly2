@@ -128,6 +128,18 @@
                         <div class="x_content">
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <select name="tipo" id="tipo" required="required"
+                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            <option value="P">Producto</option>
+                                            <option value="S">Servicios</option>
+                                            <option value="B">Bienes</option>
+                                    </select>
+                                    <span>El tipo es Obligatorio</span>
+                                    <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="establecimiento" id="establecimiento" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
                                         {% for establecimiento in establecimientos %}
