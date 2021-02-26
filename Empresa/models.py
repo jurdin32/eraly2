@@ -49,7 +49,7 @@ class Direccion(models.Model):
     telefono = models.CharField(max_length=10,blank=True)
 
     def __str__(self):
-        return "Ciudad: %s <br>Dirección: %s <br> Teléfono: %s <hr>"%(self.ciudad.nombre,self.direccion,self.telefono)
+        return mark_safe("<strong>Ciudad:</strong> %s <br><strong>Dirección:</strong> %s <br> <strong>Teléfono:</strong> %s"%(self.ciudad.nombre,self.direccion,self.telefono))
 
 
 class UsuarioEmpresa(models.Model):

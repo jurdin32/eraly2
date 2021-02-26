@@ -15,6 +15,8 @@
         }
         body{
             color:#8b8b8b ;
+            font-size: 14px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
 
@@ -27,28 +29,47 @@
 <h2>RECIBO DE PAGO</h2>
 <table style="width: 100%">
     <tr>
-        <td style="width: 20%; text-align: left">Fecha</td><td style="width: 30%; text-align: left; border-bottom: 1px solid grey">Aqui la Fecha</td>
-        <td style="width: 25%; text-align: right">No. </td><td style="width: 25%; text-align: left; border-bottom: 1px solid grey">00001</td>
+        <td style="width: 20%; text-align: left"><strong>Fecha</strong></td><td style="width: 30%; text-align: left; border-bottom: 1px solid grey">
+        {{  recibo.fecha }}</td>
+        <td style="width: 25%; text-align: right"><strong>No.</strong> </td><td style="width: 25%; text-align: left; border-bottom: 1px solid grey">
+        {{ recibo.id|stringformat:"010d" }}</td>
     </tr>
     <tr>
-        <td style=" text-align: left; padding-top: 20px">Recibi de:</td><td style="padding-top: 20px; text-align: left; border-bottom: 1px solid grey">Nombre de la persona</td>
-        <td style="padding-top: 20px; text-align: right">Cantidad: </td><td style="padding-top: 20px; text-align: left;"><div style="padding:5px; border: 1px solid grey; width: 95%">345,90</div></td>
+        <td style=" text-align: left; padding-top: 20px"><strong>Recibi de:</strong></td><td style="padding-top: 20px; text-align: left; border-bottom: 1px solid grey">{{ recibo.recibiDe }}</td>
+        <td style="padding-top: 20px; text-align: right"><strong>Cantidad:</strong> </td><td style="padding-top: 20px; text-align: left;"><div style="padding:5px; border: 1px solid grey; width: 95%">
+        {{  recibo.cantidad }}</div></td>
     </tr>
     <tr>
-        <td style=" text-align: left; padding-top: 20px">Cantidad</td>
+        <td style=" text-align: left; padding-top: 20px"><strong>Cantidad</strong></td>
         <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Aqui va la cantidad en letras.</td>
     </tr>
     <tr>
-        <td style=" text-align: left; padding-top: 20px">Concepto</td>
-        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Descripción del Pago.</td>
+        <td style=" text-align: left; padding-top: 20px"><strong>Concepto</strong></td>
+        <td colspan="3" style=" text-align: left; padding-top: 20px; border-bottom: 1px solid grey">Abono a la Cuenta {{ recibo.cuenta.id|stringformat:"010d" }}</td>
     </tr>
     <tr>
-        <td style=" text-align: left; padding-top: 20px">Recibido Por:</td>
-        <td style=" text-align: left; padding-top: 20px;"><br><br> Firma <br> Nombre <br> Domicilio
-            <br> Telefono</td>
-        <td style=" text-align: left; padding-top: 20px"> Forma de Pago:</td>
-        <td style=" text-align: left; padding-top: 20px; "><br><br>[x] Efectivo <br> [] Cheque <br> No.:
-            <br> [] Transferencia</td>
+        <td style=" text-align: left; padding-top: 20px"><strong>Recibido Por:</strong></td>
+        <td style=" text-align: left; padding-top: 20px;font-size: 13px"><br><br> <strong>Firma</strong> <br> {{ recibo.rebidoPor }} <br> {{ recibo.cuenta.cliente.establecimiento.direccion_set.first|safe }}
+        <td style=" text-align: left; padding-top: 20px"><strong>Forma de Pago:</strong></td>
+        <td style=" text-align: left; padding-top: 20px; ">
+            <br>
+            {% if recibo.formaPago == "EFECTIVO" %}
+            <br>[ x ] Efectivo
+            <br>[   ] Cheque
+            <br>[   ] Transferencia
+            {% elif recibo.formaPago == "CHEQUE" %}
+            <br>[ X ] Cheque
+            <br> No.: {{ recibo.numeroCheque }}
+            <br>[   ] Transferencia
+            <br>[   ] Efectivo
+
+            {% elif recibo.formaPago == "TRANSFERENCIA" %}
+            <br>[ X ] Transferencia
+            <br>[   ] Efectivo
+            <br>[   ] Cheque
+            {% endif %}
+
+        </td>
     </tr>
 </table>
 </div>
