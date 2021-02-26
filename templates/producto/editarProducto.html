@@ -381,13 +381,16 @@
                 </div>
                 <div class="x_content">
                     <p>Puedes arrastrar y soltar multiples</p>
-                    <form action="/products/images/{{ producto.id }}/" method="post" class="dropzone" enctype="multipart/form-data">
+                    <form action="/products/images/{{ producto.id }}/" method="post" class="dropzone"
+                          enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="fallback">
-                            <input name="imagenes" type="file" multiple />
+                            <input name="imagenes" type="file" multiple/>
                         </div>
                         <div class="dz-message needsclick">
-                            <p>Click aquí para subir la imagen, antes de iniciar asegurese de que todas las fotos sean del mismo tamaño (preferiblemente cuadradas), caso contrario podria generar errores de visualización</p>
+                            <p>Click aquí para subir la imagen, antes de iniciar asegurese de que todas las fotos sean
+                                del mismo tamaño (preferiblemente cuadradas), caso contrario podria generar errores de
+                                visualización</p>
                         </div>
                     </form>
 
