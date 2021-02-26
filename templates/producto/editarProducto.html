@@ -3,6 +3,7 @@
     {% load static %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <link href="/static/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <link href="/static/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
     <!--Crear direcciones de los establecimientos -->
     <div class="modal fade bs-example-modal-lg" id="registroColores" tabindex="-1" role="dialog" aria-hidden="true">
@@ -71,7 +72,8 @@
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
-                                        <input type="number" class="form-control" name="precio" max="999999999999999999" step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
+                                        <input type="number" class="form-control" name="precio" max="999999999999999999"
+                                               step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
                                     </div>
@@ -137,9 +139,9 @@
                                         {% elif  producto.tipo == "B" %}
                                             <option value="B">Bienes</option>
                                         {% endif %}
-                                            <option value="P">Producto</option>
-                                            <option value="S">Servicios</option>
-                                            <option value="B">Bienes</option>
+                                        <option value="P">Producto</option>
+                                        <option value="S">Servicios</option>
+                                        <option value="B">Bienes</option>
                                     </select>
                                     <span>Establecimiento es Obligatorio</span>
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
@@ -206,7 +208,8 @@
                                             style="width: 100%" multiple>
                                         {% for marca in marcas %}
                                             {% if producto.marca == marca %}
-                                                <option selected="selected" value="{{ marca.id }}">{{ marca.nombre }}</option>
+                                                <option selected="selected"
+                                                        value="{{ marca.id }}">{{ marca.nombre }}</option>
                                             {% else %}
                                                 <option value="{{ marca.id }}">{{ marca.nombre }}</option>
                                             {% endif %}
@@ -340,7 +343,8 @@
                                             <tbody>
                                             {% for precio in producto.precios_set.all %}
                                                 <tr>
-                                                    <td><a href="/products/prices/delete/{{ precio.id }}/"><i class="fa fa-trash text-danger"></i></a></td>
+                                                    <td><a href="/products/prices/delete/{{ precio.id }}/"><i
+                                                            class="fa fa-trash text-danger"></i></a></td>
                                                     <td>{{ precio.detalle }}</td>
                                                     <td class="fs15 fw700 text-right">$ {{ precio.precioVenta }}</td>
                                                 </tr>
@@ -367,10 +371,49 @@
             </div>
         </form>
     </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Dropzone multiple file uploader</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p>Puedes arrastrar y soltar multiples</p>
+                    <form action="/products/images/{{ producto.id }}/" method="post" class="dropzone" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="fallback">
+                            <input name="imagenes" type="file" multiple />
+                        </div>
+                        <div class="dz-message needsclick">
+                            <p>Click aquí para subir la imagen, antes de iniciar asegurese de que todas las fotos sean del mismo tamaño (preferiblemente cuadradas), caso contrario podria generar errores de visualización</p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script_index %}}
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
     <script>
         CKEDITOR.replace('descripcion');
         CKEDITOR.replace('tecnicos');

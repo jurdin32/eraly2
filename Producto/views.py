@@ -1,10 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 # Create your views here.
 from Empresa.models import Establecimiento
 from Home.models import Provincia
 from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
-    Productos, Marca, Colores, Precios, Kardex
+    Productos, Marca, Colores, Precios, Kardex, ImagenesProducto
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
 
@@ -303,3 +303,8 @@ def inventario(request):
         'productos':Productos.objects.filter(establecimiento__usuario=request.user),
     }
     return render(request, 'producto/inventario.html',contexto)
+
+def subir_imagenes_producto(request,id):
+    if request.POST:
+        ImagenesProducto(producto_id=id, imagen=request.FILES['file']).save()
+    return HttpResponse("ok")
