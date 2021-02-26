@@ -149,6 +149,14 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Cabecera en Tienda</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="file" name="cabecera_tienda" id="cabecera_tienda" class="form-control">
+                                    <span>Acualmente: </span>
+                                    <img style="width: 100%" src="/media/{{ establecimiento.cabecera_tienda }}" alt="">
+                                </div>
+                            </div>
+                            <div class="item form-group">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Sitio Web</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input type="text" name="web" value="{{ establecimiento.web }}" id="web" class="form-control">

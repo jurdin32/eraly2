@@ -49,6 +49,11 @@ def modificar_empresa(request,id):
             print('viene con pie de pagina')
             establecimiento.pie_pagina=request.FILES['pie']
         except: pass
+        try:
+            print("viene la cabecera de la tienda")
+            establecimiento.cabecera_tienda=request.FILES['cabecera_tienda']
+        except:
+            pass
         establecimiento.ruc=request.POST['ruc']
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
