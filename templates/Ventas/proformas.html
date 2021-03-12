@@ -40,7 +40,7 @@
                                                     <td>{{ precio.precioVenta }}</td>
                                                     <td>
                                                         <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }} {{ producto.talla }} {{ producto.colores_set.all }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
                                                             <i class="fa fa-check-circle text-success"
                                                                style="font-size: 20px"></i>
                                                         </a>
