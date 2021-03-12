@@ -418,13 +418,13 @@
             $("#tClientes").DataTable();
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
-
             $(".cliente").click(function () {
                 $("#idCliente").text($(this).data('id'))
                 $("#nombreCliente").text($(this).data('nombre'))
                 $("#direccionCliente").text($(this).data('direccion'))
                 $("#ciudadCliente").text($(this).data('ciudad'))
                 $("#telefonoCLiente").text($(this).data('telefono'))
+                console.log({this})
                 toastr.success("El Cliente se agrego")
             })
 
