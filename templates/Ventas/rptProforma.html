@@ -62,7 +62,7 @@
             {% for detalle in detalles %}
             <tr>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px; text-align: center; color: grey">{{ detalle.producto.id|stringformat:"04d"}}</td>
-                <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; color: grey">{{ detalle.producto.nombre }} {{ detalle.producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}</td>
+                <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; color: grey">{{ detalle.producto.nombre }} {{ detalle.producto.talla }} {% for color in detalle.producto.colores_set.all %}{{ color.nombre }}{% endfor %}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey;  padding: 5px; text-align: center; color: grey">{{ detalle.cantidad }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; padding: 5px ; text-align: right; color: grey">{{ detalle.precioU }}</td>
                 <td style="border-bottom: 1px solid grey;border-left: 1px solid grey; border-right: 1px solid grey;  padding: 5px ; text-align: right; color: grey">{{ detalle.subtotal }}</td>
