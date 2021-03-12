@@ -31,19 +31,21 @@
                                     {% for producto in productos %}
                                         {% for precio in precios %}
                                             {% if precio.producto == producto %}
-                                            <tr>
-                                            <td>{{ producto.id }}</td>
-                                            <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }} (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)</td>
-                                            <td>{% stock producto.id %}</td>
-                                            <td>{{ precio.precioVenta }}</td>
-                                            <td>
-                                                <a href="#"
-                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{{precio.precioVenta }}','{% stock producto.id %}')">
-                                                    <i class="fa fa-check-circle text-success"
-                                                       style="font-size: 20px"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                <tr>
+                                                    <td>{{ producto.id }}</td>
+                                                    <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }}
+                                                        (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)
+                                                    </td>
+                                                    <td>{% stock producto.id %}</td>
+                                                    <td>{{ precio.precioVenta }}</td>
+                                                    <td>
+                                                        <a href="#"
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                            <i class="fa fa-check-circle text-success"
+                                                               style="font-size: 20px"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -240,14 +242,16 @@
                                 <address>
                                     {% if documento %}
                                         <span id="idCliente" hidden>{{ documento.cliente.id }}</span>
-                                        {% else %}
+                                    {% else %}
                                         <span id="idCliente" hidden></span>
                                     {% endif %}
 
-                                    <strong>Nombre: </strong> <span id="nombreCliente">{{ documento.cliente.nombres}} {{ documento.cliente.apellidos }}</span>
+                                    <strong>Nombre: </strong> <span
+                                        id="nombreCliente">{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</span>
                                     <br><strong>Dirección: </strong><span
                                         id="direccionCliente">{{ documento.cliente.direccion }}</span>
-                                    <br><strong>Ciudad: </strong><span id="ciudadCliente">{{ documento.cliente.ciudad }}</span>
+                                    <br><strong>Ciudad: </strong><span
+                                        id="ciudadCliente">{{ documento.cliente.ciudad }}</span>
                                     <br><strong>Teléfono: </strong><span
                                         id="telefonoCLiente">{{ documento.cliente.telefono }}</span>
                                 </address>
@@ -275,36 +279,43 @@
                                         <th style="text-align: right">Precio</th>
                                         <th style="text-align: right">Subtotal</th>
                                         {% if documento.estado == "E" %}
-                                        <th style="text-align: center">
-                                            <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
-                                                <i class="fa fa-plus-circle"
-                                                   style="font-size: 20px;color: whitesmoke"></i></a>
-                                        </th>
+                                            <th style="text-align: center">
+                                                <a href="#" class="agregar" data-toggle="modal" data-target="#agregar">
+                                                    <i class="fa fa-plus-circle"
+                                                       style="font-size: 20px;color: whitesmoke"></i></a>
+                                            </th>
                                         {% endif %}
 
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for detalle in detalles %}
-                                    <tr>
-                                        <td style="text-align: center">{{ detalle.producto.id }}</td>
-                                        <td>{{ detalle.producto.nombre }}</td>
-                                        <td style="text-align: center">
-                                            {% if documento %}
-                                            <input class="form-control add" min="1" max="{%  stock detalle.producto.id %}" type="number" value="{{ detalle.cantidad }}"
-                                                    onkeyup="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')" onkeypress="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')" onchange="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')"
-                                                   style="text-align: center; border: none">
+                                        <tr>
+                                            <td style="text-align: center">{{ detalle.producto.id }}</td>
+                                            <td>{{ detalle.producto.nombre }}</td>
+                                            <td style="text-align: center">
+                                                {% if documento %}
+                                                    <input class="form-control add" min="1"
+                                                           max="{% stock detalle.producto.id %}" type="number"
+                                                           value="{{ detalle.cantidad }}"
+                                                           onkeyup="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')"
+                                                           onkeypress="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')"
+                                                           onchange="addCantidad($(this),'{{ detalle.precioU|stringformat:"1.2f" }}')"
+                                                           style="text-align: center; border: none">
+                                                {% endif %}
+                                            </td>
+                                            <td style="text-align: right">{{ detalle.precioU|stringformat:"1.2f" }}</td>
+                                            <td style="text-align: right"
+                                                class="precios">{{ detalle.subtotal|stringformat:"1.2f" }}</td>
+                                            {% if documento.estado == "E" %}
+                                                <td style="text-align: center" class="ii">
+                                                    <a href="#" class="eliminar" onclick="eliminarFila($(this),id)"><i
+                                                            class="fa fa-minus-circle text-danger"
+                                                            style="font-size: 20px"></i></a>
+                                                </td>
                                             {% endif %}
-                                        </td>
-                                        <td style="text-align: right" >{{ detalle.precioU|stringformat:"1.2f" }}</td>
-                                        <td style="text-align: right" class="precios">{{ detalle.subtotal|stringformat:"1.2f" }}</td>
-                                        {% if documento.estado == "E" %}
-                                        <td style="text-align: center" class="ii">
-                                            <a href="#" class="eliminar" onclick="eliminarFila($(this),id)"><i class="fa fa-minus-circle text-danger" style="font-size: 20px"></i></a>
-                                        </td>
-                                        {% endif %}
 
-                                    </tr>
+                                        </tr>
                                     {% endfor %}
 
                                     </tbody>
@@ -321,26 +332,28 @@
                                     {% if documento.estado == "A" %}
                                         EL ESTADO DE ESTE DOCUMENTO ES <strong>ANULADO</strong>
                                     {% else %}
-                                        Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30
-                                    días.
+                                        Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la
+                                        Proforma 30
+                                        días.
                                     {% endif %}
 
                                 </p>
                                 {% if documento.estado == "E" %}
-                                <div class=" ">
-                                    <button class="btn btn-danger pull-right" id="registrarDocumento"><i
-                                            class="fa fa-credit-card"></i> Registrar
-                                    </button>
-                                    <a target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"
-                                            id="generarDocumento" disabled="disabled"><i
-                                            class="fa fa-download"></i> Generar PDF
-                                    </a>
-                                    <a href="/proforms/{{ establecimiento.id }}" class="btn btn-success pull-right" style="margin-right: 5px;"
-                                            id="nuevoDocumento" disabled="disabled"><i
-                                            class="fa fa-download"></i> Nuevo Documento
-                                    </a>
-                                </div>
-                             {% endif %}
+                                    <div class=" ">
+                                        <button class="btn btn-danger pull-right" id="registrarDocumento"><i
+                                                class="fa fa-credit-card"></i> Registrar
+                                        </button>
+                                        <a target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"
+                                           id="generarDocumento" disabled="disabled"><i
+                                                class="fa fa-download"></i> Generar PDF
+                                        </a>
+                                        <a href="/proforms/{{ establecimiento.id }}" class="btn btn-success pull-right"
+                                           style="margin-right: 5px;"
+                                           id="nuevoDocumento" disabled="disabled"><i
+                                                class="fa fa-download"></i> Nuevo Documento
+                                        </a>
+                                    </div>
+                                {% endif %}
                             </div>
                             <!-- /.col -->
                             <div class="col-md-4">
@@ -378,6 +391,7 @@
     <script>
         var ids = []
         suma()
+
         function agregarFila(id, nombre, precio, stock) {
 
             if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
@@ -414,7 +428,7 @@
             var index = $(add).parent().parent().index()
             var cantidad = $(add).val()
             var valor = parseFloat(cantidad) * parseFloat(precio)
-            $("#tabla").children().children()[index+1].children[4].innerHTML = valor.toFixed(2);
+            $("#tabla").children().children()[index + 1].children[4].innerHTML = valor.toFixed(2);
             console.log('entro..!')
             suma()
         }
@@ -431,22 +445,22 @@
             $(".total").text(total.toFixed(2))
         }
 
-        function detallesDocumento(documento){
-            $("#tabla tr").each(function (index,fila){
-                if (index > 0){
-                    let codigo= parseInt($(this).find('td').eq(0).text());
+        function detallesDocumento(documento) {
+            $("#tabla tr").each(function (index, fila) {
+                if (index > 0) {
+                    let codigo = parseInt($(this).find('td').eq(0).text());
                     let cantidad = parseInt($(this).find('td').eq(2).find('input').val());
                     let precio = parseFloat($(this).find('td').eq(3).text());
                     let subtotal = parseFloat($(this).find('td').eq(4).text());
-                    if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0){
-                        $.post("/proforms/detall/{{ establecimiento.id }}/",{
+                    if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0) {
+                        $.post("/proforms/detall/{{ establecimiento.id }}/", {
                             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                            factura_id:parseInt(documento),
+                            factura_id: parseInt(documento),
                             producto_id: codigo,
-                            precio:precio,
-                            cantidad:cantidad,
-                            subtotal:subtotal
-                        },function (data){
+                            precio: precio,
+                            cantidad: cantidad,
+                            subtotal: subtotal
+                        }, function (data) {
                             console.log(data)
                         });
                     }
@@ -461,16 +475,6 @@
             $("#tClientes").DataTable();
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
-
-            $(".cliente").click(function () {
-                $("#idCliente").text($(this).data('id'))
-                $("#nombreCliente").text($(this).data('nombre'))
-                $("#direccionCliente").text($(this).data('direccion'))
-                $("#ciudadCliente").text($(this).data('ciudad'))
-                $("#telefonoCLiente").text($(this).data('telefono'))
-                toastr.success("El Cliente se agrego")
-            })
-
             $(".js-example-basic-single").select2({
                 maximumSelectionLength: 1
             });
@@ -480,25 +484,25 @@
                     establecimiento: '{{ establecimiento.id }}',
                     cliente: $("#idCliente").text(),
                     csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                {% if documento %}
-                    tipo:'{{ documento.id }}',
-                {% else %}
-                    tipo: "{{ documento.tipo }}",
-                {% endif %}
+                    {% if documento %}
+                        tipo: '{{ documento.id }}',
+                    {% else %}
+                        tipo: "{{ documento.tipo }}",
+                    {% endif %}
                     numero: $("#numeroDocumento").text(),
                     subtotal: $(".subtotal").text(),
                     iva: $(".iva").text(),
                     total: $(".total").text(),
                 }
                 $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
-                    console.log("Se registro: "+result)
+                    console.log("Se registro: " + result)
                     if (result >= 1) {
                         detallesDocumento(result)
-                        console.log("Se registro: "+result)
+                        console.log("Se registro: " + result)
                         toastr.success("La proforma se ha generado correctamente.!");
                         $("#registrarDocumento").attr('disabled', 'disabled');
                         $("#generarDocumento").removeAttr('disabled');
-                        $("#generarDocumento").attr("href",`/document/proform/${result}/`)
+                        $("#generarDocumento").attr("href", `/document/proform/${result}/`)
                     } else {
                         toastr.error("Ocurrio un error inesperado.!")
                         $("#generarDocumento").removeAttr('disabled');
@@ -506,5 +510,15 @@
                 })
             });
         });
+    </script>
+    <script>
+        $(".cliente").click(function () {
+            $("#idCliente").text($(this).data('id'))
+            $("#nombreCliente").text($(this).data('nombre'))
+            $("#direccionCliente").text($(this).data('direccion'))
+            $("#ciudadCliente").text($(this).data('ciudad'))
+            $("#telefonoCLiente").text($(this).data('telefono'))
+            toastr.success("El Cliente se agrego")
+        })
     </script>
 {% endblock %}
