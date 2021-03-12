@@ -424,7 +424,7 @@
                 $("#direccionCliente").text($(this).data('direccion'))
                 $("#ciudadCliente").text($(this).data('ciudad'))
                 $("#telefonoCLiente").text($(this).data('telefono'))
-                console.log({this})
+                console.log($(this).data('id'))
                 toastr.success("El Cliente se agrego")
             })
 
