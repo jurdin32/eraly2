@@ -16,14 +16,7 @@ def empresa(request):
         establecimiento=Establecimiento.objects.create(usuario=request.user,ruc=request.POST['ruc'],
                         representateLegal=request.POST['representateLegal'],
                         nombreComercial=request.POST['nombreComercial'],
-                        descripcion=request.POST['descripcion'],
-                        ubicacion_gps=request.POST['ubicacion'],
-                        correo_electronico = request.POST['email'],
-                        web = request.POST['web'],
-                        facebook = request.POST['facebook'],
-                        instagram = request.POST['instagram'],
-                        youtube = request.POST['youtube']
-                                                       )
+                        descripcion=request.POST['descripcion'],)
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
     contexto={
