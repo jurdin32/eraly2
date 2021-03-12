@@ -31,19 +31,21 @@
                                     {% for producto in productos %}
                                         {% for precio in precios %}
                                             {% if precio.producto == producto %}
-                                            <tr>
-                                            <td>{{ producto.id }}</td>
-                                            <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }} (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)</td>
-                                            <td>{% stock producto.id %}</td>
-                                            <td>{{ precio.precioVenta }}</td>
-                                            <td>
-                                                <a href="#"
-                                                   onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{{precio.precioVenta }}','{% stock producto.id %}')">
-                                                    <i class="fa fa-check-circle text-success"
-                                                       style="font-size: 20px"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                <tr>
+                                                    <td>{{ producto.id }}</td>
+                                                    <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }}
+                                                        (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)
+                                                    </td>
+                                                    <td>{% stock producto.id %}</td>
+                                                    <td>{{ precio.precioVenta }}</td>
+                                                    <td>
+                                                        <a href="#"
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                            <i class="fa fa-check-circle text-success"
+                                                               style="font-size: 20px"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
@@ -290,11 +292,11 @@
                                             class="fa fa-credit-card"></i> Registrar
                                     </button>
                                     <a class="btn btn-primary pull-right" style="margin-right: 5px;"
-                                            id="generarDocumento" disabled="disabled"><i
+                                       id="generarDocumento" disabled="disabled"><i
                                             class="fa fa-download"></i> Generar PDF
                                     </a>
                                     <a href="" class="btn btn-success pull-right" style="margin-right: 5px;"
-                                            id="nuevoDocumento" disabled="disabled"><i
+                                       id="nuevoDocumento" disabled="disabled"><i
                                             class="fa fa-download"></i> Nuevo Documento
                                     </a>
                                 </div>
@@ -387,22 +389,22 @@
             $(".total").text(total.toFixed(2))
         }
 
-        function detallesDocumento(documento){
-            $("#tabla tr").each(function (index,fila){
-                if (index > 0){
-                    let codigo= parseInt($(this).find('td').eq(0).text());
+        function detallesDocumento(documento) {
+            $("#tabla tr").each(function (index, fila) {
+                if (index > 0) {
+                    let codigo = parseInt($(this).find('td').eq(0).text());
                     let cantidad = parseInt($(this).find('td').eq(2).find('input').val());
                     let precio = parseFloat($(this).find('td').eq(3).text());
                     let subtotal = parseFloat($(this).find('td').eq(4).text());
-                    if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0){
-                        $.post("/proforms/detall/{{ establecimiento.id }}/",{
+                    if (codigo > 0 && cantidad > 0 && precio > 0 && subtotal > 0 && documento > 0) {
+                        $.post("/proforms/detall/{{ establecimiento.id }}/", {
                             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                            factura_id:parseInt(documento),
+                            factura_id: parseInt(documento),
                             producto_id: codigo,
-                            precio:precio,
-                            cantidad:cantidad,
-                            subtotal:subtotal
-                        },function (data){
+                            precio: precio,
+                            cantidad: cantidad,
+                            subtotal: subtotal
+                        }, function (data) {
                             console.log(data)
                         });
                     }
@@ -412,21 +414,13 @@
         }
     </script>
     <script>
-    var documento=0
+        var documento = 0
         $(document).ready(function () {
             $("#tproductos").DataTable();
             $("#tClientes").DataTable();
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
 
-            $(".cliente").click(function () {
-                $("#idCliente").text($(this).data('id'))
-                $("#nombreCliente").text($(this).data('nombre'))
-                $("#direccionCliente").text($(this).data('direccion'))
-                $("#ciudadCliente").text($(this).data('ciudad'))
-                $("#telefonoCLiente").text($(this).data('telefono'))
-                toastr.success("El Cliente se agrego")
-            })
 
             $(".js-example-basic-single").select2({
                 maximumSelectionLength: 1
@@ -444,14 +438,14 @@
                     total: $(".total").text(),
                 }
                 $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
-                    console.log("Se registro: "+result)
+                    console.log("Se registro: " + result)
                     if (result >= 1) {
                         detallesDocumento(result)
-                        console.log("Se registro: "+result)
+                        console.log("Se registro: " + result)
                         toastr.success("La proforma se ha generado correctamente.!");
                         $("#registrarDocumento").attr('disabled', 'disabled');
                         $("#generarDocumento").removeAttr('disabled');
-                        $("#generarDocumento").attr("href",`/document/fac/${result}/`)
+                        $("#generarDocumento").attr("href", `/document/fac/${result}/`)
                     } else {
                         toastr.error("Ocurrio un error inesperado.!")
                         $("#generarDocumento").removeAttr('disabled');
@@ -460,5 +454,15 @@
             });
 
         });
+    </script>
+    <script>
+        $(".cliente").click(function () {
+            $("#idCliente").text($(this).data('id'))
+            $("#nombreCliente").text($(this).data('nombre'))
+            $("#direccionCliente").text($(this).data('direccion'))
+            $("#ciudadCliente").text($(this).data('ciudad'))
+            $("#telefonoCLiente").text($(this).data('telefono'))
+            toastr.success("El Cliente se agrego")
+        })
     </script>
 {% endblock %}
