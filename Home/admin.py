@@ -31,7 +31,3 @@ class AdminCiudad(admin.ModelAdmin):
     list_display_links = Attr(Ciudad)
     list_display = Attr(Ciudad)
 
-@admin.register(ConfigurarDocumentos)
-class AdminConfigurarDocumentos(admin.ModelAdmin):
-    list_display = Attr(ConfigurarDocumentos)
-    list_display_links = Attr(ConfigurarDocumentos)

@@ -26,3 +26,8 @@ class AdminTiendas(admin.ModelAdmin):
 class AdminUsuario(admin.ModelAdmin):
     list_display = Attr(UsuarioEmpresa)
     list_display_links = Attr(UsuarioEmpresa)
+
+@admin.register(ConfigurarDocumentos)
+class AdminConfigurarDocumentos(admin.ModelAdmin):
+    list_display = Attr(ConfigurarDocumentos)
+    list_display_links = Attr(ConfigurarDocumentos)
