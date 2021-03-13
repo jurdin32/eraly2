@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from Home.models import Pais, Provincia, Ciudad, ConfigurarDocumentos
+from Empresa.models import *
+from Home.models import *
 from eraly2.snippers import Attr
 
 

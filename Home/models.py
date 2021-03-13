@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from Empresa.models import Establecimiento
+
 
 
 class Pais(models.Model):
@@ -27,8 +27,5 @@ class Ciudad(models.Model):
     def __str__(self):
         return self.nombre
 
-class ConfigurarDocumentos(models.Model):
-    establecimiento = models.ForeignKey(Establecimiento,null=True,blank=True)
-    proformas= models.IntegerField(default=1)
-    facturas=models.IntegerField(default=1)
+
 

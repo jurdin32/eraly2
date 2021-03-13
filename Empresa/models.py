@@ -30,8 +30,6 @@ class Establecimiento(models.Model):
     def previa(self):
         return mark_safe('<a href="/admin/Empresa/establecimiento/%s/change/"><img src="/media/%s" style="width: 50px" alt=""></a>'%(self.id,self.logo))
 
-
-
     def __str__(self):
         if self.nombreComercial:
             return self.nombreComercial
@@ -41,6 +39,12 @@ class Establecimiento(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombreComercial, instance=self)
         super(Establecimiento, self).save(*args, **kwargs)
+
+
+class ConfigurarDocumentos(models.Model):
+    establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
+    proformas = models.IntegerField(default=1)
+    facturas = models.IntegerField(default=1)
 
 
 class Direccion(models.Model):
