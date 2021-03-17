@@ -198,7 +198,6 @@
 
     <div class="row">
         <div class="col-md-12">
-            <a href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
             <div class="x_panel">
                 <div class="x_title">
                     <h2>
@@ -227,6 +226,7 @@
                                            href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
                                     {% endfor %}
                                     {% if establecimiento %}
+                                        <a href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
                                         <br>
                                         <span style="font-size: 30px; font-weight: bold">{{ establecimiento.nombreComercial|upper }}</span>
                                         <br><span style="font-weight: bold">R.U.C.:</span>{{ establecimiento.ruc }}
