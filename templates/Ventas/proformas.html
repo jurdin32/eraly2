@@ -222,8 +222,9 @@
                                     Seleccione el Establecimiento
                                 {% endif %}
                                 <address>
+                                    <a class="btn btn-danger" href="/proforms/0/">Cambiar</a>
                                     {% for establecimiento in establecimientos %}
-                                        <a class="btn btn-success"
+                                        <a class="btn btn-primary"
                                            href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
                                     {% endfor %}
                                     {% if establecimiento %}
