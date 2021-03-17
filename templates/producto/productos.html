@@ -72,7 +72,7 @@
                                                 {% else %}
                                                     <i>Sin talla</i>
                                                 {% endif %}
-                                            {% endif %}
+                                            {% else %}
                                             <i>No Aplica</i>
                                             {% endif %}
                                             </td>
@@ -85,9 +85,9 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% if producto.tipo == "P" %}
-                                                {% stock producto.id %}
+                                                    {% stock producto.id %}
                                                 {% else %}
-                                                <i>No Aplica</i>
+                                                    <i>No Aplica</i>
                                                 {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle; font-size: 20px">
