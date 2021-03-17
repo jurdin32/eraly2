@@ -39,11 +39,19 @@
                                                     <td>{% stock producto.id %}</td>
                                                     <td>{{ precio.precioVenta }}</td>
                                                     <td>
+                                                        {% if producto.tipo == "P" %}
                                                         <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
                                                             <i class="fa fa-check-circle text-success"
                                                                style="font-size: 20px"></i>
                                                         </a>
+                                                    {% else %}
+                                                        <a href="#"
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
+                                                            <i class="fa fa-check-circle text-success"
+                                                               style="font-size: 20px"></i>
+                                                        </a>
+                                                     {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -392,9 +400,9 @@
         var ids = []
         suma()
 
-        function agregarFila(id, nombre, precio, stock) {
+        function agregarFila(id, tipo, nombre, precio, stock) {
 
-            if (parseInt(stock) > 0 && parseFloat(precio) > 0) {
+            if ((parseInt(stock) > 0 && parseFloat(precio) > 0)|| tipo=="S")  {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
