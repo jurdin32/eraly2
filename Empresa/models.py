@@ -13,6 +13,7 @@ class Establecimiento(models.Model):
     banner=models.ImageField(upload_to="banner/establecimientos",null=True,blank=True)
     pie_pagina=models.ImageField(upload_to="pie/establecimientos",null=True,blank=True)
     cabecera_tienda=models.ImageField(upload_to="logos/tienda",null=True,blank=True)
+    color_encabezado_documentos=models.CharField(max_length=40, default="#ffffff")
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     ruc=models.CharField(max_length=13)
     nombreComercial=models.CharField(max_length=60)

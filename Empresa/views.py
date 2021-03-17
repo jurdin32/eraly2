@@ -58,6 +58,7 @@ def modificar_empresa(request,id):
         establecimiento.facebook = request.POST['facebook']
         establecimiento.instagram = request.POST['instagram']
         establecimiento.youtube = request.POST['youtube']
+        establecimiento.color_encabezado_documentos=request.POST['color']
         establecimiento.save()
         usuarioEstablecimiento= UsuarioEmpresa.objects.get(establecimiento=establecimiento)
         usuarioEstablecimiento.nombreCompleto=request.POST['representateLegal']
