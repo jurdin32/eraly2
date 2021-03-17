@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Empresa.models import Establecimiento, Direccion, UsuarioEmpresa
+from Empresa.models import Establecimiento, Direccion, UsuarioEmpresa, ConfigurarDocumentos
 from Home.models import Provincia
 
 
@@ -19,6 +19,7 @@ def empresa(request):
                         descripcion=request.POST['descripcion'],)
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
+        ConfigurarDocumentos(establecimiento_id=establecimiento.id, proformas=1, facturas=1).save()
     contexto={
         "empresas":UsuarioEmpresa.objects.filter(user=request.user),
         "logs":LogEntry.objects.filter(user=request.user)
