@@ -19,13 +19,12 @@ def proformas(request,id=0):
     establecimiento=None
     establecimientos=None
     productos=None
-    clientes=None
+    clientes=Clientes.objects.filter(establecimiento__usuario=request.user)
     proformaContador=""
     print(proformaContador)
     if int(id) > 0:
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
-        clientes=Clientes.objects.filter(establecimiento_id=id)
         numero=ConfigurarDocumentos.objects.get(establecimiento=establecimiento)
         proformaContador=str(numero.proformas + Facturas.objects.filter(tipo="P",establecimiento=establecimiento).count()).zfill(10)
 
