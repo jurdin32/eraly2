@@ -66,12 +66,15 @@
                                                 {% endfor %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
+                                            {% if producto.tipo == "P" %}
                                                 {% if producto.talla %}
                                                     <i>{{ producto.talla }}</i>
                                                 {% else %}
                                                     <i>Sin talla</i>
                                                 {% endif %}
-
+                                            {% endif %}
+                                            <i>No Aplica</i>
+                                            {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
@@ -80,7 +83,13 @@
                                                 {% endfor %}
 
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle"> {% stock producto.id %} </td>
+                                            <td style="text-align: center; vertical-align: middle">
+                                                {% if producto.tipo == "P" %}
+                                                {% stock producto.id %}
+                                                {% else %}
+                                                <i>No Aplica</i>
+                                                {% endif %}
+                                            </td>
                                             <td style="text-align: center; vertical-align: middle; font-size: 20px">
                                                 <a href="/products/edit/{{ producto.id }}/"><i class="fa fa-edit"></i></a>
                                                 <a href=""><i class="fa fa-trash text-danger"></i></a>
