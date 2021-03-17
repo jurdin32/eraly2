@@ -226,7 +226,7 @@
                                            href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
                                     {% endfor %}
                                     {% if establecimiento %}
-                                        <a href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
+                                        <a class="btn btn-danger" href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
                                         <br>
                                         <span style="font-size: 30px; font-weight: bold">{{ establecimiento.nombreComercial|upper }}</span>
                                         <br><span style="font-weight: bold">R.U.C.:</span>{{ establecimiento.ruc }}
