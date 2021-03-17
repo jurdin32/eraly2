@@ -14,7 +14,7 @@
                         <div class="row">
                             <a class="btn btn-danger" href="/document/list/?establecimiento=0">Todos</a>
                             {% for establecimiento in establecimientos %}
-                                <a href="/document/list/?establecimiento={{ establecimientos.id }}"></a>
+                                <a href="/document/list/?establecimiento={{ establecimiento.id }}"></a>
                             {% endfor %}
                             
                             <div class="col-sm-12">
