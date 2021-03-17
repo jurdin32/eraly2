@@ -84,16 +84,16 @@
                     <br><br></strong>
                     <u>Los valores aquí expuestos pueden estar sujeto a cambios, Vigencia de la Proforma 30 días.</u>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right; color: white;"><strong>SUBT.:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid {{documento.establecimiento.color_encabezado_documentos}};border-left: 1px solid {{documento.establecimiento.color_encabezado_documentos}};background: {{documento.establecimiento.color_encabezado_documentos}}; text-align: right; color: white;"><strong>SUBT.:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey ;text-align: right; color: grey">{{ documento.subtotal }}</td>
             </tr>
             <tr style="">
 
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; text-align: right; color: white;"><strong>IVA:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid {{documento.establecimiento.color_encabezado_documentos}};border-left: 1px solid {{documento.establecimiento.color_encabezado_documentos}};background: {{documento.establecimiento.color_encabezado_documentos}}; text-align: right; color: white;"><strong>IVA:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey; text-align: right; color: grey">{{ documento.iva }}</td>
             </tr>
             <tr style="">
-                <td style="padding: 8px; border-bottom: 1px solid #FF6600;border-left: 1px solid #FF6600;background: #FF6600; padding: 5px; ; text-align: right; color: white;"><strong>TOTAL:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid {{documento.establecimiento.color_encabezado_documentos}};border-left: 1px solid {{documento.establecimiento.color_encabezado_documentos}};background: {{documento.establecimiento.color_encabezado_documentos}}; padding: 5px; ; text-align: right; color: white;"><strong>TOTAL:</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid grey;border-left: 1px solid grey;border-right:1px solid grey; text-align: right; color: grey">{{ documento.total }}</td>
             </tr>
         </tr>
