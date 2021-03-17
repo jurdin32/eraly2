@@ -23,6 +23,10 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
+                            <a class="btn btn-primary" href="/products/?empresa=0">Todas</a>
+                        {% for empresa in empresas %}
+                        <a class="btn btn-primary" href="/products/?empresa={{ empresa.id }}">{{ empresa.nombreComercial }}</a>
+                        {% endfor %}
                                 <div class="card-box table-responsive">
                                     <table id="productos" class="table table-striped table-bordered" style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">

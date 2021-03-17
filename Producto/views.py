@@ -181,9 +181,17 @@ def eliminarSubcategoria(request,id):
     messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
     return HttpResponseRedirect('/category/%s' % cat)
 
+
+#------------ Productos ----------_#
 def productos(request):
+    PRODUCTOS=None
+    if int(request.GET['empresa'])==0:
+        productos=Productos.objects.filter(establecimiento__usuario=request.user)
+    else:
+        productos = Productos.objects.filter(establecimiento_id=request.GET['empresa'])
     contexto={
-        "productos":Productos.objects.filter(establecimiento__usuario=request.user),
+        "productos":productos,
+        "empresas":Establecimiento.objects.filter(usuario=request.user)
     }
     return render(request, "producto/productos.html",contexto)
 
