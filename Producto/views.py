@@ -184,7 +184,7 @@ def eliminarSubcategoria(request,id):
 
 #------------ Productos ----------_#
 def productos(request):
-    PRODUCTOS=None
+    productos=None
     if int(request.GET['empresa'])==0:
         productos=Productos.objects.filter(establecimiento__usuario=request.user)
     else:
@@ -219,7 +219,7 @@ def registarProducto(request):
             producto.imagen=request.FILES['imagen']
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
-        return HttpResponseRedirect("/products/")
+        return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
     else:
         return render(request, "producto/crearProducto.html",contexto)
 
