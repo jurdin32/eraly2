@@ -36,14 +36,29 @@
                                                     <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}
                                                         (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)
                                                     </td>
-                                                    <td>{% stock producto.id %}</td>
+                                                    <td>
+                                                        {% if producto.tipo == "P" %}
+                                                        {% stock producto.id %}
+                                                        {% else %}
+                                                            <i>Ilimitado</i>
+                                                        {% endif %}
+
+                                                    </td>
                                                     <td>{{ precio.precioVenta }}</td>
                                                     <td>
+                                                    {% if producto.tipo == "P" %}
                                                         <a href="#"
                                                            onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
                                                             <i class="fa fa-check-circle text-success"
                                                                style="font-size: 20px"></i>
                                                         </a>
+                                                    {% else %}
+                                                        <a href="#"
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
+                                                            <i class="fa fa-check-circle text-success"
+                                                               style="font-size: 20px"></i>
+                                                        </a>
+                                                     {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endif %}
