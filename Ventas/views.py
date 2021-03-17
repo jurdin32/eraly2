@@ -155,15 +155,15 @@ def crearDocumentoPDF_Factura(request, id):
     #return render(request,'Ventas/rptFactura.html',contexto)
 
 def listaDocumentos(request):
-    establecimiento =None
+    documentos =None
     if int(request.GET["establecimiento"])==0:
-        establecimiento=Establecimiento.objects.filter(usuario=request.user)
+        documentos = Facturas.objects.filter(establecimiento__usuario=request.user)
     else:
-        establecimiento=Establecimiento.objects.filter(id=request.GET["establecimiento"])
+        documentos=Facturas.objects.filter(establecimiento_id=request.GET["establecimiento"])
 
     contexto={
-        'documentos':Facturas.objects.filter(establecimiento__usuario=request.user),
-        "establecimientos":establecimiento,
+        'documentos':documentos,
+        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
     }
     return render(request, 'Ventas/ListaDocumentos.html',contexto)
 
