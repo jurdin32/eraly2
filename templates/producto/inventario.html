@@ -143,19 +143,27 @@
 
                                             </span></td>
                                             <td style="text-align: center; vertical-align: middle;">
+                                                {% if producto.tipo == "P" %}
                                                 <a data-toggle="modal" data-target="#ingresos"
                                                    data-producto_id="{{ producto.id }}"
                                                    data-producto="{{ producto.nombre }}"
                                                    data-tipo="I"
                                                    href="#" class="btn btn-app datos"><i class="fa fa-plus-circle"></i>Ingreso</a>
+                                                {% else %}
+                                                    <i>No Aplica</i>
+                                                {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
+                                                 {% if producto.tipo == "P" %}
                                                 <a href="" data-toggle="modal" data-target="#ingresos"
                                                    data-producto_id="{{ producto.id }}"
                                                    data-producto="{{ producto.nombre }}"
                                                    data-tipo="E"
                                                    class="btn btn-app datos">
                                                     <i class="fa fa-minus-circle"></i>Egreso</a>
+                                                 {% else %}
+                                                    <i>No Aplica</i>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {% endfor %}
