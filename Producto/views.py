@@ -185,7 +185,7 @@ def eliminarSubcategoria(request,id):
 #------------ Productos ----------_#
 def productos(request):
     productos=Productos.objects.filter(establecimiento__usuario=request.user)
-    if int(request.GET.get('empresa')):
+    if request.GET.get('empresa'):
         productos = Productos.objects.filter(establecimiento_id=request.GET.get('empresa'))
 
     contexto={
