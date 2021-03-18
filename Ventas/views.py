@@ -95,10 +95,11 @@ def registrarDocumento(request,id):
             factura.iva=request.POST["iva"]
             factura.total=request.POST["total"]
             factura.save()
-            for detalle in DetalleFactura.objects.filter(factura=factura):
-                Kardex(producto=detalle.producto, tipo="I", cantidad=detalle.cantidad,
-                       descripcion="Registrado segun modificación de factura de compra No. %s, Reposicion por devolucion de productos." % (
-                           factura.numero)).save()
+            if factura.tipo=="F":
+                for detalle in DetalleFactura.objects.filter(factura=factura):
+                    Kardex(producto=detalle.producto, tipo="I", cantidad=detalle.cantidad,
+                           descripcion="Registrado segun modificación de factura de compra No. %s, Reposicion por devolucion de productos." % (
+                               factura.numero)).save()
             eliminarregistrosFacturaProforma(factura.id)
             return HttpResponse(factura.id)
         except:
@@ -107,8 +108,6 @@ def registrarDocumento(request,id):
                                                 numero=request.POST["numero"],
                  subtotal=request.POST["subtotal"],iva=request.POST["iva"],total=request.POST["total"])
             documento.save()
-
-            print(documento)
             return HttpResponse(documento.id)
         return HttpResponse(0)
 
