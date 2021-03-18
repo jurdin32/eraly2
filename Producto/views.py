@@ -290,8 +290,12 @@ def eliminarPrecios(request,id):
 
 
 def kardex(request):
+    kax=Productos.objects.filter(establecimiento__usuario=request.user)
+    if request.GET.get("establecimiento"):
+        kax = Productos.objects.filter(establecimiento_id=request.GET.get("establecimiento"))
     contexto={
-        'kardex':Productos.objects.filter(establecimiento__usuario=request.user)
+        'kardex':kax,
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
     }
     return render(request, "producto/kardex.html",contexto)
 
