@@ -133,7 +133,14 @@
                                                 {% endfor %}
 
                                             </td>
-                                            <td style="text-align: center; vertical-align: middle"> <span class="badge badge-primary" style="font-size: 13px">{% stock producto.id %} </span></td>
+                                            <td style="text-align: center; vertical-align: middle"> <span class="badge badge-primary" style="font-size: 13px">
+                                                {% if producto.tipo == "P" %}
+                                                    {% stock producto.id %}
+                                                {% else %}
+                                                    <i>Ilimitado</i>
+                                                {% endif %}
+
+                                            </span></td>
                                             <td style="text-align: center; vertical-align: middle;">
                                                 <a data-toggle="modal" data-target="#ingresos"
                                                    data-producto_id="{{ producto.id }}"
