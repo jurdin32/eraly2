@@ -13,6 +13,11 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
+                                <a class="btn btn-danger" href="/kardex/">Todas</a>
+                                {% for establecimiento in establecimientos %}
+                                <a class="btn btn-primary" href="/kardex/?establecimiento={{ establecimiento.id }}">Todas</a>
+                                {% endfor %}
+
                                 <div class="card-box table-responsive">
                                     <table id="kardex" class="table table-striped table-bordered" style="width:100%">
                                         <thead style="background-color: #2A3F54; color: whitesmoke">
