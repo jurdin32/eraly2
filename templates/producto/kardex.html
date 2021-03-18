@@ -35,9 +35,28 @@
                                         <tr>
                                             <td style="text-align: center">{{ kard.id }}</td>
                                             <td > {{ kard }}</td>
-                                            <td style="text-align: center">{% ingresos kard.id %}</td>
-                                            <td style="text-align: center">{% egresos kard.id %}</td>
-                                            <td style="text-align: center">{% stock kard.id %}</td>
+                                            <td style="text-align: center">
+                                                {% if kard.tipo == "P" %}
+                                                    {% ingresos kard.id %}
+                                                {% else %}
+                                                    <i>No Aplica</i>
+                                                {% endif %}
+
+                                            </td>
+                                            <td style="text-align: center">
+                                                {% if kard.tipo == "P" %}
+                                                    {% egresos kard.id %}
+                                                {% else %}
+                                                    <i>No Aplica</i>
+                                                {% endif %}
+                                            </td>
+                                            <td style="text-align: center">
+                                                {% if kard.tipo == "P" %}
+                                                    {% stock kard.id %}
+                                                {% else %}
+                                                    <i>No Aplica</i>
+                                                {% endif %}
+                                            </td>
                                             <td style="text-align: center"><a href="/kardex/products/{{ kard.id }}/"><i class="fa fa-area-chart text-primary"></i></a></td>
                                         </tr>
                                         {% endfor %}
