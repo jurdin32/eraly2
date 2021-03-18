@@ -105,19 +105,26 @@
                                             <td style="text-align: center; vertical-align: middle">{% if producto.codigo  %}{{ producto.codigo }}{% else %} <i>Sin código</i> {% endif %}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.nombre }}</td>
                                             <td style="text-align: justify; vertical-align: middle">
+                                            {% if producto.tipo == "P" %}
                                                 {% for color in producto.colores_set.all %}
                                                     <i class="fa fa-circle" style="color:{{ color.codigoColor }}"></i>
                                                     <i>{{ color }}</i>
                                                     <br>
                                                 {% endfor %}
+                                            {% else %}
+                                                <i>No Aplica</i>
+                                            {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
+                                            {% if producto.tipo == "P" %}
                                                 {% if producto.talla %}
                                                     <i>{{ producto.talla }}</i>
                                                 {% else %}
                                                     <i>Sin talla</i>
                                                 {% endif %}
-
+                                            {% else %}
+                                                <i>No Aplica</i>
+                                            {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
