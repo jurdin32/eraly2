@@ -40,7 +40,7 @@
                                             <th style="text-align: center">Talla</th>
                                             <th style="text-align: center">Precio Venta</th>
                                             <th style="text-align: center">Stock</th>
-                                            <th style="text-align: center">Opciones</th>
+                                            <th style="text-align: center">Editar</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -95,8 +95,8 @@
                                                 {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle; font-size: 20px">
-                                                <a href="/products/edit/{{ producto.id }}/"><i class="fa fa-edit"></i></a>
-                                                <a href=""><i class="fa fa-trash text-danger"></i></a>
+                                                <a class="btn btn-app" href="/products/edit/{{ producto.id }}/">
+                                                    <i class="fa fa-edit"></i>Editar</a>
                                             </td>
                                         </tr>
                                         {% endfor %}
