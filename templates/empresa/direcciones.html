@@ -103,17 +103,17 @@
                                         <tbody>
                                         {% for direccion in direcciones %}
                                             <tr>
-                                                <td>{{ direccion.establecimiento.nombreComercial }}
+                                                <td style="vertical-align: middle">{{ direccion.establecimiento.nombreComercial }}
                                                     - {{ direccion.establecimiento.representateLegal }}</td>
-                                                <td>{{ direccion.ciudad.provincia.pais }}</td>
-                                                <td>{{ direccion.ciudad.provincia }}</td>
-                                                <td>{{ direccion.ciudad }}</td>
-                                                <td>{{ direccion.direccion }}</td>
-                                                <td>{{ direccion.telefono }}</td>
-                                                <td style="text-align: center; font-size: 18px">
+                                                <td style="vertical-align: middle">{{ direccion.ciudad.provincia.pais }}</td>
+                                                <td style="vertical-align: middle">{{ direccion.ciudad.provincia }}</td>
+                                                <td style="vertical-align: middle">{{ direccion.ciudad }}</td>
+                                                <td style="vertical-align: middle">{{ direccion.direccion }}</td>
+                                                <td style="vertical-align: middle">{{ direccion.telefono }}</td>
+                                                <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar</a>
                                                 </td>
-                                                <td style="text-align: center; font-size: 18px">
+                                                <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     <a href="" class="text-danger eliminar btn btn-app" data-id="{{ direccion.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Eliminar</a>
                                                 </td>
                                             </tr>
