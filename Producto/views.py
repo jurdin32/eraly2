@@ -121,12 +121,16 @@ def iconos_text():
     return iconos
 
 def categorias(request):
+    cat = Categorias.objects.filter(establecimiento__usuario=request.user)
+    if request.GET.get("cat"):
+        cat=Categorias.objects.filter(establecimiento_id=request.GET.get('cat'))
+
     if request.POST:
         Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
                                   nombre=request.POST["nombre"], descripcion=request.POST['detalle']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
-        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'categorias':cat,
         'iconos':iconos_text(),
         'establecimientos':Establecimiento.objects.filter(usuario=request.user)
     }
