@@ -158,7 +158,8 @@
             $("#datatableSubCategoria").DataTable({
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
-                }
+                },
+                pageLength: 100,
             });
             $(".modal_modificar").click(function (){
                 $("#nombre").val("")
