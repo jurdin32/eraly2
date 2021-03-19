@@ -96,7 +96,8 @@
                                             <th>Ciudad</th>
                                             <th>Dirección</th>
                                             <th>Teléfono</th>
-                                            <th style="text-align: center">Opciones</th>
+                                            <th style="text-align: center">Editar</th>
+                                            <th style="text-align: center">Eliminar</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -110,9 +111,10 @@
                                                 <td>{{ direccion.direccion }}</td>
                                                 <td>{{ direccion.telefono }}</td>
                                                 <td style="text-align: center; font-size: 18px">
-                                                    <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i></a>
-                                                    <span> | </span>
-                                                    <a href="" class="text-danger eliminar" data-id="{{ direccion.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i></a>
+                                                    <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar</a>
+                                                </td>
+                                                <td style="text-align: center; font-size: 18px">
+                                                    <a href="" class="text-danger eliminar btn btn-app" data-id="{{ direccion.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Eliminar</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
