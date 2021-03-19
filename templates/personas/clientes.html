@@ -130,7 +130,8 @@
                                             <th>Dirección</th>
                                             <th>Teléfono</th>
                                             <th style="text-align: center">Estado</th>
-                                            <th style="text-align: center">Opciones</th>
+                                            <th style="text-align: center">Editar</th>
+                                            <th style="text-align: center">Deshabilitar</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -160,9 +161,10 @@
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>
                                                     </a>
-                                                    <span> | </span>
+                                                </td>
+                                                <td style="text-align: center; font-size: 18px">
                                                     {% if cliente.estado %}
-                                                    <a href="" class="text-danger eliminar" data-id="{{ cliente.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i></a>
+                                                        <a href="" class="text-danger eliminar" data-id="{{ cliente.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i></a>
                                                     {% else %}
                                                         <a href="/clients/disable/{{ cliente.id }}/" class="text-success"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Habilitar Usuario" class="fa fa-check-circle"></i></a>
                                                     {% endif %}
