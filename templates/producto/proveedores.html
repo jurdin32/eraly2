@@ -93,6 +93,11 @@
     <div class="">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
+                <a class="btn btn-danger" href="/suppliers/">Todas</a>
+                {% for establecimiento in establecimientos %}
+                    <a class="btn btn-primary" href="/suppliers/?q={{ establecimiento.id }}"> {{ establecimiento.nombreComercial }}</a>
+                {% endfor %}
+                
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Proveedor <small>del establecimientos</small></h2>
