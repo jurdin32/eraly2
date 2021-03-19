@@ -164,9 +164,9 @@
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="codigo">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input type="text" id="codigo" name="codigo"
+                                    <input type="text"  name="codigo"
                                            placeholder="Código de barra o codigo interno (Si aplica)"
                                            value="{{ producto.codigo }}" class="form-control">
                                     <span>Código de Barras o Código Interno</span>
@@ -202,9 +202,9 @@
                                           aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="marca">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="marca" id="marca" class="js-example-basic-single form-control"
+                                    <select name="marca"  class="js-example-basic-single form-control"
                                             style="width: 100%" multiple>
                                         {% for marca in marcas %}
                                             {% if producto.marca == marca %}
@@ -219,9 +219,9 @@
                                     <span class="fa fa-tags form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]" id="talla" class="js-example-basic-single2 form-control"
+                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
                                             style="width: 100%" multiple>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
@@ -258,16 +258,22 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><small>Detalles tecnicos del Producto</small></h2>
+                            {% if not producto.tipo == "S" %}
+                                <h2><small>Detalles tecnicos del Producto</small></h2>
+                                {% else %}
+                                <h2><small>Opciones de registro</small></h2>
+                            {% endif %}
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="item form-group">
+                            <div class="item form-group" id="dTecnicos" >
                                 <div class="col-md-12 col-sm-12">
                                     <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
-                            <div class="ln_solid"></div>
+                            {% if not producto.tipo == "S" %}
+                                <div class="ln_solid"></div>
+                            {% endif %}
                             <div class="item form-group">
                                 <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                 </button>
@@ -278,7 +284,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-6 col-sm-6" id="colores">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2><small>Colores (Solo si aplica)</small></h2>
@@ -318,7 +324,11 @@
                                 </div>
                             </div>
                         </div>
+                    {% if producto.tipo == "S" %}
+                        <div class="col-md-12 col-sm-12">
+                    {% else %}
                         <div class="col-md-6 col-sm-6">
+                    {% endif %}
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2><small>Precios (Al menos 1)</small></h2>
@@ -372,7 +382,7 @@
         </form>
     </div>
     <div class="clearfix"></div>
-    <div class="row">
+    <div class="row" id="subirimagen">
         <div class="col-md-12 col-sm-12  ">
             <div class="x_panel">
                 <div class="x_title">
@@ -398,7 +408,7 @@
             </div>
         </div>
     </div>
-     <div class="row">
+     <div class="row" id="galeria">
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -453,6 +463,32 @@
         function setTwoNumberDecimal(event) {
             this.value = parseFloat(this.value).toFixed(2);
         }
+
+        $("#tipo").change(function(){
+            console.log($(this).val())
+            let valor = $(this).val()
+            if(valor == "S"){
+                $("#codigo").hide();
+                $("#marca").hide();
+                $("#talla").hide();
+                $("#imagen").hide();
+                $("#dTecnicos").hide();
+                $("#colores").hide();
+                $("#subirimagen").hide();
+                $("#galeria").hide();
+            }
+            else{
+                $("#codigo").show();
+                 $("#marca").show();
+                $("#talla").show();
+                $("#imagen").show();
+                $("#dTecnicos").show();
+                 $("#colores").show();
+                 $("#subirimagen").show();
+                 $("#galeria").show();
+            }
+
+        }).change()
 
     </script>
 {% endblock %}

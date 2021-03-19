@@ -253,12 +253,14 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="item form-group" id="tecnicos">
+                            <div class="item form-group" id="dTecnicos">
                                 <div class="col-md-12 col-sm-12">
-                                    <textarea name="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
+                                    <textarea name="tecnicos" id="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
-                            <div class="ln_solid"></div>
+                            {% ifnot producto.tipo == "S" %}
+                                <div class="ln_solid"></div>
+                            {% endifnot %}
                             <div class="item form-group">
                                 <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                 </button>
@@ -304,15 +306,15 @@
                 $("#marca").hide();
                 $("#talla").hide();
                 $("#imagen").hide();
-                $("#tecnicos").hide();
-
+                $("#dTecnicos").hide();
+                $("#colores").hide();
             }
             else{
                 $("#codigo").show();
                  $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
-                $("#tecnicos").show();
+                $("#dTecnicos").show();
             }
 
         }).change()
