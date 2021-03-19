@@ -9,6 +9,9 @@ from django.contrib import messages
 from eraly2.settings import BASE_DIR
 
 def proveedores(request):
+    prov=Proveedor.objects.filter(establecimiento__usuario=request.user)
+    if request.GET.get("q"):
+        prov = Proveedor.objects.filter(establecimiento_id=request.GET.get("q"))
     if request.POST:
         try:
             if request.FILES:
@@ -23,7 +26,7 @@ def proveedores(request):
             messages.add_message(request, messages.ERROR, "Al parecer ocurrio un error..!")
     contexto={
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'proveedores': Proveedor.objects.filter(establecimiento__usuario=request.user),
+        'proveedores': prov,
         'provincias': Provincia.objects.all(),
     }
     return render(request, "producto/proveedores.html",contexto)
