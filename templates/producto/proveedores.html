@@ -133,7 +133,8 @@
                                         <th>Representante Legal</th>
                                         <th>Tipo de Proveedor</th>
                                         <th style="text-align: center">Tipo de Actividad</th>
-                                        <th style="text-align: center">Opciones</th>
+                                        <th style="text-align: center">Editar</th>
+                                        <th style="text-align: center">Eliminar</th>
                                         </thead>
                                         <tbody>
                                         {% for proveedor in proveedores %}
@@ -165,12 +166,14 @@
                                                     {% endfor %}
                                                 </td>
                                                 <td style="text-align: center; font-size: 20px">
-                                                    <a href="/suppliers/edit/{{ proveedor.id }}/"><i
-                                                            class="fa fa-edit text-primary"></i></a>
-                                                    <a class="ee" data-uri="/suppliers/delete/{{ proveedor.id }}/"
+                                                    <a class="btn btn-app" href="/suppliers/edit/{{ proveedor.id }}/"><i
+                                                            class="fa fa-edit text-primary"></i> Editar</a>
+                                                </td>
+                                                <td style="text-align: center; font-size: 20px">
+                                                    <a class="ee btn btn-app" data-uri="/suppliers/delete/{{ proveedor.id }}/"
                                                        href="/suppliers/delete/{{ proveedor.id }}/" data-toggle="modal"
                                                        data-target="#eliminar"><i
-                                                            class="fa fa-trash text-danger"></i></a>
+                                                            class="fa fa-trash text-danger"></i> Eliminar</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
