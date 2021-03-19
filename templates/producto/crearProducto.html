@@ -155,9 +155,9 @@
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input type="text" id="codigo" name="codigo"
+                            <div class="item form-group" id="codigo">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback" >
+                                    <input type="text"  name="codigo"
                                            placeholder="Código de barra o codigo interno (Si aplica)"
                                            value="{{ producto.codigo }}" class="form-control">
                                     <span>Código de Barras o Código Interno</span>
@@ -188,14 +188,14 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"
                                            required="required" class="form-control" type="text" name="nombre">
-                                    <span>El Nombre del Producto es obligatorio</span>
+                                    <span>El Nombre del Item es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
                                           aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="marca" id="marca" class="js-example-basic-single form-control"
+                                <div class="col-md-12 col-sm-12 form-group has-feedback"id="marca">
+                                    <select name="marca"  class="js-example-basic-single form-control"
                                             style="width: 100%" multiple>
                                         {% for marca in marcas %}
                                             {% if producto.Marca == marca %}
@@ -210,9 +210,9 @@
                                     <span class="fa fa-tags form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]" id="talla" class="js-example-basic-single2 form-control"
+                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
                                             style="width: 100%" multiple>
                                          <option><option>
                                         <option value="XS">XS</option>
@@ -230,10 +230,9 @@
                                     <span class="form-control-feedback right" aria-hidden="true">XL</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="imagen">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input class="form-control" style="padding: -5px" type="file" name="imagen"
-                                           id="imagen"/>
+                                    <input class="form-control" style="padding: -5px" type="file" name="imagen"/>
                                     <span class="fa fa-image form-control-feedback right" aria-hidden="true"></span>
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
@@ -254,9 +253,9 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="item form-group">
+                            <div class="item form-group" id="tecnicos">
                                 <div class="col-md-12 col-sm-12">
-                                    <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
+                                    <textarea name="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
@@ -296,6 +295,27 @@
         function setTwoNumberDecimal(event) {
             this.value = parseFloat(this.value).toFixed(2);
         }
+
+        $("#tipo").change(function(){
+            console.log($(this).val())
+            let valor = $(this).val()
+            if(valor == "S"){
+                $("#codigo").hide();
+                $("#marca").hide();
+                $("#talla").hide();
+                $("#imagen").hide();
+                $("#tecnicos").hide();
+
+            }
+            else{
+                $("#codigo").show();
+                 $("#marca").show();
+                $("#talla").show();
+                $("#imagen").show();
+                $("#tecnicos").show();
+            }
+
+        }).change()
 
     </script>
 {% endblock %}
