@@ -47,15 +47,11 @@ urlpatterns = [
     path("products/prices/delete/<int:id>/",eliminarPrecios),
     path("products/images/<int:id>/",subir_imagenes_producto), #subir archivos
 
-
-
     path("category/",categorias),
     path("category/edit/<int:id>/",editarCategoria),
     path("category/remove/<int:id>/",eliminarCategoria),
     path("subcategory/edit/<int:id>/",editarSubCategoria),
     path("subcategory/remove/<int:id>/",eliminarSubcategoria),
-
-
     path("category/<int:id>/",subcategorias),
 
     path("suppliers/",proveedores),
@@ -72,7 +68,6 @@ urlpatterns = [
     path("kardex/", kardex),
     path("kardex/products/<int:id>/", kardex_producto),
     path("inventory/", inventario),
-
 
     path("business/remove/",eliminar_empresa),
     path("business/direcction/<int:idEmpresa>/",crear_direcciones),
@@ -95,7 +90,6 @@ urlpatterns = [
     path("clients/<int:id>/",registroCLientes),
     path("clients/disable/<int:id>/",deshabilitarCliente),
 
-
     path("accounts_receivable/",cuentasCobrar),
     path("accounts_receivable/<int:id>/",abonos),
     path("accounts_receivable/print/<int:id>/",crearAbonosPDF),
@@ -103,15 +97,11 @@ urlpatterns = [
     path("logout_/",logout_),
 
     #tienda
-
     path("store/",tienda),
     path("store/products/",_productos),
     path("store/details/",_detalles),
     path("store/stores/",_tiendas),
     path("store/ejemplo/",ejemplo),
-
-
-
 
 
 

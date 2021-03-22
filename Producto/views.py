@@ -7,6 +7,8 @@ from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, Direcc
     Productos, Marca, Colores, Precios, Kardex, ImagenesProducto
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
+from eraly2.snippers import Hash_parse
+
 
 def proveedores(request):
     prov=Proveedor.objects.filter(establecimiento__usuario=request.user)
@@ -223,6 +225,7 @@ def registarProducto(request):
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
             producto.imagen=request.FILES['imagen']
+        producto.hash = Hash_parse(str(producto.id))
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
         return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
@@ -246,6 +249,7 @@ def productos_detalles(request,id):
         producto.descripcion=request.POST['descripcion']
         producto.codigo = request.POST['codigo']
         producto.detallesTecnicos=request.POST['tecnicos']
+        producto.hash = Hash_parse(str(producto.id))
         if request.FILES:
             producto.imagen=request.FILES['imagen']
         producto.save()
