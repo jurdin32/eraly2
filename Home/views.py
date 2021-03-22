@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -20,7 +20,9 @@ def index(request):
                 auth.login(request, user)
                 return HttpResponseRedirect("/")
             else:
+                messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
                 return render(request, "Home/login.html")
+
         else:
             return render(request, "Home/login.html")
 
