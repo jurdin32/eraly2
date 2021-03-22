@@ -19,6 +19,8 @@ def index(request):
             if user is not None and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect("/")
+            else:
+                return render(request, "Home/login.html")
         else:
             return render(request, "Home/login.html")
 
