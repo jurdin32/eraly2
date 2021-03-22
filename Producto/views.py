@@ -250,6 +250,7 @@ def productos_detalles(request,id):
         producto.codigo = request.POST['codigo']
         producto.detallesTecnicos=request.POST['tecnicos']
         producto.hash = Hash_parse(producto.id)
+        print(Hash_parse(producto.id).digest())
         if request.FILES:
             producto.imagen=request.FILES['imagen']
         producto.save()

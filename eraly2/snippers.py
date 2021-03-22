@@ -15,8 +15,7 @@ def Attr(cls):
     return cls.__doc__.replace(model, "").replace("(", "").replace(")", "").replace(" ", "").split(",")
 
 def Hash_parse(text):
-    h = hashlib.sha256(str(text).encode('utf-8'))
-    print(h.hexdigest())
+    h = hashlib.sha256(str(text).encode('utf-8')).hexdigest()
     return h
 
 def render_pdf_view(request,page,contexto={}):
