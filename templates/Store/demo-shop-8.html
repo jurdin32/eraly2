@@ -941,7 +941,6 @@
                                 <li class="active">
                                     <a href="#featured" data-toggle="tab">Productos Destacados</a>
                                 </li>
-
                             </ul>
                             <div class="tab-content">
                                 <div id="featured" class="tab-pane active">
@@ -1035,7 +1034,7 @@
                                         <ul class="nav nav-links">
 
                                             <li>
-                                                <a href="#latest" data-toggle="tab">Top Productos  </a>
+                                                <a href="#latest" data-toggle="tab">Top Productos </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1139,7 +1138,7 @@
                                             </div>
                                         </li>
 
-                                         <li>
+                                        <li>
                                             <div class="product">
                                                 <figure class="product-image-area thumb-info-zoom product-img-zoom ">
                                                     <a href="demo-shop-8-product-details.html" title="Product Name"
@@ -1270,7 +1269,7 @@
                                             </div>
                                         </li>
 
-                                         <li>
+                                        <li>
                                             <div class="product">
                                                 <figure class="product-image-area thumb-info-zoom product-img-zoom ">
                                                     <a href="demo-shop-8-product-details.html" title="Product Name"
@@ -1354,6 +1353,18 @@
                                 <div class="accordion-body collapse in" id="cat-list-container">
                                     <div class="panel-body">
                                         <ul class="category-list">
+                                            {% for categoria in categorias %}
+                                                <li>
+                                                    <a href="#">{{ categoria.nombre }}</a>
+                                                    <a href="#" class="plus"></a>
+                                                    <ul>
+                                                        {% for subcategoria in categoria.subcategorias_set.all %}
+                                                            <li><a href="#">{{  subcategoria.nombre }}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                            {% endfor %}
+
                                             <li>
                                                 <a href="#">Moda</a>
                                                 <a href="#" class="plus"></a>
@@ -1833,7 +1844,6 @@
 
 <!-- Current Page Vendor and Views -->
 <script src="{% static 'Store/js/views/view.contact.js' %}"></script>
-
 
 
 <!-- Demo -->

@@ -8,7 +8,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="/store/">Inicio</a></li>
-                <li><a href="#">{{ producto.subcategoria.categoria.nombre }}</a></li>
+                <li><a href="/store/category/?ctgry={{ producto.subcategoria.categoria.id }}">{{ producto.subcategoria.categoria.nombre }}</a></li>
                 <li class="active">{{ producto.subcategoria.nombre }}</li>
             </ul>
         </div>
@@ -70,7 +70,7 @@
 
                                 <div class="product-detail-info">
                                     <div class="product-price-box">
-                                        {#												<span class="old-price">$99.00</span>#}
+                                        {#<span class="old-price">$99.00</span>#}
                                         <span class="product-price">${{ producto.precios_set.first.total }}</span>
                                     </div>
                                     <p class="availability">
