@@ -130,6 +130,7 @@ class KardexInline(admin.StackedInline):
 class AdminProductos(admin.ModelAdmin):
     list_display = Attr(Productos)
     list_display_links = Attr(Productos)
+    readonly_fields = ['hash']
     formfield_overrides = {
         models.CharField: {
             'widget': TextInput(attrs={'style': 'width:90%'})
