@@ -15,7 +15,7 @@ def Attr(cls):
     return cls.__doc__.replace(model, "").replace("(", "").replace(")", "").replace(" ", "").split(",")
 
 def Hash_parse(text):
-    h = hashlib.new("sha256","%s"%text)
+    h = hashlib.sha256(str(text).encode('utf-8'))
     print(h.digest())
     return h
 
