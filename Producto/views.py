@@ -225,7 +225,7 @@ def registarProducto(request):
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
             producto.imagen=request.FILES['imagen']
-        producto.hash = Hash_parse(str(producto.id))
+        producto.hash = Hash_parse(producto.id)
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
         return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
