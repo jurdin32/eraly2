@@ -16,7 +16,7 @@ def Attr(cls):
 
 def Hash_parse(text):
     h = hashlib.sha256(str(text).encode('utf-8'))
-    print(h.digest())
+    print(h.hexdigest())
     return h
 
 def render_pdf_view(request,page,contexto={}):
