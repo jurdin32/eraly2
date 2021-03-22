@@ -94,7 +94,7 @@ class Productos(models.Model):
     detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional")
     descripcion = RichTextUploadingField()
     estado=models.BooleanField(default=True)
-    hash = models.CharField(max_length=100,null=True,blank=True)
+    hash = models.CharField(max_length=256,null=True,blank=True)
 
     def __str__(self):
         if self.talla:
