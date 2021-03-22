@@ -6,7 +6,7 @@ from Producto.models import Productos, Categorias
 
 def tienda(request):
     contexto={
-        'categorias':Categorias.objects.all(),
+        'categorias':Categorias.objects.all().order_by('nombre'),
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
