@@ -96,6 +96,12 @@ class Productos(models.Model):
     estado=models.BooleanField(default=True)
     hash = models.CharField(max_length=256,null=True,blank=True)
 
+    def _descripcion(self):
+        return mark_safe(self.descripcion)
+
+    def _detallesTecnicos(self):
+        return mark_safe(self.detallesTecnicos)
+
     def __str__(self):
         if self.talla:
             return '%s, talla:%s' % (self.nombre, self.talla)

@@ -24,68 +24,27 @@
 									<div class="product-img-box col-sm-5">
 										<div class="product-img-box-wrapper">
 	                                        <div class="product-img-wrapper">
-	                                        	<img id="product-zoom" src="{% static 'Store/img/demos/shop/products/single/product1.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product1.jpg' %}" alt="Product main image">
+                                                <img class="img-fluid" id="product-zoom" src="/media/{{ producto.imagenesproducto_set.first.imagen }}" data-zoom-image="/media/{{ producto.imagenesproducto_set.first.imagen }}" alt="{{ producto.nombre}}">
 	                                        </div>
-
 											<a href="#" class="product-img-zoom" title="Zoom">
 												<span class="glyphicon glyphicon-search"></span>
 											</a>
 										</div>
 
 										<div class="owl-carousel manual" id="productGalleryThumbs">
-											<div class="product-img-wrapper">
-												<a href="#" data-image="{% static 'Store/img/demos/shop/products/single/product1.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product1.jpg' %}" class="product-gallery-item">
-                                                    <img src="{% static 'Store/img/demos/shop/products/single/thumbs/product1.jpg' %}" alt="product">
+                                            {% for imagen in producto.imagenesproducto_set.all %}
+                                            <div class="product-img-wrapper">
+												<a href="#" data-image="/media/{{ imagen.imagen }}" data-zoom-image="/media/{{ imagen.imagen }}" class="product-gallery-item">
+                                                    <img src="/media/{{ imagen.imagen }}" alt="product">
                                                 </a>
 											</div>
-											<div class="product-img-wrapper">
-												<a href="#" data-image="{% static 'Store/img/demos/shop/products/single/product2.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product2.jpg' %}" class="product-gallery-item">
-                                                    <img src="{% static 'Store/img/demos/shop/products/single/thumbs/product2.jpg' %}" alt="product">
-                                                </a>
-											</div>
-											<div class="product-img-wrapper">
-												<a href="#" data-image="{% static 'Store/img/demos/shop/products/single/product3.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product3.jpg' %}" class="product-gallery-item">
-                                                    <img src="{% static 'Store/img/demos/shop/products/single/thumbs/product3.jpg' %}" alt="product">
-                                                </a>
-											</div>
-											<div class="product-img-wrapper">
-												<a href="#" data-image="{% static 'Store/img/demos/shop/products/single/product4.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product4.jpg' %}" class="product-gallery-item">
-                                                    <img src="{% static 'Store/img/demos/shop/products/single/thumbs/product4.jpg' %}" alt="product">
-                                                </a>
-											</div>
-											<div class="product-img-wrapper">
-												<a href="#" data-image="{% static 'Store/img/demos/shop/products/single/product5.jpg' %}" data-zoom-image="{% static 'Store/img/demos/shop/products/single/product5.jpg' %}" class="product-gallery-item">
-                                                    <img src="{% static 'Store/img/demos/shop/products/single/thumbs/product5.jpg' %}" alt="product">
-                                                </a>
-											</div>
+                                            {% endfor %}
 										</div>
 									</div>
 
 									<div class="product-details-box col-sm-7">
-										<div class="product-nav-container">
-											<div class="product-nav product-nav-prev">
-												<a href="#" title="Previous Product">
-													<i class="fa fa-chevron-left"></i>
-												</a>
-
-												<div class="product-nav-dropdown">
-													<img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product">
-													<h4>Blue Denim Dress</h4>
-												</div>
-											</div>
-											<div class="product-nav product-nav-next">
-												<a href="#" title="Next Product">
-													<i class="fa fa-chevron-right"></i>
-												</a>
-
-												<div class="product-nav-dropdown">
-													<img src="{% static 'Store/img/demos/shop/products/product2.jpg' %}" alt="Product">
-													<h4>Black Woman Shirt</h4>
-												</div>
-											</div>
-										</div>
 										<h1 class="product-name">
-											Black Maxi Dress
+											{{ producto.nombre }}
 										</h1>
 
 										<div class="product-rating-container">
@@ -95,19 +54,19 @@
 												</div>
 											</div>
                                             <div class="review-link">
-                                                <a href="#" class="review-link-in" rel="nofollow"> <span class="count">1</span> customer review</a> | 
-                                                <a href="#" class="write-review-link" rel="nofollow">Add a review</a>
+                                                <a href="#" class="review-link-in" rel="nofollow"> <span class="count">1</span> Calificaciones</a> |
+                                                <a href="#" class="write-review-link" rel="nofollow">Agregar Calificación</a>
                                             </div>
                                         </div>
 
-                                        <div class="product-short-desc">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <div class="product-short-desc" style="text-align: justify">
+											<p>{{ producto.descripcion|safe }}</p>
 										</div>
 
 										<div class="product-detail-info">
 											<div class="product-price-box">
-												<span class="old-price">$99.00</span>
-												<span class="product-price">$89.00</span>
+{#												<span class="old-price">$99.00</span>#}
+												<span class="product-price">${{ producto.precios_set.first.total }}</span>
 											</div>
 											<p class="availability">
 												<span class="font-weight-semibold">Availability:</span>

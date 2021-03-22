@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+from Producto.models import Productos
+
 
 def tienda(request):
     contexto={
@@ -16,7 +18,7 @@ def _productos(request):
 
 def _detalles(request):
     contexto={
-
+        'producto':Productos.objects.get(hash=request.GET.get('hash'))
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
