@@ -25,3 +25,9 @@ def _tiendas(request):
 
     }
     return render(request, 'Store/tiendas.html', contexto)
+
+def ejemplo(request):
+    contexto={
+
+    }
+    return render(request, 'Store/ejemplo.html', contexto)

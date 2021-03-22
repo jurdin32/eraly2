@@ -1,1091 +1,1593 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-	<head>
+<head>
 
-		<!-- Basic -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<title>Eraly Store</title>
+    <title>Eraly Store</title>
 
-		<meta name="keywords" content="HTML5 Template" />
-		<meta name="description" content="Porto - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+    <meta name="keywords" content="HTML5 Template"/>
+    <meta name="description" content="Porto - Responsive HTML5 Template">
+    <meta name="author" content="okler.net">
 
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="{% static 'Store/img/favicon.ico' %}" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="{% static 'Store/img/apple-touch-icon.png' %}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'Store/img/favicon.ico' %}" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="{% static 'Store/img/apple-touch-icon.png' %}">
 
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light"
+          rel="stylesheet" type="text/css">
 
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="{% static 'Store/vendor/bootstrap/css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/vendor/font-awesome/css/font-awesome.min.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/vendor/animate/animate.min.css' %}">
-		<link rel="stylesheet" href="{%  static 'Store/vendor/simple-line-icons/css/simple-line-icons.min.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/vendor/owl.carousel/assets/owl.carousel.min.css' %}">
-		<link rel="stylesheet" href="{%  static 'Store/vendor/owl.carousel/assets/owl.theme.default.min.css' %}">
-		<link rel="stylesheet" href="{%  static 'Store/vendor/magnific-popup/magnific-popup.min.css' %}">
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'Store/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/animate/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/simple-line-icons/css/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/owl.carousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/owl.carousel/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/magnific-popup/magnific-popup.min.css' %}">
 
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="{% static 'Store/css/theme.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/css/theme-elements.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/css/theme-blog.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/css/theme-shop.css' %}">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'Store/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/css/theme-elements.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/css/theme-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/css/theme-shop.css' %}">
 
-		<!-- Current Page CSS -->
-		<link rel="stylesheet" href="{% static  'Store/vendor/rs-plugin/css/settings.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/layers.css' %}">
-		<link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/navigation.css' %}">
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="{% static  'Store/vendor/rs-plugin/css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/layers.css' %}">
+    <link rel="stylesheet" href="{% static 'Store/vendor/rs-plugin/css/navigation.css' %}">
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="{% static 'Store/css/skins/skin-shop-8.css' %}">
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="{% static 'Store/css/skins/skin-shop-8.css' %}">
 
-		<!-- Demo CSS -->
-		<link rel="stylesheet" href="{% static 'Store/css/demos/demo-shop-8.css' %}">
+    <!-- Demo CSS -->
+    <link rel="stylesheet" href="{% static 'Store/css/demos/demo-shop-8.css' %}">
 
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="{% static 'Store/css/custom.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'Store/css/custom.css' %}">
 
-		<!-- Head Libs -->
-		<script src="{% static 'Store/vendor/modernizr/modernizr.min.js' %}"></script>
+    <!-- Head Libs -->
+    <script src="{% static 'Store/vendor/modernizr/modernizr.min.js' %}"></script>
 
-	</head>
-	<body>
+</head>
+<body>
 
-		<div class="body">
-			<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyStartAt': 147, 'stickySetTop': '-147px', 'stickyChangeLogo': false}">
-				<div class="header-body">
-{#					<div class="header-top">#}
-{#						<div class="container">#}
-{#							<div class="dropdowns-container">#}
-{#								<div class="header-dropdown cur-dropdown">#}
-{#									<a href="#">USD <i class="fa fa-caret-down"></i></a>#}
-{##}
-{#									<ul class="header-dropdownmenu">#}
-{#										<li><a href="#">EUR</a></li>#}
-{#										<li><a href="#">USD</a></li>#}
-{#									</ul>#}
-{#								</div>#}
-{##}
-{#								<div class="header-dropdown lang-dropdown">#}
-{#									<a href="#"><img src="{% static 'Store' %}/img/demos/shop/en.png" alt="English">English <i class="fa fa-caret-down"></i></a>#}
-{##}
-{#									<ul class="header-dropdownmenu">#}
-{#										<li><a href="#"><img src="{% static 'Store' %}img/demos/shop/en.png" alt="English">English</a></li>#}
-{#										<li><a href="#"><img src="{% static 'Store' %}/img/demos/shop/fr.png" alt="French">French</a></li>#}
-{#									</ul>#}
-{#								</div>#}
-{##}
-{#								<div class="compare-dropdown">#}
-{#									<a href="#"><i class="fa fa-retweet"></i> Compare (2)</a>#}
-{##}
-{#									<div class="compare-dropdownmenu">#}
-{#										<div class="dropdownmenu-wrapper">#}
-{#											<ul class="compare-products">#}
-{#												<li class="product">#}
-{#													<a href="#" class="btn-remove" title="Remove Product"><i class="fa fa-times"></i></a>#}
-{#													<h4 class="product-name"><a href="demo-shop-8-product-details.html">White top</a></h4>#}
-{#												</li>#}
-{#												<li class="product">#}
-{#													<a href="#" class="btn-remove" title="Remove Product"><i class="fa fa-times"></i></a>#}
-{#													<h4 class="product-name"><a href="demo-shop-8-product-details.html">Blue Women Shirt</a></h4>#}
-{#												</li>#}
-{#											</ul>#}
-{##}
-{#											<div class="compare-actions">#}
-{#												<a href="#" class="action-link">Clear All</a>#}
-{#												<a href="#" class="btn btn-primary">Compare</a>#}
-{#											</div>#}
-{#										</div>#}
-{#									</div>#}
-{#								</div>#}
-{#							</div>		#}
-{#							#}
-{#							<div class="top-menu-area">#}
-{#								<a href="#">Links <i class="fa fa-caret-down"></i></a>#}
-{#								<ul class="top-menu">#}
-{#									<li><a href="demo-shop-8-myaccount.html">My Account</a></li>#}
-{#									<li><a href="#">Daily Deal</a></li>#}
-{#									<li><a href="#">My Wishlist</a></li>#}
-{#									<li><a href="demo-shop-8-blog.html">Blog</a></li>#}
-{#									<li><a href="demo-shop-8-login.html">Log in</a></li>#}
-{#								</ul>#}
-{#							</div>#}
-{#							<p class="welcome-msg">DEFAULT WELCOME MSG!</p>#}
-{#						</div>#}
-{#					</div>#}
-					<div class="header-container container">
-						<div class="header-row">
-							<div class="header-column">
-								<div class="header-logo">
-									<a href="demo-shop-8.html">
-										<img alt="Porto" width="111" height="51" src="{% static 'Store/img/demos/shop/logo-shop-red.png' %}">
-									</a>
-								</div>
-							</div>
-							<div class="header-column">
-								<div class="row">
-									<div class="cart-area">
-										<div class="custom-block">
-											<i class="fa fa-phone"></i>
-											<span>(+404) 158 14 25 78</span>
-											<span class="split"></span>
-											<a href="#">CONTACT US</a>
-										</div>
+<div class="body">
+    <header id="header"
+            data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyStartAt': 147, 'stickySetTop': '-147px', 'stickyChangeLogo': false}">
+        <div class="header-body">
+            {#					<div class="header-top">#}
+            {#						<div class="container">#}
+            {#							<div class="dropdowns-container">#}
+            {#								<div class="header-dropdown cur-dropdown">#}
+            {#									<a href="#">USD <i class="fa fa-caret-down"></i></a>#}
+            {##}
+            {#									<ul class="header-dropdownmenu">#}
+            {#										<li><a href="#">EUR</a></li>#}
+            {#										<li><a href="#">USD</a></li>#}
+            {#									</ul>#}
+            {#								</div>#}
+            {##}
+            {#								<div class="header-dropdown lang-dropdown">#}
+            {#									<a href="#"><img src="{% static 'Store' %}/img/demos/shop/en.png" alt="English">English <i class="fa fa-caret-down"></i></a>#}
+            {##}
+            {#									<ul class="header-dropdownmenu">#}
+            {#										<li><a href="#"><img src="{% static 'Store' %}img/demos/shop/en.png" alt="English">English</a></li>#}
+            {#										<li><a href="#"><img src="{% static 'Store' %}/img/demos/shop/fr.png" alt="French">French</a></li>#}
+            {#									</ul>#}
+            {#								</div>#}
+            {##}
+            {#								<div class="compare-dropdown">#}
+            {#									<a href="#"><i class="fa fa-retweet"></i> Compare (2)</a>#}
+            {##}
+            {#									<div class="compare-dropdownmenu">#}
+            {#										<div class="dropdownmenu-wrapper">#}
+            {#											<ul class="compare-products">#}
+            {#												<li class="product">#}
+            {#													<a href="#" class="btn-remove" title="Remove Product"><i class="fa fa-times"></i></a>#}
+            {#													<h4 class="product-name"><a href="demo-shop-8-product-details.html">White top</a></h4>#}
+            {#												</li>#}
+            {#												<li class="product">#}
+            {#													<a href="#" class="btn-remove" title="Remove Product"><i class="fa fa-times"></i></a>#}
+            {#													<h4 class="product-name"><a href="demo-shop-8-product-details.html">Blue Women Shirt</a></h4>#}
+            {#												</li>#}
+            {#											</ul>#}
+            {##}
+            {#											<div class="compare-actions">#}
+            {#												<a href="#" class="action-link">Clear All</a>#}
+            {#												<a href="#" class="btn btn-primary">Compare</a>#}
+            {#											</div>#}
+            {#										</div>#}
+            {#									</div>#}
+            {#								</div>#}
+            {#							</div>		#}
+            {#							#}
+            {#							<div class="top-menu-area">#}
+            {#								<a href="#">Links <i class="fa fa-caret-down"></i></a>#}
+            {#								<ul class="top-menu">#}
+            {#									<li><a href="demo-shop-8-myaccount.html">My Account</a></li>#}
+            {#									<li><a href="#">Daily Deal</a></li>#}
+            {#									<li><a href="#">My Wishlist</a></li>#}
+            {#									<li><a href="demo-shop-8-blog.html">Blog</a></li>#}
+            {#									<li><a href="demo-shop-8-login.html">Log in</a></li>#}
+            {#								</ul>#}
+            {#							</div>#}
+            {#							<p class="welcome-msg">DEFAULT WELCOME MSG!</p>#}
+            {#						</div>#}
+            {#					</div>#}
+            <div class="header-container container">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-logo">
+                            <a href="demo-shop-8.html">
+                                <img alt="Porto" width="111" height="51"
+                                     src="{% static 'Store/img/demos/shop/logo-shop-red.png' %}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-column">
+                        <div class="row">
+                            <div class="cart-area">
+                                <div class="custom-block">
+                                    <i class="fa fa-phone"></i>
+                                    <span>(+404) 158 14 25 78</span>
+                                    <span class="split"></span>
+                                    <a href="#">CONTACT US</a>
+                                </div>
 
-										<div class="cart-dropdown">
-											<a href="#" class="cart-dropdown-icon">
-												<i class="minicart-icon"></i>
-												<span class="cart-info">
+                                <div class="cart-dropdown">
+                                    <a href="#" class="cart-dropdown-icon">
+                                        <i class="minicart-icon"></i>
+                                        <span class="cart-info">
 													<span class="cart-qty">2</span>
 													<span class="cart-text">item(s)</span>
 												</span>
-											</a>
+                                    </a>
 
-											<div class="cart-dropdownmenu right">
-												<div class="dropdownmenu-wrapper">
-													<div class="cart-products">
-														<div class="product product-sm">
-															<a href="#" class="btn-remove" title="Remove Product">
-																<i class="fa fa-times"></i>
-															</a>
-															<figure class="product-image-area">
-																<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-																	<img src="{% static 'Store/img/demos/shop/products/thumbs/cart-product1.jpg' %}" alt="Product Name">
-																</a>
-															</figure>
-															<div class="product-details-area">
-																<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Blue Women Top</a></h2>
+                                    <div class="cart-dropdownmenu right">
+                                        <div class="dropdownmenu-wrapper">
+                                            <div class="cart-products">
+                                                <div class="product product-sm">
+                                                    <a href="#" class="btn-remove" title="Remove Product">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                    <figure class="product-image-area">
+                                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                           class="product-image">
+                                                            <img src="{% static 'Store/img/demos/shop/products/thumbs/cart-product1.jpg' %}"
+                                                                 alt="Product Name">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="product-details-area">
+                                                        <h2 class="product-name"><a
+                                                                href="demo-shop-8-product-details.html"
+                                                                title="Product Name">Blue Women Top</a></h2>
 
-																<div class="cart-qty-price">
-																	1 X
-																	<span class="product-price">$65.00</span>
-																</div>
-															</div>
-														</div>
-														<div class="product product-sm">
-															<a href="#" class="btn-remove" title="Remove Product">
-																<i class="fa fa-times"></i>
-															</a>
-															<figure class="product-image-area">
-																<a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-																	<img src="{% static 'Store/img/demos/shop/products/thumbs/cart-product2.jpg' %}" alt="Product Name">
-																</a>
-															</figure>
-															<div class="product-details-area">
-																<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Black Utility Top</a></h2>
-
-																<div class="cart-qty-price">
-																	1 X
-																	<span class="product-price">$39.00</span>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="cart-totals">
-														Total: <span>$104.00</span>
-													</div>
-
-													<div class="cart-actions">
-														<a href="demo-shop-8-cart.html" class="btn btn-primary">View Cart</a>
-														<a href="demo-shop-8-checkout.html" class="btn btn-primary">Checkout</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="header-search">
-										<a href="#" class="search-toggle"><i class="fa fa-search"></i></a>
-										<form action="#" method="get">
-											<div class="header-search-wrapper">
-												<input type="text" class="form-control" name="q" id="q" placeholder="Search..." required>
-												<select id="cat" name="cat">
-													<option value="">All Categories</option>
-													<option value="4">Fashion</option>
-													<option value="12">- Women</option>
-													<option value="13">- Men</option>
-													<option value="66">- Jewellery</option>
-													<option value="67">- Kids Fashion</option>
-													<option value="5">Electronics</option>
-													<option value="21">- Smart TVs</option>
-													<option value="22">- Cameras</option>
-													<option value="63">- Games</option>
-													<option value="7">Home &amp; Garden</option>
-													<option value="11">Motors</option>
-													<option value="31">- Cars and Trucks</option>
-													<option value="32">- Motorcycles &amp; Powersports</option>
-													<option value="33">- Parts &amp; Accessories</option>
-													<option value="34">- Boats</option>
-													<option value="57">- Auto Tools &amp; Supplies</option>
-                                                </select>
-												<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-											</div>
-										</form>
-									</div>
-
-									<a href="#" class="mmenu-toggle-btn" title="Toggle menu">
-										<i class="fa fa-bars"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="header-container header-nav">
-						<div class="container">
-							<div class="header-nav-main">
-								<nav>
-									<ul class="nav nav-pills" id="mainNav">
-
-										 <li class="dropdown dropdown-mega">
-                                            <a class="dropdown-toggle" href="#">
-                                                PRODUCTOS
-                                            <i class="fa fa-caret-down"></i></a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <div class="dropdown-mega-content">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Supermercado</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-accordions.html">Accordions</a></li>
-                                                                    <li><a href="shortcodes-toggles.html">Toggles</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Belleza</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-buttons.html">Buttons</a></li>
-                                                                    <li><a href="shortcodes-labels.html">Labels</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Electrodomésticos</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-call-to-action.html">Call to Action</a></li>
-                                                                    <li><a href="shortcodes-pricing-tables.html">Pricing Tables</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Audio y Video</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Hogar</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Ferretería</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Bebés</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Juguetes</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Moda</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Otros</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown dropdown-mega">
-                                            <a class="dropdown-toggle" href="#">
-                                                Servicios
-                                            <i class="fa fa-caret-down"></i></a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <div class="dropdown-mega-content">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Enseñanza</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-accordions.html">Accordions</a></li>
-                                                                    <li><a href="shortcodes-toggles.html">Toggles</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Fiestas y Eventos</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-buttons.html">Buttons</a></li>
-                                                                    <li><a href="shortcodes-labels.html">Labels</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Mantenimiento del Hogar</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-call-to-action.html">Call to Action</a></li>
-                                                                    <li><a href="shortcodes-pricing-tables.html">Pricing Tables</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Servicios de Traslado</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Viajes y Turismo</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <span class="dropdown-mega-sub-title">Otros Servicios</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    <li><a href="shortcodes-headings.html">Headings</a></li>
-                                                                    <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-
-
-										<li class="dropdown dropdown-mega">
-											<a href="demo-shop-8-category-4col.html" class="dropdown-toggle">
-												Inmuebles
-											</a>
-											<ul class="dropdown-menu">
-												<li>
-													<div class="dropdown-mega-content">
-{#														<div class="row">#}
-{#															<div class="col-md-8">#}
-{#																<div class="dropdown-mega-top">#}
-{#																	<span>Suggestions:</span>#}
-{#																	<a href="demo-shop-8-category-4col.html">3D</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Mobile</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Camera</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Headsets</a>#}
-{#																</div>#}
-{#															</div>#}
-{#														</div>#}
-														<div class="row">
-															<div class="col-md-8">
-																<div class="row">
-																	<div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-tv.png' %}" alt="Category Name"></a>
-
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Casas</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">TV, Audio</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-camera.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Departamentos</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">Cell Phones &amp; Accessories</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-game.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Hacienda</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">e-Book Readers</a></li>
-																		</ul>
-																	</div>
-                                                                    <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-game.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Locales Comerciales</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">e-Book Readers</a></li>
-																		</ul>
-																	</div>
-                                                                     <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-game.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Oficinas - Consultorios</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">e-Book Readers</a></li>
-																		</ul>
-																	</div>
-                                                                     <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-game.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Terrenos</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">e-Book Readers</a></li>
-																		</ul>
-																	</div>
-                                                                    <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-game.png' %}" alt="Category Name"></a>
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Otros Inmuebles</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">e-Book Readers</a></li>
-																		</ul>
-																	</div>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="menu-banner-area">
-																	<img src="{% static 'Store/img/demos/shop/menu-cat.png' %}" alt="Menu Banner">
-                                                                    <div class="menu-banner-header">
-																		<h3>Shop Now <span class="font-weight-bold">3D</span> <span class="font-weight-extra-bold">Tv's</span></h3>
-																		<a href="#" class="btn btn-primary">View now <i class="fa fa-caret-right"></i></a>
-																	</div>
-																	<p>This is a custom block. You can add any images or links here</p>
-																</div>
-															</div>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</li>
-
-                                        <li class="dropdown dropdown-mega">
-											<a href="demo-shop-8-category-4col.html" class="dropdown-toggle">
-												VEHÍCULOS
-											</a>
-											<ul class="dropdown-menu">
-												<li>
-													<div class="dropdown-mega-content">
-{#														<div class="row">#}
-{#															<div class="col-md-8">#}
-{#																<div class="dropdown-mega-top">#}
-{#																	<span>Suggestions:</span>#}
-{#																	<a href="demo-shop-8-category-4col.html">3D</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Mobile</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Camera</a>#}
-{#																	<a href="demo-shop-8-category-4col.html">Headsets</a>#}
-{#																</div>#}
-{#															</div>#}
-{#														</div>#}
-														<div class="row">
-															<div class="col-md-8">
-																<div class="row">
-																	<div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-tv.png' %}" alt="Category Name"></a>
-
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Autos</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">TV, Audio</a></li>
-																		</ul>
-																	</div>
-
-                                                                    <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-tv.png' %}" alt="Category Name"></a>
-
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Motos</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">TV, Audio</a></li>
-																		</ul>
-																	</div>
-
-                                                                    <div class="col-md-3">
-																		<a href="demo-shop-8-category-4col.html" class="cat-img"><img src="{% static 'Store/img/demos/shop/cat-tv.png' %}" alt="Category Name"></a>
-
-																		<a href="demo-shop-8-category-4col.html" class="dropdown-mega-sub-title">Otros Vehículos</a>
-																		<ul class="dropdown-mega-sub-nav">
-																			<li><a href="demo-shop-8-category-4col.html">TV, Audio</a></li>
-																		</ul>
-																	</div>
-                                                                </div>
-                                                            </div>
-															<div class="col-md-4">
-																<div class="menu-banner-area">
-																	<img src="{% static 'Store/img/demos/shop/menu-cat.png' %}" alt="Menu Banner">
-																	<div class="menu-banner-header">
-																		<h3>Shop Now <span class="font-weight-bold">3D</span> <span class="font-weight-extra-bold">Tv's</span></h3>
-																		<a href="#" class="btn btn-primary">View now <i class="fa fa-caret-right"></i></a>
-																	</div>
-																	<p>This is a custom block. You can add any images or links here</p>
-																</div>
-															</div>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</li>
-
-
-										<li class="pull-right">
-											<a href="demo-shop-8-contact-us.html">
-												Contact Us <span class="tip tip-hot">Hot!</span>
-											</a>
-										</li>
-
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
-
-			<div class="mobile-nav">
-				<div class="mobile-nav-wrapper">
-					<ul class="mobile-side-menu">
-						<li><a href="demo-shop-8.html">Home</a></li>
-						<li>
-							<span class="mmenu-toggle"></span>
-							<a href="#">Fashion <span class="tip tip-new">New</span></a>
-
-							<ul>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Women</a>
-									<ul>
-										<li>
-											<a href="#">Tops &amp; Blouses</a>
-										</li>
-										<li>
-											<a href="#">Accessories</a>
-										</li>
-										<li>
-											<a href="#">Dresses &amp; Skirts</a>
-										</li>
-										<li>
-											<a href="#">Shoes &amp; Boots</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Men</a>
-
-									<ul>
-										<li>
-											<a href="#">Accessories</a>
-										</li>
-										<li>
-											<a href="#">Watch &amp; Fashion <span class="tip tip-new">New</span></a>
-										</li>
-										<li>
-											<a href="#">Tees, Knits &amp; Polos</a>
-										</li>
-										<li>
-											<a href="#">Pants &amp; Denim</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Jewellery <span class="tip tip-hot">Hot</span></a>
-
-									<ul>
-										<li>
-											<a href="#">Sweaters</a>
-										</li>
-										<li>
-											<a href="#">Heels &amp; Sandals</a>
-										</li>
-										<li>
-											<a href="#">Jeans &amp; Shorts</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Kids Fashion</a>
-
-									<ul>
-										<li>
-											<a href="#">Casual Shoes</a>
-										</li>
-										<li>
-											<a href="#">Spring &amp; Autumn</a>
-										</li>
-										<li>
-											<a href="#">Winter Sneakers</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span class="mmenu-toggle"></span>
-							<a href="#">Pages <span class="tip tip-hot">Hot!</span></a>
-
-							<ul>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Category</a>
-									<ul>
-										<li>
-											<a href="demo-shop-8-category-2col.html">2 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-3col.html">3 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-4col.html">4 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-5col.html">5 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-6col.html">6 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-7col.html">7 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-8col.html">8 Columns</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-right-sidebar.html">Right Sidebar</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-list.html">Category List</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Category Banners</a>
-									<ul>
-										<li>
-											<a href="demo-shop-8-category-banner-boxed-slider.html">Boxed slider</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-banner-boxed-image.html">Boxed Image</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-category-banner-fullwidth.html">Fullwidth</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Product Details</a>
-									<ul>
-										<li>
-											<a href="demo-shop-8-product-details.html">Product Details 1</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-product-details2.html">Product Details 2</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-product-details3.html">Product Details 3</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-product-details4.html">Product Details 4</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="demo-shop-8-cart.html">Shopping Cart</a>
-								</li>
-								<li>
-									<a href="demo-shop-8-checkout.html">Checkout</a>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Loign &amp; Register</a>
-									<ul>
-										<li>
-											<a href="demo-shop-8-login.html">Login</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-register.html">Register</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<span class="mmenu-toggle"></span>
-									<a href="#">Dashboard</a>
-									<ul>
-										<li>
-											<a href="demo-shop-8-dashboard.html">Dashboard</a>
-										</li>
-										<li>
-											<a href="demo-shop-8-myaccount.html">My Account</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="demo-shop-8-about-us.html">About Us</a>
-						</li>
-						<li>
-							<span class="mmenu-toggle"></span>
-							<a href="#">Blog</a>
-							<ul>
-								<li><a href="demo-shop-8-blog.html">Blog</a></li>
-								<li><a href="demo-shop-8-blog-post.html">Blog Post</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="demo-shop-8-contact-us.html">Contact Us</a>
-						</li>
-						<li>
-							<a href="#">Buy Porto!</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="mobile-menu-overlay"></div>
-
-			<div role="main" class="main">
-                {% block content %}
-                    <div class="slider-container rev_slider_wrapper"  >
-                        <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 350, 'disableProgressBar': 'on'}">
-                            <ul>
-                                <li data-transition="fade">
-                                    <img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
-
-                                        alt=""
-                                        data-bgposition="center center"
-                                        data-bgfit="cover"
-                                        data-bgrepeat="no-repeat"
-                                        class="rev-slidebg">
-
-                                    <div class="tp-caption top-label"
-                                        data-x="227"
-                                        data-y="100"
-                                        data-start="500"
-                                        data-transform_in="y:[-300%];opacity:0;s:500;">Todo lo que buscas</div>
-
-
-                                    <div class="tp-caption main-label"
-                                        data-x="135"
-                                        data-y="130"
-                                        data-start="1500"
-                                        data-whitespace="nowrap"
-                                        data-transform_in="y:[100%];s:500;"
-                                        data-transform_out="opacity:0;s:500;"
-                                        data-mask_in="x:0px;y:0px;">ERALY STORE</div>
-
-                                    <div class="tp-caption bottom-label"
-                                        data-x="185"
-                                        data-y="200"
-                                        data-start="2000"
-                                        data-transform_in="y:[100%];opacity:0;s:500;">Desde la comodidad de tu hogar.</div>
-
-                                    <div class="tp-caption"
-                                        data-x="910"
-                                        data-y="130"
-                                        data-start="2500"
-                                        data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1300;"><img src="{% static 'Store/img/slides/slide-concept-2-1.png' %}" alt=""></div>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-
-
-
-
-                    <div class="homepage-bar">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <i class="fa fa-truck bar-icon"></i>
-                                    <div class="bar-textarea">
-                                        <h3>Envío apróx. 3 a 5 días laborables</h3>
-                                        <p>Envío gratis en todos los pedidos superiores a $ 99</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <i class="fa fa-dollar bar-icon"></i>
-                                    <div class="bar-textarea">
-                                        <h3>Pagos con tarjetas</h3>
-                                        <p>de Crédito o Débito</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <i class="fa fa-support bar-icon"></i>
-                                    <div class="bar-textarea">
-                                        <h3>SOPORTE EN LÍNEA </h3>
-                                        <p>Via Chat o Llamada</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9 normal">
-                                <div class="tabs home-products-tab">
-                                    <ul class="nav nav-links">
-                                        <li class="active">
-                                            <a href="#featured" data-toggle="tab">Productos Destacados</a>
-                                        </li>
-
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div id="featured" class="tab-pane active">
-                                            <ul class="products-grid columns4">
-
-                                                <div class="owl-carousel owl-theme" data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
-
-                                                    <div class="product">
-                                                        <figure class="product-image-area">
-                                                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                            </a>
-
-                                                            <a href="#" class="product-quickview">
-                                                                <i class="fa fa-share-square-o"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <div class="product-actions">
-                                                                <a href="#" class="addtocart" title="Add to Cart">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                        </figure>
-                                                        <div class="product-details-area">
-                                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 10 Plus</a></h2>
-                                                            <div class="product-ratings">
-                                                                <div class="ratings-box">
-                                                                    <div class="rating" style="width:60%"></div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="product-price-box">
-                                                                <span class="product-price">$120.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="product">
-                                                        <figure class="product-image-area">
-                                                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                            </a>
-
-                                                            <a href="#" class="product-quickview">
-                                                                <i class="fa fa-share-square-o"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <div class="product-actions">
-                                                                <a href="#" class="addtocart" title="Add to Cart">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </div>
-                                                        </figure>
-                                                        <div class="product-details-area">
-                                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 20 Ultra</a></h2>
-                                                            <div class="product-ratings">
-                                                                <div class="ratings-box">
-                                                                    <div class="rating" style="width:60%"></div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="product-price-box">
-                                                                <span class="product-price">$120.00</span>
-                                                            </div>
+                                                        <div class="cart-qty-price">
+                                                            1 X
+                                                            <span class="product-price">$65.00</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </ul>
-                                        </div>
+                                                <div class="product product-sm">
+                                                    <a href="#" class="btn-remove" title="Remove Product">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                    <figure class="product-image-area">
+                                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                           class="product-image">
+                                                            <img src="{% static 'Store/img/demos/shop/products/thumbs/cart-product2.jpg' %}"
+                                                                 alt="Product Name">
+                                                        </a>
+                                                    </figure>
+                                                    <div class="product-details-area">
+                                                        <h2 class="product-name"><a
+                                                                href="demo-shop-8-product-details.html"
+                                                                title="Product Name">Black Utility Top</a></h2>
 
-                                    </div>
-                                </div>
+                                                        <div class="cart-qty-price">
+                                                            1 X
+                                                            <span class="product-price">$39.00</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        {#						<div class="banners-area mt-sm">#}
-        {#							<div class="row">#}
-        {#								<div class="col-sm-4">#}
-        {#									<a href="#" class="banner">#}
-        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner4.jpg' %}" alt="Banner">#}
-        {#									</a>#}
-        {#									<a href="#" class="banner">#}
-        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner5.jpg' %}" alt="Banner">#}
-        {#									</a>#}
-        {#								</div>#}
-        {#								<div class="col-sm-8">#}
-        {#									<a href="#" class="banner">#}
-        {#										<img src="{% static 'Store/img/demos/shop/banners/shop8/banner6.jpg' %}" alt="Banner">#}
-        {#									</a>#}
-        {#								</div>#}
-        {#							</div>#}
-        {#						</div>#}
+                                            <div class="cart-totals">
+                                                Total: <span>$104.00</span>
+                                            </div>
 
-
-
-
-        {#						<div class="mb-xlg">#}
-        {#							<h2 class="slider-title">#}
-        {#			                    <span class="inline-title">OUR BRANDS</span>#}
-        {#			                    <span class="line"></span>#}
-        {#			                    <a href="#" class="view-all">View All</a>#}
-        {#			                </h2>#}
-        {##}
-        {#							<div class="owl-carousel owl-theme manual clients-carousel owl-no-narrow">#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand2.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand3.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand4.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand5.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#								<a href="#" title="Brand Name" class="client">#}
-        {#									<img class="img-responsive" src="{% static 'Store/img/demos/shop/brands/brand1.png' %}" alt="Brand">#}
-        {#								</a>#}
-        {#							</div>#}
-        {#						</div>#}
-                            </div>
-
-                            <aside class="col-md-3 sidebar shop-sidebar">
-                                <div class="panel-group mb-xlg">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#cat-list-container">
-                                                    CATEGORÍA
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div class="accordion-body collapse in" id="cat-list-container">
-                                            <div class="panel-body">
-                                                <ul class="category-list">
-                                                    <li>
-                                                        <a href="#">Moda</a>
-                                                        <a href="#" class="plus"></a>
-
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#">Women</a>
-                                                                <a href="#" class="plus"></a>
-                                                                <ul>
-                                                                    <li><a href="#">Tops &amp; Blouses</a></li>
-                                                                    <li><a href="#">Accessories</a></li>
-                                                                    <li><a href="#">Dresses &amp; Skirts</a></li>
-                                                                    <li><a href="#">Shoes &amp; Boots</a></li>
-                                                                </ul>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">Electrónica</a>
-                                                                <a href="#" class="plus"></a>
-                                                                <ul>
-                                                                    <li><a href="#">Accessories</a></li>
-                                                                    <li><a href="#">Watch Fashion</a></li>
-                                                                    <li><a href="#">Tees, Knits &amp; Polos</a></li>
-                                                                    <li><a href="#">Pants &amp; Denim</a></li>
-                                                                </ul>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">Kids Fashion</a>
-                                                                <a href="#" class="plus"></a>
-                                                                <ul>
-                                                                    <li><a href="#">Casual Shoes</a></li>
-                                                                    <li><a href="#">Spring &amp; Autumn</a></li>
-                                                                    <li><a href="#">Winter Sneakers</a></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li><a href="#">Specials</a></li>
-                                                            <li><a href="#">Featured</a></li>
-                                                            <li><a href="#">Just Arrived</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Electronics</a>
-                                                        <a href="#" class="plus"></a>
-                                                        <ul>
-                                                            <li><a href="#">Smart TVs</a></li>
-                                                            <li><a href="#">Cameras</a></li>
-                                                            <li><a href="#">Games</a></li>
-                                                            <li><a href="#">Phones</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Gifts</a></li>
-                                                    <li><a href="#">Home &amp; Garden</a></li>
-                                                    <li><a href="#">Music</a></li>
-                                                    <li>
-                                                        <a href="#">Motors</a>
-                                                        <a href="#" class="plus"></a>
-                                                        <ul>
-                                                            <li><a href="#">Accessories</a></li>
-                                                            <li><a href="#">Cars and Trucks</a></li>
-                                                            <li><a href="#">Motorcycles &amp; Powersports</a></li>
-                                                            <li><a href="#">Parts &amp; Accessories</a></li>
-                                                            <li><a href="#">Boats</a></li>
-                                                            <li><a href="#">Auto Tools &amp; Supplies</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Hogar & Jardín</a>
-                                                        <a href="#" class="plus"></a>
-                                                        <ul>
-                                                            <li><a href="#">Men</a></li>
-                                                            <li><a href="#">Women</a></li>
-                                                            <li><a href="#">Kids</a></li>
-                                                            <li><a href="#">Fashion</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                            <div class="cart-actions">
+                                                <a href="demo-shop-8-cart.html" class="btn btn-primary">View Cart</a>
+                                                <a href="demo-shop-8-checkout.html" class="btn btn-primary">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <hr class="mt-sm mb-xl">
-                            </aside>
+                            <div class="header-search">
+                                <a href="#" class="search-toggle"><i class="fa fa-search"></i></a>
+                                <form action="#" method="get">
+                                    <div class="header-search-wrapper">
+                                        <input type="text" class="form-control" name="q" id="q" placeholder="Search..."
+                                               required>
+                                        <select id="cat" name="cat">
+                                            <option value="">All Categories</option>
+                                            <option value="4">Fashion</option>
+                                            <option value="12">- Women</option>
+                                            <option value="13">- Men</option>
+                                            <option value="66">- Jewellery</option>
+                                            <option value="67">- Kids Fashion</option>
+                                            <option value="5">Electronics</option>
+                                            <option value="21">- Smart TVs</option>
+                                            <option value="22">- Cameras</option>
+                                            <option value="63">- Games</option>
+                                            <option value="7">Home &amp; Garden</option>
+                                            <option value="11">Motors</option>
+                                            <option value="31">- Cars and Trucks</option>
+                                            <option value="32">- Motorcycles &amp; Powersports</option>
+                                            <option value="33">- Parts &amp; Accessories</option>
+                                            <option value="34">- Boats</option>
+                                            <option value="57">- Auto Tools &amp; Supplies</option>
+                                        </select>
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <a href="#" class="mmenu-toggle-btn" title="Toggle menu">
+                                <i class="fa fa-bars"></i>
+                            </a>
                         </div>
                     </div>
-                {% endblock %}
+                </div>
             </div>
+            <div class="header-container header-nav">
+                <div class="container">
+                    <div class="header-nav-main">
+                        <nav>
+                            <ul class="nav nav-pills" id="mainNav">
+
+                                <li class="dropdown dropdown-mega">
+                                    <a class="dropdown-toggle" href="#">
+                                        PRODUCTOS
+                                        <i class="fa fa-caret-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="dropdown-mega-content">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Supermercado</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-accordions.html">Accordions</a></li>
+                                                            <li><a href="shortcodes-toggles.html">Toggles</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Belleza</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-buttons.html">Buttons</a></li>
+                                                            <li><a href="shortcodes-labels.html">Labels</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Electrodomésticos</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-call-to-action.html">Call to
+                                                                Action</a></li>
+                                                            <li><a href="shortcodes-pricing-tables.html">Pricing
+                                                                Tables</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Audio y Video</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Hogar</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Ferretería</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Bebés</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Juguetes</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Moda</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Otros</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-mega">
+                                    <a class="dropdown-toggle" href="#">
+                                        Servicios
+                                        <i class="fa fa-caret-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="dropdown-mega-content">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Enseñanza</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-accordions.html">Accordions</a></li>
+                                                            <li><a href="shortcodes-toggles.html">Toggles</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Fiestas y Eventos</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-buttons.html">Buttons</a></li>
+                                                            <li><a href="shortcodes-labels.html">Labels</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Mantenimiento del Hogar</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-call-to-action.html">Call to
+                                                                Action</a></li>
+                                                            <li><a href="shortcodes-pricing-tables.html">Pricing
+                                                                Tables</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Servicios de Traslado</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Viajes y Turismo</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span class="dropdown-mega-sub-title">Otros Servicios</span>
+                                                        <ul class="dropdown-mega-sub-nav">
+                                                            <li><a href="shortcodes-headings.html">Headings</a></li>
+                                                            <li><a href="shortcodes-dividers.html">Dividers</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="dropdown dropdown-mega">
+                                    <a href="demo-shop-8-category-4col.html" class="dropdown-toggle">
+                                        Inmuebles
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="dropdown-mega-content">
+                                                {#														<div class="row">#}
+                                                {#															<div class="col-md-8">#}
+                                                {#																<div class="dropdown-mega-top">#}
+                                                {#																	<span>Suggestions:</span>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">3D</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Mobile</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Camera</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Headsets</a>#}
+                                                {#																</div>#}
+                                                {#															</div>#}
+                                                {#														</div>#}
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-tv.png' %}"
+                                                                        alt="Category Name"></a>
+
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Casas</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">TV,
+                                                                        Audio</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-camera.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Departamentos</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">Cell
+                                                                        Phones &amp; Accessories</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-game.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Hacienda</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">e-Book
+                                                                        Readers</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-game.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Locales
+                                                                    Comerciales</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">e-Book
+                                                                        Readers</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-game.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Oficinas -
+                                                                    Consultorios</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">e-Book
+                                                                        Readers</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-game.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Terrenos</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">e-Book
+                                                                        Readers</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-game.png' %}"
+                                                                        alt="Category Name"></a>
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Otros Inmuebles</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">e-Book
+                                                                        Readers</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="menu-banner-area">
+                                                            <img src="{% static 'Store/img/demos/shop/menu-cat.png' %}"
+                                                                 alt="Menu Banner">
+                                                            <div class="menu-banner-header">
+                                                                <h3>Shop Now <span class="font-weight-bold">3D</span>
+                                                                    <span class="font-weight-extra-bold">Tv's</span>
+                                                                </h3>
+                                                                <a href="#" class="btn btn-primary">View now <i
+                                                                        class="fa fa-caret-right"></i></a>
+                                                            </div>
+                                                            <p>This is a custom block. You can add any images or links
+                                                                here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown dropdown-mega">
+                                    <a href="demo-shop-8-category-4col.html" class="dropdown-toggle">
+                                        VEHÍCULOS
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="dropdown-mega-content">
+                                                {#														<div class="row">#}
+                                                {#															<div class="col-md-8">#}
+                                                {#																<div class="dropdown-mega-top">#}
+                                                {#																	<span>Suggestions:</span>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">3D</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Mobile</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Camera</a>#}
+                                                {#																	<a href="demo-shop-8-category-4col.html">Headsets</a>#}
+                                                {#																</div>#}
+                                                {#															</div>#}
+                                                {#														</div>#}
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-tv.png' %}"
+                                                                        alt="Category Name"></a>
+
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Autos</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">TV,
+                                                                        Audio</a></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-tv.png' %}"
+                                                                        alt="Category Name"></a>
+
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Motos</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">TV,
+                                                                        Audio</a></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="cat-img"><img
+                                                                        src="{% static 'Store/img/demos/shop/cat-tv.png' %}"
+                                                                        alt="Category Name"></a>
+
+                                                                <a href="demo-shop-8-category-4col.html"
+                                                                   class="dropdown-mega-sub-title">Otros Vehículos</a>
+                                                                <ul class="dropdown-mega-sub-nav">
+                                                                    <li><a href="demo-shop-8-category-4col.html">TV,
+                                                                        Audio</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="menu-banner-area">
+                                                            <img src="{% static 'Store/img/demos/shop/menu-cat.png' %}"
+                                                                 alt="Menu Banner">
+                                                            <div class="menu-banner-header">
+                                                                <h3>Shop Now <span class="font-weight-bold">3D</span>
+                                                                    <span class="font-weight-extra-bold">Tv's</span>
+                                                                </h3>
+                                                                <a href="#" class="btn btn-primary">View now <i
+                                                                        class="fa fa-caret-right"></i></a>
+                                                            </div>
+                                                            <p>This is a custom block. You can add any images or links
+                                                                here</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="pull-right">
+                                    <a href="demo-shop-8-contact-us.html">
+                                        Contact Us <span class="tip tip-hot">Hot!</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav">
+        <div class="mobile-nav-wrapper">
+            <ul class="mobile-side-menu">
+                <li><a href="demo-shop-8.html">Home</a></li>
+                <li>
+                    <span class="mmenu-toggle"></span>
+                    <a href="#">Fashion <span class="tip tip-new">New</span></a>
+
+                    <ul>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Women</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Tops &amp; Blouses</a>
+                                </li>
+                                <li>
+                                    <a href="#">Accessories</a>
+                                </li>
+                                <li>
+                                    <a href="#">Dresses &amp; Skirts</a>
+                                </li>
+                                <li>
+                                    <a href="#">Shoes &amp; Boots</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Men</a>
+
+                            <ul>
+                                <li>
+                                    <a href="#">Accessories</a>
+                                </li>
+                                <li>
+                                    <a href="#">Watch &amp; Fashion <span class="tip tip-new">New</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Tees, Knits &amp; Polos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pants &amp; Denim</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Jewellery <span class="tip tip-hot">Hot</span></a>
+
+                            <ul>
+                                <li>
+                                    <a href="#">Sweaters</a>
+                                </li>
+                                <li>
+                                    <a href="#">Heels &amp; Sandals</a>
+                                </li>
+                                <li>
+                                    <a href="#">Jeans &amp; Shorts</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Kids Fashion</a>
+
+                            <ul>
+                                <li>
+                                    <a href="#">Casual Shoes</a>
+                                </li>
+                                <li>
+                                    <a href="#">Spring &amp; Autumn</a>
+                                </li>
+                                <li>
+                                    <a href="#">Winter Sneakers</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="mmenu-toggle"></span>
+                    <a href="#">Pages <span class="tip tip-hot">Hot!</span></a>
+
+                    <ul>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Category</a>
+                            <ul>
+                                <li>
+                                    <a href="demo-shop-8-category-2col.html">2 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-3col.html">3 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-4col.html">4 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-5col.html">5 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-6col.html">6 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-7col.html">7 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-8col.html">8 Columns</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-right-sidebar.html">Right Sidebar</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-list.html">Category List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Category Banners</a>
+                            <ul>
+                                <li>
+                                    <a href="demo-shop-8-category-banner-boxed-slider.html">Boxed slider</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-banner-boxed-image.html">Boxed Image</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-category-banner-fullwidth.html">Fullwidth</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Product Details</a>
+                            <ul>
+                                <li>
+                                    <a href="demo-shop-8-product-details.html">Product Details 1</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-product-details2.html">Product Details 2</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-product-details3.html">Product Details 3</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-product-details4.html">Product Details 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="demo-shop-8-cart.html">Shopping Cart</a>
+                        </li>
+                        <li>
+                            <a href="demo-shop-8-checkout.html">Checkout</a>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Loign &amp; Register</a>
+                            <ul>
+                                <li>
+                                    <a href="demo-shop-8-login.html">Login</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-register.html">Register</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="mmenu-toggle"></span>
+                            <a href="#">Dashboard</a>
+                            <ul>
+                                <li>
+                                    <a href="demo-shop-8-dashboard.html">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="demo-shop-8-myaccount.html">My Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="demo-shop-8-about-us.html">About Us</a>
+                </li>
+                <li>
+                    <span class="mmenu-toggle"></span>
+                    <a href="#">Blog</a>
+                    <ul>
+                        <li><a href="demo-shop-8-blog.html">Blog</a></li>
+                        <li><a href="demo-shop-8-blog-post.html">Blog Post</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="demo-shop-8-contact-us.html">Contact Us</a>
+                </li>
+                <li>
+                    <a href="#">Buy Porto!</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="mobile-menu-overlay"></div>
+
+    <div role="main" class="main">
+        {% block content %}
+            <div class="slider-container rev_slider_wrapper">
+                <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider
+                     data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 350, 'disableProgressBar': 'on'}">
+                    <ul>
+                        <li data-transition="fade">
+                            <img src="{% static 'Store/img/slides/slide-bg.jpg' %}"
+
+                                 alt=""
+                                 data-bgposition="center center"
+                                 data-bgfit="cover"
+                                 data-bgrepeat="no-repeat"
+                                 class="rev-slidebg">
+
+                            <div class="tp-caption top-label"
+                                 data-x="227"
+                                 data-y="100"
+                                 data-start="500"
+                                 data-transform_in="y:[-300%];opacity:0;s:500;">Todo lo que buscas
+                            </div>
+
+
+                            <div class="tp-caption main-label"
+                                 data-x="135"
+                                 data-y="130"
+                                 data-start="1500"
+                                 data-whitespace="nowrap"
+                                 data-transform_in="y:[100%];s:500;"
+                                 data-transform_out="opacity:0;s:500;"
+                                 data-mask_in="x:0px;y:0px;">ERALY STORE
+                            </div>
+
+                            <div class="tp-caption bottom-label"
+                                 data-x="185"
+                                 data-y="200"
+                                 data-start="2000"
+                                 data-transform_in="y:[100%];opacity:0;s:500;">Desde la comodidad de tu hogar.
+                            </div>
+
+                            <div class="tp-caption"
+                                 data-x="910"
+                                 data-y="130"
+                                 data-start="2500"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1300;"><img
+                                    src="{% static 'Store/img/slides/slide-concept-2-1.png' %}" alt=""></div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="homepage-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-truck bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>Envío apróx. 3 a 5 días laborables</h3>
+                                <p>Envío gratis en todos los pedidos superiores a $ 99</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-dollar bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>Pagos con tarjetas</h3>
+                                <p>de Crédito o Débito</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-support bar-icon"></i>
+                            <div class="bar-textarea">
+                                <h3>SOPORTE EN LÍNEA </h3>
+                                <p>Via Chat o Llamada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 normal">
+                        <div class="tabs home-products-tab">
+                            <ul class="nav nav-links">
+                                <li class="active">
+                                    <a href="#featured" data-toggle="tab">Productos Destacados</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div id="featured" class="tab-pane active">
+                                    <ul class="products-grid columns4">
+
+                                        <div class="owl-carousel owl-theme"
+                                             data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
+
+                                            <div class="product">
+                                                <figure class="product-image-area">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
+                                                             alt="Product Name">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                    <div class="product-actions">
+                                                        <a href="#" class="addtocart" title="Add to Cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Note 10 Plus</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product-price-box">
+                                                        <span class="product-price">$120.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="product">
+                                                <figure class="product-image-area">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
+                                                             alt="Product Name">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                    <div class="product-actions">
+                                                        <a href="#" class="addtocart" title="Add to Cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Note 20 Ultra</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product-price-box">
+                                                        <span class="product-price">$120.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 normal">
+                                    <div class="tabs home-products-tab">
+                                        <ul class="nav nav-links">
+
+                                            <li>
+                                                <a href="#latest" data-toggle="tab">Top Productos  </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <ul class="products-grid columns3">
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                         <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                         <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="product">
+                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
+                                                             alt="Product Name">
+
+                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                    </a>
+
+                                                    <a href="#" class="product-quickview  product-img-zoom">
+                                                        <i class="fa fa-share-square-o"></i>
+                                                        <span>Ver</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-details-area">
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Celuar Full HD</a>
+                                                    </h2>
+                                                    <div class="product-ratings">
+                                                        <div class="ratings-box">
+                                                            <div class="rating" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="col-md-3 sidebar shop-sidebar">
+                        <div class="panel-group mb-xlg">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle" data-toggle="collapse" href="#cat-list-container">
+                                            CATEGORÍA
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="accordion-body collapse in" id="cat-list-container">
+                                    <div class="panel-body">
+                                        <ul class="category-list">
+                                            <li>
+                                                <a href="#">Moda</a>
+                                                <a href="#" class="plus"></a>
+
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">Women</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Tops &amp; Blouses</a></li>
+                                                            <li><a href="#">Accessories</a></li>
+                                                            <li><a href="#">Dresses &amp; Skirts</a></li>
+                                                            <li><a href="#">Shoes &amp; Boots</a></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#">Electrónica</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Accessories</a></li>
+                                                            <li><a href="#">Watch Fashion</a></li>
+                                                            <li><a href="#">Tees, Knits &amp; Polos</a></li>
+                                                            <li><a href="#">Pants &amp; Denim</a></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#">Kids Fashion</a>
+                                                        <a href="#" class="plus"></a>
+                                                        <ul>
+                                                            <li><a href="#">Casual Shoes</a></li>
+                                                            <li><a href="#">Spring &amp; Autumn</a></li>
+                                                            <li><a href="#">Winter Sneakers</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#">Specials</a></li>
+                                                    <li><a href="#">Featured</a></li>
+                                                    <li><a href="#">Just Arrived</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Electronics</a>
+                                                <a href="#" class="plus"></a>
+                                                <ul>
+                                                    <li><a href="#">Smart TVs</a></li>
+                                                    <li><a href="#">Cameras</a></li>
+                                                    <li><a href="#">Games</a></li>
+                                                    <li><a href="#">Phones</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Gifts</a></li>
+                                            <li><a href="#">Home &amp; Garden</a></li>
+                                            <li><a href="#">Music</a></li>
+                                            <li>
+                                                <a href="#">Motors</a>
+                                                <a href="#" class="plus"></a>
+                                                <ul>
+                                                    <li><a href="#">Accessories</a></li>
+                                                    <li><a href="#">Cars and Trucks</a></li>
+                                                    <li><a href="#">Motorcycles &amp; Powersports</a></li>
+                                                    <li><a href="#">Parts &amp; Accessories</a></li>
+                                                    <li><a href="#">Boats</a></li>
+                                                    <li><a href="#">Auto Tools &amp; Supplies</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Hogar & Jardín</a>
+                                                <a href="#" class="plus"></a>
+                                                <ul>
+                                                    <li><a href="#">Men</a></li>
+                                                    <li><a href="#">Women</a></li>
+                                                    <li><a href="#">Kids</a></li>
+                                                    <li><a href="#">Fashion</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-sm mb-xl">
+                    </aside>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 normal">
+                        <div class="tabs home-products-tab">
+                            <ul class="nav nav-links">
+
+                                <li>
+                                    <a href="#latest" data-toggle="tab">Los más vendidos!</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <ul class="products-grid columns4">
+                            <li>
+                                <div class="product">
+                                    <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                           class="product-image">
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name">
+
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        </a>
+
+                                        <a href="#" class="product-quickview  product-img-zoom">
+                                            <i class="fa fa-share-square-o"></i>
+                                            <span>Ver</span>
+                                        </a>
+
+                                    </figure>
+                                    <div class="product-details-area">
+                                        <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                    title="Product Name">Celuar Full HD</a></h2>
+                                        <div class="product-ratings">
+                                            <div class="ratings-box">
+                                                <div class="rating" style="width:60%"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="product">
+                                    <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                           class="product-image">
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name">
+
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        </a>
+
+                                        <a href="#" class="product-quickview  product-img-zoom">
+                                            <i class="fa fa-share-square-o"></i>
+                                            <span>Ver</span>
+                                        </a>
+
+                                    </figure>
+                                    <div class="product-details-area">
+                                        <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                    title="Product Name">Celuar Full HD</a></h2>
+                                        <div class="product-ratings">
+                                            <div class="ratings-box">
+                                                <div class="rating" style="width:60%"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="product">
+                                    <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                           class="product-image">
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name">
+
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        </a>
+
+                                        <a href="#" class="product-quickview  product-img-zoom">
+                                            <i class="fa fa-share-square-o"></i>
+                                            <span>Ver</span>
+                                        </a>
+
+                                    </figure>
+                                    <div class="product-details-area">
+                                        <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                    title="Product Name">Celuar Full HD</a></h2>
+                                        <div class="product-ratings">
+                                            <div class="ratings-box">
+                                                <div class="rating" style="width:60%"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="product">
+                                    <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                        <a href="demo-shop-8-product-details.html" title="Product Name"
+                                           class="product-image">
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name">
+
+                                            <img src="{% static 'Store/img/cel.jpg' %}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        </a>
+
+                                        <a href="#" class="product-quickview  product-img-zoom">
+                                            <i class="fa fa-share-square-o"></i>
+                                            <span>Ver</span>
+                                        </a>
+
+                                    </figure>
+                                    <div class="product-details-area">
+                                        <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                    title="Product Name">Celuar Full HD</a></h2>
+                                        <div class="product-ratings">
+                                            <div class="ratings-box">
+                                                <div class="rating" style="width:60%"></div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
 
             <div class="container">
                 <div class="row">
@@ -1101,13 +1603,17 @@
                                 <div id="featured" class="tab-pane active">
                                     <ul class="products-grid columns4">
 
-                                        <div class="owl-carousel owl-theme" data-plugin-options="{'items':4 , 'autoplay': false, 'autoplayTimeout': 3000}">
+                                        <div class="owl-carousel owl-theme"
+                                             data-plugin-options="{'items':4 , 'autoplay': false, 'autoplayTimeout': 3000}">
 
                                             <div class="product">
                                                 <figure class="product-image-area">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
+                                                             alt="Product Name">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                             alt="Product Name" class="product-hover-image">
                                                     </a>
 
                                                     <a href="#" class="product-quickview">
@@ -1121,7 +1627,9 @@
                                                     </div>
                                                 </figure>
                                                 <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 10 Plus</a></h2>
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Note 10 Plus</a>
+                                                    </h2>
                                                     <div class="product-ratings">
                                                         <div class="ratings-box">
                                                             <div class="rating" style="width:60%"></div>
@@ -1136,9 +1644,12 @@
 
                                             <div class="product">
                                                 <figure class="product-image-area">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}" alt="Product Name">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                                       class="product-image">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
+                                                             alt="Product Name">
+                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                             alt="Product Name" class="product-hover-image">
                                                     </a>
 
                                                     <a href="#" class="product-quickview">
@@ -1152,7 +1663,9 @@
                                                     </div>
                                                 </figure>
                                                 <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Note 20 Ultra</a></h2>
+                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
+                                                                                title="Product Name">Note 20 Ultra</a>
+                                                    </h2>
                                                     <div class="product-ratings">
                                                         <div class="ratings-box">
                                                             <div class="rating" style="width:60%"></div>
@@ -1173,196 +1686,177 @@
                 </div>
             </div>
 
-			<div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url({% static 'Store/img/demos/shop/newsletter_popup_bg.jpg' %})">
-                <div class="newsletter-popup-content">
-                	<img src="{% static 'Store/img/demos/shop/logo-shop-red.png' %}" alt="Logo" class="img-responsive center-block">
-                    <h2>Se el primero en saberlo</h2>
-                    <p>Obtenga toda la información más reciente sobre eventos,ventas y ofertas. Regístrese para recibir el boletín hoy.</p>
-                    <form action="#">
-                        <div class="input-group">
-                            <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Email address" required>
-                            <span class="input-group-btn">
-                                <input type="submit" class="btn btn-default" value="Go!">
-                            </span>
-                        </div><!-- End .from-group -->
-                    </form>
-                    <div class="newsletter-subscribe">
-                    	<div class="checkbox mb-none">
-							<label>
-								<input type="checkbox" value="1">
-							   Don't show this popup again
-							</label>
-						</div>
+        {% endblock %}
+    </div>
+
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-ribbon">
+                    <span>Ponerse en contacto</span>
+                </div>
+
+                <div class="col-md-3">
+                    <h4>Mi cuenta</h4>
+                    <ul class="links">
+                        <li>
+                            <i class="fa fa-caret-right text-color-primary"></i>
+                            <a href="demo-shop-8-about-us.html">Sobre nosotros</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-caret-right text-color-primary"></i>
+                            <a href="demo-shop-8-contact-us.html">Contáctenos</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-caret-right text-color-primary"></i>
+                            <a href="demo-shop-8-myaccount.html"> Mi cuenta</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-caret-right text-color-primary"></i>
+                            <a href="#"> Historial de pedidos</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-caret-right text-color-primary"></i>
+                            <a href="#">Búsqueda Avanzada</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="contact-details">
+                        <h4>Información del contacto</h4>
+                        <ul class="contact">
+                            <li><p><i class="fa fa-map-marker"></i> <strong>Dirección:</strong><br> 1234 Street Name,
+                                City, US</p></li>
+                            <li><p><i class="fa fa-phone"></i> <strong>Teléfono:</strong><br> (123) 456-7890</p></li>
+                            <li><p><i class="fa fa-envelope-o"></i> <strong>Correo electrónico:</strong><br> <a
+                                    href="mailto:mail@example.com">mail@example.com</a></p></li>
+                            {#									<li><p><i class="fa fa-clock-o"></i> <strong>Días / Horas Laborable:</strong><br> Mon - Sun / 9:00AM - 8:00PM</p></li>#}
+                        </ul>
                     </div>
-                </div><!-- End .newsletter-popup-content -->
-            </div><!-- End .newsletter-popup -->
+                </div>
+                <div class="col-md-3">
+                    <h4>Main Features</h4>
+                    <ul class="features">
+                        <li>
+                            <i class="fa fa-check text-color-primary"></i>
+                            <a href="#">Super Fast Template</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-check text-color-primary"></i>
+                            <a href="#">1st Seller Template</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-check text-color-primary"></i>
+                            <a href="#">19 Unique Shop Layouts</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-check text-color-primary"></i>
+                            <a href="#">Powerful Template Features</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-check text-color-primary"></i>
+                            <a href="#">Mobile &amp; Retina Optimized</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="newsletter">
+                        <h4>Se el primero en saberlo</h4>
+                        <p class="newsletter-info">Obtenga toda la información más reciente sobre eventos,ventas y
+                            ofertas. Regístrese para recibir el boletín hoy.</p>
 
-			</div>
+                        <div class="alert alert-success hidden" id="newsletterSuccess">
+                            <strong>Success!</strong> You've been added to our email list.
+                        </div>
 
-			<footer id="footer">
-				<div class="container">
-					<div class="row">
-						<div class="footer-ribbon">
-							<span>Ponerse en contacto</span>
-						</div>
-
-						<div class="col-md-3">
-							<h4>Mi cuenta</h4>
-							<ul class="links">
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-about-us.html">Sobre nosotros</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-contact-us.html">Contáctenos</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="demo-shop-8-myaccount.html"> Mi cuenta</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="#"> Historial de pedidos</a>
-								</li>
-								<li>
-									<i class="fa fa-caret-right text-color-primary"></i>
-									<a href="#">Búsqueda Avanzada</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-3">
-							<div class="contact-details">
-								<h4>Información del contacto</h4>
-								<ul class="contact">
-									<li><p><i class="fa fa-map-marker"></i> <strong>Dirección:</strong><br> 1234 Street Name, City, US</p></li>
-									<li><p><i class="fa fa-phone"></i> <strong>Teléfono:</strong><br> (123) 456-7890</p></li>
-									<li><p><i class="fa fa-envelope-o"></i> <strong>Correo electrónico:</strong><br> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
-{#									<li><p><i class="fa fa-clock-o"></i> <strong>Días / Horas Laborable:</strong><br> Mon - Sun / 9:00AM - 8:00PM</p></li>#}
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<h4>Main Features</h4>
-							<ul class="features">
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Super Fast Template</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">1st Seller Template</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">19 Unique Shop Layouts</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Powerful Template Features</a>
-								</li>
-								<li>
-									<i class="fa fa-check text-color-primary"></i>
-									<a href="#">Mobile &amp; Retina Optimized</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-3">
-							<div class="newsletter">
-								<h4>Se el primero en saberlo</h4>
-								<p class="newsletter-info">Obtenga toda la información más reciente sobre eventos,ventas y ofertas. Regístrese para recibir el boletín hoy.</p>
-
-								<div class="alert alert-success hidden" id="newsletterSuccess">
-									<strong>Success!</strong> You've been added to our email list.
-								</div>
-
-								<div class="alert alert-danger hidden" id="newsletterError"></div>
+                        <div class="alert alert-danger hidden" id="newsletterError"></div>
 
 
-								<p>Ingrese su dirección de correo electrónico:</p>
-								<form id="newsletterForm" action="../php/newsletter-subscribe.php" method="POST">
-									<div class="input-group">
-										<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
-										<span class="input-group-btn">
+                        <p>Ingrese su dirección de correo electrónico:</p>
+                        <form id="newsletterForm" action="../php/newsletter-subscribe.php" method="POST">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Email Address" name="newsletterEmail"
+                                       id="newsletterEmail" type="text">
+                                <span class="input-group-btn">
 											<button class="btn btn-primary" type="submit">Enviar</button>
 										</span>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-copyright">
-					<div class="container">
-						<a href="index.html" class="logo">
-							<img alt="Porto Website Template" class="img-responsive" src="{% static 'Store/img/demos/shop/logo-footer.png' %}">
-						</a>
-						<ul class="social-icons">
-							<li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-						</ul>
-						<img alt="Payments" src="{% static 'Store/img/demos/shop/payments.png' %}" class="footer-payment">
-						<p class="copyright-text">© Copyright 2017. All Rights Reserved.</p>
-					</div>
-				</div>
-			</footer>
-		</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img alt="Porto Website Template" class="img-responsive"
+                         src="{% static 'Store/img/demos/shop/logo-footer.png' %}">
+                </a>
+                <ul class="social-icons">
+                    <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
+                                                         title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank"
+                                                        title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank"
+                                                         title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+                <img alt="Payments" src="{% static 'Store/img/demos/shop/payments.png' %}" class="footer-payment">
+                <p class="copyright-text">© Copyright 2017. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
 
-		<!-- Vendor -->
-		<script src="{% static 'Store/vendor/jquery/jquery.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.appear/jquery.appear.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery-cookie/jquery-cookie.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/common/common.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.validation/jquery.validation.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.gmap/jquery.gmap.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/jquery.lazyload/jquery.lazyload.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/isotope/jquery.isotope.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/vide/vide.min.js' %}"></script>
+<!-- Vendor -->
+<script src="{% static 'Store/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.appear/jquery.appear.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery-cookie/jquery-cookie.min.js' %}"></script>
+<script src="{% static 'Store/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'Store/vendor/common/common.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.validation/jquery.validation.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.gmap/jquery.gmap.min.js' %}"></script>
+<script src="{% static 'Store/vendor/jquery.lazyload/jquery.lazyload.min.js' %}"></script>
+<script src="{% static 'Store/vendor/isotope/jquery.isotope.min.js' %}"></script>
+<script src="{% static 'Store/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'Store/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'Store/vendor/vide/vide.min.js' %}"></script>
 
-		<!-- Theme Base, Components and Settings -->
-		<script src="{% static 'Store/js/theme.js' %}"></script>
-
-
-		<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
-		<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
-
-		<!-- Current Page Vendor and Views -->
-		<script src="{% static 'Store/js/views/view.contact.js' %}"></script>
+<!-- Theme Base, Components and Settings -->
+<script src="{% static 'Store/js/theme.js' %}"></script>
 
 
+<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'Store/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
 
-		<!-- Demo -->
-		<script src="{% static 'Store/js/demos/demo-shop-8.js' %}"></script>
-
-		<!-- Theme Custom -->
-		<script src="{% static 'Store/js/custom.js' %}"></script>
-
-		<!-- Theme Initialization Files -->
-		<script src="{% static 'Store/js/theme.init.js' %}"></script>
+<!-- Current Page Vendor and Views -->
+<script src="{% static 'Store/js/views/view.contact.js' %}"></script>
 
 
+<!-- Demo -->
+<script src="{% static 'Store/js/demos/demo-shop-8.js' %}"></script>
+
+<!-- Theme Custom -->
+<script src="{% static 'Store/js/custom.js' %}"></script>
+
+<!-- Theme Initialization Files -->
+<script src="{% static 'Store/js/theme.init.js' %}"></script>
 
 
+<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-12345678-1', 'auto');
+    ga('send', 'pageview');
+</script>
+ -->
 
 
-		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-12345678-1', 'auto');
-			ga('send', 'pageview');
-		</script>
-		 -->
-
-
-	</body>
+</body>
 </html>
