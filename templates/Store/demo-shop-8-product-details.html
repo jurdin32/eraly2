@@ -2,8 +2,7 @@
 {% load static %}
 {% load productosTags %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
-    <script src="{% static 'starrr/starrr.js' %}"></script>
+
     <section class="page-header mb-lg">
 
         <div class="container">
@@ -119,9 +118,9 @@
                                 <a href="#product-desc" data-toggle="tab">Descripción</a>
                             </li>
                             {% if producto.detallesTecnicos %}
-                             <li>
-                                <a href="#product-tec" data-toggle="tab">Detalles Técnicos</a>
-                            </li>
+                                <li>
+                                    <a href="#product-tec" data-toggle="tab">Detalles Técnicos</a>
+                                </li>
                             {% endif %}
                             <li>
                                 <a href="#product-reviews" data-toggle="tab">Calificaciones</a>
@@ -152,11 +151,11 @@
 
                                 </div>
                             </div>
-                        {% if producto.detallesTecnicos %}
-                        <div id="product-tec" class="tab-pane">
-                                {{ producto.detallesTecnicos|safe }}
-                            </div>
-                        {% endif %}
+                            {% if producto.detallesTecnicos %}
+                                <div id="product-tec" class="tab-pane">
+                                    {{ producto.detallesTecnicos|safe }}
+                                </div>
+                            {% endif %}
                             <div id="product-reviews" class="tab-pane">
                                 <div class="collateral-box">
                                     <ul class="list-unstyled">
@@ -168,21 +167,56 @@
                                     <h3 class="text-uppercase heading-text-color font-weight-semibold">{{ producto.nombre|upper }}</h3>
                                     <p>¿Quieres Opinar?/p>
                                     <ul>
-                                    {% for calificacion in calificaciones %}
-                                    <li>
-                                        {% if calificacion.usuario %}{{ calificacion.usuario  }}:{% else %}Anonimo:{% endif %}
-                                        <div>
-                                            <div class="rating2"></div>
-                                            <script>
-                                                $('.rating2').starrr({
-                                                    rating: {{calificacion.rating}},
-                                                    max: 5,
-                                                    readOnly: true,
-                                                })
-                                            </script>
-                                        </div>
-                                    </li>
-                                    {% endfor %}
+                                        {% for calificacion in calificaciones %}
+                                            <li>
+                                                <div>
+                                                    {% if calificacion.rating == 0 %}
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                    {% elif calificacion.rating <= 1.4 %}
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                    {% elif calificacion.rating <= 2.4 %}
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                    {% elif calificacion.rating <= 3.4 %}
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                        <a class="fa fa-star-o"></a>
+
+                                                    {% elif calificacion.rating <= 4.4 %}
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star-o"></a>
+                                                    {% else %}
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                        <a class="fa fa-star"></a>
+                                                    {% endif %}
+                                                </div>
+                                                {% if calificacion.usuario %}{{ calificacion.usuario }}:{% else %}
+                                                    Anonimo:{% endif %}{% if calificacion.comentario %}
+                                                         {{ calificacion.comentario }}
+                                                    {% else %}
+                                                    No dejo Comentario
+                                                    {% endif %} }
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                     <form action="#">
                                         <div class="form-group">
@@ -314,7 +348,6 @@
 {% endblock %}
 
 {% block script %}
-
     <script>
         $('.starrr').starrr({
             rating: {% rating_productos producto.id %},
