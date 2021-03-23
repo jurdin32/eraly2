@@ -81,7 +81,7 @@
 
                                 <div class="product-actions">
                                     <div class="product-detail-qty">
-                                        <input type="number" value="1" max="{% stock producto.id %}" class="vertical-spinner" style="width: 50px;">
+                                        <input type="number" value="1" min="1" max="{% stock producto.id %}" class="vertical-spinner" style="width: 50px;">
                                     </div>
                                     <a href="#" class="addtocart" title="Add to Cart">
                                         <i class="fa fa-shopping-cart"></i>
@@ -91,9 +91,6 @@
                                     <div class="actions-right">
                                         <a href="#" class="addtowishlist" title="Add to Wishlist">
                                             <i class="fa fa-heart"></i>
-                                        </a>
-                                        <a href="#" class="comparelink" title="Add to Compare">
-                                            <i class="glyphicon glyphicon-signal"></i>
                                         </a>
                                     </div>
                                 </div>
