@@ -1,13 +1,14 @@
 from django.shortcuts import render
 
 # Create your views here.
-from Producto.models import Productos, Categorias
+from Producto.models import Productos, Categorias, CalificacionProductos
 
 
 def tienda(request):
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
         'productos':Productos.objects.all().order_by('id') # deben ir los destacados, los de mas puntuación
+
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
 
@@ -18,8 +19,10 @@ def _productos(request):
     return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
 
 def _detalles(request):
+    producto=Productos.objects.get(hash=request.GET.get('hash'))
     contexto={
-        'producto':Productos.objects.get(hash=request.GET.get('hash'))
+        'producto':producto,
+        'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id)
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 

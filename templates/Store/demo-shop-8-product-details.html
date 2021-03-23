@@ -123,9 +123,6 @@
                             </li>
                             {% endif %}
                             <li>
-                                <a href="#product-tags" data-toggle="tab">Etiquetas</a>
-                            </li>
-                            <li>
                                 <a href="#product-reviews" data-toggle="tab">Calificaciones</a>
                             </li>
                         </ul>
@@ -159,117 +156,20 @@
                                 {{ producto.detallesTecnicos|safe }}
                             </div>
                         {% endif %}
-                            <div id="product-tags" class="tab-pane">
-                                <div class="product-tags-area">
-                                    <form action="#">
-                                        <div class="form-group">
-                                            <label>Add Your Tags:</label>
-                                            <div class="clearfix">
-                                                <input type="text" class="form-control pull-left" required>
-                                                <input type="submit" class="btn btn-primary" value="Add Tags">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
-                                </div>
-                            </div>
                             <div id="product-reviews" class="tab-pane">
                                 <div class="collateral-box">
                                     <ul class="list-unstyled">
-                                        <li>Be the first to review this product</li>
+                                        <li>Lo que los usuarios opinan de este producto</li>
                                     </ul>
                                 </div>
 
                                 <div class="add-product-review">
-                                    <h3 class="text-uppercase heading-text-color font-weight-semibold">WRITE YOUR OWN
-                                        REVIEW</h3>
-                                    <p>How do you rate this product? *</p>
-
+                                    <h3 class="text-uppercase heading-text-color font-weight-semibold">{{ producto.nombre|upper }}</h3>
+                                    <p>¿Quieres Opinar?/p>
+                                    <ul>
+                                        <li>Usuario - {{  }}</li>
+                                    </ul>
                                     <form action="#">
-                                        <table class="ratings-table">
-                                            <thead>
-                                            <tr>
-                                                <th>&nbsp;</th>
-                                                <th>1 star</th>
-                                                <th>2 stars</th>
-                                                <th>3 stars</th>
-                                                <th>4 stars</th>
-                                                <th>5 stars</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>Quality</td>
-                                                <td>
-                                                    <input type="radio" name="ratings[1]" id="Quality_1" value="1"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="ratings[1]" id="Quality_2" value="2"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="ratings[1]" id="Quality_3" value="3"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="ratings[1]" id="Quality_4" value="4"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="ratings[1]" id="Quality_5" value="5"
-                                                           class="radio">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Value</td>
-                                                <td>
-                                                    <input type="radio" name="value[1]" id="Value_1" value="1"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="value[1]" id="Value_2" value="2"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="value[1]" id="Value_3" value="3"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="value[1]" id="Value_4" value="4"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="value[1]" id="Value_5" value="5"
-                                                           class="radio">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Price</td>
-                                                <td>
-                                                    <input type="radio" name="price[1]" id="Price_1" value="1"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="price[1]" id="Price_2" value="2"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="price[1]" id="Price_3" value="3"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="price[1]" id="Price_4" value="4"
-                                                           class="radio">
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="price[1]" id="Price_5" value="5"
-                                                           class="radio">
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
                                         <div class="form-group">
                                             <label>Nickname<span class="required">*</span></label>
                                             <input type="text" class="form-control" required>
