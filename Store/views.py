@@ -7,7 +7,7 @@ from Producto.models import Productos, Categorias
 def tienda(request):
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
-        'productos':Productos.objects.all().order_by('-id')[0:10] # deben ir los destacados, los de mas puntuación
+        'productos':Productos.objects.all().order_by('id')[10] # deben ir los destacados, los de mas puntuación
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
 
