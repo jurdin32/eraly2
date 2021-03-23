@@ -117,9 +117,11 @@
                             <li class="active">
                                 <a href="#product-desc" data-toggle="tab">Descripción</a>
                             </li>
-                            <li>
+                            {% if producto.detallesTecnicos %}
+                             <li>
                                 <a href="#product-tec" data-toggle="tab">Detalles Técnicos</a>
                             </li>
+                            {% endif %}
                             <li>
                                 <a href="#product-tags" data-toggle="tab">Etiquetas</a>
                             </li>
@@ -152,9 +154,11 @@
 
                                 </div>
                             </div>
-                            <div id="product-tec" class="tab-pane">
+                        {% if producto.detallesTecnicos %}
+                        <div id="product-tec" class="tab-pane">
                                 {{ producto.detallesTecnicos|safe }}
                             </div>
+                        {% endif %}
                             <div id="product-tags" class="tab-pane">
                                 <div class="product-tags-area">
                                     <form action="#">
