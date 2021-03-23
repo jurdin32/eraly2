@@ -975,7 +975,7 @@
                                                     </figure>
                                                     <div class="product-details-area">
                                                         <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                    title="Product Name">Note 10 Plus</a>
+                                                                                    title="Product Name">{{ producto.nombre }}</a>
                                                         </h2>
                                                         <div class="product-ratings">
                                                             <div class="ratings-box">
@@ -984,7 +984,7 @@
                                                         </div>
 
                                                         <div class="product-price-box">
-                                                            <span class="product-price">$120.00</span>
+                                                            <span class="product-price">${{ producto.precios_set.first }}</span>
                                                         </div>
                                                     </div>
                                             </div>
