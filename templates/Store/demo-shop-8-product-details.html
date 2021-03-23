@@ -167,7 +167,21 @@
                                     <h3 class="text-uppercase heading-text-color font-weight-semibold">{{ producto.nombre|upper }}</h3>
                                     <p>¿Quieres Opinar?/p>
                                     <ul>
-                                        <li>Usuario - {{  }}</li>
+                                    {% for calificacion in calificaciones %}
+                                    <li>
+                                        {% if calificacion.usuario %}{{ calificacion.usuario  }}:{% else %}Anonimo:{% endif %}
+                                        <div>
+                                            <div class="rating2"></div>
+                                            <script>
+                                                $('.rating2').starrr({
+                                                    rating: {{calificacion.rating}},
+                                                    max: 5,
+                                                    readOnly: true,
+                                                })
+                                            </script>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
                                     </ul>
                                     <form action="#">
                                         <div class="form-group">
