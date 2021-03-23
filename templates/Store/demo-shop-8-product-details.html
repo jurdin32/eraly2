@@ -36,13 +36,13 @@
                                 </div>
 
                                 <div class="owl-carousel" id="productGalleryThumbs">
-                                <div class="product-img-wrapper">
-                                            <a href="#" data-image="/media/{{ producto.imagen }}"
-                                               data-zoom-image="/media/{{ producto.imagen }}"
-                                               class="product-gallery-item">
-                                                <img src="/media/{{ producto.imagen }}" alt="product">
-                                            </a>
-                                        </div>
+                                    <div class="product-img-wrapper">
+                                        <a href="#" data-image="/media/{{ producto.imagen }}"
+                                           data-zoom-image="/media/{{ producto.imagen }}"
+                                           class="product-gallery-item">
+                                            <img src="/media/{{ producto.imagen }}" alt="product">
+                                        </a>
+                                    </div>
                                     {% for imagen in producto.imagenesproducto_set.all %}
                                         <div class="product-img-wrapper">
                                             <a href="#" data-image="/media/{{ imagen.imagen }}"
@@ -68,7 +68,8 @@
                                     </div>
                                     <div class="review-link">
                                         <a href="#" class="review-link-in" rel="nofollow">
-                                            <span class="count">{% contador_producto producto.id %} </span> Calificaciones</a> |
+                                            <span class="count">{% contador_producto producto.id %} </span>
+                                            Calificaciones</a> |
                                         <a href="#" class="write-review-link" rel="nofollow">Agregar Calificación</a>
                                     </div>
                                 </div>
@@ -129,45 +130,27 @@
                         <div class="tab-content">
                             <div id="product-desc" class="tab-pane active">
                                 <div class="product-desc-area">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                                        id est laborum.</p>
+                                    {{ producto.descripcion|safe }}<br>
+                                    {% if producto.marca %}
+                                        {{ producto.marca }}<br>
+                                    {% endif %}
+                                    {% if producto.talla %}
+                                        {{ producto.talla }}<br>
+                                    {% endif %}
+
+                                    {% if producto.talla %}
+                                        {{ producto.dimension }}
+                                    {% endif %}
+
                                     <ul>
-                                        <li>Simple, Configurable (e.g. size, color, etc.), Bundled and Grouped
-                                            Products
-                                        </li>
-                                        <li>Downloadable/Digital Products, Virtual Products</li>
-                                        <li>Inventory Management with Backordered items</li>
-                                        <li>Customer Personalized Products - upload text for embroidery, monogramming,
-                                            etc.
-                                        </li>
-                                        <li>Create Store-specific attributes on the fly</li>
-                                        <li>Advanced Pricing Rules and support for Special Prices</li>
-                                        <li>Tax Rates per location, customer group and product type</li>
+                                        {% for color in producto.colores_set.all %}
+                                            <li>{{ color }}</li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
                             <div id="product-tec" class="tab-pane">
-                                <table class="product-table">
-                                    <tbody>
-                                    <tr>
-                                        <td class="table-label">Color</td>
-                                        <td>Black</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="table-label">Size</td>
-                                        <td>16mx24mx18m</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                {{ producto.detallesTecnicos|safe }}
                             </div>
                             <div id="product-tags" class="tab-pane">
                                 <div class="product-tags-area">
