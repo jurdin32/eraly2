@@ -1,6 +1,6 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% load static %}
-
+{% load productosTags %}
 {% block content %}
 
     <section class="page-header mb-lg">
@@ -74,19 +74,18 @@
                                         <span class="product-price">${{ producto.precios_set.first.total }}</span>
                                     </div>
                                     <p class="availability">
-                                        <span class="font-weight-semibold">Availability:</span>
-                                        In Stock
+                                        <span class="font-weight-semibold">Disponibilidad:</span>
+                                        {% stock producto.id %} en Stock
                                     </p>
-                                    <p class="email-to-friend"><a href="#">Email to a Friend</a></p>
                                 </div>
 
                                 <div class="product-actions">
                                     <div class="product-detail-qty">
-                                        <input type="text" value="1" class="vertical-spinner" id="product-vqty">
+                                        <input type="number" value="1" max="{% stock producto.id %}" class="vertical-spinner" id="product-vqty">
                                     </div>
                                     <a href="#" class="addtocart" title="Add to Cart">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span>Add to Cart</span>
+                                        <span>Agregar al Carrito</span>
                                     </a>
 
                                     <div class="actions-right">
