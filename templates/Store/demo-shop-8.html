@@ -952,9 +952,15 @@
                                                     <figure class="product-image-area">
                                                         <a href="/store/details/?hash={{ producto.hash }}"  title="{{ producto.nombre }}"
                                                            class="product-image">
+                                                            {% if producto.imagen %}
                                                             <img src="/media/{{ producto.imagen }}" title="{{ producto.nombre }}">
                                                             <img src="/media/{{ producto.imagen }}"
                                                                  alt="Product Name" class="product-hover-image">
+                                                            {% else %}
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" title="{{ producto.nombre }}">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                            {% endif %}
+
                                                         </a>
 
                                                         <a href="/store/details/?hash={{ producto.hash }}" class="product-quickview">
