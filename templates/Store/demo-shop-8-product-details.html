@@ -132,21 +132,24 @@
                                 <div class="product-desc-area">
                                     {{ producto.descripcion|safe }}<br>
                                     {% if producto.marca %}
-                                        {{ producto.marca }}<br>
+                                        Marca: {{ producto.marca }}<br>
                                     {% endif %}
                                     {% if producto.talla %}
-                                        {{ producto.talla }}<br>
+                                        Tallas: {{ producto.talla }}<br>
                                     {% endif %}
 
                                     {% if producto.talla %}
-                                        {{ producto.dimension }}
+                                        Dimensiones: {{ producto.dimension }}<br>
+                                    {% endif %}
+                                    {% if  producto.colores_set.all %}
+                                        Colores:
+                                        <ul>
+                                            {% for color in producto.colores_set.all %}
+                                                <li>{{ color }}</li>
+                                            {% endfor %}
+                                        </ul>
                                     {% endif %}
 
-                                    <ul>
-                                        {% for color in producto.colores_set.all %}
-                                            <li>{{ color }}</li>
-                                        {% endfor %}
-                                    </ul>
                                 </div>
                             </div>
                             <div id="product-tec" class="tab-pane">
