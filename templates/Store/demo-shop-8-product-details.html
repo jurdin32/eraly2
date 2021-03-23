@@ -2,7 +2,8 @@
 {% load static %}
 {% load productosTags %}
 {% block content %}
-
+<link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
+    <script src="{% static 'starrr/starrr.js' %}"></script>
     <section class="page-header mb-lg">
 
         <div class="container">
@@ -313,8 +314,7 @@
 {% endblock %}
 
 {% block script %}
-    <link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
-    <script src="{% static 'starrr/starrr.js' %}"></script>
+
     <script>
         $('.starrr').starrr({
             rating: {% rating_productos producto.id %},
