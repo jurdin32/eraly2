@@ -408,7 +408,7 @@
     <script src="{% static 'starrr/starrr.js' %}"></script>
     <script>
         $('.starrr').starrr({
-            rating: 4,
+            rating: {% rating_productos producto.id %},
             max: 5,
             readOnly: false,
         })
