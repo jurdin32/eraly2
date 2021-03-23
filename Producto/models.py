@@ -1,5 +1,6 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -191,7 +192,11 @@ class ImagenesProducto(models.Model):
     class Meta:
         verbose_name_plural = "8. Imagenes de Producto "
 
-
+class CalificacionProductos(models.Model):
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
+    rating=models.IntegerField(default=1)
+    comentario=models.TextField()
 
 
 

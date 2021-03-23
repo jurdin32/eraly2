@@ -1,10 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 # Create your views here.
-from Empresa.models import Establecimiento
 from Home.models import Provincia
-from Producto.models import Proveedor, ActividadProveedor, TipoProveedor, DireccionProveedor, Categorias, Subcategorias, \
-    Productos, Marca, Colores, Precios, Kardex, ImagenesProducto
+from Producto.models import *
 from django.contrib import messages
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import Hash_parse
