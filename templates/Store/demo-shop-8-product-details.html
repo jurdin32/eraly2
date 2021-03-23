@@ -399,6 +399,7 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'star-rating/js/jquery.rating.pack.js'%}"></script>
     <script>
         $(".product-gallery-item").click(function () {
             console.log($(this).data('image'))
