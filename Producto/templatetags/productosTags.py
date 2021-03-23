@@ -47,5 +47,6 @@ def egresos(id):
 @register.simple_tag
 def rating_productos(id):
     rating=CalificacionProductos.objects.filter(producto_id=id).aggregate(rating=Avg('rating'))
-    print(rating)
+    if rating['rating']==None :
+        return 0
     return rating['rating']
