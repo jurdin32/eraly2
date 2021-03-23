@@ -26,8 +26,8 @@
                                 <div class="product-img-box-wrapper">
                                     <div class="product-img-wrapper">
                                         <img id="product-zoom"
-                                             src="/media/{{ producto.imagenesproducto_set.first.imagen }}"
-                                             data-zoom-image="/media/{{ producto.imagenesproducto_set.first.imagen }}"
+                                             src="/media/{{ producto.imagen }}"
+                                             data-zoom-image="/media/{{ producto.imagen }}"
                                              alt="{{ producto.nombre }}">
                                     </div>
                                     <a href="#" class="product-img-zoom" title="Zoom">
@@ -36,6 +36,13 @@
                                 </div>
 
                                 <div class="owl-carousel" id="productGalleryThumbs">
+                                <div class="product-img-wrapper">
+                                            <a href="#" data-image="/media/{{ producto.imagen }}"
+                                               data-zoom-image="/media/{{ producto.imagen }}"
+                                               class="product-gallery-item">
+                                                <img src="/media/{{ producto.imagen }}" alt="product">
+                                            </a>
+                                        </div>
                                     {% for imagen in producto.imagenesproducto_set.all %}
                                         <div class="product-img-wrapper">
                                             <a href="#" data-image="/media/{{ imagen.imagen }}"
