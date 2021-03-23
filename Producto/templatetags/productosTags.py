@@ -50,3 +50,8 @@ def rating_productos(id):
     if rating['rating']==None :
         return 0
     return rating['rating']
+
+@register.simple_tag
+def contador_producto(id):
+    rating=CalificacionProductos.objects.filter(producto_id=id).count()
+    return rating
