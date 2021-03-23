@@ -48,3 +48,4 @@ def egresos(id):
 def rating_productos(id):
     rating=CalificacionProductos.objects.filter(producto_id=id).aggregate(rating=Avg('rating'))
     print(rating)
+    return rating['rating']
