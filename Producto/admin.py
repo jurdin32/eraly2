@@ -184,3 +184,4 @@ class AdminDireccion(admin.ModelAdmin):
     list_display = Attr(CalificacionProductos)
     list_display_links = Attr(CalificacionProductos)
 
+
