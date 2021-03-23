@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load productosTags %}
 <html>
 <head>
     <!-- Basic -->
@@ -948,22 +949,27 @@
                                         <div class="owl-carousel owl-theme"
                                              data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
                                             {% for producto in productos %}
-                                            <div class="product">
+                                                <div class="product">
                                                     <figure class="product-image-area">
-                                                        <a href="/store/details/?hash={{ producto.hash }}"  title="{{ producto.nombre }}"
+                                                        <a href="/store/details/?hash={{ producto.hash }}"
+                                                           title="{{ producto.nombre }}"
                                                            class="product-image">
                                                             {% if producto.imagen %}
-                                                            <img src="/media/{{ producto.imagen }}" title="{{ producto.nombre }}">
-                                                            <img src="/media/{{ producto.imagen }}"
-                                                                 alt="Product Name" class="product-hover-image">
+                                                                <img src="/media/{{ producto.imagen }}"
+                                                                     title="{{ producto.nombre }}">
+                                                                <img src="/media/{{ producto.imagen }}"
+                                                                     alt="Product Name" class="product-hover-image">
                                                             {% else %}
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" title="{{ producto.nombre }}">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}" alt="Product Name" class="product-hover-image">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                                     title="{{ producto.nombre }}">
+                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                                     alt="Product Name" class="product-hover-image">
                                                             {% endif %}
 
                                                         </a>
 
-                                                        <a href="/store/details/?hash={{ producto.hash }}" class="product-quickview">
+                                                        <a href="/store/details/?hash={{ producto.hash }}"
+                                                           class="product-quickview">
                                                             <i class="fa fa-minus-circle"></i>
                                                             <span> 0%</span>
                                                         </a>
@@ -974,12 +980,21 @@
                                                         </div>
                                                     </figure>
                                                     <div class="product-details-area">
-                                                        <h2 class="product-name"><a href="/store/details/?hash={{ producto.hash }}"
-                                                                                    title="Product Name">{{ producto.nombre }}</a>
+                                                        <h2 class="product-name">
+                                                            <a href="/store/details/?hash={{ producto.hash }}"
+                                                               title="Product Name">{{ producto.nombre }}</a>
                                                         </h2>
                                                         <div class="product-ratings">
-                                                            <div class="ratings-box">
-                                                                <div class="rating" style="width:60%"></div>
+                                                            <div>
+                                                                <div class="rating-{{ producto.id }}"
+                                                                     style="width:60%"></div>
+                                                                <script>
+                                                                    $('.rating-{{producto.id}}').starrr({
+                                                                        rating: {% rating_productos producto.id %},
+                                                                        max: 5,
+                                                                        readOnly: true,
+                                                                    })
+                                                                </script>
                                                             </div>
                                                         </div>
 
@@ -987,7 +1002,7 @@
                                                             <span class="product-price">${{ producto.precios_set.first }}</span>
                                                         </div>
                                                     </div>
-                                            </div>
+                                                </div>
                                             {% endfor %}
 
                                         </div>
@@ -1329,7 +1344,7 @@
                                                     <a href="#" class="plus"></a>
                                                     <ul>
                                                         {% for subcategoria in categoria.subcategorias_set.all %}
-                                                            <li><a href="#">{{  subcategoria.nombre }}</a></li>
+                                                            <li><a href="#">{{ subcategoria.nombre }}</a></li>
                                                         {% endfor %}
                                                     </ul>
                                                 </li>
@@ -1749,7 +1764,8 @@
 <script src="{% static 'Store/js/theme.init.js' %}"></script>
 
 {% block script %}
-
+    <link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
+    <script src="{% static 'starrr/starrr.js' %}"></script>
 {% endblock %}
 
 <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
