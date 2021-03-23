@@ -947,8 +947,8 @@
 
                                         <div class="owl-carousel owl-theme"
                                              data-plugin-options="{'items': 4, 'autoplay': true, 'autoplayTimeout': 3000}">
+                                            {% for producto in productos %}
                                             <div class="product">
-                                                {% for producto in productos %}
                                                     <figure class="product-image-area">
                                                         <a href="/store/details/?hash={{ producto.hash }}"  title="{{ producto.nombre }}"
                                                            class="product-image">
@@ -981,10 +981,9 @@
                                                             <span class="product-price">$120.00</span>
                                                         </div>
                                                     </div>
-                                                {% endfor %}
-
-
                                             </div>
+                                            {% endfor %}
+
                                         </div>
                                     </ul>
                                 </div>
