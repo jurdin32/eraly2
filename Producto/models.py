@@ -198,5 +198,18 @@ class CalificacionProductos(models.Model):
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
 
+class Promociones(models.Model):
+    fechaInicio=models.DateField()
+    fechaFinal=models.DateField()
+    precio =models.ForeignKey(Precios,on_delete=models.CASCADE)
+    descuento =models.IntegerField(default=0)
+    total =models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        precio= (float(self.precio.total) *float(self.descuento/100))+float(self.precio.total)
+        self.total =precio
+        super(Promociones, self).save()
+
 
 
