@@ -1,17 +1,12 @@
 from django.contrib import messages
-from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-
-# Create your views here.
-from django.views.generic.edit import ProcessFormView
 
 from Empresa.models import Establecimiento, ConfigurarDocumentos
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
-from eraly2.settings import BASE_DIR
 from eraly2.snippers import render_pdf_view, export_pdf
 from nlt import numlet as nl
 
@@ -135,7 +130,7 @@ def crearDocumentoPDF_Proforma(request, id):
     contexto={
         'documento':documento,
         'detalles':detalles,
-        'site': Site.objects.last(),
+
         'items': (10 - detalles.count()) * "*",
     }
     return export_pdf(request,'Ventas/rptProforma.html',contexto)
@@ -147,7 +142,6 @@ def crearDocumentoPDF_Factura(request, id):
         'documento':Facturas.objects.get(id=id),
         'detalles':detalles,
         'items':(10 - detalles.count())*"*",
-        'site':Site.objects.last(),
     }
     print((10 - detalles.count()))
     return render_pdf_view(request,'Ventas/rptFactura.html',contexto)
@@ -220,7 +214,6 @@ def crearAbonosPDF(request, id):
     print(resultado)
     contexto={
         'recibo':recibo,
-        'site': Site.objects.last(),
         'abono':resultado
     }
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
