@@ -80,12 +80,22 @@
 
                                 <div class="owl-carousel" id="productGalleryThumbs">
                                     <div class="product-img-wrapper">
+
+                                        {% if producto.imagen %}
                                         <a href="#" data-image="/media/{{ producto.imagen }}"
                                            data-zoom-image="/media/{{ producto.imagen }}"
                                            class="product-gallery-item">
                                             <img src="/media/{{ producto.imagen }}" alt="product">
                                         </a>
+                                        {% else %}
+                                            <a href="#" data-image="{% static 'noimagen.jpg' %}"
+                                           data-zoom-image="{% static 'noimagen.jpg' %}"
+                                           class="product-gallery-item">
+                                            <img src="{% static 'noimagen.jpg' %}" alt="product">
+                                        </a>
+                                        {% endif %}
                                     </div>
+                                {% if producto.imagen %}
                                     {% for imagen in producto.imagenesproducto_set.all %}
                                         <div class="product-img-wrapper">
                                             <a href="#" data-image="/media/{{ imagen.imagen }}"
@@ -95,6 +105,15 @@
                                             </a>
                                         </div>
                                     {% endfor %}
+                                {% else %}
+                                    <div class="product-img-wrapper">
+                                            <a href="#" data-image="{% static 'noimagen.jpg' %}"
+                                               data-zoom-image="{% static 'noimagen.jpg' %}"
+                                               class="product-gallery-item">
+                                                <img src="{% static 'noimagen.jpg' %}" alt="product">
+                                            </a>
+                                        </div>
+                                {% endif %}
                                 </div>
                             </div>
 

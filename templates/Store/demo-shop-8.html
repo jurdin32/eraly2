@@ -962,12 +962,11 @@
                                                                 <img src="/media/{{ producto.imagen }}"
                                                                      alt="Product Name" class="product-hover-image">
                                                             {% else %}
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                                <img src="{% static 'noimagen.jpg' %}"
                                                                      title="{{ producto.nombre }}">
-                                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                                <img src="{% static 'noimagen.jpg' %}"
                                                                      alt="Product Name" class="product-hover-image">
                                                             {% endif %}
-
                                                         </a>
 
                                                         <a href="/store/details/?hash={{ producto.hash }}"
