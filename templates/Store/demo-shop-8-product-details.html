@@ -209,58 +209,64 @@
 
                                 <div class="add-product-review">
                                     <h3 class="text-uppercase heading-text-color font-weight-semibold">{{ producto.nombre|upper }}</h3>
-                                    <ul>
-                                        {% for calificacion in calificaciones %}
-                                            <li>
-                                                <div>
-                                                    {% if calificacion.rating == 0 %}
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                    {% elif calificacion.rating <= 1.4 %}
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                    {% elif calificacion.rating <= 2.4 %}
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                    {% elif calificacion.rating <= 3.4 %}
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                        <a class="fa fa-star-o"></a>
 
-                                                    {% elif calificacion.rating <= 4.4 %}
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star-o"></a>
-                                                    {% else %}
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                        <a class="fa fa-star"></a>
-                                                    {% endif %}
-                                                </div>
-                                                {% if calificacion.usuario %}{{ calificacion.usuario }}:{% else %}
+                                    {% for calificacion in calificaciones %}
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        {% if calificacion.rating == 0 %}
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                        {% elif calificacion.rating <= 1.4 %}
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                        {% elif calificacion.rating <= 2.4 %}
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                        {% elif calificacion.rating <= 3.4 %}
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                            <a class="fa fa-star-o"></a>
+
+                                                        {% elif calificacion.rating <= 4.4 %}
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star-o"></a>
+                                                        {% else %}
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                            <a class="fa fa-star"></a>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                                <td>{% if calificacion.usuario %}{{ calificacion.usuario }}:{% else %}
                                                     Anonimo:{% endif %}{% if calificacion.comentario %}
                                                     {{ calificacion.comentario }}
                                                 {% else %}
                                                     No dejo Comentario
-                                                {% endif %}
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
+                                                {% endif %}</td>
+                                            </tr>
+
+
+                                        </table>
+                                    {% endfor %}
+
                                 </div>
                             </div>
                         </div>
