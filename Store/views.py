@@ -19,7 +19,12 @@ def _productos(request):
     return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
 
 def _detalles(request):
-    producto=Productos.objects.get(hash=request.GET.get('hash'))
+    producto = Productos.objects.get(hash=request.GET.get('hash'))
+    if request.POST:
+        try:
+            CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
+        except:
+            CalificacionProductos(producto=producto, rating=request.POST['rata'], comentario=request.POST['comentario']).save()
     contexto={
         'producto':producto,
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id)

@@ -2,6 +2,45 @@
 {% load static %}
 {% load productosTags %}
 {% block content %}
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="formModalLabel">Calificar</h4>
+                    <hr>
+                </div>
+                <form id="demo-form" method="post" action="/store/details/?hash={{ producto.hash }}" class="form-horizontal mb-lg">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group mt-lg">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Calificación</label>
+                            <div class="col-sm-9">
+                                <div style="font-size: 20px" class='starrr2'></div>
+                                <span class="your-choice-was" style="">Has seleccionado <input name="rata"
+                                        style="border: none;width: 15px" readonly="readonly" required="required" type="text"
+                                        class="choice"></input> estrellas.</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Comentario</label>
+                            <div class="col-sm-9">
+                                <textarea rows="5" style="resize: none" class="form-control" name="comentario"
+                                          placeholder="Escriba un comentario" required="required"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <section class="page-header mb-lg">
 
@@ -70,7 +109,8 @@
                                         <a href="#" class="review-link-in" rel="nofollow">
                                             <span class="count">{% contador_producto producto.id %} </span>
                                             Calificaciones</a> |
-                                        <a href="#" class="write-review-link" rel="nofollow">Agregar Calificación</a>
+                                        <a href="#" data-toggle="modal" data-target="#formModal"
+                                           class="write-review-link" rel="nofollow">Agregar Calificación</a>
                                     </div>
                                 </div>
 
@@ -210,10 +250,10 @@
                                                 </div>
                                                 {% if calificacion.usuario %}{{ calificacion.usuario }}:{% else %}
                                                     Anonimo:{% endif %}{% if calificacion.comentario %}
-                                                         {{ calificacion.comentario }}
-                                                    {% else %}
+                                                    {{ calificacion.comentario }}
+                                                {% else %}
                                                     No dejo Comentario
-                                                    {% endif %}
+                                                {% endif %}
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -334,6 +374,20 @@
             rating: {% rating_productos producto.id %},
             max: 5,
             readOnly: true,
+        })
+        $('.choice').val({% rating_productos producto.id %});
+        $('.starrr2').starrr({
+            rating: {% rating_productos producto.id %},
+            max: 5,
+            readOnly: false,
+            change: function (e, value) {
+                if (value) {
+                    $('.your-choice-was').show();
+                    $('.choice').val(value);
+                } else {
+                    $('.your-choice-was').hide();
+                }
+            }
         })
     </script>
     <script>

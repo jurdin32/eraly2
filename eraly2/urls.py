@@ -103,8 +103,6 @@ urlpatterns = [
     path("store/stores/",_tiendas),
     path("store/ejemplo/",ejemplo),
 
-
-
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
