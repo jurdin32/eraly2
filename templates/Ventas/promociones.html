@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load static %}
+    {% load humanize %}
     {% load productosTags %}
 
     <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
@@ -19,19 +20,19 @@
                                 {% csrf_token %}
                                 <div class="col-md-6 col-sm-6  form-group has-feedback">
                                     <label for="">Fecha de Iniciación </label>
-                                    <input type="date" class="form-control has-feedback-left" name="fecha_inicio"
-                                           id="fecha_inicio"
+                                    <input type="date" class="form-control has-feedback-left" required="required" name="fecha_inicio"
+                                           id="fi"
                                            placeholder="01/01/2021">
                                 </div>
                                 <div class="col-md-6 col-sm-6  form-group has-feedback">
                                     <label for="">Fecha de Finalización </label>
-                                    <input type="date" class="form-control has-feedback-left" name="fecha_fin"
-                                           id="fecha_fin"
+                                    <input type="date" class="form-control has-feedback-left" required="required" name="fecha_fin"
+                                           id="ff"
                                            placeholder="01/01/2021">
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <label for="">Seleccione Producto </label>
-                                    <select name="producto" id="producto" class="form-control">
+                                    <select name="producto" id="producto" required="required" class="form-control">
                                         {% for producto in productos %}
                                             <option value="{{ producto.id }}">{{ producto.nombre }}</option>
                                         {% endfor %}
@@ -41,12 +42,12 @@
                                     <label for="">Precio Web </label>
                                     <input readonly="readonly" type="text" id="precio1" name="precio1"
                                            class="form-control">
-                                    <input readonly="readonly" type="text" id="precio" name="precio"
+                                    <input readonly="readonly" type="hidden" id="precio" name="precio"
                                            class="form-control">
                                 </div>
                                 <div class="col-md-4 col-sm-4  form-group has-feedback">
                                     <label for="">% Descuento </label>
-                                    <input type="number" step="0.0001" id="descuento" name="descuento" value="0"
+                                    <input type="number" step="0.0001" id="descuento" required="required" name="descuento" value="0"
                                            class="form-control">
                                 </div>
 
@@ -60,7 +61,7 @@
                                         <div class="ln_solid"></div>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
                                         </button>
-                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <a href="" class="btn btn-primary" type="reset">Limpiar Formulario</a>
                                         <button type="submit" class="btn btn-success">Registrar Datos</button>
                                     </div>
                                 </div>
@@ -87,7 +88,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Opciones</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                    <a id="reg" class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
                                             class="fa fa-file-o"> </i> Registrar</a>
                                 </div>
                             </li>
@@ -134,15 +135,23 @@
                                                 <td style="text-align: center; vertical-align: middle"><span
                                                         class="badge badge-success"
                                                         style="font-size: 13px">{{ promo.total }}</span></td>
-                                                <td style="text-align: center; vertical-align: middle"><a href=""
-                                                                                                          class="btn btn-app"><i
-                                                        class="fa fa-edit"></i> Editar</a></td>
-                                                <td style="text-align: center; vertical-align: middle"><a href=""
-                                                                                                          class="btn btn-app"><i
+                                                <td style="text-align: center; vertical-align: middle">
+                                                    <a href="" data-target="#registro" data-toggle="modal"
+                                                        class="btn btn-app btn-primary datos"
+                                                        data-id="{{ promo.id }}"
+                                                        data-fi="{{ promo.fechaInicio|date:'Y-m-d' }}"
+                                                        data-ff="{{ promo.fechaFinal|date:'Y-m-d' }}"
+                                                        data-producto="{{ promo.precio.producto_id }}"
+                                                        data-precio="{{ promo.precio.id }}"
+                                                        data-precio1="{{ promo.precio.total|intcomma }}"
+                                                        data-descuento="{{ promo.descuento }}"
+                                                        data-uri="/products/promo/edit/{{ promo.id }}/">
+                                                        <i class="fa fa-edit"></i> Editar</a></td>
+                                                <td style="text-align: center; vertical-align: middle"><a href="/products/promo/delete/{{ promo.id }}/"
+                                                                                                          class="btn btn-app btn-danger"><i
                                                         class="fa fa-remove"></i> Eliminar</a></td>
                                             </tr>
                                         {% endfor %}
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,24 +176,40 @@
         });
 
         $("#producto").change(function () {
-            console.log("precio: " + $(this).val())
             $.get("/products/promo/price_web/" + $(this).val() + "/", function (data) {
-                $("#precio1").val(data)
+                $("#precio1").val(data.precioTotal)
+                $("#precio").val(data.id)
+                $("#total").val(data.precioTotal)
             });
         }).change();
         $("#descuento").keyup(function () {
-            try {
-                let precio = parseFloat($("#precio1").val());
+            let precio = parseFloat($("#precio1").val());
+            if ($(this).val() >0){
                 let descuento = parseFloat($("#descuento").val()) / 100;
                 let total = precio - (precio * descuento);
                 $("#total").val(total.toFixed(2))
-            } catch (e) {
-                console.log("error")
-                $("#total").val(0)
+            } else{
+                $("#total").val(precio)
             }
         })
+        $("#reg").click(function (){
+            $("#formRegistrar").attr('action',"")
+        });
 
-
+        $(".datos").click(function(){
+            console.log($(this).data('fi'))
+            $('#fi').val($(this).data('fi'))
+            $('#ff').val($(this).data('ff'))
+            $("#producto option[value="+ $(this).data('producto') +"]").attr("selected",true);
+            $('#precio').val($(this).data('precio'))
+            $('#precio1').val($(this).data('precio1').replace(",","."))
+            $('#descuento').val($(this).data('descuento'))
+            $("#formRegistrar").attr('action',$(this).data('uri'))
+            let precio = parseFloat($("#precio1").val());
+            let descuento = parseFloat($("#descuento").val()) / 100;
+                let total = precio - (precio * descuento);
+                $("#total").val(total.toFixed(2))
+        })
     </script>
 
 {% endblock %}

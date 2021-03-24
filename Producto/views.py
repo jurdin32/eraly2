@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 # Create your views here.
 from Home.models import Provincia
@@ -350,6 +350,7 @@ def promociones(request):
     if request.POST:
         Promociones(fechaInicio=request.POST.get('fecha_inicio'),fechaFinal=request.POST.get('fecha_fin'),precio_id=request.POST.get('precio'),
                     descuento=request.POST.get('descuento'),total=request.POST.get('total')).save()
+        messages.add_message(request, messages.SUCCESS, "Promoción creada exitosamente.!")
         print(request.POST)
 
     contexto={
@@ -361,4 +362,27 @@ def promociones(request):
 
 def return_precio_web(request,id):
     precio=Precios.objects.filter(producto_id=id, web=True).first()
-    return HttpResponse(precio.total)
+    data={
+        'id':precio.id,
+        'precioTotal':precio.total,
+    }
+    return JsonResponse(data)
+
+def editarPromocion(request,id):
+    promo = Promociones.objects.get(id=id)
+    if request.POST:
+        promo.fechaInicio=request.POST.get('fecha_inicio')
+        promo.fechaFinal=request.POST.get('fecha_fin')
+        promo.precio_id = request.POST.get('precio')
+        promo.descuento = request.POST.get('descuento')
+        promo.total = request.POST.get('total')
+        promo.save()
+        messages.add_message(request, messages.SUCCESS, "Se ha modificado el registro..!")
+    return HttpResponseRedirect("/products/promo/?establecimiento=%s" % promo.precio.producto.establecimiento_id)
+
+def eliminarPromocion(request,id):
+    promo =Promociones.objects.get(id=id)
+    establecimiento=promo.precio.producto.establecimiento_id
+    promo.delete()
+    messages.add_message(request, messages.ERROR, "Se ha eliminado el registro..!")
+    return HttpResponseRedirect("/products/promo/?establecimiento=%s"%establecimiento)

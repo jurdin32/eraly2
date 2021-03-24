@@ -209,7 +209,7 @@ class Promociones(models.Model):
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        precio= float(self.precio.total) - (float(self.precio.total) *float(self.descuento/100))
+        precio= float(self.precio.total) - (float(self.precio.total) *float(self.descuento)/100)
         self.total =precio
         super(Promociones, self).save()
 
