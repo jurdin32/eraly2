@@ -96,6 +96,7 @@ class Productos(models.Model):
     descripcion = RichTextUploadingField()
     estado=models.BooleanField(default=True)
     hash = models.CharField(max_length=256,null=True,blank=True)
+    puntuacion=models.DecimalField(max_digits=9, decimal_places=2,default=0)
 
     def _descripcion(self):
         return mark_safe(self.descripcion)

@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.shortcuts import render
 
 # Create your views here.
@@ -20,11 +21,16 @@ def _productos(request):
 
 def _detalles(request):
     producto = Productos.objects.get(hash=request.GET.get('hash'))
+    rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
     if request.POST:
         try:
             CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
+            producto.puntuacion=float(rating['rating'])
+            producto.save()
         except:
             CalificacionProductos(producto=producto, rating=request.POST['rata'], comentario=request.POST['comentario']).save()
+            producto.puntuacion = float(rating['rating'])
+            producto.save()
         messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
 
     contexto={
