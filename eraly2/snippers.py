@@ -32,11 +32,11 @@ def render_pdf_view(request,page,contexto={}):
     return response
 
 def export_pdf(request, template,contexto={}):
-    html = render_to_string(template, contexto)
+    html_string = render_to_string(template, contexto)
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = "inline; report.pdf"
+    response["Content-Disposition"] = "inline; documento.pdf"
     font_config = FontConfiguration()
-    HTML(string=html).write_pdf(response, font_config=font_config)
+    html.write_pdf(response, font_config=font_config)
     return response
-
 
