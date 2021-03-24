@@ -52,9 +52,11 @@
 
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="{% static 'Store/css/custom.css' %}">
+     <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
 
     <!-- Head Libs -->
     <script src="{% static 'Store/vendor/modernizr/modernizr.min.js' %}"></script>
+    <script src="{% static 'toastr/customToastr.js' %}"></script>
 
 </head>
 <body>
@@ -1763,8 +1765,19 @@
 <script src="{% static 'Store/js/theme.init.js' %}"></script>
 <link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
     <script src="{% static 'starrr/starrr.js' %}"></script>
- <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
-    <script src="{% static 'toastr/customToastr.js' %}"></script>
+
+
+
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <script>
+                    toastr.{{ message.tags }}("{{ message }}")
+                </script>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 {% block script %}
 
 {% endblock %}
