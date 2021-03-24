@@ -66,7 +66,8 @@
                     <div class="product-essential">
                         <div class="row">
                             <div class="product-img-box col-sm-5">
-                                <div class="product-img-box-wrapper">
+                            {% if producto.imagen %}
+                             <div class="product-img-box-wrapper">
                                     <div class="product-img-wrapper">
                                         <img id="product-zoom"
                                              src="/media/{{ producto.imagen }}"
@@ -77,10 +78,23 @@
                                         <span class="glyphicon glyphicon-search"></span>
                                     </a>
                                 </div>
+                            {% else %}
+                                 <div class="product-img-box-wrapper">
+                                    <div class="product-img-wrapper">
+                                        <img id="product-zoom"
+                                             src="{% static 'noimagen.jpg' %}"
+                                             data-zoom-image="{% static 'noimagen.jpg' %}"
+                                             alt="{{ producto.nombre }}">
+                                    </div>
+                                    <a href="#" class="product-img-zoom" title="Zoom">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+                            {% endif %}
+
 
                                 <div class="owl-carousel" id="productGalleryThumbs">
                                     <div class="product-img-wrapper">
-
                                         {% if producto.imagen %}
                                         <a href="#" data-image="/media/{{ producto.imagen }}"
                                            data-zoom-image="/media/{{ producto.imagen }}"
