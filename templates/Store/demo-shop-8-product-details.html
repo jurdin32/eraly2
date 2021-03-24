@@ -404,10 +404,14 @@
     <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
     <script src="{% static 'toastr/customToastr.js' %}"></script>
 
-    {% if mensaje %}
-        <script>
-            toastr.{{ tipo }}("{{ mensaje }}")
-        </script>
-    {% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <script>
+                toastr.{{ message.tags }}("{{ message }}")
+            </script>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 {% endblock %}
