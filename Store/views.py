@@ -23,10 +23,10 @@ def _detalles(request):
     if request.POST:
         try:
             CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
-            messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
         except:
             CalificacionProductos(producto=producto, rating=request.POST['rata'], comentario=request.POST['comentario']).save()
-            messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
+        messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
+
     contexto={
         'producto':producto,
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id)
