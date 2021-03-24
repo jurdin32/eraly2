@@ -82,7 +82,12 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% for precios in producto.precios_set.all %}
-                                                    <span class="badge badge-info" style="font-size: 13px">{{ precios.total }}</span><br>
+                                                    {% if precios.web %}
+                                                    <span class="badge badge-danger" style="font-size: 13px;color: white">Precio Web: {{ precios.total }}</span><br>
+                                                    {% else %}
+                                                        <span class="badge badge-info" style="font-size: 13px">{{ precios.total }}</span><br>
+                                                    {% endif %}
+
                                                     <br>
                                                 {% endfor %}
 
