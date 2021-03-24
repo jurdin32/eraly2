@@ -1,0 +1,190 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {% load static %}
+    {% load productosTags %}
+
+    <div class="modal fade bs-example-modal-lg" id="registro" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Promociones Web.</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form id="formRegistrar" class="form-label-left input_mask" method="post">
+                                {% csrf_token %}
+                                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                                    <label for="">Fecha de Iniciación </label>
+                                    <input type="date" class="form-control has-feedback-left" name="fecha_inicio"
+                                           id="fecha_inicio"
+                                           placeholder="01/01/2021">
+                                </div>
+                                <div class="col-md-6 col-sm-6  form-group has-feedback">
+                                    <label for="">Fecha de Finalización </label>
+                                    <input type="date" class="form-control has-feedback-left" name="fecha_fin"
+                                           id="fecha_fin"
+                                           placeholder="01/01/2021">
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <label for="">Seleccione Producto </label>
+                                    <select name="producto" id="producto" class="form-control">
+                                        {% for producto in productos %}
+                                            <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <label for="">Precio Web </label>
+                                    <input readonly="readonly" type="text" id="precio1" name="precio1"
+                                           class="form-control">
+                                    <input readonly="readonly" type="text" id="precio" name="precio"
+                                           class="form-control">
+                                </div>
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <label for="">% Descuento </label>
+                                    <input type="number" step="0.0001" id="descuento" name="descuento" value="0"
+                                           class="form-control">
+                                </div>
+
+                                <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                    <label for="">Total </label>
+                                    <input readonly="readonly" type="text" id="total" name="total" class="form-control">
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12" style="text-align: center">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>Documentos de los Establecimientos</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown" style="right: 30px">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">Opciones</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registro"><i
+                                            class="fa fa-file-o"> </i> Registrar</a>
+                                </div>
+                            </li>
+                            <li></li>
+                            <li><a href=""><i class="fa fa-archive"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-danger" href="/products/promo/?establecimiento=0">Todos</a>
+                                {% for establecimiento in establecimientos %}
+                                    <a class="btn btn-primary"
+                                       href="/products/promo/?establecimiento={{ establecimiento.id }}">{{ establecimiento.nombreComercial }}</a>
+                                {% endfor %}
+                                <div class="card-box table-responsive">
+                                    <table id="listaDocumentos" class="table table-striped table-bordered"
+                                           style="width:100%">
+                                        <thead style="background-color: #2A3F54; color: white">
+                                        <tr>
+                                            <th style="text-align: center">Fecha de Inicio</th>
+                                            <th style="text-align: center">Fecha de Finalización</th>
+                                            <th style="text-align: center">Producto</th>
+                                            <th style="text-align: center">Precio Normal</th>
+                                            <th style="text-align: center">% de Descuento</th>
+                                            <th style="text-align: center">Precio Final</th>
+                                            <th style="text-align: center">Editar</th>
+                                            <th style="text-align: center">Eliminar</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for promo in promociones %}
+                                            <tr>
+                                                <td style="text-align: center; vertical-align: middle">{{ promo.fechaInicio|date:"d/m/Y" }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ promo.fechaFinal|date:"d/m/Y" }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ promo.precio.producto }}</td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        class="badge badge-danger"
+                                                        style="font-size: 13px">{{ promo.precio.total }}</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        class="badge badge-info"
+                                                        style="font-size: 13px">{{ promo.descuento }}%</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><span
+                                                        class="badge badge-success"
+                                                        style="font-size: 13px">{{ promo.total }}</span></td>
+                                                <td style="text-align: center; vertical-align: middle"><a href=""
+                                                                                                          class="btn btn-app"><i
+                                                        class="fa fa-edit"></i> Editar</a></td>
+                                                <td style="text-align: center; vertical-align: middle"><a href=""
+                                                                                                          class="btn btn-app"><i
+                                                        class="fa fa-remove"></i> Eliminar</a></td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script_index %}
+    <script>
+        $(document).ready(function () {
+            $("#listaDocumentos").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                },
+                pageLength: 100,
+            });
+        });
+
+        $("#producto").change(function () {
+            console.log("precio: " + $(this).val())
+            $.get("/products/promo/price_web/" + $(this).val() + "/", function (data) {
+                $("#precio1").val(data)
+            });
+        }).change();
+        $("#descuento").keyup(function () {
+            try {
+                let precio = parseFloat($("#precio1").val());
+                let descuento = parseFloat($("#descuento").val()) / 100;
+                let total = precio - (precio * descuento);
+                $("#total").val(total.toFixed(2))
+            } catch (e) {
+                console.log("error")
+                $("#total").val(0)
+            }
+        })
+
+
+    </script>
+
+{% endblock %}

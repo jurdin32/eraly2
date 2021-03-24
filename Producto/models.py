@@ -152,6 +152,7 @@ class Precios(models.Model):
     total=models.DecimalField(max_digits=9, decimal_places=2,default=0)
     detalle=models.CharField(max_length=50)
     estado=models.BooleanField(default=True)
+    web=models.BooleanField(default=False)
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -208,7 +209,7 @@ class Promociones(models.Model):
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        precio= (float(self.precio.total) *float(self.descuento/100))+float(self.precio.total)
+        precio= float(self.precio.total) - (float(self.precio.total) *float(self.descuento/100))
         self.total =precio
         super(Promociones, self).save()
 

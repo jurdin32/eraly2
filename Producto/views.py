@@ -283,10 +283,15 @@ def eliminarColorProducto(request,id):
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
 def registrarPrecios(request,id):
+    web=True
     if request.POST:
         precio=float(str(request.POST['precio']))
-        print(precio)
-        Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle']).save()
+        print(request.POST)
+        if request.POST.get('web') == 'on':
+            web=True
+        else:
+            web =False
+        Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle'],web=web).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
@@ -334,3 +339,26 @@ def subir_imagenes_producto(request,id):
     if request.POST:
         ImagenesProducto(producto_id=id, imagen=request.FILES['file']).save()
     return HttpResponse("ok")
+
+def promociones(request):
+    promo=Promociones.objects.filter(precio__producto__establecimiento__usuario=request.user)
+    produc=Productos.objects.filter(establecimiento__usuario=request.user)
+    if request.GET.get('establecimiento'):
+        promo=Promociones.objects.filter(precio__producto__establecimiento_id= request.GET.get('establecimiento'))
+        produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'))
+
+    if request.POST:
+        Promociones(fechaInicio=request.POST.get('fecha_inicio'),fechaFinal=request.POST.get('fecha_fin'),precio_id=request.POST.get('precio'),
+                    descuento=request.POST.get('descuento'),total=request.POST.get('total')).save()
+        print(request.POST)
+
+    contexto={
+        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
+        "promociones":promo,
+        "productos":produc
+    }
+    return render(request, 'Ventas/promociones.html',contexto)
+
+def return_precio_web(request,id):
+    precio=Precios.objects.filter(producto_id=id, web=True).first()
+    return HttpResponse(precio.total)

@@ -185,3 +185,7 @@ class AdminDireccion(admin.ModelAdmin):
     list_display_links = Attr(CalificacionProductos)
 
 
+@admin.register(Promociones)
+class AdminDireccion(admin.ModelAdmin):
+    list_display = Attr(Promociones)
+    list_display_links = Attr(Promociones)

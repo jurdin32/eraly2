@@ -79,6 +79,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <ul class="to_do">
+                                            <li>
+                                                <input type="checkbox" class="flat" name="web" style="position: absolute; opacity: 0;"> Precio para la Web </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="col-md-12 col-sm-12  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-right" name="detalle"
                                                id="detalle" required="required"
@@ -352,10 +361,15 @@
                                         <table class="countries_list" style="font-size: 16px">
                                             <tbody>
                                             {% for precio in producto.precios_set.all %}
-                                                <tr>
+                                                <tr style="background-color: #0b97c4; color: white">
                                                     <td><a href="/products/prices/delete/{{ precio.id }}/"><i
-                                                            class="fa fa-trash text-danger"></i></a></td>
-                                                    <td>{{ precio.detalle }}</td>
+                                                            class="fa fa-trash" style="color: white"></i></a></td>
+                                                    <td>{{ precio.detalle }} {% if precio.web %} (Precio Web){% endif %} </td>
+                                                    <td class="fs15 fw700 text-right">$ {{ precio.total }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Precio sin Impuestos: </td>
+                                                    <td></td>
                                                     <td class="fs15 fw700 text-right">$ {{ precio.precioVenta }}</td>
                                                 </tr>
                                                 <tr>
