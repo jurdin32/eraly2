@@ -193,7 +193,7 @@ class ImagenesProducto(models.Model):
         verbose_name_plural = "8. Imagenes de Producto "
 
 class CalificacionProductos(models.Model):
-    usuario=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True,unique_for_date=True)
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
