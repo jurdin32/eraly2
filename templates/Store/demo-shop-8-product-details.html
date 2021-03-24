@@ -203,7 +203,8 @@
                             <div id="product-reviews" class="tab-pane">
                                 <div class="collateral-box">
                                     <ul class="list-unstyled">
-                                        <li>Lo que los usuarios opinan de este producto</li>
+                                        <div class='starrr'></div>
+                                        <span class="your-choice" style="">Según la opinión de los usuarios, se ha calificado el producto con:<span class="choic"></span> estrellas.</span>
                                     </ul>
                                 </div>
 
@@ -213,7 +214,7 @@
                                     {% for calificacion in calificaciones %}
                                         <table>
                                             <tr>
-                                                <td>
+                                                <td style="width: 100px">
                                                     <div>
                                                         {% if calificacion.rating == 0 %}
                                                             <a class="fa fa-star-o"></a>
@@ -383,9 +384,10 @@
         $('.starrr').starrr({
             rating: {% rating_productos producto.id %},
             max: 5,
-            readOnly: true,
+            readOnly: true
         })
         $('.choice').val({% rating_productos producto.id %});
+        $('.choic').text({% rating_productos producto.id %});
         $('.starrr2').starrr({
             rating: {% rating_productos producto.id %},
             max: 5,

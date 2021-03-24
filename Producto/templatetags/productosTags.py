@@ -49,7 +49,7 @@ def rating_productos(id):
     rating=CalificacionProductos.objects.filter(producto_id=id).aggregate(rating=Avg('rating'))
     if rating['rating']==None :
         return 0
-    return rating['rating']
+    return round(float(rating['rating']))
 
 @register.simple_tag
 def contador_producto(id):
