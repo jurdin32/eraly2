@@ -25,12 +25,10 @@ def _detalles(request):
     if request.POST:
         try:
             CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
-            producto.puntuacion=float(rating['rating'])
-            producto.save()
         except:
             CalificacionProductos(producto=producto, rating=request.POST['rata'], comentario=request.POST['comentario']).save()
-            producto.puntuacion = float(rating['rating'])
-            producto.save()
+        producto.puntuacion = float(rating['rating'])
+        producto.save()
         messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
 
     contexto={
