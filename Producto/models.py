@@ -195,8 +195,8 @@ class ImagenesProducto(models.Model):
         verbose_name_plural = "8. Imagenes de Producto "
 
 class CalificacionProductos(models.Model):
-    usuario=models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True,unique=True)
-    producto=models.OneToOneField(Productos,on_delete=models.CASCADE,unique=True,null=True,blank=True)
+    usuario=models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
+    producto=models.OneToOneField(Productos,on_delete=models.CASCADE,null=True,blank=True)
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
 
