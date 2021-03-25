@@ -63,7 +63,8 @@ def promocion_descuento(id):
     fecha=datetime.datetime.now().date()
     if promo:
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-            return promo.descuento
+            return "-"+str(promo.descuento)+"%"
+    return ""
 
 @register.simple_tag
 def promocion_precio(id):
@@ -72,3 +73,4 @@ def promocion_precio(id):
     if promo:
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
             return promo.total
+    return 0
