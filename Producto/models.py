@@ -1,6 +1,13 @@
+import os
+from io import StringIO
+
+
+
+from PIL import Image
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
 
 # Create your models here.
@@ -8,6 +15,8 @@ from django.utils.safestring import mark_safe
 
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
+from eraly2.settings import MEDIA_ROOT
+from eraly2.snippers import  resize
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
@@ -183,14 +192,29 @@ class Kardex(models.Model):
 
 class ImagenesProducto(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
-    imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='100x100')
-    thumbails=models.ImageField(upload_to='producto', null=True, blank=True)
+    imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='600x800')
+    thumbnail=models.ImageField(upload_to='producto/thumbnail', null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.producto_id)
 
     def miniatura(self):
-        return mark_safe("<img src='/media/%s' style='width: 100px'>" % self.imagen)
+        return mark_safe("<img src='/media/%s'>" % self.thumbnail)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        from django.core.files import File
+        import uuid
+        im1 =resize(self.imagen, (600, 800))
+        file = File(im1)
+        random_name = f'{uuid.uuid4()}.jpeg'
+        self.imagen.save(random_name, file, save=False)
+
+        im2=resize(self.imagen,(240, 320))
+        file=File(im2)
+        random_name = f'{uuid.uuid4()}.jpeg'
+        self.thumbnail.save(random_name, file, save=False)
+        super(ImagenesProducto, self).save()
 
     class Meta:
         verbose_name_plural = "8. Imagenes de Producto "
