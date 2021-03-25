@@ -150,7 +150,13 @@
                                 <div class="product-detail-info">
                                     <div class="product-price-box">
                                         {#<span class="old-price">$99.00</span>#}
-                                        <span class="product-price">${{ producto.precios_set.first.total }}</span>
+                                        <span class="product-price">
+                                            ${% for precio in producto.precios_set.all  %}
+                                                {% if precio.web %}
+                                                    {{ precio.total }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
                                     </div>
                                     <p class="availability">
                                         <span class="font-weight-semibold">Disponibilidad:</span>
