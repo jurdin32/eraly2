@@ -13,7 +13,7 @@ from django.utils.safestring import mark_safe
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
 from eraly2.settings import MEDIA_ROOT
-from eraly2.snippers import resize, ResizeImageMixin
+from eraly2.snippers import ResizeImageMixin
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
