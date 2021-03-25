@@ -8,6 +8,9 @@ from future.backports import datetime
 from Producto.models import Productos, Categorias, CalificacionProductos, Promociones
 from django.contrib import messages
 
+from Store.models import Publicidad
+
+
 def tienda(request):
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
@@ -52,6 +55,7 @@ def _detalles(request):
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id),
         'promocion':promo,
         'productos':Productos.objects.filter(subcategoria=producto.subcategoria),
+        'publicidad':Publicidad.objects.filter(estado=True),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
