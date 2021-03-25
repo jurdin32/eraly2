@@ -21,12 +21,9 @@ def _productos(request):
 
 def _detalles(request):
     producto = Productos.objects.get(hash=request.GET.get('hash'))
-    rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
     if request.POST:
-        try:
-            CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
-        except:
-            CalificacionProductos(producto=producto, rating=request.POST['rata'], comentario=request.POST['comentario']).save()
+        CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
+        rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
         producto.puntuacion = float(rating['rating'])
         producto.save()
         messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
