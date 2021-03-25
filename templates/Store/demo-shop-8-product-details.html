@@ -337,8 +337,6 @@
                                                     No dejo Comentario
                                                 {% endif %}</td>
                                             </tr>
-
-
                                         </table>
                                     {% endfor %}
 
@@ -364,12 +362,13 @@
                                     <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
                                          class="product-hover-image">
                                 </a>
-                                <div class="product-label"><span class="discount">
                                 {% if promocion %}
-                                    {% promocion_descuento product.id %}
+                                    <div class="product-label">
+                                    <span class="discount">
+                                        {% promocion_descuento product.id %}
+                                    </span>
+                                    </div>
                                 {% endif %}
-
-                            </span></div>
                             </figure>
                             <div class="product-details-area">
                                 <h2 class="product-name"><a href="#" title="Product Name">{{ product.nombre }}</a></h2>
