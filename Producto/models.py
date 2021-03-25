@@ -195,10 +195,11 @@ class ImagenesProducto(models.Model):
         verbose_name_plural = "8. Imagenes de Producto "
 
 class CalificacionProductos(models.Model):
-    usuario=models.OneToOneField(User, on_delete=models.CASCADE)
-    producto=models.OneToOneField(Productos,on_delete=models.CASCADE)
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
+
 
 class Promociones(models.Model):
     fechaInicio=models.DateField()
