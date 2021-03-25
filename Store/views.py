@@ -26,13 +26,14 @@ def _detalles(request):
     fecha = datetime.datetime.now().date()
     producto = Productos.objects.get(hash=request.GET.get('hash'))
     promo =Promociones.objects.filter(precio__producto=producto).last()
-    print("Fecha inicio",promo.fechaInicio)
-    print('Fecha final',promo.fechaFinal)
-    print('fecha actual',fecha)
-    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-        print("Hay promocion")
-    else:
-        promo=None
+    if promo:
+        print("Fecha inicio",promo.fechaInicio)
+        print('Fecha final',promo.fechaFinal)
+        print('fecha actual',fecha)
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            print("Hay promocion")
+        else:
+            promo=None
     if request.POST:
         if request.user.is_authenticated:
             cal = CalificacionProductos.objects.filter(usuario=request.user, producto=producto).exists()
