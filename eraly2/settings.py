@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'Empresa',
     'ckeditor_uploader',
-    'Home','Producto','Personas','Ventas',
+    'Home','Producto','Personas','Ventas','Store',
 ]
 
 
