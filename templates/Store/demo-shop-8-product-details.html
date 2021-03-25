@@ -450,14 +450,19 @@
                     </div>
                 {% endif %}
                 <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5}">
-                    <a href="#">
-                        <img class="img-responsive" src="{% static 'Store/img/demos/shop/banners/banner1-red.jpg' %}"
-                             alt="Banner">
-                    </a>
-                    <a href="#">
-                        <img class="img-responsive" src="{% static 'Store/img/demos/shop/banners/banner1-red.jpg' %}"
-                             alt="Banner">
-                    </a>
+                    {% for pu in publicidad %}
+                        <a href="#">
+                            <img class="img-responsive"
+                                 src="/media/{{ pu.imagen }}"
+                                 alt="Banner">
+                        </a>
+                        <a href="#">
+                            <img class="img-responsive"
+                                 src="/media/{{ pu.imagen }}"
+                                 alt="Banner">
+                        </a>
+                    {% endfor %}
+
 
                 </div>
             </aside>
