@@ -55,7 +55,7 @@ def _detalles(request):
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id),
         'promocion':promo,
         'productos':Productos.objects.filter(subcategoria=producto.subcategoria),
-        'publicidad':Publicidad.objects.filter(estado=True),
+        'imagnes':Publicidad.objects.filter(estado=True),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 

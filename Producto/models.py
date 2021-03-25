@@ -4,7 +4,6 @@ import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
 
 # Create your models here.
@@ -12,7 +11,6 @@ from django.utils.safestring import mark_safe
 
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
-from eraly2.settings import MEDIA_ROOT
 from eraly2.snippers import ResizeImageMixin
 
 contacto_chosse=(
