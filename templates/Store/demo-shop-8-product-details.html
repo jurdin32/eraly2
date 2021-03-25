@@ -449,7 +449,10 @@
                         <p>El precio promocional aplica hasta <br> el {{ promocion.fechaFinal }}</p>
                     </div>
                 {% endif %}
+                {% if promocion %}
                 <hr class="mt-xlg">
+                {% endif %}
+
                 <div class="owl-carousel owl-theme"
                      data-plugin-options="{'items': 1, 'autoplay': true, 'autoplayTimeout': 3000}">
                     {% for pu in imagnes %}
