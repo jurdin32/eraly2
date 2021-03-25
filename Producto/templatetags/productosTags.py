@@ -61,12 +61,14 @@ def contador_producto(id):
 def promocion_descuento(id):
     promo=Promociones.objects.filter(precio__producto_id=id).last()
     fecha=datetime.datetime.now().date()
-    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-        return promo.descuento
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            return promo.descuento
 
 @register.simple_tag
 def promocion_precio(id):
     promo=Promociones.objects.filter(precio__producto_id=id).last()
     fecha=datetime.datetime.now().date()
-    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-        return promo.total
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            return promo.total
