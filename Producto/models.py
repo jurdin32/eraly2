@@ -115,6 +115,7 @@ class Productos(models.Model,ResizeImageMixin):
             return '%s, talla:%s' % (self.nombre, self.talla)
         else:
             return '%s'%(self.nombre)
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.resize(self.imagen,(600,800))
@@ -193,8 +194,8 @@ class Kardex(models.Model):
 
 class ImagenesProducto(models.Model,ResizeImageMixin):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
-    imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='600x800')
-    thumbnail=models.ImageField(upload_to='producto/thumbnail', null=True, blank=True)
+    imagen=models.ImageField(upload_to='productos', null=True, blank=True, help_text='600x800')
+    thumbnail=models.ImageField(upload_to='productos/thumbnail', null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.producto_id)
@@ -207,6 +208,7 @@ class ImagenesProducto(models.Model,ResizeImageMixin):
         self.resize(self.imagen, (600, 800))
         self.resize(self.thumbnail, (240, 320))
         super(ImagenesProducto, self).save()
+
 
     class Meta:
         verbose_name_plural = "8. Imagenes de Producto "

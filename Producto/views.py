@@ -337,7 +337,10 @@ def inventario(request):
 
 def subir_imagenes_producto(request,id):
     if request.POST:
-        ImagenesProducto(producto_id=id, imagen=request.FILES['file'],thumbnail=request.FILES['file']).save()
+        try:
+            ImagenesProducto(producto_id=id, imagen=request.FILES['file'],thumbnail=request.FILES['file']).save()
+        except Exception as e:
+            print(e)
     return HttpResponse("ok")
 
 def promociones(request):

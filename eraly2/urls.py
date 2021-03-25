@@ -46,6 +46,7 @@ urlpatterns = [
     path("products/prices/<int:id>/",registrarPrecios),
     path("products/prices/delete/<int:id>/",eliminarPrecios),
     path("products/promo/",promociones),
+    path("products/images/<int:id>/",subir_imagenes_producto),
 
 
 
