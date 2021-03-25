@@ -1,4 +1,5 @@
 from django.db.models import Avg
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,11 +23,14 @@ def _productos(request):
 def _detalles(request):
     producto = Productos.objects.get(hash=request.GET.get('hash'))
     if request.POST:
-        CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
-        rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
-        producto.puntuacion = float(rating['rating'])
-        producto.save()
-        messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
+        try:
+            CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
+            rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
+            producto.puntuacion = float(rating['rating'])
+            producto.save()
+            messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
+        except:
+            return HttpResponseRedirect("/store/login/")
 
     contexto={
         'producto':producto,
