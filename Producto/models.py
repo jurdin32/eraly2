@@ -184,7 +184,7 @@ class Kardex(models.Model):
 class ImagenesProducto(models.Model):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='100x100')
-    #thumbails=models.ImageField(upload_to='producto', null=True, blank=True)
+    thumbails=models.ImageField(upload_to='producto', null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.producto_id)
