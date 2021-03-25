@@ -1,5 +1,6 @@
 from django import template
 from django.db.models import Sum, Avg
+import datetime
 
 from Producto.models import *
 
@@ -55,3 +56,17 @@ def rating_productos(id):
 def contador_producto(id):
     rating=CalificacionProductos.objects.filter(producto_id=id).count()
     return rating
+
+@register.simple_tag
+def promocion_descuento(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+        return promo.descuento
+
+@register.simple_tag
+def promocion_precio(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+        return promo.total

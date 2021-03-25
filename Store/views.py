@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Producto.models import Productos, Categorias, CalificacionProductos
+from future.backports import datetime
+
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones
 from django.contrib import messages
 
 def tienda(request):
@@ -21,7 +23,16 @@ def _productos(request):
     return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
 
 def _detalles(request):
+    fecha = datetime.datetime.now().date()
     producto = Productos.objects.get(hash=request.GET.get('hash'))
+    promo =Promociones.objects.filter(precio__producto=producto).last()
+    print("Fecha inicio",promo.fechaInicio)
+    print('Fecha final',promo.fechaFinal)
+    print('fecha actual',fecha)
+    if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+        print("Hay promocion")
+    else:
+        promo=None
     if request.POST:
         if request.user.is_authenticated:
             cal = CalificacionProductos.objects.filter(usuario=request.user, producto=producto).exists()
@@ -35,10 +46,11 @@ def _detalles(request):
                 messages.add_message(request, messages.ERROR, "Usted ya calificó este producto.!")
         else:
             return HttpResponseRedirect("/store/login/")
-
     contexto={
         'producto':producto,
-        'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id)
+        'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id),
+        'promocion':promo,
+        'productos':Productos.objects.filter(subcategoria=producto.subcategoria),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 

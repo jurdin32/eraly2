@@ -2,6 +2,34 @@
 {% load static %}
 {% load productosTags %}
 {% block content %}
+    <style>
+        .circulo {
+            width: 200px;
+            height: 200px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #ee3d43 !important;
+            display: table;
+            text-align: center;
+        }
+
+        .oter {
+            display: table-cell;
+            font-size: 20px;
+            color: white;
+            vertical-align: middle;
+        }
+
+        .principal {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
     <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -66,60 +94,60 @@
                     <div class="product-essential">
                         <div class="row">
                             <div class="product-img-box col-sm-5">
-                            {% if producto.imagen %}
-                             <div class="product-img-box-wrapper">
-                                    <div class="product-img-wrapper">
-                                        <img id="product-zoom"
-                                             src="/media/{{ producto.imagen }}"
-                                             data-zoom-image="/media/{{ producto.imagen }}"
-                                             alt="{{ producto.nombre }}">
+                                {% if producto.imagen %}
+                                    <div class="product-img-box-wrapper">
+                                        <div class="product-img-wrapper">
+                                            <img id="product-zoom"
+                                                 src="/media/{{ producto.imagen }}"
+                                                 data-zoom-image="/media/{{ producto.imagen }}"
+                                                 alt="{{ producto.nombre }}">
+                                        </div>
+                                        <a href="#" class="product-img-zoom" title="Zoom">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
                                     </div>
-                                    <a href="#" class="product-img-zoom" title="Zoom">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </a>
-                                </div>
-                            {% else %}
-                                 <div class="product-img-box-wrapper">
-                                    <div class="product-img-wrapper">
-                                        <img id="product-zoom"
-                                             src="{% static 'noimagen.jpg' %}"
-                                             data-zoom-image="{% static 'noimagen.jpg' %}"
-                                             alt="{{ producto.nombre }}">
+                                {% else %}
+                                    <div class="product-img-box-wrapper">
+                                        <div class="product-img-wrapper">
+                                            <img id="product-zoom"
+                                                 src="{% static 'noimagen.jpg' %}"
+                                                 data-zoom-image="{% static 'noimagen.jpg' %}"
+                                                 alt="{{ producto.nombre }}">
+                                        </div>
+                                        <a href="#" class="product-img-zoom" title="Zoom">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
                                     </div>
-                                    <a href="#" class="product-img-zoom" title="Zoom">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </a>
-                                </div>
-                            {% endif %}
+                                {% endif %}
 
 
                                 <div class="owl-carousel" id="productGalleryThumbs">
                                     <div class="product-img-wrapper">
                                         {% if producto.imagen %}
-                                        <a href="#" data-image="/media/{{ producto.imagen }}"
-                                           data-zoom-image="/media/{{ producto.imagen }}"
-                                           class="product-gallery-item">
-                                            <img src="/media/{{ producto.imagen }}" alt="product">
-                                        </a>
+                                            <a href="#" data-image="/media/{{ producto.imagen }}"
+                                               data-zoom-image="/media/{{ producto.imagen }}"
+                                               class="product-gallery-item">
+                                                <img src="/media/{{ producto.imagen }}" alt="product">
+                                            </a>
                                         {% else %}
                                             <a href="#" data-image="{% static 'noimagen.jpg' %}"
-                                           data-zoom-image="{% static 'noimagen.jpg' %}"
-                                           class="product-gallery-item">
-                                            <img src="{% static 'noimagen.jpg' %}" alt="product">
-                                        </a>
+                                               data-zoom-image="{% static 'noimagen.jpg' %}"
+                                               class="product-gallery-item">
+                                                <img src="{% static 'noimagen.jpg' %}" alt="product">
+                                            </a>
                                         {% endif %}
                                     </div>
-                                {% if producto.imagen %}
-                                    {% for imagen in producto.imagenesproducto_set.all %}
-                                        <div class="product-img-wrapper">
-                                            <a href="#" data-image="/media/{{ imagen.imagen }}"
-                                               data-zoom-image="/media/{{ imagen.imagen }}"
-                                               class="product-gallery-item">
-                                                <img src="/media/{{ imagen.thumbnail }}" alt="product">
-                                            </a>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
+                                    {% if producto.imagen %}
+                                        {% for imagen in producto.imagenesproducto_set.all %}
+                                            <div class="product-img-wrapper">
+                                                <a href="#" data-image="/media/{{ imagen.imagen }}"
+                                                   data-zoom-image="/media/{{ imagen.imagen }}"
+                                                   class="product-gallery-item">
+                                                    <img src="/media/{{ imagen.thumbnail }}" alt="product">
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -149,14 +177,29 @@
 
                                 <div class="product-detail-info">
                                     <div class="product-price-box">
-                                        {#<span class="old-price">$99.00</span>#}
-                                        <span class="product-price">
-                                            ${% for precio in producto.precios_set.all  %}
+                                        {% if promocion %}
+                                            <span class="old-price">
+                                                {% for precio in producto.precios_set.all %}
+                                                    {% if precio.web %}
+                                                        $ {{ precio.total }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                            <br>
+                                            <span class="product-price">
+                                                $ {{ promocion.total }}
+                                            </span>
+                                        {% else %}
+                                            <span class="product-price">
+                                            {% for precio in producto.precios_set.all %}
                                                 {% if precio.web %}
-                                                    {{ precio.total }}
+                                                    $ {{ precio.total }}
                                                 {% endif %}
                                             {% endfor %}
                                         </span>
+                                        {% endif %}
+
+
                                     </div>
                                     <p class="availability">
                                         <span class="font-weight-semibold">Disponibilidad:</span>
@@ -234,7 +277,8 @@
                             <div id="product-reviews" class="tab-pane">
                                 <div class="collateral-box">
                                     <ul class="list-unstyled">
-                                        <span class="your-choice" style="">Según la opinión de los usuarios, se ha calificado el producto con: <div class='starrr'></div> (<span class="choic"></span> estrellas).</span>
+                                        <span class="your-choice" style="">Según la opinión de los usuarios, se ha calificado el producto con: <div
+                                                class='starrr'></div> (<span class="choic"></span> estrellas).</span>
                                     </ul>
                                 </div>
 
@@ -268,7 +312,7 @@
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
-                                                            <a  style="text-decoration: none" class="fa fa-star-o"></a>
+                                                            <a style="text-decoration: none" class="fa fa-star-o"></a>
                                                             <a style="text-decoration: none" class="fa fa-star-o"></a>
 
                                                         {% elif calificacion.rating <= 4.4 %}
@@ -282,7 +326,7 @@
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
                                                             <a style="text-decoration: none" class="fa fa-star"></a>
-                                                            <a  style="text-decoration: none" class="fa fa-star"></a>
+                                                            <a style="text-decoration: none" class="fa fa-star"></a>
                                                         {% endif %}
                                                     </div>
                                                 </td>
@@ -305,54 +349,63 @@
                 </div>
 
                 <h2 class="slider-title">
-                    <span class="inline-title">Also Purchased</span>
+                    <span class="inline-title">Productos Relacionados</span>
                     <span class="line"></span>
                 </h2>
 
                 <div class="owl-carousel owl-theme"
                      data-plugin-options="{'items':4, 'margin':20, 'nav':true, 'dots': false, 'loop': false}">
-                    <div class="product">
-                        <figure class="product-image-area">
-                            <a href="#" title="Product Name" class="product-image">
-                                <img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product Name">
-                                <img src="{% static 'Store/img/demos/shop/products/product1-2.jpg' %}"
-                                     alt="Product Name" class="product-hover-image">
-                            </a>
+                    {% for product in productos %}
+                        <div class="product">
+                            <figure class="product-image-area">
+                                <a href="/store/details/?hash={{ product.hash }}" title="Product Name"
+                                   class="product-image">
+                                    <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}">
+                                    <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
+                                         class="product-hover-image">
+                                </a>
+                                <div class="product-label"><span class="discount">
+                                {% if promocion %}
+                                    -{% promocion_descuento product.id %}%
+                                {% endif %}
 
-                            <a href="#" class="product-quickview">
-                                <i class="fa fa-share-square-o"></i>
-                                <span>Quick View</span>
-                            </a>
-                            <div class="product-label"><span class="discount">-10%</span></div>
-                            <div class="product-label"><span class="new">New</span></div>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="#" title="Product Name">Noa Sheer Blouse</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:60%"></div>
+                            </span></div>
+                            </figure>
+                            <div class="product-details-area">
+                                <h2 class="product-name"><a href="#" title="Product Name">{{ product.nombre }}</a></h2>
+                                <div class="product-ratings">
+                                    <div class="ratings-box">
+                                        <div class="rating" style="width:60%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="product-price-box">
+
+                                <span class="product-price">
+                                    {% for precio in product.precios_set.all %}
+                                        {% if precio.web %}
+                                            $ {{ precio.total }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+
+                                </div>
+
+                                <div class="product-actions">
+                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                    <a href="#" class="addtocart" title="Add to Cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span>Add to Cart</span>
+                                    </a>
+                                    <a href="#" class="comparelink" title="Add to Compare">
+                                        <i class="glyphicon glyphicon-signal"></i>
+                                    </a>
                                 </div>
                             </div>
-
-                            <div class="product-price-box">
-                                <span class="old-price">$99.00</span>
-                                <span class="product-price">$89.00</span>
-                            </div>
-
-                            <div class="product-actions">
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="addtocart" title="Add to Cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
 
                 </div>
@@ -389,21 +442,31 @@
                 </div>
 
                 <hr class="mt-xlg">
-
+                {% if promocion %}
+                    <div class="principal">
+                        <div class="circulo">
+                            <div class="oter">
+                                <span style="font-weight: bold; font-size: 35px">-{{ promocion.descuento }}% </span>
+                                <br>
+                                de descuento
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <p>El precio promocional aplica hasta <br> el {{ promocion.fechaFinal }}</p>
+                    </div>
+                {% endif %}
                 <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5}">
                     <a href="#">
                         <img class="img-responsive" src="{% static 'Store/img/demos/shop/banners/banner1-red.jpg' %}"
                              alt="Banner">
                     </a>
-
                     <a href="#">
-                        <img class="img-responsive" src="{% static 'Store/img/demos/shop/banners/banner2-red.jpg' %}"
+                        <img class="img-responsive" src="{% static 'Store/img/demos/shop/banners/banner1-red.jpg' %}"
                              alt="Banner">
                     </a>
 
                 </div>
-
-                <hr>
             </aside>
         </div>
     </div>
