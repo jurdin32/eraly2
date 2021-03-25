@@ -362,13 +362,7 @@
                                     <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
                                          class="product-hover-image">
                                 </a>
-                                {% if promocion %}
-                                    <div class="product-label">
-                                    <span class="discount">
-                                        {% promocion_descuento product.id %}
-                                    </span>
-                                    </div>
-                                {% endif %}
+                                {% promocion_descuento product.id %}
                             </figure>
                             <div class="product-details-area">
                                 <h2 class="product-name"><a href="#" title="Product Name">{{ product.nombre }}</a></h2>
