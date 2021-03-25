@@ -26,7 +26,7 @@ def _detalles(request):
     fecha = datetime.datetime.now().date()
     producto = Productos.objects.get(hash=request.GET.get('hash'))
     promo =Promociones.objects.filter(precio__producto=producto).last()
-    if promo:
+    if promo!=None:
         print("Fecha inicio",promo.fechaInicio)
         print('Fecha final',promo.fechaFinal)
         print('fecha actual',fecha)
