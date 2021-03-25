@@ -45,6 +45,43 @@ def _tiendas(request):
     }
     return render(request, 'Store/tiendas.html', contexto)
 
+def account(request):
+    contexto={
+
+    }
+    return render(request, 'Store/demo-shop-8-myaccount.html', contexto)
+
+def dashboard(request):
+    contexto={
+
+    }
+    return render(request, 'Store/demo-shop-8-dashboard.html', contexto)
+
+def register(request):
+    contexto={
+
+    }
+    return render(request, 'Store/demo-shop-8-register.html', contexto)
+
+
+
+def checkout(request):
+    contexto={
+
+    }
+    return render(request, 'Store/demo-shop-8-checkout.html', contexto)
+
+
+
+def contact(request):
+    contexto={
+
+    }
+    return render(request, 'Store/demo-shop-8-contact-us.html', contexto)
+
+
+
+
 def ejemplo(request):
     contexto={
 
