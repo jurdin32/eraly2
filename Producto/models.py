@@ -1,9 +1,6 @@
-import os
-from io import StringIO
+from django.core.files import File
+import uuid
 
-
-
-from PIL import Image
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
@@ -118,6 +115,12 @@ class Productos(models.Model):
             return '%s, talla:%s' % (self.nombre, self.talla)
         else:
             return '%s'%(self.nombre)
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        im1 = resize(self.imagen, (600, 800))
+        file = File(im1)
+        random_name = f'{uuid.uuid4()}.jpeg'
+        self.imagen.save(random_name, file, save=False)
 
     class Meta:
         verbose_name_plural = "3. Producto "
@@ -203,8 +206,7 @@ class ImagenesProducto(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        from django.core.files import File
-        import uuid
+
         im1 =resize(self.imagen, (600, 800))
         file = File(im1)
         random_name = f'{uuid.uuid4()}.jpeg'
