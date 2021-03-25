@@ -63,11 +63,11 @@ def promocion_descuento(id):
     fecha=datetime.datetime.now().date()
     if promo:
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-         return"""<div class="product-label">
+         return mark_safe("""<div class="product-label">
                     <span class="discount">
                         %s
                     </span>
-                </div>"""%promo.descuento
+                </div>"""%promo.descuento)
     return ""
 
 @register.simple_tag
