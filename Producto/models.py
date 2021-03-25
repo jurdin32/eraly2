@@ -121,6 +121,8 @@ class Productos(models.Model):
         file = File(im1)
         random_name = f'{uuid.uuid4()}.jpeg'
         self.imagen.save(random_name, file, save=False)
+        
+        super(Productos, self).save()
 
     class Meta:
         verbose_name_plural = "3. Producto "
