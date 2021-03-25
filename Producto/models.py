@@ -121,6 +121,7 @@ class Productos(models.Model,ResizeImageMixin):
         self.resize(self.imagen,(600,800))
         super(Productos, self).save()
 
+
     class Meta:
         verbose_name_plural = "3. Producto "
 
