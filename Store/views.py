@@ -23,13 +23,16 @@ def _productos(request):
 def _detalles(request):
     producto = Productos.objects.get(hash=request.GET.get('hash'))
     if request.POST:
-        try:
-            CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
-            rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
-            producto.puntuacion = float(rating['rating'])
-            producto.save()
-            messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
-        except:
+        if request.user.is_authenticated:
+            try:
+                CalificacionProductos(producto=producto,rating=request.POST['rata'],comentario=request.POST['comentario'],usuario=request.user).save()
+                rating = CalificacionProductos.objects.filter(producto=producto).aggregate(rating=Avg('rating'))
+                producto.puntuacion = float(rating['rating'])
+                producto.save()
+                messages.add_message(request, messages.SUCCESS, "Gracias por calificar este producto..!")
+            except:
+                    messages.add_message(request, messages.ERROR, "Usted ya calificó este producto.!")
+        else:
             return HttpResponseRedirect("/store/login/")
 
     contexto={

@@ -196,7 +196,7 @@ class ImagenesProducto(models.Model):
 
 class CalificacionProductos(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True,unique=True)
-    producto=models.ForeignKey(Productos,on_delete=models.CASCADE,unique=True)
+    producto=models.ForeignKey(Productos,on_delete=models.CASCADE,unique=True,null=True,blank=True)
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
 
