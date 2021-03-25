@@ -13,7 +13,7 @@ from django.utils.safestring import mark_safe
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
 from eraly2.settings import MEDIA_ROOT
-from eraly2.snippers import  resize
+from eraly2.snippers import resize, ResizeImageMixin
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
@@ -88,7 +88,7 @@ class Marca(models.Model):
     def __str__(self):
         return self.nombre
 
-class Productos(models.Model):
+class Productos(models.Model,ResizeImageMixin):
     tipo=models.CharField(max_length=2, default="P")
     imagen=models.ImageField(upload_to="productos",null=True,blank=True, help_text="imagen de 100px x 100px")
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
@@ -117,11 +117,7 @@ class Productos(models.Model):
             return '%s'%(self.nombre)
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        im1 = resize(self.imagen, (600, 800))
-        file = File(im1)
-        random_name = f'{uuid.uuid4()}.jpeg'
-        self.imagen.save(random_name, file, save=False)
-        
+        self.resize(self.imagen,(600,800))
         super(Productos, self).save()
 
     class Meta:
@@ -195,7 +191,7 @@ class Kardex(models.Model):
     def __str__(self):
         return self.producto.nombre
 
-class ImagenesProducto(models.Model):
+class ImagenesProducto(models.Model,ResizeImageMixin):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
     imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='600x800')
     thumbnail=models.ImageField(upload_to='producto/thumbnail', null=True, blank=True)
@@ -208,16 +204,8 @@ class ImagenesProducto(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
-        im1 =resize(self.imagen, (600, 800))
-        file = File(im1)
-        random_name = f'{uuid.uuid4()}.jpeg'
-        self.imagen.save(random_name, file, save=False)
-
-        im2=resize(self.imagen,(240, 320))
-        file=File(im2)
-        random_name = f'{uuid.uuid4()}.jpeg'
-        self.thumbnail.save(random_name, file, save=False)
+        self.resize(self.imagen, (600, 800))
+        self.resize(self.thumbnail, (240, 320))
         super(ImagenesProducto, self).save()
 
     class Meta:
