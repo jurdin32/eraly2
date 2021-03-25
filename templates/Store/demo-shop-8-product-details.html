@@ -449,15 +449,6 @@
                         <p>El precio promocional aplica hasta <br> el {{ promocion.fechaFinal }}</p>
                     </div>
                 {% endif %}
-                <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5}">
-                    {% for pu in imagnes %}
-                        <a href="#">
-                            <img class="img-responsive"
-                                 src="/media/{{ pu.imagen }}"
-                                 alt="Banner">
-                        </a>
-                    {% endfor %}
-                </div>
                 <div class="owl-carousel owl-theme"
                      data-plugin-options="{'items': 1, 'autoplay': true, 'autoplayTimeout': 3000}">
                     {% for pu in imagnes %}
