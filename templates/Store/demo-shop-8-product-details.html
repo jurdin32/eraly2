@@ -358,9 +358,16 @@
                             <figure class="product-image-area">
                                 <a href="/store/details/?hash={{ product.hash }}" title="Product Name"
                                    class="product-image">
+                                    {% if product.imagen %}
                                     <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}">
                                     <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
                                          class="product-hover-image">
+                                        {% else %}
+                                        <img src="{% static 'noimagen.jpg' %}" alt="{{ product.nombre }}">
+                                    <img src="{% static 'noimagen.jpg' %}" alt="{{ product.nombre }}"
+                                         class="product-hover-image">
+                                    {% endif %}
+
                                 </a>
                                 {% promocion_descuento product.id %}
                             </figure>
