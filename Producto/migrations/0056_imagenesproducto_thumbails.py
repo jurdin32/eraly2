@@ -15,4 +15,5 @@ class Migration(migrations.Migration):
             name='thumbails',
             field=models.ImageField(blank=True, null=True, upload_to='producto'),
         ),
+
     ]
