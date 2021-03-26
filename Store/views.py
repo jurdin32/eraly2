@@ -59,6 +59,13 @@ def _detalles(request):
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
+def add_carrito(request):
+    request.session['carrito']={}
+
+    print(request.session)
+
+
+
 def _tiendas(request):
     contexto={
 

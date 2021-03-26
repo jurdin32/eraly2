@@ -116,6 +116,9 @@ urlpatterns = [
     path("store/contact/",contact),
     path("store/checkout/",checkout),
 
+    #carrito de compras
+    path("/store/add/cart",add_carrito),
+
 
 
 
