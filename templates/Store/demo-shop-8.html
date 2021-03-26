@@ -148,7 +148,7 @@
                                     <a href="#" class="cart-dropdown-icon">
                                         <i class="minicart-icon"></i>
                                         <span class="cart-info">
-													<span class="cart-qty">2</span>
+													<span class="cart-qty">0</span>
 													<span class="cart-text">item(s)</span>
 												</span>
                                     </a>
@@ -1757,6 +1757,31 @@
         </ul>
     {% endif %}
 
+<script>
+    var contador=0
+        $(".cx").html("")
+        {% for car in request.session.carrito %}
+            $(".cx").append('<div class="product product-sm">' +
+                '<a href="#" class="btn-remove" title="Remove Product">' +
+                '<i class="fa fa-times"></i>'
+                + '</a>' +
+                '<figure class="product-image-area">' +
+                '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">' +
+                '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">' +
+                '</a>' +
+                '</figure>' +
+                '<div class="product-details-area">' +
+                '<h2 class="product-name"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
+                '<div class="cart-qty-price">' +
+                '1 X' +
+                '<span class="product-price">$65.00</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>')
+            contador={{ forloop.counter }}
+        {% endfor %}
+        $(".cart-qty").text(contador)
+</script>
 
 {% block script %}
 
