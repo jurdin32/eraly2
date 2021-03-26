@@ -517,7 +517,7 @@
                 '</a>' +
                 '</figure>' +
                 '<div class="product-details-area">' +
-                '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
+                '<h2 class="product-name"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
                 '<div class="cart-qty-price">' +
                 '1 X' +
                 '<span class="product-price">$65.00</span>' +
@@ -529,7 +529,6 @@
 
         $(".addtocart").click(function () {
             $(".cx").html("")
-            contador+=1
             $.get("/store/add/cart/", {
                 producto: '{{ producto.id }}',
                 promocion: '{{ promocion.id }}',
@@ -546,12 +545,13 @@
                     '</a>' +
                     '</figure>' +
                     '<div class="product-details-area">' +
-                    '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">'+data.producto_nombre+'</a></h2>' +
+                    '<h2 class="product-name"><a href="/store/details/?hash='+data.hash+'" title="Product Name">'+data.producto_nombre+'</a></h2>' +
                     '<div class="cart-qty-price">'+data.cantidad+' x ' +
                     '<span class="product-price">$'+data.precio_promocion+'</span>' +
                     '</div>' +
                     '</div>' +
                     '</div>')
+                contador+=1
                 $(".cart-qty").text(contador)
             })
             {% for car in request.session.carrito %}
@@ -565,7 +565,7 @@
                     '</a>' +
                     '</figure>' +
                     '<div class="product-details-area">' +
-                    '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.producto_nombre }}</a></h2>' +
+                    '<h2 class="product-name"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.producto_nombre }}</a></h2>' +
                     '<div class="cart-qty-price">' +
                     '{{car.cantidad}} x ' +
                     '<span class="product-price">${{car.precio_promocion}}</span>' +
