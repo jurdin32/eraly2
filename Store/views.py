@@ -87,11 +87,13 @@ def add_carrito(request):
         'cantidad':cantidad,
         'precio_total': total,
     }
+
     datos.append(cart)
     request.session['carrito']=datos
+    request.session.save()
 
     print("sesion",request.session['carrito'])
-    return HttpResponse("ok")
+    return JsonResponse(cart)
 
 
 
