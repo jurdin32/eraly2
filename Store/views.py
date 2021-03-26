@@ -1,5 +1,5 @@
 from django.db.models import Avg
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,6 +10,8 @@ from django.contrib import messages
 
 from Store.models import Publicidad
 
+
+datos=[]
 
 def tienda(request):
     contexto={
@@ -60,9 +62,6 @@ def _detalles(request):
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
 def add_carrito(request):
-    request.session['carrito']=[]
-    print(request.session)
-    print(request.GET)
     promocion=None
     descuento_promo = 0
     producto=Productos.objects.get(id=request.GET.get('producto'))
@@ -76,6 +75,7 @@ def add_carrito(request):
     descuento = precio * (float(descuento_promo)/100)
     precioU = precio-descuento
     total =precioU * float(request.GET.get('cantidad'))
+
     cart={
         'producto_id':producto.id,
         'producto_nombre':producto.nombre,
@@ -87,10 +87,11 @@ def add_carrito(request):
         'cantidad':cantidad,
         'precio_total': total,
     }
+    datos.append(cart)
+    request.session['carrito']=datos
 
-    request.session['carrito'].append(cart)
-    print(request.session['carrito'])
-    return JsonResponse(request.session['carrito'],safe=False)
+    print("sesion",request.session['carrito'])
+    return HttpResponse("ok")
 
 
 

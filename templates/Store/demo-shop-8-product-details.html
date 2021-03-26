@@ -209,8 +209,9 @@
 
                                 <div class="product-actions">
                                     <div class="product-detail-qty">
-                                        <input type="number" value="1" min="1" max="{% stock producto.id %}" id="cantidad"
-                                               class="vertical-spinner" style="width: 50px;">
+                                        <input type="number" value="1" min="1" max="{% stock producto.id %}"
+                                               id="cantidad"
+                                               class="form-control" style="width: 70px;text-align: center">
                                     </div>
                                     <a href="#" class="addtocart" title="Add to Cart">
                                         <i class="fa fa-shopping-cart"></i>
@@ -357,13 +358,13 @@
                                 <a href="/store/details/?hash={{ product.hash }}" title="Product Name"
                                    class="product-image">
                                     {% if product.imagen %}
-                                    <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}">
-                                    <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
-                                         class="product-hover-image">
-                                        {% else %}
+                                        <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}">
+                                        <img src="/media/{{ product.imagen }}" alt="{{ product.nombre }}"
+                                             class="product-hover-image">
+                                    {% else %}
                                         <img src="{% static 'noimagen.jpg' %}" alt="{{ product.nombre }}">
-                                    <img src="{% static 'noimagen.jpg' %}" alt="{{ product.nombre }}"
-                                         class="product-hover-image">
+                                        <img src="{% static 'noimagen.jpg' %}" alt="{{ product.nombre }}"
+                                             class="product-hover-image">
                                     {% endif %}
 
                                 </a>
@@ -455,7 +456,7 @@
                     </div>
                 {% endif %}
                 {% if promocion %}
-                <hr class="mt-xlg">
+                    <hr class="mt-xlg">
                 {% endif %}
 
                 <div class="owl-carousel owl-theme"
@@ -503,32 +504,54 @@
         })
     </script>
     <script>
-    $(".addtocart").click(function(){
-        var dato;
-        $.get("/store/add/cart/",{producto: '{{ producto.id }}', promocion:'{{ promocion.id }}',cantidad:$("#cantidad").val()},function (data){
+        $(".cx").html("")
+        {% for car in request.session.carrito %}
+            $(".cx").append('<div class="product product-sm">' +
+                '<a href="#" class="btn-remove" title="Remove Product">' +
+                '<i class="fa fa-times"></i>'
+                + '</a>' +
+                '<figure class="product-image-area">' +
+                '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">' +
+                '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">' +
+                '</a>' +
+                '</figure>' +
+                '<div class="product-details-area">' +
+                '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
+                '<div class="cart-qty-price">' +
+                '1 X' +
+                '<span class="product-price">$65.00</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>')
+        {% endfor %}
+
+        $(".addtocart").click(function () {
             $(".cx").html("")
+            $.get("/store/add/cart/", {
+                producto: '{{ producto.id }}',
+                promocion: '{{ promocion.id }}',
+                cantidad: $("#cantidad").val()
+            })
             {% for car in request.session.carrito %}
-                dato +='<div class="product product-sm">' +
+                $(".cx").append('<div class="product product-sm">' +
                     '<a href="#" class="btn-remove" title="Remove Product">' +
-                        '<i class="fa fa-times"></i>'
-                    +'</a>'+
-                    '<figure class="product-image-area">'+
-                        '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">'+
-                            '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">'+
-                        '</a>'+
-                    '</figure>'+
-                    '<div class="product-details-area">'+
-                        '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.nombre_producto }}</a></h2>'+
-                        '<div class="cart-qty-price">'+
-                            '1 X'+
-                            '<span class="product-price">$65.00</span>'+
-                        '</div>'+
-                    '</div>'+
-                '</div>'
+                    '<i class="fa fa-times"></i>'
+                    + '</a>' +
+                    '<figure class="product-image-area">' +
+                    '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">' +
+                    '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">' +
+                    '</a>' +
+                    '</figure>' +
+                    '<div class="product-details-area">' +
+                    '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
+                    '<div class="cart-qty-price">' +
+                    '{{car.cantidad}} x ' +
+                    '<span class="product-price">${{car.precio_promocion}}</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>')
             {% endfor %}
-        $(".cx").html(dato)
         })
-    })
     </script>
 
 
