@@ -1,11 +1,11 @@
 from django.db.models import Avg
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 from future.backports import datetime
 
-from Producto.models import Productos, Categorias, CalificacionProductos, Promociones
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios
 from django.contrib import messages
 
 from Store.models import Publicidad
@@ -60,9 +60,37 @@ def _detalles(request):
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
 def add_carrito(request):
-    request.session['carrito']={}
-
+    request.session['carrito']=[]
     print(request.session)
+    print(request.GET)
+    promocion=None
+    descuento_promo = 0
+    producto=Productos.objects.get(id=request.GET.get('producto'))
+    if request.GET.get('promocion'):
+        promocion =Promociones.objects.get(id=request.GET.get('promocion'))
+        descuento_promo=promocion.descuento
+
+    cantidad = request.GET.get('cantidad')
+    precio = Precios.objects.filter(producto_id=producto.id,web=True).last()
+    precio=float(precio.total)
+    descuento = precio * (float(descuento_promo)/100)
+    precioU = precio-descuento
+    total =precioU * float(request.GET.get('cantidad'))
+    cart={
+        'producto_id':producto.id,
+        'producto_nombre':producto.nombre,
+        'producto_imagen':producto.imagen.name or producto.imagenesproducto_set.first().imagen.name,
+        'hash':producto.hash,
+        'precio_normal':precio,
+        'descuento_porcentaje':descuento_promo,
+        'precio_promocion':precioU,
+        'cantidad':cantidad,
+        'precio_total': total,
+    }
+
+    request.session['carrito'].append(cart)
+    print(request.session['carrito'])
+    return JsonResponse(request.session['carrito'],safe=False)
 
 
 

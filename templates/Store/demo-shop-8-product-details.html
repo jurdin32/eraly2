@@ -75,7 +75,6 @@
 
 
     <section class="page-header mb-lg">
-
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="/store/">Inicio</a></li>
@@ -172,6 +171,7 @@
                                 </div>
 
                                 <div class="product-short-desc" style="text-align: justify">
+
                                     <p>{{ producto.descripcion|safe }}</p>
                                 </div>
 
@@ -209,7 +209,7 @@
 
                                 <div class="product-actions">
                                     <div class="product-detail-qty">
-                                        <input type="number" value="1" min="1" max="{% stock producto.id %}"
+                                        <input type="number" value="1" min="1" max="{% stock producto.id %}" id="cantidad"
                                                class="vertical-spinner" style="width: 50px;">
                                     </div>
                                     <a href="#" class="addtocart" title="Add to Cart">
@@ -345,12 +345,10 @@
                         </div>
                     </div>
                 </div>
-
                 <h2 class="slider-title">
                     <span class="inline-title">Productos Relacionados</span>
                     <span class="line"></span>
                 </h2>
-
                 <div class="owl-carousel owl-theme"
                      data-plugin-options="{'items':4, 'margin':20, 'nav':true, 'dots': false, 'loop': false}">
                     {% for product in productos %}
@@ -397,7 +395,7 @@
                                     </a>
                                     <a href="#" class="addtocart" title="Add to Cart">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span>Add to Cart</span>
+                                        <span>Al Carrito</span>
                                     </a>
                                     <a href="#" class="comparelink" title="Add to Compare">
                                         <i class="glyphicon glyphicon-signal"></i>
@@ -506,7 +504,30 @@
     </script>
     <script>
     $(".addtocart").click(function(){
-        $.get("/store/add/cart",)
+        var dato;
+        $.get("/store/add/cart/",{producto: '{{ producto.id }}', promocion:'{{ promocion.id }}',cantidad:$("#cantidad").val()},function (data){
+            $(".cx").html("")
+            {% for car in request.session.carrito %}
+                dato +='<div class="product product-sm">' +
+                    '<a href="#" class="btn-remove" title="Remove Product">' +
+                        '<i class="fa fa-times"></i>'
+                    +'</a>'+
+                    '<figure class="product-image-area">'+
+                        '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">'+
+                            '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">'+
+                        '</a>'+
+                    '</figure>'+
+                    '<div class="product-details-area">'+
+                        '<h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">{{ car.nombre_producto }}</a></h2>'+
+                        '<div class="cart-qty-price">'+
+                            '1 X'+
+                            '<span class="product-price">$65.00</span>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'
+            {% endfor %}
+        $(".cx").html(dato)
+        })
     })
     </script>
 

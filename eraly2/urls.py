@@ -117,7 +117,7 @@ urlpatterns = [
     path("store/checkout/",checkout),
 
     #carrito de compras
-    path("/store/add/cart",add_carrito),
+    path("store/add/cart/",add_carrito),
 
 
 
