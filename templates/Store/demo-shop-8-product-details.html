@@ -504,6 +504,7 @@
         })
     </script>
     <script>
+    var contador=0
         $(".cx").html("")
         {% for car in request.session.carrito %}
             $(".cx").append('<div class="product product-sm">' +
@@ -523,10 +524,12 @@
                 '</div>' +
                 '</div>' +
                 '</div>')
+            contador={{ forloop.counter }}
         {% endfor %}
 
         $(".addtocart").click(function () {
             $(".cx").html("")
+            contador+=1
             $.get("/store/add/cart/", {
                 producto: '{{ producto.id }}',
                 promocion: '{{ promocion.id }}',
@@ -549,6 +552,7 @@
                     '</div>' +
                     '</div>' +
                     '</div>')
+                $(".cart-qty").text(contador)
             })
             {% for car in request.session.carrito %}
                 $(".cx").append('<div class="product product-sm">' +
@@ -568,9 +572,11 @@
                     '</div>' +
                     '</div>' +
                     '</div>')
+                contador={{ forloop.counter }}
             {% endfor %}
 
         })
+    $(".cart-qty").text(contador)
     </script>
 
 
