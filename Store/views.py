@@ -87,12 +87,10 @@ def add_carrito(request):
         'cantidad':cantidad,
         'precio_total': total,
     }
-    if not cart in datos:
-        datos.append(cart)
     request.session['carrito']=datos
     request.session.save()
 
-    print("sesion",request.session['carrito'])
+    print(cart)
     return JsonResponse(cart)
 
 
