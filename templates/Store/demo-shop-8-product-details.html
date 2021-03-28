@@ -2,6 +2,7 @@
 {% load static %}
 {% load productosTags %}
 {% block content %}
+    {% load humanize %}
     <style>
         .circulo {
             width: 200px;
@@ -476,6 +477,18 @@
 
 {% block script %}
     <script>
+    var totalcarrito = 0
+    var contador = 0
+    function totales() {
+         totalcarrito=0
+            $(".product-price-total").each(function () {
+                $(".cart-totals").html("")
+                totalcarrito += parseFloat($(this).val().replace(',', "."))
+                $(".cart-totals").html("Total: <span>$" + totalcarrito.toFixed(2) + "</span>")
+            });
+        }
+    </script>
+    <script>
         $('.starrr').starrr({
             rating: {% rating_productos producto.id %},
             max: 5,
@@ -504,12 +517,12 @@
         })
     </script>
     <script>
-        var contador = 0
+
         $(".cx").html("")
         {% for car in request.session.carrito %}
             {% if car.producto_id%}
                 $(".cx").append('<div class="product product-sm">' +
-                    '<a href="#" class="btn-remove" title="Remove Product">' +
+                    '<a href="/store/add/cart/deleteItem/?product_id={{ car.hash }}" class="btn-remove" title="Remove Product">' +
                     '<i class="fa fa-times"></i>'
                     + '</a>' +
                     '<figure class="product-image-area">' +
@@ -522,13 +535,17 @@
                     '<div class="cart-qty-price">' +
                     '{{car.cantidad}} x ' +
                     '<span class="product-price">${{car.precio_promocion}}</span>' +
+                    '<input type="hidden" value="{{car.precio_total|intcomma}}" class="product-price-total"></input>' +
                     '</div>' +
                     '</div>' +
                     '</div>')
             {% endif %}
             contador={{ forloop.counter }}
+            totales()
         {% endfor %}
 
+        console.log(totalcarrito)
+        $(".cart-totals").html("Total: <span>$" + totalcarrito + "</span>")
         $(".addtocart").click(function () {
             $.get("/store/add/cart/", {
                 producto: '{{ producto.id }}',
@@ -536,9 +553,9 @@
                 cantidad: $("#cantidad").val()
             }, function (data) {
                 if (data.producto_id > 0) {
-                    console.log(data.hash)
+                    toastr.success("Se agregó al carrito..!")
                     $(".cx").append('<div class="product product-sm">' +
-                        '<a href="#" class="btn-remove" title="Remove Product">' +
+                        '<a href="/store/add/cart/deleteItem/?product_id='+data.hash+'" class="btn-remove" title="Remove Product">' +
                         '<i class="fa fa-times"></i>'
                         + '</a>' +
                         '<figure class="product-image-area">' +
@@ -550,21 +567,48 @@
                         '<h2 class="product-name" style="padding-right: 8px"><a href="/store/details/?hash=' + data.hash + '" title="Product Name">' + data.producto_nombre + '</a></h2>' +
                         '<div class="cart-qty-price">' + data.cantidad + ' x ' +
                         '<span class="product-price">$' + data.precio_promocion + '</span>' +
+                        '<input type="hidden" value="'+data.precio_total+'" class="product-price-total"></input>' +
                         '</div>' +
                         '</div>' +
                         '</div>')
                     contador += 1
-                    $(".cart-qty").text(contador)
-                }
-                else{
+
+                } else {
                     console.log(data.producto_id)
                 }
+                $(".cart-qty").text(contador)
+                totales()
             })
+
+            $(".cx").html("")
+            {% for car in request.session.carrito %}
+                {% if car.producto_id%}
+                    $(".cx").append('<div class="product product-sm">' +
+                        '<a href="/store/add/cart/deleteItem/?product_id={{ car.hash }}" class="btn-remove" title="Remove Product">' +
+                        '<i class="fa fa-times"></i>'
+                        + '</a>' +
+                        '<figure class="product-image-area">' +
+                        '<a href="/store/details/?hash={{ car.hash }}" title="Product Name" class="product-image">' +
+                        '<img src="/media/{{ car.producto_imagen}}" alt="Product Name">' +
+                        '</a>' +
+                        '</figure>' +
+                        '<div class="product-details-area">' +
+                        '<h2 class="product-name" style="padding-right: 8px"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.producto_nombre }}</a></h2>' +
+                        '<div class="cart-qty-price">' +
+                        '{{car.cantidad}} x ' +
+                        '<span class="product-price">${{car.precio_promocion}}</span>' +
+                        '<input type="hidden" value="{{car.precio_total}}" class="product-price-total"></input>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>')
+                {% endif %}
+                contador={{ forloop.counter }}
+            {% endfor %}
+            totales()
+            console.log(totalcarrito)
+
         })
         $(".cart-qty").text(contador)
     </script>
-
-
-
 
 {% endblock %}

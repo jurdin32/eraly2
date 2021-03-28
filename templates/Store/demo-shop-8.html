@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load productosTags %}
+ {% load humanize %}
 <html>
 <head>
     <!-- Basic -->
@@ -181,7 +182,7 @@
                                             </div>
 
                                             <div class="cart-totals">
-                                                Total: <span>$104.00</span>
+
                                             </div>
 
                                             <div class="cart-actions">
@@ -950,10 +951,10 @@
                                                         <a href="/store/details/?hash={{ producto.hash }}"
                                                            class="product-quickview">
                                                             <i class="fa fa-minus-circle"></i>
-                                                            <span> 0%</span>
+                                                            <span>{% promocion_descuento producto.id %}%</span>
                                                         </a>
                                                         <div class="product-actions">
-                                                            <a href="#" class="addtocart" title="Add to Cart">
+                                                            <a href="#" class="addtocart" data-prod="{{ producto.id }}" data-promo="{% promocion_id producto.id %}" title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
                                                             </a>
                                                         </div>
@@ -1741,28 +1742,44 @@
 <!-- Theme Initialization Files -->
 <script src="{% static 'Store/js/theme.init.js' %}"></script>
 <link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
-    <script src="{% static 'starrr/starrr.js' %}"></script>
+<script src="{% static 'starrr/starrr.js' %}"></script>
 
 <script src="{% static 'toastr/toastr.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
 <script src="{% static 'toastr/customToastr.js' %}"></script>
 
 {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <script>
-                    toastr.{{ message.tags }}("{{ message }}")
-                </script>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <ul class="messages">
+        {% for message in messages %}
+            <script>
+                toastr.{{ message.tags }}("{{ message }}")
+            </script>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <script>
-    var contador=0
-        $(".cx").html("")
-        {% for car in request.session.carrito %}
+    var totalcarrito = 0
+    var contador = 0
+
+    function totales() {
+        totalcarrito = 0
+        $(".product-price-total").each(function () {
+            $(".cart-totals").html("")
+            totalcarrito += parseFloat($(this).val().replace(',', "."))
+            $(".cart-totals").html("Total: <span>$" + totalcarrito.toFixed(2) + "</span>")
+        });
+    }
+</script>
+
+
+{% block script %}
+<script>
+    $(".cx").html("")
+    {% for car in request.session.carrito %}
+        {% if car.producto_id%}
             $(".cx").append('<div class="product product-sm">' +
-                '<a href="#" class="btn-remove" title="Remove Product">' +
+                '<a href="/store/add/cart/deleteItem/?product_id={{ car.hash }}" class="btn-remove" title="Remove Product">' +
                 '<i class="fa fa-times"></i>'
                 + '</a>' +
                 '<figure class="product-image-area">' +
@@ -1771,20 +1788,57 @@
                 '</a>' +
                 '</figure>' +
                 '<div class="product-details-area">' +
-                '<h2 class="product-name"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.nombre_producto }}</a></h2>' +
+                '<h2 class="product-name" style="padding-right: 8px"><a href="/store/details/?hash={{ car.hash }}" title="Product Name">{{ car.producto_nombre }}</a></h2>' +
                 '<div class="cart-qty-price">' +
-                '1 X' +
-                '<span class="product-price">$65.00</span>' +
+                '{{car.cantidad}} x ' +
+                '<span class="product-price">${{car.precio_promocion}}</span>' +
+                '<input type="hidden" value="{{car.precio_total|intcomma}}" class="product-price-total"></input>' +
                 '</div>' +
                 '</div>' +
                 '</div>')
-            contador={{ forloop.counter }}
-        {% endfor %}
-        $(".cart-qty").text(contador)
+        {% endif %}
+        contador = {{ forloop.counter }}
+    {% endfor %}
+    totales()
+$(".cart-qty").text(contador)
+
+
+    $(".addtocart").click(function () {
+        $.get("/store/add/cart/", {
+            producto: $(this).data('prod'),
+            promocion: $(this).data('promo'),
+            cantidad: 1,
+        }, function (data) {
+            if (data.producto_id > 0) {
+                toastr.success("Se agregó al carrito..!")
+                $(".cx").append('<div class="product product-sm">' +
+                    '<a href="/store/add/cart/deleteItem/?product_id=' + data.hash + '" class="btn-remove" title="Remove Product">' +
+                    '<i class="fa fa-times"></i>'
+                    + '</a>' +
+                    '<figure class="product-image-area">' +
+                    '<a href="/store/details/?hash=' + data.hash + 'title="Product Name" class="product-image">' +
+                    '<img src="/media/' + data.producto_imagen + '" alt="Product Name">' +
+                    '</a>' +
+                    '</figure>' +
+                    '<div class="product-details-area">' +
+                    '<h2 class="product-name" style="padding-right: 8px"><a href="/store/details/?hash=' + data.hash + '" title="Product Name">' + data.producto_nombre + '</a></h2>' +
+                    '<div class="cart-qty-price">' + data.cantidad + ' x ' +
+                    '<span class="product-price">$' + data.precio_promocion + '</span>' +
+                    '<input type="hidden" value="' + data.precio_total + '" class="product-price-total"></input>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>')
+                contador += 1
+
+            } else {
+                console.log(data.producto_id)
+            }
+            $(".cart-qty").text(contador)
+            totales()
+        })
+    })
+
 </script>
-
-{% block script %}
-
 {% endblock %}
 
 </body>

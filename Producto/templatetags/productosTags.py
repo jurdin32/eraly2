@@ -78,3 +78,13 @@ def promocion_precio(id):
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
             return promo.total
     return 0
+
+
+@register.simple_tag
+def promocion_id(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            return promo.id
+    return 0
