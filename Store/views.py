@@ -89,6 +89,7 @@ def add_carrito(request):
     if control_carrito(request,producto_id=producto.id):
         request.session['carrito'].append(cart)
         request.session.save()
+        messages.add_message(request, messages.SUCCESS, "Se agrego al carrito..!")
         print('no se guardo porque ya existe')
         return JsonResponse(cart)
     else:
