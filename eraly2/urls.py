@@ -123,7 +123,7 @@ urlpatterns = [
 
     #django restframework:
     path('api-auth/', include('rest_framework.urls')),
-    path('', include(routes.urls)),
+    path('api-auth/', include(routes.router.urls)),
 
 
 

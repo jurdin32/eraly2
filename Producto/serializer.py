@@ -1,10 +1,12 @@
 
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
+from rest_framework import serializers
 
-# Serializers define the API representation.
-class ProductoSerializer(serializers.HyperlinkedModelSerializer):
+from Empresa.serializer import EstablecimientoSerializer
+from Producto.models import Productos
+
+
+class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'nombre', 'Establecimiento__nombre_comercial', 'descripcion','hash']
+        model = Productos
+        fields = ['id','establecimiento','nombre', 'descripcion','hash',]
 
