@@ -75,7 +75,7 @@ def add_carrito(request):
     descuento = precio * (float(descuento_promo)/100)
     precioU = precio-descuento
     total =precioU * float(request.GET.get('cantidad'))
-
+    datos=[]
     cart={
         'producto_id':producto.id,
         'producto_nombre':producto.nombre,
@@ -87,6 +87,7 @@ def add_carrito(request):
         'cantidad':cantidad,
         'precio_total': total,
     }
+    datos.append(cart)
     request.session['carrito']=datos
     request.session.save()
 
