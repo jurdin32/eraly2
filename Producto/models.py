@@ -88,7 +88,7 @@ class Marca(models.Model):
 
 class Productos(models.Model,ResizeImageMixin):
     tipo=models.CharField(max_length=2, default="P")
-    imagen=models.ImageField(upload_to="productos",null=True,blank=True, help_text="imagen de 100px x 100px")
+    imagen=models.ImageField(upload_to="productos",null=True,blank=True, default='noimagen.jpg')
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
     subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
@@ -116,7 +116,8 @@ class Productos(models.Model,ResizeImageMixin):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.resize(self.imagen,(600,800))
+        if str(self.imagen.name)!='noimagen.jpg':
+            self.resize(self.imagen,(600,800))
         super(Productos, self).save()
 
 
