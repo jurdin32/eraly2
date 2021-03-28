@@ -26,6 +26,7 @@ from Producto.views import *
 from Store.views import *
 from Store.views import _productos, _detalles, _tiendas
 from Ventas.views import *
+from eraly2 import routes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -118,6 +119,11 @@ urlpatterns = [
 
     #carrito de compras
     path("store/add/cart/",add_carrito),
+
+
+    #django restframework:
+    path('api-auth/', include('rest_framework.urls')),
+    path('', include(routes.urls)),
 
 
 
