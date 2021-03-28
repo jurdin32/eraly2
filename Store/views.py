@@ -11,8 +11,6 @@ from django.contrib import messages
 from Store.models import Publicidad
 
 
-datos=[]
-
 def tienda(request):
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
@@ -31,6 +29,7 @@ def _detalles(request):
     fecha = datetime.datetime.now().date()
     producto = Productos.objects.get(hash=request.GET.get('hash'))
     promo =Promociones.objects.filter(precio__producto=producto).last()
+    print(request.session.get('carrito'))
     if promo:
         print("Fecha inicio",promo.fechaInicio)
         print('Fecha final',promo.fechaFinal)
@@ -68,31 +67,45 @@ def add_carrito(request):
     if request.GET.get('promocion'):
         promocion =Promociones.objects.get(id=request.GET.get('promocion'))
         descuento_promo=promocion.descuento
-
     cantidad = request.GET.get('cantidad')
     precio = Precios.objects.filter(producto_id=producto.id,web=True).last()
     precio=float(precio.total)
     descuento = precio * (float(descuento_promo)/100)
     precioU = precio-descuento
     total =precioU * float(request.GET.get('cantidad'))
-    datos=[]
-    cart={
-        'producto_id':producto.id,
-        'producto_nombre':producto.nombre,
-        'producto_imagen':producto.imagen.name or producto.imagenesproducto_set.first().imagen.name,
-        'hash':producto.hash,
-        'precio_normal':precio,
-        'descuento_porcentaje':descuento_promo,
-        'precio_promocion':precioU,
-        'cantidad':cantidad,
-        'precio_total': total,
-    }
-    datos.append(cart)
-    request.session['carrito']=datos
-    request.session.save()
+    #del request.session['carrito']
+    cart = {}
+    if not request.session.get('carrito'):
+        request.session['carrito']=[]
+    cart.setdefault('producto_id',producto.id)
+    cart.setdefault('producto_nombre',producto.nombre)
+    cart.setdefault('producto_imagen',producto.imagen.name or producto.imagenesproducto_set.first().imagen.name)
+    cart.setdefault('hash',producto.hash)
+    cart.setdefault('precio_normal',precio)
+    cart.setdefault('descuento_porcentaje',descuento_promo)
+    cart.setdefault('precio_promocion',precioU)
+    cart.setdefault('cantidad',cantidad)
+    cart.setdefault('precio_total',total)
+    if control_carrito(request,producto_id=producto.id):
+        request.session['carrito'].append(cart)
+        request.session.save()
+        print('no se guardo porque ya existe')
+        return JsonResponse(cart)
+    else:
+        print(request.session.get('carrito'))
+        print("aqui")
+        cart = {'producto_id': 0}
+        return JsonResponse(cart)
 
-    print(cart)
-    return JsonResponse(cart)
+
+def control_carrito(request,producto_id):
+    if request.session.get('carrito'):
+        for c in request.session.get('carrito'):
+            print(int(dict(c)['producto_id']))
+            if int(producto_id) == int(dict(c)['producto_id']):
+                print("no se agrega porque ya existe")
+                return False
+    return True
 
 
 

@@ -504,61 +504,10 @@
         })
     </script>
     <script>
-    var contador=0
+        var contador = 0
         $(".cx").html("")
-            $.get("/store/add/cart/", {
-                producto: '{{ producto.id }}',
-                promocion: '{{ promocion.id }}',
-                cantidad: $("#cantidad").val()
-            }, function (data) {
-                console.log(data.hash)
-                $(".cx").append('<div class="product product-sm">' +
-                    '<a href="#" class="btn-remove" title="Remove Product">' +
-                    '<i class="fa fa-times"></i>'
-                    + '</a>' +
-                    '<figure class="product-image-area">' +
-                    '<a href="/store/details/?hash='+data.hash+'title="Product Name" class="product-image">' +
-                    '<img src="/media/'+data.producto_imagen+'" alt="Product Name">' +
-                    '</a>' +
-                    '</figure>' +
-                    '<div class="product-details-area">' +
-                    '<h2 class="product-name"><a href="/store/details/?hash='+data.hash+'" title="Product Name">'+data.producto_nombre+'</a></h2>' +
-                    '<div class="cart-qty-price">'+data.cantidad+' x ' +
-                    '<span class="product-price">$'+data.precio_promocion+'</span>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>')
-                contador+=1
-                $(".cart-qty").text(contador)
-            })
-        $(".addtocart").click(function () {
-            $(".cx").html("")
-            $.get("/store/add/cart/", {
-                producto: '{{ producto.id }}',
-                promocion: '{{ promocion.id }}',
-                cantidad: $("#cantidad").val()
-            }, function (data) {
-                console.log(data.hash)
-                $(".cx").append('<div class="product product-sm">' +
-                    '<a href="#" class="btn-remove" title="Remove Product">' +
-                    '<i class="fa fa-times"></i>'
-                    + '</a>' +
-                    '<figure class="product-image-area">' +
-                    '<a href="/store/details/?hash='+data.hash+'title="Product Name" class="product-image">' +
-                    '<img src="/media/'+data.producto_imagen+'" alt="Product Name">' +
-                    '</a>' +
-                    '</figure>' +
-                    '<div class="product-details-area">' +
-                    '<h2 class="product-name"><a href="/store/details/?hash='+data.hash+'" title="Product Name">'+data.producto_nombre+'</a></h2>' +
-                    '<div class="cart-qty-price">'+data.cantidad+' x ' +
-                    '<span class="product-price">$'+data.precio_promocion+'</span>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>')
-                contador+=1
-                $(".cart-qty").text(contador)
-            })
-            {% for car in request.session.carrito %}
+        {% for car in request.session.carrito %}
+            {% if car.producto_id%}
                 $(".cx").append('<div class="product product-sm">' +
                     '<a href="#" class="btn-remove" title="Remove Product">' +
                     '<i class="fa fa-times"></i>'
@@ -576,11 +525,40 @@
                     '</div>' +
                     '</div>' +
                     '</div>')
-                contador={{ forloop.counter }}
-            {% endfor %}
+            {% endif %}
+            contador={{ forloop.counter }}
+        {% endfor %}
 
+        $(".addtocart").click(function () {
+            $.get("/store/add/cart/", {
+                producto: '{{ producto.id }}',
+                promocion: '{{ promocion.id }}',
+                cantidad: $("#cantidad").val()
+            }, function (data) {
+                if (data.producto_id > 0) {
+                    console.log(data.hash)
+                    $(".cx").append('<div class="product product-sm">' +
+                        '<a href="#" class="btn-remove" title="Remove Product">' +
+                        '<i class="fa fa-times"></i>'
+                        + '</a>' +
+                        '<figure class="product-image-area">' +
+                        '<a href="/store/details/?hash=' + data.hash + 'title="Product Name" class="product-image">' +
+                        '<img src="/media/' + data.producto_imagen + '" alt="Product Name">' +
+                        '</a>' +
+                        '</figure>' +
+                        '<div class="product-details-area">' +
+                        '<h2 class="product-name"><a href="/store/details/?hash=' + data.hash + '" title="Product Name">' + data.producto_nombre + '</a></h2>' +
+                        '<div class="cart-qty-price">' + data.cantidad + ' x ' +
+                        '<span class="product-price">$' + data.precio_promocion + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>')
+                    contador += 1
+                    $(".cart-qty").text(contador)
+                }
+            })
         })
-    $(".cart-qty").text(contador)
+        $(".cart-qty").text(contador)
     </script>
 
 
