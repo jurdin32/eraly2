@@ -78,11 +78,11 @@ def add_carrito(request):
     cart.setdefault('producto_nombre',producto.nombre)
     cart.setdefault('producto_imagen',producto.imagen.name or producto.imagenesproducto_set.first().imagen.name)
     cart.setdefault('hash',producto.hash)
-    cart.setdefault('precio_normal',precio)
+    cart.setdefault('precio_normal',round(precio,2))
     cart.setdefault('descuento_porcentaje',descuento_promo)
-    cart.setdefault('precio_promocion',precioU)
+    cart.setdefault('precio_promocion',round(precioU,2))
     cart.setdefault('cantidad',cantidad)
-    cart.setdefault('precio_total',total)
+    cart.setdefault('precio_total',round(total,2))
     if control_carrito(request,producto_id=producto.id):
         request.session['carrito'].append(cart)
         request.session.save()
@@ -132,10 +132,10 @@ def modificar_carrito(request,cantidad):
             descuento = precio * (float(c['descuento_porcentaje']) / 100)
             precioU = precio - descuento
             total = precioU * float(cantidad)
-            c['precio_normal']= precio
-            c['precio_promocion']= precioU
+            c['precio_normal']= round(precio,2)
+            c['precio_promocion']= round(precioU,2)
             c['cantidad']= cantidad
-            c['precio_total']= total
+            c['precio_total']= round(total,2)
             request.session.save()
             return c
 

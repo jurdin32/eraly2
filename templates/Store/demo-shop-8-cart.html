@@ -1,6 +1,7 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% block content %}
     {% load productosTags %}
+    {% load humanize %}
     <div role="main" class="main">
         <div class="cart">
             <div class="container">
@@ -61,7 +62,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="text-primary precios">{{ sess.precio_total|floatformat:2 }}</span>
+                                            <span class="text-primary precios">{{ sess.precio_total|floatformat:2|intcomma }}</span>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -279,7 +280,7 @@
             let subtotal=0;
 
             $(".precios").each(function () {
-                total+=parseFloat($(this).text())
+                total+=parseFloat($(this).text().replace(",","."))
             })
             $("#total_pagar").text(total.toFixed(2))
             iva=total*0.12;
