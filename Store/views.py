@@ -118,6 +118,9 @@ def eliminar_item(request):
                 messages.add_message(request, messages.ERROR, "Se eliminó del carrito..!")
                 return HttpResponseRedirect('/store/details/?hash=%s'%hash)
 
+def ver_cart(request):
+
+    return render(request,'Store/demo-shop-8-cart.html')
 
 
 def _tiendas(request):

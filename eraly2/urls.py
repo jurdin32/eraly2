@@ -120,6 +120,7 @@ urlpatterns = [
     #carrito de compras
     path("store/add/cart/",add_carrito),
     path("store/add/cart/deleteItem/",eliminar_item),
+    path("store/view/cart/",ver_cart),
 
 
     #django restframework:
