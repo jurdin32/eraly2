@@ -101,26 +101,60 @@ def control_carrito(request,producto_id):
                 return False
     return True
 
+def deleteItem(request,producto_id):
+    for item in request.session.get('carrito'):
+        if producto_id == item['hash']:
+            request.session.get('carrito').remove(item)
+            request.session.save()
+
 def eliminar_item(request):
     print(request.GET.get('product_id'))
     producto_id=request.GET.get('product_id')
-    hash=""
-    print(request.GET)
-    print(request.get_full_path())
+
     if request.session.get('carrito'):
-        for item in request.session.get('carrito'):
-            if producto_id == item['hash']:
-                request.session.get('carrito').remove(item)
-                print(item['hash'])
-                hash =item['hash']
-                request.session.save()
-                print(request.session.get('carrito'))
-                messages.add_message(request, messages.ERROR, "Se eliminó del carrito..!")
-                return HttpResponseRedirect('/store/details/?hash=%s'%hash)
+        if request.GET.get('cc'):
+            print("entro aqui",request.GET)
+            deleteItem(request, producto_id)
+            return HttpResponseRedirect("/store/view/cart/")
+        else:
+            deleteItem(request,producto_id)
+            return HttpResponseRedirect('/store/details/?hash=%s'%producto_id)
+
+
+
+
+
+def modificar_carrito(request,cantidad):
+    for c in request.session.get('carrito'):
+        if request.GET.get('hash') == dict(c)['hash']:
+            cantidad = cantidad
+            precio = float(c['precio_normal'])
+            descuento = precio * (float(c['descuento_porcentaje']) / 100)
+            precioU = precio - descuento
+            total = precioU * float(cantidad)
+            c['precio_normal']= precio
+            c['precio_promocion']= precioU
+            c['cantidad']= cantidad
+            c['precio_total']= total
+            request.session.save()
+            return c
 
 def ver_cart(request):
+    if request.GET.get('add'):
+        item=modificar_carrito(request,request.GET.get('add'))
+        return JsonResponse(item)
 
+    if request.GET.get('remove'):
+        item=modificar_carrito(request,request.GET.get('remove'))
+        return JsonResponse(item)
     return render(request,'Store/demo-shop-8-cart.html')
+
+def vaciar_carrito(request):
+    if request.session.get('carrito'):
+        del request.session['carrito']
+        messages.add_message(request, messages.SUCCESS, "El carrito esta vacio..!")
+    return HttpResponseRedirect("/store/view/cart/")
+
 
 
 def _tiendas(request):

@@ -1771,9 +1771,6 @@
         });
     }
 </script>
-
-
-{% block script %}
 <script>
     $(".cx").html("")
     {% for car in request.session.carrito %}
@@ -1839,6 +1836,9 @@ $(".cart-qty").text(contador)
     })
 
 </script>
+
+{% block script %}
+
 {% endblock %}
 
 </body>

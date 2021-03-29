@@ -1,268 +1,336 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% block content %}
-<div role="main" class="main">
-				<div class="cart">
-					<div class="container">
-						<h1 class="h2 heading-primary mt-lg clearfix">
-							<span>Shopping Cart</span>
-							<a href="#" class="btn btn-primary pull-right">Proceed to Checkout</a>
-						</h1>
+    {% load productosTags %}
+    <div role="main" class="main">
+        <div class="cart">
+            <div class="container">
+                <h1 class="h2 heading-primary mt-lg clearfix">
+                    <span>Tu carrito de compras. <i class="fa fa-smile-o"></i></span>
+                    <a href="#" class="btn btn-primary pull-right">Proceed to Checkout</a>
+                </h1>
 
-						<div class="row">
-							<div class="col-md-8 col-lg-9">
-								<div class="cart-table-wrap">
-									<table class="cart-table">
-										<thead>
-											<tr>
-												<th></th>
-												<th></th>
-												<th>Product Name</th>
-												<th>Unit Price</th>
-												<th>Qty</th>
-												<th>Subtotal</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="product-action-td">
-													<a href="#" title="Remove product" class="btn-remove"><i class="fa fa-times"></i></a>
-												</td>
-												<td class="product-image-td">
-													<a href="#" title="Product Name">
-														<img src="../img/demos/shop/products/cart-product1.jpg" alt="Product Name">
-													</a>
-												</td>
-												<td class="product-name-td">
-													<h2 class="product-name"><a href="#" title="Product Name">Women Fashion Blouse</a></h2>
-												</td>
-												<td>$120.00</td>
-												<td>
-													<div class="qty-holder">
-														<a href="#" class="qty-dec-btn" title="Dec">-</a>
-														<input type="text" class="qty-input" value="1">
-														<a href="#" class="qty-inc-btn" title="Inc">+</a>
-														<a href="#" class="edit-qty"><i class="fa fa-pencil"></i></a>
-													</div>
-												</td>
-												<td>
-													<span class="text-primary">$120.00</span>
-												</td>
-											</tr>
-											<tr>
-												<td class="product-action-td">
-													<a href="#" title="Remove product" class="btn-remove"><i class="fa fa-times"></i></a>
-												</td>
-												<td class="product-image-td">
-													<a href="#" title="Product Name">
-														<img src="../img/demos/shop/products/cart-product2.jpg" alt="Product Name">
-													</a>
-												</td>
-												<td class="product-name-td">
-													<h2 class="product-name"><a href="#" title="Product Name">Black Utility Top</a></h2>
-												</td>
-												<td>$49.00</td>
-												<td>
-													<div class="qty-holder">
-														<a href="#" class="qty-dec-btn" title="Dec">-</a>
-														<input type="text" class="qty-input" value="1">
-														<a href="#" class="qty-inc-btn" title="Inc">+</a>
-														<a href="#" class="edit-qty"><i class="fa fa-pencil"></i></a>
-													</div>
-												</td>
-												<td>
-													<span class="text-primary">$49.00</span>
-												</td>
-											</tr>
-										</tbody>
-										<tfoot>
-											<tr>
-												<td colspan="6" class="clearfix">
-													<button class="btn btn-default hover-primary btn-continue">Continue Shopping</button>
-													<button class="btn btn-default hover-primary btn-update">Update Shopping Cart</button>
-													<button class="btn btn-default hover-primary btn-clear">Clear Shopping Cart</button>
-												</td>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-							</div>
-							<aside class="col-md-4 col-lg-3 sidebar shop-sidebar">
-								<div class="panel-group">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<a class="accordion-toggle collapsed" data-toggle="collapse" href="#panel-cart-discount">
-													Discount Code
-												</a>
-											</h4>
-										</div>
-										<div id="panel-cart-discount" class="accordion-body collapse">
-											<div class="panel-body">
-												<p class="mb-sm">Enter your coupon code if you have one.</p>
-												<form action="#">
-													<div class="form-group">
-														<input type="text" class="form-control" required>
-													</div>
-													<input type="submit" class="btn btn-primary btn-block" value="Apply Coupon">
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<a class="accordion-toggle collapsed" data-toggle="collapse" href="#panel-cart-ship">
-													ESTIMATE SHIPPING AND TAX
-												</a>
-											</h4>
-										</div>
-										<div id="panel-cart-ship" class="accordion-body collapse">
-											<div class="panel-body">
-												<p class="mb-sm">Enter your destination to get a shipping estimate.</p>
-												<form action="#">
-													<div class="form-group">
-														<label>Contry <span class="required">*</span></label>
-														<select name="#" class="form-control">
-															<option value="United States">United States</option>
-															<option value="United Kingdon">United Kingdon</option>
-															<option value="China">China</option>
-															<option value="Russia">Russia</option>
-														</select>
-													</div>
-													<div class="form-group">
-														<label>State/Province</label>
-														<select name="#" class="form-control">
-															<option value="United States">Please select region, state</option>
-															<option value="Alabama">Alabama</option>
-															<option value="Alaska">Alaska</option>
-														</select>
-													</div>
-													<div class="form-group">
-														<label>Zip Code</label>
-														<input type="text" class="form-control">
-													</div>
-													<input type="submit" class="btn btn-primary btn-block" value="Get a Quote">
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<a class="accordion-toggle" data-toggle="collapse" href="#panel-cart-total">
-													Cart Totals
-												</a>
-											</h4>
-										</div>
-										<div id="panel-cart-total" class="accordion-body collapse in">
-											<div class="panel-body">
-												<table class="totals-table">
-													<tbody>
-														<tr>
-															<td>Subtotal</td>
-															<td>$159.00</td>
-														</tr>
-														<tr>
-															<td>Grand Total</td>
-															<td>$159.00</td>
-														</tr>
-													</tbody>
-												</table>
-												<div class="totals-table-action">
-													<a href="#" class="btn btn-primary btn-block">Proceed to Checkout</a>
-													<a href="#" class="btn btn-link btn-block">Checkout with Multiple Addresses</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</aside>
-						</div>
+                <div class="row">
+                    <div class="col-md-8 col-lg-9">
+                        <div class="cart-table-wrap">
+                            <table class="cart-table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Producto</th>
+                                    <th>P. Normal</th>
+                                    <th>P. Promo</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for sess in request.session.carrito %}
+                                    <tr>
+                                        <td class="product-action-td">
+                                            <a href="/store/add/cart/deleteItem/?product_id={{ sess.hash }}&cc=ok" title="Remove product" class="btn-remove"><i
+                                                    class="fa fa-times"></i></a>
+                                        </td>
+                                        <td class="product-image-td">
+                                            <a href="/store/details/?hash={{ sess.hash }}"
+                                               title="{{ sess.producto_nombre }}">
+                                                <img src="/media/{{ sess.producto_imagen }}"
+                                                     alt="{{ sess.producto_nombre }}">
+                                            </a>
+                                        </td>
+                                        <td class="product-name-td">
+                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
+                                                                        title="Product Name">{{ sess.producto_nombre }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ sess.precio_normal }}</td>
+                                        {% if sess.precio_normal == sess.precio_promocion %}
+                                            <td><i>No tiene descuento</i></td>
+                                        {% else %}
+                                            <td>{{ sess.precio_promocion }}</td>
 
-						<div class="crosssell-products">
-							<h2 class="h4"><strong>Based on your selection, you may be interested in the following items:</strong></h2>
-							<div class="row">
-								<div class="col-sm-6 col-md-3">
-									<div class="product product-sm">
-										<figure class="product-image-area">
-											<a href="#" title="Product Name" class="product-image">
-												<img src="../img/demos/shop/products/cart-product3.jpg" alt="Product Name">
-											</a>
-										</figure>
-										<div class="product-details-area">
-											<h2 class="product-name"><a href="#" title="Product Name">Jane Dress</a></h2>
+                                        {% endif %}
+                                        <td>
+                                            <div class="qty-holder">
+                                                <a href="#" class="qty-dec-btn" title="Quitar">-</a>
+                                                <input type="text" readonly="readonly" class="qty-input" value="{{ sess.cantidad }}">
+                                                <input type="hidden" readonly="readonly" class="qty-hash" value="{{ sess.hash }}">
+                                                <input type="hidden" class="qty-stock" readonly="readonly" value="{% stock sess.producto_id %}">
+                                                <a href="#" class="qty-inc-btn" title="Adicionar">+</a>
+                                                <a href="#" class="edit-qty"><i class="fa fa-pencil"></i></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary precios">{{ sess.precio_total|floatformat:2 }}</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
-											<div class="product-price-box">
-												<span class="old-price">$120.00</span>
-												<span class="product-price">$90.00</span>
-											</div>
 
-											<a href="#" class="btn btn-default hover-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-3">
-									<div class="product product-sm">
-										<figure class="product-image-area">
-											<a href="#" title="Product Name" class="product-image">
-												<img src="../img/demos/shop/products/cart-product4.jpg" alt="Product Name">
-											</a>
-										</figure>
-										<div class="product-details-area">
-											<h2 class="product-name"><a href="#" title="Product Name">Jane Dress - S</a></h2>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7" class="clearfix">
+                                        <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
+                                            Comprando</a>
+                                        <a href="/store/view/cart/delete/" class="btn btn-default hover-primary btn-update">Vaciar Carrito</a>
+                                        <a href="/store/view/cart/" class="btn btn-default hover-primary btn-update">Actualizar Carrito</a>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <aside class="col-md-4 col-lg-3 sidebar shop-sidebar">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                           href="#panel-cart-discount">
+                                            Código de descuento
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="panel-cart-discount" class="accordion-body collapse">
+                                    <div class="panel-body">
+                                        <p class="mb-sm">Enter your coupon code if you have one.</p>
+                                        <form action="#">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" required>
+                                            </div>
+                                            <input type="submit" class="btn btn-primary btn-block" value="Apply Coupon">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% comment %}<div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                           href="#panel-cart-ship">
+                                            ESTIMATE SHIPPING AND TAX
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="panel-cart-ship" class="accordion-body collapse">
+                                    <div class="panel-body">
+                                        <p class="mb-sm">Enter your destination to get a shipping estimate.</p>
+                                        <form action="#">
+                                            <div class="form-group">
+                                                <label>Contry <span class="required">*</span></label>
+                                                <select name="#" class="form-control">
+                                                    <option value="United States">United States</option>
+                                                    <option value="United Kingdon">United Kingdon</option>
+                                                    <option value="China">China</option>
+                                                    <option value="Russia">Russia</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>State/Province</label>
+                                                <select name="#" class="form-control">
+                                                    <option value="United States">Please select region, state</option>
+                                                    <option value="Alabama">Alabama</option>
+                                                    <option value="Alaska">Alaska</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Zip Code</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <input type="submit" class="btn btn-primary btn-block" value="Get a Quote">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>{% endcomment %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle" data-toggle="collapse" href="#panel-cart-total">
+                                            total del Carrito
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="panel-cart-total" class="accordion-body collapse in">
+                                    <div class="panel-body">
+                                        <table class="totals-table">
+                                            <tbody>
+                                            <tr>
+                                                <td>Subtotal</td>
+                                                <td id="subtotal">$159.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>IVA 12%</td>
+                                                <td id="iva">$159.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total a pagar</td>
+                                                <td id="total_pagar">$159.00</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="totals-table-action">
+                                            <a href="#" class="btn btn-primary btn-block">Proceed to Checkout</a>
+                                            <a href="#" class="btn btn-link btn-block">Checkout with Multiple
+                                                Addresses</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
 
-											<div class="product-price-box">
-												<span class="old-price">$100.00</span>
-												<span class="product-price">$89.00</span>
-											</div>
+                <div class="crosssell-products">
+                    <h2 class="h4"><strong>Based on your selection, you may be interested in the following
+                        items:</strong></h2>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="product product-sm">
+                                <figure class="product-image-area">
+                                    <a href="#" title="Product Name" class="product-image">
+                                        <img src="../img/demos/shop/products/cart-product3.jpg" alt="Product Name">
+                                    </a>
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="#" title="Product Name">Jane Dress</a></h2>
 
-											<a href="#" class="btn btn-default hover-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="clearfix visible-sm"></div>
-								<div class="col-sm-6 col-md-3">
-									<div class="product product-sm">
-										<figure class="product-image-area">
-											<a href="#" title="Product Name" class="product-image">
-												<img src="../img/demos/shop/products/cart-product1.jpg" alt="Product Name">
-											</a>
-										</figure>
-										<div class="product-details-area">
-											<h2 class="product-name"><a href="#" title="Product Name">Jane Dress - XL</a></h2>
+                                    <div class="product-price-box">
+                                        <span class="old-price">$120.00</span>
+                                        <span class="product-price">$90.00</span>
+                                    </div>
 
-											<div class="product-price-box">
-												<span class="old-price">$100.00</span>
-												<span class="product-price">$69.00</span>
-											</div>
+                                    <a href="#" class="btn btn-default hover-primary">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="product product-sm">
+                                <figure class="product-image-area">
+                                    <a href="#" title="Product Name" class="product-image">
+                                        <img src="../img/demos/shop/products/cart-product4.jpg" alt="Product Name">
+                                    </a>
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="#" title="Product Name">Jane Dress - S</a></h2>
 
-											<a href="#" class="btn btn-default hover-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-md-3">
-									<div class="product product-sm">
-										<figure class="product-image-area">
-											<a href="#" title="Product Name" class="product-image">
-												<img src="../img/demos/shop/products/cart-product2.jpg" alt="Product Name">
-											</a>
-										</figure>
-										<div class="product-details-area">
-											<h2 class="product-name"><a href="#" title="Product Name">Jane Dress - M</a></h2>
+                                    <div class="product-price-box">
+                                        <span class="old-price">$100.00</span>
+                                        <span class="product-price">$89.00</span>
+                                    </div>
 
-											<div class="product-price-box">
-												<span class="old-price">$110.00</span>
-												<span class="product-price">$79.00</span>
-											</div>
+                                    <a href="#" class="btn btn-default hover-primary">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix visible-sm"></div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="product product-sm">
+                                <figure class="product-image-area">
+                                    <a href="#" title="Product Name" class="product-image">
+                                        <img src="../img/demos/shop/products/cart-product1.jpg" alt="Product Name">
+                                    </a>
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="#" title="Product Name">Jane Dress - XL</a></h2>
 
-											<a href="#" class="btn btn-default hover-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                                    <div class="product-price-box">
+                                        <span class="old-price">$100.00</span>
+                                        <span class="product-price">$69.00</span>
+                                    </div>
 
-			</div>
+                                    <a href="#" class="btn btn-default hover-primary">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="product product-sm">
+                                <figure class="product-image-area">
+                                    <a href="#" title="Product Name" class="product-image">
+                                        <img src="../img/demos/shop/products/cart-product2.jpg" alt="Product Name">
+                                    </a>
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="#" title="Product Name">Jane Dress - M</a></h2>
+
+                                    <div class="product-price-box">
+                                        <span class="old-price">$110.00</span>
+                                        <span class="product-price">$79.00</span>
+                                    </div>
+
+                                    <a href="#" class="btn btn-default hover-primary">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    calcular_total()
+
+        function calcular_total() {
+            let total=0;
+            let iva=0;
+            let subtotal=0;
+
+            $(".precios").each(function () {
+                total+=parseFloat($(this).text())
+            })
+            $("#total_pagar").text(total.toFixed(2))
+            iva=total*0.12;
+            $("#iva").text(iva.toFixed(2))
+            subtotal= total -iva
+            $("#subtotal").text(subtotal.toFixed(2))
+        }
+
+        $(".qty-inc-btn").click(function (){
+            let stock =parseInt($(this).parent().find('input.qty-stock').val())
+            let hash = $(this).parent().find('input.qty-hash').val()
+            let input_value =parseInt($(this).parent().find('input.qty-input').val())
+            let este=$(this)
+            if (input_value==0){
+                $(this).parent().find('input.qty-input').val(1)
+            }
+            if (stock > input_value){
+                input_value +=1
+
+                $.get("/store/view/cart/",{add:input_value,hash:hash },function (datos){
+                    let precio_tt=datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+                    calcular_total()
+                })
+                $(this).parent().find('input.qty-input').val(input_value)
+            }
+            else {
+                    toastr.error("Lo sentimos este producto no tiene mas stock..!")
+            }
+
+
+        })
+
+        $(".qty-dec-btn").click(function (){
+            let input_value =parseInt($(this).parent().find('input.qty-input').val())
+            let hash = $(this).parent().find('input.qty-hash').val()
+            let este=$(this)
+            if(input_value >0){
+                input_value-=1
+                $.get("/store/view/cart/",{remove:input_value,hash:hash },function (datos){
+                    let precio_tt=datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+                    calcular_total()
+                })
+                $(this).parent().find('input.qty-input').val(input_value)
+            }
+
+
+
+        })
+
+
+    </script>
 {% endblock %}
