@@ -24,7 +24,7 @@ from Home.views import *
 from Personas.views import *
 from Producto.views import *
 from Store.views import *
-from Store.views import *
+from Store.views import _productos, _detalles, _tiendas
 from Ventas.views import *
 from eraly2 import routes
 
