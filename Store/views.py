@@ -185,6 +185,7 @@ def directorio(request):
     try:
         usuario=UsuariosWeb.objects.get(usuario=request.user)
         direccions = DireccionesWeb.objects.filter(usuarioWeb=usuario)
+        direccioness=direccions
 
     except:
         usuario = UsuariosWeb.objects.create(usuario=request.user)
@@ -202,7 +203,7 @@ def directorio(request):
         messages.add_message(request, messages.SUCCESS, "Se agrego nueva dirección al directorio..!")
     contexto={
         'provincias':Provincia.objects.all(),
-        'direcciones':direccions,
+        'direcciones':direccioness,
     }
     return render(request, 'Store/demo-shop-8-directory.html', contexto)
 
