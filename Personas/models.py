@@ -36,4 +36,5 @@ class DireccionesWeb(models.Model):
     envio=models.BooleanField(default=False)
     observacion=models.TextField()
     facturacion=models.BooleanField(default=False)
+    activo=models.BooleanField(default=True)
 

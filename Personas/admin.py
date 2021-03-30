@@ -12,3 +12,8 @@ class AdminTipoProveedor(admin.ModelAdmin):
 class AdminUsuarioWeb(admin.ModelAdmin):
     list_display = Attr(UsuariosWeb)
     list_display_links = Attr(UsuariosWeb)
+
+@admin.register(DireccionesWeb)
+class AdminDireccionesWeb(admin.ModelAdmin):
+    list_display = Attr(DireccionesWeb)
+    list_display_links = Attr(DireccionesWeb)

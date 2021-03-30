@@ -5,6 +5,9 @@ from django.shortcuts import render
 # Create your views here.
 from future.backports import datetime
 
+from Empresa.views import direcciones
+from Home.models import Provincia, Pais
+from Personas.models import *
 from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios
 from django.contrib import messages
 
@@ -174,6 +177,24 @@ def dashboard(request):
 
     }
     return render(request, 'Store/demo-shop-8-dashboard.html', contexto)
+
+def directorio(request):
+    envio =False
+    usuario = UsuariosWeb.objects.get(usuario=request.user)
+    if request.POST:
+        print(request.POST)
+        if request.POST.get('envio')=="on":
+            envio=True
+
+        direccion=DireccionesWeb.objects.create(usuarioWeb=usuario, direccion=request.POST.get('direccion'), ciudad_id=request.POST.get('ciudad'),
+                                      envio=envio, telefono=request.POST.get('telefono'),celular=request.POST.get('celular'))
+        direccion.save()
+        messages.add_message(request, messages.SUCCESS, "Se agrego nueva dirección al directorio..!")
+    contexto={
+        'provincias':Provincia.objects.all(),
+        'direcciones':DireccionesWeb.objects.filter(usuarioWeb=usuario)
+    }
+    return render(request, 'Store/demo-shop-8-directory.html', contexto)
 
 def register(request):
     contexto={
