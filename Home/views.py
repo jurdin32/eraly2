@@ -18,6 +18,8 @@ def index(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
+                if request.GET.get('useranon'):
+                    return HttpResponseRedirect("/store/dashboard/")
                 return HttpResponseRedirect("/")
             else:
                 messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
@@ -28,4 +30,4 @@ def index(request):
 
 def logout_(request):
     logout(request)
-    return render(request, "Home/login.html")
+    return HttpResponseRedirect('/?useranon=no')

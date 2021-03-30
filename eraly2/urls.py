@@ -113,6 +113,7 @@ urlpatterns = [
     path("store/ejemplo/", ejemplo),
     path("store/account/",account),
     path("store/register/",register),
+    path("store/login/",register),
     path("store/dashboard/",dashboard),
     path("store/contact/",contact),
     path("store/checkout/",checkout),
