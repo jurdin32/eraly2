@@ -28,6 +28,26 @@ def index(request):
         else:
             return render(request, "Home/login.html")
 
+def login_store_user(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/store/dashboard/")
+    else:
+        if request.POST:
+            print(request.POST)
+            email = request.POST['email']
+            password = request.POST['password']
+            user = auth.authenticate(email=email, password=password)
+            if user is not None and user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect("/store/dashboard/")
+            else:
+                messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
+                return HttpResponseRedirect('/store/login/')
+
+        else:
+            return render(request, 'Store/demo-shop-8-login.html')
+
+
 def logout_(request):
     logout(request)
     if request.GET.get('useranon'):

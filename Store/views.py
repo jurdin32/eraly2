@@ -209,12 +209,6 @@ def register(request):
     }
     return render(request, 'Store/demo-shop-8-register.html', contexto)
 
-def login_store(request):
-    contexto={
-
-    }
-    return render(request, 'Store/demo-shop-8-login.html', contexto)
-
 
 
 def checkout(request):

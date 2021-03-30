@@ -21,10 +21,10 @@ from django.conf.urls.static import static
 
 from Empresa.views import *
 from Home.views import *
-from Personas.views import registroCLientes, deshabilitarCliente
+from Personas.views import *
 from Producto.views import *
 from Store.views import *
-from Store.views import _productos, _detalles, _tiendas
+from Store.views import *
 from Ventas.views import *
 from eraly2 import routes
 
@@ -113,7 +113,7 @@ urlpatterns = [
     path("store/ejemplo/", ejemplo),
     path("store/account/",account),
     path("store/register/",register),
-    path("store/login/",login_store),
+    path("store/login/",login_store_user),
     path("store/dashboard/",dashboard),
     path("store/directory/",directorio),
     path("store/contact/",contact),
