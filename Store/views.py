@@ -181,22 +181,17 @@ def dashboard(request):
 def directorio(request):
     envio =False
     usuario =None
-    direccions=None
-    direccioness=None
     try:
         usuario=UsuariosWeb.objects.get(usuario=request.user)
-        direccions = DireccionesWeb.objects.filter(usuarioWeb=usuario)
-        direccioness=direccions
     except:
         usuario = UsuariosWeb.objects.create(usuario=request.user)
     if request.POST:
         print(request.POST)
         if request.POST.get('envio')=="on":
             envio=True
-            for direcc  in direccions:
+            for direcc  in DireccionesWeb.objects.filter(usuarioWeb=usuario):
                 direcc.envio=False
                 direcc.save()
-
         direccion=DireccionesWeb.objects.create(usuarioWeb=usuario, direccion=request.POST.get('direccion'), ciudad_id=request.POST.get('ciudad'),
                                       envio=envio, telefono=request.POST.get('telefono'),celular=request.POST.get('celular'),
                                                 observacion=request.POST.get('observacion'))
@@ -204,7 +199,7 @@ def directorio(request):
         messages.add_message(request, messages.SUCCESS, "Se agrego nueva dirección al directorio..!")
     contexto={
         'provincias':Provincia.objects.all(),
-        'direcciones':direccioness,
+        'direcciones':DireccionesWeb.objects.filter(usuarioWeb=usuario),
     }
     return render(request, 'Store/demo-shop-8-directory.html', contexto)
 
