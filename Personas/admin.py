@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Personas.models import Clientes
+from Personas.models import *
 from eraly2.snippers import Attr
 
 
@@ -7,3 +7,8 @@ from eraly2.snippers import Attr
 class AdminTipoProveedor(admin.ModelAdmin):
     list_display = Attr(Clientes)
     list_display_links = Attr(Clientes)
+
+@admin.register(UsuariosWeb)
+class AdminUsuarioWeb(admin.ModelAdmin):
+    list_display = Attr(UsuariosWeb)
+    list_display_links = Attr(UsuariosWeb)
