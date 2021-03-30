@@ -14,7 +14,8 @@
                     {% csrf_token %}
                     <div class="modal-body">
                         <div class="form-group mt-lg">
-                            <label class="col-sm-3 text-left text-sm-right mb-0">Seleccione Provincia *</label>
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Provincia <span
+                                                class="required">*</span></label>
                             <div class="col-sm-9">
                                 <select name="ciudad" class="js-example-basic-single form-control" required="required"
                                         multiple=multiple style="width: 100%" id="ciudad">
@@ -28,7 +29,8 @@
                             </div>
                         </div>
                         <div class="form-group mt-lg">
-                            <label class="col-sm-3 text-left text-sm-right mb-0">Dirección *</label>
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Dirección <span
+                                                class="required">*</span></label>
                             <div class="col-sm-9">
                                 <input type="text" required="required" name="direccion" class="form-control">
                             </div>
@@ -90,7 +92,7 @@
                                 (Se usa para envío)
                             {% endif %}
                         </h3>
-                        <a href="#" class="panel-box-edit">Editar</a>
+                        <a href="#" class="panel-box-edit" style="font-size: 14px"><i class="fa fa-edit"></i></a>
                     </div>
 
                     <div class="panel-box-content">
@@ -117,9 +119,7 @@
             </div>
         {% endfor %}
     </div>
-
-{% endblock %}
-{% block script %}
+    <script src="{% static 'Store/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
