@@ -36,8 +36,10 @@ def login_store_user(request):
             print(request.POST)
             email = request.POST['email']
             password = request.POST['password']
-            user = auth.authenticate(email=email, password=password)
+            user = User.objects.filter(email=request.POST.get('email')).last()
+
             if user is not None and user.is_active:
+                user = auth.authenticate(username=user.username, password=password)
                 auth.login(request, user)
                 return HttpResponseRedirect("/store/dashboard/")
             else:
