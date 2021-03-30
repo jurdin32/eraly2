@@ -30,4 +30,6 @@ def index(request):
 
 def logout_(request):
     logout(request)
-    return HttpResponseRedirect('/?useranon=no')
+    if request.GET.get('useranon'):
+        return HttpResponseRedirect('/store/login/')
+    return HttpResponseRedirect('/')
