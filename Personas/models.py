@@ -24,8 +24,6 @@ class Clientes(models.Model):
 class UsuariosWeb(models.Model):
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     identificacion=models.CharField(max_length=13, unique=True)
-    nombres=models.CharField(max_length=60)
-    apellidos=models.CharField(max_length=60)
 
 class DireccionesWeb(models.Model):
     usuarioWeb=models.ForeignKey(UsuariosWeb, on_delete=models.CASCADE)

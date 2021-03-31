@@ -17,22 +17,31 @@
             {% block contenido %}
                 <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
                     <div class="box-content">
-                        <form action="#">
-
+                        <form id="acc" action="/store/account/" method="post">
+                            {% csrf_token %}
                             <h4 class="heading-primary text-uppercase mb-lg">Información de la cuenta</h4>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Identificacion<span
+                                                class="required">*</span></label>
+                                        <input type="text" class="form-control" maxlength="13" name="identificacion" value="{{ usuario.identificacion }}" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="font-weight-normal">Nombres <span
                                                 class="required">*</span></label>
-                                        <input type="text" name="nombres" class="form-control" value="{{ request.user.first_name }}" required>
+                                        <input type="text" name="nombres" class="form-control" maxlength="60" value="{{ request.user.first_name }}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="font-weight-normal">Apellidos <span
                                                 class="required">*</span></label>
-                                        <input type="text" name="apellidos" value="{{ request.user.last_name }}" class="form-control" required>
+                                        <input type="text" name="apellidos" maxlength="60" value="{{ request.user.last_name }}" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +51,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Correo<span
                                                 class="required">*</span></label>
-                                        <input type="email" class="form-control" name="email" value="{{ request.user.email }}" required>
+                                        <input type="email" class="form-control" maxlength="60" name="email" value="{{ request.user.email }}" required>
                                     </div>
                                 </div>
 
@@ -50,14 +59,14 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Contraseña <span
                                                 class="required">*</span></label>
-                                        <input type="password" class="form-control" required>
+                                        <input type="password" name="password" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="checkbox mb-xs">
                                 <label>
-                                    <input type="checkbox" value="1" id="change-pass-checkbox">
+                                    <input type="checkbox" value="1" name="cambiar" id="change-pass-checkbox">
                                     Cambiar Contraseña
                                 </label>
                             </div>
@@ -69,15 +78,22 @@
                                         <div class="form-group">
                                             <label class="font-weight-normal">Contraseña <span
                                                     class="required">*</span></label>
-                                            <input type="password" class="form-control" required>
+                                            <input type="password" id="password1" name="password1" class="form-control">
+
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="form-group">
                                             <label class="font-weight-normal">Confirmar Contraseña <span
                                                     class="required">*</span></label>
-                                            <input type="password" class="form-control" required>
+                                            <input type="password" id="password2" name="password2" class="form-control">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <div class="form-group">
+                                            <i id="np" class="fa" style="margin-top: 35px"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +102,7 @@
                             <div class="row">
                                 <div class="col-xs-12"  style="text-align: right">
                                     <div class="form-action clearfix mt-none">
-                                        <input type="submit" class="btn btn-primary" value="Guardar">
+                                        <button type="submit" onclick="enviar()" class="btn btn-primary">Guardar</button>
                                     </div>
                                 </div>
                             </div>
@@ -97,3 +113,50 @@
         </div>
     </div>
 </div>
+{% block script %}
+    <script>
+    var yes_no=true
+    function enviar(){
+        console.log(yes_no)
+        if (yes_no==false){
+            $("#acc").submit(function (evt){
+                evt.preventDefault();
+                location.reload();
+            })
+        }
+    }
+
+    $("#password1").keyup(function(){
+        if($(this).val() == $('#password2').val()){
+            $('#np').removeClass("fa-remove")
+            $('#np').removeClass("text-danger")
+            $('#np').addClass("fa-check")
+            $('#np').addClass("text-success")
+            yes_no=true
+        }
+        else{
+            $('#np').addClass("fa-remove")
+            $('#np').removeClass("text-success")
+            $('#np').removeClass("fa-check")
+            $('#np').addClass("text-danger")
+            yes_no=false
+        }
+    })
+    $("#password2").keyup(function(){
+        if($(this).val() == $('#password1').val()){
+            $('#np').removeClass("fa-remove")
+            $('#np').removeClass("text-danger")
+            $('#np').addClass("fa-check")
+            $('#np').addClass("text-success")
+            yes_no=true
+        }
+        else{
+            $('#np').addClass("fa-remove")
+            $('#np').removeClass("text-success")
+            $('#np').removeClass("fa-check")
+            $('#np').addClass("text-danger")
+            yes_no=false
+        }
+    })
+    </script>
+{% endblock %}

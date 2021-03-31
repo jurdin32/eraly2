@@ -167,8 +167,26 @@ def _tiendas(request):
     return render(request, 'Store/tiendas.html', contexto)
 
 def account(request):
-    contexto={
+    usuario = UsuariosWeb.objects.get(usuario=request.user)
+    if request.POST:
+        user = request.user
+        if user.check_password(request.POST.get('password')):
+            user.first_name=request.POST.get('nombres')
+            user.last_name=request.POST.get('apellidos')
+            user.email=request.POST.get('email')
+            usuario.identificacion = request.POST.get('identificacion')
+            usuario.save()
+            print( request.POST )
+            if request.POST.get('cambiar')=='1' and len(request.POST.get('password1'))>0 and len(request.POST.get('password2')):
+                if request.POST.get('password1')==request.POST.get('password2'):
+                    user.set_password(request.POST.get('password2'))
+            user.save()
+            messages.add_message(request, messages.SUCCESS, "Tú información de contacto se actualizó correctamente..!")
+        else:
+            messages.add_message(request, messages.ERROR, "Lo sentimos.! no es posible actualizar los datos, es posible que la contraseña ingresada no sea correcta, Reintente")
 
+    contexto={
+        'usuario':usuario,
     }
     return render(request, 'Store/demo-shop-8-myaccount.html', contexto)
 
