@@ -936,11 +936,20 @@
                                                     <figure class="product-image-area thumb-info-zoom product-img-zoom ">
                                                         <a href="demo-shop-8-product-details.html" title="{{ puntuado.nombre }}"
                                                            class="product-image">
+                                                            {% if puntuado.imagen %}
                                                             <img src="/media/{{ puntuado.imagen }}"
                                                                  alt="{{ puntuado.nombre }}">
 
-                                                            <img src=/media/{{ puntuado.imagen }}"
+                                                            <img src="/media/{{ puntuado.imagen }}"
                                                                  alt="{{ puntuado.nombre }}" class="product-hover-image">
+                                                                {% else %}
+                                                                <img src="{% static 'noimagen.jpg' %}"
+                                                                 alt="{{ puntuado.nombre }}">
+
+                                                            <img src="{% static 'noimagen.jpg' %}"
+                                                                 alt="{{ puntuado.nombre }}" class="product-hover-image">
+                                                            {% endif %}
+
                                                         </a>
 
                                                         <a href="#" class="product-quickview  product-img-zoom">
