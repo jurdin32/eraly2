@@ -157,5 +157,17 @@
             }
         });
     </script>
+    <script>
+        let uri = '{{ request.get_full_path }}'
+        console.log(uri)
+        $('.nav-list li').each(function () {
+            console.log($(this).find('a').attr('href'))
+            if ($(this).find('a').attr('href') == uri) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+        })
+    </script>
 
 {% endblock %}

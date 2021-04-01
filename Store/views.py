@@ -233,6 +233,7 @@ def directorio(request):
             direccion.observacion=request.POST.get('observacion')
             direccion.save()
             messages.add_message(request, messages.SUCCESS, "Se modificó el directorio..!")
+            return HttpResponseRedirect("/store/directory/")
         else:
             direccion=DireccionesWeb.objects.create(usuarioWeb=usuario, direccion=request.POST.get('direccion'), ciudad_id=request.POST.get('ciudad'),
                                       envio=envio, telefono=request.POST.get('telefono'),celular=request.POST.get('celular'),
