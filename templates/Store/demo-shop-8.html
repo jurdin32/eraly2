@@ -976,10 +976,11 @@
                                                                 <div class="rat-{{ puntuado.id }}"></div>
                                                             </div>
                                                         </div>
+                                                        <div class="product-price-box">
+                                                            <span class="product-price">${{ puntuado.precios_set.first.total }}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="product-price-box">
-                                                        <span class="product-price">${{ puntuado.precios_set.first.total }}</span>
-                                                    </div>
+
                                                 </div>
                                             </li>
                                         {% endfor %}
