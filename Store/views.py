@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
@@ -166,6 +167,7 @@ def _tiendas(request):
     }
     return render(request, 'Store/tiendas.html', contexto)
 
+@login_required(login_url='/store/login/')
 def account(request):
     usuario = UsuariosWeb.objects.get(usuario=request.user)
     if request.POST:
