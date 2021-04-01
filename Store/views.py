@@ -20,7 +20,7 @@ def tienda(request):
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
         'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
-        'puntuados':productos.order_by('-puntuacion')
+        'puntuados':list(productos.order_by('-puntuacion'))
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
