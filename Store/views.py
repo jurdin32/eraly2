@@ -17,7 +17,7 @@ from Store.models import Publicidad
 
 def paginacion_productos(request):
     producto = Productos.objects.filter(puntuacion__range=(1,5)).order_by('-puntuacion')
-    paginator = Paginator(producto, 3)  # Show 25 contacts per page.
+    paginator = Paginator(producto, 9)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return page_obj
