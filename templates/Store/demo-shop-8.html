@@ -968,13 +968,6 @@
                                                         <div class="product-ratings">
                                                             <div>
                                                                 <div class="rat-{{ puntuado.id }}"></div>
-                                                                <script>
-                                                                    $('.rat-{{puntuado.id}}').starrr({
-                                                                        rating: {% rating_productos puntuado.id %},
-                                                                        max: 5,
-                                                                        readOnly: true,
-                                                                    })
-                                                                </script>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1525,7 +1518,16 @@
     })
 
 </script>
+<script>
+{% for puntuado in puntuados %}
+    $('.rat-{{puntuado.id}}').starrr({
+        rating: {% rating_productos puntuado.id %},
+        max: 5,
+        readOnly: true,
+    })
+{% endfor %}
 
+</script>
 {% block script %}
 
 {% endblock %}
