@@ -880,7 +880,7 @@
                                                             <span>{% promocion_descuento producto.id %}%</span>
                                                         </a>
                                                         <div class="product-actions">
-                                                            <a href="#" class="addtocart" data-prod="{{ producto.id }}"
+                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ producto.id }}"
                                                                data-promo="{% promocion_id producto.id %}"
                                                                title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
@@ -958,7 +958,13 @@
                                                             <i class="fa fa-share-square-o"></i>
                                                             <span>Ver</span>
                                                         </a>
-
+                                                        <div class="product-actions">
+                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ puntuado.id }}"
+                                                               data-promo="{% promocion_id puntuado.id %}"
+                                                               title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                        </div>
                                                     </figure>
                                                     <div class="product-details-area">
                                                         <h2 class="product-name"><a
@@ -1220,11 +1226,13 @@
                                                         {% endif %}
                                                     </a>
 
-                                                    <div class="product-actions">
-                                                        <a href="#" class="addtocart" title="Add to Cart">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </a>
-                                                    </div>
+                                                   <div class="product-actions">
+                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ nuevo.id }}"
+                                                               data-promo="{% promocion_id nuevo.id %}"
+                                                               title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                        </div>
                                                 </figure>
                                                 <div class="product-details-area">
                                                     <h2 class="product-name"><a href="/store/details/?hash={{ nuevo.hash }}"
