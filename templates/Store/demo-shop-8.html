@@ -964,8 +964,15 @@
                                                                 title="Product Name">{{ puntuado.nombre }}</a>
                                                         </h2>
                                                         <div class="product-ratings">
-                                                            <div class="ratings-box">
-                                                                <div class="rating" style="width:60%"></div>
+                                                            <div>
+                                                                   <div class="ratingxp-{{ puntuado.id }}"></div>
+                                                                    <script>
+                                                                        $('.ratingxp-{{puntuado.id}}').starrr({
+                                                                            rating: {% rating_productos puntuado.id %},
+                                                                            max: 5,
+                                                                            readOnly: true,
+                                                                        })
+                                                                    </script>
                                                             </div>
                                                         </div>
 
