@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
@@ -14,13 +15,20 @@ from django.contrib import messages
 
 from Store.models import Publicidad
 
+def paginacion_productos(request):
+    producto = Productos.objects.filter(puntuacion__range=(1,5)).order_by('-puntuacion')
+    paginator = Paginator(producto, 3)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
+
 
 def tienda(request):
     productos=Productos.objects.all()
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
         'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
-        'puntuados':productos.filter(puntuacion__range=(1,5)).order_by('-puntuacion')
+        'puntuados':paginacion_productos(request)
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
