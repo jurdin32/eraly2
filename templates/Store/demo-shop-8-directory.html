@@ -89,7 +89,7 @@
                 <div class="panel-box">
                     <div class="panel-box-title">
                         <h3>
-                            {{ direccion.direccion|upper }}
+                            {{ direccion.direccion|upper|truncatechars:25 }}
                             {% if direccion.envio %}
                                 (Se usa para envío)
                             {% endif %}
