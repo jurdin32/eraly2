@@ -32,13 +32,18 @@
                     <div class="panel-box">
                         <div class="panel-box-title">
                             <h3>INFORMACIÓN DEL CONTACTO</h3>
-                            <a href="#" class="panel-box-edit">Editar</a>
+                            <a href="/store/account/" class="panel-box-edit"><i class="fa fa-edit"></i></a>
                         </div>
 
                         <div class="panel-box-content">
-                            <p>Name LastName<br>
-                                eraly@gmail.com<br>
-                                <a href="#">Cambiar Contraseña</a></p>
+                            <ul style="list-style: none">
+                                <li><span style="font-weight: bold">Identificación: </span> {{ request.user.usuariosweb_set.first.identificacion }} </li>
+                                <li><span style="font-weight: bold">Nombres: </span>{{ request.user.first_name }}</li>
+                                <li><span style="font-weight: bold">Apellidos: </span>{{ request.user.last_name }}</li>
+                                <li><span style="font-weight: bold">Email: </span>{{ request.user.email }}</li>
+                                <li><a href="/store/account/">Cambiar Contraseña</a></li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
