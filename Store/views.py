@@ -194,6 +194,7 @@ def account(request):
     }
     return render(request, 'Store/demo-shop-8-myaccount.html', contexto)
 
+@login_required(login_url='/store/login/')
 def dashboard(request):
     usuario = None
     direccionesW=None
