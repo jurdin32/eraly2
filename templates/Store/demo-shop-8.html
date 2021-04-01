@@ -1037,7 +1037,7 @@
                     </aside>
                 </div>
             </div>
-            <div class="container">
+            {% comment %}<div class="container">
                 <div class="row">
                     <div class="col-md-12 normal">
                         <div class="tabs home-products-tab">
@@ -1184,7 +1184,7 @@
                     </div>
                 </div>
             </div>
-
+{% endcomment %}
 
             <div class="container">
                 <div class="row">
@@ -1202,21 +1202,24 @@
 
                                         <div class="owl-carousel owl-theme"
                                              data-plugin-options="{'items':4 , 'autoplay': false, 'autoplayTimeout': 3000}">
-
+                                            {% for nuevo in nuevos %}
                                             <div class="product">
                                                 <figure class="product-image-area">
                                                     <a href="demo-shop-8-product-details.html" title="Product Name"
                                                        class="product-image">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
+                                                        {% if nuevo.imagen %}
+                                                        <img src="/media/{{ nuevo.imagen }}"
                                                              alt="Product Name">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
+                                                        <img src="/media/{{ nuevo.imagen }}"
                                                              alt="Product Name" class="product-hover-image">
+                                                        {% else %}
+                                                            <img src="{% static 'noimagen.jpg' %}"
+                                                             alt="Product Name">
+                                                        <img src="{% static 'noimagen.jpg' %}"
+                                                             alt="Product Name" class="product-hover-image">
+                                                        {% endif %}
                                                     </a>
 
-                                                    <a href="#" class="product-quickview">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
                                                     <div class="product-actions">
                                                         <a href="#" class="addtocart" title="Add to Cart">
                                                             <i class="fa fa-shopping-cart"></i>
@@ -1224,12 +1227,12 @@
                                                     </div>
                                                 </figure>
                                                 <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Note 10 Plus</a>
+                                                    <h2 class="product-name"><a href="/store/details/?hash={{ nuevo.hash }}"
+                                                                                title="Product Name">{{ nuevo.nombre }}</a>
                                                     </h2>
                                                     <div class="product-ratings">
                                                         <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
+                                                            <div class="nuevo-r{{ nuevo.id }}"></div>
                                                         </div>
                                                     </div>
 
@@ -1238,42 +1241,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% endfor %}
 
-                                            <div class="product">
-                                                <figure class="product-image-area">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3.jpg' %}"
-                                                             alt="Product Name">
-                                                        <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
 
-                                                    <a href="#" class="product-quickview">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                    <div class="product-actions">
-                                                        <a href="#" class="addtocart" title="Add to Cart">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </a>
-                                                    </div>
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Note 20 Ultra</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="product-price-box">
-                                                        <span class="product-price">$120.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </ul>
                                 </div>
@@ -1550,6 +1520,13 @@
     })
 {% endfor %}
 
+{% for nuevo in nuevos %}
+    $('.nuevo-r{{nuevo.id}}').starrr({
+        rating: {% rating_productos nuevo.id %},
+        max: 5,
+        readOnly: true,
+    })
+{% endfor %}
 </script>
 {% block script %}
 
