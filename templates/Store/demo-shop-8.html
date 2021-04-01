@@ -58,6 +58,8 @@
     <!-- Head Libs -->
     <script src="{% static 'Store/vendor/modernizr/modernizr.min.js' %}"></script>
 
+    <link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
+
 
 </head>
 <body>
@@ -965,26 +967,21 @@
                                                         </h2>
                                                         <div class="product-ratings">
                                                             <div>
-                                                                   <div class="ratingxp-{{ puntuado.id }}"></div>
-                                                                    <script>
-                                                                        $('.ratingxp-{{puntuado.id}}').starrr({
-                                                                            rating: {% rating_productos puntuado.id %},
-                                                                            max: 5,
-                                                                            readOnly: true,
-                                                                        })
-                                                                    </script>
+                                                                <div class="rat-{{ puntuado.id }}"></div>
+                                                                <script>
+                                                                    $('.rat-{{puntuado.id}}').starrr({
+                                                                        rating: {% rating_productos puntuado.id %},
+                                                                        max: 5,
+                                                                        readOnly: true,
+                                                                    })
+                                                                </script>
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
                                             </li>
                                         {% endfor %}
-
-
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -1427,8 +1424,7 @@
 
 <!-- Theme Initialization Files -->
 <script src="{% static 'Store/js/theme.init.js' %}"></script>
-<link rel="stylesheet" href="{% static 'starrr/starrr.css' %}">
-<script src="{% static 'starrr/starrr.js' %}"></script>
+
 
 <script src="{% static 'toastr/toastr.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
@@ -1436,6 +1432,10 @@
 
 <script src="{% static 'select2/js/select2.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+
+
+<script src="{% static 'starrr/starrr.js' %}"></script>
+
 
 {% if messages %}
     <ul class="messages">
