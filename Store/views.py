@@ -124,10 +124,6 @@ def eliminar_item(request):
             deleteItem(request,producto_id)
             return HttpResponseRedirect('/store/details/?hash=%s'%producto_id)
 
-
-
-
-
 def modificar_carrito(request,cantidad):
     for c in request.session.get('carrito'):
         if request.GET.get('hash') == dict(c)['hash']:
@@ -169,7 +165,11 @@ def _tiendas(request):
 
 @login_required(login_url='/store/login/')
 def account(request):
-    usuario = UsuariosWeb.objects.get(usuario=request.user)
+    usuario=None
+    try:
+        usuario = UsuariosWeb.objects.get(usuario=request.user)
+    except:
+        usuario =UsuariosWeb.objects.create(usuario=request.user)
     if request.POST:
         user = request.user
         if user.check_password(request.POST.get('password')):
