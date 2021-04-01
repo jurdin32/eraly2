@@ -70,11 +70,11 @@
                                     {% if  direccion %}
                                         <ul style="list-style: none">
                                             <li><i class="fa fa-globe"></i><span style="font-weight: bold"> Pais:</span> {{ direccion.ciudad.provincia.pais.nombre }}</li>
-                                            <li><i class="fa fa-globe"></i><span style="font-weight: bold"> Provincia: </span> {{ direccion.ciudad.provincia.nombre }}</li>
-                                            <li><i class="fa fa-map"></i><span style="font-weight: bold"> Ciudad: </span> {{ direccion.ciudad.nombre }}</li>
-                                            <li><i class="fa fa-map-pin"></i><span style="font-weight: bold"> Dirección: </span> {{ direccion.direccion }}</li>
-                                            <li><i class="fa fa-phone"></i><span style="font-weight: bold"> Teléfono: </span> {{ direccion.telefono }}</li>
-                                            <li><i class="fa fa-mobile-phone"></i><span style="font-weight: bold"> Celular: </span> {{ direccion.celular }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-globe"></i><span style="font-weight: bold"> Provincia: </span> {{ direccion.ciudad.provincia.nombre }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-map"></i><span style="font-weight: bold"> Ciudad: </span> {{ direccion.ciudad.nombre }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-map-pin"></i><span style="font-weight: bold"> Dirección: </span> {{ direccion.direccion }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-phone"></i><span style="font-weight: bold"> Teléfono: </span> {{ direccion.telefono }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-mobile-phone"></i><span style="font-weight: bold"> Celular: </span> {{ direccion.celular }}</li>
 
                                         </ul>
                                     {% else %}

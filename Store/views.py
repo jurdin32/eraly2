@@ -196,14 +196,20 @@ def account(request):
 
 def dashboard(request):
     usuario = None
+    direccionesW=None
     try:
         usuario = UsuariosWeb.objects.get(usuario=request.user)
     except:
         usuario = UsuariosWeb.objects.create(usuario=request.user)
+        usuario.identificacion=str.zfill(str(usuario.id),10)
         usuario.save()
+    try:
+        direccionesW = DireccionesWeb.objects.get(usuarioWeb=usuario, envio=True)
+    except:
+        pass
 
     contexto={
-        'direccion': DireccionesWeb.objects.get(usuarioWeb=usuario, envio=True)
+        'direccion':direccionesW
     }
     return render(request, 'Store/demo-shop-8-dashboard.html', contexto)
 
@@ -245,6 +251,15 @@ def directorio(request):
         'direcciones':DireccionesWeb.objects.filter(usuarioWeb=usuario),
     }
     return render(request, 'Store/demo-shop-8-directory.html', contexto)
+
+def eliminar_directorio(request,n):
+    try:
+        direct=DireccionesWeb.objects.get(id=n)
+        direct.delete()
+        messages.add_message(request, messages.ERROR, "Se eliminó el registro..!")
+        return HttpResponseRedirect("/store/directory/")
+    except:
+        return  HttpResponseRedirect("/store/directory/")
 
 def register(request):
     contexto={
