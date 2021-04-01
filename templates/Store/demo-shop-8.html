@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load productosTags %}
- {% load humanize %}
+{% load humanize %}
 <html>
 <head>
     <!-- Basic -->
@@ -82,8 +82,8 @@
                                 <div class="custom-block">
                                     <i class="fa fa-user"></i>
                                     {% if request.user.id %}
-                                    <a href="/store/dashboard/">Mi cuenta</a>
-                                     <a href="/logout_/?useranon=no">Cerrar Sesión</a>
+                                        <a href="/store/dashboard/">Mi cuenta</a>
+                                        <a href="/logout_/?useranon=no">Cerrar Sesión</a>
                                     {% else %}
                                         <a href="/store/login/">Iniciar Sesión</a>
                                     {% endif %}
@@ -132,7 +132,8 @@
 
                                             <div class="cart-actions">
                                                 <a href="/store/view/cart/" class="btn btn-primary">Ver Carrito</a>
-                                                <a href="demo-shop-8-checkout.html" class="btn btn-primary">Pagar Ahora!</a>
+                                                <a href="demo-shop-8-checkout.html" class="btn btn-primary">Pagar
+                                                    Ahora!</a>
                                             </div>
                                         </div>
                                     </div>
@@ -877,7 +878,9 @@
                                                             <span>{% promocion_descuento producto.id %}%</span>
                                                         </a>
                                                         <div class="product-actions">
-                                                            <a href="#" class="addtocart" data-prod="{{ producto.id }}" data-promo="{% promocion_id producto.id %}" title="Add to Cart">
+                                                            <a href="#" class="addtocart" data-prod="{{ producto.id }}"
+                                                               data-promo="{% promocion_id producto.id %}"
+                                                               title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
                                                             </a>
                                                         </div>
@@ -927,299 +930,43 @@
                                     </div>
 
                                     <ul class="products-grid columns3">
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
+                                        {% for puntuado in puntuados %}
+                                            <li>
+                                                <div class="product">
+                                                    <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                                        <a href="demo-shop-8-product-details.html" title="{{ puntuado.nombre }}"
+                                                           class="product-image">
+                                                            <img src="/media/{{ puntuado.imagen }}"
+                                                                 alt="{{ puntuado.nombre }}">
 
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
+                                                            <img src=/media/{{ puntuado.imagen }}"
+                                                                 alt="{{ puntuado.nombre }}" class="product-hover-image">
+                                                        </a>
 
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
+                                                        <a href="#" class="product-quickview  product-img-zoom">
+                                                            <i class="fa fa-share-square-o"></i>
+                                                            <span>Ver</span>
+                                                        </a>
 
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
+                                                    </figure>
+                                                    <div class="product-details-area">
+                                                        <h2 class="product-name"><a
+                                                                href="demo-shop-8-product-details.html"
+                                                                title="Product Name">{{ puntuado.nombre }}</a>
+                                                        </h2>
+                                                        <div class="product-ratings">
+                                                            <div class="ratings-box">
+                                                                <div class="rating" style="width:60%"></div>
+                                                            </div>
                                                         </div>
+
+
                                                     </div>
-
-
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
+                                            </li>
+                                        {% endfor %}
 
 
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="product">
-                                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                    <a href="demo-shop-8-product-details.html" title="Product Name"
-                                                       class="product-image">
-                                                        <img src="{% static 'Store/img/cat1.PNG' %}"
-                                                             alt="Product Name">
-
-                                                        <img src="{% static 'Store/img/cate2.PNG' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                    </a>
-
-                                                    <a href="#" class="product-quickview  product-img-zoom">
-                                                        <i class="fa fa-share-square-o"></i>
-                                                        <span>Ver</span>
-                                                    </a>
-
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                                title="Product Name">Celuar Full HD</a>
-                                                    </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="rating" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </li>
                                     </ul>
 
                                 </div>
@@ -1723,7 +1470,7 @@
         contador = {{ forloop.counter }}
     {% endfor %}
     totales()
-$(".cart-qty").text(contador)
+    $(".cart-qty").text(contador)
 
 
     $(".addtocart").click(function () {

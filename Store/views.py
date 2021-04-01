@@ -16,9 +16,11 @@ from Store.models import Publicidad
 
 
 def tienda(request):
+    productos=Productos.objects.all()
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
-        'productos':Productos.objects.all().order_by('id') # deben ir los destacados, los de mas puntuación,
+        'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
+        'puntuados':productos.order_by('-puntuacion')
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
