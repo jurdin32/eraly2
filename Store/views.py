@@ -18,7 +18,7 @@ from Store.models import Publicidad
 
 def tienda(request):
     productos=Productos.objects.all()
-    puntuados = productos.filter(puntuacion__range=(1, 5)).order_by('-puntuacion')
+    puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
     paginator = Paginator(puntuados, 9)
     page = request.GET.get('page')
     contexto={
