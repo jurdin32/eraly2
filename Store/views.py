@@ -170,6 +170,7 @@ def account(request):
         usuario = UsuariosWeb.objects.get(usuario=request.user)
     except:
         usuario =UsuariosWeb.objects.create(usuario=request.user)
+        usuario.save()
     if request.POST:
         user = request.user
         if user.check_password(request.POST.get('password')):
@@ -189,15 +190,24 @@ def account(request):
 
     contexto={
         'usuario':usuario,
+
     }
     return render(request, 'Store/demo-shop-8-myaccount.html', contexto)
 
 def dashboard(request):
-    contexto={
+    usuario = None
+    try:
+        usuario = UsuariosWeb.objects.get(usuario=request.user)
+    except:
+        usuario = UsuariosWeb.objects.create(usuario=request.user)
+        usuario.save()
 
+    contexto={
+        'direccion': DireccionesWeb.objects.get(usuarioWeb=usuario, envio=True)
     }
     return render(request, 'Store/demo-shop-8-dashboard.html', contexto)
 
+@login_required(login_url='/store/login/')
 def directorio(request):
     envio =False
     usuario =None
