@@ -1242,12 +1242,6 @@
                                                     <h2 class="product-name"><a href="/store/details/?hash={{ nuevo.hash }}"
                                                                                 title="Product Name">{{ nuevo.nombre }}</a>
                                                     </h2>
-                                                    <div class="product-ratings">
-                                                        <div class="ratings-box">
-                                                            <div class="nuevo{{ nuevo.id }}"></div>
-                                                        </div>
-                                                    </div>
-
                                                     <div class="product-price-box">
                                                         <span class="product-price">${{ nuevo.precios_set.first.total }}</span>
                                                     </div>
@@ -1532,13 +1526,6 @@
     })
 {% endfor %}
 
-{% for nuevo in nuevos %}
-    $('.nuevo{{nuevo.id}}').starrr({
-        rating: {% rating_productos nuevo.id %},
-        max: 5,
-        readOnly: true,
-    })
-{% endfor %}
 </script>
 {% block script %}
 
