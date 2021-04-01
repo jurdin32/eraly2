@@ -37,7 +37,7 @@
                                     <a href="/store/account/" class="panel-box-edit"><i class="fa fa-edit"></i></a>
                                 </div>
 
-                                <div class="panel-box-content" style="height: 250px">
+                                <div class="panel-box-content" style="height: 250px; font-size: 14px">
                                     <ul style="list-style: none;">
                                         <li style="line-height: 30px"><span
                                                 style="font-weight: bold"><i class="fa fa-credit-card-alt"></i> Identificación: </span> {{ request.user.usuariosweb_set.first.identificacion }}
@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                   {% comment %} <div class="row">
                         <div class="col-xs-12">
                             <div class="panel-box">
                                 <div class="panel-box-title">
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                 {% endblock %}
 
             </div>
