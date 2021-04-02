@@ -1036,11 +1036,11 @@
                                         <ul class="category-list">
                                             {% for categoria in categorias %}
                                                 <li>
-                                                    <a href="#">{{ categoria.nombre }}</a>
-                                                    <a href="#" class="plus"></a>
+                                                    <a style="cursor: pointer">{{ categoria.nombre }}</a>
+                                                    <a style="cursor: pointer" class="plus"></a>
                                                     <ul>
                                                         {% for subcategoria in categoria.subcategorias_set.all %}
-                                                            <li><a href="#">{{ subcategoria.nombre }}</a></li>
+                                                            <li><a href="/store/category/?categoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a></li>
                                                         {% endfor %}
                                                     </ul>
                                                 </li>

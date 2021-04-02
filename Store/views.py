@@ -278,6 +278,18 @@ def eliminar_directorio(request,n):
     except:
         return  HttpResponseRedirect("/store/directory/")
 
+
+def ver_categorias(request):
+    prod=None
+    if request.GET.get('categoria'):
+        prod=Productos.objects.filter(subcategoria_id=request.GET.get('categoria'))
+    else:
+        prod=Productos.objects.all()
+    contexto={
+        'productos':prod
+    }
+    return render(request, 'Store/demo-shop-8-category-list.html',contexto)
+
 def register(request):
     contexto={
 
