@@ -190,10 +190,10 @@
                                     <div id="price-slider"></div>
                                     <div class="filter-price-details">
                                         <span>Des</span>
-                                        <input type="text" id="price-range-low" class="form-control" placeholder="Min">
+                                        <input type="text" id="price-range-low"  class="form-control" placeholder="Min">
                                         <span>Has</span>
                                         <input type="text" id="price-range-high" class="form-control" placeholder="Max">
-                                        <a href="#" class="btn btn-primary">Busc</a>
+                                        <a href="#" id="bx" class="btn btn-primary">Busc</a>
                                     </div>
                                 </div>
                             </div>
@@ -364,6 +364,20 @@
             uri += "&list=" + $(this).val();
             console.log(uri)
             location.href = uri
+        })
+        let precios_rango=Array(2)
+        $("#price-range-low").keyup(function(){
+            precios_rango[0]=($(this).val())
+            let uri="{{ request.get_full_path }}"+"&bprecio="+precios_rango
+            console.log(precios_rango,uri)
+            $("#bx").attr("href",uri)
+        })
+
+        $("#price-range-high").keyup(function(){
+             precios_rango[1]=$(this).val()
+            let uri="{{ request.get_full_path }}"+"&bprecio="+precios_rango
+            console.log(precios_rango,uri)
+            $("#bx").attr("href",uri)
         })
 
     </script>

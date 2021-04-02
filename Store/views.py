@@ -283,11 +283,19 @@ def ver_subcategorias(request):
     prod=None
     paginator=None
     if request.GET.get('subcategoria'):
-        prod=Productos.objects.filter(subcategoria_id=request.GET.get('subcategoria'))
+        prod=Productos.objects.filter(subcategoria_id=request.GET.get('subcategoria'),precios__web=True)
     elif request.GET.get('categoria'):
-        prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'))
+        prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'),precios__web=True)
     else:
-        prod=Productos.objects.all()
+        prod=Productos.objects.filter(precios__web=True)
+    if request.GET.get('bprecio'):
+        try:
+            valores=request.GET.get("bprecio").split(",")
+            prod.filter(precios__web=True,precios__total__range=(float(valores[0]),float(valores[1])),)
+            print(valores, 'vienen por get')
+            print(prod)
+        except:
+            pass
 
     if request.GET.get("list"):
         paginator = Paginator(prod, request.GET.get("list"))
