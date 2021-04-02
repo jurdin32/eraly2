@@ -74,7 +74,7 @@
                                                  class="product-hover-image">
                                         {% endif %}
                                     </a>
-                                    <div class="product-label"><span class="discount">-{% promocion_descuento producto.id %}%</span></div>
+                                    {% promocion_descuento producto.id %}%
                                 </figure>
                                 <div class="product-details-area">
                                     <h2 class="product-name">
