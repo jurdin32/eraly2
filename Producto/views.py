@@ -382,7 +382,10 @@ def editarPromocion(request,id):
         promo.total = request.POST.get('total')
         promo.save()
         messages.add_message(request, messages.SUCCESS, "Se ha modificado el registro..!")
-    return HttpResponseRedirect("/products/promo/?establecimiento=%s" % promo.precio.producto.establecimiento_id)
+    if request.GET.get('establecimiento'):
+        return HttpResponseRedirect("/products/promo/?establecimiento=%s" % promo.precio.producto.establecimiento_id)
+    else:
+        return HttpResponseRedirect("/products/promo/")
 
 def eliminarPromocion(request,id):
     promo =Promociones.objects.get(id=id)
