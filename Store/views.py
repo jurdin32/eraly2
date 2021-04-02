@@ -18,14 +18,14 @@ from Store.models import Publicidad
 
 def tienda(request):
     productos=Productos.objects.all()
-    puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
+    puntuados = productos.filter(puntuacion__range=(2, 5),precios__web=True).order_by('-puntuacion')
     paginator = Paginator(puntuados, 9)
     page = request.GET.get('page')
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
         'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
         'puntuados':paginator.get_page(page),
-        'nuevos':productos.filter(puntuacion__range=(0,2)).order_by('-puntuacion'),
+        'nuevos':productos.filter(puntuacion__range=(0,2),precios__web=True).order_by('-puntuacion'),
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
@@ -62,7 +62,7 @@ def _detalles(request):
         'producto':producto,
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id),
         'promocion':promo,
-        'productos':Productos.objects.filter(subcategoria=producto.subcategoria),
+        'productos':Productos.objects.filter(subcategoria=producto.subcategoria,precios__web=True),
         'imagnes':Publicidad.objects.filter(estado=True),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
