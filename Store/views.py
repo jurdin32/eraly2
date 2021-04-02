@@ -87,7 +87,16 @@ def add_carrito(request):
         request.session['carrito']=[]
     cart.setdefault('producto_id',producto.id)
     cart.setdefault('producto_nombre',producto.nombre)
-    cart.setdefault('producto_imagen',producto.imagen.name or producto.imagenesproducto_set.first().imagen.name)
+    imagen=""
+    try:
+        imagen = producto.imagen.name
+    except:
+        if producto.imagenesproducto_set.first():
+            imagen = producto.imagenesproducto_set.first().imagen
+        else:
+            producto="/static/noimagen.jpg"
+
+    cart.setdefault('producto_imagen',imagen)
     cart.setdefault('hash',producto.hash)
     cart.setdefault('precio_normal',round(precio,2))
     cart.setdefault('descuento_porcentaje',descuento_promo)
