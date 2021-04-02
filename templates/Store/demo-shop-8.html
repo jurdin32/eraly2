@@ -1036,7 +1036,7 @@
                                         <ul class="category-list">
                                             {% for categoria in categorias %}
                                                 <li>
-                                                    <a style="cursor: pointer">{{ categoria.nombre }}</a>
+                                                    <a href="/store/category/?categoria={{ categoria.id }}" style="cursor: pointer">{{ categoria.nombre }}</a>
                                                     <a style="cursor: pointer" class="plus"></a>
                                                     <ul>
                                                         {% for subcategoria in categoria.subcategorias_set.all %}

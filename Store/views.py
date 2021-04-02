@@ -288,6 +288,7 @@ def ver_subcategorias(request):
         prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'))
     else:
         prod=Productos.objects.all()
+
     if request.GET.get("list"):
         paginator = Paginator(prod, request.GET.get("list"))
     else:
