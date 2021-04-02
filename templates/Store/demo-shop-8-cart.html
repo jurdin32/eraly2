@@ -2,6 +2,7 @@
 {% block content %}
     {% load productosTags %}
     {% load humanize %}
+    {% load static %}
     <div role="main" class="main">
         <div class="cart">
             <div class="container">
@@ -34,8 +35,14 @@
                                         <td class="product-image-td">
                                             <a href="/store/details/?hash={{ sess.hash }}"
                                                title="{{ sess.producto_nombre }}">
+                                                {% if sess.producto_imagen %}
                                                 <img src="/media/{{ sess.producto_imagen }}"
                                                      alt="{{ sess.producto_nombre }}">
+                                                {% else %}
+                                                    <img src="{% static 'noimagen.jpg' %}"
+                                                     alt="{{ sess.producto_nombre }}">
+                                                {% endif %}
+
                                             </a>
                                         </td>
                                         <td class="product-name-td">
