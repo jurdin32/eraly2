@@ -94,7 +94,7 @@ def add_carrito(request):
         if producto.imagenesproducto_set.first():
             imagen = producto.imagenesproducto_set.first().imagen
         else:
-            producto="/static/noimagen.jpg"
+            imagen=""
 
     cart.setdefault('producto_imagen',imagen)
     cart.setdefault('hash',producto.hash)
