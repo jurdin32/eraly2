@@ -280,22 +280,25 @@ def eliminar_directorio(request,n):
 
 
 def ver_subcategorias(request):
-    prod=None
+    prod=Productos.objects.filter(precios__web=True)
     paginator=None
+    min=0
+    max =0
     if request.GET.get('subcategoria'):
-        prod=Productos.objects.filter(subcategoria_id=request.GET.get('subcategoria'),precios__web=True)
+        prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
     elif request.GET.get('categoria'):
-        prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'),precios__web=True)
-    else:
-        prod=Productos.objects.filter(precios__web=True)
+        prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
+
     if request.GET.get('bprecio'):
-        try:
-            valores=request.GET.get("bprecio").split(",")
-            prod.filter(precios__web=True,precios__total__range=(float(valores[0]),float(valores[1])),)
-            print(valores, 'vienen por get')
-            print(prod)
-        except:
-            pass
+        valores=request.GET.get("bprecio").split(",")
+        nueva_lista = [sublista for sublista in valores if sublista]
+        print(nueva_lista)
+        if len(nueva_lista)==2:
+            min = nueva_lista[0].replace(",",".")
+            max= nueva_lista[1].replace(",",".")
+        else:
+            min=max =nueva_lista[0]
+        prod=prod.filter(precios__total__range=(float(min),float(max)))
 
     if request.GET.get("list"):
         paginator = Paginator(prod, request.GET.get("list"))
@@ -307,9 +310,11 @@ def ver_subcategorias(request):
     contexto={
         'productos':paginator.get_page('page'),
         'categorias':Categorias.objects.all(),
-        'numero':request.GET.get("list")
+        'numero':request.GET.get("list"),
+        'min':min,
+        'max':max,
     }
-    print(request.GET)
+
     if request.GET.get('grid'):
         return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
     else:
