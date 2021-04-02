@@ -1040,7 +1040,7 @@
                                                     <a style="cursor: pointer" class="plus"></a>
                                                     <ul>
                                                         {% for subcategoria in categoria.subcategorias_set.all %}
-                                                            <li><a href="/store/category/?categoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a></li>
+                                                            <li><a href="/store/category/?subcategoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a></li>
                                                         {% endfor %}
                                                     </ul>
                                                 </li>
