@@ -292,6 +292,7 @@ def ver_subcategorias(request):
         paginator = Paginator(prod, request.GET.get("list"))
     else:
         paginator = Paginator(prod, 12)
+
     page = request.GET.get('page')
 
     contexto={
@@ -299,7 +300,12 @@ def ver_subcategorias(request):
         'categorias':Categorias.objects.all(),
         'numero':request.GET.get("list")
     }
-    return render(request, 'Store/demo-shop-8-category-list.html',contexto)
+    print(request.GET)
+    if request.GET.get('grid'):
+        return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
+    else:
+        return render(request, 'Store/demo-shop-8-category-list.html', contexto)
+
 
 def register(request):
     contexto={
