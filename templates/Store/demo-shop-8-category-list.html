@@ -82,8 +82,8 @@
                                            title="Product Name">{{ producto.nombre }}</a>
                                     </h2>
                                     <div class="product-ratings">
-                                        <div class="ratings-box">
-                                            <div class="rating" style="width:60%"></div>
+                                        <div class="rat-{{producto.id}}">
+
                                         </div>
                                     </div>
 
@@ -380,6 +380,14 @@
             console.log(precios_rango,uri)
             $("#bx").attr("href",uri)
         })
+
+        {% for producto in productos %}
+            $('.rat-{{producto.id}}').starrr({
+                rating: {% rating_productos producto.id %},
+                max: 5,
+                readOnly: true,
+            })
+        {% endfor %}
     </script>
 {% endblock %}
 
