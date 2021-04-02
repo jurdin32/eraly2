@@ -17,15 +17,15 @@ from Store.models import Publicidad
 
 
 def tienda(request):
-    productos=Productos.objects.all()
-    puntuados = productos.filter(puntuacion__range=(2, 5),precios__web=True).order_by('-puntuacion')
+    productos=Productos.objects.filter(precios__web=True)
+    puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
     paginator = Paginator(puntuados, 9)
     page = request.GET.get('page')
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
         'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
         'puntuados':paginator.get_page(page),
-        'nuevos':productos.filter(puntuacion__range=(0,2),precios__web=True).order_by('-puntuacion'),
+        'nuevos':productos.filter(puntuacion__range=(0,2)).order_by('-puntuacion'),
 
     }
     return render(request, 'Store/demo-shop-8.html',contexto)
