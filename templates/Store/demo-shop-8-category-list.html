@@ -37,18 +37,22 @@
                     <div class="limiter">
                         <label>Ver:</label>
                         <select class="seleccion">
-                                {% if  request.get.list == '12' %}
+                                 {% if  numero == '12' %}
                                     <option value="12" selected>12</option>
                                     <option value="24">24</option>
                                     <option value="36" >36</option>
-                                {% elif request.get.list == '24' %}
+                                {% elif numero == '24' %}
                                    <option value="12">12</option>
                                     <option value="24" selected>24</option>
                                     <option value="36" >36</option>
-                                {% elif request.get.list == '36' %}
+                                {% elif numero == '36' %}
                                     <option value="12">12</option>
                                     <option value="24">24</option>
                                     <option value="36" selected >36</option>
+                                {% else %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" >36</option>
                             {% endif %}
                             </select>
                     </div>
@@ -120,18 +124,22 @@
                         <div class="limiter">
                             <label>Ver:</label>
                             <select class="seleccion">
-                                {% if  request.get.list == '12' %}
+                                {% if  numero == '12' %}
                                     <option value="12" selected>12</option>
                                     <option value="24">24</option>
                                     <option value="36" >36</option>
-                                {% elif request.get.list == '24' %}
+                                {% elif numero == '24' %}
                                    <option value="12">12</option>
                                     <option value="24" selected>24</option>
                                     <option value="36" >36</option>
-                                {% elif request.get.list == '36' %}
+                                {% elif numero == '36' %}
                                     <option value="12">12</option>
                                     <option value="24">24</option>
                                     <option value="36" selected >36</option>
+                                {% else %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" >36</option>
                             {% endif %}
                             </select>
                         </div>

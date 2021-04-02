@@ -297,6 +297,7 @@ def ver_subcategorias(request):
     contexto={
         'productos':paginator.get_page('page'),
         'categorias':Categorias.objects.all(),
+        'numero':request.GET.get("list")
     }
     return render(request, 'Store/demo-shop-8-category-list.html',contexto)
 
