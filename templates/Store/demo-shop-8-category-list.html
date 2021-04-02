@@ -65,7 +65,7 @@
                         {% for producto in productos %}
                             <div class="product product-list">
                                 <figure class="product-image-area">
-                                    <a href="demo-shop-8-product-details.html" title="Product Name"
+                                    <a href="/store/details/?hash={{ producto.hash }}" title="Product Name"
                                        class="product-image">
                                         {% if producto.imagen %}
                                             <img src="/media/{{ producto.imagen }}" alt="Product Name">
@@ -81,7 +81,7 @@
                                 </figure>
                                 <div class="product-details-area">
                                     <h2 class="product-name">
-                                        <a href="demo-shop-8-product-details.html"
+                                        <a href="/store/details/?hash={{ producto.hash }}"
                                            title="Product Name">{{ producto.nombre }}</a>
                                     </h2>
                                     <div class="product-ratings">
