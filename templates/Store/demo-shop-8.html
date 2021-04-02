@@ -877,8 +877,9 @@
                                                         <a href="/store/details/?hash={{ producto.hash }}"
                                                            class="product-quickview">
                                                             <i class="fa fa-minus-circle"></i>
-                                                            <span>{% promocion_descuento producto.id %}%</span>
+
                                                         </a>
+                                                        {% promocion_descuento producto.id %}
                                                         <div class="product-actions">
                                                             <a style="cursor: pointer" class="addtocart" data-prod="{{ producto.id }}"
                                                                data-promo="{% promocion_id producto.id %}"
@@ -958,10 +959,7 @@
 
                                                         </a>
 
-                                                        <a href="/store/details/?hash={{ puntuado.hash }}" class="product-quickview  product-img-zoom">
-                                                            <i class="fa fa-share-square-o"></i>
-                                                            <span>Ver</span>
-                                                        </a>
+                                                        {% promocion_descuento puntuado.id %}
                                                         <div class="product-actions">
                                                             <a style="cursor: pointer" class="addtocart" data-prod="{{ puntuado.id }}"
                                                                data-promo="{% promocion_id puntuado.id %}"
@@ -1088,7 +1086,7 @@
                                                              alt="Product Name" class="product-hover-image">
                                                         {% endif %}
                                                     </a>
-
+                                                    {% promocion_descuento nuevo.id %}
                                                    <div class="product-actions">
                                                             <a style="cursor: pointer" class="addtocart" data-prod="{{ nuevo.id }}"
                                                                data-promo="{% promocion_id nuevo.id %}"
