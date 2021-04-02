@@ -37,10 +37,20 @@
                     <div class="limiter">
                         <label>Ver:</label>
                         <select class="seleccion">
-                            <option value="12">12</option>
-                            <option value="24">24</option>
-                            <option value="36">36</option>
-                        </select>
+                                {% if  request.get.list == '12' %}
+                                    <option value="12" selected>12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" >36</option>
+                                {% elif request.get.list == '24' %}
+                                   <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36" >36</option>
+                                {% elif request.get.list == '36' %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" selected >36</option>
+                            {% endif %}
+                            </select>
                     </div>
                 </div>
             </div>
@@ -110,9 +120,19 @@
                         <div class="limiter">
                             <label>Ver:</label>
                             <select class="seleccion">
-                                <option value="12">12</option>
-                                <option value="24">24</option>
-                                <option value="36">36</option>
+                                {% if  request.get.list == '12' %}
+                                    <option value="12" selected>12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" >36</option>
+                                {% elif request.get.list == '24' %}
+                                   <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36" >36</option>
+                                {% elif request.get.list == '36' %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" selected >36</option>
+                            {% endif %}
                             </select>
                         </div>
                     </div>
@@ -322,7 +342,7 @@
 {% endblock %}
 {% block script %}
 <script>
-
+    console.log({{ request.get.list }})
     $(".seleccion").change(function(){
         let uri= "{{ request.get_full_path }}"
         uri+="&list="+$(this).val();
