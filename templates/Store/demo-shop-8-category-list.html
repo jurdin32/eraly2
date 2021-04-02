@@ -35,8 +35,8 @@
                     </ul>
 
                     <div class="limiter">
-                        <label>Show:</label>
-                        <select>
+                        <label>Ver:</label>
+                        <select class="seleccion">
                             <option value="12">12</option>
                             <option value="24">24</option>
                             <option value="36">36</option>
@@ -108,8 +108,8 @@
                         </ul>
 
                         <div class="limiter">
-                            <label>Show:</label>
-                            <select>
+                            <label>Ver:</label>
+                            <select class="seleccion">
                                 <option value="12">12</option>
                                 <option value="24">24</option>
                                 <option value="36">36</option>
@@ -318,6 +318,19 @@
         </aside>
     </div>
 </div>
+
+{% endblock %}
+{% block script %}
+<script>
+
+    $(".seleccion").change(function(){
+        let uri= "{{ request.get_full_path }}"
+        uri+="&list="+$(this).val();
+        console.log(uri)
+        location.href=uri
+    })
+
+</script>
 {% endblock %}
 
 

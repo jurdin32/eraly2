@@ -281,15 +281,21 @@ def eliminar_directorio(request,n):
 
 def ver_subcategorias(request):
     prod=None
+    paginator=None
     if request.GET.get('subcategoria'):
         prod=Productos.objects.filter(subcategoria_id=request.GET.get('subcategoria'))
     elif request.GET.get('categoria'):
         prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'))
     else:
         prod=Productos.objects.all()
+    if request.GET.get("list"):
+        paginator = Paginator(prod, request.GET.get("list"))
+    else:
+        paginator = Paginator(prod, 12)
+    page = request.GET.get('page')
 
     contexto={
-        'productos':prod,
+        'productos':paginator.get_page('page'),
         'categorias':Categorias.objects.all(),
     }
     return render(request, 'Store/demo-shop-8-category-list.html',contexto)
