@@ -906,7 +906,11 @@
                                                         </div>
 
                                                         <div class="product-price-box">
-                                                            <span class="product-price">${{ producto.precios_set.first.total }}</span>
+                                                            {% for precio in producto.precios_set.all  %}
+                                                                {% if precio.web %}
+                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                {% endif %}
+                                                            {% endfor %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -977,7 +981,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="product-price-box">
-                                                            <span class="product-price">${{ puntuado.precios_set.first.total }}</span>
+                                                            {% for precio in puntuado.precios_set.all  %}
+                                                                {% if precio.web %}
+                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                {% endif %}
+                                                            {% endfor %}
                                                         </div>
                                                     </div>
 
@@ -1243,8 +1251,12 @@
                                                                                 title="Product Name">{{ nuevo.nombre }}</a>
                                                     </h2>
                                                     <div class="product-price-box">
-                                                        <span class="product-price">${{ nuevo.precios_set.first.total }}</span>
-                                                    </div>
+                                                            {% for precio in nuevo.precios_set.all  %}
+                                                                {% if precio.web %}
+                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
                                                 </div>
                                             </div>
                                             {% endfor %}
@@ -1451,8 +1463,8 @@
             $(".cart-totals").html("Total: <span>$" + totalcarrito.toFixed(2) + "</span>")
         });
     }
-</script>
-<script>
+
+
     $(".cx").html("")
     {% for car in request.session.carrito %}
         {% if car.producto_id%}
@@ -1487,6 +1499,7 @@
             promocion: $(this).data('promo'),
             cantidad: 1,
         }, function (data) {
+            console.log(data)
             if (data.producto_id > 0) {
                 toastr.success("Se agregó al carrito..!")
                 $(".cx").append('<div class="product product-sm">' +
