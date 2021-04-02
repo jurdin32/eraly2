@@ -1,5 +1,7 @@
 {% extends 'Store/demo-shop-8.html' %}
-<div class="container">
+{% block content %}
+{% load static %}
+<div class="container" style="padding-top: 30px">
     <div class="row">
         <div class="col-md-9 col-md-push-3">
             <div class="toolbar mb-none">
@@ -11,8 +13,8 @@
                             <option value="Name">Name</option>
                             <option value="Price">Price</option>
                         </select>
-                        <a href="#" title="Set Desc Direction">
-                            <img src="../img/demos/shop/i_asc_arrow.gif" alt="Set Desc Direction">
+                        <a href="" title="Set Desc Direction">
+                            <img src="{% static 'Store/img/demos/shop/i_asc_arrow.gif' %}" alt="Set Desc Direction">
                         </a>
                     </div>
 
@@ -642,4 +644,6 @@
         </aside>
     </div>
 </div>
+{% endblock %}
+
 
