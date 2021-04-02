@@ -1,6 +1,7 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% block content %}
 {% load static %}
+{% load productosTags %}
 <div class="container" style="padding-top: 30px">
     <div class="row">
         <div class="col-md-9 col-md-push-3">
@@ -46,19 +47,20 @@
 
             <ul class="products-list">
                 <li>
+                    {% for producto in productos %}
                     <div class="product product-list">
                         <figure class="product-image-area">
                             <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product1.jpg" alt="Product Name">
-                                <img src="../img/demos/shop/products/product1-2.jpg" alt="Product Name"
+                                <img src="/media/{{ producto.imagen }}" alt="Product Name">
+                                <img src="/media/{{ producto.imagen }}" alt="Product Name"
                                      class="product-hover-image">
                             </a>
                             <div class="product-label"><span class="discount">-10%</span></div>
-                            <div class="product-label"><span class="new">New</span></div>
                         </figure>
                         <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa
-                                Sheer Blouse</a></h2>
+                            <h2 class="product-name">
+                                <a href="demo-shop-8-product-details.html" title="Product Name">{{ producto.nombre }}</a>
+                            </h2>
                             <div class="product-ratings">
                                 <div class="ratings-box">
                                     <div class="rating" style="width:60%"></div>
@@ -66,222 +68,33 @@
                             </div>
 
                             <div class="product-short-desc">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
+                                {{ producto.descripcion|safe|truncatechars:300 }}
                             </div>
 
                             <div class="product-price-box">
-                                <span class="old-price">$99.00</span>
-                                <span class="product-price">$89.00</span>
+                                {% for precio in producto.precios_set.all %}
+                                    {% if precio %}
+                                    <span class="product-price">{{ precio.total }}</span>
+                                    {% endif %}
+                                {% endfor %}
+
+
                             </div>
 
                             <div class="product-actions">
-                                <a href="#" class="addtocart" title="Add to Cart">
+                                <a style="cursor: pointer" class="addtocart" title="Add to Cart" data-prod="{{ producto.id }}" data-promo="{% promocion_id producto.id %}">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Add to Cart</span>
                                 </a>
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                                <a href="#" class="quickview" title="Quick View">
+                                <a href="/store/details/?hash={{ producto.hash }}" class="comparelink" title="Quick View">
                                     <i class="fa fa-search"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </li>
+                    {% endfor %}
 
-                <li>
-                    <div class="product product-list">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product2.jpg" alt="Product Name">
-                                <img src="../img/demos/shop/products/product2-2.jpg" alt="Product Name"
-                                     class="product-hover-image">
-                            </a>
-                            <div class="product-label"><span class="discount">-25%</span></div>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Women
-                                Fashion Blouse</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:0%"></div>
-                                </div>
-                            </div>
 
-                            <div class="product-short-desc">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="old-price">$120.00</span>
-                                <span class="product-price">$90.00</span>
-                            </div>
-
-                            <div class="product-actions">
-                                <a href="#" class="addtocart" title="Add to Cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </a>
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                                <a href="#" class="quickview" title="Quick View">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="product product-list">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product3.jpg" alt="Product Name">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion
-                                Dress</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:60%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-short-desc">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$70.00</span>
-                            </div>
-
-                            <div class="product-actions">
-                                <a href="#" class="addtocart" title="Add to Cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </a>
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                                <a href="#" class="quickview" title="Quick View">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="product product-list">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product4.jpg" alt="Product Name">
-                            </a>
-                            <div class="product-label"><span class="discount">-20%</span></div>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion
-                                Sweater</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:80%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-short-desc">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="old-price">$100.00</span>
-                                <span class="product-price">$90.00</span>
-                            </div>
-
-                            <div class="product-actions">
-                                <a href="#" class="addtocart" title="Add to Cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </a>
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                                <a href="#" class="quickview" title="Quick View">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="product product-list">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product5.jpg" alt="Product Name">
-                                <img src="../img/demos/shop/products/product5-2.jpg" alt="Product Name"
-                                     class="product-hover-image">
-                            </a>
-                            <div class="product-label"><span class="new">New</span></div>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion
-                                Jacket</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:20%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-short-desc">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$230.00</span>
-                            </div>
-
-                            <div class="product-actions">
-                                <a href="#" class="addtocart" title="Add to Cart">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </a>
-                                <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="comparelink" title="Add to Compare">
-                                    <i class="glyphicon glyphicon-signal"></i>
-                                </a>
-                                <a href="#" class="quickview" title="Quick View">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </li>
             </ul>
 
@@ -331,7 +144,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
-                                Price
+                                Precio
                             </a>
                         </h4>
                     </div>
@@ -340,11 +153,11 @@
                             <div class="filter-price">
                                 <div id="price-slider"></div>
                                 <div class="filter-price-details">
-                                    <span>from</span>
+                                    <span>Des</span>
                                     <input type="text" id="price-range-low" class="form-control" placeholder="Min">
-                                    <span>to</span>
+                                    <span>Has</span>
                                     <input type="text" id="price-range-high" class="form-control" placeholder="Max">
-                                    <a href="#" class="btn btn-primary">FILTER</a>
+                                    <a href="#" class="btn btn-primary">Busc</a>
                                 </div>
                             </div>
                         </div>
@@ -354,7 +167,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-size">
-                                Size
+                                Tallas
                             </a>
                         </h4>
                     </div>
@@ -387,7 +200,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
-                                Brands
+                                Subcategorías
                             </a>
                         </h4>
                     </div>
@@ -405,7 +218,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
-                                color
+                                colores
                             </a>
                         </h4>
                     </div>
@@ -498,144 +311,6 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h4>Featured</h4>
-            <div class="owl-carousel owl-theme"
-                 data-plugin-options="{'items':1, 'margin': 5, 'dots': false, 'nav': true}">
-                <div>
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-                                <img src="../img/demos/shop/products/product13-2.jpg" alt="Product Name"
-                                     class="product-hover-image">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - S</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:0%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$220.00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product14.jpg" alt="Product Name">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - XL</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:80%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$180.00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product15.jpg" alt="Product Name">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - 2XL</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:0%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$240.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product16.jpg" alt="Product Name">
-                                <img src="../img/demos/shop/products/product16-2.jpg" alt="Product Name"
-                                     class="product-hover-image">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - 3XL</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:60%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$220.00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product17.jpg" alt="Product Name">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - M</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:0%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$180.00</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product product-sm">
-                        <figure class="product-image-area">
-                            <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-                            </a>
-                        </figure>
-                        <div class="product-details-area">
-                            <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond
-                                Ring - XL</a></h2>
-                            <div class="product-ratings">
-                                <div class="ratings-box">
-                                    <div class="rating" style="width:80%"></div>
-                                </div>
-                            </div>
-
-                            <div class="product-price-box">
-                                <span class="product-price">$240.00</span>
-                            </div>
                         </div>
                     </div>
                 </div>

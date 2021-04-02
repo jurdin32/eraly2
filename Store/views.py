@@ -283,8 +283,8 @@ def ver_subcategorias(request):
     prod=None
     if request.GET.get('subcategoria'):
         prod=Productos.objects.filter(subcategoria_id=request.GET.get('subcategoria'))
-    elif request.GET.get():
-        prod=Productos.objects.filter('categoria')
+    elif request.GET.get('categoria'):
+        prod=Productos.objects.filter(subcategoria__categoria_id=request.GET.get('categoria'))
     else:
         prod=Productos.objects.all()
 
