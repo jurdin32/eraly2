@@ -65,9 +65,15 @@
                     <div class="product product-list">
                         <figure class="product-image-area">
                             <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                <img src="/media/{{ producto.imagen }}" alt="Product Name">
+                                {% if producto.imagen %}
+                                    <img src="/media/{{ producto.imagen }}" alt="Product Name">
                                 <img src="/media/{{ producto.imagen }}" alt="Product Name"
                                      class="product-hover-image">
+                                    {% else %}
+                                    <img src="{% static 'noimagen.jpg' %}" alt="Product Name">
+                                <img src="{% static 'noimagen.jpg' %}" alt="Product Name"
+                                     class="product-hover-image">
+                                {% endif %}
                             </a>
                             <div class="product-label"><span class="discount">-10%</span></div>
                         </figure>
