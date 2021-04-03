@@ -236,16 +236,16 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
-                                    {{ subcategorias }}
+                                    {{ categoria.nombre }}
                                 </a>
                             </h4>
                         </div>
                         <div id="panel-filter-brand" class="accordion-body collapse in">
                             <div class="panel-body">
                                 <ul>
-                                    <li><a href="#">Nike</a></li>
-                                    <li><a href="#">Adidas</a></li>
-                                    <li><a href="#">Puma</a></li>
+                                    {% for sub in categoria.subcategorias_set.all %}
+                                    <li><a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>

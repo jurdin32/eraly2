@@ -282,16 +282,15 @@ def eliminar_directorio(request,n):
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
     paginator=None
-    subcat=None
+    cat=None
     min=0
     max =0
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
-        subcat = Subcategorias.objects.all()
 
     elif request.GET.get('categoria'):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
-        subcat = Subcategorias.objects.filter(categoria_id=request.GET.get('categoria'))
+        cat= Categorias.objects.get(id=request.GET.get('categoria'))
 
     if request.GET.get('size'):
 
@@ -321,7 +320,7 @@ def ver_subcategorias(request):
         'numero':request.GET.get("list"),
         'min':min,
         'max':max,
-        'subcategorias':subcat,
+        'categoria':cat,
     }
 
     if request.GET.get('grid'):
