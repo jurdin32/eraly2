@@ -18,8 +18,8 @@
 
                         <div class="view-mode">
                             <a href="{{ request.get_full_path }}&grid" title="List">
-                            <i class="fa fa-list-ul"></i>
-                        </a>
+                                <i class="fa fa-list-ul"></i>
+                            </a>
                             <a href="{{ request.get_full_path }}&grid=on" title="Grid">
                                 <i class="fa fa-th"></i>
                             </a>
@@ -82,7 +82,7 @@
                                            title="Product Name">{{ producto.nombre }}</a>
                                     </h2>
                                     <div class="product-ratings">
-                                        <div class="rat-{{producto.id}}">
+                                        <div class="rat-{{ producto.id }}">
 
                                         </div>
                                     </div>
@@ -190,9 +190,11 @@
                                     <div id="price-slider"></div>
                                     <div class="filter-price-details">
                                         <span>Des</span>
-                                        <input type="text" id="price-range-low" value="{{ min }}"  class="form-control" placeholder="Min">
+                                        <input type="text" id="price-range-low" value="{{ min }}" class="form-control"
+                                               placeholder="Min">
                                         <span>Has</span>
-                                        <input type="text" id="price-range-high" value="{{ max }}" class="form-control" placeholder="Max">
+                                        <input type="text" id="price-range-high" value="{{ max }}" class="form-control"
+                                               placeholder="Max">
                                         <a href="#" id="bx" class="btn btn-primary">Busc</a>
                                     </div>
                                 </div>
@@ -232,24 +234,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
-                                    {{ categoria.nombre }}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="panel-filter-brand" class="accordion-body collapse in">
-                            <div class="panel-body">
-                                <ul>
-                                    {% for sub in categoria.subcategorias_set.all %}
-                                    <li><a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a></li>
-                                    {% endfor %}
-                                </ul>
+                    {% if not categoria %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
+                                        {{ categoria.nombre }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panel-filter-brand" class="accordion-body collapse in">
+                                <div class="panel-body">
+                                    <ul>
+                                        {% for sub in categoria.subcategorias_set.all %}
+                                            <li>
+                                                <a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -364,21 +370,21 @@
             uri += "&list=" + $(this).val();
             location.href = uri
         })
-        let precios_rango=Array(2)
-        $("#price-range-low").keyup(function(){
-            precios_rango[0]=($(this).val())
-            precios_rango[1]=$("#price-range-high").val()
-            let uri="{{ request.get_full_path }}"+"&bprecio="+precios_rango
-            console.log(precios_rango,uri)
-            $("#bx").attr("href",uri)
+        let precios_rango = Array(2)
+        $("#price-range-low").keyup(function () {
+            precios_rango[0] = ($(this).val())
+            precios_rango[1] = $("#price-range-high").val()
+            let uri = "{{ request.get_full_path }}" + "&bprecio=" + precios_rango
+            console.log(precios_rango, uri)
+            $("#bx").attr("href", uri)
         })
 
-        $("#price-range-high").keyup(function(){
-             precios_rango[0]= $("#price-range-low").val()
-             precios_rango[1]=($(this).val())
-            let uri="{{ request.get_full_path }}"+"&bprecio="+precios_rango
-            console.log(precios_rango,uri)
-            $("#bx").attr("href",uri)
+        $("#price-range-high").keyup(function () {
+            precios_rango[0] = $("#price-range-low").val()
+            precios_rango[1] = ($(this).val())
+            let uri = "{{ request.get_full_path }}" + "&bprecio=" + precios_rango
+            console.log(precios_rango, uri)
+            $("#bx").attr("href", uri)
         })
 
         {% for producto in productos %}
