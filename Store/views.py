@@ -375,7 +375,7 @@ def register(request):
 
 def checkout(request):
     contexto={
-
+        'direcciones':DireccionesWeb.objects.get(envio=True,usuarioWeb__usuario=request.user)
     }
     return render(request, 'Store/demo-shop-8-checkout.html', contexto)
 

@@ -54,34 +54,22 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-col">
-                            <h3>Name &amp; Address</h3>
+                            <h3>Datos del Usuario</h3>
 
                             <div class="row">
-                                <div class="col-xs-6 col-md-6">
+                                <div class="col-xs-12 col-md-12">
                                     <div class="form-group">
                                         <label>First Name<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Middle Name/Initial</label>
-                                        <input type="text" class="form-control">
+                                        <input name="nombre" value="{{ request.user.first_name }}" readonly="readonly" type="text" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-6 col-md-6">
+                                <div class="col-xs-12 col-md-12">
                                     <div class="form-group">
                                         <label>Last Name<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Company</label>
-                                        <input type="text" class="form-control">
+                                        <input name="apellidos" value="{{ request.user.last_name }}" readonly="readonly" type="text" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +78,7 @@
                                 <div class="col-xs-12 col-md-12">
                                     <div class="form-group wide">
                                         <label>Email<span class="required">*</span></label>
-                                        <input type="email" class="form-control" required>
+                                        <input name="email" value="{{ request.user.email }}" readonly="readonly" type="email" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -98,13 +86,32 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-12">
                                     <div class="form-group wide">
-                                        <label>Address<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Dirección<span class="required">*</span></label>
+                                        <input name="direccion" value="{{ direcciones.direccion }}" type="text" class="form-control" readonly="readonly" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Ciudad<span class="required">*</span></label>
+                                        <input readonly="readonly" name="ciudad" value="{{ direcciones.ciudad.nombre }}" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-12">
-                                    <div class="form-group wide">
-                                        <input type="text" class="form-control">
+                                    <div class="form-group">
+                                        <label>Provincia<span class="required">*</span></label>
+                                        <input readonly="readonly" class="form-control" type="text" value="{{ direcciones.ciudad.provincia.nombre }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Pais<span class="required">*</span></label>
+                                        <input readonly="readonly" type="text" class="form-control" value="{{ direcciones.ciudad.provincia.pais.nombre }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -112,138 +119,62 @@
                             <div class="row">
                                 <div class="col-xs-6 col-md-6">
                                     <div class="form-group">
-                                        <label>City<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Teléfono<span class="required">*</span></label>
+                                        <input value="{{ direcciones.telefono }}" readonly="readonly" type="text" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-6">
                                     <div class="form-group">
-                                        <label>State/Province<span class="required">*</span></label>
-                                        <select class="form-control">
-                                            <option value="Please select region">Please select region</option>
-                                            <option value="Alabama">Alabama</option>
-                                            <option value="Alaska">Alaska</option>
-                                        </select>
+                                        <label>Celular</label>
+                                        <input value="{{ direcciones.celular }}" readonly="readonly" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Zip/Postal Code<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Country<span class="required">*</span></label>
-                                        <select class="form-control">
-                                            <option value="United States">United States</option>
-                                            <option value="China">China</option>
-                                            <option value="England">England</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Telephone<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Fax</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="checkbox mb-sm">
-                                <label>
-                                    <input type="checkbox" value="1">
-                                    Create an account for later use
-                                </label>
-                            </div>
-
-                            <div class="checkbox mb-sm">
-                                <label>
-                                    <input type="checkbox" value="1">
-                                    Ship to this address
-                                </label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-col">
-                            <h3>Shipping Method</h3>
-                            <div class="ship-list">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" value="shipping-method-1" name="shipping[method]"
-                                               checked="checked">
-                                        Flat Rate
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" value="shipping-method-2" name="shipping[method]"
-                                               checked="checked">
-                                        Fixed <span class="text-primary">$5.00</span>
-                                    </label>
-                                </div>
-                            </div>
+                            <h3>Descuento</h3>
 
 
-                            <h3 class="no-border">Discount Codes <a class="expand-plus collapsed" role="button"
+                            <h3 class="no-border">Código de Descuento<a class="expand-plus collapsed" role="button"
                                                                     data-toggle="collapse" href="#discountArea"
                                                                     aria-expanded="false"
                                                                     aria-controls="discountArea"></a></h3>
 
                             <div class="collapse" id="discountArea">
                                 <div class="form-group wide">
-                                    <label>Enter your coupon code:</label>
+                                    <label>Ingrese el Código del Cupón:</label>
                                     <input type="text" class="form-control">
                                 </div>
 
-                                <a href="#" class="btn btn-primary">Apply</a>
+                                <a href="#" class="btn btn-primary">Aplicar</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-col">
-                            <h3>Payment Method</h3>
+                            <h3>Método de pago</h3>
 
                             <div class="checkout-payment-method">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" value="checkmo" name="payment[method]" checked="checked"
-                                               class="payment-card-check">
-                                        Check / Money order
-                                    </label>
-                                </div>
-
-                                <div class="radio">
-                                    <label>
                                         <input type="radio" value="checkcard" name="payment[method]"
                                                class="payment-card-check">
-                                        Credit Card (saved)
+                                            Tarjeta de Crédito
                                     </label>
                                 </div>
 
                                 <div id="payment-credit-card-area">
                                     <div class="form-group wide mb-md">
-                                        <label>Name on Card<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Nombre en  la tarjeta<span class="required">*</span></label>
+                                        <input name="nombre_tarjeta" type="text" class="form-control" required>
                                     </div>
 
                                     <div class="form-group wide mb-md">
-                                        <label>Credit Card Type<span class="required">*</span></label>
+                                        <label>Tipo de tarjeta<span class="required">*</span></label>
                                         <select class="form-control">
-                                            <option value="&nbsp;">--Please Select--</option>
+                                            <option value="&nbsp;">--Seleccione--</option>
                                             <option value="AE">American Express</option>
                                             <option value="VI">Visa</option>
                                             <option value="MC">MasterCard</option>
@@ -251,44 +182,44 @@
                                     </div>
 
                                     <div class="form-group wide mb-md">
-                                        <label>Credit Card number<span class="required">*</span></label>
+                                        <label>Número (16 dígitos)<span class="required">*</span></label>
                                         <input type="text" class="form-control" required>
                                     </div>
 
                                     <div class="form-group wide mb-md">
-                                        <label>Credit Card Type<span class="required">*</span></label>
+                                        <label>Fecha de Expiración<span class="required">*</span></label>
                                         <div class="clearfix">
                                             <select class="form-control pull-left">
-                                                <option value="&nbsp;">Month</option>
-                                                <option value="1">01 - January</option>
-                                                <option value="2">02 - February</option>
-                                                <option value="3">03 - March</option>
-                                                <option value="4">04 - April</option>
-                                                <option value="5">05 - May</option>
-                                                <option value="6">06 - June</option>
-                                                <option value="7">07 - July</option>
-                                                <option value="8">08 - August</option>
-                                                <option value="9">09 - September</option>
-                                                <option value="10">10 - October</option>
-                                                <option value="11">11 - November</option>
-                                                <option value="12">12 - December</option>
+                                                <option value="&nbsp;">Mes</option>
+                                                <option value="1">01 - Enero</option>
+                                                <option value="2">02 - Febrero</option>
+                                                <option value="3">03 - Marzo</option>
+                                                <option value="4">04 - Abril</option>
+                                                <option value="5">05 - Mayo</option>
+                                                <option value="6">06 - Junio</option>
+                                                <option value="7">07 - Julio</option>
+                                                <option value="8">08 - Augosto</option>
+                                                <option value="9">09 - Septiembre</option>
+                                                <option value="10">10 - Octubre</option>
+                                                <option value="11">11 - Noviembre</option>
+                                                <option value="12">12 - Deciembre</option>
                                             </select>
 
                                             <select class="form-control pull-left ml-md">
-                                                <option value="&nbsp;">Year</option>
-                                                <option value="2017">2017</option>
-                                                <option value="2018">2018</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
+                                                <option value="&nbsp;">Año</option>
+                                                <option value="21">2021</option>
+                                                <option value="22">2022</option>
+                                                <option value="23">2023</option>
+                                                <option value="24">2024</option>
+                                                <option value="25">2025</option>
+                                                <option value="26">2026</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-lg">
-                                        <label>Card Verification Number<span class="required">*</span></label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Código de Verificación<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="codigo_verificacion" required>
                                     </div>
                                 </div>
                             </div>
