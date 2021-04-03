@@ -424,15 +424,17 @@ def misOrdenes(request):
     usuario=request.user.usuariosweb_set.first()
     ordenes=None
     orden=None
+    ordenesss=None
     if request.GET.get("order"):
         orden= ComprasWeb.objects.get(hash=request.GET.get("order"))
     else:
         ordenes=ComprasWeb.objects.filter(usuario=usuario)
+        paginator = Paginator(ordenes, 10)
+        page = request.GET.get('page')
+        ordenesss=paginator.get_page(page)
 
-    paginator = Paginator(ordenes, 10)
-    page = request.GET.get('page')
     contexto={
-        'ordenes':paginator.get_page(page),
+        'ordenes':ordenesss,
         'orden':orden
     }
     if request.GET.get("order"):
