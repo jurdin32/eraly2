@@ -63,7 +63,7 @@
                                     <a style="text-decoration: none" href="/store/details/?hash={{ orden.producto.hash }}">
                                         {{ orden.producto.nombre }}
                                         <i class="text-success">
-                                            {% if orden.color != 0 %}
+                                            {% if orden.color != None %}
                                                 , color  {{ orden.color }}
                                             {% endif %}
                                         </i>
