@@ -59,7 +59,7 @@
                         {% for orden in orden.detallecompraweb_set.all %}
                             <tr>
                                 <td class="product-image-td"><img style="width: 50px" src="/media/{{ orden.producto.imagen }}" alt=""></td>
-                                <td class="product-name" style="width: 25%">
+                                <td class="product-name">
                                     <a style="text-decoration: none" href="/store/details/?hash={{ orden.producto.hash }}">
                                         {{ orden.producto.nombre }}
                                         <i class="text-success">
