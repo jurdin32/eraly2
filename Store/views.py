@@ -335,7 +335,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
-        'colores': obtenerColores()
+        'colores': obtenerColores(),
         'q':q
     }
 
