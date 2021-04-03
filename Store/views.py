@@ -317,7 +317,7 @@ def ver_subcategorias(request):
         elif request.GET.get("ord") == "star":
             prod = prod.order_by('-puntuacion')
         else:
-            prod = prod.order_by('-precios__total')
+            prod = prod.order_by('precios__total')
         ord=request.GET.get("ord")
 
     if request.GET.get('bprecio'):
