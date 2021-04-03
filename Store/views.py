@@ -278,6 +278,13 @@ def eliminar_directorio(request,n):
     except:
         return  HttpResponseRedirect("/store/directory/")
 
+def obtenerColores():
+    colores=[]
+    for color in Colores.objects.all():
+        if not color.codigoColor in color:
+            colores.append(color.codigoColor)
+    return colores
+
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
     paginator=None
@@ -325,7 +332,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
-        'colores': Colores.objects.all().annotate().order_by('codigoColor')
+        'colores': obtenerColores()
     }
 
     if request.GET.get('grid'):
