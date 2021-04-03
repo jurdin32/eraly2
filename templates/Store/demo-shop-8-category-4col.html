@@ -117,9 +117,23 @@
                     <div class="toolbar">
                         <div class="sorter">
                             <ul class="pagination">
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                {% if productos.has_previous %}
+                                    <li>
+                                        <a href="?page={{ productos.previous_page_number }}">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="active">
+                                    <a href="?page={{ productos.number }}">{{ productos.number }}</a>
+                                </li>
+                                {% if productos.has_next %}
+                                    <li>
+                                        <a href="?page={{ productos.next_page_number }}">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
 
                             <div class="limiter">
@@ -264,11 +278,11 @@
                             <div class="panel-body">
                                 <ul class="configurable-filter-list filter-list-color">
                                     {% for color in colores %}
-                                    <li>
-                                        <a href="{{ request.get_full_path }}&color={{ color }}">
-                                            <span style="background-color: #{{ color }}"></span>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a href="{{ request.get_full_path }}&color={{ color }}">
+                                                <span style="background-color: #{{ color }}"></span>
+                                            </a>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
