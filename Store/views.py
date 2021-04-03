@@ -282,7 +282,7 @@ def obtenerColores():
     colores=[]
     for color in Colores.objects.all():
         if not color.codigoColor in colores:
-            colores.append(color.codigoColor)
+            colores.append(color.codigoColor.replace("#",""))
     return colores
 
 def ver_subcategorias(request):
@@ -305,11 +305,11 @@ def ver_subcategorias(request):
 
     if request.GET.get('color'):
         prod=prod.filter(colores__codigoColor=request.GET.get('color'))
-
+        print(prod)
+    print(request.GET)
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
         nueva_lista = [sublista for sublista in valores if sublista]
-        print(nueva_lista)
         if len(nueva_lista)==2:
             min = nueva_lista[0].replace(",",".")
             max= nueva_lista[1].replace(",",".")
@@ -323,7 +323,6 @@ def ver_subcategorias(request):
         paginator = Paginator(prod, 12)
 
     page = request.GET.get('page')
-    print(obtenerColores())
     contexto={
         'productos':paginator.get_page('page'),
         'categorias':Categorias.objects.all(),
