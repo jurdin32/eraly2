@@ -278,7 +278,6 @@ def eliminar_directorio(request,n):
     except:
         return  HttpResponseRedirect("/store/directory/")
 
-
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
     paginator=None
@@ -324,7 +323,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
-        'colores': Colores.objects.all()
+        'colores': Colores.objects.all().distinct()
     }
 
     if request.GET.get('grid'):
