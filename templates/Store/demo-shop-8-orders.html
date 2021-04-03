@@ -8,6 +8,27 @@
         <div class="col-md-9 col-md-push-3 my-account form-section">
             <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Mis compras.{% endblock %}</h1>
             {% block contenido %}
+                <div class="toolbar mb-none" style="padding-right: 35px">
+                    <ul class="pagination pull-right">
+                            {% if ordenes.has_previous %}
+                                <li>
+                                    <a href="?page={{ ordenes.previous_page_number }}">
+                                        <i class="fa fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="?page={{ ordenes.number }}">{{ ordenes.number }}</a>
+                            </li>
+                            {% if ordenes.has_next %}
+                                <li>
+                                    <a href="?page={{ ordenes.next_page_number }}">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                </div>
                 <div class="cart-table-wrap">
                     <table class="cart-table">
                         <thead>
@@ -41,27 +62,6 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-                        <tfoot>
-                        <ul class="pagination pull-right">
-                            {% if ordenes.has_previous %}
-                                <li>
-                                    <a href="?page={{ ordenes.previous_page_number }}">
-                                        <i class="fa fa-chevron-left"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            <li class="active">
-                                <a href="?page={{ ordenes.number }}">{{ ordenes.number }}</a>
-                            </li>
-                            {% if ordenes.has_next %}
-                                <li>
-                                    <a href="?page={{ ordenes.next_page_number }}">
-                                        <i class="fa fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                        </tfoot>
                     </table>
                 </div>
             {% endblock %}
