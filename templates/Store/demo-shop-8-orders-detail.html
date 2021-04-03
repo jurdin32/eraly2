@@ -59,8 +59,8 @@
                         {% for orden in orden.detallecompraweb_set.all %}
                             <tr>
                                 <td><img style="width: 50px" src="/media/{{ orden.producto.imagen }}" alt=""></td>
-                                <td>{{ orden.producto.nombre }}</td>
-                                <td class="text-right">{{ orden.precio_normal }}</td>
+                                <td style="width: 25%">{{ orden.producto.nombre }}</td>
+                                <td class="text-right" >{{ orden.precio_normal }}</td>
                                 <td class="text-right">{{ orden.descuento_porcentaje }}</td>
                                 <td class="text-right">{{ orden.precio_promocion }}</td>
                                 <td class="text-right">{{ orden.cantidad }}</td>
