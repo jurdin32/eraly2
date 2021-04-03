@@ -71,11 +71,15 @@ def _detalles(request):
 def add_carrito(request):
     promocion=None
     descuento_promo = 0
+    color=0
+    imagen = ""
     producto=Productos.objects.get(id=request.GET.get('producto'))
     if request.GET.get('promocion'):
         if int(request.GET.get('promocion'))>0:
             promocion =Promociones.objects.get(id=request.GET.get('promocion'))
             descuento_promo=promocion.descuento
+    if request.GET.get('color'):
+        color= request.GET.get('color')
     cantidad = request.GET.get('cantidad')
     precio = Precios.objects.filter(producto_id=producto.id,web=True).last()
     precio=float(precio.total)
@@ -88,7 +92,10 @@ def add_carrito(request):
         request.session['carrito']=[]
     cart.setdefault('producto_id',producto.id)
     cart.setdefault('producto_nombre',producto.nombre)
-    imagen=""
+
+    if request.GET.get('color'):
+        print( request.GET.get('color'),Colores.objects.get(id= request.GET.get('color')).nombre)
+        color=Colores.objects.get(id= request.GET.get('color')).nombre
     try:
         imagen = producto.imagen.name
     except:
@@ -104,6 +111,7 @@ def add_carrito(request):
     cart.setdefault('precio_promocion',round(precioU,2))
     cart.setdefault('cantidad',cantidad)
     cart.setdefault('precio_total',round(total,2))
+    cart.setdefault('color',color)
     if control_carrito(request,producto_id=producto.id):
         request.session['carrito'].append(cart)
         request.session.save()
@@ -395,7 +403,7 @@ def pay(request):
         for car in request.session['carrito']:
             detalle=DetalleCompraWeb.objects.create(compra=compra, producto_id=car['producto_id'],precio_normal=car['precio_normal'],
                                                     descuento_porcentaje=car['descuento_porcentaje'],precio_promocion=car['precio_promocion'],
-                                                    cantidad=car['cantidad'],precio_total=car['precio_total'])
+                                                    cantidad=car['cantidad'],precio_total=car['precio_total'],color=car['color'])
             detalle.save()
         del request.session['carrito']
     except:

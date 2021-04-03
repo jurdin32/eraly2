@@ -29,25 +29,34 @@
                                 {% for sess in request.session.carrito %}
                                     <tr>
                                         <td class="product-action-td">
-                                            <a href="/store/add/cart/deleteItem/?product_id={{ sess.hash }}&cc=ok" title="Remove product" class="btn-remove"><i
+                                            <a href="/store/add/cart/deleteItem/?product_id={{ sess.hash }}&cc=ok"
+                                               title="Remove product" class="btn-remove"><i
                                                     class="fa fa-times"></i></a>
                                         </td>
                                         <td class="product-image-td">
                                             <a href="/store/details/?hash={{ sess.hash }}"
                                                title="{{ sess.producto_nombre }}">
                                                 {% if sess.producto_imagen %}
-                                                <img src="/media/{{ sess.producto_imagen }}"
-                                                     alt="{{ sess.producto_nombre }}">
+                                                    <img src="/media/{{ sess.producto_imagen }}"
+                                                         alt="{{ sess.producto_nombre }}">
                                                 {% else %}
                                                     <img src="{% static 'noimagen.jpg' %}"
-                                                     alt="{{ sess.producto_nombre }}">
+                                                         alt="{{ sess.producto_nombre }}">
                                                 {% endif %}
 
                                             </a>
                                         </td>
                                         <td class="product-name-td">
-                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
-                                                                        title="Product Name">{{ sess.producto_nombre }}</a>
+                                            <h2 class="product-name"><a style="text-decoration: none"
+                                                                        href="/store/details/?hash={{ sess.hash }}"
+                                                                        title="Product Name">{{ sess.producto_nombre }}
+                                                <i class="text-success">
+                                                    {% if sess.color != 0 %}
+                                                        , color  {{ sess.color }}
+                                                    {% endif %}
+
+                                                </i>
+                                            </a>
                                             </h2>
                                         </td>
                                         <td>{{ sess.precio_normal }}</td>
@@ -60,9 +69,12 @@
                                         <td>
                                             <div class="qty-holder">
                                                 <a href="#" class="qty-dec-btn" title="Quitar">-</a>
-                                                <input type="text" readonly="readonly" class="qty-input" value="{{ sess.cantidad }}">
-                                                <input type="hidden" readonly="readonly" class="qty-hash" value="{{ sess.hash }}">
-                                                <input type="hidden" class="qty-stock" readonly="readonly" value="{% stock sess.producto_id %}">
+                                                <input type="text" readonly="readonly" class="qty-input"
+                                                       value="{{ sess.cantidad }}">
+                                                <input type="hidden" readonly="readonly" class="qty-hash"
+                                                       value="{{ sess.hash }}">
+                                                <input type="hidden" class="qty-stock" readonly="readonly"
+                                                       value="{% stock sess.producto_id %}">
                                                 <a href="#" class="qty-inc-btn" title="Adicionar">+</a>
                                                 <a href="#" class="edit-qty"><i class="fa fa-pencil"></i></a>
                                             </div>
@@ -80,8 +92,10 @@
                                     <td colspan="7" class="clearfix">
                                         <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
                                             Comprando</a>
-                                        <a href="/store/view/cart/delete/" class="btn btn-default hover-primary btn-update">Vaciar Carrito</a>
-                                        <a href="/store/view/cart/" class="btn btn-default hover-primary btn-update">Actualizar Carrito</a>
+                                        <a href="/store/view/cart/delete/"
+                                           class="btn btn-default hover-primary btn-update">Vaciar Carrito</a>
+                                        <a href="/store/view/cart/" class="btn btn-default hover-primary btn-update">Actualizar
+                                            Carrito</a>
                                     </td>
                                 </tr>
                                 </tfoot>
@@ -178,7 +192,8 @@
                                         </table>
                                         <div class="totals-table-action">
                                             <a href="/store/checkout/" class="btn btn-primary btn-block">Ir a Pagar</a>
-                                            <a href="/store/directory/" class="btn btn-link btn-block">Mis direcciones</a>
+                                            <a href="/store/directory/" class="btn btn-link btn-block">Mis
+                                                direcciones</a>
                                         </div>
                                     </div>
                                 </div>
@@ -192,63 +207,61 @@
     </div>
 {% endblock %}
 {% block script %}
-<script>
-    calcular_total()
+    <script>
+        calcular_total()
 
         function calcular_total() {
-            let total=0;
-            let iva=0;
-            let subtotal=0;
+            let total = 0;
+            let iva = 0;
+            let subtotal = 0;
 
             $(".precios").each(function () {
-                total+=parseFloat($(this).text().replace(",","."))
+                total += parseFloat($(this).text().replace(",", "."))
             })
             $("#total_pagar").text(total.toFixed(2))
-            iva=total*0.12;
+            iva = total * 0.12;
             $("#iva").text(iva.toFixed(2))
-            subtotal= total -iva
+            subtotal = total - iva
             $("#subtotal").text(subtotal.toFixed(2))
         }
 
-        $(".qty-inc-btn").click(function (){
-            let stock =parseInt($(this).parent().find('input.qty-stock').val())
+        $(".qty-inc-btn").click(function () {
+            let stock = parseInt($(this).parent().find('input.qty-stock').val())
             let hash = $(this).parent().find('input.qty-hash').val()
-            let input_value =parseInt($(this).parent().find('input.qty-input').val())
-            let este=$(this)
-            if (input_value==0){
+            let input_value = parseInt($(this).parent().find('input.qty-input').val())
+            let este = $(this)
+            if (input_value == 0) {
                 $(this).parent().find('input.qty-input').val(1)
             }
-            if (stock > input_value){
-                input_value +=1
+            if (stock > input_value) {
+                input_value += 1
 
-                $.get("/store/view/cart/",{add:input_value,hash:hash },function (datos){
-                    let precio_tt=datos.precio_total
-                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+                $.get("/store/view/cart/", {add: input_value, hash: hash}, function (datos) {
+                    let precio_tt = datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">' + precio_tt.toFixed(2) + '</span>')
                     calcular_total()
                 })
                 $(this).parent().find('input.qty-input').val(input_value)
-            }
-            else {
-                    toastr.error("Lo sentimos este producto no tiene mas stock..!")
+            } else {
+                toastr.error("Lo sentimos este producto no tiene mas stock..!")
             }
 
 
         })
 
-        $(".qty-dec-btn").click(function (){
-            let input_value =parseInt($(this).parent().find('input.qty-input').val())
+        $(".qty-dec-btn").click(function () {
+            let input_value = parseInt($(this).parent().find('input.qty-input').val())
             let hash = $(this).parent().find('input.qty-hash').val()
-            let este=$(this)
-            if(input_value >0){
-                input_value-=1
-                $.get("/store/view/cart/",{remove:input_value,hash:hash },function (datos){
-                    let precio_tt=datos.precio_total
-                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+            let este = $(this)
+            if (input_value > 0) {
+                input_value -= 1
+                $.get("/store/view/cart/", {remove: input_value, hash: hash}, function (datos) {
+                    let precio_tt = datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">' + precio_tt.toFixed(2) + '</span>')
                     calcular_total()
                 })
                 $(this).parent().find('input.qty-input').val(input_value)
             }
-
 
 
         })
