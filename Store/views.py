@@ -325,7 +325,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
-        'colores': Colores.objects.all().distinct('codigoColor')
+        'colores': Colores.objects.all().annotate().order_by('codigoColor')
     }
 
     if request.GET.get('grid'):
