@@ -8,11 +8,11 @@
                 <div class="toolbar mb-none">
                     <div class="sorter">
                         <div class="sort-by">
-                            <label>Sort by:</label>
-                            <select>
-                                <option value="Position">Posición</option>
-                                <option value="Name">Nombre</option>
-                                <option value="Price">Precio</option>
+                            <label>Ordenar:</label>
+                            <select class="ordenar">
+                                <option value="{{ request.get_full_path }}&ord=star">Posición</option>
+                                <option value="{{ request.get_full_path }}&ord=name">Nombre</option>
+                                <option value="{{ request.get_full_path }}&ord=price">Precio</option>
                             </select>
                         </div>
 
@@ -340,5 +340,9 @@
                 readOnly: true,
             })
         {% endfor %}
+
+        $(".ordenar").change(function(){
+            location.href=$(this).val()
+        })
     </script>
 {% endblock %}

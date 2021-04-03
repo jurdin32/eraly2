@@ -310,6 +310,13 @@ def ver_subcategorias(request):
     if request.GET.get("q"):
         q=request.GET.get("q")
         prod = prod.filter(nombre__icontains=request.GET.get("q"))
+    if request.GET.get("ord"):
+        if request.GET.get("ord") == "name":
+            prod = prod.order_by('nombre')
+        elif request.GET.get("ord") == "star":
+            prod = prod.order_by('puntuacion')
+        else:
+            prod = prod.order_by('-precios__total')
 
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
