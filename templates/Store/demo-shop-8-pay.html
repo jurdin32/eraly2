@@ -1,0 +1,153 @@
+{% extends 'Store/demo-shop-8.html' %}
+{% block content %}
+    {% load productosTags %}
+    {% load humanize %}
+    {% load static %}
+    <div role="main" class="main">
+        <div class="cart">
+            <div class="container">
+                <h1 class="h2 heading-primary mt-lg clearfix">
+                    <span>Tú compra esta casi lista. <i class="fa fa-smile-o"></i></span>
+                </h1>
+                <div style="font-size: 100px; text-align: center; padding-bottom: 20px"><i class="fa fa-check-circle text-success"></i><div style="font-size: 13px">Su compra se ha registrado, un agente de la tienda se pondrá en contácto contigo para finalizar con el proceso.</div></div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="cart-table-wrap">
+                            <table class="cart-table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Producto</th>
+                                    <th>P. Normal</th>
+                                    <th>P. Promo</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                    <th>Estatus</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for sess in request.session.carrito %}
+                                    <tr>
+                                        <td class="product-image-td">
+                                            <a href="/store/details/?hash={{ sess.hash }}"
+                                               title="{{ sess.producto_nombre }}">
+                                                {% if sess.producto_imagen %}
+                                                <img src="/media/{{ sess.producto_imagen }}"
+                                                     alt="{{ sess.producto_nombre }}">
+                                                {% else %}
+                                                    <img src="{% static 'noimagen.jpg' %}"
+                                                     alt="{{ sess.producto_nombre }}">
+                                                {% endif %}
+
+                                            </a>
+                                        </td>
+                                        <td class="product-name-td">
+                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
+                                                                        title="Product Name">{{ sess.producto_nombre }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ sess.precio_normal }}</td>
+                                        {% if sess.precio_normal == sess.precio_promocion %}
+                                            <td><i>No tiene descuento</i></td>
+                                        {% else %}
+                                            <td>{{ sess.precio_promocion }}</td>
+
+                                        {% endif %}
+                                        <td>
+                                            <div class="qty-holder">
+                                                <input type="text" readonly="readonly" class="qty-input" value="{{ sess.cantidad }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary precios">{{ sess.precio_total|floatformat:2|intcomma }}</span>
+                                        </td>
+                                    <td style="font-size: 20px" class="text-success"><i class="fa fa-check-circle"></i></td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7" class="clearfix">
+                                        <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
+                                            Comprando</a>
+                                        <a href="/store/view/cart/delete/" class="btn btn-default hover-primary btn-update">Vaciar Carrito</a>
+                                        <a href="/store/view/cart/" class="btn btn-default hover-primary btn-update">Actualizar Carrito</a>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    calcular_total()
+
+        function calcular_total() {
+            let total=0;
+            let iva=0;
+            let subtotal=0;
+
+            $(".precios").each(function () {
+                total+=parseFloat($(this).text().replace(",","."))
+            })
+            $("#total_pagar").text(total.toFixed(2))
+            iva=total*0.12;
+            $("#iva").text(iva.toFixed(2))
+            subtotal= total -iva
+            $("#subtotal").text(subtotal.toFixed(2))
+        }
+
+        $(".qty-inc-btn").click(function (){
+            let stock =parseInt($(this).parent().find('input.qty-stock').val())
+            let hash = $(this).parent().find('input.qty-hash').val()
+            let input_value =parseInt($(this).parent().find('input.qty-input').val())
+            let este=$(this)
+            if (input_value==0){
+                $(this).parent().find('input.qty-input').val(1)
+            }
+            if (stock > input_value){
+                input_value +=1
+
+                $.get("/store/view/cart/",{add:input_value,hash:hash },function (datos){
+                    let precio_tt=datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+                    calcular_total()
+                })
+                $(this).parent().find('input.qty-input').val(input_value)
+            }
+            else {
+                    toastr.error("Lo sentimos este producto no tiene mas stock..!")
+            }
+
+
+        })
+
+        $(".qty-dec-btn").click(function (){
+            let input_value =parseInt($(this).parent().find('input.qty-input').val())
+            let hash = $(this).parent().find('input.qty-hash').val()
+            let este=$(this)
+            if(input_value >0){
+                input_value-=1
+                $.get("/store/view/cart/",{remove:input_value,hash:hash },function (datos){
+                    let precio_tt=datos.precio_total
+                    este.parent().parent().parent().find('td').eq(6).html('<span class="text-primary precios">'+precio_tt.toFixed(2)+'</span>')
+                    calcular_total()
+                })
+                $(this).parent().find('input.qty-input').val(input_value)
+            }
+
+
+
+        })
+
+
+    </script>
+{% endblock %}

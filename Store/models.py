@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from Personas.models import UsuariosWeb
+from Producto.models import Productos
 from eraly2.snippers import ResizeImageMixin
 
 
@@ -12,3 +14,20 @@ class Publicidad(models.Model,ResizeImageMixin):
              update_fields=None):
         self.resize(self.imagen, (600, 800))
         super(Publicidad, self).save()
+
+class ComprasWeb(models.Model):
+    fecha=models.DateTimeField(auto_created=True)
+    usuario=models.ForeignKey(UsuariosWeb,on_delete=models.CASCADE)
+    subtotal=models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    iva = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    por_confirmar=models.BooleanField(default=True)
+
+class DetalleCompraWeb(models.Model):
+    compra=models.ForeignKey(ComprasWeb, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
+    precio_normal=models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    descuento_porcentaje=models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    precio_promocion= models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    cantidad=models.IntegerField(default=0)
+    precio_total= models.DecimalField(max_digits=9, decimal_places=2, default=0)

@@ -233,7 +233,7 @@
 
                             <div class="checkout-review-action">
                                 <h5>Total a Pagar <span>$ 0.00</span></h5>
-                                <a href="#" class="btn btn-primary">Finalizar Compra</a>
+                                <a href="#" id="finalizar" class="btn btn-primary">Finalizar Compra</a>
                             </div>
                         </div>
                     </div>
@@ -322,6 +322,16 @@
         $("#iva").text(iva.toFixed(2))
         $("#subtotal").text(subtotal.toFixed(2))
 
+        let pay="checkmo"
+        $(".payment-card-check").click(function (){
+            console.log($(this).val())
+            pay=$(this).val()
+        })
+        $("#finalizar").click(function(){
+            if(pay == "checkmo"){
+                location.href="/store/checkout/pay/"
+            }
+        })
 
     </script>
 {% endblock %}

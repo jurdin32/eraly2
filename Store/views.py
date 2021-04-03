@@ -379,6 +379,10 @@ def checkout(request):
     }
     return render(request, 'Store/demo-shop-8-checkout.html', contexto)
 
+def pay(request):
+    print(request.session['carrito'])
+
+    return render(request,'Store/demo-shop-8-pay.html')
 
 
 def contact(request):
