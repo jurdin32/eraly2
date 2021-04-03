@@ -51,8 +51,11 @@
                                                                         href="/store/details/?hash={{ sess.hash }}"
                                                                         title="Product Name">{{ sess.producto_nombre }}
                                                 <i class="text-success">
-                                                    {% if sess.color != 0 %}
+                                                    {% if sess.color != None %}
                                                         , color  {{ sess.color }}
+                                                    {% endif %}
+                                                    {% if sess.talla != None %}
+                                                        , talla  {{ sess.talla }}
                                                     {% endif %}
 
                                                 </i>

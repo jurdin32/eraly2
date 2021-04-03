@@ -71,8 +71,9 @@ def _detalles(request):
 def add_carrito(request):
     promocion=None
     descuento_promo = 0
-    color=0
+    color=None
     imagen = ""
+    talla=None
     producto=Productos.objects.get(id=request.GET.get('producto'))
     if request.GET.get('promocion'):
         if int(request.GET.get('promocion'))>0:
@@ -94,8 +95,10 @@ def add_carrito(request):
     cart.setdefault('producto_nombre',producto.nombre)
 
     if request.GET.get('color'):
-        print( request.GET.get('color'),Colores.objects.get(id= request.GET.get('color')).nombre)
         color=Colores.objects.get(id= request.GET.get('color')).nombre
+    if request.GET.get('talla'):
+        talla=request.GET.get('talla')
+
     try:
         imagen = producto.imagen.name
     except:
@@ -112,6 +115,8 @@ def add_carrito(request):
     cart.setdefault('cantidad',cantidad)
     cart.setdefault('precio_total',round(total,2))
     cart.setdefault('color',color)
+    cart.setdefault('talla', talla)
+
     if control_carrito(request,producto_id=producto.id):
         request.session['carrito'].append(cart)
         request.session.save()
@@ -403,7 +408,7 @@ def pay(request):
         for car in request.session['carrito']:
             detalle=DetalleCompraWeb.objects.create(compra=compra, producto_id=car['producto_id'],precio_normal=car['precio_normal'],
                                                     descuento_porcentaje=car['descuento_porcentaje'],precio_promocion=car['precio_promocion'],
-                                                    cantidad=car['cantidad'],precio_total=car['precio_total'],color=car['color'])
+                                                    cantidad=car['cantidad'],precio_total=car['precio_total'],color=car['color'],talla=car['talla'])
             detalle.save()
         del request.session['carrito']
     except:

@@ -37,6 +37,7 @@ class DetalleCompraWeb(models.Model):
     compra=models.ForeignKey(ComprasWeb, on_delete=models.CASCADE)
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
     color=models.CharField(max_length=60,null=True,blank=True)
+    talla=models.CharField(max_length=60,null=True,blank=True)
     precio_normal=models.DecimalField(max_digits=9, decimal_places=2, default=0)
     descuento_porcentaje=models.DecimalField(max_digits=9, decimal_places=2, default=0)
     precio_promocion= models.DecimalField(max_digits=9, decimal_places=2, default=0)

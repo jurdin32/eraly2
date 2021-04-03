@@ -209,20 +209,36 @@
                                 </div>
 
                                 <div class="product-actions">
-                                    <div class="product-detail-qty" style="margin-left: 0px">
-                                        <input type="number" value="1" min="1" max="{% stock producto.id %}"
-                                               id="cantidad"
-                                               class="form-control" style="width: 70px;text-align: center">
-                                    </div>
-                                {% if producto.colores_set.all %}
-                                <select name="color" class="form-control" style="width: 85%; float: right" id="color">
-                                        {% for color in producto.colores_set.all %}
-                                            <option value="{{ color.id }}">{{ color.nombre }}</option>
-                                        {% endfor %}
-                                    </select>
-                                {% endif %}
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <span>Cantidad *</span>
+                                            <input type="number" value="1" min="1" max="{% stock producto.id %}"
+                                                   id="cantidad"
+                                                   class="form-control" style="width: 100%;text-align: center">
+                                        </div>
+                                        {% if producto.talla %}
+                                            <div class="col-sm-3">
+                                                <span>Talla *</span>
+                                                <select name="tallas" class="form-control" style="width: 100%;"
+                                                        id="tallas">
+                                                </select>
+                                            </div>
+                                        {% endif %}
+                                        {% if producto.colores_set.all %}
+                                            <div class="col-sm-6">
+                                                <span>Color *</span>
+                                                <select name="color" class="form-control"
+                                                        style="width: 100%;"
+                                                        id="color">
+                                                    {% for color in producto.colores_set.all %}
+                                                        <option value="{{ color.id }}">{{ color.nombre }}</option>
+                                                    {% endfor %}
+                                                </select>
 
-                                    <div class="actions-right">
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-sm-9" style="padding-top: 10px">
+                                            <div class="actions-right" style="float: none">
                                         <a style="cursor: pointer" class="addtocart" title="Add to Cart">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Agregar al Carrito</span>
@@ -231,6 +247,10 @@
                                             <i class="fa fa-heart"></i>
                                         </a>
                                     </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
                                 <div class="product-share-box">
@@ -559,7 +579,8 @@
                 producto: '{{ producto.id }}',
                 promocion: '{{ promocion.id }}',
                 cantidad: $("#cantidad").val(),
-                color:$("#color").val()
+                color: $("#color").val(),
+                talla:$("#tallas").val()
             }, function (data) {
                 if (data.producto_id > 0) {
                     toastr.success("Se agregó al carrito..!")
@@ -618,6 +639,17 @@
 
         })
         $(".cart-qty").text(contador)
+
+
+        let size = '{{ producto.talla }}'.split(",")
+        size = $.grep(size, function (n) {
+            return (n);
+        });
+
+        console.log(size)
+        for (let i = 0; i < size.length; i++) {
+            $("#tallas").append(new Option(size[i], size[i]))
+        }
     </script>
 
 {% endblock %}
