@@ -45,7 +45,7 @@
                         {% for orden in ordenes %}
                             <tr>
                                 <td>{{ orden.fecha|date:"d/m/Y H:m" }}</td>
-                                <td><a href="/store/shopp/?order={{ orden.hash }}">{{ orden.hash|truncatechars:40 }}</a>
+                                <td><a href="/store/shopp/?order={{ orden.hash }}">{{ orden.hash|truncatechars:25 }}</a>
                                 </td>
                                 <td class="text-right">{{ orden.subtotal }}</td>
                                 <td class="text-right">{{ orden.iva }}</td>
