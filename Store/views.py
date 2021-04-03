@@ -278,6 +278,14 @@ def eliminar_directorio(request,n):
     except:
         return  HttpResponseRedirect("/store/directory/")
 
+def pagos(request):
+    contexto={
+
+    }
+    return render(request,'Store/demo-shop-8-pay_information.html',contexto)
+
+
+
 def obtenerColores():
     colores=[]
     for color in Colores.objects.all():
@@ -353,6 +361,9 @@ def ver_subcategorias(request):
         return render(request, 'Store/demo-shop-8-category-4col.html', contexto)
     else:
         return render(request, 'Store/demo-shop-8-category-list.html', contexto)
+
+
+
 
 def register(request):
     contexto={

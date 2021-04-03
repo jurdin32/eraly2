@@ -1,7 +1,6 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% load static %}
 {% block content %}
-
     <div role="main" class="main">
         <div class="checkout">
             <div class="container">
@@ -10,8 +9,11 @@
                 </h1>
 
                 <div class="checkout-menu clearfix">
-                    <a href="#" class="btn btn-primary pull-left mb-sm" data-toggle="modal"
+                    {% if not request.user.id %}
+                     <a href="#" class="btn btn-primary pull-left mb-sm" data-toggle="modal"
                        data-target=".shop-login-modal">LOGIN</a>
+                    {% endif %}
+
 
                     <div class="dropdown pull-right checkout-review-dropdown">
                         <button class="btn btn-primary mb-sm" id="reviewTable" type="button" data-toggle="dropdown"
@@ -305,7 +307,8 @@
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
 
-                    <form action="#">
+                    <form action="/store/login/" method="post">
+                        {% csrf_token %}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true"><i class="fa fa-times"></i></span></button>
@@ -315,12 +318,12 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label class="mb-xs">Email Address <span class="required">*</span></label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="mb-xs">Password <span class="required">*</span></label>
-                                <input type="password" class="form-control" required>
+                                <input name="password" type="password" class="form-control" required>
                             </div>
                         </div>
 
@@ -368,5 +371,4 @@
         </div>
 
     </div>
-
 {% endblock %}
