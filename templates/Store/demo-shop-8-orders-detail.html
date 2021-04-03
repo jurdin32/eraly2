@@ -1,0 +1,90 @@
+{% extends 'Store/demo-shop-8-dashboard.html' %}
+
+{% load productosTags %}
+{% load humanize %}
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-push-3 my-account form-section">
+            <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Oren No.
+                <span style="font-size: 14px" class="text-success"> {{ orden.hash }}</span>{% endblock %}</h1>
+            {% block contenido %}
+                <div class="cart-table-wrap">
+                    <table class="cart-table">
+                        <thead>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th class="text-right">Subtotal</th>
+                            <th class="text-right">IVA</th>
+                            <th class="text-right">Total</th>
+                            <th class="text-center">Estatus</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ orden.fecha|date:"d/m/Y H:m" }}</td>
+                            <td class="text-right">{{ orden.subtotal }}</td>
+                            <td class="text-right">{{ orden.iva }}</td>
+                            <td class="text-right">{{ orden.total }}</td>
+                            <td class="text-center">
+                                {% if orden.por_confirmar %}
+                                    <i style="font-size: 30px" class="fa fa-newspaper-o text-danger"
+                                       title="Sin confirmar"></i>
+                                {% else %}
+                                    <i style="font-size: 30px" class="fa fa-check-circle text-success"
+                                       title="Confirmado"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="divider divider-secondary">
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <div class="cart-table-wrap">
+                    <table class="cart-table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Producto</th>
+                            <th class="text-right">Precio</th>
+                            <th class="text-right">Descuento</th>
+                            <th class="text-right">Promo</th>
+                            <th class="text-right">Cantidad</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for orden in orden.detallecompraweb_set.all %}
+                            <tr>
+                                <td><img style="width: 50px" src="/media/{{ orden.producto.imagen }}" alt=""></td>
+                                <td>{{ orden.producto.nombre }}</td>
+                                <td class="text-right">{{ orden.precio_normal }}</td>
+                                <td class="text-right">{{ orden.descuento_porcentaje }}</td>
+                                <td class="text-right">{{ orden.precio_promocion }}</td>
+                                <td class="text-right">{{ orden.cantidad }}</td>
+                                <td class="text-right">{{ orden.precio_total }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% block script %}
+    <script>
+        let uri = '{{ request.get_full_path }}'
+        console.log(uri)
+        $('.nav-list li').each(function () {
+            console.log($(this).find('a').attr('href'))
+            if ($(this).find('a').attr('href') == uri) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+        })
+    </script>
+{% endblock %}

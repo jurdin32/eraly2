@@ -409,10 +409,15 @@ def pay(request):
 
 def misOrdenes(request):
     usuario=request.user.usuariosweb_set.first()
-    print(usuario)
+
     contexto={
         'ordenes':ComprasWeb.objects.filter(usuario=usuario),
     }
+    if request.GET.get("order"):
+        contexto={
+            'orden':ComprasWeb.objects.get(hash=request.GET.get("order"))
+        }
+        return render(request, 'Store/demo-shop-8-orders-detail.html', contexto)
     return render(request,'Store/demo-shop-8-orders.html',contexto)
 
 def contact(request):

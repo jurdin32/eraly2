@@ -25,6 +25,9 @@ class UsuariosWeb(models.Model):
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     identificacion=models.CharField(max_length=13, unique=True)
 
+    def __str__(self):
+        return self.usuario.get_full_name()
+
 class DireccionesWeb(models.Model):
     usuarioWeb=models.ForeignKey(UsuariosWeb, on_delete=models.CASCADE)
     direccion=models.TextField()
