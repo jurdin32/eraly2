@@ -229,10 +229,8 @@
                             </div>
                         </div>
                     </div>
-                {{ request }}
-                {% if request.get.subcategoria %}
-                {% else %}
-                     <div class="panel panel-default">
+                {% if excento == 1 %}
+                <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
@@ -252,9 +250,7 @@
                             </div>
                         </div>
                     </div>
-                {% endif %} 
-
-
+                {% endif %}
 
                     <div class="panel panel-default">
                         <div class="panel-heading">

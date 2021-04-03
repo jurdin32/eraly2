@@ -285,12 +285,14 @@ def ver_subcategorias(request):
     cat=None
     min=0
     max =0
+    excento=0
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
 
     elif request.GET.get('categoria'):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
         cat= Categorias.objects.get(id=request.GET.get('categoria'))
+        excento =1
 
     if request.GET.get('size'):
 
@@ -321,6 +323,7 @@ def ver_subcategorias(request):
         'min':min,
         'max':max,
         'categoria':cat,
+        'excento':excento,
     }
 
     if request.GET.get('grid'):
