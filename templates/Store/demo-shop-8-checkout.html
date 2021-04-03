@@ -23,23 +23,17 @@
                         <div class="dropdown-menu" aria-labelledby="reviewTable">
                             <h3>Detalle del Pago</h3>
                             <table>
-                                <thead>
-                                <tr>
-                                    <th>Subtotal</th>
-                                    <th class="text-right" id="subtotal"></th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>IVA (12%)</td>
-                                    <td class="text-right" id="iva"></td>
-                                </tr>
-                                </tbody>
-
                                 <tfoot>
                                 <tr>
-                                    <td>Total</td>
+                                    <td style="padding-left: 10px">Subtotal</td>
+                                    <td class="text-right" id="subtotal"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 10px">IVA (12%)</td>
+                                    <td class="text-right" id="iva"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 10px">Total</td>
                                     <td class="text-right" id="total"></td>
                                 </tr>
                                 </tfoot>
@@ -313,11 +307,11 @@
 {% block script %}
     <script>
         $(".checkout-review-action>h5>span").text($(".cart-totals>span").text())
-        $("#reviewTable").html('<i class="fa fa-shopping-cart"></i> '+$(".cart-totals>span").text())
+        $("#reviewTable").html('<i class="fa fa-shopping-cart"></i> ' + $(".cart-totals>span").text())
 
-        let total=parseFloat($(".cart-totals>span").text().replace("$",""))
-        let iva = total *0.12
-        let  subtotal= total -iva
+        let total = parseFloat($(".cart-totals>span").text().replace("$", ""))
+        let iva = total * 0.12
+        let subtotal = total - iva
         $("#total").text(total.toFixed(2))
         $("#iva").text(iva.toFixed(2))
         $("#subtotal").text(subtotal.toFixed(2))
