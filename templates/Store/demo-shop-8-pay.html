@@ -4,12 +4,10 @@
     {% load humanize %}
     {% load static %}
     <div role="main" class="main">
+    {% block titulo %}Tú compra está casi lista. <i class="fa fa-smile-o"></i>{% endblock %}
     {% block contenido %}
         <div class="cart">
             <div class="container">
-                <h1 class="h2 heading-primary mt-lg clearfix">
-                    <span>Tú compra esta casi lista. <i class="fa fa-smile-o"></i></span>
-                </h1>
                 <div style="font-size: 100px; text-align: center; padding-bottom: 20px"><i class="fa fa-check-circle text-success"></i>
                     <div style="font-size: 13px">
                         Su compra se ha registrado, un agente de la tienda se pondrá en contácto contigo para finalizar con el proceso.
@@ -88,8 +86,14 @@
                                             </a>
                                         </td>
                                         <td class="product-name-td">
-                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
-                                                                        title="Product Name">{{ sess.producto.nombre }}</a>
+                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.producto.hash }}" style="text-decoration: none"
+                                                                        title="Product Name">{{ sess.producto.nombre }}
+                                            <i class="text-success">
+                                                    {% if sess.color != 0 %}
+                                                        , color  {{ sess.color }}
+                                                    {% endif %}
+
+                                            </a>
                                             </h2>
                                         </td>
                                         <td>{{ sess.precio_normal }}</td>
