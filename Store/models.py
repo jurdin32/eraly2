@@ -16,7 +16,7 @@ class Publicidad(models.Model,ResizeImageMixin):
         super(Publicidad, self).save()
 
 class ComprasWeb(models.Model):
-    fecha=models.DateTimeField(auto_created=True,null=True,blank=True)
+    fecha=models.DateTimeField(auto_now_add=True,blank=True)
     usuario=models.ForeignKey(UsuariosWeb,on_delete=models.CASCADE)
     subtotal=models.DecimalField(max_digits=9, decimal_places=2, default=0)
     iva = models.DecimalField(max_digits=9, decimal_places=2, default=0)

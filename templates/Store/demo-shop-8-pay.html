@@ -1,9 +1,10 @@
-{% extends 'Store/demo-shop-8.html' %}
-{% block content %}
+{% extends 'Store/demo-shop-8-dashboard.html' %}
+
     {% load productosTags %}
     {% load humanize %}
     {% load static %}
     <div role="main" class="main">
+    {% block contenido %}
         <div class="cart">
             <div class="container">
                 <h1 class="h2 heading-primary mt-lg clearfix">
@@ -116,10 +117,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="7" class="clearfix">
-                                        <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
-                                            Comprando</a>
-                                        <a href="/store/view/cart/delete/" class="btn btn-default hover-primary btn-update">Vaciar Carrito</a>
-                                        <a href="/store/view/cart/" class="btn btn-default hover-primary btn-update">Actualizar Carrito</a>
+                                        <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar Comprando</a>
                                     </td>
                                 </tr>
                                 </tfoot>
@@ -129,9 +127,9 @@
                 </div>
             </div>
         </div>
-
-    </div>
 {% endblock %}
+    </div>
+
 {% block script %}
 <script>
     calcular_total()

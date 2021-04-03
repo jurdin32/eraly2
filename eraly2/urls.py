@@ -121,6 +121,7 @@ urlpatterns = [
     path("store/dashboard/",dashboard),
     path("store/directory/",directorio),
     path("store/directory/delete/<int:n>/",eliminar_directorio),
+    path("store/shopp/",misOrdenes),
 
     path("store/contact/",contact),
     path("store/checkout/",checkout),

@@ -408,7 +408,12 @@ def pay(request):
 
 
 def misOrdenes(request):
-    return render(request,'')
+    usuario=request.user.usuariosweb_set.first()
+    print(usuario)
+    contexto={
+        'ordenes':ComprasWeb.objects.filter(usuario=usuario),
+    }
+    return render(request,'Store/demo-shop-8-orders.html',contexto)
 
 def contact(request):
     contexto={

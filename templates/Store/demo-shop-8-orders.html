@@ -1,0 +1,57 @@
+{% extends 'Store/demo-shop-8-dashboard.html' %}
+
+{% load productosTags %}
+{% load humanize %}
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-push-3 my-account form-section">
+            <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Mis compras.{% endblock %}</h1>
+            {% block contenido %}
+                <div class="cart-table-wrap">
+                    <table class="cart-table">
+                        <thead>
+                        <tr>
+                            <th>Fecha:Hora</th>
+                            <th>No.</th>
+                            <th>P. Normal</th>
+                            <th>P. Promo</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Estatus</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for orden in ordenes %}
+                            <tr>
+                                <td>{{ orden.fecha }}</td>
+                                <td>{{ orden.hash }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+    {% block script %}
+        <script>
+            let uri = '{{ request.get_full_path }}'
+            console.log(uri)
+            $('.nav-list li').each(function () {
+                console.log($(this).find('a').attr('href'))
+                if ($(this).find('a').attr('href') == uri) {
+                    $(this).addClass('active')
+                } else {
+                    $(this).removeClass('active')
+                }
+            })
+        </script>
+    {% endblock %}
