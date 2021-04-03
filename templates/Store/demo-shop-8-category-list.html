@@ -27,9 +27,23 @@
                         </div>
 
                         <ul class="pagination">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                            {% if productos.has_previous %}
+                                    <li>
+                                        <a href="?page={{ productos.previous_page_number }}">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="active">
+                                    <a href="?page={{ productos.number }}">{{ productos.number }}</a>
+                                </li>
+                                {% if productos.has_next %}
+                                    <li>
+                                        <a href="?page={{ productos.next_page_number }}">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
                         </ul>
 
                         <div class="limiter">
