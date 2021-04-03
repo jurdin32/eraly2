@@ -144,7 +144,8 @@
                                 <a href="#" class="search-toggle"><i class="fa fa-search"></i></a>
                                 <form action="/store/search/" method="get">
                                     <div class="header-search-wrapper" style="padding-right: 0px; padding-right: 45px">
-                                        <input type="text" class="form-control" name="q" id="q" placeholder="Búscar..." value="{{ q }}"
+                                        <input type="text" class="form-control" name="q" id="q" placeholder="Búscar..."
+                                               value="{{ q }}"
                                                required>
                                         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
                                         </button>
@@ -531,27 +532,37 @@
     <div class="mobile-nav">
         <div class="mobile-nav-wrapper">
             <ul class="mobile-side-menu">
-                <li><a href="/">Home</a></li>
+                <li><a href="/">Inicio</a></li>
                 <li>
                     <span class="mmenu-toggle"></span>
                     <a style="cursor: pointer">Categorías</a>
-
                     <ul>
                         {% for categoria in categorias %}
+                            <li>
+                                <span class="mmenu-toggle"></span>
+                                <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+                                <ul>
+                                    {% for sub in categoria.subcategorias_set.all %}
+                                        <li><a href="/store/category/?categoria={{ sub.id }}">{{ sub.nombre }}</a></li>
+                                    {% endfor %}
+
+
+                                </ul>
+                            </li>
+                        {% endfor %}
                         <li>
                             <span class="mmenu-toggle"></span>
-                            <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+                            <a style="cursor: pointer">Panel de Usuario</a>
                             <ul>
-                                {% for sub in categoria.subcategorias_set.all %}
-                                <li><a href="/store/category/?categoria={{ sub.id }}">{{ sub.nombre }}</a></li>
-                                {% endfor %}
-
-
+                                <li><a href="/store/dashboard/">Dashboard</a></li>
+                                <li><a href="/store/account/">Información de la Cuenta</a></li>
+                                <li><a href="/store/directory/">Directorio</a></li>
+                                <li><a href="/store/shopp/">Mis Ordenes</a></li>
                             </ul>
                         </li>
-                        {% endfor %}
                     </ul>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -684,7 +695,8 @@
                                                         </a>
                                                         {% promocion_descuento producto.id %}
                                                         <div class="product-actions">
-                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ producto.id }}"
+                                                            <a style="cursor: pointer" class="addtocart"
+                                                               data-prod="{{ producto.id }}"
                                                                data-promo="{% promocion_id producto.id %}"
                                                                title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
@@ -710,9 +722,9 @@
                                                         </div>
 
                                                         <div class="product-price-box">
-                                                            {% for precio in producto.precios_set.all  %}
+                                                            {% for precio in producto.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                    <span class="product-price">${{ precio.total }}</span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
@@ -744,27 +756,31 @@
                                             <li>
                                                 <div class="product">
                                                     <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                                        <a href="/store/details/?hash={{ puntuado.hash }}" title="{{ puntuado.nombre }}"
+                                                        <a href="/store/details/?hash={{ puntuado.hash }}"
+                                                           title="{{ puntuado.nombre }}"
                                                            class="product-image">
                                                             {% if puntuado.imagen %}
-                                                            <img src="/media/{{ puntuado.imagen }}"
-                                                                 alt="{{ puntuado.nombre }}">
+                                                                <img src="/media/{{ puntuado.imagen }}"
+                                                                     alt="{{ puntuado.nombre }}">
 
-                                                            <img src="/media/{{ puntuado.imagen }}"
-                                                                 alt="{{ puntuado.nombre }}" class="product-hover-image">
-                                                                {% else %}
+                                                                <img src="/media/{{ puntuado.imagen }}"
+                                                                     alt="{{ puntuado.nombre }}"
+                                                                     class="product-hover-image">
+                                                            {% else %}
                                                                 <img src="{% static 'noimagen.jpg' %}"
-                                                                 alt="{{ puntuado.nombre }}">
+                                                                     alt="{{ puntuado.nombre }}">
 
-                                                            <img src="{% static 'noimagen.jpg' %}"
-                                                                 alt="{{ puntuado.nombre }}" class="product-hover-image">
+                                                                <img src="{% static 'noimagen.jpg' %}"
+                                                                     alt="{{ puntuado.nombre }}"
+                                                                     class="product-hover-image">
                                                             {% endif %}
 
                                                         </a>
 
                                                         {% promocion_descuento puntuado.id %}
                                                         <div class="product-actions">
-                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ puntuado.id }}"
+                                                            <a style="cursor: pointer" class="addtocart"
+                                                               data-prod="{{ puntuado.id }}"
                                                                data-promo="{% promocion_id puntuado.id %}"
                                                                title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
@@ -782,9 +798,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="product-price-box">
-                                                            {% for precio in puntuado.precios_set.all  %}
+                                                            {% for precio in puntuado.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                    <span class="product-price">${{ precio.total }}</span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
@@ -797,16 +813,16 @@
                                 </div>
                             </div>
                             <div class="row">
-								<div class="col-md-12">
-									<ul class="pagination pull-right">
+                                <div class="col-md-12">
+                                    <ul class="pagination pull-right">
                                         {% if puntuados.has_previous %}
-										    <li>
+                                            <li>
                                                 <a href="?page={{ puntuados.previous_page_number }}">
                                                     <i class="fa fa-chevron-left"></i>
                                                 </a>
                                             </li>
                                         {% endif %}
-										<li class="active">
+                                        <li class="active">
                                             <a href="?page={{ puntuados.number }}">{{ puntuados.number }}</a>
                                         </li>
                                         {% if puntuados.has_next %}
@@ -816,9 +832,9 @@
                                                 </a>
                                             </li>
                                         {% endif %}
-									</ul>
-								</div>
-							</div>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -837,11 +853,14 @@
                                         <ul class="category-list">
                                             {% for categoria in categorias %}
                                                 <li>
-                                                    <a href="/store/category/?categoria={{ categoria.id }}" style="cursor: pointer">{{ categoria.nombre }}</a>
+                                                    <a href="/store/category/?categoria={{ categoria.id }}"
+                                                       style="cursor: pointer">{{ categoria.nombre }}</a>
                                                     <a style="cursor: pointer" class="plus"></a>
                                                     <ul>
                                                         {% for subcategoria in categoria.subcategorias_set.all %}
-                                                            <li><a href="/store/category/?subcategoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a></li>
+                                                            <li>
+                                                                <a href="/store/category/?subcategoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a>
+                                                            </li>
                                                         {% endfor %}
                                                     </ul>
                                                 </li>
@@ -873,44 +892,47 @@
                                         <div class="owl-carousel owl-theme"
                                              data-plugin-options="{'items':4 , 'autoplay': false, 'autoplayTimeout': 3000}">
                                             {% for nuevo in nuevos %}
-                                            <div class="product">
-                                                <figure class="product-image-area">
-                                                    <a href="/store/details/?hash={{ nuevo.hash }}" title="Product Name"
-                                                       class="product-image">
-                                                        {% if nuevo.imagen %}
-                                                        <img src="/media/{{ nuevo.imagen }}"
-                                                             alt="Product Name">
-                                                        <img src="/media/{{ nuevo.imagen }}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                        {% else %}
-                                                            <img src="{% static 'noimagen.jpg' %}"
-                                                             alt="Product Name">
-                                                        <img src="{% static 'noimagen.jpg' %}"
-                                                             alt="Product Name" class="product-hover-image">
-                                                        {% endif %}
-                                                    </a>
-                                                    {% promocion_descuento nuevo.id %}
-                                                   <div class="product-actions">
-                                                            <a style="cursor: pointer" class="addtocart" data-prod="{{ nuevo.id }}"
+                                                <div class="product">
+                                                    <figure class="product-image-area">
+                                                        <a href="/store/details/?hash={{ nuevo.hash }}"
+                                                           title="Product Name"
+                                                           class="product-image">
+                                                            {% if nuevo.imagen %}
+                                                                <img src="/media/{{ nuevo.imagen }}"
+                                                                     alt="Product Name">
+                                                                <img src="/media/{{ nuevo.imagen }}"
+                                                                     alt="Product Name" class="product-hover-image">
+                                                            {% else %}
+                                                                <img src="{% static 'noimagen.jpg' %}"
+                                                                     alt="Product Name">
+                                                                <img src="{% static 'noimagen.jpg' %}"
+                                                                     alt="Product Name" class="product-hover-image">
+                                                            {% endif %}
+                                                        </a>
+                                                        {% promocion_descuento nuevo.id %}
+                                                        <div class="product-actions">
+                                                            <a style="cursor: pointer" class="addtocart"
+                                                               data-prod="{{ nuevo.id }}"
                                                                data-promo="{% promocion_id nuevo.id %}"
                                                                title="Add to Cart">
                                                                 <i class="fa fa-shopping-cart"></i>
                                                             </a>
                                                         </div>
-                                                </figure>
-                                                <div class="product-details-area">
-                                                    <h2 class="product-name"><a href="/store/details/?hash={{ nuevo.hash }}"
-                                                                                title="Product Name">{{ nuevo.nombre }}</a>
-                                                    </h2>
-                                                    <div class="product-price-box">
-                                                            {% for precio in nuevo.precios_set.all  %}
+                                                    </figure>
+                                                    <div class="product-details-area">
+                                                        <h2 class="product-name"><a
+                                                                href="/store/details/?hash={{ nuevo.hash }}"
+                                                                title="Product Name">{{ nuevo.nombre }}</a>
+                                                        </h2>
+                                                        <div class="product-price-box">
+                                                            {% for precio in nuevo.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                <span class="product-price">${{ precio.total }}</span>
+                                                                    <span class="product-price">${{ precio.total }}</span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             {% endfor %}
 
 
@@ -1183,13 +1205,13 @@
 
 </script>
 <script>
-{% for puntuado in puntuados %}
-    $('.rat-{{puntuado.id}}').starrr({
-        rating: {% rating_productos puntuado.id %},
-        max: 5,
-        readOnly: true,
-    })
-{% endfor %}
+    {% for puntuado in puntuados %}
+        $('.rat-{{puntuado.id}}').starrr({
+            rating: {% rating_productos puntuado.id %},
+            max: 5,
+            readOnly: true,
+        })
+    {% endfor %}
 
 </script>
 {% block script %}
