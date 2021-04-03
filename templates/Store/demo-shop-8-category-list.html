@@ -258,102 +258,24 @@
                         </div>
                     {% endif %}
 
-                    <div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
-                                    colores
+                                    COLOR
                                 </a>
                             </h4>
                         </div>
                         <div id="panel-filter-color" class="accordion-body collapse in">
                             <div class="panel-body">
                                 <ul class="configurable-filter-list filter-list-color">
+                                    {% for color in colores %}
                                     <li>
-                                        <a href="#">
-                                            <span style="background-color: #000"></span>
+                                        <a href="{{ request.get_full_path }}&color={{ color.codigoColor }}">
+                                            <span style="background-color: {{ color.codigoColor }}"></span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #21284f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #272725"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #006b20"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #68686a"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #1736a9"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #f6edd1"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #a69172"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #d8c7a7"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #fd9904"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #f56ab8"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #442937"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #bd1721"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #1226ad"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #cbcbcb"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #c7b89a"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style="background-color: #fff"></span>
-                                        </a>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
