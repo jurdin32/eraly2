@@ -341,9 +341,6 @@ def ver_subcategorias(request):
     else:
         return render(request, 'Store/demo-shop-8-category-list.html', contexto)
 
-def busqueda(request):
-    ver_subcategorias(request)
-
 def register(request):
     contexto={
 
