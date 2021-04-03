@@ -24,6 +24,12 @@ class ComprasWeb(models.Model):
     por_confirmar=models.BooleanField(default=True)
     hash=models.CharField(max_length=1000,null=True,blank=True)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.iva =float(self.total)*0.12
+        self.subtotal=float(self.total) -float(self.iva)
+        super(ComprasWeb, self).save()
+
     def __str__(self):
         return self.hash
 
