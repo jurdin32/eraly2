@@ -305,8 +305,10 @@ def ver_subcategorias(request):
 
     if request.GET.get('color'):
         prod=prod.filter(colores__codigoColor="#"+request.GET.get('color'))
-        print(prod)
-    print(request.GET)
+
+    if request.GET.get("q"):
+        prod = prod.filter(nombre__icontains=request.GET.get("q"))
+
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
         nueva_lista = [sublista for sublista in valores if sublista]
@@ -339,6 +341,8 @@ def ver_subcategorias(request):
     else:
         return render(request, 'Store/demo-shop-8-category-list.html', contexto)
 
+def busqueda(request):
+    ver_subcategorias(request)
 
 def register(request):
     contexto={

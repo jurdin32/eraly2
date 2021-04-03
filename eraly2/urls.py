@@ -111,6 +111,7 @@ urlpatterns = [
     path("store/details/",_detalles),
     path("store/category/",ver_subcategorias),
     path("store/stores/",_tiendas),
+    path("store/search/",busqueda),
     path("store/ejemplo/", ejemplo),
     path("store/account/",account),
     path("store/register/",register),
