@@ -359,7 +359,7 @@ def ver_subcategorias(request):
 
     page = request.GET.get('page')
     contexto={
-        'productos':paginator.get_page('page'),
+        'productos':paginator.get_page(page),
         'categorias':Categorias.objects.all(),
         'numero':request.GET.get("list"),
         'min':min,
@@ -422,14 +422,20 @@ def pay(request):
 
 def misOrdenes(request):
     usuario=request.user.usuariosweb_set.first()
+    ordenes=None
+    orden=None
+    if request.GET.get("order"):
+        orden= ComprasWeb.objects.get(hash=request.GET.get("order"))
+    else:
+        ordenes=ComprasWeb.objects.filter(usuario=usuario)
 
+    paginator = Paginator(ordenes, 10)
+    page = request.GET.get('page')
     contexto={
-        'ordenes':ComprasWeb.objects.filter(usuario=usuario),
+        'ordenes':paginator.get_page(page),
+        'orden':orden
     }
     if request.GET.get("order"):
-        contexto={
-            'orden':ComprasWeb.objects.get(hash=request.GET.get("order"))
-        }
         return render(request, 'Store/demo-shop-8-orders-detail.html', contexto)
     return render(request,'Store/demo-shop-8-orders.html',contexto)
 
