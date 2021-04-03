@@ -533,19 +533,23 @@
     <div class="mobile-nav">
         <div class="mobile-nav-wrapper">
             <ul class="mobile-side-menu">
-                <li><a href="demo-shop-8.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>
                     <span class="mmenu-toggle"></span>
-                    <a href="#">Fashion <span class="tip tip-new">New</span></a>
+                    <a style="cursor: pointer">Categorías</a>
 
                     <ul>
+                        {% for categoria in categorias %}
+                        <li>
+                            <a href="/store/category/?categoria={{ categoria.id }}">Tops &amp; Blouses</a>
+                        </li>
+                        {% endfor %}
+
                         <li>
                             <span class="mmenu-toggle"></span>
                             <a href="#">Women</a>
                             <ul>
-                                <li>
-                                    <a href="#">Tops &amp; Blouses</a>
-                                </li>
+
                                 <li>
                                     <a href="#">Accessories</a>
                                 </li>
