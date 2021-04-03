@@ -292,6 +292,7 @@ def ver_subcategorias(request):
     min=0
     max =0
     excento=0
+    q=''
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
 
@@ -307,6 +308,7 @@ def ver_subcategorias(request):
         prod=prod.filter(colores__codigoColor="#"+request.GET.get('color'))
 
     if request.GET.get("q"):
+        q=request.GET.get("q")
         prod = prod.filter(nombre__icontains=request.GET.get("q"))
 
     if request.GET.get('bprecio'):
@@ -334,6 +336,7 @@ def ver_subcategorias(request):
         'categoria':cat,
         'excento':excento,
         'colores': obtenerColores()
+        'q':q
     }
 
     if request.GET.get('grid'):
