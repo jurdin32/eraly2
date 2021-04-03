@@ -281,7 +281,7 @@ def eliminar_directorio(request,n):
 def obtenerColores():
     colores=[]
     for color in Colores.objects.all():
-        if not color.codigoColor in colores:
+        if not color.codigoColor.replace("#","") in colores:
             colores.append(color.codigoColor.replace("#",""))
     return colores
 
