@@ -297,7 +297,7 @@ def ver_subcategorias(request):
         prod=prod.filter(talla__icontains=request.GET.get('size'))
 
     if request.GET.get('color'):
-        prod=prod.filter(colores__codigoColor=request.GET.get('color'))
+        prod=prod.filter(colores__codigoColor__exact=request.GET.get('color'))
 
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
