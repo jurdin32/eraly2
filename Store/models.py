@@ -16,12 +16,16 @@ class Publicidad(models.Model,ResizeImageMixin):
         super(Publicidad, self).save()
 
 class ComprasWeb(models.Model):
-    fecha=models.DateTimeField(auto_created=True)
+    fecha=models.DateTimeField(auto_created=True,null=True,blank=True)
     usuario=models.ForeignKey(UsuariosWeb,on_delete=models.CASCADE)
     subtotal=models.DecimalField(max_digits=9, decimal_places=2, default=0)
     iva = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     por_confirmar=models.BooleanField(default=True)
+    hash=models.CharField(max_length=1000,null=True,blank=True)
+
+    def __str__(self):
+        return self.hash
 
 class DetalleCompraWeb(models.Model):
     compra=models.ForeignKey(ComprasWeb, on_delete=models.CASCADE)

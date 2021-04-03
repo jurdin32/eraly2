@@ -13,7 +13,8 @@ from Personas.models import *
 from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
 from django.contrib import messages
 
-from Store.models import Publicidad
+from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb
+from eraly2.snippers import Hash_parse
 
 
 def tienda(request):
@@ -380,10 +381,34 @@ def checkout(request):
     return render(request, 'Store/demo-shop-8-checkout.html', contexto)
 
 def pay(request):
-    print(request.session['carrito'])
+    totalCarrito=0
+    compra=None
+    usuario=UsuariosWeb.objects.get(usuario=request.user)
+    try:
+        for car in request.session['carrito']:
+            totalCarrito+=float(car['precio_total'])
+            print(car)
+        compra= ComprasWeb.objects.create(usuario=usuario, total=totalCarrito, por_confirmar=True)
+        compra.save()
+        compra.hash= Hash_parse(str(compra.id))
+        compra.save()
+        for car in request.session['carrito']:
+            detalle=DetalleCompraWeb.objects.create(compra=compra, producto_id=car['producto_id'],precio_normal=car['precio_normal'],
+                                                    descuento_porcentaje=car['descuento_porcentaje'],precio_promocion=car['precio_promocion'],
+                                                    cantidad=car['cantidad'],precio_total=car['precio_total'])
+            detalle.save()
+        del request.session['carrito']
+    except:
+        return HttpResponseRedirect("/store/dashboard/")
 
-    return render(request,'Store/demo-shop-8-pay.html')
+    contexto={
+        'compra':compra
+    }
+    return render(request,'Store/demo-shop-8-pay.html',contexto)
 
+
+def misOrdenes(request):
+    return render(request,'')
 
 def contact(request):
     contexto={

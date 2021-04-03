@@ -9,7 +9,12 @@
                 <h1 class="h2 heading-primary mt-lg clearfix">
                     <span>Tú compra esta casi lista. <i class="fa fa-smile-o"></i></span>
                 </h1>
-                <div style="font-size: 100px; text-align: center; padding-bottom: 20px"><i class="fa fa-check-circle text-success"></i><div style="font-size: 13px">Su compra se ha registrado, un agente de la tienda se pondrá en contácto contigo para finalizar con el proceso.</div></div>
+                <div style="font-size: 100px; text-align: center; padding-bottom: 20px"><i class="fa fa-check-circle text-success"></i>
+                    <div style="font-size: 13px">
+                        Su compra se ha registrado, un agente de la tienda se pondrá en contácto contigo para finalizar con el proceso.
+                        <div>Este es el código de tu compra: <a href="/store/shopp/{{ compra.hash }}">{{ compra.hash }}</a></div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <div class="cart-table-wrap">
@@ -26,7 +31,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for sess in request.session.carrito %}
+                                {% if request.session.carrito %}
+                                 {% for sess in request.session.carrito %}
                                     <tr>
                                         <td class="product-image-td">
                                             <a href="/store/details/?hash={{ sess.hash }}"
@@ -64,6 +70,46 @@
                                     <td style="font-size: 20px" class="text-success"><i class="fa fa-check-circle"></i></td>
                                     </tr>
                                 {% endfor %}
+                                {% else %}
+                                      {% for sess in compra.detallecompraweb_set.all %}
+                                    <tr>
+                                        <td class="product-image-td">
+                                            <a href="/store/details/?hash={{ sess.hash }}"
+                                               title="{{ sess.producto.nombre }}">
+                                                {% if sess.producto.imagen %}
+                                                <img src="/media/{{ sess.producto.imagen }}"
+                                                     alt="{{ sess.producto.nombre }}">
+                                                {% else %}
+                                                    <img src="{% static 'noimagen.jpg' %}"
+                                                     alt="{{ sess.producto.nombre }}">
+                                                {% endif %}
+
+                                            </a>
+                                        </td>
+                                        <td class="product-name-td">
+                                            <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
+                                                                        title="Product Name">{{ sess.producto.nombre }}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ sess.precio_normal }}</td>
+                                        {% if sess.precio_normal == sess.precio_promocion %}
+                                            <td><i>No tiene descuento</i></td>
+                                        {% else %}
+                                            <td>{{ sess.precio_promocion }}</td>
+
+                                        {% endif %}
+                                        <td>
+                                            <div class="qty-holder">
+                                                <input type="text" readonly="readonly" class="qty-input" value="{{ sess.cantidad }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary precios">{{ sess.precio_total|floatformat:2|intcomma }}</span>
+                                        </td>
+                                    <td style="font-size: 20px" class="text-success"><i class="fa fa-check-circle"></i></td>
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
 
 
                                 </tbody>
