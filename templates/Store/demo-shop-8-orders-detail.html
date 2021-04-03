@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-9 col-md-push-3 my-account form-section">
             <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Oren No.
-                <span style="font-size: 14px" class="text-success"> {{ orden.hash }}</span>{% endblock %}</h1>
+                <span style="font-size: 14px" class="text-success"> {{ orden.hash|truncatechars:25 }}</span>{% endblock %}</h1>
             {% block contenido %}
                 <div class="cart-table-wrap">
                     <table class="cart-table">
