@@ -289,6 +289,9 @@ def ver_subcategorias(request):
     elif request.GET.get('categoria'):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
 
+    if request.GET.get('size'):
+        prod=prod.filter(talla=request.GET.get('size'))
+
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
         nueva_lista = [sublista for sublista in valores if sublista]
