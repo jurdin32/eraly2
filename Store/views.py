@@ -10,7 +10,7 @@ from future.backports import datetime
 from Empresa.views import direcciones
 from Home.models import Provincia, Pais
 from Personas.models import *
-from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
 from django.contrib import messages
 
 from Store.models import Publicidad
@@ -324,6 +324,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
+        'colores': Colores.objects.all()
     }
 
     if request.GET.get('grid'):
