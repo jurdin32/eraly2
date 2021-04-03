@@ -230,10 +230,9 @@
                         </div>
                     </div>
                 {{ request }}
-                {% if request.get.categoria %}
-                
-                {% endif %} 
-                    <div class="panel panel-default">
+                {% if request.get.subcategoria %}
+                {% else %}
+                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
@@ -253,6 +252,8 @@
                             </div>
                         </div>
                     </div>
+                {% endif %} 
+
 
 
                     <div class="panel panel-default">
