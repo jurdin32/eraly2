@@ -10,9 +10,25 @@
                         <div class="sort-by">
                             <label>Ordenar:</label>
                             <select class="ordenar">
-                                <option value="{{ request.get_full_path }}&ord=star">Posición</option>
-                                <option value="{{ request.get_full_path }}&ord=name">Nombre</option>
-                                <option value="{{ request.get_full_path }}&ord=price">Precio</option>
+                                <option>--Seleccione--</option>
+                                {% if ord == "star" %}
+                                    <option value="star" selected>Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == 'name' %}
+                                    <option value="star">Posición</option>
+                                    <option value="name" selected>Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == "price" %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price" selected>Precio</option>
+                                {% else %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% endif %}
+
                             </select>
                         </div>
 
@@ -341,8 +357,8 @@
             })
         {% endfor %}
 
-        $(".ordenar").change(function(){
-            location.href=$(this).val()
+        $(".ordenar").change(function () {
+            location.href = "{{ request.get_full_path }}&ord=" + $(this).val()
         })
     </script>
 {% endblock %}

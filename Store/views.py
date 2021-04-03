@@ -293,6 +293,7 @@ def ver_subcategorias(request):
     max =0
     excento=0
     q=''
+    ord=''
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
 
@@ -317,6 +318,7 @@ def ver_subcategorias(request):
             prod = prod.order_by('puntuacion')
         else:
             prod = prod.order_by('-precios__total')
+        ord=request.GET.get("ord")
 
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
@@ -343,7 +345,8 @@ def ver_subcategorias(request):
         'categoria':cat,
         'excento':excento,
         'colores': obtenerColores(),
-        'q':q
+        'q':q,
+        'ord':ord,
     }
 
     if request.GET.get('grid'):

@@ -10,9 +10,25 @@
                         <div class="sort-by">
                             <label>Ordenar:</label>
                             <select class="ordenar">
-                                <option value="{{ request.get_full_path }}&estar=on">Posición</option>
-                                <option value="{{ request.get_full_path }}&name=on">Nombre</option>
-                                <option value="{{ request.get_full_path }}&price=on">Precio</option>
+                                <option>--Seleccione--</option>
+                                {% if ord == "star" %}
+                                    <option value="star" selected>Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == 'name' %}
+                                    <option value="star">Posición</option>
+                                    <option value="name" selected>Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == "price" %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price" selected>Precio</option>
+                                {% else %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% endif %}
+
                             </select>
                         </div>
 
@@ -346,6 +362,10 @@
                 readOnly: true,
             })
         {% endfor %}
+
+    $(".ordenar").change(function(){
+            location.href = "{{ request.get_full_path }}&ord=" + $(this).val()
+        })
     </script>
 {% endblock %}
 
