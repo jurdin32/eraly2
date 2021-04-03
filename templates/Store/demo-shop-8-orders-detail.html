@@ -23,7 +23,7 @@
                         <tbody>
                         <tr>
                             <td>{{ orden.fecha|date:"d/m/Y H:m" }}</td>
-                            <td class="text-right">{{ orden.subtotal }}</td>
+                            <td class="text-right ">{{ orden.subtotal }}</td>
                             <td class="text-right">{{ orden.iva }}</td>
                             <td class="text-right">{{ orden.total }}</td>
                             <td class="text-center">
@@ -59,7 +59,7 @@
                         {% for orden in orden.detallecompraweb_set.all %}
                             <tr>
                                 <td class="product-image-td"><img style="width: 50px" src="/media/{{ orden.producto.imagen }}" alt=""></td>
-                                <td class="product-image-td" style="width: 25%">
+                                <td class="product-name" style="width: 25%">
                                     <a style="text-decoration: none" href="/store/details/?hash={{ orden.producto.hash }}">
                                         {{ orden.producto.nombre }}
                                         <i class="text-success">
@@ -72,11 +72,11 @@
                                         </i>
                                     </a>
                                 </td>
-                                <td class="text-right product-image-td">{{ orden.precio_normal }}</td>
-                                <td class="text-right product-image-td">{{ orden.descuento_porcentaje }}</td>
-                                <td class="text-right product-image-td">{{ orden.precio_promocion }}</td>
-                                <td class="text-right product-image-td">{{ orden.cantidad }}</td>
-                                <td class="text-right product-image-td">{{ orden.precio_total }}</td>
+                                <td class="text-right product-name">{{ orden.precio_normal }}</td>
+                                <td class="text-right product-name">{{ orden.descuento_porcentaje }}</td>
+                                <td class="text-right product-name">{{ orden.precio_promocion }}</td>
+                                <td class="text-right product-name">{{ orden.cantidad }}</td>
+                                <td class="text-right product-name">{{ orden.precio_total }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
