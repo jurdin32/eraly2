@@ -290,7 +290,8 @@ def ver_subcategorias(request):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
 
     if request.GET.get('size'):
-        prod=prod.filter(talla=request.GET.get('size'))
+
+        prod=prod.filter(talla__icontains=request.GET.get('size'))
 
     if request.GET.get('bprecio'):
         valores=request.GET.get("bprecio").split(",")
