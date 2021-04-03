@@ -10,7 +10,7 @@ from future.backports import datetime
 from Empresa.views import direcciones
 from Home.models import Provincia, Pais
 from Personas.models import *
-from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias
 from django.contrib import messages
 
 from Store.models import Publicidad
@@ -282,10 +282,12 @@ def eliminar_directorio(request,n):
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
     paginator=None
+    subcat=None
     min=0
     max =0
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
+        subcat=Subcategorias.objects.filter(categoria_id=request.GET.get('categoria'))
     elif request.GET.get('categoria'):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
 
@@ -317,6 +319,7 @@ def ver_subcategorias(request):
         'numero':request.GET.get("list"),
         'min':min,
         'max':max,
+        'subcategorias':subcat,
     }
 
     if request.GET.get('grid'):
