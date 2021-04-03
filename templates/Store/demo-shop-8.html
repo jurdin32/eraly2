@@ -541,77 +541,17 @@
                     <ul>
                         {% for categoria in categorias %}
                         <li>
+                            <span class="mmenu-toggle"></span>
                             <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+                            <ul>
+                                {% for sub in categoria.subcategorias_set.all %}
+                                <li><a href="/store/category/?categoria={{ sub.id }}">{{ sub.nombre }}</a></li>
+                                {% endfor %}
+
+
+                            </ul>
                         </li>
                         {% endfor %}
-
-                        <li>
-                            <span class="mmenu-toggle"></span>
-                            <a href="#">Women</a>
-                            <ul>
-
-                                <li>
-                                    <a href="#">Accessories</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dresses &amp; Skirts</a>
-                                </li>
-                                <li>
-                                    <a href="#">Shoes &amp; Boots</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="mmenu-toggle"></span>
-                            <a href="#">Men</a>
-
-                            <ul>
-                                <li>
-                                    <a href="#">Accessories</a>
-                                </li>
-                                <li>
-                                    <a href="#">Watch &amp; Fashion <span class="tip tip-new">New</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Tees, Knits &amp; Polos</a>
-                                </li>
-                                <li>
-                                    <a href="#">Pants &amp; Denim</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="mmenu-toggle"></span>
-                            <a href="#">Jewellery <span class="tip tip-hot">Hot</span></a>
-
-                            <ul>
-                                <li>
-                                    <a href="#">Sweaters</a>
-                                </li>
-                                <li>
-                                    <a href="#">Heels &amp; Sandals</a>
-                                </li>
-                                <li>
-                                    <a href="#">Jeans &amp; Shorts</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="mmenu-toggle"></span>
-                            <a href="#">Kids Fashion</a>
-
-                            <ul>
-                                <li>
-                                    <a href="#">Casual Shoes</a>
-                                </li>
-                                <li>
-                                    <a href="#">Spring &amp; Autumn</a>
-                                </li>
-                                <li>
-                                    <a href="#">Winter Sneakers</a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
                 <li>
