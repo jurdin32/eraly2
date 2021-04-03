@@ -287,9 +287,11 @@ def ver_subcategorias(request):
     max =0
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
-        subcat=Subcategorias.objects.filter(categoria_id=request.GET.get('categoria'))
+        subcat = Subcategorias.objects.all()
+
     elif request.GET.get('categoria'):
         prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
+        subcat = Subcategorias.objects.filter(categoria_id=request.GET.get('categoria'))
 
     if request.GET.get('size'):
 
