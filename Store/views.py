@@ -39,7 +39,8 @@ def _productos(request):
 
 def _detalles(request):
     fecha = datetime.datetime.now().date()
-    producto = Productos.objects.get(hash=request.GET.get('hash'))
+    productoss = Productos.objects.filter(precios__web=True)
+    producto = productoss.get(hash=request.GET.get('hash'))
     promo =Promociones.objects.filter(precio__producto=producto).last()
     if promo:
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
@@ -63,7 +64,7 @@ def _detalles(request):
         'producto':producto,
         'calificaciones': CalificacionProductos.objects.filter(producto_id=producto.id),
         'promocion':promo,
-        'productos':Productos.objects.filter(subcategoria=producto.subcategoria,precios__web=True),
+        'productos':productoss.filter(subcategoria=producto.subcategoria),
         'imagnes':Publicidad.objects.filter(estado=True),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
@@ -83,7 +84,7 @@ def add_carrito(request):
         color= request.GET.get('color')
     cantidad = request.GET.get('cantidad')
     precio = Precios.objects.filter(producto_id=producto.id,web=True).last()
-    precio=float(precio.total)
+    precio=float(precio.precioVenta)
     descuento = precio * (float(descuento_promo)/100)
     precioU = precio-descuento
     total =precioU * float(request.GET.get('cantidad'))
@@ -401,7 +402,7 @@ def pay(request):
         for car in request.session['carrito']:
             totalCarrito+=float(car['precio_total'])
             print(car)
-        compra= ComprasWeb.objects.create(usuario=usuario, total=totalCarrito, por_confirmar=True)
+        compra= ComprasWeb.objects.create(usuario=usuario, subtotal=totalCarrito, por_confirmar=True)
         compra.save()
         compra.hash= Hash_parse(str(compra.id))
         compra.save()

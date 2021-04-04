@@ -182,7 +182,7 @@
                                             <span class="old-price">
                                                 {% for precio in producto.precios_set.all %}
                                                     {% if precio.web %}
-                                                        $ {{ precio.total }}
+                                                        $ {{ precio.precioVenta }}
                                                     {% endif %}
                                                 {% endfor %}
                                             </span>
@@ -194,7 +194,7 @@
                                             <span class="product-price">
                                             {% for precio in producto.precios_set.all %}
                                                 {% if precio.web %}
-                                                    $ {{ precio.total }}
+                                                    $ {{ precio.precioVenta }}
                                                 {% endif %}
                                             {% endfor %}
                                         </span>

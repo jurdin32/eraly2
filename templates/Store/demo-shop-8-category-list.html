@@ -124,7 +124,7 @@
                                     <div class="product-price-box">
                                         {% for precio in producto.precios_set.all %}
                                             {% if precio.web %}
-                                                <span class="product-price">{{ precio.total }}</span>
+                                                <span class="product-price">{{ precio.precioVenta }}</span>
                                             {% endif %}
                                         {% endfor %}
 

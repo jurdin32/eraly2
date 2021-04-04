@@ -26,8 +26,8 @@ class ComprasWeb(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.iva =float(self.total)*0.12
-        self.subtotal=float(self.total) -float(self.iva)
+        self.iva =float(self.subtotal)*0.12
+        self.total=float(self.subtotal) + float(self.iva)
         super(ComprasWeb, self).save()
 
     def __str__(self):

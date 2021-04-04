@@ -128,7 +128,7 @@
                                                 <td style="text-align: center; vertical-align: middle">{{ promo.precio.producto }}</td>
                                                 <td style="text-align: center; vertical-align: middle"><span
                                                         class="badge badge-danger"
-                                                        style="font-size: 13px">{{ promo.precio.total }}</span></td>
+                                                        style="font-size: 13px">{{ promo.precio.precioVenta }}</span></td>
                                                 <td style="text-align: center; vertical-align: middle"><span
                                                         class="badge badge-info"
                                                         style="font-size: 13px">{{ promo.descuento }}%</span></td>
@@ -143,7 +143,7 @@
                                                         data-ff="{{ promo.fechaFinal|date:'Y-m-d' }}"
                                                         data-producto="{{ promo.precio.producto_id }}"
                                                         data-precio="{{ promo.precio.id }}"
-                                                        data-precio1="{{ promo.precio.total|intcomma }}"
+                                                        data-precio1="{{ promo.precio.precioVenta|intcomma }}"
                                                         data-descuento="{{ promo.descuento }}"
                                                         data-uri="/products/promo/edit/{{ promo.id }}/">
                                                         <i class="fa fa-edit"></i> Editar</a></td>

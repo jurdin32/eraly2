@@ -312,16 +312,14 @@
 {% endblock %}
 {% block script %}
     <script>
-        $(".checkout-review-action>h5>span").text($(".cart-totals>span").text())
-        $("#reviewTable").html('<i class="fa fa-shopping-cart"></i> ' + $(".cart-totals>span").text())
-
-        let total = parseFloat($(".cart-totals>span").text().replace("$", ""))
-        let iva = total * 0.12
-        let subtotal = total - iva
-        $("#total").text(total.toFixed(2))
-        $("#iva").text(iva.toFixed(2))
+        let subtotal = parseFloat($(".cart-totals>span").text().replace("$", ""))
+        let iva = subtotal * 0.12
+        let total = subtotal + iva
         $("#subtotal").text(subtotal.toFixed(2))
-
+        $("#iva").text(iva.toFixed(2))
+        $("#total").text(total.toFixed(2))
+        $(".checkout-review-action>h5>span").text("$"+total.toFixed(2))
+        $("#reviewTable").html('<i class="fa fa-shopping-cart"></i> ' + total.toFixed(2))
         let pay="checkmo"
         $(".payment-card-check").click(function (){
             console.log($(this).val())

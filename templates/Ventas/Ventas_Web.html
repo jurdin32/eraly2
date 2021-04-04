@@ -33,6 +33,7 @@
                                             <th style="text-align: center">Pr Normal</th>
                                             <th style="text-align: center">Desc.</th>
                                             <th style="text-align: center">Pr Promo</th>
+                                            <th style="text-align: center">Subtotal</th>
                                             <th style="text-align: center">IVA</th>
                                             <th style="text-align: center">Total</th>
 
@@ -60,10 +61,16 @@
                                             <td style="text-align: center; vertical-align: middle">{{ documento.precio_normal }}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ documento.descuento_porcentaje }}%</td>
                                             <td style="text-align: center; vertical-align: middle">{{ documento.precio_promocion }}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.iva }}</td>
                                             <td style="text-align: center;; vertical-align: middle"><span
                                                     class="badge badge-danger"
-                                                    style="font-size: 13px">{{ documento.total }}</span></td>
+                                                    style="font-size: 13px">{% with iva=documento.precio_total|mul:0.12 %}
+                                                                    {{ documento.precio_total|sub:iva|floatformat:2 }}
+                                                                {% endwith %}
+                                            </span></td>
+                                            <td style="text-align: center;; vertical-align: middle"><span
+                                                    class="badge badge-danger"
+                                                    style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span></td>
+                                            <td style="text-align: center; vertical-align: middle">{{ documento.precio_total }}</td>
                                         {% endfor %}
 
                                         </tbody>

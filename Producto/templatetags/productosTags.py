@@ -76,7 +76,7 @@ def promocion_precio(id):
     fecha=datetime.datetime.now().date()
     if promo:
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
-            return promo.total
+            return promo.precio
     return 0
 
 

@@ -219,13 +219,13 @@
             let subtotal = 0;
 
             $(".precios").each(function () {
-                total += parseFloat($(this).text().replace(",", "."))
+                subtotal += parseFloat($(this).text().replace(",", "."))
             })
-            $("#total_pagar").text(total.toFixed(2))
-            iva = total * 0.12;
-            $("#iva").text(iva.toFixed(2))
-            subtotal = total - iva
             $("#subtotal").text(subtotal.toFixed(2))
+            iva = subtotal * 0.12;
+            $("#iva").text(iva.toFixed(2))
+            total = subtotal + iva
+            $("#total_pagar").text(total.toFixed(2))
         }
 
         $(".qty-inc-btn").click(function () {
