@@ -28,54 +28,12 @@
                                     <th>Producto</th>
                                     <th>P. Normal</th>
                                     <th>P. Promo</th>
-                                    <th>Cantidad</th>
-                                    <th>Subtotal</th>
-                                    <th>Estatus</th>
+                                    <th style="text-align: center">Cantidad</th>
+                                    <th class="text-right">Subtotal</th>
+                                    <th style="text-align: center">Estatus</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% if request.session.carrito %}
-                                    {% for sess in request.session.carrito %}
-                                        <tr>
-                                            <td class="product-image-td">
-                                                <a href="/store/details/?hash={{ sess.hash }}"
-                                                   title="{{ sess.producto_nombre }}">
-                                                    {% if sess.producto_imagen %}
-                                                        <img src="/media/{{ sess.producto_imagen }}"
-                                                             alt="{{ sess.producto_nombre }}">
-                                                    {% else %}
-                                                        <img src="{% static 'noimagen.jpg' %}"
-                                                             alt="{{ sess.producto_nombre }}">
-                                                    {% endif %}
-
-                                                </a>
-                                            </td>
-                                            <td class="product-name-td">
-                                                <h2 class="product-name"><a href="/store/details/?hash={{ sess.hash }}"
-                                                                            title="Product Name">{{ sess.producto_nombre }}</a>
-                                                </h2>
-                                            </td>
-                                            <td>{{ sess.precio_normal }}</td>
-                                            {% if sess.precio_normal == sess.precio_promocion %}
-                                                <td><i>No tiene descuento</i></td>
-                                            {% else %}
-                                                <td>{{ sess.precio_promocion }}</td>
-
-                                            {% endif %}
-                                            <td>
-                                                <div class="qty-holder">
-                                                    <input type="text" readonly="readonly" class="qty-input"
-                                                           value="{{ sess.cantidad }}">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-primary precios">{{ sess.precio_total|floatformat:2|intcomma }}</span>
-                                            </td>
-                                            <td style="font-size: 20px" class="text-success"><i
-                                                    class="fa fa-check-circle"></i></td>
-                                        </tr>
-                                    {% endfor %}
-                                {% else %}
                                     {% for sess in compra.detallecompraweb_set.all %}
                                         <tr>
                                             <td class="product-image-td">
@@ -116,10 +74,7 @@
                                                 <td>{{ sess.precio_promocion }}</td>
                                             {% endif %}
                                             <td>
-                                                <div class="qty-holder">
-                                                    <input type="text" readonly="readonly" class="qty-input"
-                                                           value="{{ sess.cantidad }}">
-                                                </div>
+                                               {{ sess.cantidad }}
                                             </td>
                                             <td>
                                                 <span class="text-primary subtotal">{{ sess.precio_total|floatformat:2 }}</span>
@@ -129,28 +84,28 @@
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
-
-
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="5" class="clearfix">
+                                    <td colspan="4" class="clearfix">
                                         <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
                                             Comprando</a>
                                     </td>
-                                    <td class="subtotales"></td>
+                                     <td class="text-right text-primary">SUBTOTAL:</td>
+                                    <td class="subtotales text-right"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" class="clearfix">
-                                    </td>
-                                    <td class="iva"></td>
+                                    <td colspan="4" class="clearfix"></td>
+                                    <td class="text-right text-primary">IVA:</td>
+                                    <td class="iva text-right"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" class="clearfix">
+                                    <td colspan="4" class="clearfix">
                                     </td>
-                                    <td class="total_general"></td>
+                                     <td class="text-right text-primary">TOTAL:</td>
+                                    <td class="total_general text-right"></td>
                                     <td></td>
                                 </tr>
                                 </tfoot>
