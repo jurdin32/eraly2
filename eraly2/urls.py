@@ -85,6 +85,7 @@ urlpatterns = [
     path("proforms/createCLient/<id>/",registroClienteFacturaProforma),
     path("proforms/create/<int:id>/",registrarDocumento),
     path("proforms/detall/<int:id>/",registrarDetallesFacturaProforma),
+    path("store/autority/",autorizar_ComprasWeb),
 
     path("proforms/edit/<int:id>/",editarDocumentos),
     path("giveBack/<int:id>/",anularDocumento),
