@@ -64,7 +64,7 @@
                                             <td style="text-align: center;; vertical-align: middle"><span
                                                     class="badge badge-danger"
                                                     style="font-size: 13px">{% with iva=documento.precio_total|mul:0.12 %}
-                                                                    {{ documento.precio_total|sub:iva|floatformat:2 }}
+                                                                    {{ documento.precio_total|add:iva|floatformat:2 }}
                                                                 {% endwith %}
                                             </span></td>
                                             <td style="text-align: center;; vertical-align: middle"><span
