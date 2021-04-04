@@ -68,8 +68,12 @@
                                             </span></td>
                                             <td style="text-align: center;; vertical-align: middle"><span
                                                     class="badge badge-danger"
-                                                    style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span></td>
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.precio_total }}</td>
+                                                    style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span>
+                                            </td>
+                                            <td style="text-align: center; vertical-align: middle">
+                                                {% with iva=documento.precio_total|mul:0.12 %}
+                                                    {{ documento.precio_total|add:iva }}</td>
+                                                {% endwith %}
                                         {% endfor %}
 
                                         </tbody>
