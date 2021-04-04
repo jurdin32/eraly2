@@ -27,6 +27,8 @@ class Establecimiento(models.Model):
     facebook=models.CharField(max_length=400,null=True,blank=True)
     instagram=models.CharField(max_length=400, null=True, blank=True)
     youtube = models.CharField(max_length=400,null=True,blank=True)
+    
+
 
     def previa(self):
         return mark_safe('<a href="/admin/Empresa/establecimiento/%s/change/"><img src="/media/%s" style="width: 50px" alt=""></a>'%(self.id,self.logo))
