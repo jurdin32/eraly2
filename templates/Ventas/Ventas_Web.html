@@ -72,7 +72,7 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
                                                 {% with iva=documento.precio_total|mul:0.12 %}
-                                                    {{ documento.precio_total|add:iva }}</td>
+                                                    {{ documento.precio_total|addition:iva }}</td>
                                                 {% endwith %}
                                         {% endfor %}
 
