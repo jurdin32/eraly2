@@ -43,3 +43,4 @@ class DetalleCompraWeb(models.Model):
     precio_promocion= models.DecimalField(max_digits=9, decimal_places=2, default=0)
     cantidad=models.IntegerField(default=0)
     precio_total= models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    autorizado=models.BooleanField(default=False)
