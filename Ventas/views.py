@@ -222,6 +222,5 @@ def crearAbonosPDF(request, id):
 def autorizar_ComprasWeb(request):
     contexto={
         'comprasweb':DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
-
     }
     return render(request,'Ventas/Ventas_Web.html',contexto)
