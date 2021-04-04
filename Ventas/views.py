@@ -6,6 +6,7 @@ from Empresa.models import Establecimiento, ConfigurarDocumentos
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
+from Store.models import DetalleCompraWeb
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
 from eraly2.snippers import render_pdf_view, export_pdf
 from nlt import numlet as nl
@@ -220,6 +221,7 @@ def crearAbonosPDF(request, id):
 
 def autorizar_ComprasWeb(request):
     contexto={
+        'comprasweb':DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
 
     }
     return render(request,'Ventas/Ventas_Web.html',contexto)
