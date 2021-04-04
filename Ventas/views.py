@@ -217,3 +217,9 @@ def crearAbonosPDF(request, id):
         'abono':resultado
     }
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
+
+def autorizar_ComprasWeb(request):
+    contexto={
+
+    }
+    return render(request,'Ventas/Ventas_Web.html',contexto)
