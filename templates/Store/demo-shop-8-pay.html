@@ -15,7 +15,8 @@
                         Su compra se ha registrado, un agente de la tienda se pondrá en contácto contigo para finalizar
                         con el proceso.
                         <div>Este es el código de tu compra: <a
-                                href="/store/shopp/?order={{ compra.hash }}">{{ compra.hash|truncatechars:40 }}</a></div>
+                                href="/store/shopp/?order={{ compra.hash }}">{{ compra.hash|truncatechars:40 }}</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -34,56 +35,55 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for sess in compra.detallecompraweb_set.all %}
-                                        <tr>
-                                            <td class="product-image-td">
+                                {% for sess in compra.detallecompraweb_set.all %}
+                                    <tr>
+                                        <td class="product-image-td">
+                                            <a href="/store/details/?hash={{ sess.producto.hash }}"
+                                               title="{{ sess.producto.nombre }}">
+                                                {% if sess.producto.imagen %}
+                                                    <img src="/media/{{ sess.producto.imagen }}"
+                                                         alt="{{ sess.producto.nombre }}">
+                                                {% else %}
+                                                    <img src="{% static 'noimagen.jpg' %}"
+                                                         alt="{{ sess.producto.nombre }}">
+                                                {% endif %}
+
+                                            </a>
+                                        </td>
+                                        <td class="product-name-td">
+                                            <h2 class="product-name">
                                                 <a href="/store/details/?hash={{ sess.producto.hash }}"
-                                                   title="{{ sess.producto.nombre }}">
-                                                    {% if sess.producto.imagen %}
-                                                        <img src="/media/{{ sess.producto.imagen }}"
-                                                             alt="{{ sess.producto.nombre }}">
-                                                    {% else %}
-                                                        <img src="{% static 'noimagen.jpg' %}"
-                                                             alt="{{ sess.producto.nombre }}">
-                                                    {% endif %}
+                                                   style="text-decoration: none"
+                                                   title="Product Name">{{ sess.producto.nombre }}
+                                                    <i class="text-success">
+                                                        {% if sess.color != None %}
+                                                            , color  {{ sess.color }}
+                                                        {% endif %}
+                                                        {% if sess.talla != None %}
+                                                            , talla  {{ sess.talla }}
+                                                        {% endif %}
+                                                    </i>
+
 
                                                 </a>
-                                            </td>
-                                            <td class="product-name-td">
-                                                <h2 class="product-name">
-                                                    <a href="/store/details/?hash={{ sess.producto.hash }}"
-                                                       style="text-decoration: none"
-                                                       title="Product Name">{{ sess.producto.nombre }}
-                                                        <i class="text-success">
-                                                            {% if sess.color != None %}
-                                                                , color  {{ sess.color }}
-                                                            {% endif %}
-                                                            {% if sess.talla != None %}
-                                                                , talla  {{ sess.talla }}
-                                                            {% endif %}
-                                                        </i>
-
-
-                                                    </a>
-                                                </h2>
-                                            </td>
-                                            <td>{{ sess.precio_normal }}</td>
-                                            {% if sess.precio_normal == sess.precio_promocion %}
-                                                <td><i>No tiene descuento</i></td>
-                                            {% else %}
-                                                <td>{{ sess.precio_promocion }}</td>
-                                            {% endif %}
-                                            <td>
-                                               {{ sess.cantidad }}
-                                            </td>
-                                            <td>
-                                                <span class="text-primary subtotal">{{ sess.precio_total|floatformat:2 }}</span>
-                                            </td>
-                                            <td style="font-size: 20px" class="text-success"><i
-                                                    class="fa fa-check-circle"></i></td>
-                                        </tr>
-                                    {% endfor %}
-                                {% endif %}
+                                            </h2>
+                                        </td>
+                                        <td>{{ sess.precio_normal }}</td>
+                                        {% if sess.precio_normal == sess.precio_promocion %}
+                                            <td><i>No tiene descuento</i></td>
+                                        {% else %}
+                                            <td>{{ sess.precio_promocion }}</td>
+                                        {% endif %}
+                                        <td>
+                                            {{ sess.cantidad }}
+                                        </td>
+                                        <td>
+                                            <span class="text-primary subtotal">{{ sess.precio_total|floatformat:2 }}</span>
+                                        </td>
+                                        <td style="font-size: 20px" class="text-success"><i
+                                                class="fa fa-check-circle"></i></td>
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -91,7 +91,7 @@
                                         <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
                                             Comprando</a>
                                     </td>
-                                     <td class="text-right text-primary">SUBTOTAL:</td>
+                                    <td class="text-right text-primary">SUBTOTAL:</td>
                                     <td class="subtotales text-right"></td>
                                     <td></td>
                                 </tr>
@@ -104,7 +104,7 @@
                                 <tr>
                                     <td colspan="4" class="clearfix">
                                     </td>
-                                     <td class="text-right text-primary">TOTAL:</td>
+                                    <td class="text-right text-primary">TOTAL:</td>
                                     <td class="total_general text-right"></td>
                                     <td></td>
                                 </tr>
@@ -119,20 +119,20 @@
 </div>
 {% block script %}
     <script>
-    let subtotal=0
-    let iva=0
-    let total_general=0
+        let subtotal = 0
+        let iva = 0
+        let total_general = 0
 
-    $(".subtotal").each(function(){
-        subtotal+= parseFloat($(this).text().replace(",","."))
-    })
-    iva= subtotal *0.12
-    total_general= subtotal+iva
-    $(".subtotales").text(subtotal.toFixed(2))
-    $(".iva").text(iva.toFixed(2))
-    $(".total_general").text(total_general.toFixed(2))
+        $(".subtotal").each(function () {
+            subtotal += parseFloat($(this).text().replace(",", "."))
+        })
+        iva = subtotal * 0.12
+        total_general = subtotal + iva
+        $(".subtotales").text(subtotal.toFixed(2))
+        $(".iva").text(iva.toFixed(2))
+        $(".total_general").text(total_general.toFixed(2))
 
-    console.log(subtotal)
+        console.log(subtotal)
     </script>
 {% endblock %}
 
