@@ -14,7 +14,7 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-danger" href="/store/autority/?establecimiento=0">Todos</a>
+                                <a class="btn btn-danger" href="/store/autority/">Todos</a>
                                 {% for establecimiento in request.user.establecimiento_set.all %}
                                     <a class="btn btn-primary"
                                        href="/store/autority/?establecimiento={{ establecimiento.id }}">{{ establecimiento.nombreComercial }}</a>
