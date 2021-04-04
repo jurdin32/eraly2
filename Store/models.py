@@ -44,3 +44,4 @@ class DetalleCompraWeb(models.Model):
     cantidad=models.IntegerField(default=0)
     precio_total= models.DecimalField(max_digits=9, decimal_places=2, default=0)
     autorizado=models.BooleanField(default=False)
+    enviado=models.DateTimeField(null=True,blank=True)
