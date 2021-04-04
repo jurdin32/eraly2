@@ -40,42 +40,48 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         {% for documento in comprasweb %}
                                             <tr>
-                                            <td style="vertical-align: middle">{{ documento.compra.fecha }}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.producto_id }}</td>
-                                            <td style="text-align: center; vertical-align: middle">
-                                                <span class="badge badge-success" style="font-size: 13px">Compra por Internet</span>
-                                            </td>
-                                            <td style="vertical-align: middle">{{ documento.compra.usuario.usuario.first_name }} {{ documento.compra.usuario.usuario.last_name }}</td>
-                                            <td style="vertical-align: middle"><span class="badge badge-danger"
-                                                                                     style="font-size: 13px">
+                                                <td style="vertical-align: middle">{{ documento.compra.fecha }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.producto_id }}</td>
+                                                <td style="text-align: center; vertical-align: middle">
+                                                    <span class="badge badge-success" style="font-size: 13px">Compra por Internet</span>
+                                                </td>
+                                                <td style="vertical-align: middle">{{ documento.compra.usuario.usuario.first_name }} {{ documento.compra.usuario.usuario.last_name }}</td>
+                                                <td style="vertical-align: middle"><span class="badge badge-danger"
+                                                                                         style="font-size: 13px">
                                                         {{ documento.producto.nombre }} {% if documento.talla %}
-                                                {{ documento.talla }}{% endif %}{% if documento.color %}
-                                                {{ documento.color }}{% endif %}</span>
-                                            </td>
-                                            <td style="vertical-align: middle; text-align: center"><span
-                                                    class="badge badge-primary"
-                                                    style="font-size: 13px">{{ documento.cantidad }}</span></td>
+                                                    {{ documento.talla }}{% endif %}{% if documento.color %}
+                                                    {{ documento.color }}{% endif %}</span>
+                                                </td>
+                                                <td style="vertical-align: middle; text-align: center"><span
+                                                        class="badge badge-primary"
+                                                        style="font-size: 13px">{{ documento.cantidad }}</span></td>
 
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.precio_normal }}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.descuento_porcentaje }}%</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ documento.precio_promocion }}</td>
-                                            <td style="text-align: center;; vertical-align: middle"><span
-                                                    class="badge badge-danger"
-                                                    style="font-size: 13px">
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.precio_normal }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.descuento_porcentaje }}%</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.precio_promocion }}</td>
+                                                <td style="text-align: center;; vertical-align: middle"><span
+                                                        class="badge badge-primary"
+                                                        style="font-size: 13px">
                                                                     {{ documento.precio_total }}
                                             </span></td>
-                                            <td style="text-align: center;; vertical-align: middle"><span
-                                                    class="badge badge-danger"
-                                                    style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span>
-                                            </td>
-                                            <td style="text-align: center; vertical-align: middle">
-                                                {% with iva=documento.precio_total|mul:0.12 %}
-                                                    {{ documento.precio_total|addition:iva|floatformat:2 }}</td>
-                                                {% endwith %}
+                                                <td style="text-align: center;; vertical-align: middle"><span
+                                                        class="badge badge-success"
+                                                        style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span>
+                                                </td>
+                                                <td style="text-align: center; vertical-align: middle">
+                                                <span
+                                                        class="badge badge-danger"
+                                                        style="font-size: 13px">
+                                                    {% with iva=documento.precio_total|mul:0.12 %}
+                                                        {{ documento.precio_total|addition:iva|floatformat:2 }}
+                                                    {% endwith %}
+                                                </span>
+                                                </td>
+                                            </tr>
                                         {% endfor %}
-
                                         </tbody>
                                     </table>
                                 </div>
