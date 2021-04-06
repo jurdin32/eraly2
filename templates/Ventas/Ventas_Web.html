@@ -7,9 +7,78 @@
     <div class="modal fade" id="from-despachar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                <form action="/store/autority/" method="post" class="form-label-left input_mask">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Despachar Mercaderia</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 ">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <br>
+                                    <div class="col-md-12 col-sm-12  form-group">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="codigo_compra" name="codigo_compra"
+                                               placeholder="Codigo de la compra">
+                                        <span class="fa fa-code form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
 
+                                    <div class="col-md-3 col-sm-3  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="producto_id"
+                                               style="text-align:center;background-color: #ff000f; color: white"
+                                               name="producto_id"
+                                               placeholder="Código del Producto">
+                                        <span class="fa fa-codepen form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9  form-group has-feedback"></div>
+
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="nombre_producto" name="nombre_producto"
+                                               placeholder="Nompre del Producto">
+                                        <span class="fa fa-product-hunt form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly="readonly"
+                                               id="precio" name="precio" placeholder="Precio">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly id="iva"
+                                               name="iva" placeholder="IVA">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly id="total"
+                                               name="total" placeholder="Total">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-danger">Autorizar Envío</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="from-autorizar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Despachar Mercaderia</h4>
+                    <h4 class="modal-title" id="myModalLabel">Rotulo del empaque</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -17,50 +86,20 @@
                     <div class="col-md-12 ">
                         <div class="x_panel">
                             <div class="x_content">
-                                <br>
-                                <form class="form-label-left input_mask">
-                                    <div class="col-md-12 col-sm-12  form-group">
-                                        <label>Código de la Compra</label>
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly" id="codigo_compra" name="codigo_compra"
-                                               placeholder="Codigo de la compra">
-                                        <span class="fa fa-code form-control-feedback left" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly" id="producto_id" style="text-align:center;background-color: #ff000f; color: white" name="producto_id"
-                                               placeholder="Código del Producto">
-                                        <span class="fa fa-codepen form-control-feedback left" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9  form-group has-feedback"></div>
-
-                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly" id="nombre_producto" name="nombre_producto"
-                                               placeholder="Nompre del Producto">
-                                        <span class="fa fa-product-hunt form-control-feedback left"
-                                              aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly="readonly" id="precio" name="precio" placeholder="Precio">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly id="iva" name="iva" placeholder="IVA">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly id="total" name="total" placeholder="Total">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
-                                    </div>
-                                </form>
+                                <div style="text-align: center" id="imprimir">
+                                    <img style="height: 100px" id="codigo"/><br>
+                                    <label id="n" for=""></label><br>
+                                    <label id="identificacion"></label><br>
+                                    <label id="cliente"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                    <a class="btn btn-danger" href="javascript:imprSelec('imprimir')"><i class="fa fa-print"></i> Imprimir</a>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -79,13 +118,13 @@
                             <div class="col-sm-12">
                                 <a class="btn btn-app" href="/store/autority/">
                                     <i class="fa fa-bullhorn"></i>
-                                    <span class="badge bg-red">{{ total_compras }}</span>
+                                    <span class="badge bg-blue">{{ total_compras }}</span>
                                     Todos</a>
                                 {% for establecimiento in request.user.establecimiento_set.all %}
                                     <a class="btn btn-app"
                                        href="/store/autority/?establecimiento={{ establecimiento.id }}">
                                         <i class="fa fa-bullhorn"></i>
-                                        <span class="badge bg-red">{{ comprasweb.count }}</span>
+                                        <span class="badge bg-red">{% ventas_store establecimiento.id %}</span>
                                         {{ establecimiento.nombreComercial }}
                                     </a>
                                 {% endfor %}
@@ -152,18 +191,32 @@
                                                 </span>
                                                 </td>
                                                 <td>
-                                                    <a style="cursor:pointer;" class="btn btn-app dx"
-                                                       data-target="#from-despachar" data-toggle="modal"
-                                                       data-producto_id="{{ documento.producto_id }}"
-                                                       data-nombre="
+                                                    {% if documento.autorizado %}
+                                                        <a style="cursor:pointer" class="btn btn-app btn-primary da"
+                                                           data-toggle="modal"
+                                                           data-target="#from-autorizar"
+                                                           data-etiqueta="{{ documento.etiqueta }}"
+                                                           data-cliente="{{ documento.compra.usuario.usuario.get_full_name }}"
+                                                           data-identificacion="{{ documento.compra.usuario.identificacion }}"
+                                                           data-n="
+                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}"
+                                                        "
+                                                        ><i class="fa fa-check-circle"></i>Autorizado</a>
+                                                    {% else %}
+                                                        <a style="cursor:pointer;" class="btn btn-app dx"
+                                                           data-target="#from-despachar" data-toggle="modal"
+                                                           data-producto_id="{{ documento.id }}"
+                                                           data-nombre="
 
-                                                               {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}"
-                                                       data-cantidad="{{ documento.cantidad }}"
-                                                       data-precio="{{ documento.precio_total }}"
-                                                       data-hash="{{ documento.compra.hash }}"
-                                                    >
-                                                        <i class="fa fa-share-square-o"></i>
-                                                    </a>
+                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}"
+                                                           data-cantidad="{{ documento.cantidad }}"
+                                                           data-precio="{{ documento.precio_total }}"
+                                                           data-hash="{{ documento.compra.hash }}"
+                                                        >
+                                                            <i class="fa fa-share-square-o"></i>
+                                                        </a>
+                                                    {% endif %}
+
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -180,21 +233,24 @@
 
 {% endblock %}
 {% block script_index %}
+    <script src="{% static 'vendors/JsBarcode.all.min.js' %}"></script>
     <script>
         $(document).ready(function () {
+
             $("#listaDocumentos").DataTable({
                 language: {
-                    url: "{% static 'Spanish_dt.json' %}"
+                    url: "{% static 'Spanish_dt.json' %}",
                 },
+                order: [[0, 'desc']],
                 pageLength: 100,
             });
         });
 
-        $(".dx").click(function (){
+        $(".dx").click(function () {
             $("#codigo_compra").val($(this).data('hash'))
             $("#producto_id").val($(this).data('producto_id'))
             $("#nombre_producto").val($.trim($(this).data('nombre')))
-            let precio=parseFloat($(this).data('precio').replace(",","."))
+            let precio = parseFloat($(this).data('precio').replace(",", "."))
             let iva = precio * 0.12
             let total = precio + iva
             $("#precio").val(precio.toFixed(2))
@@ -202,5 +258,21 @@
             $("#total").val(total.toFixed(2))
 
         });
+        $(".da").click(function () {
+            JsBarcode("#codigo", $(this).data('etiqueta'));
+            $("#n").text($(this).data('n'))
+            $("#identificacion").text("Identificación: " + $(this).data('identificacion'))
+            $("#cliente").text("Cliente: " + $(this).data('cliente'))
+        })
+
+        function imprSelec(nombre) {
+            var ficha = document.getElementById(nombre);
+            var ventimp = window.open(' ', 'popimpr');
+            ventimp.document.write(ficha.innerHTML);
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+        }
+
     </script>
 {% endblock %}

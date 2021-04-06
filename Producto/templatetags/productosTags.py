@@ -3,6 +3,7 @@ from django.db.models import Sum, Avg
 import datetime
 
 from Producto.models import *
+from Store.models import ComprasWeb, DetalleCompraWeb
 
 register = template.Library()
 
@@ -88,3 +89,7 @@ def promocion_id(id):
         if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
             return promo.id
     return 0
+
+@register.simple_tag
+def ventas_store(id_establecimiento):
+    return  DetalleCompraWeb.objects.filter(producto__establecimiento_id=id_establecimiento,autorizado=False).count()

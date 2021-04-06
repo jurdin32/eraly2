@@ -44,4 +44,11 @@ class DetalleCompraWeb(models.Model):
     cantidad=models.IntegerField(default=0)
     precio_total= models.DecimalField(max_digits=9, decimal_places=2, default=0)
     autorizado=models.BooleanField(default=False)
-    enviado=models.DateTimeField(null=True,blank=True)
+    enviado=models.DateTimeField(null=True,blank=True,auto_now_add=True)
+    etiqueta=models.CharField(max_length=100,null=True,blank=True)
+    
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.etiqueta=str.upper(self.compra.hash[5:15])
+        print(self.etiqueta)
+        super(DetalleCompraWeb, self).save()
