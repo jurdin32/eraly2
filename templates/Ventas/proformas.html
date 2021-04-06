@@ -48,19 +48,21 @@
                                                 <td>{{ precio.precioVenta }}</td>
                                                 <td>
                                                     {% if producto.tipo == "P" %}
+                                                        {% with colores=producto.colores_set.all %}
                                                         <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
-                                                                   {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {{ colores }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
                                                             <i class="fa fa-check-circle text-success"
                                                                style="font-size: 20px"></i>
                                                         </a>
+                                                        {% endwith %}
                                                     {% else %}
+                                                        {% with colores=producto.colores_set.all %}
                                                         <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
-                                                                   {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
+                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}{{ colores }},'{{ precio.precioVenta }}','1000')">
                                                             <i class="fa fa-check-circle text-success"
                                                                style="font-size: 20px"></i>
                                                         </a>
+                                                        {% endwith %}
                                                     {% endif %}
                                                 </td>
                                             </tr>
