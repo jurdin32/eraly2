@@ -33,12 +33,14 @@
                                             {% if precio.producto == producto %}
                                                 <tr>
                                                     <td>{{ producto.id }}</td>
-                                                    <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}
+                                                    <td style="text-align: justify">{{ producto.nombre }}, {{ producto.talla }}
+                                                        {% for color in producto.colores_set.all %}
+                                                            {{ color.nombre }}{% endfor %}
                                                         (<span style="font-size: 12px; color: #0b97c4">{{ precio.detalle }}</span>)
                                                     </td>
                                                     <td>
                                                         {% if producto.tipo == "P" %}
-                                                        {% stock producto.id %}
+                                                            {% stock producto.id %}
                                                         {% else %}
                                                             <i>Ilimitado</i>
                                                         {% endif %}
@@ -46,19 +48,21 @@
                                                     </td>
                                                     <td>{{ precio.precioVenta }}</td>
                                                     <td>
-                                                    {% if producto.tipo == "P" %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
-                                                    {% else %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
-                                                     {% endif %}
+                                                        {% if producto.tipo == "P" %}
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
+                                                                       {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
+                                                                       {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -353,9 +357,9 @@
     <script>
         var ids = []
 
-        function agregarFila(id,tipo, nombre, precio, stock) {
-            precio=precio.replace(",",".")
-            if ((parseInt(stock) > 0 && parseFloat(precio) > 0)|| tipo=="S") {
+        function agregarFila(id, tipo, nombre, precio, stock) {
+            precio = precio.replace(",", ".")
+            if ((parseInt(stock) > 0 && parseFloat(precio) > 0) || tipo == "S") {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
@@ -432,12 +436,6 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#tproductos").DataTable({
-                responsive: true
-            });
-            $("#tClientes").DataTable({
-                 responsive: true
-            });
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
 
@@ -483,5 +481,19 @@
             console.log($(this).data('id'))
             toastr.success("El Cliente se agrego")
         })
+    </script>
+    <script>
+        $("#tproductos").DataTable({
+            language: {
+                url: "{% static 'Spanish_dt.json' %}",
+            },
+            responsive: true
+        });
+        $("#tClientes").DataTable({
+            language: {
+                url: "{% static 'Spanish_dt.json' %}",
+            },
+            responsive: true
+        });
     </script>
 {% endblock %}
