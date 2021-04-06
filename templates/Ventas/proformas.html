@@ -184,7 +184,7 @@
                                         <td>{{ cliente.ciudad }}</td>
                                         <td>{{ cliente.telefono }}</td>
                                         <td style="text-align: center">
-                                            <a data-dismiss="modal" href="#" class="cliente"
+                                            <a style="cursor: pointer" class="cliente"
                                                data-id="{{ cliente.id }}"
                                                data-nombre="{{ cliente.nombres }} {{ cliente.apellidos }}"
                                                data-ciudad_id="{{ cliente.ciudad.id }}"
@@ -478,6 +478,7 @@
             $("#telefonoCLiente").text($(this).data('telefono'))
             console.log($(this).data('id'))
             toastr.success("El Cliente se agrego")
+            $("#listaClientes").modal('hide');
         })
     </script>
     <script>
