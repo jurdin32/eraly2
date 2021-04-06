@@ -432,7 +432,9 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#tproductos").DataTable();
+            $("#tproductos").DataTable({
+                responsive: true
+            });
             $("#tClientes").DataTable();
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
