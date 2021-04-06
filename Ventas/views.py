@@ -221,6 +221,7 @@ def crearAbonosPDF(request, id):
 
 def autorizar_ComprasWeb(request):
     compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
+    contador=compras.count()
     if request.POST:
         compra=compras.get(id=request.POST.get('producto_id'))
         compra.autorizado=True
@@ -229,6 +230,6 @@ def autorizar_ComprasWeb(request):
         compras = compras.filter(producto__establecimiento_id=request.GET.get('establecimiento'))
     contexto={
         'comprasweb':compras,
-        'total_compras':compras.count()
+        'total_compras':contador
     }
     return render(request,'Ventas/Ventas_Web.html',contexto)
