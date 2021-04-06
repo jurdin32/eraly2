@@ -49,19 +49,20 @@
                                                 <td>
                                                     {% if producto.tipo == "P" %}
                                                         {% with colores=producto.colores_set.all %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {{ colores }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {{ colores }}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
                                                         {% endwith %}
                                                     {% else %}
                                                         {% with colores=producto.colores_set.all %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}{{ colores }},'{{ precio.precioVenta }}','1000')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }}
+                                                                       {{ producto.talla }}{{ colores }},'{{ precio.precioVenta }}','1000')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
                                                         {% endwith %}
                                                     {% endif %}
                                                 </td>
@@ -185,11 +186,10 @@
                                         <td>{{ cliente.telefono }}</td>
                                         <td style="text-align: center">
                                             <a style="cursor: pointer" class="cliente"
-                                               data-id="{{ cliente.id }}"
-                                               data-nombre="{{ cliente.nombres }} {{ cliente.apellidos }}"
-                                               data-ciudad_id="{{ cliente.ciudad.id }}"
-                                               data-ciudad="{{ cliente.ciudad.nombre }}"
-                                               data-telefono="{{ cliente.telefono }}">
+                                               onclick="seleccionaCLiente('{{ cliente.id }}',
+                                                       '{{ cliente.nombres }} {{ cliente.apellidos }}',
+                                                       '{{ cliente.ciudad.nombre }}','{{ cliente.telefono }}')"
+                                            >
                                                 <i style="font-size: 20px"
                                                    class="fa fa-check-circle text-success"></i>
                                             </a>
@@ -470,16 +470,15 @@
         });
     </script>
     <script>
-        $(".cliente").click(function () {
-            $("#idCliente").text($(this).data('id'))
-            $("#nombreCliente").text($(this).data('nombre'))
-            $("#direccionCliente").text($(this).data('direccion'))
-            $("#ciudadCliente").text($(this).data('ciudad'))
-            $("#telefonoCLiente").text($(this).data('telefono'))
-            console.log($(this).data('id'))
+        function seleccionaCLiente(id,nombre,direccion,ciudad,telefono) {
+            $("#idCliente").text(id)
+            $("#nombreCliente").text(nombre)
+            $("#direccionCliente").text(direccion)
+            $("#ciudadCliente").text(ciudad)
+            $("#telefonoCLiente").text(telefono)
             toastr.success("El Cliente se agrego")
             $("#listaClientes").modal('hide');
-        })
+        }
     </script>
     <script>
         $("#tproductos").DataTable({
@@ -503,7 +502,7 @@
         }
 
         div.dataTables_wrapper div.dataTables_filter label {
-                text-align: right;
+            text-align: right;
         }
     </style>
 {% endblock %}
