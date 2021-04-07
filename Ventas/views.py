@@ -225,12 +225,13 @@ def autorizar_ComprasWeb(request):
 
     if request.GET.get('establecimiento'):
         compras = compras.filter(producto__establecimiento_id=request.GET.get('establecimiento'))
-        return HttpResponseRedirect('/store/autority/?establecimiento=%s'%request.GET.get('establecimiento'))
 
     if request.POST:
         compra=compras.get(id=request.POST.get('producto_id'))
         compra.autorizado=True
         compra.save()
+        messages.add_message(request,messages.SUCCESS,"Se ha autorizado el envío de mercaderías..!")
+        return HttpResponseRedirect('/store/autority/?establecimiento=%s' %compra.producto.establecimiento_id)
     contexto={
         'comprasweb':compras,
         'total_compras':contador
