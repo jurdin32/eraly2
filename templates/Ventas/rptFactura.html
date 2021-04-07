@@ -64,7 +64,7 @@
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:40px">{{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
-                <td>{{ detalle.producto|truncatechars }}</td>
+                <td>{{ detalle.producto }}</td>
                 <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.iva }}</td>
