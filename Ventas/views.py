@@ -39,6 +39,7 @@ def proformas(request,id=0):
         'provincias':Provincia.objects.all(),
         'contadorProforma':contadorDocumentos,
         'precios':Precios.objects.all(),
+        'tipo':tipo,
     }
     return render(request, 'Ventas/proformas.html', contexto)
 

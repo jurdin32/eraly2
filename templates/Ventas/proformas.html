@@ -224,10 +224,10 @@
                                     Seleccione el Establecimiento
                                 {% endif %}
                                 <address>
-                                    <a class="btn btn-danger" href="/billing/0/?tipo={{ request.get.tipo }}">Cambiar</a>
+                                    <a class="btn btn-danger" href="/billing/0/?tipo={{ tipo}}">Cambiar</a>
                                     {% for establecimiento in establecimientos %}
                                         <a class="btn btn-primary"
-                                           href="/billing/{{ establecimiento.id }}/?tipo={{ request.get.tipo }}">{{ establecimiento }}</a>
+                                           href="/billing/{{ establecimiento.id }}/?tipo={{ tipo }}">{{ establecimiento }}</a>
                                     {% endfor %}
                                     {% if establecimiento %}
                                         <br>
