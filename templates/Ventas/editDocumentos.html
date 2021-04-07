@@ -480,13 +480,14 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#tproductos").DataTable({
+            var params={
                 language: {
                     url: "{% static 'Spanish_dt.json' %}",
                 },
                 responsive: true
-            });
-            $("#tClientes").DataTable();
+            }
+            $("#tproductos").DataTable(params);
+            $("#tClientes").DataTable(params);
             $("#buscarCliente").attr("data-toggle", "modal")
             $("#buscarCliente").attr("data-target", "#listaClientes")
             $(".js-example-basic-single").select2({
