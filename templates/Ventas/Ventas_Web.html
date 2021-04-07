@@ -257,7 +257,7 @@
 
         function autorizado(etiqueta,n,identificacion, cliente, direccion, telefono) {
             JsBarcode("#codigo", etiqueta);
-            $("#n").text($(this).data('n'))
+            $("#n").text(n)
             $("#identificacion").text("Identificación: " + identificacion)
             $("#cliente").text("Cliente: " +cliente)
             $("#dir").text("Dirección: " + direccion)
