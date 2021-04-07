@@ -13,10 +13,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="x_panel">
-                        <div class="x_content">
-                            <div class="col-md-12 col-sm-12">
-                                <table class="table table-bordered table-striped" id="tproductos"
-                                       style="text-align: center">
+                        <div class="x_content ">
+                            <div class="card-box table-responsive">
+                                <table class="table table-bordered table-striped" id="tproductos">
                                     <thead>
                                     <tr style="background-color: #2A3F54; color: whitesmoke">
                                         <th>Id</th>
@@ -40,18 +39,20 @@
                                                     <td>{{ precio.precioVenta }}</td>
                                                     <td>
                                                         {% if producto.tipo == "P" %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
-                                                    {% else %}
-                                                        <a href="#"
-                                                           onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }} {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
-                                                            <i class="fa fa-check-circle text-success"
-                                                               style="font-size: 20px"></i>
-                                                        </a>
-                                                     {% endif %}
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
+                                                                       {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','{% stock producto.id %}')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="#"
+                                                               onclick="agregarFila('{{ producto.id }}','{{ producto.tipo }}','{{ producto.nombre }} {{ producto.talla }}
+                                                                       {% for color in producto.colores_set.all %}{{ color.nombre }}{% endfor %}','{{ precio.precioVenta }}','1000')">
+                                                                <i class="fa fa-check-circle text-success"
+                                                                   style="font-size: 20px"></i>
+                                                            </a>
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -226,7 +227,8 @@
                                            href="/proforms/{{ establecimiento.id }}">{{ establecimiento }}</a>
                                     {% endfor %}
                                     {% if establecimiento %}
-                                        <a class="btn btn-danger" href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
+                                        <a class="btn btn-danger"
+                                           href="/document/list/?establecimiento={{ establecimiento.id }}">Volver</a>
                                         <br>
                                         <span style="font-size: 30px; font-weight: bold">{{ establecimiento.nombreComercial|upper }}</span>
                                         <br><span style="font-weight: bold">R.U.C.:</span>{{ establecimiento.ruc }}
@@ -403,7 +405,7 @@
 
         function agregarFila(id, tipo, nombre, precio, stock) {
 
-            if ((parseInt(stock) > 0 && parseFloat(precio) > 0)|| tipo=="S")  {
+            if ((parseInt(stock) > 0 && parseFloat(precio) > 0) || tipo == "S") {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
                     document.getElementById("tabla").insertRow(-1).innerHTML = '' +
@@ -480,7 +482,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            var params={
+            var params = {
                 language: {
                     url: "{% static 'Spanish_dt.json' %}",
                 },
