@@ -117,7 +117,7 @@ def crearDocumentoPDF_Factura(request, id):
         'items':(10 - detalles.count())*"*",
     }
     print((10 - detalles.count()))
-    return render_pdf_view(request,'Ventas/rptFactura.html',contexto)
+    return export_pdf(request,'Ventas/rptFactura.html',contexto)
     #return render(request,'Ventas/rptFactura.html',contexto)
 
 def listaDocumentos(request):
