@@ -21,7 +21,7 @@
     <table style="padding-left: 1cm; padding-right: 0.5cm">
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                <td style="text-align: center; width:40px"> {{ detalle.producto.subcategoria|truncatechars:2|upper }}{{ detalle.producto.id }}</td>
+                <td style="text-align: center; width:40px"> {{ detalle.producto.subcategoria|truncatechars:2|upper }}{{ detalle.producto.id|stringformat:"0d2" }}</td>
                 <td>{{ detalle.producto }}</td>
                 <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
