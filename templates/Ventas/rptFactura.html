@@ -57,12 +57,12 @@
             </tr>
             {% for detalle in detalles %}
                 <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                    <td style="text-align: center; width:60px; padding-top: 5px">
+                    <td style="text-align: center; width:60px; padding-top: 10px">
                         {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
-                    <td style="padding-top: 5px">{{ detalle.producto }}</td>
-                    <td style="text-align: center; width:40px; padding-top: 5px">{{ detalle.cantidad }}</td>
-                    <td style="text-align: center; width:40px; padding-top: 5px">{{ detalle.precioU }}</td>
-                    <td style="text-align: right; width:60px; padding-top: 5px">{{ detalle.subtotal }}</td>
+                    <td style="padding-top: 10px">{{ detalle.producto }}</td>
+                    <td style="text-align: center; width:40px; padding-top: 10px">{{ detalle.cantidad }}</td>
+                    <td style="text-align: center; width:40px; padding-top: 10px">{{ detalle.precioU }}</td>
+                    <td style="text-align: right; width:60px; padding-top: 10px">{{ detalle.subtotal }}</td>
                 </tr>
             {% endfor %}
         </table>
