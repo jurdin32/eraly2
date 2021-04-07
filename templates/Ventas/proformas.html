@@ -460,7 +460,13 @@
                         toastr.success("La proforma se ha generado correctamente.!");
                         $("#registrarDocumento").attr('disabled', 'disabled');
                         $("#generarDocumento").removeAttr('disabled');
-                        $("#generarDocumento").attr("href", `/document/proform/${result}/`)
+                        if('{{ tipo }}'=="P"){
+                            $("#generarDocumento").attr("href", `/document/proform/${result}/`)
+                        }
+                        else{
+                            $("#generarDocumento").attr("href", `/document/billing/${result}/`)
+                        }
+
                     } else {
                         toastr.error("Ocurrio un error inesperado.!")
                         $("#generarDocumento").removeAttr('disabled');
