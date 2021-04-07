@@ -17,8 +17,8 @@
     <title>{{ documento.numero }}</title>
 </head>
 <body>
-<div style="background-color: #0b97c4; height: 200px; width: 14cm; float: left;">
-    <table border="1px">
+<div style="background-color: #0b97c4; height: 200px; width: 14.80cm; float: left;">
+    <table>
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
@@ -59,16 +59,9 @@
         </tr>
     </table>
 </div>
-<div style="background-color: darkgrey; height: 200px; width: 14cm; float: right;>
-    <table border="1px">
-        {% comment %}<tr style="padding:5px;">
-        <td style="text-align: center; width:80px"></td>
-        <td style="width: 200px"></td>
-        <td style="text-align: center;width:60px"></td>
-        <td style="text-align: right;width: 80px"></td>
-        <td style="text-align: right; width:80px"></td>
-        <td style="text-align: right; width:80px"></td>
-    </tr>{% endcomment %}
+<div style="background-color: darkgrey; height: 200px; width: 14.80cm; float: right;>
+    <table>
+
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
