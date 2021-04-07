@@ -28,6 +28,7 @@
                 <td style="text-align: center; width:60px"> {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
                 <td>{{ detalle.producto }}</td>
                 <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
+                <td style="text-align: center; width:40px">{{ detalle.precioU }}</td>
                 <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
             </tr>
         {% endfor %}
