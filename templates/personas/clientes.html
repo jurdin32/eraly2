@@ -149,22 +149,17 @@
                                                     <span class="badge badge-danger" style="font-size: 13px">Deshabilitado</span>
                                                 {% endif %}</td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
-                                                    <a href="#" data-id="{{ cliente.id }}"
-                                                       data-establecimiento="{{ cliente.establecimiento_id }}"
-                                                       data-ciudad="{{ cliente.ciudad_id }}"
-                                                       data-nombres="{{ cliente.nombres }}"
-                                                       data-cedula="{{ cliente.cedula }}"
-                                                       data-apellidos="{{ cliente.apellidos }}"
-                                                       data-direccion="{{ cliente.direccion }}"
-                                                       data-celular="{{ cliente.celular }}"
-                                                       data-telefono="{{ cliente.telefono }}"
+                                                    <a style="cursor: pointer"
+                                                       onclick="modificar_cliente('{{ cliente.id }}','{{ cliente.ciudad_id }}',
+                                                               '{{ cliente.establecimiento_id }}','{{ cliente.nombres }}','{{ cliente.apellidos }}',
+                                                               '{{ cliente.cedula }}','{{ cliente.direccion }}','{{ cliente.celular }}','{{ cliente.telefono }}')"
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
                                                     </a>
                                                 </td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     {% if cliente.estado %}
-                                                        <a href="" class="text-danger eliminar btn btn-app" data-id="{{ cliente.id }}" data-toggle="modal" data-target="#eliminar">
+                                                        <a href="" class="text-danger eliminar btn btn-app" onclick="eliminar_cliente('{{ cliente.id }}')" data-toggle="modal" data-target="#eliminar">
                                                             <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Deshabilitar</a>
                                                     {% else %}
                                                         <a href="/clients/disable/{{ cliente.id }}/" class="text-success btn btn-app">
@@ -211,22 +206,20 @@
         });
     </script>
     <script>
-    $(".modificar").click(function(){
-        let idCiudad=$(this).data("ciudad")
-        let idEstablecimiento=$(this).data("establecimiento")
-        $("#nombres").val($(this).data("nombres"));
-        $("#apellidos").val($(this).data("apellidos"));
-        $("#cedula").val($(this).data("cedula"));
+   function modificar_cliente(id,idCiudad,idEstablecimiento,nombres,apellidos,cedula,direccion,celular,telefono){
+        $("#nombres").val(nombres);
+        $("#apellidos").val(apellidos);
+        $("#cedula").val(cedula);
         $('#ciudades').val(idCiudad).trigger('change');
-        $("#direccion").val($(this).data("direccion"));
-        $("#celular").val($(this).data("celular"));
-        $("#telefono").val($(this).data("telefono"));
+        $("#direccion").val(direccion);
+        $("#celular").val(celular);
+        $("#telefono").val(telefono);
         $("#establecimiento").val(idEstablecimiento).trigger('change');
-        $("#frmModificar").attr("action","/clients/"+$(this).data("id")+"/")
-    })
+        $("#frmModificar").attr("action","/clients/"+id+"/")
+    }
 
-    $(".eliminar").click(function (){
-        $("#eliminarRegistro").attr("href","/clients/disable/"+$(this).data("id")+"/")
-    })
+    function eliminar_cliente(id){
+        $("#eliminarRegistro").attr("href","/clients/disable/"+id+"/")
+    }
     </script>
 {% endblock %}
