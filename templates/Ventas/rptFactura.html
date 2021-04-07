@@ -47,21 +47,8 @@
                 <td style="text-align: right; width:60px; padding-top: 1cm">{{ detalle.subtotal }}</td>
             </tr>
         {% endfor %}
-        {% for item in items %}
-            <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px; color: white">
-                <td style="text-align: center"> {{ item }}</td>
-                <td>{{ item }}</td>
-                <td style="text-align: center">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
-            </tr>
-        {% endfor %}
-
     </table>
-    <br>
-    <br>
-    <table>
+    <table style="padding-top: 5cm">
         <tr style="padding-left: 2px; padding-right: 2px">
             <td colspan="5" rowspan="3"></td>
             <td style="text-align: right">Subtotal</td>
