@@ -205,7 +205,7 @@
                                                 <td>
                                                     {% if documento.autorizado %}
                                                         <a class="btn btn-app btn-success"
-                                                           style="cursor:pointer; background-color: #28a745"
+                                                           style="cursor:pointer; color: #28a745"
                                                            data-toggle="modal"
                                                            data-target="#from-autorizar"
                                                            onclick="autorizado('{{ documento.etiqueta }}',
@@ -215,7 +215,7 @@
                                                             <i class="fa fa-check-circle"></i>Autorizado</a>
                                                     {% else %}
                                                         <a class="btn btn-app btn danger"
-                                                           style="cursor:pointer;background-color: #dc3545"
+                                                           style="cursor:pointer;color: #dc3545"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
                                                                    '
