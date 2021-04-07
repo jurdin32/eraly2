@@ -30,7 +30,7 @@ def proformas(request,id=0):
         contador=establecimientos.count()
         if contador == 1:
             for esta in establecimientos:
-                return HttpResponseRedirect("/proforms/%s/"%esta.id)
+                return HttpResponseRedirect("/billing/%s/"%esta.id)
     contexto={
         'establecimiento':establecimiento,
         'establecimientos':establecimientos,
