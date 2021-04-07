@@ -43,7 +43,7 @@
             <tr>
                 <td style="padding-bottom: 5px">Sr(es).</td>
                 <td colspan="2" style="padding-bottom: 10px">{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
-                <td colspan="2" style="padding-bottom: 10px">{{ documento.fecha }}</td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.fecha|date:"d/m/Y" }}</td>
             </tr>
             <tr>
                 <td style="padding-bottom: 10px">RUC/CI</td>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>Direc.</td>
-                <td colspan="2" style="padding-bottom: 10px"></td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.cliente.direccion }}</td>
                 <td colspan="2" style="padding-bottom: 10px"></td>
             </tr>
             {% for detalle in detalles %}
