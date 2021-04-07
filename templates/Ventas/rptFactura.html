@@ -17,8 +17,8 @@
     <title>{{ documento.numero }}</title>
 </head>
 <body>
-<div style="background-color: #0b97c4; height: 200px; width: 14.75cm; float: left;">
-    <table>
+<div style="background-color: #0b97c4; height: 200px; width: 50%; float: left;">
+    <table style="padding-right: 1cm">
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
@@ -59,7 +59,7 @@
         </tr>
     </table>
 </div>
-<div style="background-color: darkgrey; height: 200px; width: 14.75cm; float: right;>
+<div style="background-color: darkgrey; height: 200px; width: 50%; float: right;>
     <table>
 
         {% for detalle in detalles %}
