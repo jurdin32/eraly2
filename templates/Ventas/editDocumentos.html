@@ -402,7 +402,6 @@
         suma()
 
         function agregarFila(id, tipo, nombre, precio, stock) {
-
             if ((parseInt(stock) > 0 && parseFloat(precio) > 0) || tipo == "S") {
                 if (ids.indexOf(parseInt(id)) < 0) {
                     ids.push(parseInt(id))
@@ -479,61 +478,64 @@
         }
     </script>
     <script>
-        $(document).ready(function () {
-            var params = {
-                language: {
-                    url: "{% static 'Spanish_dt.json' %}",
-                },
-                responsive: true
-            }
-            $("#tproductos").DataTable(params);
-            $("#tClientes").DataTable(params);
-            $("#buscarCliente").attr("data-toggle", "modal")
-            $("#buscarCliente").attr("data-target", "#listaClientes")
-            $(".js-example-basic-single").select2({
-                maximumSelectionLength: 1
-            });
 
-            $("#registrarDocumento").click(function () {
-                data = {
-                    establecimiento: '{{ establecimiento.id }}',
-                    cliente: $("#idCliente").text(),
-                    csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                    {% if documento %}
-                        tipo: '{{ documento.id }}',
-                    {% else %}
-                        tipo: "{{ documento.tipo }}",
-                    {% endif %}
-                    numero: $("#numeroDocumento").text(),
-                    subtotal: $(".subtotal").text(),
-                    iva: $(".iva").text(),
-                    total: $(".total").text(),
-                }
-                $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
-                    console.log("Se registro: " + result)
-                    if (result >= 1) {
-                        detallesDocumento(result)
-                        console.log("Se registro: " + result)
-                        toastr.success("La proforma se ha generado correctamente.!");
-                        $("#registrarDocumento").attr('disabled', 'disabled');
-                        $("#generarDocumento").removeAttr('disabled');
-                        $("#generarDocumento").attr("href", `/document/proform/${result}/`)
-                    } else {
-                        toastr.error("Ocurrio un error inesperado.!")
-                        $("#generarDocumento").removeAttr('disabled');
-                    }
-                })
-            });
+        var params = {
+            language: {
+                url: "{% static 'Spanish_dt.json' %}",
+            },
+            responsive: true
+        }
+        $("#tproductos").DataTable({params});
+        $("#tClientes").DataTable({params});
+        $("#buscarCliente").attr("data-toggle", "modal")
+        $("#buscarCliente").attr("data-target", "#listaClientes")
+        $(".js-example-basic-single").select2({
+            maximumSelectionLength: 1
         });
+
+        $("#registrarDocumento").click(function () {
+            data = {
+                establecimiento: '{{ establecimiento.id }}',
+                cliente: $("#idCliente").text(),
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                {% if documento %}
+                    tipo: '{{ documento.id }}',
+                {% else %}
+                    tipo: "{{ documento.tipo }}",
+                {% endif %}
+                numero: $("#numeroDocumento").text(),
+                subtotal: $(".subtotal").text(),
+                iva: $(".iva").text(),
+                total: $(".total").text(),
+            }
+            $.post("/proforms/create/{{ establecimiento.id }}/", data, function (result) {
+                console.log("Se registro: " + result)
+                if (result >= 1) {
+                    detallesDocumento(result)
+                    console.log("Se registro: " + result)
+                    toastr.success("La proforma se ha generado correctamente.!");
+                    $("#registrarDocumento").attr('disabled', 'disabled');
+                    $("#generarDocumento").removeAttr('disabled');
+                    $("#generarDocumento").attr("href", `/document/proform/${result}/`)
+                } else {
+                    toastr.error("Ocurrio un error inesperado.!")
+                    $("#generarDocumento").removeAttr('disabled');
+                }
+            })
+        });
+
     </script>
     <script>
-        $(".cliente").click(function () {
-            $("#idCliente").text($(this).data('id'))
-            $("#nombreCliente").text($(this).data('nombre'))
-            $("#direccionCliente").text($(this).data('direccion'))
-            $("#ciudadCliente").text($(this).data('ciudad'))
-            $("#telefonoCLiente").text($(this).data('telefono'))
+    function seleccionaCLiente(id,nombre,direccion,ciudad,telefono) {
+            $("#idCliente").text(id)
+            $("#nombreCliente").text(nombre)
+            $("#direccionCliente").text(direccion)
+            $("#ciudadCliente").text(ciudad)
+            $("#telefonoCLiente").text(telefono)
             toastr.success("El Cliente se agrego")
-        })
+            $("#listaClientes").modal('hide');
+        }
+
+
     </script>
 {% endblock %}
