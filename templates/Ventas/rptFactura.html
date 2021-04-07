@@ -42,13 +42,13 @@
         <table style="padding-left: 1cm; padding-right: 0.5cm;padding-top: 3cm">
             <tr>
                 <td style="padding-bottom: 5px">Sr(es).</td>
-                <td colspan="2" style="padding-bottom: 10px"></td>
-                <td colspan="2" style="padding-bottom: 10px">Fecha</td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.cliente.nombres }} {{ documento.cliente.apellidos }}</td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.fecha }}</td>
             </tr>
             <tr>
                 <td style="padding-bottom: 10px">RUC/CI</td>
-                <td colspan="2" style="padding-bottom: 10px"></td>
-                <td colspan="2" style="padding-bottom: 10px">Lugar</td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.cliente.cedula }}</td>
+                <td colspan="2" style="padding-bottom: 10px">{{ documento.cliente.ciudad }}</td>
             </tr>
             <tr>
                 <td>Direc.</td>
