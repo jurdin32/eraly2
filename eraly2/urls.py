@@ -90,7 +90,7 @@ urlpatterns = [
     path("proforms/edit/<int:id>/",editarDocumentos),
     path("giveBack/<int:id>/",anularDocumento),
 
-    path("billing/<id>/",facturas),
+    path("billing/<id>/",proformas),
 
     path("document/proform/<int:id>/",crearDocumentoPDF_Proforma),
     path("document/fac/<int:id>/",crearDocumentoPDF_Factura),

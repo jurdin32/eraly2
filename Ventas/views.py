@@ -16,13 +16,14 @@ def proformas(request,id=0):
     establecimientos=None
     productos=None
     clientes=Clientes.objects.filter(establecimiento__usuario=request.user)
-    proformaContador=""
-    print(proformaContador)
+    contadorDocumentos=""
+    tipo=request.GET.get('tipo')
+
     if int(id) > 0:
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
         numero=ConfigurarDocumentos.objects.get(establecimiento=establecimiento)
-        proformaContador=str(numero.proformas + Facturas.objects.filter(tipo="P",establecimiento=establecimiento).count()).zfill(10)
+        contadorDocumentos=str(numero.proformas + Facturas.objects.filter(tipo=tipo,establecimiento=establecimiento).count()).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
@@ -36,41 +37,11 @@ def proformas(request,id=0):
         'productos':productos,
         'clientes':clientes,
         'provincias':Provincia.objects.all(),
-        'contadorProforma':proformaContador,
+        'contadorProforma':contadorDocumentos,
         'precios':Precios.objects.all(),
     }
     return render(request, 'Ventas/proformas.html', contexto)
 
-def facturas(request,id=0):
-    establecimiento=None
-    establecimientos=None
-    productos=None
-    clientes=None
-    proformaContador=""
-    print(proformaContador)
-    if int(id) > 0:
-        establecimiento = Establecimiento.objects.get(id=id)
-        productos = Productos.objects.filter(establecimiento_id=id)
-        clientes=Clientes.objects.filter(establecimiento_id=id)
-        numero=ConfigurarDocumentos.objects.get(establecimiento=establecimiento)
-        proformaContador=str(numero.facturas+Facturas.objects.filter(tipo="F", establecimiento=establecimiento).count()).zfill(10)
-
-    else:
-        establecimientos = Establecimiento.objects.filter(usuario=request.user)
-        contador=establecimientos.count()
-        if contador == 1:
-            for esta in establecimientos:
-                return HttpResponseRedirect("/billing/%s/"%esta.id)
-    contexto={
-        'establecimiento':establecimiento,
-        'establecimientos':establecimientos,
-        'productos':productos,
-        'clientes':clientes,
-        'provincias':Provincia.objects.all(),
-        'contadorProforma':proformaContador,
-        'precios': Precios.objects.all(),
-    }
-    return render(request, 'Ventas/facturas.html', contexto)
 
 def eliminarregistrosFacturaProforma(id):
     try:
