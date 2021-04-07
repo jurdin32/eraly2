@@ -13,22 +13,24 @@
 
 
         }
-        body{
+
+        body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-        #footer {
-                position: fixed;
-                bottom: 0px;
-                left: 0px;
-                right: 0px;
-                height: 4cm;
 
-                /** Extra personal styles **/
-                background-color: #03a9f4;
-                color: white;
-                text-align: center;
-                line-height: 35px;
-            }
+        #footer {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: 4cm;
+
+            /** Extra personal styles **/
+            background-color: #03a9f4;
+            color: white;
+            text-align: center;
+            line-height: 35px;
+        }
     </style>
 
     <title>{{ documento.numero }}</title>
@@ -37,24 +39,25 @@
 <div id="cuerpo">
     <div style="border-right: lightgrey; height: 100%; width: 50%; float: left;font-size: 13px;">
         <table style="padding-left: 1cm; padding-right: 0.5cm;padding-top: 3cm">
-        <tr>
-            <td style="padding-bottom: 5px">Sr(es).</td>
-            <td colspan="2" style="padding-bottom: 10px"></td>
-            <td colspan="2" style="padding-bottom: 10px">Fecha</td>
-        </tr>
-        <tr>
-            <td style="padding-bottom: 10px">RUC/CI</td>
-            <td colspan="2" style="padding-bottom: 10px"></td>
-            <td colspan="2" style="padding-bottom: 10px">Lugar</td>
-        </tr>
-        <tr>
-            <td>Direc.</td>
-            <td colspan="2" style="padding-bottom: 10px"></td>
-            <td colspan="2" style="padding-bottom: 10px"></td>
-        </tr>
+            <tr>
+                <td style="padding-bottom: 5px">Sr(es).</td>
+                <td colspan="2" style="padding-bottom: 10px"></td>
+                <td colspan="2" style="padding-bottom: 10px">Fecha</td>
+            </tr>
+            <tr>
+                <td style="padding-bottom: 10px">RUC/CI</td>
+                <td colspan="2" style="padding-bottom: 10px"></td>
+                <td colspan="2" style="padding-bottom: 10px">Lugar</td>
+            </tr>
+            <tr>
+                <td>Direc.</td>
+                <td colspan="2" style="padding-bottom: 10px"></td>
+                <td colspan="2" style="padding-bottom: 10px"></td>
+            </tr>
             {% for detalle in detalles %}
                 <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                    <td style="text-align: center; width:60px; padding-top: 1cm"> {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
+                    <td style="text-align: center; width:60px; padding-top: 1cm">
+                        {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
                     <td style="padding-top: 1cm">{{ detalle.producto }}</td>
                     <td style="text-align: center; width:40px; padding-top: 1cm">{{ detalle.cantidad }}</td>
                     <td style="text-align: center; width:40px; padding-top: 1cm">{{ detalle.precioU }}</td>
@@ -64,65 +67,82 @@
         </table>
     </div>
     <div style=" height: 100%; width: 50%; float: right;font-size: 13px;">
-    <table style="padding-right: 1cm; padding-left: 0.5cm">
-    <tr>
-        <td>Sr(es).</td>
-        <td colspan="2"></td>
-        <td colspan="2">Fecha</td>
-    </tr>
-    <tr>
-        <td>RUC/CI</td>
-        <td colspan="2"></td>
-        <td colspan="2">Lugar</td>
-    </tr>
-    <tr>
-        <td>Direc.</td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-    </tr>
-        {% for detalle in detalles %}
-            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
-                <td style="text-align: center; width:60px">{{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
-                <td>{{ detalle.producto }}</td>
-                <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
-                <td style="text-align: center; width:40px">{{ detalle.precioU }}</td>
-                <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
+        <table style="padding-right: 1cm; padding-left: 0.5cm">
+            <tr>
+                <td>Sr(es).</td>
+                <td colspan="2"></td>
+                <td colspan="2">Fecha</td>
             </tr>
-        {% endfor %}
-        {% for item in items %}
-            <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px; color: white">
-                <td style="text-align: center"> {{ item }}</td>
-                <td>{{ item }}</td>
-                <td style="text-align: center">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
-                <td style="text-align: right">{{ item }}</td>
+            <tr>
+                <td>RUC/CI</td>
+                <td colspan="2"></td>
+                <td colspan="2">Lugar</td>
             </tr>
-        {% endfor %}
+            <tr>
+                <td>Direc.</td>
+                <td colspan="2"></td>
+                <td colspan="2"></td>
+            </tr>
+            {% for detalle in detalles %}
+                <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
+                    <td style="text-align: center; width:60px">
+                        {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
+                    <td>{{ detalle.producto }}</td>
+                    <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
+                    <td style="text-align: center; width:40px">{{ detalle.precioU }}</td>
+                    <td style="text-align: right; width:60px">{{ detalle.subtotal }}</td>
+                </tr>
+            {% endfor %}
+            {% for item in items %}
+                <tr style="padding-top:12px; padding-left: 2px; padding-right: 2px; color: white">
+                    <td style="text-align: center"> {{ item }}</td>
+                    <td>{{ item }}</td>
+                    <td style="text-align: center">{{ item }}</td>
+                    <td style="text-align: right">{{ item }}</td>
+                    <td style="text-align: right">{{ item }}</td>
+                    <td style="text-align: right">{{ item }}</td>
+                </tr>
+            {% endfor %}
 
-    </table>
-    <br>
-    <br>
-    <table>
-        <tr style="padding-left: 2px; padding-right: 2px">
-            <td colspan="5" rowspan="3"></td>
-            <td style="text-align: right">Subtotal</td>
-            <td style="text-align: right"> {{ documento.subtotal }}</td>
-        </tr>
-        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
-            <td style="text-align: right"> IVA</td>
-            <td style="text-align: right"> {{ documento.iva }}</td>
-        </tr>
-        <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
-            <td style="text-align: right"> Total</td>
-            <td style="text-align: right"> {{ documento.total }}</td>
-        </tr>
-    </table>
-</div>
+        </table>
+        <br>
+        <br>
+        <table>
+            <tr style="padding-left: 2px; padding-right: 2px">
+                <td colspan="5" rowspan="3"></td>
+                <td style="text-align: right">Subtotal</td>
+                <td style="text-align: right"> {{ documento.subtotal }}</td>
+            </tr>
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+                <td style="text-align: right"> IVA</td>
+                <td style="text-align: right"> {{ documento.iva }}</td>
+            </tr>
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+                <td style="text-align: right"> Total</td>
+                <td style="text-align: right"> {{ documento.total }}</td>
+            </tr>
+        </table>
+    </div>
 </div>
 <div id="footer">
-<div style="width: 50%; float: left">
-<table>
+    <div style="width: 50%; float: left">
+        <table>
+            <tr style="padding-left: 2px; padding-right: 2px">
+                <td colspan="4"></td>
+
+                <td style="text-align: right"> {{ documento.subtotal }}</td>
+            </tr>
+                <td colspan="4" style="text-align: right"> IVA</td>
+                <td style="text-align: right"> {{ documento.iva }}</td>
+            </tr>
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
+                <td colspan="4" style="text-align: right"></td>
+                <td style="text-align: right"> {{ documento.total }}</td>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 50%; float: right">
+        <table>
             <tr style="padding-left: 2px; padding-right: 2px">
                 <td colspan="5" rowspan="3"></td>
                 <td style="text-align: right">Subtotal</td>
@@ -137,24 +157,7 @@
                 <td style="text-align: right"> {{ documento.total }}</td>
             </tr>
         </table>
-</div>
-<div style="width: 50%; float: right">
-<table>
-            <tr style="padding-left: 2px; padding-right: 2px">
-                <td colspan="5" rowspan="3"></td>
-                <td style="text-align: right">Subtotal</td>
-                <td style="text-align: right"> {{ documento.subtotal }}</td>
-            </tr>
-            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
-                <td style="text-align: right"> IVA</td>
-                <td style="text-align: right"> {{ documento.iva }}</td>
-            </tr>
-            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px">
-                <td style="text-align: right"> Total</td>
-                <td style="text-align: right"> {{ documento.total }}</td>
-            </tr>
-        </table>
-</div>
+    </div>
 </div>
 
 </body>
