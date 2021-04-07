@@ -139,13 +139,10 @@
                                                     <a href="" data-target="#registro" data-toggle="modal"
                                                         class="btn btn-app btn-primary datos"
                                                         data-id="{{ promo.id }}"
-                                                        data-fi="{{ promo.fechaInicio|date:'Y-m-d' }}"
-                                                        data-ff="{{ promo.fechaFinal|date:'Y-m-d' }}"
-                                                        data-producto="{{ promo.precio.producto_id }}"
-                                                        data-precio="{{ promo.precio.id }}"
-                                                        data-precio1="{{ promo.precio.precioVenta|intcomma }}"
-                                                        data-descuento="{{ promo.descuento }}"
-                                                        data-uri="/products/promo/edit/{{ promo.id }}/">
+                                                       onclick="modificar_promo('{{ promo.fechaInicio|date:'Y-m-d' }}',
+                                                               '{{ promo.fechaFinal|date:'Y-m-d' }}','{{ promo.precio.producto_id }}',
+                                                               '{{ promo.precio.id }}','{{ promo.precio.precioVenta|intcomma }}',
+                                                               '{{ promo.descuento }}','/products/promo/edit/{{ promo.id }}/')">
                                                         <i class="fa fa-edit"></i> Editar</a></td>
                                                 <td style="text-align: center; vertical-align: middle"><a href="/products/promo/delete/{{ promo.id }}/"
                                                                                                           class="btn btn-app btn-danger"><i
@@ -194,23 +191,21 @@
             }
         })
         $("#reg").click(function (){
-            $("#formRegistrar").attr('action',"")
+            $("#formRegistrar").attr('action',"/products/promo/")
         });
-
-        $(".datos").click(function(){
-            console.log($(this).data('fi'))
-            $('#fi').val($(this).data('fi'))
-            $('#ff').val($(this).data('ff'))
-            $("#producto option[value="+ $(this).data('producto') +"]").attr("selected",true);
-            $('#precio').val($(this).data('precio'))
-            $('#precio1').val($(this).data('precio1').replace(",","."))
+        function modificar_promo(fi,ff,id_producto,precio,precio1,descuento,uri){
+            $('#fi').val(fi)
+            $('#ff').val(ff)
+            $("#producto option[value="+ id_producto +"]").attr("selected",true);
+            $('#precio').val(precio.replace(",","."))
+            $('#precio1').val(precio1.replace(",","."))
             $('#descuento').val($(this).data('descuento'))
-            $("#formRegistrar").attr('action',$(this).data('uri'))
-            let precio = parseFloat($("#precio1").val());
-            let descuento = parseFloat($("#descuento").val()) / 100;
-                let total = precio - (precio * descuento);
-                $("#total").val(total.toFixed(2))
-        })
+            let precios = parseFloat(precio1.replace(",","."));
+            let descuentos= parseFloat(descuento) / 100;
+            let total = precios - (precios * descuentos);
+             $("#total").val(total.toFixed(2))
+             $("#formRegistrar").attr('action',uri)
+        }
     </script>
 
 {% endblock %}
