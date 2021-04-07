@@ -74,7 +74,7 @@ class Subcategorias(models.Model):
 
 
     def __str__(self):
-        return '%s | %s' % (self.categoria.nombre,self.nombre)
+        return '%s' % (self.nombre[0:3])
 
     class Meta:
         verbose_name_plural = "2. Subcategorias "
