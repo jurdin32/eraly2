@@ -473,19 +473,6 @@
 
             })
         }
-
-        $("#tproductos").DataTable({
-            language: {
-                url: "{% static 'Spanish_dt.json' %}",
-            },
-            responsive: true
-        });
-        $("#tClientes").DataTable({
-             language: {
-                url: "{% static 'Spanish_dt.json' %}",
-            },
-            responsive: true
-        });
         $("#buscarCliente").attr("data-toggle", "modal")
         $("#buscarCliente").attr("data-target", "#listaClientes")
         $(".js-example-basic-single").select2({
@@ -533,6 +520,18 @@
             $("#listaClientes").modal('hide');
         }
 
+        $("#tproductos").DataTable({
+            language: {
+                url: "{% static 'Spanish_dt.json' %}",
+            },
+            responsive: true
+        });
+        $("#tClientes").DataTable({
+             language: {
+                url: "{% static 'Spanish_dt.json' %}",
+            },
+            responsive: true
+        });
 
     </script>
 {% endblock %}
