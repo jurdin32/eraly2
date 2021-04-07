@@ -205,14 +205,9 @@
                                                     {% else %}
                                                         <a style="cursor:pointer;" class="btn btn-app dx"
                                                            data-target="#from-despachar" data-toggle="modal"
-                                                           data-producto_id="{{ documento.id }}"
-                                                           data-nombre="
-
-                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}"
-                                                           data-cantidad="{{ documento.cantidad }}"
-                                                           data-precio="{{ documento.precio_total }}"
-                                                           data-hash="{{ documento.compra.hash }}"
-                                                        >
+                                                           onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
+                                                                   '{{ documento.precio_total }}')">
                                                             <i class="fa fa-share-square-o"></i>
                                                         </a>
                                                     {% endif %}
@@ -246,19 +241,18 @@
                 responsive: true
             });
         });
-
-        $(".dx").click(function () {
-            $("#codigo_compra").val($(this).data('hash'))
-            $("#producto_id").val($(this).data('producto_id'))
-            $("#nombre_producto").val($.trim($(this).data('nombre')))
-            let precio = parseFloat($(this).data('precio').replace(",", "."))
-            let iva = precio * 0.12
-            let total = precio + iva
-            $("#precio").val(precio.toFixed(2))
+        function autorizar(hash, producto_id, nombre, precio){
+            $("#codigo_compra").val(hash)
+            $("#producto_id").val(producto_id)
+            $("#nombre_producto").val($.trim(nombre))
+            let precios = parseFloat(precio.replace(",", "."))
+            let iva = precios * 0.12
+            let total = precios + iva
+            $("#precio").val(precios.toFixed(2))
             $("#iva").val(iva.toFixed(2))
             $("#total").val(total.toFixed(2))
+        }
 
-        });
         $(".da").click(function () {
             JsBarcode("#codigo", $(this).data('etiqueta'));
             $("#n").text($(this).data('n'))
