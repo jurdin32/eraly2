@@ -56,8 +56,8 @@
                 <td colspan="2" style="padding-bottom: 10px"></td>
             </tr>
             {% for detalle in detalles %}
-                <tr style="padding-top:1cm; padding-left: 2px; padding-right: 2px;">
-                    <td style="text-align: center; width:60px; padding-top: 10px">
+                <tr style="padding-top:2cm; padding-left: 2px; padding-right: 2px;">
+                    <td style="text-align: center; width:60px; padding-top: 1cm">
                         {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
                     <td style="padding-top: 10px">{{ detalle.producto }}</td>
                     <td style="text-align: center; width:40px; padding-top: 10px">{{ detalle.cantidad }}</td>
@@ -86,7 +86,7 @@
             </tr>
             {% for detalle in detalles %}
                 <tr style="padding-top:1cm; padding-left: 2px; padding-right: 2px;">
-                    <td style="text-align: center; width:60px; padding-top: 10px">
+                    <td style="text-align: center; width:60px; padding-top: 1cm">
                         {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
                     <td style="padding-top: 10px">{{ detalle.producto }}</td>
                     <td style="text-align: center; width:40px; padding-top: 10px">{{ detalle.cantidad }}</td>
