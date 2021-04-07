@@ -18,7 +18,7 @@
 </head>
 <body>
 <div style="background-color: #0b97c4; height: 200px; width: 50%; float: left;">
-    <table style="padding-right: 1cm">
+    <table style="padding-left: 1cm; padding-right: 0.5cm">
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:40px"> {{ detalle.producto.id }}</td>
@@ -59,8 +59,8 @@
         </tr>
     </table>
 </div>
-<div style="background-color: darkgrey; height: 200px; width: 50%; float: right;>
-    <table>
+<div style="background-color: darkgrey; height: 200px; width: 50%; float: right;">
+    <table style="padding-right: 1cm; padding-left: 0.5cm">
 
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
