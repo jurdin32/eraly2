@@ -23,6 +23,21 @@
 <body>
 <div style="border-right: lightgrey; height: 100%; width: 50%; float: left;font-size: 13px;">
     <table style="padding-left: 1cm; padding-right: 0.5cm">
+    <tr>
+        <td>Sr(es).</td>
+        <td colspan="2"></td>
+        <td colspan="2">Fecha</td>
+    </tr>
+    <tr>
+        <td>RUC/CI</td>
+        <td colspan="2"></td>
+        <td colspan="2">Lugar</td>
+    </tr>
+    <tr>
+        <td>Direc.</td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+    </tr>
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:60px"> {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
@@ -64,6 +79,21 @@
 </div>
 <div style=" height: 100%; width: 50%; float: right;font-size: 13px;">
     <table style="padding-right: 1cm; padding-left: 0.5cm">
+    <tr>
+        <td>Sr(es).</td>
+        <td colspan="2"></td>
+        <td colspan="2">Fecha</td>
+    </tr>
+    <tr>
+        <td>RUC/CI</td>
+        <td colspan="2"></td>
+        <td colspan="2">Lugar</td>
+    </tr>
+    <tr>
+        <td>Direc.</td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+    </tr>
         {% for detalle in detalles %}
             <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
                 <td style="text-align: center; width:60px">{{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
