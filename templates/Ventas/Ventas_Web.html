@@ -214,13 +214,11 @@
                                                                    {% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.envio %}'{{ direc.direccion }} - {{ direc.ciudad.nombre }} - {{ direc.provincia.nombre }}','{{ direc.celular }} - {{ direc.telefono }}'{% endif %}{% endfor %},)">
                                                             <i class="fa fa-check-circle"></i>Autorizado</a>
                                                     {% else %}
-                                                        <a class="btn btn-app btn danger"
-                                                           style="cursor:pointer;color: #dc3545"
+                                                        <a class="btn btn-app btn-primary"
+                                                           style="cursor:pointer;color: #007bff"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
-                                                                   '
-                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
-                                                                   '{{ documento.precio_total }}')">
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}')">
                                                             <i class="fa fa-share-square-o"></i>
                                                         </a>
                                                     {% endif %}
