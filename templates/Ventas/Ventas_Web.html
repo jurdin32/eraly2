@@ -200,7 +200,11 @@
                                                             onclick="autorizado('{{ documento.etiqueta }}',
                                                                     '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
                                                                     '{{ documento.compra.usuario.identificacion }}','{{ documento.compra.usuario.usuario.get_full_name }}',
-                                                                    '{% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.web %}{{ direc.direccion }}{% endif %}{% endfor %}')">
+                                                                    '{% for direc in documento.compra.usuario.direccionesweb_set.all %}
+                                                                        {% if direc.web %}
+                                                                            {{ direc.direccion }}
+                                                                        {% endif %}
+                                                                    {% endfor %}',)">
                                                             <i class="fa fa-check-circle"></i>Autorizado</a>
                                                     {% else %}
                                                         <a  class="btn btn-app btn danger" style="cursor:pointer;background-color: #dc3545"
