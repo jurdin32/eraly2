@@ -102,8 +102,8 @@
                                 <li><a><i class="fa fa-file-o"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         {% if establecimiento %}
-                                            <li><a href="/proforms/{{ establecimiento.id }}/">Proformas</a></li>
-                                            <li><a href="/billing/{{ establecimiento.id }}/">Facturación</a></li>
+                                            <li><a href="/billing/{{ establecimiento.id }}/?tipo=P">Proformas</a></li>
+                                            <li><a href="/billing/{{ establecimiento.id }}/?tipo=F">Facturación</a></li>
                                         {% else %}
                                             <li><a href="/billing/0/?tipo=P">Proformas</a></li>
                                             <li><a href="/billing/0/?tipo=F">Facturación</a></li>
