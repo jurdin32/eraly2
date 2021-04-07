@@ -39,8 +39,8 @@
         <td colspan="2" style="padding-bottom: 10px"></td>
     </tr>
         {% for detalle in detalles %}
-            <tr style="padding-top:50px; padding-left: 2px; padding-right: 2px;">
-                <td style="text-align: center; width:60px"> {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
+            <tr style="padding-top:5px; padding-left: 2px; padding-right: 2px;">
+                <td style="text-align: center; width:60px; padding-top: 5cm"> {{ detalle.producto.subcategoria|slice:3|upper }}{{ detalle.producto.id|stringformat:"03d" }}</td>
                 <td>{{ detalle.producto }}</td>
                 <td style="text-align: center; width:40px">{{ detalle.cantidad }}</td>
                 <td style="text-align: center; width:40px">{{ detalle.precioU }}</td>
