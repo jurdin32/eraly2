@@ -1,6 +1,7 @@
 import datetime
 import json
 
+from django.contrib import messages
 from django.contrib.admin.models import LogEntry
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -90,6 +91,7 @@ def eliminar_empresa(request):
 
 def crear_direcciones(request,idEmpresa):
     Direccion.objects.create(establecimiento_id=idEmpresa,ciudad_id=request.POST['ciudad'],direccion=request.POST['direccion'],telefono=request.POST['telefono']).save()
+    messages.add_message(request,messages.SUCCESS,"Se agregó nueva dirección a su empresa..!")
     return HttpResponseRedirect("/business/edit/%s/"%idEmpresa)
 
 def direcciones(request):
@@ -108,13 +110,10 @@ def modificar_direcciones(request,id):
         direccion.telefono=request.POST['telefono']
         direccion.direccion=request.POST['direccion']
         direccion.save()
-        mensaje="El registro de direcciones fue modificado existosamente..!"
-        tipo="success"
+        messages.add_message(request,messages.SUCCESS,"El registro de direcciones fue modificado existosamente..!")
     contexto={
        "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
         "provincias":Provincia.objects.all(),
-        "mensaje":mensaje,
-        "tipo": tipo,
     }
     return render(request, "empresa/direcciones.html",contexto)
 

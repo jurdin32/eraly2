@@ -111,10 +111,10 @@
                                                 <td style="vertical-align: middle">{{ direccion.direccion }}</td>
                                                 <td style="vertical-align: middle">{{ direccion.telefono }}</td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
-                                                    <a href="#" data-id="{{ direccion.id }}" data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"  data-telefono="{{ direccion.telefono }}" data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar</a>
+                                                    <a href="#" onclick="modificar('{{ direccion.id }}','{{ direccion.ciudad_id }}','{{ direccion.direccion }}','{{ direccion.telefono }}')"  data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar</a>
                                                 </td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
-                                                    <a href="" class="text-danger eliminar btn btn-app" data-id="{{ direccion.id }}" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Eliminar</a>
+                                                    <a href="" class="text-danger eliminar btn btn-app" onclick="eliminar('{{ direccion.id }}')" data-toggle="modal" data-target="#eliminar"> <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Eliminar</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -136,7 +136,8 @@
             $("#direcciones").DataTable({
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
-                }
+                },
+                responsive: true
             });
         });
     </script>
@@ -148,16 +149,14 @@
         });
     </script>
     <script>
-    $(".modificar").click(function(){
-        var idCiudad=$(this).data("ciudad")
-        $('#ciudades').val(idCiudad).trigger('change');
-        $("#direccion").val($(this).data("direccion"));
-        $("#telefono").val($(this).data("telefono"));
-        $("#frmModificar").attr("action","/directions/edit/"+$(this).data("id")+"/")
-    })
-
-    $(".eliminar").click(function (){
-        $("#eliminarRegistro").attr("href","/directions/delete/"+$(this).data("id")+"/")
-    })
+    function modificar(id, ciudad, direccion,telefono){
+        $('#ciudades').val(ciudad).trigger('change');
+        $("#direccion").val(direccion);
+        $("#telefono").val(telefono);
+        $("#frmModificar").attr("action","/directions/edit/"+id+"/")
+    }
+    function eliminar(id){
+         $("#eliminarRegistro").attr("href","/directions/delete/"+id+"/")
+    }
     </script>
 {% endblock %}

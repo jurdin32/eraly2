@@ -140,16 +140,12 @@
                                                 <td style="vertical-align: middle">{{ categoria.descripcion }}</td>
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a class="modal_modificar btn btn-app" href="#" data-toggle="modal"
-                                                       data-establecimiento="{{ categoria.establecimiento.id }}"
-                                                       data-id="{{ categoria.id }}" data-target="#registrar"
-                                                       data-icono="{{ categoria.icono }}"
-                                                       data-nombre="{{ categoria.nombre }}"
-                                                       data-detalle="{{ categoria.descripcion }}">
-                                                        <i class="fa fa-edit"></i> Editar</a>
+                                                       onclick="modificar_categoria('{{ categoria.id }}','{{ categoria.icono }}','{{ categoria.establecimiento.id }}','{{ categoria.nombre }}','{{ categoria.descripcion }}')"
+                                                       data-target="#registrar">
+                                                    <i class="fa fa-edit"></i> Editar</a>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    <a href="#" data-toggle="modal" data-target="#eliminar"
-                                                       data-id="{{ categoria.id }}" class="eliminar btn btn-app">
+                                                    <a href="#" data-toggle="modal" data-target="#eliminar" onclick="eliminar_categoria('{{ categoria.id }}')" class="eliminar btn btn-app">
                                                         <i class="fa fa-trash-o text-danger"></i> Eliminar</a>
                                                 </td>
                                             </tr>
@@ -184,28 +180,25 @@
                 pageLength: 100,
                 responsive: true
             });
-            $(".modal_modificar").click(function () {
+        });
+        function modificar_categoria(id, icono, establecimiento,nombre,detalle,){
                 $("#nombre").val("")
                 $("#detalle").text("")
-                var icono = $(this).data('icono').replace("fa ", "")
-                var establecimiento = $(this).data('establecimiento')
-
-                $("#icono").val(icono).trigger('change');
+                $("#icono").val(icono.replace("fa ", "")).trigger('change');
                 $("#establecimiento").val(establecimiento).trigger('change');
-                $("#nombre").val($(this).data('nombre'))
-                $("#detalle").text($(this).data('detalle'))
-                $("#frmRegistrar").attr("action", "/category/edit/" + $(this).data('id') + "/")
-            });
+                $("#nombre").val(nombre)
+                $("#detalle").text(detalle)
+                $("#frmRegistrar").attr("action", "/category/edit/" + id + "/")
+            }
+
             $(".modal_registrar").click(function () {
                 $("#nombre").val("")
                 $("#detalle").text("")
                 $("#frmRegistrar").attr("action", "/category/")
             });
 
-            $(".eliminar").click(function () {
-                $("#eliminarRegistro").attr("href", "/category/remove/" + $(this).data('id') + "/")
-            });
-
-        });
+            function eliminar_categoria(id){
+                $("#eliminarRegistro").attr("href", "/category/remove/" + id + "/")
+            };
     </script>
 {% endblock %}

@@ -131,15 +131,14 @@
                                                 <td style="vertical-align: middle">{{ sub.nombre }}</td>
                                                 <td style="vertical-align: middle">{{ sub.descripcion }}</td>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    <a class="modal_modificar btn btn-app" href="#" data-toggle="modal"
+                                                    <a class="modal_modificar btn btn-app" style="cursor: pointer" data-toggle="modal"
                                                        data-id="{{ sub.id }}" data-target="#registrar"
-                                                       data-icono="{{ sub.icono }}" data-nombre="{{ sub.nombre }}"
-                                                       data-detalle="{{ sub.descripcion }}">
+                                                       onclick="modificar_subcategoria('{{ sub.id }}','{{ sub.icono }}','{{ sub.nombre }}','{{ sub.descripcion }}')">
                                                         <i class="fa fa-edit"></i> Editar</a>
                                                 </td>
                                                 <td style="vertical-align: middle">
-                                                    <a href="#" data-toggle="modal" data-target="#eliminar"
-                                                       data-id="{{ sub.id }}" class="eliminar btn btn-app">
+                                                    <a style="cursor: pointer" data-toggle="modal" data-target="#eliminar"
+                                                       onclick="eliminar_subcategoria('{{ sub.id }}')" class="eliminar btn btn-app">
                                                         <i class="fa fa-trash-o text-danger"></i> Eliminar</a>
 
                                                 </td>
@@ -177,26 +176,25 @@
                 pageLength: 100,
                 responsive: true
             });
-            $(".modal_modificar").click(function () {
+        });
+        function modificar_subcategoria(id, icono, nombre,detalle){
                 $("#nombre").val("")
                 $("#detalle").text("")
-                var icono = $(this).data('icono').replace("fa ", "")
-                $("#icono").val(icono).trigger('change');
-                $("#nombre").val($(this).data('nombre'))
-                $("#detalle").text($(this).data('detalle'))
-                $("#frmRegistrar").attr("action", "/subcategory/edit/" + $(this).data('id') + "/")
-            });
+                $("#icono").val(icono.replace("fa ", "")).trigger('change');
+                $("#nombre").val(nombre)
+                $("#detalle").text(detalle)
+                $("#frmRegistrar").attr("action", "/subcategory/edit/" + id + "/")
+            }
+
             $(".modal_registrar").click(function () {
                 $("#nombre").val("")
                 $("#detalle").text("")
                 $("#frmRegistrar").attr("action", "/category/" + $(this).data('id') + "/")
             });
 
-            $(".eliminar").click(function () {
-                $("#eliminarRegistro").attr("href", "/subcategory/remove/" + $(this).data('id') + "/")
-            });
+            function eliminar_subcategoria(id){
+                $("#eliminarRegistro").attr("href", "/subcategory/remove/" + id + "/")
+            }
 
-
-        });
     </script>
 {% endblock %}
