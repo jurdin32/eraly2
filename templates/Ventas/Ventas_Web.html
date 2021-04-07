@@ -86,22 +86,30 @@
                     <div class="col-md-12 ">
                         <div class="x_panel">
                             <div class="x_content">
-                                <div style="text-align: center" id="imprimir">
-                                    <img style="height: 100px" id="codigo"/><br>
-                                    <ul style="list-style: none">
-                                        <li><span id="n"></span></li>
-                                        <li><span id="identificacion"></span></li>
-                                        <li><span id="cliente"></span></li>
-                                        <li><span id="dir"></span></li>
-                                        <li><span id="telef"></span></li>
-                                    </ul>
+                                <div class="row" style="text-align: center" id="imprimir">
+                                    <div class="col-6">
+                                        <img style="height: 100px" id="codigo"/>
+                                        <span id="n"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul style="list-style: none">
+                                            <li><strong>Datos del CLiente:</strong></li>
+                                            <li><span id="identificacion"></span></li>
+                                            <li><span id="cliente"></span></li>
+                                            <li><span id="dir"></span></li>
+                                            <li><span id="telef"></span></li>
+                                        </ul>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-danger" href="javascript:imprSelec('imprimir')"><i class="fa fa-print"></i> Imprimir</a>
+                    <a class="btn btn-danger" href="javascript:imprSelec('imprimir')"><i class="fa fa-print"></i>
+                        Imprimir</a>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -196,19 +204,23 @@
                                                 </td>
                                                 <td>
                                                     {% if documento.autorizado %}
-                                                        <a  class="btn btn-app btn-success" style="cursor:pointer; background-color: #28a745"
+                                                        <a class="btn btn-app btn-success"
+                                                           style="cursor:pointer; background-color: #28a745"
                                                            data-toggle="modal"
                                                            data-target="#from-autorizar"
-                                                            onclick="autorizado('{{ documento.etiqueta }}',
-                                                                    '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
-                                                                    '{{ documento.compra.usuario.identificacion }}','{{ documento.compra.usuario.usuario.get_full_name }}',
-                                                                    {% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.envio %}'{{ direc.direccion }}','{{ direc.celular }} - {{ direc.telefono }}'{% endif %}{% endfor %},)">
+                                                           onclick="autorizado('{{ documento.etiqueta }}',
+                                                                   '
+                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
+                                                                   '{{ documento.compra.usuario.identificacion }}','{{ documento.compra.usuario.usuario.get_full_name }}',
+                                                                   {% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.envio %}'{{ direc.direccion }}','{{ direc.celular }} - {{ direc.telefono }}'{% endif %}{% endfor %},)">
                                                             <i class="fa fa-check-circle"></i>Autorizado</a>
                                                     {% else %}
-                                                        <a  class="btn btn-app btn danger" style="cursor:pointer;background-color: #dc3545"
+                                                        <a class="btn btn-app btn danger"
+                                                           style="cursor:pointer;background-color: #dc3545"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
-                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
+                                                                   '
+                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
                                                                    '{{ documento.precio_total }}')">
                                                             <i class="fa fa-share-square-o"></i>
                                                         </a>
@@ -243,7 +255,8 @@
                 responsive: true
             });
         });
-        function autorizar(hash, producto_id, nombre, precio){
+
+        function autorizar(hash, producto_id, nombre, precio) {
             $("#codigo_compra").val(hash)
             $("#producto_id").val(producto_id)
             $("#nombre_producto").val($.trim(nombre))
@@ -255,13 +268,13 @@
             $("#total").val(total.toFixed(2))
         }
 
-        function autorizado(etiqueta,n,identificacion, cliente, direccion, telefono) {
+        function autorizado(etiqueta, n, identificacion, cliente, direccion, telefono) {
             JsBarcode("#codigo", etiqueta);
             $("#n").text(n)
             $("#identificacion").text("Identificación: " + identificacion)
-            $("#cliente").text("Cliente: " +cliente)
+            $("#cliente").text("Cliente: " + cliente)
             $("#dir").text("Dirección: " + direccion)
-            $("#telef").text("Teléfono: " +telefono)
+            $("#telef").text("Teléfono: " + telefono)
         }
 
         function imprSelec(nombre) {
