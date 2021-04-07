@@ -192,18 +192,16 @@
                                                 </td>
                                                 <td>
                                                     {% if documento.autorizado %}
-                                                        <a style="cursor:pointer" class="btn btn-app btn-primary da"
+                                                        <a  class="btn btn-app btn-success" style="cursor:pointer; background-color: #28a745"
                                                            data-toggle="modal"
                                                            data-target="#from-autorizar"
-                                                           data-etiqueta="{{ documento.etiqueta }}"
-                                                           data-cliente="{{ documento.compra.usuario.usuario.get_full_name }}"
-                                                           data-identificacion="{{ documento.compra.usuario.identificacion }}"
-                                                           data-n="
-                                                                   {{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}"
-                                                        "
-                                                        ><i class="fa fa-check-circle"></i>Autorizado</a>
+                                                            onclick="autorizado('{{ documento.etiqueta }}',
+                                                                    '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
+                                                                    '{{ documento.compra.usuario.identificacion }}','{{ documento.compra.usuario.usuario.get_full_name }}',
+                                                                    '{% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.web %}{{ direc.direccion }}{% endif %}{% endfor %}')">
+                                                            <i class="fa fa-check-circle"></i>Autorizado</a>
                                                     {% else %}
-                                                        <a style="cursor:pointer;" class="btn btn-app dx"
+                                                        <a  class="btn btn-app btn danger" style="cursor:pointer;background-color: #dc3545"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
                                                                    '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
@@ -253,12 +251,14 @@
             $("#total").val(total.toFixed(2))
         }
 
-        $(".da").click(function () {
-            JsBarcode("#codigo", $(this).data('etiqueta'));
+        function autorizado(etiqueta,n,identificacion, cliente, direccion, telefono) {
+            JsBarcode("#codigo", etiqueta);
             $("#n").text($(this).data('n'))
-            $("#identificacion").text("Identificación: " + $(this).data('identificacion'))
-            $("#cliente").text("Cliente: " + $(this).data('cliente'))
-        })
+            $("#identificacion").text("Identificación: " + identificacion)
+            $("#cliente").text("Cliente: " +cliente)
+            $("#dir").text("Dirección: " + direccion)
+            $("#tel").text("Teléfono: " +telefono)
+        }
 
         function imprSelec(nombre) {
             var ficha = document.getElementById(nombre);
