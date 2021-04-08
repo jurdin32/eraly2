@@ -52,7 +52,7 @@ def login_store_user(request):
                 return HttpResponseRedirect('/store/login/')
 
         else:
-            return render(request, 'Store/demo-shop-8-login.html',contexto)
+            return render(request, 'Store/demo-shop-8-login.html',contexo)
 
 
 def logout_(request):
