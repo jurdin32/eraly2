@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load static %}
+    {% load productosTags %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <link href="/static/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
@@ -228,6 +229,15 @@
                                     </select>
                                     <span>(Solo si Aplica) Talla</span>
                                     <span class="form-control-feedback right" aria-hidden="true">XL</span>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input id="stok" value="{% stock producto.id %}"
+                                           required="required" class="form-control" type="text" name="nombre">
+                                    <span>Stock inicial</span>
+                                    <span class="fa fa-shopping-basket form-control-feedback right"
+                                          aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="item form-group" id="imagen">
