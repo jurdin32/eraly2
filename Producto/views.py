@@ -1,3 +1,5 @@
+import random
+
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 # Create your views here.
@@ -223,7 +225,7 @@ def registarProducto(request):
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
             producto.imagen=request.FILES['imagen']
-        producto.hash = Hash_parse(producto.id)
+        producto.hash = Hash_parse(producto.id+random.randint(1, 1000))
         producto.save()
         if int(request.POST.get("stock"))>0:
             Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
@@ -249,7 +251,6 @@ def productos_detalles(request,id):
         producto.descripcion=request.POST['descripcion']
         producto.codigo = request.POST['codigo']
         producto.detallesTecnicos=request.POST['tecnicos']
-        producto.hash = Hash_parse(producto.id)
         print(Hash_parse(producto.id))
         if request.FILES:
             producto.imagen=request.FILES['imagen']
