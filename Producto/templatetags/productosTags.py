@@ -28,7 +28,7 @@ def stock(id):
             egresos=0
         return ingresos-egresos
     except:
-        pass
+        return 0
 
 @register.simple_tag
 def ingresos(id):
