@@ -73,11 +73,11 @@
             </tr>
             <tr style="width: 100%">
                 <td>{{ documento.cliente.cedula }}</td>
-                <td style="padding-left: 130px">{{ documento.fecha|date:"d/m/Y" }}</td>
+                <td style="padding-left: 125px">{{ documento.fecha|date:"d/m/Y" }}</td>
             </tr>
             <tr style="width: 100%;">
                 <td>{{ documento.cliente.direccion|upper }}</td>
-                <td style="padding-left: 130px; padding-top: 10px;  background-color: #0cc485">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
+                <td style="padding-left: 125px; padding-top: 10px;  background-color: #0cc485">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 15px">
             <td colspan="2" style="padding-left: 137px;">{{ documento.cliente.celular }}</td>
