@@ -107,7 +107,7 @@
                             <div class="col-sm-12">
                                 <a class="btn btn-danger" href="/category/">Todas</a>
                                 {% for establecimiento in establecimientos %}
-                                    <a class="btn btn-primary btn-app text-success"
+                                    <a class="btn btn-primary"
                                        href="/category/?cat={{ establecimiento.id }}">{{ establecimiento.nombreComercial }}</a>
                                 {% endfor %}
                                 <div class="card-box table-responsive">
@@ -128,8 +128,8 @@
                                         {% for categoria in categorias %}
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    <a href="/category/{{ categoria.id }}/"><i
-                                                            class="fa fa-eye text-primary" style="font-size: 20px"></i></a>
+                                                    <a href="/category/{{ categoria.id }}/" class="btn btn-app text-success"><i
+                                                            class="fa fa-eye text-primary" style="font-size: 20px"></i>Ver Subcat.</a>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a href="#"><i class="{{ categoria.icono }} text-success"
