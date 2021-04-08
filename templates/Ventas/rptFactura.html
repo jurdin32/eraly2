@@ -73,11 +73,11 @@
             </tr>
             <tr>
                 <td style=" width: 250px">{{ documento.cliente.cedula }}</td>
-                <td style="background-color: red;text-align: center; width: 100px">{{ documento.fecha|date:"d/m/Y" }}</td>
+                <td style="background-color: red;padding-left: 50px">{{ documento.fecha|date:"d/m/Y" }}</td>
             </tr>
             <tr style="width: 100%;">
                 <td style="width: 250px">{{ documento.cliente.direccion|upper }}</td>
-                <td style="padding-top: 17px; padding-left: 145px;">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
+                <td style="padding-top: 17px; padding-left: 50px;">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 0px">
             <td colspan="2" style="padding-left: 150px;">{{ documento.cliente.celular }}</td>
@@ -90,12 +90,12 @@
                 <td colspan="2">{{ documento.cliente.nombres|upper }} {{ documento.cliente.apellidos|upper }}</td>
             </tr>
             <tr style="width: 100%">
-                <td>{{ documento.cliente.cedula }}</td>
-                <td style="padding-left: 145px">{{ documento.fecha|date:"d/m/Y" }}</td>
+                <td style="width: 250px">{{ documento.cliente.cedula }}</td>
+                <td style="padding-left: 50px">{{ documento.fecha|date:"d/m/Y" }}</td>
             </tr>
             <tr style="width: 100%;">
-                <td>{{ documento.cliente.direccion|upper }}</td>
-                <td style="padding-left: 145px; padding-top: 10px">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
+                <td style="width: 250px">{{ documento.cliente.direccion|upper }}</td>
+                <td style="padding-left: 50px; padding-top: 10px">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 10px">
             <td colspan="2" style="padding-left: 150px">{{ documento.cliente.celular }}</td>
