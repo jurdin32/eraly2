@@ -26,9 +26,7 @@ def proformas(request,id=0):
         if tipo=="P":
             contadorDocumentos=str(numero.proformas + Facturas.objects.filter(tipo=tipo,establecimiento=establecimiento).count()).zfill(10)
         else:
-            contadorDocumentos = str(
-                numero.facturas + Facturas.objects.filter(tipo=tipo, establecimiento=establecimiento).count()).zfill(
-                10)
+            contadorDocumentos = str(numero.facturas + Facturas.objects.filter(tipo=tipo, establecimiento=establecimiento).count()).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
