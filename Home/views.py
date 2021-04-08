@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 # Create your views here.
+from Producto.models import Categorias
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -29,6 +31,9 @@ def index(request):
             return render(request, "Home/login.html")
 
 def login_store_user(request):
+    contexo={
+        'categorias':Categorias.objects.all()
+    }
     if request.user.is_authenticated:
         return HttpResponseRedirect("/store/dashboard/")
     else:
@@ -47,7 +52,7 @@ def login_store_user(request):
                 return HttpResponseRedirect('/store/login/')
 
         else:
-            return render(request, 'Store/demo-shop-8-login.html')
+            return render(request, 'Store/demo-shop-8-login.html',contexto)
 
 
 def logout_(request):
