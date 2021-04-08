@@ -52,7 +52,7 @@
             top: 297px;
             left: 43px;
             right: 0px;
-             height: 100%;
+
             /** Extra personal styles
             background-color: #03a9f4;
             color: white;
@@ -79,8 +79,8 @@
                 <td>{{ documento.cliente.direccion|upper }}</td>
                 <td style="padding-left: 130px; padding-top: 10px">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
             </tr>
-        <tr style="line-height: 15px; padding-left: 200px">
-            <td colspan="2" style="background-color: #0cc485">{{ documento.cliente.celular }}</td>
+        <tr style="width: 100%;line-height: 15px">
+            <td colspan="2" style="padding-left: 137px; background-color: #0cc485">{{ documento.cliente.celular }}</td>
         </tr>
     </table>
     </div>
@@ -98,7 +98,7 @@
                 <td style="padding-left: 130px; padding-top: 10px">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 13px">
-            <td colspan="2" style="padding-left: 135px">{{ documento.cliente.celular }}</td>
+            <td colspan="2" style="padding-left: 137px">{{ documento.cliente.celular }}</td>
         </tr>
     </table>
     </div>
