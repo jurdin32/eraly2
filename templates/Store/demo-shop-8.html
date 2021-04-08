@@ -533,7 +533,7 @@
         <div class="mobile-nav-wrapper">
             <ul class="mobile-side-menu">
                 <li><a href="/">Inicio</a></li>
-                {% if request.user.username %}
+                {% if not request.user.username %}
                 <li><<a href="/store/login/">Logín</a></li>
                 {% endif %}
                 <li>
