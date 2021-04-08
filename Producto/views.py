@@ -225,6 +225,8 @@ def registarProducto(request):
             producto.imagen=request.FILES['imagen']
         producto.hash = Hash_parse(producto.id)
         producto.save()
+        if int(request.POST.get("stock"))>0:
+            Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
         return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
     else:
