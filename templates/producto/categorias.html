@@ -139,13 +139,13 @@
                                                 <td style="vertical-align: middle">{{ categoria.nombre }}</td>
                                                 <td style="vertical-align: middle">{{ categoria.descripcion }}</td>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    <a class="modal_modificar btn btn-app" href="#" data-toggle="modal"
+                                                    <a class="modal_modificar btn btn-app text-primary" href="#" data-toggle="modal"
                                                        onclick="modificar_categoria('{{ categoria.id }}','{{ categoria.icono }}','{{ categoria.establecimiento.id }}','{{ categoria.nombre }}','{{ categoria.descripcion }}')"
                                                        data-target="#registrar">
-                                                    <i class="fa fa-edit"></i> Editar</a>
+                                                    <i class="fa fa-edit text-primary"></i> Editar</a>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    <a href="#" data-toggle="modal" data-target="#eliminar" onclick="eliminar_categoria('{{ categoria.id }}')" class="eliminar btn btn-app">
+                                                    <a href="#" data-toggle="modal" data-target="#eliminar" onclick="eliminar_categoria('{{ categoria.id }}')" class="eliminar btn btn-app text-danger">
                                                         <i class="fa fa-trash-o text-danger"></i> Eliminar</a>
                                                 </td>
                                             </tr>
