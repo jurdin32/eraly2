@@ -231,10 +231,10 @@
                                     <span class="form-control-feedback right" aria-hidden="true">XL</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="stock">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="stok" value="{% stock producto.id %}"
-                                           required="required" class="form-control" type="text" name="nombre">
+                                    <input value="{% stock producto.id %}"
+                                           required="required" class="form-control" type="number" name="stock">
                                     <span>Stock inicial</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
                                           aria-hidden="true"></span>
@@ -316,6 +316,7 @@
                 $("#imagen").hide();
                 $("#dTecnicos").hide();
                 $("#colores").hide();
+                $("#stock").hide();
             }
             else{
                 $("#codigo").show();
@@ -323,6 +324,7 @@
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
+                $("#stock").show();
             }
 
         }).change()
