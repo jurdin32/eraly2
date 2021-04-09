@@ -241,6 +241,14 @@ def registarProducto(request):
     else:
         return render(request, "producto/crearProducto.html",contexto)
 
+def colores():
+    colores = []
+    for color in Colores.objects.all():
+        if not color in colores:
+            colores.append(color)
+    print(colores)
+    return colores
+
 
 def productos_detalles(request,id):
     producto=Productos.objects.get(id=id)
@@ -269,7 +277,8 @@ def productos_detalles(request,id):
         'categorias':Categorias.objects.all(),
         'subcategorias':Subcategorias.objects.all(),
         'marcas':Marca.objects.all(),
-        'imagenes':ImagenesProducto.objects.filter(producto_id=id)
+        'imagenes':ImagenesProducto.objects.filter(producto_id=id),
+        'colores':colores(),
     }
     return render(request, 'producto/editarProducto.html',contexto)
 
