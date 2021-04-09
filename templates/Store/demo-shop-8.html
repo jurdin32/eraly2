@@ -178,12 +178,11 @@
                                                             <div class="col-md-2">
                                                                 <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
                                                                 <ul class="dropdown-mega-sub-nav">
+                                                                    {% for productos_ in sub.productos_set.all %}
                                                                     <li>
-                                                                        <a href="shortcodes-accordions.html">Accordions</a>
+                                                                        <a href="shortcodes-accordions.html">{{ productos_.nombre }}</a>
                                                                     </li>
-                                                                    <li><a href="shortcodes-toggles.html">Toggles</a>
-                                                                    </li>
-
+                                                                    {% endfor %}
                                                                 </ul>
                                                             </div>
                                                         {% endfor %}
