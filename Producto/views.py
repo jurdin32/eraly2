@@ -207,7 +207,7 @@ def registarProducto(request):
     producto = Productos()
     contexto = {
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'categorias': Categorias.objects.filter(establecimiento__usuario=request.user),
+        'categorias': Categorias.objects.all().order_by('nombre'),
         'marcas': Marca.objects.all(),
         'subcategorias':Subcategorias.objects.all(),
     }
