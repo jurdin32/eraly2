@@ -133,16 +133,16 @@ class Productos(models.Model,ResizeImageMixin):
              update_fields=None):
 
         if self.tipo=="P" and not self.imagen:
-            self.imagen = 'noproducto.png'
+            self.imagen = '/static/noproducto.png'
 
         if self.tipo=="S" and not self.imagen:
-            self.imagen = 'noservicio.png'
+            self.imagen = '/static/noservicio.png'
 
         if self.tipo=="V" and not self.imagen:
-            self.imagen = 'novehiculo.png'
+            self.imagen = '/static/novehiculo.png'
 
         if self.tipo=="I" and not self.imagen:
-            self.imagen = 'noinmueble.png'
+            self.imagen = '/static/noinmueble.png'
 
 
         try:
