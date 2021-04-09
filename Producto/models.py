@@ -102,7 +102,7 @@ class Marca(models.Model):
 
 class Productos(models.Model,ResizeImageMixin):
     tipo=models.CharField(max_length=20, default="P")
-    imagen=models.ImageField(upload_to="productos",null=True,blank=True, default='noimagen.jpg')
+    imagen=models.ImageField(upload_to="productos",null=True,blank=True)
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
     subcategoria=models.ForeignKey(Subcategorias_2, on_delete=models.CASCADE,null=True,blank=True)
@@ -133,16 +133,16 @@ class Productos(models.Model,ResizeImageMixin):
              update_fields=None):
 
         if self.tipo=="P" and not self.imagen:
-            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noproducto.png')
+            self.imagen = 'noproducto.png'
 
         if self.tipo=="S" and not self.imagen:
-            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noservicio.png')
+            self.imagen = 'noservicio.png'
 
         if self.tipo=="V" and not self.imagen:
-            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='novehiculo.png')
+            self.imagen = 'novehiculo.png'
 
         if self.tipo=="I" and not self.imagen:
-            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noinmueble.png')
+            self.imagen = 'noinmueble.png'
 
 
         try:
