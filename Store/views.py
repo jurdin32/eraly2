@@ -304,8 +304,9 @@ def pagos(request):
 def obtenerColores():
     colores=[]
     for color in Colores.objects.all():
-        if not color.codigoColor.replace("#","") in colores:
-            colores.append(color.codigoColor.replace("#",""))
+        code=color.codigoColor.replace("#","")
+        if not code in colores:
+            colores.append(code)
     return set(colores)
 
 def ver_subcategorias(request):
