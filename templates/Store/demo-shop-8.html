@@ -225,7 +225,7 @@
                                 <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
                                 <ul>
                                     {% for sub in categoria.subcategorias_set.all %}
-                                        <li><a href="/store/category/?categoria={{ sub.id }}">{{ sub.nombre }}</a></li>
+                                        <li><a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a></li>
                                     {% endfor %}
 
 
