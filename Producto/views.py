@@ -146,6 +146,7 @@ def editarCategoria(request,id):
     if request.POST:
         print(request.POST)
         categoria=Subcategorias.objects.get(id=id)
+        categoria.categoria_id=request.POST['categoria']
         categoria.nombre=request.POST["nombre"]
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
