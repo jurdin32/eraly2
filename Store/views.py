@@ -361,7 +361,7 @@ def ver_subcategorias(request):
     page = request.GET.get('page')
     contexto={
         'productos':paginator.get_page(page),
-        'categorias':Categorias.objects.all(),
+        'categorias':Categorias.objects.all().order_by('nombre'),
         'numero':request.GET.get("list"),
         'min':min,
         'max':max,
