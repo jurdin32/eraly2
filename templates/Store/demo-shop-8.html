@@ -170,15 +170,16 @@
                                     <a class="dropdown-toggle" href="#">
                                         {{ categoria.nombre|upper }}
                                         <i class="fa fa-caret-down"></i></a>
-                                    {% for sub in categoria.subcategorias_set.all %}
+
                                     <ul class="dropdown-menu">
+                                    {% for sub in categoria.subcategorias_set.all %}
                                         <li>
                                             <div class="dropdown-mega-content">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
                                                         <ul class="dropdown-mega-sub-nav">
-                                                            {% for productos_ in sub.productos_set.all|unordered_list %}
+                                                            {% for productos_ in sub.productos_set.all %}
                                                                 {% if forloop.counter <= 4 %}
                                                                     <li><a href="shortcodes-accordions.html">{{ productos_.nombre }}</a></li>
                                                                 {% endif %}
@@ -189,8 +190,9 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        {% endfor %}
                                     </ul>
-                                    {% endfor %}
+
 
 
                                 </li>
