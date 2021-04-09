@@ -97,7 +97,7 @@ class Productos(models.Model,ResizeImageMixin):
     talla=models.CharField(max_length=50,null=True,blank=True)
     dimension=models.CharField(max_length=200,null=True,blank=True)
     detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional",default="Sin detalles Técnicos")
-    descripcion = RichTextUploadingField(default="Sin descripción")
+    descripcion = RichTextUploadingField(default="Sin descripción",null=True,blank=True)
     estado=models.BooleanField(default=True)
     hash = models.CharField(max_length=256,null=True,blank=True)
     puntuacion=models.DecimalField(max_digits=9, decimal_places=2,default=0)
