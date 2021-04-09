@@ -170,12 +170,13 @@
                                     <a class="dropdown-toggle" href="#">
                                         {{ categoria.nombre|upper }}
                                         <i class="fa fa-caret-down"></i></a>
+                                    {% for sub in categoria.subcategorias_set.all %}
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="dropdown-mega-content">
                                                 <div class="row">
                                                     <div class="col-md-2">
-                                                        <span class="dropdown-mega-sub-title">Supermercado</span>
+                                                        <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
                                                         <ul class="dropdown-mega-sub-nav">
                                                             <li><a href="shortcodes-accordions.html">Accordions</a></li>
                                                             <li><a href="shortcodes-toggles.html">Toggles</a></li>
@@ -255,6 +256,9 @@
                                             </div>
                                         </li>
                                     </ul>
+                                    {% endfor %}
+
+
                                 </li>
                                 {% endfor %}
 
