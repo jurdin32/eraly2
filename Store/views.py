@@ -321,7 +321,7 @@ def ver_subcategorias(request):
         prod=prod.filter(subcategoria_id=request.GET.get('subcategoria'))
 
     elif request.GET.get('categoria'):
-        prod=prod.filter(subcategoria__categoria_id=request.GET.get('categoria'))
+        prod=prod.filter(subcategoria__subcategoria__subcategorias_2_id=request.GET.get('categoria'))
         cat= Categorias.objects.get(id=request.GET.get('categoria'))
         excento =1
 
