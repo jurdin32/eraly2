@@ -45,8 +45,8 @@ class ActividadProveedor(models.Model):
 
 
 class Categorias(models.Model):
+    principal=models.ForeignKey('self', null=True, blank=True, related_name='children',on_delete=models.CASCADE)
     establecimiento=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
-    icono=models.CharField(max_length=20, default='fa fa-')
     nombre=models.CharField(max_length=200)
     descripcion=models.TextField(null=True,blank=True)
 
@@ -91,7 +91,7 @@ class Productos(models.Model,ResizeImageMixin):
     imagen=models.ImageField(upload_to="productos",null=True,blank=True, default='noimagen.jpg')
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
-    subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
+    subcategoria=models.ForeignKey(Categorias, on_delete=models.CASCADE,null=True,blank=True)
     marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=100)
     talla=models.CharField(max_length=50,null=True,blank=True)
