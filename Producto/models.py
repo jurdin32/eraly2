@@ -117,7 +117,7 @@ class Productos(models.Model,ResizeImageMixin):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         try:
-            self.resize(self.imagen,(600,800))
+            self.resize(self.imagen,(600,600))
         except:
             pass
         super(Productos, self).save()
