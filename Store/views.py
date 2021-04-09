@@ -317,50 +317,52 @@ def ver_subcategorias(request):
     excento=0
     q=''
     ord=''
-    if request.GET.get('subcategoria'):
-        prod=prod.filter(subcategoria__subcategoria_id=request.GET.get('subcategoria'))
+    try:
+        if request.GET.get('subcategoria'):
+            prod=prod.filter(subcategoria__subcategoria_id=request.GET.get('subcategoria'))
 
-    elif request.GET.get('categoria'):
-        prod=prod.filter(subcategoria__subcategoria__categoria_id=request.GET.get('categoria'))
-        cat= Categorias.objects.get(id=request.GET.get('categoria'))
-        excento =1
+        elif request.GET.get('categoria'):
+            prod=prod.filter(subcategoria__subcategoria__categoria_id=request.GET.get('categoria'))
+            cat= Categorias.objects.get(id=request.GET.get('categoria'))
+            excento =1
 
-    if request.GET.get('size'):
-        prod=prod.filter(talla__icontains=request.GET.get('size'))
+        if request.GET.get('size'):
+            prod=prod.filter(talla__icontains=request.GET.get('size'))
 
-    if request.GET.get('color'):
-        prod=prod.filter(colores__codigoColor="#"+request.GET.get('color'))
+        if request.GET.get('color'):
+            prod=prod.filter(colores__codigoColor="#"+request.GET.get('color'))
 
-    if request.GET.get("q"):
-        q=request.GET.get("q")
-        prod = prod.filter(nombre__icontains=request.GET.get("q")) or prod.filter(subcategoria__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(etiquetas__icontains=request.GET.get("q")) or prod.filter(marca__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(establecimiento__nombreComercial__icontains=request.GET.get("q")) or prod.filter(descripcion__icontains=request.GET.get("q")) or \
-               prod.filter(detallesTecnicos__icontains=request.GET.get("q"))
-    if request.GET.get("ord"):
-        if request.GET.get("ord") == "name":
-            prod = prod.order_by('nombre')
-        elif request.GET.get("ord") == "star":
-            prod = prod.order_by('-puntuacion')
-        else:
-            prod = prod.order_by('precios__total')
-        ord=request.GET.get("ord")
+        if request.GET.get("q"):
+            q=request.GET.get("q")
+            prod = prod.filter(nombre__icontains=request.GET.get("q")) or prod.filter(subcategoria__nombre__icontains=request.GET.get("q")) or \
+                   prod.filter(etiquetas__icontains=request.GET.get("q")) or prod.filter(marca__nombre__icontains=request.GET.get("q")) or \
+                   prod.filter(establecimiento__nombreComercial__icontains=request.GET.get("q")) or prod.filter(descripcion__icontains=request.GET.get("q")) or \
+                   prod.filter(detallesTecnicos__icontains=request.GET.get("q"))
+        if request.GET.get("ord"):
+            if request.GET.get("ord") == "name":
+                prod = prod.order_by('nombre')
+            elif request.GET.get("ord") == "star":
+                prod = prod.order_by('-puntuacion')
+            else:
+                prod = prod.order_by('precios__total')
+            ord=request.GET.get("ord")
 
-    if request.GET.get('bprecio'):
-        valores=request.GET.get("bprecio").split(",")
-        nueva_lista = [sublista for sublista in valores if sublista]
-        if len(nueva_lista)==2:
-            min = nueva_lista[0].replace(",",".")
-            max= nueva_lista[1].replace(",",".")
-        else:
-            min=max =nueva_lista[0]
-        prod=prod.filter(precios__total__range=(float(min),float(max)))
+        if request.GET.get('bprecio'):
+            valores=request.GET.get("bprecio").split(",")
+            nueva_lista = [sublista for sublista in valores if sublista]
+            if len(nueva_lista)==2:
+                min = nueva_lista[0].replace(",",".")
+                max= nueva_lista[1].replace(",",".")
+            else:
+                min=max =nueva_lista[0]
+            prod=prod.filter(precios__total__range=(float(min),float(max)))
 
-    if request.GET.get("list"):
-        paginator = Paginator(prod, request.GET.get("list"))
-    else:
+        if request.GET.get("list"):
+            paginator = Paginator(prod, request.GET.get("list"))
+
+
+    except:
         paginator = Paginator(prod, 12)
-
     page = request.GET.get('page')
     contexto={
         'productos':paginator.get_page(page),
