@@ -20,7 +20,7 @@ from eraly2.snippers import Hash_parse
 def tienda(request):
     productos=Productos.objects.filter(precios__web=True)
     puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
-    paginator = Paginator(puntuados, 9)
+    paginator = Paginator(puntuados, 20)
     page = request.GET.get('page')
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
