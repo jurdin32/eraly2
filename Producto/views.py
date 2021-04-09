@@ -149,19 +149,12 @@ def editarCategoria(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
 
-
-
-
-
-
 def subcategorias(request,id):
     if request.POST:
-        Subcategorias.objects.create(categoria_id=id,nombre=request.POST["nombre"],
-                                     descripcion=request.POST['detalle']).save()
-
+        Subcategorias_2.objects.create(subcategoria_id=id,nombre=request.POST["nombre"]).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
-        'categoria':Categorias.objects.get(id=id),
+        'categoria':Subcategorias.objects.get(id=id),
         'subcategorias':Subcategorias.objects.filter(categoria_id=id),
         'iconos': iconos_text(),
     }
