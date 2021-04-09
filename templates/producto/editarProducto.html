@@ -265,7 +265,7 @@
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="detalles">
                                 <div class="col-md-12 col-sm-12">
                                     <span>Descripción del Producto</span>
                                     <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
@@ -278,7 +278,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             {% if not producto.tipo == "S" %}
-                                <h2><small>Detalles tecnicos del Producto</small></h2>
+                                <h2><small>Detalles técnicos del Producto</small></h2>
                                 {% else %}
                                 <h2><small>Opciones de registro</small></h2>
                             {% endif %}
@@ -509,15 +509,22 @@
                 $("#subirimagen").hide();
                 $("#galeria").hide();
             }
-            else{
+            if(valor == "P"){
                 $("#codigo").show();
-                 $("#marca").show();
+                $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
-                 $("#colores").show();
-                 $("#subirimagen").show();
-                 $("#galeria").show();
+                $("#stock").show();
+            }
+            if(valor == "V" || valor=="I"){
+                $("#codigo").show();
+                $("#marca").show();
+                $("#talla").hide();
+                $("#imagen").show();
+                $("#detalles").hide()
+                $("#dTecnicos").show();
+                $("#stock").show();
             }
 
         }).change()
