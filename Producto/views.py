@@ -134,7 +134,7 @@ def categorias(request):
         cats=Categorias.objects.create(establecimiento_id=request.POST['establecimiento'],
                                   nombre=request.POST["nombre"], descripcion=request.POST['detalle'])
         cats.save()
-        cats.slug=cats.nombre[0:2]+str(cats.id)
+        cats.slug=cats.nombre[0:1]
         cats.save()
 
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
@@ -152,7 +152,7 @@ def editarCategoria(request,id):
         categoria.establecimiento_id=request.POST['establecimiento']
         categoria.nombre=request.POST["nombre"]
         categoria.descripcion=request.POST['detalle']
-        categoria.slug = categoria.nombre[0:2] + str(categoria.id)
+        categoria.slug = categoria.nombre[0:1]
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
