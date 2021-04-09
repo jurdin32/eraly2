@@ -165,7 +165,7 @@ def editarSubCategoria(request,id):
         categoria.nombre=request.POST["nombre"]
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
-    return  HttpResponseRedirect('/category/%s'%categoria.categoria_id)
+    return  HttpResponseRedirect('/category/%s'%categoria.subcategoria_id)
 
 #------------ Productos ----------_#
 def productos(request):
