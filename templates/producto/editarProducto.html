@@ -478,20 +478,19 @@
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
     <script>
-        CKEDITOR.replace('descripcion');
-        CKEDITOR.replace('tecnicos');
 
-        CKEDITOR.editorConfig = function(config)
-        {
-            config.toolbar_Full =
-            [
-                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-                { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
-                { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
-                { name: 'colors', items : [ 'TextColor','BGColor' ] }
-            ];
-        };
-
+        function ckeditor_(control){
+            CKEDITOR.replace(control,{
+            toolbar : [
+                ['TextColor', 'BGColor','-','Image', 'Table','-'],
+                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+            ]
+        });
+        }
+        ckeditor_('tecnicos')
+        ckeditor_('descripcion')
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
