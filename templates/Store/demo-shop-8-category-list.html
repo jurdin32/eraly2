@@ -214,9 +214,9 @@
                                     {% for categoria in categorias %}
                                         <li>
                                             <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
-                                            <ul>
+                                            <ul class="list-group-item">
                                                 {% for subcat in categoria.subcategorias_set.all %}
-                                                    <li><a href="/store/category/?subcategoria={{ subcat.id }}">{{ subcat.nombre }}</a></li>
+                                                    <li class="listing-item"><a href="/store/category/?subcategoria={{ subcat.id }}">{{ subcat.nombre }}</a></li>
                                                 {% endfor %}
 
                                             </ul>
