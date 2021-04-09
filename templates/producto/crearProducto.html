@@ -345,7 +345,12 @@
             }
             if(valor == "V" || valor=="I"){
                 $("#codigo").show();
-                $("#marca").show();
+                if(valor=="V"){
+                    $("#marca").show();
+                }
+                else{
+                    $("#marca").hide();
+                }
                 $("#talla").hide();
                 $("#imagen").show();
                 $("#detalles").hide()
