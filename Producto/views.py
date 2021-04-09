@@ -243,8 +243,9 @@ def registarProducto(request):
 
 def colores():
     colores = []
+    aux=[]
     for color in Colores.objects.all():
-        if not color in colores:
+        if not color.codigoColor in aux:
             colores.append(color)
     print(colores)
     return colores
