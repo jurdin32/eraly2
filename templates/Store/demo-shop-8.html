@@ -172,8 +172,9 @@
                                         <i class="fa fa-caret-down"></i></a>
 
                                     <ul class="dropdown-menu">
-                                    {% for sub in categoria.subcategorias_set.all %}
+
                                         <li>
+                                        {% for sub in categoria.subcategorias_set.all %}
                                             <div class="dropdown-mega-content">
                                                 <div class="row">
                                                     <div class="col-md-2">
@@ -189,8 +190,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% endfor %}
                                         </li>
-                                        {% endfor %}
+
                                     </ul>
 
 
