@@ -247,7 +247,7 @@
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="detalles">
                                 <div class="col-md-12 col-sm-12">
                                     <span>Descripción del Producto</span>
                                     <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
@@ -342,6 +342,7 @@
                 $("#marca").show();
                 $("#talla").hide();
                 $("#imagen").show();
+                $("#detalles").hide()
                 $("#dTecnicos").show();
                 $("#stock").show();
             }
