@@ -126,7 +126,7 @@ def iconos_text():
     return iconos
 
 def categorias(request):
-    cat = Subcategorias.objects.filter(categoria__establecimiento__usuario=request.user)
+    cat = Subcategorias.objects.all()
     if request.GET.get("cat"):
         cat=Subcategorias.objects.filter(categoria__establecimiento_id=request.GET.get('cat'))
 
