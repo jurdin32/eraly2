@@ -223,7 +223,7 @@ def account(request):
 
     contexto={
         'usuario':usuario,
-
+        'categorias':Categorias.objects.all()
     }
     return render(request, 'Store/demo-shop-8-myaccount.html', contexto)
 
@@ -243,7 +243,8 @@ def dashboard(request):
         pass
 
     contexto={
-        'direccion':direccionesW
+        'direccion':direccionesW,
+        'categorias': Categorias.objects.all()
     }
     return render(request, 'Store/demo-shop-8-dashboard.html', contexto)
 
@@ -283,6 +284,7 @@ def directorio(request):
     contexto={
         'provincias':Provincia.objects.all(),
         'direcciones':DireccionesWeb.objects.filter(usuarioWeb=usuario),
+        'categorias': Categorias.objects.all()
     }
     return render(request, 'Store/demo-shop-8-directory.html', contexto)
 
@@ -449,7 +451,8 @@ def misOrdenes(request):
 
     contexto={
         'ordenes':ordenesss,
-        'orden':orden
+        'orden':orden,
+        'categorias': Categorias.objects.all()
     }
     if request.GET.get("order"):
         return render(request, 'Store/demo-shop-8-orders-detail.html', contexto)
@@ -457,7 +460,7 @@ def misOrdenes(request):
 
 def contact(request):
     contexto={
-
+        'categorias': Categorias.objects.all(),
     }
     return render(request, 'Store/demo-shop-8-contact-us.html', contexto)
 
