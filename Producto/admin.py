@@ -88,6 +88,17 @@ class AdminSubcategorias(admin.ModelAdmin):
     }
 
 
+@admin.register(Subcategorias_2)
+class AdminSubcategorias2(admin.ModelAdmin):
+    list_display = Attr(Subcategorias_2)
+    list_display_links = Attr(Subcategorias_2)
+    formfield_overrides = {
+        models.CharField: {
+            'widget': TextInput(attrs={'style': 'width:90%'})
+        },
+    }
+
+
 @admin.register(DetallesProducto)
 class AdminDetallesProducto(admin.ModelAdmin):
     list_display = Attr(DetallesProducto)
