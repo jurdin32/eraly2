@@ -332,6 +332,7 @@ def ver_subcategorias(request):
         cat= Categorias.objects.get(id=request.GET.get('categoria'))
         excento =1
 
+
     if request.GET.get('size'):
         prod=prod.filter(talla__icontains=request.GET.get('size'))
 

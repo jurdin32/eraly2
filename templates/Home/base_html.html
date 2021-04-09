@@ -83,7 +83,9 @@
                                         class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/suppliers/">Proveedores</a></li>
-                                        <li><a href="/category/">Categorías</a></li>
+                                        {% if request.user.is_superuser %}
+                                            <li><a href="/category/">Categorías</a></li>
+                                        {% endif %}
                                         <li><a href="/products/">Productos y Servicios</a></li>
                                         <li><a href="/products/promo/">Promociones</a></li>
                                         <li><a href="/kardex/">Kardex (Inventario)</a></li>
