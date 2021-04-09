@@ -56,7 +56,7 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.id }}</td>
                                             <td style="text-align: center; vertical-align: middle">{% if producto.codigo  %}{{ producto.codigo }}{% else %} <i>Sin código</i> {% endif %}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ producto.subcategoria.subcategoria.categoria.nombre }}: {{ producto.subcategoria.nombre }}</td>
+                                            <td style="text-align: center; vertical-align: middle">{{ producto.subcategoria.subcategoria.nombre }}: {{ producto.subcategoria.nombre }}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.nombre }}</td>
                                             <td style="text-align: justify; vertical-align: middle">
                                             {% if producto.tipo == "P" %}
