@@ -13,7 +13,6 @@ from Personas.models import *
 from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
 from django.contrib import messages
 
-from Producto.views import colores
 from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb
 from eraly2.snippers import Hash_parse
 
@@ -307,7 +306,7 @@ def obtenerColores():
     for color in Colores.objects.all():
         if not color.codigoColor.replace("#","") in colores:
             colores.append(color.codigoColor.replace("#",""))
-    return colores
+    return set(colores)
 
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
@@ -371,7 +370,7 @@ def ver_subcategorias(request):
         'max':max,
         'categoria':cat,
         'excento':excento,
-        'colores': colores(),
+        'colores': obtenerColores(),
         'q':q,
         'ord':ord,
     }
