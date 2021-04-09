@@ -116,6 +116,7 @@ class Productos(models.Model,ResizeImageMixin):
     estado=models.BooleanField(default=True)
     hash = models.CharField(max_length=256,null=True,blank=True)
     puntuacion=models.DecimalField(max_digits=9, decimal_places=2,default=0)
+    etiquetas=models.TextField(default="",null=True,blank=True)
 
     def _descripcion(self):
         return mark_safe(self.descripcion)
