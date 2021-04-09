@@ -56,7 +56,7 @@ class ResizeImageMixin:
     def resize(self, imageField, size:tuple):
         im = Image.open(imageField)  # Catch original
         source_image = im.convert('RGB')
-        source_image.thumbnail(size)  # Resize to size
+        source_image.resize(size)  # Resize to size
         output = BytesIO()
         source_image.save(output, format='JPEG') # Save resize image to bytes
         output.seek(0)
