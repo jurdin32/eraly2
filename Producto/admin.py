@@ -139,7 +139,7 @@ class KardexInline(admin.StackedInline):
 
 @admin.register(Productos)
 class AdminProductos(admin.ModelAdmin):
-    list_display = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion','_detallesTecnicos']
+    list_display = ['tipo','hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion','_detallesTecnicos']
 
     list_display_links = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion','_detallesTecnicos']
     readonly_fields = ['hash']
