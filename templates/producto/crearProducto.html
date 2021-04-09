@@ -329,15 +329,22 @@
                 $("#colores").hide();
                 $("#stock").hide();
             }
-            else{
+            if(valor == "P"){
                 $("#codigo").show();
-                 $("#marca").show();
+                $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
                 $("#stock").show();
             }
-
+            if(valor == "V" || valor=="B"){
+                $("#codigo").show();
+                $("#marca").show();
+                $("#talla").hide();
+                $("#imagen").show();
+                $("#dTecnicos").show();
+                $("#stock").show();
+            }
         }).change()
 
     </script>
