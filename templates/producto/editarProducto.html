@@ -155,9 +155,9 @@
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
                                     {% for categoria in categorias %}
                                         {% if categoria == producto.subcategoria.subcategoria.categoria %}
-                                         <option selected="selected" value="{{ categoria.slug }}">{{ categoria.nombre }}</option>
+                                         <option selected="selected" value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
                                             {% else %}
-                                         <option value="{{ categoria.slug }}">{{ categoria.nombre }}</option>
+                                         <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
                                         {% endif %}
 
                                     {% endfor %}
@@ -490,7 +490,7 @@
         $("#tipo").change(function(){
             console.log($(this).val())
             let valor = $(this).val()
-            if(valor == "S"){
+            if(valor == "SERVICIOS"){
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
