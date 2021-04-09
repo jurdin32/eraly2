@@ -17,24 +17,10 @@
                             <form class="form-label-left input_mask" id="frmRegistrar" method="post">
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <select class="form-control js-example-basic-single" multiple style="width: 100%"
-                                            name="icono" id="icono">
-                                        {% for icono in iconos %}
-                                            <option value="{{ icono }}">{{ icono }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name='nombre'
                                            id="nombre"
                                            placeholder="Aquí el nombre">
                                     <span class="fa fa-edit form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <textarea name="detalle" id="detalle" cols="30" rows="10" class="form-control"
-                                              style="padding-left: 40px"></textarea>
-                                    <span class="fa fa-file-text-o form-control-feedback left"
-                                          aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -104,43 +90,23 @@
                                            style="width:100%">
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
-                                            <th style="text-align: center;">Id</th>
                                             <th style="text-align: center;">Categoría</th>
-                                            <th style="text-align: center">Icono</th>
                                             <th>Nombre de la Subcategoria</th>
-                                            <th style="width: 50%">Descripción</th>
                                             <th style="text-align: center">Editar</th>
-                                            <th style="text-align: center">Eliminar</th>
-
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {% for sub in subcategorias %}
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle">
-                                                    {{ sub.id }}
+                                                    {{ sub.subcategoria.nombre }}
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle">
-                                                    {{ sub.categoria }}
-                                                </td>
-                                                <td style="text-align: center; vertical-align: middle">
-                                                    <a href="#"><i class="{{ sub.icono }} text-success"
-                                                                   style="font-size: 20px"></i></a>
-                                                </td>
-
                                                 <td style="vertical-align: middle">{{ sub.nombre }}</td>
-                                                <td style="vertical-align: middle">{{ sub.descripcion }}</td>
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a class="modal_modificar btn btn-app" style="cursor: pointer" data-toggle="modal"
                                                        data-id="{{ sub.id }}" data-target="#registrar"
                                                        onclick="modificar_subcategoria('{{ sub.id }}','{{ sub.icono }}','{{ sub.nombre }}','{{ sub.descripcion }}')">
                                                         <i class="fa fa-edit"></i> Editar</a>
-                                                </td>
-                                                <td style="vertical-align: middle">
-                                                    <a style="cursor: pointer" data-toggle="modal" data-target="#eliminar"
-                                                       onclick="eliminar_subcategoria('{{ sub.id }}')" class="eliminar btn btn-app">
-                                                        <i class="fa fa-trash-o text-danger"></i> Eliminar</a>
-
                                                 </td>
                                             </tr>
                                         {% endfor %}
