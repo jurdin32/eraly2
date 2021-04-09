@@ -210,10 +210,10 @@
                         </div>
                         <div id="panel-filter-category" class="accordion-body collapse in">
                             <div class="panel-body">
-                                <ul class="nav nav-list narrow">
+                                <ul>
                                     {% for categoria in categorias %}
                                         <li>
-                                            <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+                                            <a style="cursor:pointer; color: red" href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
                                             <ul class="nav nav-list narrow">
                                                 {% for subcat in categoria.subcategorias_set.all %}
                                                     <li><a href="/store/category/?subcategoria={{ subcat.id }}">{{ subcat.nombre }}</a></li>
