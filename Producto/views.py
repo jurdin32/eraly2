@@ -127,9 +127,6 @@ def iconos_text():
 
 def categorias(request):
     cat = Subcategorias.objects.all()
-    if request.GET.get("cat"):
-        cat=Subcategorias.objects.filter(categoria__establecimiento_id=request.GET.get('cat'))
-
     if request.POST:
         cats=Subcategorias.objects.create(categoria_id=request.POST['categoria'],nombre=request.POST["nombre"])
         cats.save()
@@ -152,11 +149,9 @@ def editarCategoria(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
 
-def eliminarCategoria(request,id):
-    cat = Categorias.objects.get(id=id)
-    cat.delete()
-    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
-    return HttpResponseRedirect('/category/')
+
+
+
 
 
 def subcategorias(request,id):
