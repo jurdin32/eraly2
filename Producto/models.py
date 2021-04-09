@@ -131,6 +131,20 @@ class Productos(models.Model,ResizeImageMixin):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+
+        if self.tipo=="P" and not self.imagen:
+            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noproducto.png')
+
+        if self.tipo=="S" and not self.imagen:
+            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noservicio.png')
+
+        if self.tipo=="V" and not self.imagen:
+            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='novehiculo.png')
+
+        if self.tipo=="I" and not self.imagen:
+            self.imagen = models.ImageField(upload_to="productos", null=True, blank=True, default='noinmueble.png')
+
+
         try:
             self.resize(self.imagen,(600,600))
         except:
