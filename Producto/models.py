@@ -222,8 +222,8 @@ class ImagenesProducto(models.Model,ResizeImageMixin):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.resize(self.imagen, (600, 800))
-        self.resize(self.thumbnail, (240, 320))
+        self.resize(self.imagen, (600, 600))
+        self.resize(self.thumbnail, (200, 200))
         super(ImagenesProducto, self).save()
 
 
