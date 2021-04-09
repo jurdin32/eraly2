@@ -155,7 +155,7 @@ def subcategorias(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
         'categoria':Subcategorias.objects.get(id=id),
-        'subcategorias':Subcategorias_2.objects.filter(categoria_id=id),
+        'subcategorias':Subcategorias_2.objects.filter(subcategoria_id=id),
     }
     return render(request, "producto/subcategorias.html",contexto)
 
