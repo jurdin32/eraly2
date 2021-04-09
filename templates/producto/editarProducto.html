@@ -141,16 +141,14 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
-                                        {% if producto.tipo == "P" %}
-                                            <option selected value="P">Producto</option>
-                                        {% elif producto.tipo == "S" %}
-                                            <option selected value="S">Servicios</option>
-                                        {% elif  producto.tipo == "B" %}
-                                            <option value="B">Bienes</option>
+                                    {% for categoria in categorias %}
+                                        {% if categoria == producto.subcategoria.subcategoria.categoria %}
+                                         <option selected="selected" value="{{ categoria.slug }}">{{ categoria.nombre }}</option>
+                                            {% else %}
+                                         <option value="{{ categoria.slug }}">{{ categoria.nombre }}</option>
                                         {% endif %}
-                                        <option value="P">Producto</option>
-                                        <option value="S">Servicios</option>
-                                        <option value="B">Bienes</option>
+
+                                    {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
@@ -186,9 +184,9 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
                                             style="width: 100%" required="required" multiple>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
-                                            {% for sub in categoria.subcategorias_set.all %}
+                                            {% for sub in categoria.subcategorias_2_set.all %}
                                                 {% if producto.subcategoria == sub %}
                                                     <option selected="selected"
                                                             value="{{ sub.id }}">{{ sub.nombre }}</option>

@@ -50,8 +50,15 @@ class Categorias(models.Model):
     descripcion=models.TextField(null=True,blank=True)
     slug=models.CharField(max_length=20,null=True,blank=True)
 
+
     def __str__(self):
         return '%s' % (self.nombre)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.nombre=str.upper(self.nombre)
+        self.slug = str.upper(self.slug)
+        super(Categorias, self).save()
 
     class Meta:
         verbose_name_plural = "1. Categorias "
@@ -72,7 +79,7 @@ class Subcategorias(models.Model):
 
 
     def __str__(self):
-        return '%s' % (self.nombre[0:3])
+        return '%s' % (self.nombre)
 
     class Meta:
         verbose_name_plural = "2. Subcategorias "
@@ -82,7 +89,7 @@ class Subcategorias_2(models.Model):
     nombre=models.CharField(max_length=200)
 
     def __str__(self):
-        return '%s' % (self.nombre[0:3])
+        return '%s' % (self.nombre)
 
     class Meta:
         verbose_name_plural = "2.1 Subcategorias Subcategoría"
@@ -99,7 +106,7 @@ class Productos(models.Model,ResizeImageMixin):
     imagen=models.ImageField(upload_to="productos",null=True,blank=True, default='noimagen.jpg')
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
-    subcategoria=models.ForeignKey(Categorias, on_delete=models.CASCADE,null=True,blank=True)
+    subcategoria=models.ForeignKey(Subcategorias_2, on_delete=models.CASCADE,null=True,blank=True)
     marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=100)
     talla=models.CharField(max_length=50,null=True,blank=True)

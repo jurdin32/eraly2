@@ -132,7 +132,7 @@
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
                                         {% for categoria in categorias %}
-                                        <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
+                                        <option value="{{ categoria.slug }}">{{ categoria.nombre|capfirst }}</option>
                                         {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
@@ -169,9 +169,9 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
                                             style="width: 100%" required="required" multiple>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
-                                            {% for sub in categoria.subcategorias_set.all %}
+                                            {% for sub in categoria.subcategorias_2_set.all %}
                                                 {% if producto.subcategoria == sub %}
                                                     <option selected="selected"
                                                             value="{{ sub.id }}">{{ sub.nombre }}</option>

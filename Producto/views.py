@@ -131,7 +131,7 @@ def categorias(request):
         cat=Categorias.objects.filter(establecimiento_id=request.GET.get('cat'))
 
     if request.POST:
-        cats=Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
+        cats=Categorias.objects.create(establecimiento_id=request.POST['establecimiento'],
                                   nombre=request.POST["nombre"], descripcion=request.POST['detalle'])
         cats.save()
         cats.slug=cats.nombre[0:2]+str(cats.id)
@@ -150,9 +150,9 @@ def editarCategoria(request,id):
         print(request.POST)
         categoria=Categorias.objects.get(id=id)
         categoria.establecimiento_id=request.POST['establecimiento']
-        categoria.icono="fa "+request.POST["icono"]
         categoria.nombre=request.POST["nombre"]
         categoria.descripcion=request.POST['detalle']
+        categoria.slug = categoria.nombre[0:2] + str(categoria.id)
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
@@ -166,8 +166,9 @@ def eliminarCategoria(request,id):
 
 def subcategorias(request,id):
     if request.POST:
-        Subcategorias.objects.create(categoria_id=id, icono="fa "+request.POST["icono"],nombre=request.POST["nombre"],
+        Subcategorias.objects.create(categoria_id=id,nombre=request.POST["nombre"],
                                      descripcion=request.POST['detalle']).save()
+
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
         'categoria':Categorias.objects.get(id=id),
@@ -212,7 +213,8 @@ def registarProducto(request):
     contexto = {
         'establecimientos': Establecimiento.objects.filter(usuario=request.user),
         'categorias': Categorias.objects.filter(establecimiento__usuario=request.user),
-        'marcas': Marca.objects.all()
+        'marcas': Marca.objects.all(),
+        'subcategorias':Subcategorias.objects.all(),
     }
     if request.POST:
         producto.establecimiento_id=request.POST['establecimiento']
@@ -264,7 +266,8 @@ def productos_detalles(request,id):
     contexto={
         'producto':producto,
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
-        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'categorias':Categorias.objects.all(),
+        'subcategorias':Subcategorias.objects.all(),
         'marcas':Marca.objects.all(),
         'imagenes':ImagenesProducto.objects.filter(producto_id=id)
     }
