@@ -84,7 +84,7 @@ class Subcategorias_2(models.Model):
         return '%s' % (self.nombre[0:3])
 
     class Meta:
-        verbose_name_plural = "2. Subcategorias "
+        verbose_name_plural = "2.1 Subcategorias Subcategoría"
 
 class Marca(models.Model):
     nombre=models.CharField(max_length=40)
