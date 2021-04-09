@@ -45,7 +45,6 @@ class ActividadProveedor(models.Model):
 
 
 class Categorias(models.Model):
-    principal=models.ForeignKey('self', null=True, blank=True, related_name='children',on_delete=models.CASCADE)
     establecimiento=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=200)
     descripcion=models.TextField(null=True,blank=True)
@@ -68,10 +67,18 @@ class DireccionProveedor(models.Model):
 
 class Subcategorias(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
-    icono=models.CharField(max_length=20)
     nombre=models.CharField(max_length=200)
-    descripcion=models.TextField()
 
+
+    def __str__(self):
+        return '%s' % (self.nombre[0:3])
+
+    class Meta:
+        verbose_name_plural = "2. Subcategorias "
+
+class Subcategorias_2(models.Model):
+    subcategoria = models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
+    nombre=models.CharField(max_length=200)
 
     def __str__(self):
         return '%s' % (self.nombre[0:3])
