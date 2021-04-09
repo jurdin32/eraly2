@@ -102,7 +102,7 @@ class Marca(models.Model):
         return self.nombre
 
 class Productos(models.Model,ResizeImageMixin):
-    tipo=models.CharField(max_length=2, default="P")
+    tipo=models.CharField(max_length=20, default="P")
     imagen=models.ImageField(upload_to="productos",null=True,blank=True, default='noimagen.jpg')
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
