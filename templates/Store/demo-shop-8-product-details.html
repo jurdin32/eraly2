@@ -80,9 +80,10 @@
             <ul class="breadcrumb">
                 <li><a href="/store/">Inicio</a></li>
                 <li>
-                    <a href="/store/category/?ctgry={{ producto.subcategoria.categoria.id }}">{{ producto.subcategoria.categoria.nombre }}</a>
+                    <a href="/store/category/?ctgry={{ producto.subcategoria.subcategoria.categoria.id }}">{{producto.subcategoria.subcategoria.categoria.nombre }}</a>
                 </li>
                 <li class="active">{{ producto.subcategoria.nombre }}</li>
+                <li class="active">{{ producto.subcategoria.subcategoria.nombre }}</li>
             </ul>
         </div>
     </section>
