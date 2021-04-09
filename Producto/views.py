@@ -131,8 +131,12 @@ def categorias(request):
         cat=Categorias.objects.filter(establecimiento_id=request.GET.get('cat'))
 
     if request.POST:
-        Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
-                                  nombre=request.POST["nombre"], descripcion=request.POST['detalle']).save()
+        cats=Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
+                                  nombre=request.POST["nombre"], descripcion=request.POST['detalle'])
+        cats.save()
+        cats.slug=cats.nombre[0:2]+str(cats.id)
+        cats.save()
+
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
         'categorias':cat,
