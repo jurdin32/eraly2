@@ -120,7 +120,6 @@ class Productos(models.Model,ResizeImageMixin):
             self.resize(self.imagen,(600,800))
         except:
             pass
-
         super(Productos, self).save()
 
 
