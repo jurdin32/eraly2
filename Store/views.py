@@ -310,7 +310,7 @@ def obtenerColores():
 
 def ver_subcategorias(request):
     prod=Productos.objects.filter(precios__web=True)
-    paginator=None
+    paginator = Paginator(prod, 12)
     cat=None
     min=0
     max =0
@@ -362,7 +362,7 @@ def ver_subcategorias(request):
 
 
     except:
-        paginator = Paginator(prod, 12)
+        pass
     page = request.GET.get('page')
     contexto={
         'productos':paginator.get_page(page),
