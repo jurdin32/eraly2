@@ -55,7 +55,7 @@ urlpatterns = [
     path("category/",categorias),
     path("category/edit/<int:id>/",editarCategoria),
     path("subcategory/edit/<int:id>/",editarSubCategoria),
-    path("subcategory/remove/<int:id>/",eliminarSubcategoria),
+
 
 
     path("category/<int:id>/",subcategorias),

@@ -160,23 +160,12 @@ def subcategorias(request,id):
     return render(request, "producto/subcategorias.html",contexto)
 
 def editarSubCategoria(request,id):
-    categoria = Subcategorias.objects.get(id=id)
+    categoria = Subcategorias_2.objects.get(id=id)
     if request.POST:
-        print(request.POST)
-        categoria.icono="fa "+request.POST["icono"]
         categoria.nombre=request.POST["nombre"]
-        categoria.descripcion=request.POST['detalle']
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/%s'%categoria.categoria_id)
-
-def eliminarSubcategoria(request,id):
-    sub = Subcategorias.objects.get(id=id)
-    cat = sub.categoria.id
-    sub.delete()
-    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
-    return HttpResponseRedirect('/category/%s' % cat)
-
 
 #------------ Productos ----------_#
 def productos(request):
