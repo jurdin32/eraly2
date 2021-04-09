@@ -105,7 +105,7 @@
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a class="modal_modificar btn btn-app" style="cursor: pointer" data-toggle="modal"
                                                        data-id="{{ sub.id }}" data-target="#registrar"
-                                                       onclick="modificar_subcategoria('{{ sub.id }}','{{ sub.icono }}','{{ sub.nombre }}','{{ sub.descripcion }}')">
+                                                       onclick="modificar_subcategoria('{{ sub.id }}','{{ sub.nombre }}',)">
                                                         <i class="fa fa-edit"></i> Editar</a>
                                                 </td>
                                             </tr>
@@ -143,12 +143,9 @@
                 responsive: true
             });
         });
-        function modificar_subcategoria(id, icono, nombre,detalle){
+        function modificar_subcategoria(id,nombre){
                 $("#nombre").val("")
-                $("#detalle").text("")
-                $("#icono").val(icono.replace("fa ", "")).trigger('change');
                 $("#nombre").val(nombre)
-                $("#detalle").text(detalle)
                 $("#frmRegistrar").attr("action", "/subcategory/edit/" + id + "/")
             }
 

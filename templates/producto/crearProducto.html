@@ -132,7 +132,7 @@
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
                                         {% for categoria in categorias %}
-                                        <option value="{{ categoria.nombre }}">{{ categoria.nombre|capfirst }}</option>
+                                        <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
                                         {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
@@ -309,7 +309,7 @@
         $("#tipo").change(function(){
             console.log($(this).val())
             let valor = $(this).val()
-            if(valor == "SERVICIO"){
+            if(valor == "S"){
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
