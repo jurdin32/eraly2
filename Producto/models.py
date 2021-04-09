@@ -144,7 +144,6 @@ class Productos(models.Model,ResizeImageMixin):
         if self.tipo=="I" and not self.imagen:
             self.imagen = '/static/noinmueble.png'
 
-
         try:
             self.resize(self.imagen,(600,600))
         except:
