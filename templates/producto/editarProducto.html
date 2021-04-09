@@ -290,6 +290,15 @@
                                     <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
+                        <div class="item form-group" id="tags">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input value="{{ producto.etiquetas }}"
+                                           required="required" class="form-control" type="number" name="etiquetas">
+                                    <span>Escriba aquí todas las que considere necesario</span>
+                                    <span class="fa fa-tags form-control-feedback right"
+                                          aria-hidden="true"></span>
+                                </div>
+                            </div>
                             {% if not producto.tipo == "S" %}
                                 <div class="ln_solid"></div>
                             {% endif %}
