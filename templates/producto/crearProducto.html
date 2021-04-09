@@ -296,8 +296,18 @@
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script>
-        CKEDITOR.replace('descripcion');
-        CKEDITOR.replace('tecnicos');
+       function ckeditor_(control){
+            CKEDITOR.replace(control,{
+            toolbar : [
+                ['TextColor', 'BGColor','-','Image', 'Table','-'],
+                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+            ]
+        });
+        }
+        ckeditor_('tecnicos')
+        ckeditor_('descripcion')
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
