@@ -198,6 +198,7 @@ def registarProducto(request):
             producto.marca = None
         producto.talla = recorrertallas(request)
         producto.codigo=request.POST['codigo']
+        producto.etiquetas = request.POST['etiquetas']
         producto.descripcion=request.POST['descripcion']
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
@@ -238,6 +239,7 @@ def productos_detalles(request,id):
         producto.talla = recorrertallas(request)
         producto.descripcion=request.POST['descripcion']
         producto.codigo = request.POST['codigo']
+        producto.etiquetas = request.POST['etiquetas']
         producto.detallesTecnicos=request.POST['tecnicos']
         print(Hash_parse(producto.id))
         if request.FILES:

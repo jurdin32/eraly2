@@ -173,7 +173,6 @@ CKEDITOR_CONFIGS = {
             {'name': 'links', 'items': ['Link', 'Unlink']},
             {'name': 'insert',
              'items': ['Image', 'Table', 'HorizontalRule', 'Smiley']},
-
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
         ],
