@@ -317,10 +317,6 @@
             placeholder: "Seleccione"
         });
         $(".js-example-basic-single2").select2();
-
-        {% if producto.talla %}
-            tallas='{{ producto.talla }}'.split(",");
-        {% endif %}
         $(".js-example-basic-single2").val(tallas).trigger('change');
 
         function setTwoNumberDecimal(event) {
