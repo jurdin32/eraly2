@@ -126,33 +126,27 @@ def iconos_text():
     return iconos
 
 def categorias(request):
-    cat = Categorias.objects.filter(establecimiento__usuario=request.user)
+    cat = Subcategorias.objects.filter(categoria__establecimiento__usuario=request.user)
     if request.GET.get("cat"):
-        cat=Categorias.objects.filter(establecimiento_id=request.GET.get('cat'))
+        cat=Subcategorias.objects.filter(categoria__establecimiento_id=request.GET.get('cat'))
 
     if request.POST:
-        cats=Categorias.objects.create(establecimiento_id=request.POST['establecimiento'],
-                                  nombre=request.POST["nombre"], descripcion=request.POST['detalle'])
+        cats=Subcategorias.objects.create(categoria_id=request.POST['categoria'],nombre=request.POST["nombre"])
         cats.save()
-        cats.slug=cats.nombre[0:1]
-        cats.save()
-
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
-        'categorias':cat,
+        'subcategorias':cat,
         'iconos':iconos_text(),
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'categorias':Categorias.objects.all().order_by('nombre')
     }
     return render(request, "producto/categorias.html",contexto)
 
 def editarCategoria(request,id):
     if request.POST:
         print(request.POST)
-        categoria=Categorias.objects.get(id=id)
-        categoria.establecimiento_id=request.POST['establecimiento']
+        categoria=Subcategorias.objects.get(id=id)
         categoria.nombre=request.POST["nombre"]
-        categoria.descripcion=request.POST['detalle']
-        categoria.slug = categoria.nombre[0:1]
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')

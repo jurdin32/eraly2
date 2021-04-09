@@ -18,9 +18,9 @@
                                 {% csrf_token %}
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <select class="form-control js-example-basic-single" style="width: 100%"
-                                            name="establecimiento" id="establecimiento" multiple>
-                                        {% for establecimiento in establecimientos %}
-                                            <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                            name="categoria" id="categoria" multiple>
+                                        {% for cat in categorias %}
+                                            <option value="{{ cat.id }}">{{ cat.nombre }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -29,12 +29,6 @@
                                            id="nombre"
                                            placeholder="Aquí el nombre">
                                     <span class="fa fa-edit form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-                                <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                    <textarea name="detalle" id="detalle" cols="30" rows="10" class="form-control"
-                                              style="padding-left: 40px"></textarea>
-                                    <span class="fa fa-file-text-o form-control-feedback left"
-                                          aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -108,26 +102,24 @@
                                         <thead style="background-color: #2A3F54; color: white">
                                         <tr>
                                             <th style="text-align: center;">Ver subcategorías</th>
-                                            <th>Establecimiento</th>
-                                            <th>Nombre de la Categoria</th>
-                                            <th>Descripción</th>
+                                            <th>Categoría</th>
+                                            <th>Nombre de la Subcategoria</th>
                                             <th style="text-align: center">Editar</th>
                                             <th style="text-align: center">Eliminar</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in subcategorias %}
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a href="/category/{{ categoria.id }}/" class="btn btn-app text-success"><i
                                                             class="fa fa-eye text-success" style="font-size: 20px"></i>Ver Subcat.</a>
                                                 </td>
-                                                <td style="vertical-align: middle">{{ categoria.establecimiento }}</td>
+                                                <td style="vertical-align: middle">{{ categoria.categoria.nombre }}</td>
                                                 <td style="vertical-align: middle">{{ categoria.nombre }}</td>
-                                                <td style="vertical-align: middle">{{ categoria.descripcion }}</td>
                                                 <td style="text-align: center; vertical-align: middle">
                                                     <a class="modal_modificar btn btn-app text-primary" href="#" data-toggle="modal"
-                                                       onclick="modificar_categoria('{{ categoria.id }}','{{ categoria.icono }}','{{ categoria.establecimiento.id }}','{{ categoria.nombre }}','{{ categoria.descripcion }}')"
+                                                       onclick="modificar_categoria('{{ categoria.id }}','{{ categoria.categoria.id }}','{{ categoria.nombre }}')"
                                                        data-target="#registrar">
                                                     <i class="fa fa-edit text-primary"></i> Editar</a>
                                                 </td>
@@ -168,19 +160,15 @@
                 responsive: true
             });
         });
-        function modificar_categoria(id, icono, establecimiento,nombre,detalle,){
+        function modificar_categoria(id, categoria,nombre,){
                 $("#nombre").val("")
-                $("#detalle").text("")
-                $("#icono").val(icono.replace("fa ", "")).trigger('change');
-                $("#establecimiento").val(establecimiento).trigger('change');
+                $("#categoria").val(categoria).trigger('change');
                 $("#nombre").val(nombre)
-                $("#detalle").text(detalle)
                 $("#frmRegistrar").attr("action", "/category/edit/" + id + "/")
             }
 
             $(".modal_registrar").click(function () {
                 $("#nombre").val("")
-                $("#detalle").text("")
                 $("#frmRegistrar").attr("action", "/category/")
             });
 
