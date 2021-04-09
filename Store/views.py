@@ -318,13 +318,17 @@ def ver_subcategorias(request):
     excento=0
     q=''
     ord=''
+
+    if request.GET.get('ctgry'):
+        prod = prod.filter(subcategoria__subcategoria__categoria_id=request.GET.get('categoria'))
+        cat = Categorias.objects.get(id=request.GET.get('categoria'))
+
     if request.GET.get('subcategoria'):
         prod=prod.filter(subcategoria__subcategoria_id=request.GET.get('subcategoria'))
 
     elif request.GET.get('categoria'):
-        prod=prod.filter(subcategoria__subcategoria__categoria_id=request.GET.get('categoria'))
-        cat= Categorias.objects.get(id=request.GET.get('categoria'))
-        excento =1
+        prod = prod.filter(subcategoria__subcategoria__categoria_id=request.GET.get('categoria'))
+        cat = Categorias.objects.get(id=request.GET.get('categoria'))
 
     if request.GET.get('size'):
         prod=prod.filter(talla__icontains=request.GET.get('size'))
