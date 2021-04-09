@@ -77,7 +77,7 @@
             </tr>
             <tr style="width: 100%;">
                 <td style="width: 250px">{{ documento.cliente.direccion|upper }}</td>
-                <td style="padding-top: 17px; padding-left: 50px;">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
+                <td style="padding-top: 17px; padding-left: 50px;">{{ documento.cliente.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 0px">
             <td colspan="2" style="padding-left: 150px;">{{ documento.cliente.celular }}</td>
@@ -95,7 +95,7 @@
             </tr>
             <tr style="width: 100%;">
                 <td style="width: 250px">{{ documento.cliente.direccion|upper }}</td>
-                <td style="padding-left: 45px; padding-top: 10px">{{ documento.establecimiento.direccion_set.first.ciudad.nombre|upper }}</td>
+                <td style="padding-left: 45px; padding-top: 10px">{{ documento.cliente.ciudad.nombre|upper }}</td>
             </tr>
         <tr style="width: 100%;line-height: 10px">
             <td colspan="2" style="padding-left: 150px">{{ documento.cliente.celular }}</td>
