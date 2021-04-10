@@ -5,12 +5,15 @@
 			<section class="form-section register-form">
 				<div class="container">
 					<h1 class="h2 heading-primary font-weight-normal mb-md mt-xlg">Crea una cuenta</h1>
-
-					<div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
-						<div class="box-content">
+                    <div class="box-content">
                             {% if mensaje %}
-                            <label for="" class="alert alert-success">{{ mensaje }} <a href="/store/login/">Iniciar Sesión</a></label>
+                                <label for="" class="alert alert-success">{{ mensaje }} <a href="/store/login/">Iniciar Sesión</a></label>
                             {% endif %}
+                        {% if mensaje %}
+                            <label for="" class="alert alert-danger">{{ error }} <a href="/store/password/change"></a></label>
+                        {% endif %} 
+					<div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
+						
 
 							<form action="" method="post">
                                 {% csrf_token %}

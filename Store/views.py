@@ -398,21 +398,27 @@ def ver_subcategorias(request):
 
 def register(request):
     mensaje=""
+    error=""
     if request.POST:
         nombres= request.POST.get("nombres")
         apellidos = request.POST.get("apellidos")
         ussuario=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
-        if request.POST.get("password1") == request.POST.get('password2'):
-            user=User.objects.create(username=ussuario,email=request.POST.get('email'),
-                                     first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
-                                     is_active=True,is_staff=False,is_superuser=False)
-            user.set_password(request.POST.get('password2'))
-            user.save()
-            UsuariosWeb.objects.create(usuario=user,identificacion="0000000000000").save()
-            mensaje="Su registro se ha creado de manera exitosa, puede iniciar sesión en el siguiente enlace:"
+        try:
+            uuuu=User.objects.get(email=request.POST.get("email"))
+            error = "No es posible realizar el registro, Esta dirección ya se uso por otro usuario,si no recuerda su contraseña puede cambiarla desde "
+        except Exception as error:
+            if request.POST.get("password1") == request.POST.get('password2'):
+                user=User.objects.create(username=ussuario,email=request.POST.get('email'),
+                                         first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
+                                         is_active=True,is_staff=False,is_superuser=False)
+                user.set_password(request.POST.get('password2'))
+                user.save()
+                UsuariosWeb.objects.create(usuario=user,identificacion="0000000000000").save()
+                mensaje="Su registro se ha creado de manera exitosa, puede iniciar sesión en el siguiente enlace:"
         print(request.POST)
     contexto={
-        'mensaje':mensaje
+        'mensaje':mensaje,
+        'error':error,
     }
     return render(request, 'Store/demo-shop-8-register.html', contexto)
 
