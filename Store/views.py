@@ -407,7 +407,7 @@ def register(request):
             uuuu=User.objects.get(email=request.POST.get("email"))
             print(uuuu)
             error = "No es posible realizar el registro, Esta dirección ya se uso por otro usuario,si no recuerda su contraseña puede cambiarla desde "
-        except Exception as error:
+        except Exception as ex:
             if request.POST.get("password1") == request.POST.get('password2'):
                 user=User.objects.create(username=ussuario,email=request.POST.get('email'),
                                          first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
