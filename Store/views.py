@@ -405,6 +405,7 @@ def register(request):
         ussuario=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         try:
             uuuu=User.objects.get(email=request.POST.get("email"))
+            print(uuuu)
             error = "No es posible realizar el registro, Esta dirección ya se uso por otro usuario,si no recuerda su contraseña puede cambiarla desde "
         except Exception as error:
             if request.POST.get("password1") == request.POST.get('password2'):
