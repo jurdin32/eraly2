@@ -360,7 +360,7 @@
                                                         {% endif %}
                                                     </div>
                                                 </td>
-                                                <td>{% if calificacion.usuario %}{{ calificacion.usuario }}:{% else %}
+                                                <td>{% if calificacion.usuario %}{{ calificacion.usuario.get_full_name }}:{% else %}
                                                     Anonimo:{% endif %}{% if calificacion.comentario %}
                                                     {{ calificacion.comentario }}
                                                 {% else %}
