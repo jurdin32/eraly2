@@ -8,6 +8,10 @@
 
 					<div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
 						<div class="box-content">
+                            {% if mensaje %}
+                            <label for="" class="alert alert-success">{{ mensaje }} <a href="/store/login/">Iniciar Sesión</a></label>
+                            {% endif %}
+
 							<form action="" method="post">
                                 {% csrf_token %}
 								<h4 class="heading-primary text-uppercase mb-lg">PERSONAL INFORMATION</h4>

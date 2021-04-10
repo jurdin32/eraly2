@@ -397,6 +397,7 @@ def ver_subcategorias(request):
 
 
 def register(request):
+    mensaje=""
     if request.POST:
         nombres= request.POST.get("nombres")
         apellidos = request.POST.get("apellidos")
@@ -407,9 +408,10 @@ def register(request):
                                      is_active=True,is_staff=False,is_superuser=False)
             user.save()
             UsuariosWeb.objects.create(usuario=user,identificacion="0000000000000").save()
+            mensaje="Su registro se ha creado de manera exitosa, puede iniciar sesión en el siguiente enlace:"
         print(request.POST)
     contexto={
-
+        'mensaje':mensaje
     }
     return render(request, 'Store/demo-shop-8-register.html', contexto)
 
