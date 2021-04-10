@@ -10,25 +10,21 @@ from Producto.models import Categorias
 
 
 def index(request):
-    if request.user.is_authenticated:
-        return render(request, "Home/index2.html")
-    else:
-        if request.POST:
-            print(request.POST)
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user is not None and user.is_active:
-                auth.login(request, user)
-                if request.GET.get('useranon'):
-                    return HttpResponseRedirect("/store/dashboard/")
-                return HttpResponseRedirect("/")
-            else:
-                messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
-                return render(request, "Home/login.html")
-
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user is not None and user.is_active and user.is_staff:
+            auth.login(request, user)
+            return HttpResponseRedirect("/")
         else:
+            messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
             return render(request, "Home/login.html")
+
+    if request.user.is_authenticated and request.user.is_staff:
+        return render(request, "/")
+    else:
+        return HttpResponseRedirect("/store/")
 
 def login_store_user(request):
     contexo={
