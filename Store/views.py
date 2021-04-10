@@ -406,7 +406,7 @@ def register(request):
             user=User.objects.create(username=ussuario,email=request.POST.get('email'),
                                      first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
                                      is_active=True,is_staff=False,is_superuser=False)
-            user.set_password(password=request.POST.get('password2'))
+            user.set_password(request.POST.get('password2'))
             user.save()
             UsuariosWeb.objects.create(usuario=user,identificacion="0000000000000").save()
             mensaje="Su registro se ha creado de manera exitosa, puede iniciar sesión en el siguiente enlace:"
