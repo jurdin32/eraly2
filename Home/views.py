@@ -50,9 +50,7 @@ def login_store_user(request):
             else:
                 messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
                 return HttpResponseRedirect('/store/login/')
-
-        else:
-            return render(request, 'Store/demo-shop-8-login.html',contexo)
+    return render(request, 'Store/demo-shop-8-login.html',contexo)
 
 
 def logout_(request):
