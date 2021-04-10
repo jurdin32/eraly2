@@ -42,11 +42,14 @@ def login_store_user(request):
             email = request.POST['email']
             password = request.POST['password']
             user = User.objects.filter(email=request.POST.get('email')).last()
-
             if user is not None and user.is_active:
-                user = auth.authenticate(username=user.username, password=password)
-                auth.login(request, user)
-                return HttpResponseRedirect("/store/dashboard/")
+                try:
+                    user = auth.authenticate(username=user.username, password=password)
+                    auth.login(request, user)
+                    return HttpResponseRedirect("/store/dashboard/")
+                except Exception as error:
+                    messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
+                    return HttpResponseRedirect('/store/login/')
             else:
                 messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
                 return HttpResponseRedirect('/store/login/')
