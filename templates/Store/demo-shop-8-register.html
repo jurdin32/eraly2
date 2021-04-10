@@ -2,77 +2,90 @@
 {% load static %}
 {% block content %}
 
-			<section class="form-section register-form">
-				<div class="container">
-					<h1 class="h2 heading-primary font-weight-normal mb-md mt-xlg">Crea una cuenta</h1>
+    <section class="form-section register-form">
+        <div class="container">
+            <h1 class="h2 heading-primary font-weight-normal mb-md mt-xlg">Crea una cuenta</h1>
+            {% if mensaje %}
+                <div class="alert alert-success mb-xlg" role="alert">
+                    {{ mensaje }} <a href="/store/login/">Iniciar Sesión</a>
+                </div>
+            {% endif %}
+            {% if mensaje %}
+                <div class="alert alert-danger mb-xlg" role="alert">
+                    {{ error }} <a href="/store/password/change/"></a>
+                </div>
+            {% endif %}
+            <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
+                <div class="box-content">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h4 class="heading-primary text-uppercase mb-lg">PERSONAL INFORMATION</h4>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="font-weight-normal">Nombres <span class="required">*</span></label>
+                                    <input name="nombres" aria-required="true" type="text" class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="font-weight-normal">Apellidos <span class="required">*</span></label>
+                                    <input name="apellidos" aria-required="true" type="text" class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
 
-					<div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
-						<div class="box-content">
-							<form action="" method="post">
-                                {% csrf_token %}
-								<h4 class="heading-primary text-uppercase mb-lg">PERSONAL INFORMATION</h4>
-								<div class="row">
-									<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="font-weight-normal">Nombres <span class="required">*</span></label>
-											<input name="nombres" aria-required="true" type="text" class="form-control" required>
-										</div>
-									</div>
-									<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="font-weight-normal">Apellidos <span class="required">*</span></label>
-											<input name="apellidos" aria-required="true"  type="text" class="form-control" required>
-										</div>
-									</div>
-								</div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="font-weight-normal">Correo <span class="required">*</span></label>
+                                    <input name="email" type="email" class="form-control" required>
+                                </div>
 
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="form-group">
-											<label class="font-weight-normal">Correo <span class="required">*</span></label>
-											<input name="email" type="email" class="form-control" required>
-										</div>
+                                <div class="checkbox mb-xlg">
+                                    <label>
+                                        <input type="checkbox" value="1">
+                                        Suscríbete al boletí
+                                    </label>
+                                </div>
+                                <h4 class="heading-primary text-uppercase mb-lg">INFORMACIÓN DE LOG-IN</h4>
+                            </div>
+                        </div>
 
-										<div class="checkbox mb-xlg">
-											<label>
-												<input type="checkbox" value="1">
-												 Suscríbete al boletí
-											</label>
-										</div>
-										<h4 class="heading-primary text-uppercase mb-lg">INFORMACIÓN DE LOG-IN</h4>
-									</div>
-								</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="font-weight-normal">Contraseña <span class="required">*</span></label>
+                                    <input name="password1" type="password" class="form-control" required>
+                                </div>
+                            </div>
 
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label class="font-weight-normal">Contraseña <span class="required">*</span></label>
-											<input name="password1" type="password" class="form-control" required>
-										</div>
-									</div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="font-weight-normal">Confirmar Contraseña<span
+                                            class="required">*</span></label>
+                                    <input name="password2" type="password" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
 
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label class="font-weight-normal">Confirmar Contraseña<span class="required">*</span></label>
-											<input name="password2" type="password" class="form-control" required>
-										</div>
-									</div>
-								</div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="required mt-lg mb-none">* Campos requeridos</p>
 
-								<div class="row">
-									<div class="col-xs-12">
-										<p class="required mt-lg mb-none">* Campos requeridos</p>
+                                <div class="form-action clearfix mt-none">
+                                    <a href="demo-shop-8-login.html" class="pull-left"><i
+                                            class="fa fa-angle-double-left"></i> Atras</a>
 
-										<div class="form-action clearfix mt-none">
-											<a href="demo-shop-8-login.html" class="pull-left"><i class="fa fa-angle-double-left"></i> Atras</a>
-
-											<input type="submit" class="btn btn-primary" value="Submit">
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</section>
+                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
