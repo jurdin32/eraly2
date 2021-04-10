@@ -193,6 +193,7 @@ def _tiendas(request):
     contexto={
         'categorias':Categorias.objects.all()
 
+
     }
     return render(request, 'Store/tiendas.html', contexto)
 
@@ -396,6 +397,8 @@ def ver_subcategorias(request):
 
 
 def register(request):
+    if request.POST:
+        print(request.POST)
     contexto={
 
     }
