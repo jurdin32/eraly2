@@ -401,11 +401,12 @@ def register(request):
     if request.POST:
         nombres= request.POST.get("nombres")
         apellidos = request.POST.get("apellidos")
-        ussuario=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","")
+        ussuario=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         if request.POST.get("password1") == request.POST.get('password2'):
-            user=User.objects.create(username=ussuario,email=request.POST.get('email'),password=request.POST.get('password2'),
+            user=User.objects.create(username=ussuario,email=request.POST.get('email'),
                                      first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
                                      is_active=True,is_staff=False,is_superuser=False)
+            user.set_password(password=request.POST.get('password2'))
             user.save()
             UsuariosWeb.objects.create(usuario=user,identificacion="0000000000000").save()
             mensaje="Su registro se ha creado de manera exitosa, puede iniciar sesión en el siguiente enlace:"
