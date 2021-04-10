@@ -22,9 +22,11 @@ def index(request):
             return render(request, "Home/login.html")
 
     if request.user.is_authenticated and request.user.is_staff:
-        return render(request, "/")
+        return render(request, "Home/login.html")
     else:
         return HttpResponseRedirect("/store/")
+
+
 
 def login_store_user(request):
     contexo={
