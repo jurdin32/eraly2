@@ -10,7 +10,12 @@
                         <h2>Productos <small>del establecimientos</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
-                                <a href="/products/new/" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Opciones</a>
+                                {% if empresa %}
+                                    <a href="/products/new/?empresa={{ empresa.id }}" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Opciones</a>
+                                {% else %}
+                                    <a href="/products/new/" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Opciones</a>
+                                {% endif %}
+
                             </li>
                         </ul>
                         <div class="clearfix"></div>
