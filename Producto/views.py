@@ -181,12 +181,6 @@ def productos(request):
 
 def registarProducto(request):
     producto = Productos()
-    contexto = {
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'categorias': Categorias.objects.all().order_by('nombre'),
-        'marcas': Marca.objects.all(),
-        'subcategorias':Subcategorias.objects.all(),
-    }
     if request.POST:
         producto.establecimiento_id=request.POST['establecimiento']
         producto.subcategoria_id=request.POST['categoria']
@@ -209,9 +203,15 @@ def registarProducto(request):
         if int(request.POST.get("stock"))>0:
             Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
-        return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
-    else:
-        return render(request, "producto/crearProducto.html",contexto)
+        return HttpResponseRedirect("/products/edit/%s/?precio=on"%str(producto.id))
+
+    contexto = {
+        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'categorias': Categorias.objects.all().order_by('nombre'),
+        'marcas': Marca.objects.all(),
+        'subcategorias': Subcategorias.objects.all(),
+    }
+    return render(request, "producto/crearProducto.html",contexto)
 
 def colores():
     colores = []
