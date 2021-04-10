@@ -23,7 +23,7 @@ class Clientes(models.Model):
 
 class UsuariosWeb(models.Model):
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
-    identificacion=models.CharField(max_length=13, unique=True)
+    identificacion=models.CharField(max_length=13)
 
     def __str__(self):
         return self.usuario.get_full_name()

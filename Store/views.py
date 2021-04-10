@@ -398,6 +398,14 @@ def ver_subcategorias(request):
 
 def register(request):
     if request.POST:
+        nombres= request.POST.get("nombres")
+        apellidos = request.POST.get("apellidos")
+        ussuario=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","")
+        if request.POST.get("password1") == request.POST.get('password2'):
+            user=User.objects.create(username=ussuario,email=request.POST.get('email'),password=request.POST.get('password2'),
+                                     first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),)
+            user.save()
+            UsuariosWeb.objects.create(usuario=user, )
         print(request.POST)
     contexto={
 
