@@ -1,636 +1,363 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% load static %}
+{% load productosTags %}
+{% block content %}
+    <div class="container" style="padding-top: 30px">
+        <div class="row">
+            <div class="col-md-9 col-md-push-2">
+                <div class="toolbar mb-none">
+                    <div class="sorter">
+                        <div class="sort-by">
+                            <label>Ordenar:</label>
+                            <select class="ordenar">
+                                <option>--Seleccione--</option>
+                                {% if ord == "star" %}
+                                    <option value="star" selected>Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == 'name' %}
+                                    <option value="star">Posición</option>
+                                    <option value="name" selected>Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% elif ord == "price" %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price" selected>Precio</option>
+                                {% else %}
+                                    <option value="star">Posición</option>
+                                    <option value="name">Nombre</option>
+                                    <option value="price">Precio</option>
+                                {% endif %}
 
-                {% block content %}
-                    <section class="page-header mb-lg">
-
-                        <div class="container">
-                            <ul class="breadcrumb">
-                                <li><a href="#">Home</a></li>
-
-                                <li><a href="#">Fashion</a></li>
-                                <li class="active">Dresses</li>
-                            </ul>
+                            </select>
                         </div>
-                    </section>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-10 col-md-push-2">
-                                <div class="toolbar mb-none">
-                                    <div class="sorter">
-                                        <div class="sort-by">
-                                            <label>Sort by:</label>
-                                            <select>
-                                                <option value="Position">Position</option>
-                                                <option value="Name">Name</option>
-                                                <option value="Price">Price</option>
-                                            </select>
-                                            <a href="#" title="Set Desc Direction">
-                                                <img src="{% static 'Store/img/demos/shop/i_asc_arrow.gif' %}" alt="Set Desc Direction">
-                                            </a>
-                                        </div>
+                        <div class="view-mode">
+                            <a href="{{ request.get_full_path }}&grid" title="List">
+                                <i class="fa fa-list-ul"></i>
+                            </a>
+                            <a href="{{ request.get_full_path }}&grid=on" title="Grid">
+                                <i class="fa fa-th"></i>
+                            </a>
 
-                                        <div class="view-mode">
-                                            <span title="Grid">
-                                                <i class="fa fa-th"></i>
-                                            </span>
-                                            <a href="#" title="List">
-                                                <i class="fa fa-list-ul"></i>
-                                            </a>
-                                        </div>
+                        </div>
 
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                                        </ul>
+                        <ul class="pagination">
+                            {% if productos.has_previous %}
+                                <li>
+                                    <a href="{{ request.get_full_path }}&page={{ productos.previous_page_number }}">
+                                        <i class="fa fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="active">
+                                <a href="{{ request.get_full_path }}&page={{ productos.number }}">{{ productos.number }}</a>
+                            </li>
+                            {% if productos.has_next %}
+                                <li>
+                                    <a href="{{ request.get_full_path }}&page={{ productos.next_page_number }}">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
 
-                                        <div class="limiter">
-                                            <label>Show:</label>
-                                            <select>
-                                                <option value="12">12</option>
-                                                <option value="24">24</option>
-                                                <option value="36">36</option>
-                                            </select>
+                        <div class="limiter">
+                            <label>Ver:</label>
+                            <select class="seleccion">
+                                {% if  numero == '12' %}
+                                    <option value="12" selected>12</option>
+                                    <option value="24">24</option>
+                                    <option value="36">36</option>
+                                {% elif numero == '24' %}
+                                    <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36">36</option>
+                                {% elif numero == '36' %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" selected>36</option>
+                                {% else %}
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36">36</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="products-grid columns4">
+                    {% for producto in productos %}
+                        <li>
+                            <div class="product">
+                                <figure class="product-image-area">
+                                    <a href="/store/details/?hash={{ producto.hash }}" title="Product Name"
+                                       class="product-image">
+                                        {% if producto.imagen %}
+                                            <img src="/media/{{ producto.imagen }}"
+                                                 alt="Product Name">
+                                            <img src="/media/{{ producto.imagen }}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        {% else %}
+                                            <img src="{% static 'noimagen.jpg' %}"
+                                                 alt="Product Name">
+                                            <img src="{% static 'noimagen.jpg' %}"
+                                                 alt="Product Name" class="product-hover-image">
+                                        {% endif %}
+
+                                    </a>
+                                    {% promocion_descuento producto.id %}
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="/store/details/?hash={{ producto.hash }}"
+                                                                title="Product Name">{{ producto.nombre }}</a></h2>
+                                    <div class="product-ratings">
+                                        <div class="rat-{{ producto.id }}">
+
                                         </div>
                                     </div>
-                                </div>
 
-                                <ul class="products-grid columns4">
-                                    <li>
-                                        <div class="product">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product Name">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                </a>
-
-                                                <a href="#" class="product-quickview">
-                                                    <i class="fa fa-share-square-o"></i>
-                                                    <span>Quick View</span>
-                                                </a>
-                                                <div class="product-label"><span class="discount">-10%</span></div>
-                                                <div class="product-label"><span class="new">New</span></div>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Sheer Blouse</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="old-price">$99.00</span>
-                                                    <span class="product-price">$89.00</span>
-                                                </div>
-
-                                                <div class="product-actions">
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a href="#" class="addtocart" title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <a href="#" class="comparelink" title="Add to Compare">
-                                                        <i class="glyphicon glyphicon-signal"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="product">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product Name">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                </a>
-
-                                                <a href="#" class="product-quickview">
-                                                    <i class="fa fa-share-square-o"></i>
-                                                    <span>Quick View</span>
-                                                </a>
-                                                <div class="product-label"><span class="discount">-10%</span></div>
-                                                <div class="product-label"><span class="new">New</span></div>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Sheer Blouse</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="old-price">$99.00</span>
-                                                    <span class="product-price">$89.00</span>
-                                                </div>
-
-                                                <div class="product-actions">
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a href="#" class="addtocart" title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <a href="#" class="comparelink" title="Add to Compare">
-                                                        <i class="glyphicon glyphicon-signal"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="product">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product Name">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                </a>
-
-                                                <a href="#" class="product-quickview">
-                                                    <i class="fa fa-share-square-o"></i>
-                                                    <span>Quick View</span>
-                                                </a>
-                                                <div class="product-label"><span class="discount">-10%</span></div>
-                                                <div class="product-label"><span class="new">New</span></div>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Sheer Blouse</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="old-price">$99.00</span>
-                                                    <span class="product-price">$89.00</span>
-                                                </div>
-
-                                                <div class="product-actions">
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a href="#" class="addtocart" title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <a href="#" class="comparelink" title="Add to Compare">
-                                                        <i class="glyphicon glyphicon-signal"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="product">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1.jpg' %}" alt="Product Name">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product1-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                </a>
-
-                                                <a href="#" class="product-quickview">
-                                                    <i class="fa fa-share-square-o"></i>
-                                                    <span>Quick View</span>
-                                                </a>
-                                                <div class="product-label"><span class="discount">-10%</span></div>
-                                                <div class="product-label"><span class="new">New</span></div>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Noa Sheer Blouse</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="old-price">$99.00</span>
-                                                    <span class="product-price">$89.00</span>
-                                                </div>
-
-                                                <div class="product-actions">
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a href="#" class="addtocart" title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <a href="#" class="comparelink" title="Add to Compare">
-                                                        <i class="glyphicon glyphicon-signal"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-
-                                    <li>
-                                        <div class="product">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product12.jpg' %}" alt="Product Name">
-                                                    <img src="{% static 'Store/img/demos/shop/products/product12-2.jpg' %}" alt="Product Name" class="product-hover-image">
-                                                </a>
-
-                                                <a href="#" class="product-quickview">
-                                                    <i class="fa fa-share-square-o"></i>
-                                                    <span>Quick View</span>
-                                                </a>
-                                                <div class="product-label"><span class="new">New</span></div>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Fashion Sweater - Pink</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$80.00</span>
-                                                </div>
-
-                                                <div class="product-actions">
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a href="#" class="addtocart" title="Add to Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                    </a>
-                                                    <a href="#" class="comparelink" title="Add to Compare">
-                                                        <i class="glyphicon glyphicon-signal"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-
-                                </ul>
-
-                                <div class="toolbar-bottom">
-                                    <div class="toolbar">
-                                        <div class="sorter">
-                                            <ul class="pagination">
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                                            </ul>
-
-                                            <div class="limiter">
-                                                <label>Show:</label>
-                                                <select>
-                                                    <option value="12">12</option>
-                                                    <option value="24">24</option>
-                                                    <option value="36">36</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                    <div class="product-price-box">
+                                    <div class="product-actions" style="float: right; padding-top: -10px">
+                                        <a style="cursor: pointer" class="addtocart" title="Add to Cart"
+                                           data-prod="{{ producto.id }}" data-promo="{% promocion_id producto.id %}">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Add to Cart</span>
+                                        </a>
+                                        <a href="/store/details/?hash={{ producto.hash }}" class="comparelink"
+                                           title="Quick View">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                    </div>
+                                        {% for precio in producto.precios_set.all %}
+                                            {% if precio.web %}
+                                                <span class="product-price">$ {{ precio.precioVenta }}</span>
+                                            {% endif %}
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-                            <aside class="col-md-2 col-md-pull-10 sidebar shop-sidebar">
-                                <div class="panel-group">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
-                                                    CATEGORÍAS
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="panel-filter-category" class="accordion-body collapse in">
-                                            <div class="panel-body">
-                                                <ul>
-                                                    <li><a href="#">Top &amp; Blouses</a></li>
-                                                    <li><a href="#">Accessories</a></li>
-                                                    <li><a href="#">Pants &amp; Denim</a></li>
-                                                    <li><a href="#">Dresses &amp; Skirts</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
-                                                    PRECIO
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="panel-filter-price" class="accordion-body collapse in">
-                                            <div class="panel-body">
-                                                <div class="filter-price">
-                                                    <div id="price-slider"></div>
-                                                    <div class="filter-price-details" style="text-align: left">
-                                                        <span>Desde </span>
-                                                        <br>
-                                                        <input type="text" id="price-range-low" class="form-control" placeholder="Min">
-                                                        <br>
-                                                        <span>a</span>
-                                                        <br>
-                                                        <input type="text" id="price-range-high" class="form-control" placeholder="Max">
-                                                        <br><p></p>
-                                                        <a  href="#" class="btn btn-primary">FILTRAR</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-size">
-                                                    TAMAÑO
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="panel-filter-size" class="accordion-body collapse in">
-                                            <div class="panel-body">
-                                                <ul class="configurable-filter-list">
-                                                    <li>
-                                                        <a href="#">S</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">M</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">L</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">XL</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">2XL</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">3XL</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
-                                                    MARCAS
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="panel-filter-brand" class="accordion-body collapse in">
-                                            <div class="panel-body">
-                                                <ul>
-                                                    <li><a href="#">Nike</a></li>
-                                                    <li><a href="#">Adidas</a></li>
-                                                    <li><a href="#">Puma</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
-                                                    COLOR
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="panel-filter-color" class="accordion-body collapse in">
-                                            <div class="panel-body">
-                                                <ul class="configurable-filter-list filter-list-color">
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #000"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #21284f"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #272725"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #006b20"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #68686a"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #1736a9"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #f6edd1"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #a69172"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #d8c7a7"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #fd9904"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #f56ab8"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #442937"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #bd1721"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #1226ad"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #cbcbcb"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #c7b89a"></span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span style="background-color: #fff"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="toolbar-bottom">
+                    <div class="toolbar">
+                        <div class="sorter">
+                            <ul class="pagination">
+                                {% if productos.has_previous %}
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&page={{ productos.previous_page_number }}">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="active">
+                                    <a href="{{ request.get_full_path }}&page={{ productos.number }}">{{ productos.number }}</a>
+                                </li>
+                                {% if productos.has_next %}
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&page={{ productos.next_page_number }}">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
 
-                                <h4>Featured</h4>
-                                <div class="owl-carousel owl-theme" data-plugin-options="{'items':1, 'margin': 5, 'dots': false, 'nav': true}">
-                                    <div>
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-                                                    <img src="../img/demos/shop/products/product13-2.jpg" alt="Product Name" class="product-hover-image">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - S</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:0%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$220.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product14.jpg" alt="Product Name">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:80%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$180.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product15.jpg" alt="Product Name">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 2XL</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:0%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product16.jpg" alt="Product Name">
-                                                    <img src="../img/demos/shop/products/product16-2.jpg" alt="Product Name" class="product-hover-image">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - 3XL</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$220.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product17.jpg" alt="Product Name">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - M</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:0%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$180.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product product-sm">
-                                            <figure class="product-image-area">
-                                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                                    <img src="../img/demos/shop/products/product13.jpg" alt="Product Name">
-                                                </a>
-                                            </figure>
-                                            <div class="product-details-area">
-                                                <h2 class="product-name"><a href="demo-shop-8-product-details.html" title="Product Name">Diamond Ring - XL</a></h2>
-                                                <div class="product-ratings">
-                                                    <div class="ratings-box">
-                                                        <div class="rating" style="width:80%"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product-price-box">
-                                                    <span class="product-price">$240.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </aside>
+                            <div class="limiter">
+                                <label>Ver:</label>
+                                <select class="seleccion">
+                                    {% if  numero == '12' %}
+                                        <option value="12" selected>12</option>
+                                        <option value="24">24</option>
+                                        <option value="36">36</option>
+                                    {% elif numero == '24' %}
+                                        <option value="12">12</option>
+                                        <option value="24" selected>24</option>
+                                        <option value="36">36</option>
+                                    {% elif numero == '36' %}
+                                        <option value="12">12</option>
+                                        <option value="24">24</option>
+                                        <option value="36" selected>36</option>
+                                    {% else %}
+                                        <option value="12">12</option>
+                                        <option value="24">24</option>
+                                        <option value="36">36</option>
+                                    {% endif %}
+                                </select>
+                            </div>
                         </div>
                     </div>
-                {% endblock %}
+                </div>
+            </div>
+
+            <aside class="col-md-3 col-md-pull-10 sidebar shop-sidebar">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-category">
+                                    Categorías
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="panel-filter-category" class="accordion-body collapse in" aria-expanded="false">
+                            <div class="panel-body">
+                                <ul class="nav nav-list narrow">
+                                    {% for categoria in categorias %}
+                                        <li>
+                                            <a style="cursor:pointer; color: red" href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-price">
+                                    PRECIO
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="panel-filter-price" class="accordion-body collapse in">
+                            <div class="panel-body">
+                                <div class="filter-price">
+                                    <div id="price-slider"></div>
+                                    <div class="filter-price-details">
+                                        <span>Des</span>
+                                        <input type="text" id="price-range-low" value="{{ min }}" class="form-control"
+                                               placeholder="Min">
+                                        <span>Has</span>
+                                        <input type="text" id="price-range-high" value="{{ max }}" class="form-control"
+                                               placeholder="Max">
+                                        <a href="#" class="btn btn-primary">Busc</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-size">
+                                    Tallas
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="panel-filter-size" class="accordion-body collapse in">
+                            <div class="panel-body">
+                                <ul class="configurable-filter-list">
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=s">S</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=m">M</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=l">L</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=xl">XL</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=2xl">2XL</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ request.get_full_path }}&size=3xl">3XL</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% if excento == 1 %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-brand">
+                                        {{ categoria.nombre }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panel-filter-brand" class="accordion-body collapse in">
+                                <div class="panel-body">
+                                    <ul>
+                                        {% for sub in categoria.subcategorias_set.all %}
+                                            <li>
+                                                <a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" href="#panel-filter-color">
+                                    COLOR
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="panel-filter-color" class="accordion-body collapse in">
+                            <div class="panel-body">
+                                <ul class="configurable-filter-list filter-list-color">
+                                    {% for color in colores %}
+                                        <li>
+                                            <a href="{{ request.get_full_path }}&color={{ color }}">
+                                                <span style="background-color: #{{ color }}"></span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        console.log({{ request.get.list }})
+        $(".seleccion").change(function () {
+            let uri = "{{ request.get_full_path }}"
+            uri += "&list=" + $(this).val();
+            location.href = uri
+        })
+        let precios_rango = Array(2)
+        $("#price-range-low").keyup(function () {
+            precios_rango[0] = ($(this).val())
+            precios_rango[1] = $("#price-range-high").val()
+            let uri = "{{ request.get_full_path }}" + "&bprecio=" + precios_rango
+            console.log(precios_rango, uri)
+            $("#bx").attr("href", uri)
+        })
+
+        $("#price-range-high").keyup(function () {
+            precios_rango[0] = $("#price-range-low").val()
+            precios_rango[1] = ($(this).val())
+            let uri = "{{ request.get_full_path }}" + "&bprecio=" + precios_rango
+            console.log(precios_rango, uri)
+            $("#bx").attr("href", uri)
+        })
+
+        {% for producto in productos %}
+            $('.rat-{{producto.id}}').starrr({
+                rating: {% rating_productos producto.id %},
+                max: 5,
+                readOnly: true,
+            })
+        {% endfor %}
+
+        $(".ordenar").change(function () {
+            location.href = "{{ request.get_full_path }}&ord=" + $(this).val()
+        })
+    </script>
+{% endblock %}

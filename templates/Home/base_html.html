@@ -57,7 +57,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Bienvenido,</span>
-                        <h2>{{ request.user }}</h2>
+                        <h2>{{ request.user.first_name }}</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -83,7 +83,9 @@
                                         class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/suppliers/">Proveedores</a></li>
-                                        <li><a href="/category/">Categorías</a></li>
+                                        {% if request.user.is_superuser %}
+                                            <li><a href="/category/">Categorías</a></li>
+                                        {% endif %}
                                         <li><a href="/products/">Productos y Servicios</a></li>
                                         <li><a href="/products/promo/">Promociones</a></li>
                                         <li><a href="/kardex/">Kardex (Inventario)</a></li>
@@ -102,12 +104,13 @@
                                 <li><a><i class="fa fa-file-o"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         {% if establecimiento %}
-                                            <li><a href="/proforms/{{ establecimiento.id }}/">Proformas</a></li>
-                                            <li><a href="/billing/{{ establecimiento.id }}/">Facturación</a></li>
+                                            <li><a href="/billing/{{ establecimiento.id }}/?tipo=P">Proformas</a></li>
+                                            <li><a href="/billing/{{ establecimiento.id }}/?tipo=F">Facturación</a></li>
                                         {% else %}
-                                            <li><a href="/proforms/0/">Proformas</a></li>
-                                            <li><a href="/billing/0/">Facturación</a></li>
+                                            <li><a href="/billing/0/?tipo=P">Proformas</a></li>
+                                            <li><a href="/billing/0/?tipo=F">Facturación</a></li>
                                         {% endif %}
+                                        <li><a href="/store/autority/">Ventas Web (Store)</a></li>
 
                                         <li><a href="/document/list/?establecimiento=0">Registro de Documentos</a></li>
                                     </ul>

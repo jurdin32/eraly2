@@ -21,11 +21,12 @@ from django.conf.urls.static import static
 
 from Empresa.views import *
 from Home.views import *
-from Personas.views import registroCLientes, deshabilitarCliente
+from Personas.views import *
 from Producto.views import *
 from Store.views import *
 from Store.views import _productos, _detalles, _tiendas
 from Ventas.views import *
+from eraly2 import routes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,14 +47,15 @@ urlpatterns = [
     path("products/prices/<int:id>/",registrarPrecios),
     path("products/prices/delete/<int:id>/",eliminarPrecios),
     path("products/promo/",promociones),
+    path("products/promo/edit/<int:id>/",editarPromocion),
+    path("products/images/<int:id>/",subir_imagenes_producto),
 
 
 
     path("category/",categorias),
     path("category/edit/<int:id>/",editarCategoria),
-    path("category/remove/<int:id>/",eliminarCategoria),
     path("subcategory/edit/<int:id>/",editarSubCategoria),
-    path("subcategory/remove/<int:id>/",eliminarSubcategoria),
+
 
 
     path("category/<int:id>/",subcategorias),
@@ -82,11 +84,12 @@ urlpatterns = [
     path("proforms/createCLient/<id>/",registroClienteFacturaProforma),
     path("proforms/create/<int:id>/",registrarDocumento),
     path("proforms/detall/<int:id>/",registrarDetallesFacturaProforma),
+    path("store/autority/",autorizar_ComprasWeb),
 
     path("proforms/edit/<int:id>/",editarDocumentos),
     path("giveBack/<int:id>/",anularDocumento),
 
-    path("billing/<id>/",facturas),
+    path("billing/<id>/",proformas),
 
     path("document/proform/<int:id>/",crearDocumentoPDF_Proforma),
     path("document/fac/<int:id>/",crearDocumentoPDF_Factura),
@@ -106,13 +109,34 @@ urlpatterns = [
     path("store/",tienda),
     path("store/products/",_productos),
     path("store/details/",_detalles),
-    path("store/stores/",_tiendas),
+    path("store/category/",ver_subcategorias),
+    path("<slug:slug>/",_tiendas),
+    path("store/search/",ver_subcategorias),
+
     path("store/ejemplo/", ejemplo),
+
     path("store/account/",account),
     path("store/register/",register),
+    path("store/login/",login_store_user),
     path("store/dashboard/",dashboard),
+    path("store/directory/",directorio),
+    path("store/directory/delete/<int:n>/",eliminar_directorio),
+    path("store/shopp/",misOrdenes),
+
     path("store/contact/",contact),
     path("store/checkout/",checkout),
+    path("store/checkout/pay/",pay),
+
+    #carrito de compras
+    path("store/add/cart/",add_carrito),
+    path("store/add/cart/deleteItem/",eliminar_item),
+    path("store/view/cart/",ver_cart),
+    path("store/view/cart/delete/",vaciar_carrito),
+
+
+    #django restframework:
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-auth/', include(routes.router.urls)),
 
 
 

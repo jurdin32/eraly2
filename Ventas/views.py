@@ -6,6 +6,7 @@ from Empresa.models import Establecimiento, ConfigurarDocumentos
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
+from Store.models import DetalleCompraWeb
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
 from eraly2.snippers import render_pdf_view, export_pdf
 from nlt import numlet as nl
@@ -15,44 +16,17 @@ def proformas(request,id=0):
     establecimientos=None
     productos=None
     clientes=Clientes.objects.filter(establecimiento__usuario=request.user)
-    proformaContador=""
-    print(proformaContador)
+    contadorDocumentos=""
+    tipo=request.GET.get('tipo')
+
     if int(id) > 0:
         establecimiento = Establecimiento.objects.get(id=id)
         productos = Productos.objects.filter(establecimiento_id=id)
         numero=ConfigurarDocumentos.objects.get(establecimiento=establecimiento)
-        proformaContador=str(numero.proformas + Facturas.objects.filter(tipo="P",establecimiento=establecimiento).count()).zfill(10)
-
-    else:
-        establecimientos = Establecimiento.objects.filter(usuario=request.user)
-        contador=establecimientos.count()
-        if contador == 1:
-            for esta in establecimientos:
-                return HttpResponseRedirect("/proforms/%s/"%esta.id)
-    contexto={
-        'establecimiento':establecimiento,
-        'establecimientos':establecimientos,
-        'productos':productos,
-        'clientes':clientes,
-        'provincias':Provincia.objects.all(),
-        'contadorProforma':proformaContador,
-        'precios':Precios.objects.all(),
-    }
-    return render(request, 'Ventas/proformas.html', contexto)
-
-def facturas(request,id=0):
-    establecimiento=None
-    establecimientos=None
-    productos=None
-    clientes=None
-    proformaContador=""
-    print(proformaContador)
-    if int(id) > 0:
-        establecimiento = Establecimiento.objects.get(id=id)
-        productos = Productos.objects.filter(establecimiento_id=id)
-        clientes=Clientes.objects.filter(establecimiento_id=id)
-        numero=ConfigurarDocumentos.objects.get(establecimiento=establecimiento)
-        proformaContador=str(numero.facturas+Facturas.objects.filter(tipo="F", establecimiento=establecimiento).count()).zfill(10)
+        if tipo=="P":
+            contadorDocumentos=str(numero.proformas + Facturas.objects.filter(tipo=tipo,establecimiento=establecimiento).count()).zfill(10)
+        else:
+            contadorDocumentos = str(numero.facturas + Facturas.objects.filter(tipo=tipo, establecimiento=establecimiento).count()).zfill(10)
 
     else:
         establecimientos = Establecimiento.objects.filter(usuario=request.user)
@@ -66,10 +40,12 @@ def facturas(request,id=0):
         'productos':productos,
         'clientes':clientes,
         'provincias':Provincia.objects.all(),
-        'contadorProforma':proformaContador,
-        'precios': Precios.objects.all(),
+        'contadorProforma':contadorDocumentos,
+        'precios':Precios.objects.all(),
+        'tipo':tipo,
     }
-    return render(request, 'Ventas/facturas.html', contexto)
+    return render(request, 'Ventas/proformas.html', contexto)
+
 
 def eliminarregistrosFacturaProforma(id):
     try:
@@ -144,7 +120,7 @@ def crearDocumentoPDF_Factura(request, id):
         'items':(10 - detalles.count())*"*",
     }
     print((10 - detalles.count()))
-    return render_pdf_view(request,'Ventas/rptFactura.html',contexto)
+    return export_pdf(request,'Ventas/rptFactura.html',contexto)
     #return render(request,'Ventas/rptFactura.html',contexto)
 
 def listaDocumentos(request):
@@ -217,3 +193,22 @@ def crearAbonosPDF(request, id):
         'abono':resultado
     }
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
+
+def autorizar_ComprasWeb(request):
+    compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
+    contador=compras.count()
+
+    if request.GET.get('establecimiento'):
+        compras = compras.filter(producto__establecimiento_id=request.GET.get('establecimiento'))
+
+    if request.POST:
+        compra=compras.get(id=request.POST.get('producto_id'))
+        compra.autorizado=True
+        compra.save()
+        messages.add_message(request,messages.SUCCESS,"Se ha autorizado el envío de mercaderías..!")
+        return HttpResponseRedirect('/store/autority/?establecimiento=%s' %compra.producto.establecimiento_id)
+    contexto={
+        'comprasweb':compras,
+        'total_compras':contador
+    }
+    return render(request,'Ventas/Ventas_Web.html',contexto)

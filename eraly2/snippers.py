@@ -6,6 +6,16 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 from weasyprint.fonts import FontConfiguration
 
+import uuid
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
+from django.core.files.base import ContentFile
+from django.db import models
+
+from Producto import models
+
+
 def get_filename(filename):
     return filename.upper()
 
@@ -17,7 +27,7 @@ def Attr(cls):
 def Hash_parse(text):
     h = hashlib.sha256(str(text).encode('utf-8')).hexdigest()
     return h
-
+#no sirve
 def render_pdf_view(request,page,contexto={}):
     template_path = page
     context = contexto
@@ -31,6 +41,7 @@ def render_pdf_view(request,page,contexto={}):
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
+#pdf
 def export_pdf(request, template,contexto={}):
     html_string = render_to_string(template, contexto)
     html = HTML(string=html_string, base_url=request.build_absolute_uri())
@@ -39,4 +50,18 @@ def export_pdf(request, template,contexto={}):
     font_config = FontConfiguration()
     html.write_pdf(response, font_config=font_config)
     return response
+
+#redimensionar imagen:
+class ResizeImageMixin:
+    def resize(self, imageField, size:tuple):
+        im = Image.open(imageField)  # Catch original
+        source_image = im.convert('RGB')
+        source_image=source_image.resize(size)  # Resize to size
+        output = BytesIO()
+        source_image.save(output, format='JPEG') # Save resize image to bytes
+        output.seek(0)
+        content_file = ContentFile(output.read())  # Read output and create ContentFile in memory
+        file = File(content_file)
+        random_name = f'{uuid.uuid4()}.jpeg'
+        imageField.save(random_name, file, save=False)
 

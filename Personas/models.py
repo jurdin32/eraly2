@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -18,3 +19,23 @@ class Clientes(models.Model):
 
     def __str__(self):
         return "%s %s [%s]"%(self.nombres, self.apellidos, self.cedula)
+
+
+class UsuariosWeb(models.Model):
+    usuario=models.ForeignKey(User,on_delete=models.CASCADE)
+    identificacion=models.CharField(max_length=13)
+
+    def __str__(self):
+        return self.usuario.get_full_name()
+
+class DireccionesWeb(models.Model):
+    usuarioWeb=models.ForeignKey(UsuariosWeb, on_delete=models.CASCADE)
+    direccion=models.TextField()
+    ciudad=models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    telefono=models.CharField(max_length=10)
+    celular=models.CharField(max_length=10)
+    envio=models.BooleanField(default=False)
+    observacion=models.TextField()
+    facturacion=models.BooleanField(default=False)
+    activo=models.BooleanField(default=True)
+

@@ -10,12 +10,7 @@
                         <h2>Productos <small>del establecimientos</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false">Opciones</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/products/new/"><i
-                                            class="fa fa-file-o"> </i> Registrar Nuevo</a>
-                                </div>
+                                    <a id="pnew" href="/products/new/?empresa={{ empresa.id }}" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Registrar</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -34,7 +29,7 @@
                                             <th style="text-align: center">Imagen</th>
                                             <th style="text-align: center">Id</th>
                                             <th style="text-align: center">Código</th>
-                                            <th style="text-align: center">Categoría/subcategoría</th>
+                                            <th style="text-align: center; width: 200px">Categoría/subcategoría</th>
                                             <th style="text-align: center">Descripción</th>
                                             <th style="text-align: center">Color</th>
                                             <th style="text-align: center">Talla</th>
@@ -47,7 +42,7 @@
                                         {% for producto in productos %}
                                             <tr>
                                             <td style="text-align: center; vertical-align: middle">
-                                                {% if producto.tipo == "P" %}
+                                                {% if producto.tipo == "P" or producto.tipo == "A" or producto.tipo == "V" %}
                                                 <img style="width: 50px;height: 50px;" src="/media/{{ producto.imagen }}" alt="image">
                                                 {% else %}
                                                     <i>No Aplica</i>
@@ -56,10 +51,10 @@
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.id }}</td>
                                             <td style="text-align: center; vertical-align: middle">{% if producto.codigo  %}{{ producto.codigo }}{% else %} <i>Sin código</i> {% endif %}</td>
-                                            <td style="text-align: center; vertical-align: middle">{{ producto.subcategoria.categoria.nombre }}: {{ producto.subcategoria.nombre }}</td>
+                                            <td style="text-align: center; vertical-align: middle">{{ producto.subcategoria.subcategoria.nombre }}: {{ producto.subcategoria.nombre }}</td>
                                             <td style="text-align: center; vertical-align: middle">{{ producto.nombre }}</td>
                                             <td style="text-align: justify; vertical-align: middle">
-                                            {% if producto.tipo == "P" %}
+                                            {% if producto.tipo == "P" or producto.tipo == "A" or  producto.tipo == "V" %}
                                                 {% for color in producto.colores_set.all %}
                                                     <i class="fa fa-circle" style="color:{{ color.codigoColor }}"></i>
                                                     <i>{{ color }}</i>
@@ -70,7 +65,7 @@
                                             {% endif %}
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
-                                            {% if producto.tipo == "P" %}
+                                            {% if producto.tipo == "P" or producto.tipo == "A" or producto.tipo == "V" %}
                                                 {% if producto.talla %}
                                                     <i>{{ producto.talla }}</i>
                                                 {% else %}
@@ -93,7 +88,7 @@
 
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
-                                                {% if producto.tipo == "P" %}
+                                                {% if producto.tipo == "P" or producto.tipo == "A" or producto.tipo == "V"%}
                                                     {% stock producto.id %}
                                                 {% else %}
                                                     <i>No Aplica</i>
@@ -119,12 +114,22 @@
 {% endblock %}
 {% block script_index %}
     <script>
+        let params = new URLSearchParams(location.search);
+        var pre = params.get('empresa');
+        if (pre){
+            $("#pnew").attr('href', '/products/new/?empresa='+pre)
+        }
+        else{
+            $("#pnew").attr('href', '/products/new/')
+        }
+
         $(document).ready(function () {
             $("#productos").DataTable({
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
                 },
                 pageLength: 100,
+                responsive: true
             });
         });
     </script>

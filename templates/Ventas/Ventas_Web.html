@@ -1,0 +1,285 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {% load static %}
+    {% load productosTags %}
+    {% load mathfilters %}
+
+    <div class="modal fade" id="from-despachar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="/store/autority/" method="post" class="form-label-left input_mask">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Despachar Mercaderia</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 ">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <br>
+                                    <div class="col-md-12 col-sm-12  form-group">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="codigo_compra" name="codigo_compra"
+                                               placeholder="Codigo de la compra">
+                                        <span class="fa fa-code form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="producto_id"
+                                               style="text-align:center;background-color: #ff000f; color: white"
+                                               name="producto_id"
+                                               placeholder="Código del Producto">
+                                        <span class="fa fa-codepen form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9  form-group has-feedback"></div>
+
+                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                               id="nombre_producto" name="nombre_producto"
+                                               placeholder="Nompre del Producto">
+                                        <span class="fa fa-product-hunt form-control-feedback left"
+                                              aria-hidden="true"></span>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly="readonly"
+                                               id="precio" name="precio" placeholder="Precio">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly id="iva"
+                                               name="iva" placeholder="IVA">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                        <input type="tel" class="form-control has-feedback-left" readonly id="total"
+                                               name="total" placeholder="Total">
+                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-danger">Autorizar Envío</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="from-autorizar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Rotulo del empaque</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="row" style="text-align: center" id="imprimir">
+                                    <div class="col-sm-6">
+                                        <img style="height: 100px" id="codigo"/><br>
+                                        <span id="n"></span>
+                                    </div>
+                                    <div class="col-md-6" style="text-align: left">
+                                        <ul style="list-style: none">
+                                            <li><strong>Datos del CLiente:</strong></li>
+                                            <li><span id="identificacion"></span></li>
+                                            <li><span id="cliente"></span></li>
+                                            <li><span id="dir"></span></li>
+                                            <li><span id="telef"></span></li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" href="javascript:imprSelec('imprimir')"><i class="fa fa-print"></i>
+                        Imprimir</a>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>Documentos de los Establecimientos</small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-app" href="/store/autority/">
+                                    <i class="fa fa-bullhorn"></i>
+                                    <span class="badge bg-blue">{{ total_compras }}</span>
+                                    Todos</a>
+                                {% for establecimiento in request.user.establecimiento_set.all %}
+                                    <a class="btn btn-app"
+                                       href="/store/autority/?establecimiento={{ establecimiento.id }}">
+                                        <i class="fa fa-bullhorn"></i>
+                                        <span class="badge bg-red">{% ventas_store establecimiento.id %}</span>
+                                        {{ establecimiento.nombreComercial }}
+                                    </a>
+                                {% endfor %}
+                                <div class="card-box table-responsive">
+                                    <table id="listaDocumentos" class="table table-striped table-bordered"
+                                           style="width:100%">
+                                        <thead style="background-color: #2A3F54; color: white">
+                                        <tr>
+                                            <th style="text-align: center">Fecha</th>
+                                            <th style="text-align: center">Tipo</th>
+                                            <th style="text-align: center">Producto [Código]</th>
+                                            <th style="text-align: center">Cant.</th>
+                                            <th style="text-align: center">Pr Normal</th>
+                                            <th style="text-align: center">Desc.</th>
+                                            <th style="text-align: center">Pr Promo</th>
+                                            <th style="text-align: center">Subtotal</th>
+                                            <th style="text-align: center">IVA</th>
+                                            <th style="text-align: center">Total</th>
+                                            <th style="text-align: center">Despachar</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for documento in comprasweb %}
+                                            <tr>
+                                                <td style="vertical-align: middle">{{ documento.compra.fecha|date:"d/m/Y H:m" }}</td>
+                                                <td style="text-align: center; vertical-align: middle">
+                                                    <span class="badge badge-success" style="font-size: 13px">Compra por Internet</span>
+                                                </td>
+                                                <td style="vertical-align: middle">
+                                                    <span class="badge badge-warning"
+                                                          style="font-size: 13px">{{ documento.producto_id }}</span>
+                                                    <span class="badge badge-danger"
+                                                          style="font-size: 13px">
+                                                        {{ documento.producto.nombre }} {% if documento.talla %}
+                                                        {{ documento.talla }}{% endif %}{% if documento.color %}
+                                                        {{ documento.color }}{% endif %}</span>
+
+                                                </td>
+                                                <td style="vertical-align: middle; text-align: center"><span
+                                                        class="badge badge-primary"
+                                                        style="font-size: 13px">{{ documento.cantidad }}</span></td>
+
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.precio_normal }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.descuento_porcentaje }}%</td>
+                                                <td style="text-align: center; vertical-align: middle">{{ documento.precio_promocion }}</td>
+                                                <td style="text-align: center;; vertical-align: middle"><span
+                                                        class="badge badge-primary"
+                                                        style="font-size: 13px">
+                                                                    {{ documento.precio_total }}
+                                            </span></td>
+                                                <td style="text-align: center;; vertical-align: middle"><span
+                                                        class="badge badge-success"
+                                                        style="font-size: 13px">{{ documento.precio_total|mul:0.12|floatformat:2 }}</span>
+                                                </td>
+                                                <td style="text-align: center; vertical-align: middle">
+                                                <span
+                                                        class="badge badge-danger"
+                                                        style="font-size: 13px">
+                                                    {% with iva=documento.precio_total|mul:0.12 %}
+                                                        {{ documento.precio_total|addition:iva|floatformat:2 }}
+                                                    {% endwith %}
+                                                </span>
+                                                </td>
+                                                <td>
+                                                    {% if documento.autorizado %}
+                                                        <a class="btn btn-app btn-success"
+                                                           style="cursor:pointer; color: #28a745"
+                                                           data-toggle="modal"
+                                                           data-target="#from-autorizar"
+                                                           onclick="autorizado('{{ documento.etiqueta }}',
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}',
+                                                                   '{{ documento.compra.usuario.identificacion }}','{{ documento.compra.usuario.usuario.get_full_name }}',
+                                                                   {% for direc in documento.compra.usuario.direccionesweb_set.all %}{% if direc.envio %}'{{ direc.direccion }} - {{ direc.ciudad.nombre }} - {{ direc.provincia.nombre }}','{{ direc.celular }} - {{ direc.telefono }}'{% endif %}{% endfor %},)">
+                                                            <i class="fa fa-check-circle"></i>Autorizado</a>
+                                                    {% else %}
+                                                        <a class="btn btn-app btn-primary"
+                                                           style="cursor:pointer;color: #007bff"
+                                                           data-target="#from-despachar" data-toggle="modal"
+                                                           onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}')">
+                                                            <i class="fa fa-share-square-o"></i>Por Autorizar</a>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script_index %}
+    <script src="{% static 'vendors/JsBarcode.all.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#listaDocumentos").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}",
+                },
+                order: [[0, 'desc']],
+                pageLength: 100,
+                responsive: true
+            });
+        });
+
+        function autorizar(hash, producto_id, nombre, precio) {
+            $("#codigo_compra").val(hash)
+            $("#producto_id").val(producto_id)
+            $("#nombre_producto").val($.trim(nombre))
+            let precios = parseFloat(precio.replace(",", "."))
+            let iva = precios * 0.12
+            let total = precios + iva
+            $("#precio").val(precios.toFixed(2))
+            $("#iva").val(iva.toFixed(2))
+            $("#total").val(total.toFixed(2))
+        }
+
+        function autorizado(etiqueta, n, identificacion, cliente, direccion, telefono) {
+            JsBarcode("#codigo", etiqueta);
+            $("#n").text(n)
+            $("#identificacion").text("Identificación: " + identificacion)
+            $("#cliente").text("Cliente: " + cliente)
+            $("#dir").text("Dirección: " + direccion)
+            $("#telef").text("Teléfono: " + telefono)
+        }
+
+        function imprSelec(nombre) {
+            var ficha = document.getElementById(nombre);
+            var ventimp = window.open(' ', 'popimpr');
+            ventimp.document.write(ficha.innerHTML);
+            ventimp.document.close();
+            ventimp.print();
+            ventimp.close();
+        }
+
+    </script>
+{% endblock %}

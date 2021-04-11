@@ -1,6 +1,7 @@
 {% extends 'Home/index2.html' %}
 {% block contenido_index %}
     {% load static %}
+    {% load productosTags %}
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <link href="/static/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
@@ -103,7 +104,7 @@
     </div>
 
     <div class="">
-        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post"
+        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post" action="/products/new/?precio=on"
               enctype="multipart/form-data">
             <div class="row">
                 {% csrf_token %}
@@ -111,18 +112,6 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2><small>Registro de Productos</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-haspopup="true" aria-expanded="false">Nuevos Productos</a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a class="dropdown-item" href="/products/new/"><i
-                                                class="fa fa-plus-circle"> </i>
-                                            Agregar</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -130,9 +119,9 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
-                                            <option value="P">Producto</option>
-                                            <option value="S">Servicios</option>
-                                            <option value="B">Bienes</option>
+                                        {% for categoria in categorias %}
+                                        <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
+                                        {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
@@ -168,9 +157,9 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
                                             style="width: 100%" required="required" multiple>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
-                                            {% for sub in categoria.subcategorias_set.all %}
+                                            {% for sub in categoria.subcategorias_2_set.all %}
                                                 {% if producto.subcategoria == sub %}
                                                     <option selected="selected"
                                                             value="{{ sub.id }}">{{ sub.nombre }}</option>
@@ -186,7 +175,7 @@
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"
+                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto o Servicio"
                                            required="required" class="form-control" type="text" name="nombre">
                                     <span>El Nombre del Item es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
@@ -230,6 +219,15 @@
                                     <span class="form-control-feedback right" aria-hidden="true">XL</span>
                                 </div>
                             </div>
+                            <div class="item form-group" id="stock">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input value="{% stock producto.id %}"
+                                           required="required" class="form-control" type="number" name="stock">
+                                    <span>Stock inicial</span>
+                                    <span class="fa fa-shopping-basket form-control-feedback right"
+                                          aria-hidden="true"></span>
+                                </div>
+                            </div>
                             <div class="item form-group" id="imagen">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <input class="form-control" style="padding: -5px" type="file" name="imagen"/>
@@ -237,7 +235,7 @@
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="detalles">
                                 <div class="col-md-12 col-sm-12">
                                     <span>Descripción del Producto</span>
                                     <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
@@ -258,13 +256,22 @@
                                     <textarea name="tecnicos" id="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
+                            <div class="item form-group" id="tags">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input value="{{ producto.etiquetas }}"
+                                           required="required" class="form-control" type="text" name="etiquetas">
+                                    <span>Escriba aquí todas las que considere necesario</span>
+                                    <span class="fa fa-tags form-control-feedback right"
+                                          aria-hidden="true"></span>
+                                </div>
+                            </div>
                                 <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                 </button>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                 </button>
-                                <a href="/products/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
                             </div>
                         </div>
                     </div>
@@ -277,8 +284,26 @@
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script>
-        CKEDITOR.replace('descripcion');
-        CKEDITOR.replace('tecnicos');
+
+        let params = new URLSearchParams(location.search);
+        var emp = params.get('empresa');
+        if (emp){
+            $("#establecimiento").val(emp).trigger('change')
+            $("#regresar").attr('href','/products/?empresa='+emp)
+        }
+
+       function ckeditor_(control){
+            CKEDITOR.replace(control,{
+            toolbar : [
+                ['TextColor', 'BGColor','-','Image', 'Table','-'],
+                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+            ]
+        });
+        }
+        ckeditor_('tecnicos')
+        ckeditor_('descripcion')
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
@@ -288,9 +313,6 @@
             placeholder: "Seleccione"
         });
         $(".js-example-basic-single2").select2();
-
-        tallas = '{{ producto.talla }}'.split(",");
-        $(".js-example-basic-single2").val(tallas).trigger('change');
 
         function setTwoNumberDecimal(event) {
             this.value = parseFloat(this.value).toFixed(2);
@@ -303,18 +325,34 @@
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
-                $("#imagen").hide();
+                $("#imagen").show();
                 $("#dTecnicos").hide();
                 $("#colores").hide();
+                $("#stock").hide();
             }
-            else{
+            if(valor == "P"){
                 $("#codigo").show();
-                 $("#marca").show();
+                $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
+                $("#stock").show();
+                $("#detalles").show();
             }
-
+            if(valor == "V" || valor=="I"){
+                $("#codigo").show();
+                if(valor=="V"){
+                    $("#marca").show();
+                }
+                else{
+                    $("#marca").hide();
+                }
+                $("#talla").hide();
+                $("#imagen").show();
+                $("#detalles").hide()
+                $("#dTecnicos").show();
+                $("#stock").show();
+            }
         }).change()
 
     </script>

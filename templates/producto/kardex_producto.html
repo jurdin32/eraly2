@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="datatablett" class="table table-striped table-bordered">
                                         <thead style="background-color: #2A3F54; color: whitesmoke">
                                         <tr>
                                             <th style="text-align: center">Id</th>
@@ -65,7 +65,7 @@
 {% block script_index %}
     <script>
         $(document).ready(function () {
-            $("#datatable").DataTable({
+            $("#datatablett").DataTable({
                 language: {
                     url: "{% static 'Spanish_dt.json' %}"
                 }
@@ -84,7 +84,8 @@ var myChart = new Chart(ctx, {
                 '#16b4d6',
                 '#c70d88',
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            responsive: true
         }]
     }
 });

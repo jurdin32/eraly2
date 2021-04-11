@@ -88,6 +88,17 @@ class AdminSubcategorias(admin.ModelAdmin):
     }
 
 
+@admin.register(Subcategorias_2)
+class AdminSubcategorias2(admin.ModelAdmin):
+    list_display = Attr(Subcategorias_2)
+    list_display_links = Attr(Subcategorias_2)
+    formfield_overrides = {
+        models.CharField: {
+            'widget': TextInput(attrs={'style': 'width:90%'})
+        },
+    }
+
+
 @admin.register(DetallesProducto)
 class AdminDetallesProducto(admin.ModelAdmin):
     list_display = Attr(DetallesProducto)
@@ -128,9 +139,9 @@ class KardexInline(admin.StackedInline):
 
 @admin.register(Productos)
 class AdminProductos(admin.ModelAdmin):
-    list_display = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion','_detallesTecnicos']
+    list_display = ['tipo','hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion',]
 
-    list_display_links = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion','_detallesTecnicos']
+    list_display_links = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion',]
     readonly_fields = ['hash']
     formfield_overrides = {
         models.CharField: {

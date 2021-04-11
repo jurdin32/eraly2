@@ -1,7 +1,9 @@
 from django import template
 from django.db.models import Sum, Avg
+import datetime
 
 from Producto.models import *
+from Store.models import ComprasWeb, DetalleCompraWeb
 
 register = template.Library()
 
@@ -26,7 +28,7 @@ def stock(id):
             egresos=0
         return ingresos-egresos
     except:
-        pass
+        return 0
 
 @register.simple_tag
 def ingresos(id):
@@ -55,3 +57,39 @@ def rating_productos(id):
 def contador_producto(id):
     rating=CalificacionProductos.objects.filter(producto_id=id).count()
     return rating
+
+@register.simple_tag
+def promocion_descuento(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+         return mark_safe("""<div class="product-label">
+                    <span class="discount">
+                        -"""+str(promo.descuento)+"""%
+                    </span>
+                </div>""")
+    return ""
+
+@register.simple_tag
+def promocion_precio(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            return promo.precio
+    return 0
+
+
+@register.simple_tag
+def promocion_id(id):
+    promo=Promociones.objects.filter(precio__producto_id=id).last()
+    fecha=datetime.datetime.now().date()
+    if promo:
+        if fecha >= promo.fechaInicio and fecha <= promo.fechaFinal:
+            return promo.id
+    return 0
+
+@register.simple_tag
+def ventas_store(id_establecimiento):
+    return  DetalleCompraWeb.objects.filter(producto__establecimiento_id=id_establecimiento,autorizado=False).count()

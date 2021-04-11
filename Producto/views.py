@@ -1,3 +1,5 @@
+import random
+
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 # Create your views here.
@@ -124,70 +126,46 @@ def iconos_text():
     return iconos
 
 def categorias(request):
-    cat = Categorias.objects.filter(establecimiento__usuario=request.user)
-    if request.GET.get("cat"):
-        cat=Categorias.objects.filter(establecimiento_id=request.GET.get('cat'))
-
+    cat = Subcategorias.objects.all()
     if request.POST:
-        Categorias.objects.create(establecimiento_id=request.POST['establecimiento'], icono="fa "+request.POST["icono"],
-                                  nombre=request.POST["nombre"], descripcion=request.POST['detalle']).save()
+        cats=Subcategorias.objects.create(categoria_id=request.POST['categoria'],nombre=request.POST["nombre"])
+        cats.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
-        'categorias':cat,
+        'subcategorias':cat,
         'iconos':iconos_text(),
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'categorias':Categorias.objects.all().order_by('nombre')
     }
     return render(request, "producto/categorias.html",contexto)
 
 def editarCategoria(request,id):
     if request.POST:
         print(request.POST)
-        categoria=Categorias.objects.get(id=id)
-        categoria.establecimiento_id=request.POST['establecimiento']
-        categoria.icono="fa "+request.POST["icono"]
+        categoria=Subcategorias.objects.get(id=id)
+        categoria.categoria_id=request.POST['categoria']
         categoria.nombre=request.POST["nombre"]
-        categoria.descripcion=request.POST['detalle']
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     return  HttpResponseRedirect('/category/')
 
-def eliminarCategoria(request,id):
-    cat = Categorias.objects.get(id=id)
-    cat.delete()
-    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
-    return HttpResponseRedirect('/category/')
-
-
 def subcategorias(request,id):
     if request.POST:
-        Subcategorias.objects.create(categoria_id=id, icono="fa "+request.POST["icono"],nombre=request.POST["nombre"],
-                                     descripcion=request.POST['detalle']).save()
+        Subcategorias_2.objects.create(subcategoria_id=id,nombre=request.POST["nombre"]).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     contexto={
-        'categoria':Categorias.objects.get(id=id),
-        'subcategorias':Subcategorias.objects.filter(categoria_id=id),
-        'iconos': iconos_text(),
+        'categoria':Subcategorias.objects.get(id=id),
+        'subcategorias':Subcategorias_2.objects.filter(subcategoria_id=id),
     }
     return render(request, "producto/subcategorias.html",contexto)
 
 def editarSubCategoria(request,id):
-    categoria = Subcategorias.objects.get(id=id)
+    categoria = Subcategorias_2.objects.get(id=id)
     if request.POST:
-        print(request.POST)
-        categoria.icono="fa "+request.POST["icono"]
         categoria.nombre=request.POST["nombre"]
-        categoria.descripcion=request.POST['detalle']
         categoria.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
-    return  HttpResponseRedirect('/category/%s'%categoria.categoria_id)
-
-def eliminarSubcategoria(request,id):
-    sub = Subcategorias.objects.get(id=id)
-    cat = sub.categoria.id
-    sub.delete()
-    messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
-    return HttpResponseRedirect('/category/%s' % cat)
-
+    return  HttpResponseRedirect('/category/%s'%categoria.subcategoria_id)
 
 #------------ Productos ----------_#
 def productos(request):
@@ -203,11 +181,6 @@ def productos(request):
 
 def registarProducto(request):
     producto = Productos()
-    contexto = {
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
-        'categorias': Categorias.objects.filter(establecimiento__usuario=request.user),
-        'marcas': Marca.objects.all()
-    }
     if request.POST:
         producto.establecimiento_id=request.POST['establecimiento']
         producto.subcategoria_id=request.POST['categoria']
@@ -219,16 +192,36 @@ def registarProducto(request):
             producto.marca = None
         producto.talla = recorrertallas(request)
         producto.codigo=request.POST['codigo']
+        producto.etiquetas = request.POST['etiquetas']
         producto.descripcion=request.POST['descripcion']
         producto.detallesTecnicos=request.POST['tecnicos']
         if request.FILES:
             producto.imagen=request.FILES['imagen']
-        producto.hash = Hash_parse(producto.id)
         producto.save()
+        producto.hash = Hash_parse(int(producto.id)+random.randint(1, 1000))
+        producto.save()
+        if int(request.POST.get("stock"))>0:
+            Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
-        return HttpResponseRedirect("/products/?empresa=%s"%producto.establecimiento_id)
-    else:
-        return render(request, "producto/crearProducto.html",contexto)
+        return HttpResponseRedirect("/products/edit/%s/?precio=on"%str(producto.id))
+
+    contexto = {
+        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'categorias': Categorias.objects.all().order_by('nombre'),
+        'marcas': Marca.objects.all(),
+        'subcategorias': Subcategorias.objects.all(),
+    }
+    return render(request, "producto/crearProducto.html",contexto)
+
+def colores():
+    colores = []
+    aux=[]
+    for color in Colores.objects.all():
+        if not color.codigoColor in aux:
+            aux.append(color.codigoColor)
+            colores.append(color)
+    print(colores)
+    return colores
 
 
 def productos_detalles(request,id):
@@ -246,8 +239,8 @@ def productos_detalles(request,id):
         producto.talla = recorrertallas(request)
         producto.descripcion=request.POST['descripcion']
         producto.codigo = request.POST['codigo']
+        producto.etiquetas = request.POST['etiquetas']
         producto.detallesTecnicos=request.POST['tecnicos']
-        producto.hash = Hash_parse(producto.id)
         print(Hash_parse(producto.id))
         if request.FILES:
             producto.imagen=request.FILES['imagen']
@@ -256,9 +249,11 @@ def productos_detalles(request,id):
     contexto={
         'producto':producto,
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
-        'categorias':Categorias.objects.filter(establecimiento__usuario=request.user),
+        'categorias':Categorias.objects.all(),
+        'subcategorias':Subcategorias.objects.all(),
         'marcas':Marca.objects.all(),
-        'imagenes':ImagenesProducto.objects.filter(producto_id=id)
+        'imagenes':ImagenesProducto.objects.filter(producto_id=id),
+        'colores':colores(),
     }
     return render(request, 'producto/editarProducto.html',contexto)
 
@@ -337,7 +332,11 @@ def inventario(request):
 
 def subir_imagenes_producto(request,id):
     if request.POST:
-        ImagenesProducto(producto_id=id, imagen=request.FILES['file']).save()
+        try:
+            img= ImagenesProducto(producto_id=id, imagen=request.FILES['file'],thumbnail=request.FILES['file'])
+            img.save()
+        except Exception as e:
+            print(e)
     return HttpResponse("ok")
 
 def promociones(request):
@@ -378,7 +377,10 @@ def editarPromocion(request,id):
         promo.total = request.POST.get('total')
         promo.save()
         messages.add_message(request, messages.SUCCESS, "Se ha modificado el registro..!")
-    return HttpResponseRedirect("/products/promo/?establecimiento=%s" % promo.precio.producto.establecimiento_id)
+    if request.GET.get('establecimiento'):
+        return HttpResponseRedirect("/products/promo/?establecimiento=%s" % promo.precio.producto.establecimiento_id)
+    else:
+        return HttpResponseRedirect("/products/promo/")
 
 def eliminarPromocion(request,id):
     promo =Promociones.objects.get(id=id)

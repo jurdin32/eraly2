@@ -1,8 +1,5 @@
-{% extends 'Store/demo-shop-8.html' %}
+{% extends 'Store/demo-shop-8-dashboard.html' %}
 {% load static %}
-{% block content %}
-
-
 <section class="page-header">
     <div class="container">
         <ul class="breadcrumb">
@@ -16,120 +13,162 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9 col-md-push-3 my-account form-section">
-            <h1 class="h2 heading-primary font-weight-normal">Editar la información de la cuenta</h1>
-
-            <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
-                <div class="box-content">
-                    <form action="#">
-
-                        <h4 class="heading-primary text-uppercase mb-lg">Información de la cuenta</h4>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-3">
-                                <div class="form-group">
-                                    <label class="font-weight-normal">Primer Nombre <span
-                                            class="required">*</span></label>
-                                    <input type="text" class="form-control" required>
+            <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Editar la información de la cuenta{% endblock %}</h1>
+            {% block contenido %}
+                <div class="featured-box featured-box-primary featured-box-flat featured-box-text-left mt-md">
+                    <div class="box-content">
+                        <form id="acc" action="/store/account/" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Identificacion<span
+                                                class="required">*</span></label>
+                                        <input type="text" class="form-control" maxlength="13" name="identificacion" value="{{ usuario.identificacion }}" required>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-md-3">
-                                <div class="form-group">
-                                    <label class="font-weight-normal">Segundo Nombre</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-md-5">
-                                <div class="form-group">
-                                    <label class="font-weight-normal">Apellido <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label class="font-weight-normal">Correo<span
-                                            class="required">*</span></label>
-                                    <input type="email" class="form-control" required>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label class="font-weight-normal">Contraseña <span
-                                            class="required">*</span></label>
-                                    <input type="password" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="checkbox mb-xs">
-                            <label>
-                                <input type="checkbox" value="1" id="change-pass-checkbox">
-                                Cambiar Contraseña
-                            </label>
-                        </div>
-
-                        <div id="account-chage-pass">
-                            <h4 class="heading-primary text-uppercase mb-lg">Cambiar Contraseña</h4>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="font-weight-normal">Contraseña <span
+                                        <label class="font-weight-normal">Nombres <span
                                                 class="required">*</span></label>
-                                        <input type="password" class="form-control" required>
+                                        <input type="text" name="nombres" class="form-control" maxlength="60" value="{{ request.user.first_name }}" required>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="font-weight-normal">Confirmar Contraseña <span
+                                        <label class="font-weight-normal">Apellidos <span
                                                 class="required">*</span></label>
-                                        <input type="password" class="form-control" required>
+                                        <input type="text" name="apellidos" maxlength="60" value="{{ request.user.last_name }}" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p class="required mt-lg mb-none">* Campo requerido</p>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Correo<span
+                                                class="required">*</span></label>
+                                        <input type="email" class="form-control" maxlength="60" name="email" value="{{ request.user.email }}" required>
+                                    </div>
+                                </div>
 
-                                <div class="form-action clearfix mt-none">
-                                    <a href="demo-shop-8-login.html" class="pull-left"><i
-                                            class="fa fa-angle-double-left"></i> Atras</a>
-
-                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal">Contraseña <span
+                                                class="required">*</span></label>
+                                        <input type="password" name="password" class="form-control" required>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+
+                            <div class="checkbox mb-xs">
+                                <label>
+                                    <input type="checkbox" value="1" name="cambiar" id="change-pass-checkbox">
+                                    Cambiar Contraseña
+                                </label>
+                            </div>
+
+                            <div id="account-chage-pass">
+                                <h4 class="heading-primary text-uppercase mb-lg">Cambiar Contraseña</h4>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="font-weight-normal">Contraseña <span
+                                                    class="required">*</span></label>
+                                            <input type="password" id="password1" name="password1" class="form-control">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label class="font-weight-normal">Confirmar Contraseña <span
+                                                    class="required">*</span></label>
+                                            <input type="password" id="password2" name="password2" class="form-control">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <div class="form-group">
+                                            <i id="np" class="fa" style="margin-top: 35px"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12"  style="text-align: right">
+                                    <div class="form-action clearfix mt-none">
+                                        <button type="submit" onclick="enviar()" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-md-pull-9">
-            <aside class="sidebar">
-
-                <h4>Mi cuenta</h4>
-                <ul class="nav nav-list">
-                    <li><a href="#">Panel de cuenta</a></li>
-                    <li class="active"><a href="#">Información de la cuenta</a></li>
-                    <li><a href="#">Directorio</a></li>
-                    <li><a href="#">Mis ordenes</a></li>
-                    <li><a href="#">Acuerdos de facturación</a></li>
-                    <li><a href="#">Perfiles recurrentes</a></li>
-                    <li><a href="#">Mis Opiniones del producto</a></li>
-                    <li><a href="#">Mis etiquetas</a></li>
-                    <li><a href="#">Mi lista de deseos</a></li>
-                    <li><a href="#">Mis aplicaciónes</a></li>
-                    <li><a href="#">Suscripciones a los boletines</a></li>
-                    <li><a href="#">Mis productos descargables</a></li>
-                </ul>
-
-            </aside>
+            {% endblock %}
         </div>
     </div>
 </div>
+{% block script %}
+    <script>
+    var yes_no=true
+    function enviar(){
+        console.log(yes_no)
+        if (yes_no==false){
+            $("#acc").submit(function (evt){
+                evt.preventDefault();
+                location.reload();
+            })
+        }
+    }
 
+    $("#password1").keyup(function(){
+        if($(this).val() == $('#password2').val()){
+            $('#np').removeClass("fa-remove")
+            $('#np').removeClass("text-danger")
+            $('#np').addClass("fa-check")
+            $('#np').addClass("text-success")
+            yes_no=true
+        }
+        else{
+            $('#np').addClass("fa-remove")
+            $('#np').removeClass("text-success")
+            $('#np').removeClass("fa-check")
+            $('#np').addClass("text-danger")
+            yes_no=false
+        }
+    })
+    $("#password2").keyup(function(){
+        if($(this).val() == $('#password1').val()){
+            $('#np').removeClass("fa-remove")
+            $('#np').removeClass("text-danger")
+            $('#np').addClass("fa-check")
+            $('#np').addClass("text-success")
+            yes_no=true
+        }
+        else{
+            $('#np').addClass("fa-remove")
+            $('#np').removeClass("text-success")
+            $('#np').removeClass("fa-check")
+            $('#np').addClass("text-danger")
+            yes_no=false
+        }
+    })
+    </script>
+    <script>
+        let uri='{{ request.get_full_path }}'
+        console.log(uri)
+        $('.nav-list li').each(function(){
+            console.log($(this).find('a').attr('href'))
+            if ($(this).find('a').attr('href') ==uri){
+                $(this).addClass('active')
+            }
+            else{
+                $(this).removeClass('active')
+            }
+        })
+    </script>
 {% endblock %}

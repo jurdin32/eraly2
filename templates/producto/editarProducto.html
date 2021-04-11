@@ -23,8 +23,20 @@
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
+                                        <div class="" style="padding-left: 10px; padding-right: 10px">
+                                            <label for="">Paleta</label>
+                                            <div style="border: 1px solid lightgrey; height: 100%; padding: 10px">
+                                            {% for color in colores %}
+                                                <i class="fa fa-square cx" data-nombre="{{ color.nombre }}" data-codigo="{{ color.codigoColor }}" style="color: {{ color.codigoColor }}; font-size: 18px; cursor: pointer" title="{{ color.nombre }}"></i>
+                                            {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="input-group demo2" style="padding-left: 10px; padding-right: 10px">
-                                            <input type="text" value="#ffff" placeholder="#00000" name="color"
+                                            <input type="text" value="#ffff" placeholder="#00000" name="color" id="color_codigo" readonly="readonly"
                                                    class="form-control"/>
                                             <span class="input-group-addon"><i></i></span>
                                         </div>
@@ -33,7 +45,7 @@
 
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-right" name="nombre"
-                                           id="nombre" required="required"
+                                           id="nombre_color" required="required"
                                            placeholder="Aquí el nombre del Color">
                                     <span class="fa fa-file-image-o form-control-feedback right"
                                           aria-hidden="true"></span>
@@ -141,16 +153,14 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
-                                        {% if producto.tipo == "P" %}
-                                            <option selected value="P">Producto</option>
-                                        {% elif producto.tipo == "S" %}
-                                            <option selected value="S">Servicios</option>
-                                        {% elif  producto.tipo == "B" %}
-                                            <option value="B">Bienes</option>
+                                    {% for categoria in categorias %}
+                                        {% if categoria.nombre|slice:1 == producto.subcategoria.subcategoria.categoria.nombre|slice:1 %}
+                                         <option selected="selected" value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre }}</option>
+                                            {% else %}
+                                         <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre }}</option>
                                         {% endif %}
-                                        <option value="P">Producto</option>
-                                        <option value="S">Servicios</option>
-                                        <option value="B">Bienes</option>
+
+                                    {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
                                     <span class="fa fa-building form-control-feedback right" aria-hidden="true"></span>
@@ -186,9 +196,9 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
                                             style="width: 100%" required="required" multiple>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
-                                            {% for sub in categoria.subcategorias_set.all %}
+                                            {% for sub in categoria.subcategorias_2_set.all %}
                                                 {% if producto.subcategoria == sub %}
                                                     <option selected="selected"
                                                             value="{{ sub.id }}">{{ sub.nombre }}</option>
@@ -255,7 +265,7 @@
                                     <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="detalles">
                                 <div class="col-md-12 col-sm-12">
                                     <span>Descripción del Producto</span>
                                     <textarea name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
@@ -268,7 +278,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             {% if not producto.tipo == "S" %}
-                                <h2><small>Detalles tecnicos del Producto</small></h2>
+                                <h2><small>Detalles técnicos del Producto</small></h2>
                                 {% else %}
                                 <h2><small>Opciones de registro</small></h2>
                             {% endif %}
@@ -278,6 +288,15 @@
                             <div class="item form-group" id="dTecnicos" >
                                 <div class="col-md-12 col-sm-12">
                                     <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
+                                </div>
+                            </div>
+                        <div class="item form-group" id="tags">
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input value="{{ producto.etiquetas }}"
+                                           required="required" class="form-control" name="etiquetas">
+                                    <span>Escriba aquí todas las que considere necesario, separe con comas</span>
+                                    <span class="fa fa-tags form-control-feedback right"
+                                          aria-hidden="true"></span>
                                 </div>
                             </div>
                             {% if not producto.tipo == "S" %}
@@ -389,7 +408,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -460,12 +478,31 @@
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
     <script>
-        CKEDITOR.replace('descripcion');
-        CKEDITOR.replace('tecnicos');
+
+        function ckeditor_(control){
+            CKEDITOR.replace(control,{
+            toolbar : [
+                ['TextColor', 'BGColor','-','Image', 'Table','-'],
+                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+            ]
+        });
+        }
+        ckeditor_('tecnicos')
+        ckeditor_('descripcion')
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
     <script>
+        let params = new URLSearchParams(location.search);
+        var pre = params.get('precio');
+        console.log(pre)
+
+        if (pre == 'on') {
+            $("#registroPrecios").modal('show');
+        }
+
         $(".js-example-basic-single").select2({
             maximumSelectionLength: 1
         });
@@ -491,18 +528,34 @@
                 $("#subirimagen").hide();
                 $("#galeria").hide();
             }
-            else{
+            if(valor == "P"){
                 $("#codigo").show();
-                 $("#marca").show();
+                $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
-                 $("#colores").show();
-                 $("#subirimagen").show();
-                 $("#galeria").show();
+                $("#stock").show();
+                $("#detalles").show()
             }
-
+            if(valor == "V" || valor=="I"){
+                $("#codigo").show();
+                if(valor=="V"){
+                    $("#marca").show();
+                }
+                else{
+                    $("#marca").hide();
+                }
+                $("#talla").hide();
+                $("#imagen").show();
+                $("#detalles").hide()
+                $("#dTecnicos").show();
+                $("#stock").show();
+            }
         }).change()
-
+        $(".cx").click(function(){
+            $("#color_codigo").val($(this).data('codigo'));
+            $("#nombre_color").val($(this).data('nombre'));
+            console.log($(this).data('codigo'),$(this).data('nombre'))
+        })
     </script>
 {% endblock %}

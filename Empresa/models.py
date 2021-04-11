@@ -24,9 +24,11 @@ class Establecimiento(models.Model):
     ubicacion_gps = models.CharField(max_length=300,null=True,blank=True)
     correo_electronico=models.EmailField(max_length=600,null=True,blank=True)
     web=models.CharField(max_length=400,null=True,blank=True)
-    facebook=models.CharField(max_length=400,null=True,blank=True)
-    instagram=models.CharField(max_length=400, null=True, blank=True)
-    youtube = models.CharField(max_length=400,null=True,blank=True)
+    facebook=models.CharField(max_length=400,null=True,blank=True,default=" ")
+    instagram=models.CharField(max_length=400, null=True, blank=True, default=" ")
+    youtube = models.CharField(max_length=400,null=True,blank=True,default=" ")
+    
+
 
     def previa(self):
         return mark_safe('<a href="/admin/Empresa/establecimiento/%s/change/"><img src="/media/%s" style="width: 50px" alt=""></a>'%(self.id,self.logo))
@@ -62,7 +64,7 @@ class UsuarioEmpresa(models.Model):
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     nombreCompleto=models.CharField(max_length=60)
-    cedula=models.CharField(max_length=10,null=True,blank=True)
+    cedula=models.CharField(max_length=13,null=True,blank=True)
 
     def __str__(self):
         return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)

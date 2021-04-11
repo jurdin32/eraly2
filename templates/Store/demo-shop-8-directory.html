@@ -1,0 +1,183 @@
+{% extends 'Store/demo-shop-8-dashboard.html' %}
+{% load static %}
+{% block auxiliar %}
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="formModalLabel">Registrar nuevas direcciones.</h4>
+                    <hr>
+                </div>
+                <form id="form-registro" method="post" class="form-horizontal mb-lg">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group mt-lg">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Ciudad <span
+                                    class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <select name="ciudad" class="js-example-basic-single2 form-control" required="required"
+                                        multiple style="width: 100%" id="ciudad">
+                                    {% for provincia in provincias %}
+                                        <optgroup label="{{ provincia.nombre }}"></optgroup>
+                                        {% for ciudad in provincia.ciudad_set.all %}
+                                            <option value="{{ ciudad.id }}">{{ ciudad.nombre }}</option>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mt-lg">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Dirección <span
+                                    class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" required="required" id="direccion" name="direccion"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Teléfono</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="telefono" id="telefono" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Celular</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="celular" id="celular" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Activar para envio</label>
+                            <div class="col-sm-9">
+                                <input type="checkbox" id="envio" name="envio">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-left text-sm-right mb-0">Observación</label>
+                            <div class="col-sm-9">
+                                <textarea name="observacion" id="observacion" style="resize: none; height: 100px"
+                                          class="form-control"
+                                          placeholder="Indique quien recibe, si es casa o apartamento, el piso, cualquier otra novedad, etc."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Salir</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block titulo %}Mis direcciones{% endblock %}
+
+{% block contenido %}
+    <div class="alert alert-success mb-xlg" role="alert">
+        Crea nuevas direcciones <strong> dando click en el enlace </strong> de <a id="enlace" href="#"
+                                                                                  data-target="#formModal"
+                                                                                  data-toggle="modal">Registro</a>
+    </div>
+    <div class="row">
+        {% for direccion in direcciones %}
+            <div class="col-sm-6">
+                <div class="panel-box">
+                    <div class="panel-box-title">
+                        <h3>
+                            {{ direccion.direccion|upper|truncatechars:25 }}
+                            {% if direccion.envio %}
+                                (Se usa para envío)
+                            {% endif %}
+                        </h3>
+                        <a href="/store/directory/delete/{{ direccion.id }}/" class="panel-box-edit"><i style="font-size: 15px" class="fa fa-trash"></i>
+                            <a href="#" data-id="{{ direccion.id }}" data-envio="{{ direccion.envio }}"
+                               data-ciudad="{{ direccion.ciudad_id }}" data-direccion="{{ direccion.direccion }}"
+                               data-telefono="{{ direccion.telefono }}" data-celular="{{ direccion.celular }}"
+                               data-observacion="{{ direccion.observacion }}" data-toggle="modal"
+                               data-target="#formModal" class="panel-box-edit ndata" style="font-size: 14px"><i style="font-size: 15px; padding-right: 10px"
+                                    class="fa fa-edit"></i></a>
+
+                        </a>
+                    </div>
+
+                    <div class="panel-box-content" style="height: 258px">
+                        <ul style="list-style: none">
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i class="fa fa-globe"></i> Pais:</span> {{ direccion.ciudad.provincia.pais.nombre }}
+                            </li>
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i class="fa fa-globe"></i> Provincia: </span> {{ direccion.ciudad.provincia.nombre }}
+                            </li>
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i class="fa fa-map"></i> Ciudad: </span>{{ direccion.ciudad.nombre }}
+                            </li>
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i class="fa fa-map-pin"></i> Dirección: </span>{{ direccion.direccion }}
+                            </li>
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i class="fa fa-phone"></i> Teléfono:</span> {{ direccion.telefono }}
+                            </li>
+                            <li style="padding-top: 6px"><span style="font-weight: bold"><i
+                                    class="fa fa-mobile-phone"></i> Celular:</span> {{ direccion.celular }}</li>
+                            {% if direccion.observacion %}
+                                <li style="padding-top: 6px"><span style="font-weight: bold"><i
+                                        class="fa fa-text-height"></i> Observación:</span> {{ direccion.observacion|truncatechars:90 }}
+                                </li>
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block script %}
+
+    <script>
+        $("#ciudad").select2({
+            maximumSelectionLength: 1
+        });
+        $("#enlace").click(function () {
+            $("#form-registro").attr("action", "/store/directory/")
+            $("#ciudad").val(-1).trigger('change')
+            $("#direccion").val("")
+            $("#telefono").val("")
+            $("#celular").val("")
+            $("#observacion").val("")
+            $("#envio").attr('checked', false);
+
+        })
+        $(".ndata").click(function () {
+            $("#form-registro").attr("action", "/store/directory/?edit=" + $(this).data('id'))
+            let ciudad = $(this).data('ciudad')
+            let direccion = $(this).data('direccion')
+            let telefono = $(this).data('telefono')
+            let celular = $(this).data('celular')
+            let observacion = $(this).data('observacion')
+            let envio = $(this).data('envio')
+            $("#ciudad").val(ciudad).trigger('change')
+            $("#direccion").val(direccion)
+            $("#telefono").val(telefono)
+            $("#celular").val(celular)
+            $("#observacion").val(observacion)
+            console.log(envio)
+            if (envio == "True") {
+                $("#envio").attr('checked', true);
+            }
+        });
+    </script>
+    <script>
+        let uri = '{{ request.get_full_path }}'
+        console.log(uri)
+        $('.nav-list li').each(function () {
+            console.log($(this).find('a').attr('href'))
+            if ($(this).find('a').attr('href') == uri) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+        })
+    </script>
+
+{% endblock %}

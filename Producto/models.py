@@ -1,3 +1,6 @@
+from django.core.files import File
+import uuid
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
@@ -8,6 +11,7 @@ from django.utils.safestring import mark_safe
 
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
+from eraly2.snippers import ResizeImageMixin
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
@@ -41,13 +45,19 @@ class ActividadProveedor(models.Model):
 
 
 class Categorias(models.Model):
-    establecimiento=models.ForeignKey(Establecimiento,on_delete=models.CASCADE,null=True,blank=True)
-    icono=models.CharField(max_length=20, default='fa fa-')
     nombre=models.CharField(max_length=200)
     descripcion=models.TextField(null=True,blank=True)
+    slug=models.CharField(max_length=20,null=True,blank=True)
+
 
     def __str__(self):
         return '%s' % (self.nombre)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.nombre=str.upper(self.nombre)
+        self.slug = str.upper(self.slug)
+        super(Categorias, self).save()
 
     class Meta:
         verbose_name_plural = "1. Categorias "
@@ -64,16 +74,24 @@ class DireccionProveedor(models.Model):
 
 class Subcategorias(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
-    icono=models.CharField(max_length=20)
     nombre=models.CharField(max_length=200)
-    descripcion=models.TextField()
 
 
     def __str__(self):
-        return '%s | %s' % (self.categoria.nombre,self.nombre)
+        return '%s' % (self.nombre)
 
     class Meta:
         verbose_name_plural = "2. Subcategorias "
+
+class Subcategorias_2(models.Model):
+    subcategoria = models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
+    nombre=models.CharField(max_length=200)
+
+    def __str__(self):
+        return '%s' % (self.nombre)
+
+    class Meta:
+        verbose_name_plural = "2.1 Subcategorias Subcategoría"
 
 class Marca(models.Model):
     nombre=models.CharField(max_length=40)
@@ -82,21 +100,22 @@ class Marca(models.Model):
     def __str__(self):
         return self.nombre
 
-class Productos(models.Model):
-    tipo=models.CharField(max_length=2, default="P")
-    imagen=models.ImageField(upload_to="productos",null=True,blank=True, help_text="imagen de 100px x 100px")
+class Productos(models.Model,ResizeImageMixin):
+    tipo=models.CharField(max_length=20, default="P")
+    imagen=models.ImageField(upload_to="productos",null=True,blank=True)
     codigo=models.CharField(max_length=300, null=True,blank=True, help_text="Solo si tiene codigo interno o codigo de barras")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
-    subcategoria=models.ForeignKey(Subcategorias, on_delete=models.CASCADE)
+    subcategoria=models.ForeignKey(Subcategorias_2, on_delete=models.CASCADE,null=True,blank=True)
     marca=models.ForeignKey(Marca,on_delete=models.CASCADE,null=True,blank=True)
     nombre=models.CharField(max_length=100)
     talla=models.CharField(max_length=50,null=True,blank=True)
     dimension=models.CharField(max_length=200,null=True,blank=True)
-    detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional")
-    descripcion = RichTextUploadingField()
+    detallesTecnicos = RichTextUploadingField(null=True,blank=True,help_text="Es opcional",default="Sin detalles Técnicos")
+    descripcion = RichTextUploadingField(default="Sin descripción",null=True,blank=True)
     estado=models.BooleanField(default=True)
     hash = models.CharField(max_length=256,null=True,blank=True)
     puntuacion=models.DecimalField(max_digits=9, decimal_places=2,default=0)
+    etiquetas=models.TextField(default="",null=True,blank=True)
 
     def _descripcion(self):
         return mark_safe(self.descripcion)
@@ -109,6 +128,28 @@ class Productos(models.Model):
             return '%s, talla:%s' % (self.nombre, self.talla)
         else:
             return '%s'%(self.nombre)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        if self.tipo=="P" and not self.imagen:
+            self.imagen = 'noproducto.png'
+
+        if self.tipo=="S" and not self.imagen:
+            self.imagen = 'noservicio.png'
+
+        if self.tipo=="V" and not self.imagen:
+            self.imagen = 'novehiculo.png'
+
+        if self.tipo=="I" and not self.imagen:
+            self.imagen = 'noinmueble.png'
+
+        try:
+            self.resize(self.imagen,(600,600))
+        except:
+            pass
+        super(Productos, self).save()
+
 
     class Meta:
         verbose_name_plural = "3. Producto "
@@ -181,24 +222,33 @@ class Kardex(models.Model):
     def __str__(self):
         return self.producto.nombre
 
-class ImagenesProducto(models.Model):
+class ImagenesProducto(models.Model,ResizeImageMixin):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
-    imagen=models.ImageField(upload_to='producto', null=True, blank=True, help_text='100x100')
+    imagen=models.ImageField(upload_to='productos', null=True, blank=True, help_text='600x800')
+    thumbnail=models.ImageField(upload_to='productos/thumbnail', null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.producto_id)
 
     def miniatura(self):
-        return mark_safe("<img src='/media/%s' style='width: 100px'>" % self.imagen)
+        return mark_safe("<img src='/media/%s'>" % self.thumbnail)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.resize(self.imagen, (600, 600))
+        self.resize(self.thumbnail, (200, 200))
+        super(ImagenesProducto, self).save()
+
 
     class Meta:
         verbose_name_plural = "8. Imagenes de Producto "
 
 class CalificacionProductos(models.Model):
-    usuario=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True,unique_for_date=True)
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
     producto=models.ForeignKey(Productos,on_delete=models.CASCADE)
     rating=models.IntegerField(default=1)
     comentario=models.TextField(blank=True,null=True)
+
 
 class Promociones(models.Model):
     fechaInicio=models.DateField()
@@ -209,7 +259,7 @@ class Promociones(models.Model):
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        precio= float(self.precio.total) - (float(self.precio.total) *float(self.descuento)/100)
+        precio= float(self.precio.precioVenta) - (float(self.precio.precioVenta) *float(self.descuento)/100)
         self.total =precio
         super(Promociones, self).save()
 

@@ -145,9 +145,7 @@
                                             <td style="text-align: center; vertical-align: middle;">
                                                 {% if producto.tipo == "P" %}
                                                 <a data-toggle="modal" data-target="#ingresos"
-                                                   data-producto_id="{{ producto.id }}"
-                                                   data-producto="{{ producto.nombre }}"
-                                                   data-tipo="I"
+                                                   onclick="inventario('{{ producto.id }}','{{ producto.nombre }}','I')"
                                                    href="#" class="btn btn-app datos"><i class="fa fa-plus-circle"></i>Ingreso</a>
                                                 {% else %}
                                                     <i>No Aplica</i>
@@ -156,9 +154,7 @@
                                             <td style="text-align: center; vertical-align: middle;">
                                                  {% if producto.tipo == "P" %}
                                                 <a href="" data-toggle="modal" data-target="#ingresos"
-                                                   data-producto_id="{{ producto.id }}"
-                                                   data-producto="{{ producto.nombre }}"
-                                                   data-tipo="E"
+                                                   onclick="inventario('{{ producto.id }}','{{ producto.nombre }}','E')"
                                                    class="btn btn-app datos">
                                                     <i class="fa fa-minus-circle"></i>Egreso</a>
                                                  {% else %}
@@ -187,15 +183,16 @@
                     url: "{% static 'Spanish_dt.json' %}"
                 },
                 pageLength: 100,
+                responsive: true
             });
         });
 
 
-        $(".datos").click(function () {
-            $("#producto_id").val($(this).data('producto_id'))
-            $("#producto").text($(this).data('producto'))
-            $("#tipo").val($(this).data('tipo'))
-        })
+        function inventario(id,producto,tipo) {
+            $("#producto_id").val(id)
+            $("#producto").text(producto)
+            $("#tipo").val(tipo)
+        }
 
     </script>
 {% endblock %}

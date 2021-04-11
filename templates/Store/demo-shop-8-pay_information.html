@@ -1,0 +1,159 @@
+{% extends 'Store/demo-shop-8.html' %}
+{% load static %}
+{% block content %}
+    {% block auxiliar %}
+
+    {% endblock %}
+    <section class="page-header">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/store/">Inicio</a></li>
+
+                <li class="active">Mi Tablero</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-md-push-3 my-account">
+                <h1 class="h2 heading-primary font-weight-normal">{% block titulo %}Mi Panel de
+                    Usuario{% endblock %}</h1>
+                {% block contenido %}
+                    <div class="alert alert-success mb-xlg" role="alert">
+                        ¡Hola, <strong>cliente de Eraly!</strong> Desde el Panel de control de Mi cuenta, puede ver una
+                        instantánea de la actividad reciente de su cuenta y actualizar la información. Seleccione un
+                        enlace.
+
+                    </div>
+
+                    <h2 class="h3 mb-sm"><strong>Información de la cuenta</strong></h2>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel-box">
+                                <div class="panel-box-title">
+                                    <h3>INFORMACIÓN DEL CONTACTO</h3>
+                                    <a href="/store/account/" class="panel-box-edit"><i class="fa fa-edit"></i></a>
+                                </div>
+
+                                <div class="panel-box-content" style="height: 250px; font-size: 14px">
+                                    <ul style="list-style: none;">
+                                        <li style="line-height: 30px"><span
+                                                style="font-weight: bold"><i class="fa fa-credit-card-alt"></i> Identificación: </span> {{ request.user.usuariosweb_set.first.identificacion }}
+                                        </li>
+                                        <li style="line-height: 30px"><span
+                                                style="font-weight: bold"><i class="fa fa-user"></i> Nombres: </span>{{ request.user.first_name }}
+                                        </li>
+                                        <li style="line-height: 30px"><span
+                                                style="font-weight: bold"><i class="fa fa-user"></i> Apellidos: </span>{{ request.user.last_name }}
+                                        </li>
+                                        <li style="line-height: 30px"><span style="font-weight: bold"><i class="fa fa-envelope"></i> Email: </span>{{ request.user.email }}</li>
+                                        <li style="line-height: 30px">
+                                            <span>Puede Cambiar su contraseña desde </span>
+                                            <a href="/store/account/">aquí</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="panel-box">
+                                <div class="panel-box-title">
+                                    <h3>INFORMACIÓN DE ENVIO</h3>
+                                    <a href="/store/directory/" class="panel-box-edit"><i class="fa fa-edit"></i></a>
+                                </div>
+
+                                <div class="panel-box-content" style="height: 250px; font-size: 14px">
+                                    {% if  direccion %}
+                                        <ul style="list-style: none">
+                                            <li><i class="fa fa-globe"></i><span style="font-weight: bold"> Pais:</span> {{ direccion.ciudad.provincia.pais.nombre }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-globe"></i><span style="font-weight: bold"> Provincia: </span> {{ direccion.ciudad.provincia.nombre }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-map"></i><span style="font-weight: bold"> Ciudad: </span> {{ direccion.ciudad.nombre }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-map-pin"></i><span style="font-weight: bold"> Dirección: </span> {{ direccion.direccion }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-phone"></i><span style="font-weight: bold"> Teléfono: </span> {{ direccion.telefono }}</li>
+                                            <li style="padding-top: 7px"><i class="fa fa-mobile-phone"></i><span style="font-weight: bold"> Celular: </span> {{ direccion.celular }}</li>
+
+                                        </ul>
+                                    {% else %}
+                                        <p>Actualmente no tienes direcciones ingresadas, puedes registrarlas <a
+                                                href="/store/directory/">aquí</a></p>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   {% comment %} <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-box">
+                                <div class="panel-box-title">
+                                    <h3>DIRECTORIO</h3>
+                                    <a href="#" class="panel-box-edit">Manage Addresses</a>
+                                </div>
+
+                                <div class="panel-box-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h4 class="h5 heading-text-color font-weight-semibold mb-xs">dirección de
+                                                facturación por defecto</h4>
+                                            <address>
+                                                No ha establecido una dirección de facturación predeterminada.<br>
+                                                <a href="#">Editar dirección</a>
+                                            </address>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h4 class="h5 heading-text-color font-weight-semibold mb-xs">Dirección de
+                                                entrega por defecto</h4>
+                                            <address>
+                                                No ha establecido una dirección de envío predeterminada.<br>
+                                                <a href="#">Editar dirección</a>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>{% endcomment %}
+                {% endblock %}
+
+            </div>
+            <div class="col-md-3 col-md-pull-9">
+                <aside class="sidebar">
+                    <h4>Mi cuenta</h4>
+                    <ul class="nav nav-list">
+                        <li class="active"><a href="/store/dashboard/">Panel de cuenta</a></li>
+                        <li><a href="/store/account/">Información de la cuenta</a></li>
+                        <li><a href="/store/directory/">Directorio</a></li>
+                        <li><a href="#">Mis ordenes</a></li>
+                        <li><a href="#">Acuerdos de facturación</a></li>
+                        <li><a href="#">Perfiles recurrentes</a></li>
+                        <li><a href="#">Mis Opiniones del producto</a></li>
+                        <li><a href="#">Mis etiquetas</a></li>
+                        <li><a href="#">Mi lista de deseos</a></li>
+                        <li><a href="#">Mis aplicaciónes</a></li>
+                        <li><a href="#">Suscripciones a los boletines</a></li>
+                        <li><a href="#">Mis productos descargables</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        let uri = '{{ request.get_full_path }}'
+        console.log(uri)
+        $('.nav-list li').each(function () {
+            console.log($(this).find('a').attr('href'))
+            if ($(this).find('a').attr('href') == uri) {
+                $(this).addClass('active')
+            } else {
+                $(this).removeClass('active')
+            }
+        })
+    </script>
+{% endblock %}
