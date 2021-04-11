@@ -206,7 +206,8 @@ def _tiendas(request,slug):
         'categorias':Categorias.objects.all(),
         'tienda':establecimiento,
         'categoriaTiendas':_obtener_categoria(establecimiento.id),
-        'contador':len(_obtener_categoria(establecimiento.id))
+        'contador':len(_obtener_categoria(establecimiento.id)),
+        'pestrella':Productos.objects.filter(establecimiento=establecimiento).order_by('puntuacion').first()
     }
     return render(request, 'Store/tiendas.html', contexto)
 
