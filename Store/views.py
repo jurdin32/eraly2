@@ -22,6 +22,7 @@ def tienda(request):
     puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
     del request.session['tiendas']
     request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.all()]
+    print(request.session['tiendas'])
     paginator = Paginator(puntuados, 20)
     page = request.GET.get('page')
     contexto={
@@ -190,7 +191,7 @@ def vaciar_carrito(request):
 
 
 
-def _tiendas(request):
+def _tiendas(request,slug):
     contexto={
         'categorias':Categorias.objects.all()
 
