@@ -202,12 +202,14 @@ def _obtener_categoria(id):
 
 def _tiendas(request,slug):
     establecimiento=Establecimiento.objects.get(slug=slug)
+    productos=Productos.objects.filter(establecimiento=establecimiento,precios__web=True).order_by('puntuacion')
     contexto={
         'categorias':Categorias.objects.all(),
         'tienda':establecimiento,
         'categoriaTiendas':_obtener_categoria(establecimiento.id),
         'contador':len(_obtener_categoria(establecimiento.id)),
-        'pestrella':Productos.objects.filter(establecimiento=establecimiento).order_by('puntuacion')
+        'pestrella':productos,
+        'de4y5':productos.filter(puntuacion=range(4,5))
     }
     return render(request, 'Store/tiendas.html', contexto)
 
