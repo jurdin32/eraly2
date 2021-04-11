@@ -259,6 +259,7 @@
 {% block script %}
     <script src="{% static 'starrr/starrr.js' %}"></script>
     <script>
+    $(".cloned").hide()
         {% for puntuado in de4y5 %}
             $('.rat-{{puntuado.id}}').starrr({
                 rating: {% rating_productos puntuado.id %},
