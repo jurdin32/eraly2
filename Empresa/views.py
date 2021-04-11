@@ -21,6 +21,7 @@ def empresa(request):
         establecimiento.save()
         UsuarioEmpresa(user=request.user, establecimiento=establecimiento,nombreCompleto=request.POST['representateLegal'],cedula=request.POST['ruc']).save()
         ConfigurarDocumentos(establecimiento_id=establecimiento.id, proformas=1, facturas=1).save()
+        messages.add_message(request,messages.SUCCESS,"Su empresa se ha creado exisomente, no olvide agregar una direccion y completar los datos desde el botón editar")
     contexto={
         "empresas":UsuarioEmpresa.objects.filter(user=request.user),
         "logs":LogEntry.objects.filter(user=request.user)
