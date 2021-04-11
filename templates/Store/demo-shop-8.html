@@ -524,42 +524,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <aside class="col-md-3 sidebar shop-sidebar">
-                        <div class="panel-group mb-xlg">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" data-toggle="collapse" href="#cat-list-container">
-                                            CATEGORÍA
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="accordion-body collapse in" id="cat-list-container">
-                                    <div class="panel-body">
-                                        <ul class="category-list">
-                                            {% for categoria in categorias %}
-                                                <li>
-                                                    <a href="/store/category/?categoria={{ categoria.id }}"
-                                                       style="cursor: pointer">{{ categoria.nombre }}</a>
-                                                    <a style="cursor: pointer" class="plus"></a>
-                                                    <ul>
-                                                        {% for subcategoria in categoria.subcategorias_set.all %}
-                                                            <li>
-                                                                <a href="/store/category/?subcategoria={{ subcategoria.id }}">{{ subcategoria.nombre }}</a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="mt-sm mb-xl">
-                    </aside>
                 </div>
             </div>
             <div class="container">
