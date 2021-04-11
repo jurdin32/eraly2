@@ -110,12 +110,30 @@
         </div>
     </div>
     <div class="container">
-        <div class="banner-container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="owl-carousel owl-theme"
+                     data-plugin-options="{'items': 1, 'autoplay': true, 'autoplayTimeout': 3000}">
+                    {% for pu in imagnes %}
+                        <a href="">
+                            <img class="product-image"
+                                 src="/media/{{ pu.imagen }}"
+                                 alt="Banner">
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="banner-container">
             <a href="#" class="banner">
                 <img src="/static/Store/img/demos/shop/banners/shop12/banner1.jpg" alt="Banner">
                 <br>
             </a>
         </div>
+            </div>
+
+        </div>
+
     </div>
 
     <div class="container">
@@ -172,13 +190,14 @@
         </div>
     </div>
     <style>
-    .feature-box.feature-box-style-2 .feature-box-info {
-        padding-left: 0px;
-    }
-    .feature-box .feature-box-info {
-        padding-left: 0px;
-    }
-</style>
+        .feature-box.feature-box-style-2 .feature-box-info {
+            padding-left: 0px;
+        }
+
+        .feature-box .feature-box-info {
+            padding-left: 0px;
+        }
+    </style>
     <div class="container">
         <div class="banner-container">
             <a href="#" class="banner">
@@ -204,28 +223,29 @@
 
                 <ul class="products-grid columns4">
                     {% for prod in de4y5 %}
-                    <li>
-                        <div class="product">
-                            <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                <a href="/store/details/?hash={{ prod.hash }}" title="{{ prod.nombre}}" class="product-image">
-                                    <img src="/media/{{ prod.imagen }}"
-                                         alt="Product Name">
-                                </a>
+                        <li>
+                            <div class="product">
+                                <figure class="product-image-area thumb-info-zoom product-img-zoom ">
+                                    <a href="/store/details/?hash={{ prod.hash }}" title="{{ prod.nombre }}"
+                                       class="product-image">
+                                        <img src="/media/{{ prod.imagen }}"
+                                             alt="Product Name">
+                                    </a>
 
-                            </figure>
-                            <div class="product-details-area">
-                                <h2 class="product-name"><a href="/store/details/?hash={{ prod.hash }}"
-                                                            title="{{ prod.nombre }}">{{ prod.nombre }}</a></h2>
-                                <div class="product-ratings">
-                                    <div>
-                                        <div class="rat-{{ prod.id }}"></div>
+                                </figure>
+                                <div class="product-details-area">
+                                    <h2 class="product-name"><a href="/store/details/?hash={{ prod.hash }}"
+                                                                title="{{ prod.nombre }}">{{ prod.nombre }}</a></h2>
+                                    <div class="product-ratings">
+                                        <div>
+                                            <div class="rat-{{ prod.id }}"></div>
+                                        </div>
                                     </div>
+
+
                                 </div>
-
-
                             </div>
-                        </div>
-                    </li>
+                        </li>
                     {% endfor %}
 
 
@@ -236,15 +256,15 @@
     </div>
 {% endblock %}
 {% block script %}
-<script src="{% static 'starrr/starrr.js' %}"></script>
-<script>
-    {% for puntuado in de4y5 %}
-        $('.rat-{{puntuado.id}}').starrr({
-            rating: {% rating_productos puntuado.id %},
-            max: 5,
-            readOnly: true,
-        })
-    {% endfor %}
+    <script src="{% static 'starrr/starrr.js' %}"></script>
+    <script>
+        {% for puntuado in de4y5 %}
+            $('.rat-{{puntuado.id}}').starrr({
+                rating: {% rating_productos puntuado.id %},
+                max: 5,
+                readOnly: true,
+            })
+        {% endfor %}
 
-</script>
+    </script>
 {% endblock %}

@@ -209,7 +209,8 @@ def _tiendas(request,slug):
         'categoriaTiendas':_obtener_categoria(establecimiento.id),
         'contador':len(_obtener_categoria(establecimiento.id)),
         'pestrella':productos,
-        'de4y5':productos.filter(puntuacion__range=(4,5))
+        'de4y5':productos.filter(puntuacion__range=(4,5)),
+        'imagnes':Publicidad.objects.all(),
     }
     return render(request, 'Store/tiendas.html', contexto)
 
