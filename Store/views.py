@@ -196,7 +196,7 @@ def _obtener_categoria(id):
     for prod in Productos.objects.filter(establecimiento_id=id):
         if not prod.subcategoria.subcategoria.id in aux:
             aux.append(prod.subcategoria.subcategoria.id)
-            categorias.append(prod.subcategoria.subcategoria)
+            categorias.append({'id':prod.subcategoria.subcategoria.id,'nombre':prod.subcategoria.subcategoria.nombre,'imagen':prod.imagen},)
     print(categorias)
     return categorias
 
