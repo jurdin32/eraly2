@@ -2,22 +2,22 @@
 {% load static %}
 {% block content %}
     {% if tienda.cabecera_tienda %}
-    <div class="slider-container rev_slider_wrapper">
-        <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider
-             data-plugin-options="{'delay': 9000, 'gridwidth': 1270, 'gridheight': 350, 'disableProgressBar': 'on'}">
-            <ul>
-                <li data-transition="fade">
-                    <img src="/media/{{ tienda.cabecera_tienda }}"
-                         alt=""
-                         data-bgposition="center center"
-                         data-bgfit="cover"
-                         data-bgrepeat="no-repeat"
-                         class="rev-slidebg">
-                </li>
-            </ul>
+        <div class="slider-container rev_slider_wrapper">
+            <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider
+                 data-plugin-options="{'delay': 9000, 'gridwidth': 1270, 'gridheight': 350, 'disableProgressBar': 'on'}">
+                <ul>
+                    <li data-transition="fade">
+                        <img src="/media/{{ tienda.cabecera_tienda }}"
+                             alt=""
+                             data-bgposition="center center"
+                             data-bgfit="cover"
+                             data-bgrepeat="no-repeat"
+                             class="rev-slidebg">
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
     <div class="container" style="text-align: right">
         <div class="row">
             <br>
@@ -28,20 +28,30 @@
                         <i class="fa fa-bars"></i>
                     </a>
                 </div>
-
-
             </div>
             <div class="col-md-8">
                 <div class="post-meta">
 
-                    <span><i class="fa fa-street-view" style="color: #cc3e1d"></i>  Machala - Rocafuerte y Buenavista &nbsp; &nbsp; </span>
-                    <span><i class="fa fa-calendar-check-o" style="color: #cc3e1d"></i> lun-vier &nbsp; &nbsp; </span>
+                    <span><i class="fa fa-street-view"
+                             style="color: #cc3e1d"></i>  {{ tienda.direccion_set.all.first.ciudad.nombre }} - {{ tienda.direccion_set.all.first.direccion }} &nbsp; &nbsp; </span>
+                    <span><i class="fa fa-calendar-check-o"
+                             style="color: #cc3e1d"></i> Todos los días &nbsp; &nbsp; </span>
                     <span><i class="fa fa-clock-o" style="color: #cc3e1d"></i> 08H00 a 17H00 &nbsp; &nbsp; </span>
                     <span><a href="#"> <i class="fa fa-phone"
-                                          style="color: #0d6287"></i></a> 0995485265&nbsp; &nbsp; </span>
-                    <span><a href="#"> <i class="fa fa-globe" style="color: #0d6287"></i></a>&nbsp; &nbsp; </span>
-                    <span><a href="#"> <i class="fa fa-facebook" style="color: #0d6287"></i></a>&nbsp; &nbsp; </span>
-                    <span><a href="#"> <i class="fa fa-instagram" style="color: #993660"></i></a> </span>
+                                          style="color: #0d6287"></i></a> {{ tienda.direccion_set.first.telefono }}&nbsp; &nbsp; </span>
+                    {% if tienda.facebook %}
+                        <span><a href="{{ tienda.facebook }}"> <i class="fa fa-facebook" style="color: #0d6287"></i></a>&nbsp; &nbsp; </span>
+                    {% endif %}
+
+                    {% if tienda.instagram %}
+                        <span><a href="{{ tienda.instagram }}"> <i class="fa fa-instagram"
+                                                                   style="color: #993660"></i></a> &nbsp; &nbsp; </span>
+                    {% endif %}
+
+                    {% if tienda.youtube %}
+                        <span><a href="{{ tienda.youtube }}"> <i class="fa fa-youtube" style="color: #993660"></i></a>&nbsp; &nbsp; </span>
+                    {% endif %}
+
                 </div>
 
             </div>
@@ -141,12 +151,12 @@
 
     <div class="container">
         <div class="row">
-            <div >
+            <div>
                 <ul class="portfolio-list sort-destination">
                     <li class="col-md-6 isotope-item brands">
                         <div class="portfolio-item">
                             <a href="">
-                                <span  class="thumb-info   thumb-info-zoom" style="border: 0px !important;" >
+                                <span class="thumb-info   thumb-info-zoom" style="border: 0px !important;">
                                     <span class="thumb-info-lighten">
                                         <img src="/static/Store/img/cat1.PNG" class="img-responsive" alt="">
                                     </span>
@@ -157,7 +167,7 @@
                     <li class="col-md-6 isotope-item medias">
                         <div class="portfolio-item">
                             <a href="">
-                                <span class="thumb-info  thumb-info-zoom" style="border: 0px !important;" >
+                                <span class="thumb-info  thumb-info-zoom" style="border: 0px !important;">
                                     <span class="thumb-info-lighten">
                                         <span class="owl-carousel owl-theme nav-inside m-none"
                                               data-plugin-options="{'items': 1, 'margin': 10, 'animateOut': 'fadeOut', 'autoplay': true, 'autoplayTimeout': 3000}">
