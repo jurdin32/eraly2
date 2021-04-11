@@ -186,9 +186,12 @@
                                                                 <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
                                                                 <ul class="dropdown-mega-sub-nav">
                                                                     {% for sub2 in sub.subcategorias_2_set.all %}
-                                                                    <li>
+                                                                        {% if forloop.counter < 5 %}
+                                                                        <li>
                                                                         <a href="/store/category/?subcategoria={{ sub.id }}">{{ sub2.nombre }}</a>
                                                                     </li>
+                                                                        {% endif %}
+
                                                                     {% endfor %}
                                                                 </ul>
                                                             </div>
