@@ -42,6 +42,11 @@
                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                 </div>
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="email" class="form-control has-feedback-left" name="email" id="email"
+                                               placeholder="Ingrese email">
+                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
                                     <input type="text" class="form-control has-feedback-left" name="direccion"
                                            id="direccion" required
                                            placeholder="Aquí la dirección">
@@ -152,7 +157,7 @@
                                                     <a style="cursor: pointer"
                                                        onclick="modificar_cliente('{{ cliente.id }}','{{ cliente.ciudad_id }}',
                                                                '{{ cliente.establecimiento_id }}','{{ cliente.nombres }}','{{ cliente.apellidos }}',
-                                                               '{{ cliente.cedula }}','{{ cliente.direccion }}','{{ cliente.celular }}','{{ cliente.telefono }}')"
+                                                               '{{ cliente.cedula }}','{{ cliente.direccion }}','{{ cliente.celular }}','{{ cliente.telefono }}','{{ cliente.email }}')"
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
                                                     </a>
@@ -206,8 +211,9 @@
         });
     </script>
     <script>
-   function modificar_cliente(id,idCiudad,idEstablecimiento,nombres,apellidos,cedula,direccion,celular,telefono){
+   function modificar_cliente(id,idCiudad,idEstablecimiento,nombres,apellidos,cedula,direccion,celular,telefono,email){
         $("#nombres").val(nombres);
+        $("#email").val(email);
         $("#apellidos").val(apellidos);
         $("#cedula").val(cedula);
         $('#ciudades').val(idCiudad).trigger('change');
