@@ -193,9 +193,8 @@ def vaciar_carrito(request):
 
 def _tiendas(request,slug):
     contexto={
-        'categorias':Categorias.objects.all()
-
-
+        'categorias':Categorias.objects.all(),
+        'tienda':Establecimiento.objects.get(slug=slug),
     }
     return render(request, 'Store/tiendas.html', contexto)
 
