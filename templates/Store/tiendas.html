@@ -1,13 +1,13 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% load static %}
 {% block content %}
+    {% if tienda.cabecera_tienda %}
     <div class="slider-container rev_slider_wrapper">
         <div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider
              data-plugin-options="{'delay': 9000, 'gridwidth': 1270, 'gridheight': 350, 'disableProgressBar': 'on'}">
             <ul>
                 <li data-transition="fade">
                     <img src="/media/{{ tienda.cabecera_tienda }}"
-
                          alt=""
                          data-bgposition="center center"
                          data-bgfit="cover"
@@ -17,7 +17,7 @@
             </ul>
         </div>
     </div>
-
+{% endif %}
     <div class="container" style="text-align: right">
         <div class="row">
             <br>
