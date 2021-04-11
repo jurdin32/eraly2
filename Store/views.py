@@ -260,6 +260,9 @@ def dashboard(request):
         direccionesW = DireccionesWeb.objects.get(usuarioWeb=usuario, envio=True)
     except:
         pass
+    if request.session.get('tiendas'):
+        del request.session['tiendas']
+    request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.all().order_by('slug')]
 
     contexto={
         'direccion':direccionesW,
