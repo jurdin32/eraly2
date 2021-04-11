@@ -22,7 +22,7 @@ def registroCLientes(request,id=0):
             cliente.ciudad_id=request.POST['ciudad']
             cliente.celular=request.POST['celular']
             cliente.telefono=request.POST['telefono']
-            cliente.email=email=request.POST['email']
+            cliente.email=request.POST['email']
             cliente.save()
             messages.add_message(request, messages.SUCCESS, "El registro se ha modificado exitosamente..!")
     contexto={
