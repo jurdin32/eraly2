@@ -189,7 +189,7 @@
                                                                     {% for sub2 in sub.subcategorias_2_set.all %}
                                                                         {% if forloop.counter < 5 %}
                                                                             <li>
-                                                                            <a href="/store/category/?subcategoria={{ sub.id }}">{{ sub2.nombre }}</a>
+                                                                            <a style="text-decoration: none" href="/store/category/?subcategoria={{ sub.id }}">{{ sub2.nombre }}</a>
                                                                         </li>
                                                                         {% endif %}
                                                                     {% endfor %}
