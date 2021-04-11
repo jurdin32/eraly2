@@ -93,7 +93,7 @@ def registrarDetallesFacturaProforma(request,id):
 def registroClienteFacturaProforma(request,id):
     if request.POST:
         print(request.POST)
-        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'],
+        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'], email=request.POST['email'],
                  apellidos=request.POST['apellidos'],ciudad_id=request.POST['ciudad'],
                  direccion=request.POST['direccion'],
                  telefono=request.POST['telefono'],celular=request.POST['celular']).save()

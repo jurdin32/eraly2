@@ -11,6 +11,7 @@ class Clientes(models.Model):
     cedula=models.CharField(max_length=13)
     nombres=models.CharField(max_length=60)
     apellidos=models.CharField(max_length=60)
+    email=models.EmailField(max_length=200,null=True,blank=True)
     direccion=models.CharField(max_length=60)
     ciudad=models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     telefono=models.CharField(max_length=13,null=True,blank=True)
