@@ -207,7 +207,7 @@ def _tiendas(request,slug):
         'tienda':establecimiento,
         'categoriaTiendas':_obtener_categoria(establecimiento.id),
         'contador':len(_obtener_categoria(establecimiento.id)),
-        'pestrella':Productos.objects.filter(establecimiento=establecimiento).order_by('puntuacion').first()
+        'pestrella':Productos.objects.filter(establecimiento=establecimiento).order_by('puntuacion')
     }
     return render(request, 'Store/tiendas.html', contexto)
 

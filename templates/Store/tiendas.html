@@ -121,10 +121,10 @@
                 <ul class="portfolio-list sort-destination">
                     <li class="col-md-4 isotope-item brands">
                         <div class="portfolio-item">
-                            <a href="/store/details/?hash={{ pestrella.hash }}">
+                            <a href="/store/details/?hash={{ pestrella.first.hash }}">
                                 <span class="thumb-info   thumb-info-zoom" style="border: 0px !important;">
                                     <span class="thumb-info-lighten">
-                                        <img src="/media/{{ pestrella.imagen }}" class="img-responsive" alt="">
+                                        <img src="/media/{{ pestrella.first.imagen }}" class="img-responsive" alt="">
                                     </span>
                                 </span>
                             </a>
@@ -137,17 +137,11 @@
                                     <span class="thumb-info-lighten">
                                         <span class="owl-carousel owl-theme nav-inside m-none"
                                               data-plugin-options="{'items': 1, 'margin': 10, 'animateOut': 'fadeOut', 'autoplay': true, 'autoplayTimeout': 3000}">
-
-                                            <span>
-                                                <img src="/static/Store/img/cate2.PNG"
-                                                     class="img-responsive" alt="">
+                                            {% for estrella in pestrella %}
+                                             <span>
+                                                <img src="/media/{{ estrella.imagen }}" class="img-responsive" alt="">
                                             </span>
-
-                                            <span>
-                                                <img src="/static/Store/img/cat1.PNG"
-                                                     class="img-responsive" alt="">
-                                            </span>
-
+                                            {% endfor %}
                                         </span>
 
                                     </span>
