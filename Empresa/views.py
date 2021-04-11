@@ -50,6 +50,12 @@ def modificar_empresa(request,id):
             establecimiento.cabecera_tienda=request.FILES['cabecera_tienda']
         except:
             pass
+        try:
+            establecimiento.banner1=request.FILES['banner1']
+        except: pass
+        try:
+            establecimiento.banner2=request.FILES['banner2']
+        except: pass
         establecimiento.ruc=request.POST['ruc']
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
