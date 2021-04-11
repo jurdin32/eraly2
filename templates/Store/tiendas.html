@@ -142,13 +142,20 @@
                                             {% for estrella in pestrella %}
                                                 <span>
                                              <div class="feature-box feature-box-style-2 feature-box-secondary">
-                                                    <div class="feature-box-icon" style="width: 50%">
-                                                        <img src="/media/{{ estrella.imagen }}" class="img-responsive">
-                                                    </div>
-                                                    <div class="feature-box-info">
-                                                        <h4 class="mb-sm">Compra ya..!</h4>
-                                                        <p class="mb-lg">{{ estrella.descripcion|safe }}</p>
-                                                    </div>
+                                                 <div class="row">
+                                                     <div class="col-md-6">
+                                                         <div class="feature-box-icon">
+                                                            <img src="/media/{{ estrella.imagen }}"
+                                                                 class="img-responsive">
+                                                        </div>
+                                                     </div>
+                                                     <div class="col-md-6">
+                                                         <div class="feature-box-info">
+                                                            <h4 class="mb-sm">Compra ya..!</h4>
+                                                            <p class="mb-lg">{{ estrella.descripcion|safe }}</p>
+                                                        </div>
+                                                     </div>
+                                                 </div>
                                                 </div>
                                             </span>
                                             {% endfor %}
