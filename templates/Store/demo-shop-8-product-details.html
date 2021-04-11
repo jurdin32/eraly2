@@ -171,8 +171,14 @@
                                            class="write-review-link" rel="nofollow">Agregar Calificación</a>
                                     </div>
                                     <div class="review-link">
-                                        <a href="#" class="review-link-in" rel="nofollow">
+                                        <a class="review-link-in" rel="nofollow">
                                             <span class="count"><strong>Tienda: </strong></span>
+                                            {{ producto.establecimiento.nombreComercial }}</a>
+                                </div>
+
+                                <div class="review-link">
+                                        <a href="/{{ producto.establecimiento.slug }}/" class="review-link-in" rel="nofollow">
+                                            <span class="count"><strong>Ver toda la tienda </strong></span>
                                             {{ producto.establecimiento.nombreComercial }}</a>
                                 </div>
 
