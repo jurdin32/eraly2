@@ -165,13 +165,13 @@
                     <div class="header-nav-main">
                         <nav>
                             <ul class="nav nav-pills" id="mainNav">
-                            <li class="dropdown"><a href="" class="dropdown-toggle">Tiendas</a>
-                                <ul class="dropdown-menu">
-                                    {% for tienda in request.session.tiendas %}
-                                    <li><a href="/{{ tienda.slug }}/">{{ tienda.nombre }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
+                                <li class="dropdown"><a href="" class="dropdown-toggle">Tiendas</a>
+                                    <ul class="dropdown-menu">
+                                        {% for tienda in request.session.tiendas %}
+                                            <li><a href="/{{ tienda.slug }}/">{{ tienda.nombre }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
                                 {% for categoria in categorias %}
                                     <li class="dropdown dropdown-mega">
                                         <a class="dropdown-toggle" href="#">
@@ -183,19 +183,22 @@
                                                     <div class="row">
                                                         {% for sub in categoria.subcategorias_set.all %}
                                                             {% if forloop.counter <= 50 %}
-                                                            <div class="col-md-3">
-                                                                <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
-                                                                <ul class="dropdown-mega-sub-nav">
-                                                                    {% for sub2 in sub.subcategorias_2_set.all %}
-                                                                        {% if forloop.counter < 5 %}
-                                                                            <li>
-                                                                            <a style="text-decoration: none" href="/store/category/?subcategoria={{ sub.id }}">{{ sub2.nombre }}</a>
-                                                                        </li>
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                    <li><a href="" style="text-decoration: none; color: red">Ver mas</a></li>
-                                                                </ul>
-                                                            </div>
+                                                                <div class="col-md-3">
+                                                                    <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
+                                                                    <ul class="dropdown-mega-sub-nav">
+                                                                        {% for sub2 in sub.subcategorias_2_set.all %}
+                                                                            {% if forloop.counter < 5 %}
+                                                                                <li>
+                                                                                    <a style="text-decoration: none"
+                                                                                       href="/store/category/?subcategoria={{ sub.id }}">{{ sub2.nombre }}</a>
+                                                                                </li>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        <li><a href=""
+                                                                               style="text-decoration: none; color: red">Ver
+                                                                            mas</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             {% endif %}
                                                         {% endfor %}
                                                     </div>
@@ -235,7 +238,8 @@
                                 <a href="/store/category/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
                                 <ul>
                                     {% for sub in categoria.subcategorias_set.all %}
-                                        <li><a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a></li>
+                                        <li><a href="/store/category/?subcategoria={{ sub.id }}">{{ sub.nombre }}</a>
+                                        </li>
                                     {% endfor %}
 
 
@@ -248,13 +252,13 @@
                     <li>
                         <span class="mmenu-toggle"></span>
                         <a style="cursor: pointer">Panel de Usuario</a>
-                    <ul>
-                        <li><a href="/store/dashboard/">Dashboard</a></li>
-                        <li><a href="/store/account/">Información de la Cuenta</a></li>
-                        <li><a href="/store/directory/">Directorio</a></li>
-                        <li><a href="/store/shopp/">Mis Ordenes</a></li>
-                        <li><a href="/logout_/?useranon=no">Cerrar Sesión</a></li>
-                    </ul>
+                        <ul>
+                            <li><a href="/store/dashboard/">Dashboard</a></li>
+                            <li><a href="/store/account/">Información de la Cuenta</a></li>
+                            <li><a href="/store/directory/">Directorio</a></li>
+                            <li><a href="/store/shopp/">Mis Ordenes</a></li>
+                            <li><a href="/logout_/?useranon=no">Cerrar Sesión</a></li>
+                        </ul>
                     </li>
                 {% endif %}
 
@@ -720,7 +724,14 @@
         </div>
     </footer>
 </div>
-
+<style>
+    .feature-box.feature-box-style-2 .feature-box-info {
+        padding-left: 0px;
+    }
+    .feature-box .feature-box-info {
+        padding-left: 0px;
+    }
+</style>
 <!-- Vendor -->
 <script src="{% static 'Store/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'Store/vendor/jquery.appear/jquery.appear.min.js' %}"></script>
