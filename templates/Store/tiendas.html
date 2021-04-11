@@ -150,7 +150,7 @@
                                                      </div>
                                                      <div class="col-md-6">
                                                          <div class="feature-box-info">
-                                                             <span class="mb-sm">Esto podría interesarte</span>
+                                                             <span class="mb-sm">{{ estrella.nombre|upper }}</span>
                                                             <p class="mb-lg">{{ estrella.descripcion|safe }}</p>
                                                         </div>
                                                      </div>
@@ -170,7 +170,14 @@
             </div>
         </div>
     </div>
-
+    <style>
+    .feature-box.feature-box-style-2 .feature-box-info {
+        padding-left: 0px;
+    }
+    .feature-box .feature-box-info {
+        padding-left: 0px;
+    }
+</style>
     <div class="container">
         <div class="banner-container">
             <a href="#" class="banner">
