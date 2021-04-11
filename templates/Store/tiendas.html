@@ -202,26 +202,19 @@
                 </div>
 
                 <ul class="products-grid columns4">
+                    {% for prod in de4y5 %}
                     <li>
                         <div class="product">
                             <figure class="product-image-area thumb-info-zoom product-img-zoom ">
                                 <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
+                                    <img src="/media/{{ prod.imagen }}"
                                          alt="Product Name">
-
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name" class="product-hover-image">
-                                </a>
-
-                                <a href="#" class="product-quickview  product-img-zoom">
-                                    <i class="fa fa-share-square-o"></i>
-                                    <span>Ver</span>
                                 </a>
 
                             </figure>
                             <div class="product-details-area">
                                 <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                            title="Product Name">Celuar Full HD</a></h2>
+                                                            title="Product Name">{{ prod.nombre }}</a></h2>
                                 <div class="product-ratings">
                                     <div class="ratings-box">
                                         <div class="rating" style="width:60%"></div>
@@ -232,99 +225,7 @@
                             </div>
                         </div>
                     </li>
-
-                    <li>
-                        <div class="product">
-                            <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name">
-
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name" class="product-hover-image">
-                                </a>
-
-                                <a href="#" class="product-quickview  product-img-zoom">
-                                    <i class="fa fa-share-square-o"></i>
-                                    <span>Ver</span>
-                                </a>
-
-                            </figure>
-                            <div class="product-details-area">
-                                <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                            title="Product Name">Celuar Full HD</a></h2>
-                                <div class="product-ratings">
-                                    <div class="ratings-box">
-                                        <div class="rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="product">
-                            <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name">
-
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name" class="product-hover-image">
-                                </a>
-
-                                <a href="#" class="product-quickview  product-img-zoom">
-                                    <i class="fa fa-share-square-o"></i>
-                                    <span>Ver</span>
-                                </a>
-
-                            </figure>
-                            <div class="product-details-area">
-                                <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                            title="Product Name">Celuar Full HD</a></h2>
-                                <div class="product-ratings">
-                                    <div class="ratings-box">
-                                        <div class="rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="product">
-                            <figure class="product-image-area thumb-info-zoom product-img-zoom ">
-                                <a href="demo-shop-8-product-details.html" title="Product Name" class="product-image">
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name">
-
-                                    <img src="{% static 'Store/img/cel.jpg' %}"
-                                         alt="Product Name" class="product-hover-image">
-                                </a>
-
-                                <a href="#" class="product-quickview  product-img-zoom">
-                                    <i class="fa fa-share-square-o"></i>
-                                    <span>Ver</span>
-                                </a>
-
-                            </figure>
-                            <div class="product-details-area">
-                                <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                            title="Product Name">Celuar Full HD</a></h2>
-                                <div class="product-ratings">
-                                    <div class="ratings-box">
-                                        <div class="rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </li>
+                    {% endfor %}
 
 
                 </ul>
