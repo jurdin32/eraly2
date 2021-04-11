@@ -168,7 +168,7 @@
                             <li class="dropdown"><a href="" class="dropdown-toggle">Tiendas</a>
                                 <ul class="dropdown-menu">
                                     {% for tienda in request.session.tiendas %}
-                                    <li><a href="/store/stores?q={{ tienda.id }}">{{ tienda.nombre }}</a></li>
+                                    <li><a href="/{{ tienda.slug }}/">{{ tienda.nombre }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </li>

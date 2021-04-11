@@ -271,7 +271,7 @@
                                 </button>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                 </button>
-                                <a href="/products/" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
                             </div>
                         </div>
                     </div>
@@ -289,6 +289,7 @@
         var emp = params.get('empresa');
         if (emp){
             $("#establecimiento").val(emp).trigger('change')
+            $("#regresar").attr('href','/products/?empresa='+emp)
         }
 
        function ckeditor_(control){
