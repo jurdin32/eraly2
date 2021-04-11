@@ -139,7 +139,9 @@
                                               data-plugin-options="{'items': 1, 'margin': 10, 'animateOut': 'fadeOut', 'autoplay': true, 'autoplayTimeout': 3000}">
                                             {% for estrella in pestrella %}
                                              <span>
-                                                <img src="/media/{{ estrella.imagen }}" class="img-responsive" alt="">
+                                                <div style="background-color: red; width: 100%">
+                                                    <img src="/media/{{ estrella.imagen }}" class="img-responsive" alt="">
+                                                </div>
                                             </span>
                                             {% endfor %}
                                         </span>
