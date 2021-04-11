@@ -189,12 +189,24 @@ def vaciar_carrito(request):
         messages.add_message(request, messages.SUCCESS, "El carrito esta vacio..!")
     return HttpResponseRedirect("/store/view/cart/")
 
-
+#obtiene las categorias por establecimiento:
+def _obtener_categoria(id):
+    categorias =[]
+    aux=[]
+    for prod in Productos.objects.filter(establecimiento_id=id):
+        if not prod.subcategoria.subcategoria.id in aux:
+            aux.append(prod.subcategoria.subcategoria.id)
+            categorias.append(prod.subcategoria.subcategoria)
+    print(categorias)
+    return categorias
 
 def _tiendas(request,slug):
+    establecimiento=Establecimiento.objects.get(slug=slug)
     contexto={
         'categorias':Categorias.objects.all(),
-        'tienda':Establecimiento.objects.get(slug=slug),
+        'tienda':establecimiento,
+        'categoriaTiendas':_obtener_categoria(establecimiento.id),
+        'contador':len(_obtener_categoria(establecimiento.id))
     }
     return render(request, 'Store/tiendas.html', contexto)
 

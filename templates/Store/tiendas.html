@@ -68,20 +68,18 @@
                 <div class="tabs home-products-tab">
                     <ul class="nav nav-links">
                         <li class="active">
-                            <a href="#featured" data-toggle="tab">Categoría de Productos </a>
+                            <a href="#featured" data-toggle="tab">Categoría de Productos de {{ tienda.nombreComercial }}</a>
                         </li>
 
                     </ul>
                     <div class="tab-content">
                         <div id="featured" class="tab-pane active">
-                            <ul class="products-grid columns4">
-
+                            <ul class="products-grid {% if contador < 4 %} columns{{ contador }}{% else %}columns4{% endif %}">
                                 <div class="owl-carousel owl-theme"
-                                     data-plugin-options="{'items': 6, 'autoplay': true, 'autoplayTimeout': 6000}">
-
-                                    <div class="product">
-                                        <figure class="product-image-area"
-                                                style="margin: 30px ; border: 0px solid #ddd;">
+                                     data-plugin-options="{'items': {{ contador }}, 'autoplay': true, 'autoplayTimeout': 6000}">
+                                    {% for ctienda in categoriaTiendas %}
+                                        <div class="product">
+                                        <figure class="product-image-area" style="margin: 30px ; border: 0px solid #ddd;">
                                             <a href="demo-shop-8-product-details.html" title="Product Name"
                                                class="product-image">
                                                 <img src="{% static 'Store/img/icons/seo-grey.png' %}"
@@ -93,45 +91,13 @@
                                         </figure>
                                         <div class="product-details-area">
                                             <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                        title="Product Name">laptops</a></h2>
+                                                                        title="Product Name">{{ ctienda }}</a></h2>
                                         </div>
                                     </div>
+                                    {% endfor %}
 
-                                    <div class="product">
-                                        <figure class="product-image-area"
-                                                style="margin: 20px ; border: 0px solid #ddd;">
-                                            <a href="demo-shop-8-product-details.html" title="Product Name"
-                                               class="product-image">
-                                                <img src="{% static 'Store/img/icons/seo-grey.png' %}"
-                                                     alt="Product Name">
-                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
-                                                     alt="Product Name" class="product-hover-image">
-                                            </a>
 
-                                        </figure>
-                                        <div class="product-details-area">
-                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                        title="Product Name">Celulares</a></h2>
-                                        </div>
-                                    </div>
 
-                                    <div class="product">
-                                        <figure class="product-image-area"
-                                                style="margin: 20px ; border: 0px solid #ddd;">
-                                            <a href="demo-shop-8-product-details.html" title="Product Name"
-                                               class="product-image">
-                                                <img src="{% static 'Store/img/icons/seo-grey.png' %}"
-                                                     alt="Product Name">
-                                                <img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
-                                                     alt="Product Name" class="product-hover-image">
-                                            </a>
-
-                                        </figure>
-                                        <div class="product-details-area">
-                                            <h2 class="product-name"><a href="demo-shop-8-product-details.html"
-                                                                        title="Product Name">Tablets</a></h2>
-                                        </div>
-                                    </div>
                                 </div>
                             </ul>
                         </div>
