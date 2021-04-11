@@ -64,7 +64,7 @@ class UsuarioEmpresa(models.Model):
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     nombreCompleto=models.CharField(max_length=60)
-    cedula=models.CharField(max_length=10,null=True,blank=True)
+    cedula=models.CharField(max_length=13,null=True,blank=True)
 
     def __str__(self):
         return "%s | %s: %s"%(self.nombreCompleto,self.user.username,self.nombreCompleto)
