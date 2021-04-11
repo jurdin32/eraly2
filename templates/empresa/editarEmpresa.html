@@ -222,6 +222,7 @@
                         <div class="dashboard-widget-content">
                             <ul class="list-unstyled timeline widget">
                                     <li style="padding: 20px">
+                                    <label for="">Cargue su logo</label>
                                         {% if establecimiento.logo %}
                                             <span>Logo Actual: {{ establecimiento.logo }}</span>
                                             <div style="padding: 10px;">
@@ -233,6 +234,7 @@
                                         <input type="file" name="logo" id="logo">
                                     </li>
                                     <li style="padding: 20px">
+                                        <label for="">Cargue su banner, se usa en facturación</label>
                                         {% if establecimiento.banner %}
                                             <span>Banner Actual: {{ establecimiento.banner }}</span><br>
                                             <div style="padding: 10px; text-align: center">
@@ -242,6 +244,7 @@
                                         <input type="file" name="banner" id="banner">
                                     </li>
                                     <li style="padding: 20px">
+                                    <label for="">Imágen al pie, se usa en facturación</label>
                                         {% if establecimiento.pie_pagina %}
                                             <span>Pie de Pagina Actual: {{ establecimiento.pie_pagina|truncatechars:70 }}</span><br>
                                             <div style="padding: 10px">
