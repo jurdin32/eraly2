@@ -24,9 +24,9 @@ class Establecimiento(models.Model):
     ubicacion_gps = models.CharField(max_length=300,null=True,blank=True)
     correo_electronico=models.EmailField(max_length=600,null=True,blank=True)
     web=models.CharField(max_length=400,null=True,blank=True)
-    facebook=models.CharField(max_length=400,null=True,blank=True)
-    instagram=models.CharField(max_length=400, null=True, blank=True)
-    youtube = models.CharField(max_length=400,null=True,blank=True)
+    facebook=models.CharField(max_length=400,null=True,blank=True,default=" ")
+    instagram=models.CharField(max_length=400, null=True, blank=True, default=" ")
+    youtube = models.CharField(max_length=400,null=True,blank=True,default=" ")
     
 
 
