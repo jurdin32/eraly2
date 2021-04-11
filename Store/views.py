@@ -70,6 +70,7 @@ def _detalles(request):
         'promocion':promo,
         'productos':productoss.filter(subcategoria=producto.subcategoria),
         'imagnes':Publicidad.objects.filter(estado=True),
+        'categorias': Categorias.objects.all().order_by('nombre'),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
