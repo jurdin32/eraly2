@@ -85,6 +85,10 @@
                                     <i class="fa fa-user"></i>
                                     {% if request.user.id %}
                                         <a href="/store/dashboard/">Mi cuenta</a>
+                                        {% if request.user.is_staff %}
+                                        <a href="/">Panel de Administración</a>
+                                        {% endif %}
+
                                         <a href="/logout_/?useranon=no">Cerrar Sesión</a>
                                     {% else %}
                                         <a href="/store/login/">Iniciar Sesión</a>
@@ -253,6 +257,9 @@
                         <span class="mmenu-toggle"></span>
                         <a style="cursor: pointer">Panel de Usuario</a>
                         <ul>
+                            {% if request.user.is_staff %}
+                                <a href="/">Panel de Administración</a>
+                            {% endif %}
                             <li><a href="/store/dashboard/">Dashboard</a></li>
                             <li><a href="/store/account/">Información de la Cuenta</a></li>
                             <li><a href="/store/directory/">Directorio</a></li>
