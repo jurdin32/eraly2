@@ -183,7 +183,7 @@
                                                     <div class="row">
                                                         {% for sub in categoria.subcategorias_set.all %}
                                                             {% if forloop.counter <= 50 %}
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <span class="dropdown-mega-sub-title">{{ sub.nombre }}</span>
                                                                 <ul class="dropdown-mega-sub-nav">
                                                                     {% for sub2 in sub.subcategorias_2_set.all %}
