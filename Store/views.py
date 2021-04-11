@@ -20,7 +20,7 @@ from eraly2.snippers import Hash_parse
 def tienda(request):
     productos=Productos.objects.filter(precios__web=True)
     puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
-    if request.session['tiendas']:
+    if request.sessionget('tiendas'):
         del request.session['tiendas']
     request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.all().order_by('slug')]
     print(request.session['tiendas'])
