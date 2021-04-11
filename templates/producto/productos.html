@@ -10,12 +10,7 @@
                         <h2>Productos <small>del establecimientos</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown">
-                                {% if empresa %}
-                                    <a href="/products/new/?empresa={{ empresa.id }}" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Opciones</a>
-                                {% else %}
-                                    <a href="/products/new/" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Opciones</a>
-                                {% endif %}
-
+                                    <a id="pnew" href="/products/new/?empresa={{ empresa.id }}" class="btn btn-success" style="background-color: #26B99A; color: white" aria-expanded="false">Registrar</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -119,6 +114,15 @@
 {% endblock %}
 {% block script_index %}
     <script>
+        let params = new URLSearchParams(location.search);
+        var pre = params.get('empresa');
+        if (pre){
+            $("#pnew").attr('href', '/products/new/?empresa='+pre)
+        }
+        else{
+            $("#pnew").attr('href', '/products/new/')
+        }
+
         $(document).ready(function () {
             $("#productos").DataTable({
                 language: {
