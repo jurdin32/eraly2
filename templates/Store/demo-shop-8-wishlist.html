@@ -24,6 +24,12 @@
                                 <tbody>
                                 {% for sess in favoritos %}
                                     <tr>
+                                    <td class="product-action-td">
+                                            <a href="/store//?product_id={{ sess.producto.hash }}&cc=ok"
+                                               title="Remove product" class="btn-remove"><i
+                                                    class="fa fa-times"></i></a>
+                                        </td>
+
                                         <td class="product-image-td">
                                             <a href="/store/details/?hash={{ sess.producto.hash }}"
                                                title="{{ sess.producto.nombre }}">
