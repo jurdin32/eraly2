@@ -513,8 +513,13 @@ def favoritos(request):
     print(request.GET.get('hash'))
     producto=Productos.objects.get(hash=request.GET.get('hash'))
     print(producto)
+    isp=False
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
-    if not producto in Favoritos.objects.filter(usuario=usuarioweb):
+    for producto in Favoritos.objects.filter(usuario=usuarioweb):
+        if producto==producto:
+            isp=True
+
+    if not isp:
         favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
         favorito.save()
         messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
