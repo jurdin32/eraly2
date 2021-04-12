@@ -510,10 +510,16 @@ def contact(request):
 
 @login_required(login_url='/store/login/')
 def favoritos(request):
+    print(request.GET.get('hash'))
     producto=Productos.objects.get(hash=request.GET.get('hash'))
+    print(producto)
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
-    favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
-    messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
+    if not producto in Favoritos.objects.filter(usuario=usuarioweb):
+        favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
+        favorito.save()
+        messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
+    else:
+        messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
     return HttpResponseRedirect("/store/details/?hash=%s"%producto.hash)
 
 
