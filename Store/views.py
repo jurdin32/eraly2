@@ -517,7 +517,7 @@ def favoritos(request):
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
     for producto in Favoritos.objects.filter(usuario=usuarioweb):
         try:
-            producto = Favoritos.objects.get(producto_id=producto.id)
+            dato = Favoritos.objects.get(producto_id=producto.id)
             isp=True
             messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
             break
