@@ -538,7 +538,7 @@ def lista_favoritos(request):
 
     return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
 
-def borrar_favoritos(request,hash):
+def borrar_favoritos(request,slug):
     usuariow = UsuariosWeb.objects.get(usuario=request.user)
     try:
         favoritos=Favoritos.objects.get(usuario=usuariow,producto__hash=hash)
