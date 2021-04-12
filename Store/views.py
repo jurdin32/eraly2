@@ -525,7 +525,7 @@ def favoritos(request):
         messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
     else:
         messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
-    return HttpResponseRedirect("/store/details/?hash=%s"%producto.hash)
+    return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
 
 def ejemplo(request):
