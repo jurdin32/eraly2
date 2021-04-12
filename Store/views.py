@@ -524,6 +524,8 @@ def favoritos(request):
         favorito= Favoritos.objects.create(usuario=usuarioweb,producto_id=producto.id)
         favorito.save()
         messages.add_message(request,messages.SUCCESS, "Se ha agregó a tus favoritos..!")
+    else:
+        messages.add_message(request,messages.WARNING, 'El producto ya está en favoritos')
 
     return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
