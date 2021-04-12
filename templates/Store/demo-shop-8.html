@@ -85,9 +85,10 @@
                                     {% if request.user.id %}
                                         <a href="/store/dashboard/"><i class="fa fa-user"></i> Mi cuenta</a>
                                         {% if request.user.is_staff %}
-                                        <a href="/"><i class="fa fa-user-circle"></i> Panel de Administración</a>
+                                            <a href="/"><i class="fa fa-user-circle"></i> Panel de Administración</a>
                                         {% endif %}
-                                        <a href="/logout_/?useranon=no"><i class="fa fa-power-off"></i> Cerrar Sesión</a>
+                                        <a href="/logout_/?useranon=no"><i class="fa fa-power-off"></i> Cerrar
+                                            Sesión</a>
                                     {% else %}
                                         <a href="/store/login/"><i class="fa fa-user-circle"></i> Iniciar Sesión</a>
                                     {% endif %}
@@ -410,13 +411,6 @@
                                                         <div class="product-ratings">
                                                             <div>
                                                                 <div class="rating-{{ producto.id }}"></div>
-                                                                <script>
-                                                                    $('.rating-{{producto.id}}').starrr({
-                                                                        rating: {% rating_productos producto.id %},
-                                                                        max: 5,
-                                                                        readOnly: true,
-                                                                    })
-                                                                </script>
                                                             </div>
                                                         </div>
 
@@ -870,6 +864,14 @@
     {% for puntuado in puntuados %}
         $('.rat-{{puntuado.id}}').starrr({
             rating: {% rating_productos puntuado.id %},
+            max: 5,
+            readOnly: true,
+        })
+    {% endfor %}
+
+    {% for producto in productos %}
+        $('.rating-{{producto.id}}').starrr({
+            rating: {% rating_productos producto.id %},
             max: 5,
             readOnly: true,
         })
