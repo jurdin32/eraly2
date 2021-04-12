@@ -525,7 +525,7 @@ def favoritos(request):
             pass
 
     if not isp:
-        favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
+        favorito= Favoritos.objects.create(usuario=usuarioweb,producto_id=producto.id)
         favorito.save()
         messages.add_message(request,messages.SUCCESS, "Se ha agregó a tus favoritos..!")
 
