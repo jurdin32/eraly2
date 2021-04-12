@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb
+from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb, Favoritos
 from eraly2.snippers import Attr
 
 
@@ -19,3 +19,8 @@ class AdminComprasWeb(admin.ModelAdmin):
 class AdminDetalleCompraWeb(admin.ModelAdmin):
     list_display = Attr(DetalleCompraWeb)
     list_display_links = Attr(DetalleCompraWeb)
+
+@admin.register(Favoritos)
+class AdminFavorito(admin.ModelAdmin):
+    list_display = Attr(Favoritos)
+    list_display_links = Attr(Favoritos)
