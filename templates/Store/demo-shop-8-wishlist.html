@@ -17,15 +17,12 @@
                                 <tr>
                                     <th></th>
                                     <th>Producto</th>
-                                    <th>P. Normal</th>
-                                    <th>P. Promo</th>
-                                    <th style="text-align: center">Cantidad</th>
-                                    <th class="text-right">Subtotal</th>
-                                    <th style="text-align: center">Estatus</th>
+                                    <th>Precio</th>
+                                    <th>Estatus</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for sess in compra.detallecompraweb_set.all %}
+                                {% for sess in favoritos %}
                                     <tr>
                                         <td class="product-image-td">
                                             <a href="/store/details/?hash={{ sess.producto.hash }}"
@@ -58,20 +55,8 @@
                                                 </a>
                                             </h2>
                                         </td>
-                                        <td>{{ sess.precio_normal }}</td>
-                                        {% if sess.precio_normal == sess.precio_promocion %}
-                                            <td><i>No tiene descuento</i></td>
-                                        {% else %}
-                                            <td>{{ sess.precio_promocion }}</td>
-                                        {% endif %}
-                                        <td style="text-align: center">
-                                            {{ sess.cantidad }}
-                                        </td>
-                                        <td class="text-right">
-                                            <span class="text-primary subtotal">{{ sess.precio_total|floatformat:2 }}</span>
-                                        </td >
-                                        <td style="font-size: 20px; text-align: center" class="text-success"><i
-                                                class="fa fa-check-circle"></i></td>
+                                        <td><i>{{ sess.producto.precios_set.all.last.total }}</i></td>
+                                        <td style="font-size: 20px;" class="text-danger"><i class="fa fa-heart"></i></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

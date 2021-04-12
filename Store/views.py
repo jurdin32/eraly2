@@ -527,9 +527,11 @@ def favoritos(request):
         messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
     return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
+@login_required(login_url='/store/login/')
 def lista_favoritos(request):
+    usuariow=UsuariosWeb.objects.get(usuario=request.user)
     contexto={
-
+        'favoritos':Favoritos.objects.filter(usuario=usuariow)
     }
 
     return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
