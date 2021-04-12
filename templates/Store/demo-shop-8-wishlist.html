@@ -75,30 +75,6 @@
                                     </tr>
                                 {% endfor %}
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td colspan="4" class="clearfix">
-                                        <a href="/store/" class="btn btn-default hover-primary btn-continue">Continuar
-                                            Comprando</a>
-                                    </td>
-                                    <td class="text-right text-primary">SUBTOTAL:</td>
-                                    <td class="subtotales text-right"></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="clearfix"></td>
-                                    <td class="text-right text-primary">IVA:</td>
-                                    <td class="iva text-right"></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="clearfix">
-                                    </td>
-                                    <td class="text-right text-primary">TOTAL:</td>
-                                    <td class="total_general text-right"></td>
-                                    <td></td>
-                                </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -107,22 +83,3 @@
         </div>
     {% endblock %}
 </div>
-{% block script %}
-    <script>
-        let subtotal = 0
-        let iva = 0
-        let total_general = 0
-
-        $(".subtotal").each(function () {
-            subtotal += parseFloat($(this).text().replace(",", "."))
-        })
-        iva = subtotal * 0.12
-        total_general = subtotal + iva
-        $(".subtotales").text(subtotal.toFixed(2))
-        $(".iva").text(iva.toFixed(2))
-        $(".total_general").text(total_general.toFixed(2))
-
-        console.log(subtotal)
-    </script>
-{% endblock %}
-
