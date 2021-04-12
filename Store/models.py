@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from Personas.models import UsuariosWeb
-from Producto.models import Productos
+from Producto.models import Productos, Precios
 from eraly2.snippers import ResizeImageMixin
 
 
@@ -52,3 +52,14 @@ class DetalleCompraWeb(models.Model):
         self.etiqueta=str.upper(self.compra.hash[5:15])
         print(self.etiqueta)
         super(DetalleCompraWeb, self).save()
+
+class Favoritos(models.Model):
+    usuario=models.ForeignKey(UsuariosWeb,on_delete=models.CASCADE)
+    producto =models.ForeignKey(Productos,on_delete=models.CASCADE)
+    precio =models.DecimalField(default=0, max_digits=9, decimal_places=2)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        precios= Precios.objects.filter(producto=self.producto,web=True).last()
+        self.precio=precios.precioVenta
+        super(Favoritos, self).save()
