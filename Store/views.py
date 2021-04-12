@@ -513,6 +513,7 @@ def favoritos(request):
     producto=Productos.objects.get(hash=request.GET.get('hash'))
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
     favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
+    messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
     return HttpResponseRedirect("/store/details/?hash=%s"%producto.hash)
 
 
