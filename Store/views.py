@@ -541,7 +541,7 @@ def lista_favoritos(request):
 def borrar_favoritos(request,slug):
     usuariow = UsuariosWeb.objects.get(usuario=request.user)
     try:
-        favoritos=Favoritos.objects.get(usuario=usuariow,producto__hash=hash)
+        favoritos=Favoritos.objects.get(usuario=usuariow,producto__hash=slug)
         favoritos.delete()
         messages.add_message(request,messages.ERROR,"El producto se eliminó de su lista de deseos..!")
     except Favoritos.DoesNotExist:
