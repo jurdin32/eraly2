@@ -120,6 +120,7 @@ urlpatterns = [
     path("store/register/",register),
     path("store/login/",login_store_user),
     path("store/dashboard/",dashboard),
+    path("store/wishlist/", lista_favoritos),
     path("store/directory/",directorio),
     path("store/directory/delete/<int:n>/",eliminar_directorio),
     path("store/shopp/",misOrdenes),

@@ -527,6 +527,13 @@ def favoritos(request):
         messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
     return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
+def lista_favoritos(request):
+    contexto={
+
+    }
+
+    return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
+
 
 def ejemplo(request):
     contexto={
