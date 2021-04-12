@@ -8,24 +8,22 @@ from Personas.models import Clientes
 from django.contrib import messages
 
 def registroCLientes(request,id=0):
+    cliente=Clientes()
     if request.POST:
-        if id == 0:
-            pass
-        else:
-            print(request.POST)
+        if id ==0:
             cliente=Clientes.objects.get(id=id)
-            cliente.establecimiento_id=request.POST['establecimiento']
-            cliente.cedula=request.POST['cedula']
-            cliente.nombres=request.POST['nombres']
-            cliente.apellidos=request.POST['apellidos']
-            cliente.direccion=request.POST['direccion']
-            cliente.ciudad_id=request.POST['ciudad']
-            cliente.email = request.POST['email']
-            cliente.celular=request.POST['celular']
-            cliente.telefono=request.POST['telefono']
-            cliente.email=request.POST['email']
-            cliente.save()
-            messages.add_message(request, messages.SUCCESS, "El registro se ha modificado exitosamente..!")
+        cliente.establecimiento_id=request.POST['establecimiento']
+        cliente.cedula=request.POST['cedula']
+        cliente.nombres=request.POST['nombres']
+        cliente.apellidos=request.POST['apellidos']
+        cliente.direccion=request.POST['direccion']
+        cliente.ciudad_id=request.POST['ciudad']
+        cliente.email = request.POST['email']
+        cliente.celular=request.POST['celular']
+        cliente.telefono=request.POST['telefono']
+        cliente.email=request.POST['email']
+        cliente.save()
+        messages.add_message(request, messages.SUCCESS, "El registro se ha modificado exitosamente..!")
     contexto={
         'clientes':Clientes.objects.filter(establecimiento__usuario=request.user),
         'provincias':Provincia.objects.all(),
