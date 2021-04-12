@@ -286,7 +286,12 @@ def registrarPrecios(request,id):
             web=True
         else:
             web =False
-        Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle'],web=web).save()
+        try:
+            precio=Precios.objects.get(producto_id=id,web=web)
+            precio.web=False
+            precio.save()
+        except Precios.DoesNotExist:
+            Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle'],web=web).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
