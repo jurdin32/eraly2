@@ -109,6 +109,7 @@ urlpatterns = [
     path("store/",tienda),
     path("store/products/",_productos),
     path("store/details/",_detalles),
+    path("store/fav/",favoritos),
     path("store/category/",ver_subcategorias),
     path("<slug:slug>/",_tiendas),
     path("store/search/",ver_subcategorias),

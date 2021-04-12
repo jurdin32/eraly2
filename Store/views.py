@@ -13,7 +13,7 @@ from Personas.models import *
 from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
 from django.contrib import messages
 
-from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb
+from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb, Favoritos
 from eraly2.snippers import Hash_parse
 
 
@@ -508,7 +508,12 @@ def contact(request):
     }
     return render(request, 'Store/demo-shop-8-contact-us.html', contexto)
 
-
+@login_required(login_url='/store/login/')
+def favoritos(request):
+    producto=Productos.objects.get(hash=request.GET.get('hash'))
+    usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
+    favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
+    return HttpResponseRedirect("/store/details/?hash=%s"%producto.hash)
 
 
 def ejemplo(request):
