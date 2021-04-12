@@ -519,6 +519,7 @@ def favoritos(request):
         try:
             producto = Productos.objects.get(id=producto.id)
             isp=True
+            messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
             break
         except Productos.DoesNotExist:
             pass
@@ -527,8 +528,6 @@ def favoritos(request):
         favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
         favorito.save()
         messages.add_message(request,messages.SUCCESS, "Se ha agregó a tus favoritos..!")
-    else:
-        messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
 
     return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
