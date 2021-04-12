@@ -420,7 +420,7 @@
                                     <span class="product-price">
                                         {% for precio in product.precios_set.all %}
                                             {% if precio.web %}
-                                                $ {{ precio.total }}
+                                                $ {{ precio.precioVenta }}
                                             {% endif %}
                                         {% endfor %}
                                     </span>
