@@ -515,15 +515,11 @@ def favoritos(request):
     print(producto)
     isp=False
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
-    for producto in Favoritos.objects.filter(usuario=usuarioweb):
-        try:
-            dato = Favoritos.objects.get(producto_id=producto.id)
-            isp=True
-            messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
-            break
-        except Favoritos.DoesNotExist:
-            pass
-
+    try:
+        Favoritos.objects.get(usuario=usuarioweb,producto=producto)
+        isp =True
+    except Favoritos.DoesNotExist:
+        isp=False
     if not isp:
         favorito= Favoritos.objects.create(usuario=usuarioweb,producto_id=producto.id)
         favorito.save()
