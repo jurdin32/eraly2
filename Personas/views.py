@@ -20,6 +20,7 @@ def registroCLientes(request,id=0):
             cliente.apellidos=request.POST['apellidos']
             cliente.direccion=request.POST['direccion']
             cliente.ciudad_id=request.POST['ciudad']
+            cliente.email = request.POST['email']
             cliente.celular=request.POST['celular']
             cliente.telefono=request.POST['telefono']
             cliente.email=request.POST['email']

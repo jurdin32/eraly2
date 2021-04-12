@@ -119,6 +119,11 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Registro <small>de Clientes</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                    <a id="nuevoCliente" class="btn btn-success" style="background-color: #26B99A; color: white" data-toggle="modal" data-target="#modificar" aria-expanded="false">Registrar</a>
+                            </li>
+                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -227,5 +232,10 @@
     function eliminar_cliente(id){
         $("#eliminarRegistro").attr("href","/clients/disable/"+id+"/")
     }
+
+    $("#nuevoCliente").click(function (){
+        $("#frmModificar").attr("action","/clients/0/")
+    })
+
     </script>
 {% endblock %}
