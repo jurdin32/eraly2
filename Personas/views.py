@@ -10,7 +10,7 @@ from django.contrib import messages
 def registroCLientes(request,id=0):
     cliente=Clientes()
     if request.POST:
-        if id ==0:
+        if int(id) >0:
             cliente=Clientes.objects.get(id=id)
         cliente.establecimiento_id=request.POST['establecimiento']
         cliente.cedula=request.POST['cedula']
