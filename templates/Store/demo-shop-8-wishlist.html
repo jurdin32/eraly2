@@ -25,7 +25,7 @@
                                 {% for sess in favoritos %}
                                     <tr>
                                     <td class="product-action-td">
-                                            <a href="/store//?product_id={{ sess.producto.hash }}&cc=ok"
+                                            <a href="/store/wishlist/detelete/{{ sess.producto.hash }}/"
                                                title="Remove product" class="btn-remove"><i
                                                     class="fa fa-times"></i></a>
                                         </td>

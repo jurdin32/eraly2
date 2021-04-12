@@ -538,6 +538,15 @@ def lista_favoritos(request):
 
     return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
 
+def borrar_favoritos(request,hash):
+    usuariow = UsuariosWeb.objects.get(usuario=request.user)
+    try:
+        favoritos=Favoritos.objects.get(usuario=usuariow,producto__hash=hash)
+        favoritos.delete()
+        messages.add_message(request,messages.ERROR,"El producto se eliminó de su lista de deseos..!")
+    except Favoritos.DoesNotExist:
+        pass
+    return HttpResponseRedirect("/store/wishlist/")
 
 def ejemplo(request):
     contexto={
