@@ -246,6 +246,9 @@
 
                                 </address>
                             </div>
+                        {% if establecimiento %}
+
+
                             <!-- /.col -->
                             <div class="col-sm-4 invoice-col" style="padding-top: 20px">
                                 <span style="font-weight: bold; font-size: 20px">A FAVOR DE:</span>
@@ -272,11 +275,13 @@
                                     style="color: indianred">{{ contadorProforma }}</span></span>
                             </div>
                             <!-- /.col -->
+                        {% endif %}
                         </div>
                         <!-- /.row -->
 
                         <!-- Table row -->
-                        <div class="row">
+                    {% if establecimiento %}
+                     <div class="row">
                             <div class="table table-responsive">
                                 <table class="table table-striped table-bordered" id="tabla">
                                     <thead>
@@ -345,6 +350,8 @@
                             </div>
                             <!-- /.col -->
                         </div>
+                    {% endif %}
+
 
                     </section>
                 </div>

@@ -98,7 +98,7 @@ def registroClienteFacturaProforma(request,id):
                  direccion=request.POST['direccion'],
                  telefono=request.POST['telefono'],celular=request.POST['celular']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se Creado..!")
-    return HttpResponseRedirect("/proforms/%s/"%id)
+    return HttpResponseRedirect("/proforms/%s/?tipo=%s"%(id,request.GET.get('tipo')))
 
 def crearDocumentoPDF_Proforma(request, id):
     documento=Facturas.objects.get(id=id)
