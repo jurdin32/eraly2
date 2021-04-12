@@ -64,5 +64,5 @@ class Favoritos(models.Model):
         print("precio",pre)
         if pre:
             print(pre.precioVenta,pre.total)
-            self.precio=pre.precioVenta
+            self.precio=pre.total
         super(Favoritos, self).save()
