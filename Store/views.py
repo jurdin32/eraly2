@@ -516,15 +516,20 @@ def favoritos(request):
     isp=False
     usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
     for producto in Favoritos.objects.filter(usuario=usuarioweb):
-        if producto==producto:
+        try:
+            producto = Productos.objects.get(id=producto.id)
             isp=True
+            break
+        except Productos.DoesNotExist:
+            pass
 
     if not isp:
         favorito= Favoritos.objects.create(usuario=usuarioweb,producto=producto)
         favorito.save()
-        messages.add_message(request,messages.SUCCESS, "Se ha agrego a tus favoritos..!")
+        messages.add_message(request,messages.SUCCESS, "Se ha agregó a tus favoritos..!")
     else:
         messages.add_message(request, messages.WARNING, "Ya esta en favoritos..!")
+
     return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
 @login_required(login_url='/store/login/')
