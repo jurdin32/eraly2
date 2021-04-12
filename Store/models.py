@@ -61,5 +61,5 @@ class Favoritos(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         precios= Precios.objects.filter(producto_id=self.producto_id, web=True).last()
-        self.precio=precios.precioVenta
+        self.precio=precios.total
         super(Favoritos, self).save()
