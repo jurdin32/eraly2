@@ -148,12 +148,12 @@
                                                     </a>
                                                 </td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
-                                                    {% if cliente.estado %}
-                                                        <a href="" class="text-danger eliminar btn btn-app" onclick="eliminar_cliente('{{ cliente.id }}')" data-toggle="modal" data-target="#eliminar">
-                                                            <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Eliminar" class="fa fa-trash"></i>Deshabilitar</a>
+                                                    {% if user.user.is_active %}
+                                                        <a href="" class="text-danger eliminar btn btn-app">
+                                                            <i data-toggle="tooltip" class="fa fa-check-circle"></i>Habilitado</a>
                                                     {% else %}
-                                                        <a href="/clients/disable/{{ cliente.id }}/" class="text-success btn btn-app">
-                                                            <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Habilitar Usuario" class="fa fa-check-circle"></i>Habilitar</a>
+                                                        <a href="" class="text-danger eliminar btn btn-app">
+                                                            <i data-toggle="tooltip" class="fa fa-close"></i>Deshabilitado</a>
                                                     {% endif %}
 
                                                 </td>
