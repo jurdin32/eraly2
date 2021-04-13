@@ -208,11 +208,11 @@
         else{
             $("#sesion").iCheck('uncheck')
         }
-        $("#frmModificar").attr("action","/business/user_register/?edit="+id+"/")
+        $("#frmModificar").attr("action","/business/user_register/?edit="+id+"")
     }
 
     function eliminar_cliente(id){
-        $("#eliminarRegistro").attr("href","/business/user_register/?disable="+id+"/")
+        $("#eliminarRegistro").attr("href","/business/user_register/?disable="+id+"")
     }
 
     $("#nuevoCliente").click(function (){
