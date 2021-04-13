@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 
@@ -368,10 +368,11 @@ def ver_subcategorias(request):
 
     if request.GET.get("q"):
         q=request.GET.get("q")
-        prod = prod.filter(nombre__icontains=request.GET.get("q")) or prod.filter(subcategoria__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(etiquetas__icontains=request.GET.get("q")) or prod.filter(marca__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(establecimiento__nombreComercial__icontains=request.GET.get("q")) or prod.filter(descripcion__icontains=request.GET.get("q")) or \
-               prod.filter(detallesTecnicos__icontains=request.GET.get("q"))
+        query=(Q(nombre__icontains=q) or Q(subcategoria__nombre__icontains=q) or Q(etiquetas__icontains=q)
+               or Q(marca__nombre__icontains=q) or Q(establecimiento__nombreComercial__icontains=q)
+               or Q(descripcion__icontains=q) or Q(detallesTecnicos__icontains=q))
+        prod = prod.filter(query).distinct()
+
     if request.GET.get("ord"):
         if request.GET.get("ord") == "name":
             prod = prod.order_by('nombre')
