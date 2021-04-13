@@ -129,13 +129,13 @@ def crearDocumentoPDF_Factura(request, id):
 def listaDocumentos(request):
     documentos =None
     if int(request.GET["establecimiento"])==0:
-        documentos = Facturas.objects.filter(establecimiento__usuario=request.user)
+        documentos = Facturas.objects.filter(establecimiento__usuarioempresa__user=request.user)
     else:
         documentos=Facturas.objects.filter(establecimiento_id=request.GET["establecimiento"])
 
     contexto={
         'documentos':documentos,
-        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
+        "establecimientos":Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, 'Ventas/ListaDocumentos.html',contexto)
 
