@@ -367,7 +367,7 @@
                                                 <li><a style="cursor:pointer;" id="nprecio" class="dropdown-item"
                                                        data-toggle="modal"
                                                        data-target="#registroPrecios"
-                                                        data-href="/products/prices/{{ producto.id }}/"
+                                                        data-enlace="/products/prices/{{ producto.id }}/"
                                                 ><i
                                                         class="fa fa-plus-circle"> </i>
                                                     Agregar</a>
@@ -387,7 +387,7 @@
                                                         <a href="/products/prices/delete/{{ precio.id }}/"><i
                                                             class="fa fa-trash" style="color: white"></i></a>
                                                         <a class="dataprecio" style="cursor:pointer;" data-target="#registroPrecios" data-toggle="modal"
-                                                           data-href="/products/prices/edit/{{ precio.id }}/"
+                                                           data-enlace="/products/prices/edit/{{ precio.id }}/"
                                                            data-web="{{ precio.web }}"
                                                            data-precio="{{ precio.precioVenta }}"
                                                            data-detalle="{{ precio.detalle }}"
@@ -578,10 +578,10 @@
             else{
                 $("#web").checked(false)
             }
-            $("#formPrecio").attr('action',$(this).data('href'))
+            $("#formPrecio").attr('action',$(this).data('enlace'))
         })
         $("#nprecio").click(function (){
-            $("#formPrecio").attr('action',$(this).data())
+            $("#formPrecio").attr('action',$(this).data('enlace'))
         })
     </script>
 {% endblock %}
