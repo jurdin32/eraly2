@@ -1,16 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Avg, Q
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.db.models import Avg
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from simple_search import search_filter
 # Create your views here.
 from future.backports import datetime
 
-from Empresa.views import direcciones
-from Home.models import Provincia, Pais
+from Home.models import Provincia
 from Personas.models import *
-from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Colores
 from django.contrib import messages
 
 from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb, Favoritos
@@ -369,9 +368,6 @@ def ver_subcategorias(request):
     if request.GET.get("q"):
         q=request.GET.get("q")
         search_fields = ['nombre', 'subcategoria__nombre', 'etiquetas','marca__nombre','establecimiento__nombreComercial','descripcion','detallesTecnicos']
-        # query=(Q(nombre__icontains=q) or Q(subcategoria__nombre__icontains=q) or Q(etiquetas__icontains=q)
-        #        or Q(marca__nombre__icontains=q) or Q(establecimiento__nombreComercial__icontains=q)
-        #        or Q(descripcion__search=q) or Q(detallesTecnicos__search=q))
         prod = prod.filter(search_filter(search_fields, q))
 
     if request.GET.get("ord"):
