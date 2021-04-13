@@ -55,10 +55,10 @@ def registro_otrosUsuarios(request):
         apellidos=""
         activo=False
         establecimiento = Establecimiento.objects.get(id=request.POST.get('establecimiento'))
-        if request.POST.get("sesion")=='on':
+        if request.GET.get("sesion")=='on':
             activo=True
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
-        if request.POST.get("edit"):
+        if request.GET.get("edit"):
             print("entra a modificar")
             user=User.objects.get(id=request.POST.get("edit"))
             user.is_active = activo
@@ -79,7 +79,7 @@ def registro_otrosUsuarios(request):
         usuario.nombreCompleto=nombres+" "+apellidos
         usuario.cedula=request.POST.get('cedula')
         usuario.save()
-        if not request.POST.get('edit') and not request.POST.get('disable'):
+        if not request.GET.get('edit') and not request.GET.get('disable'):
             messages.add_message(request, messages.SUCCESS, 'El registro se ha creado exitosamente..!')
     contexto={
         'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
