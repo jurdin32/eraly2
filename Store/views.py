@@ -370,7 +370,7 @@ def ver_subcategorias(request):
         q=request.GET.get("q")
         query=(Q(nombre__icontains=q) or Q(subcategoria__nombre__icontains=q) or Q(etiquetas__icontains=q)
                or Q(marca__nombre__icontains=q) or Q(establecimiento__nombreComercial__icontains=q)
-               or Q(descripcion__icontains=q) or Q(detallesTecnicos__icontains=q))
+               or Q(descripcion__search=q) or Q(detallesTecnicos__search=q))
         prod = prod.filter(query).distinct()
 
     if request.GET.get("ord"):
