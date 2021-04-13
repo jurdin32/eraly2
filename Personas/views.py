@@ -60,7 +60,7 @@ def registro_otrosUsuarios(request):
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         if request.GET.get("edit"):
             print("entra a modificar")
-            user=User.objects.get(id=request.POST.get("edit"))
+            user=User.objects.get(id=request.GET.get("edit"))
             user.is_active = activo
             usuario=UsuarioEmpresa.objects.get(user=user)
             messages.add_message(request,messages.SUCCESS,'El registro se ha modificado..!')
