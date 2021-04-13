@@ -248,7 +248,7 @@ def productos_detalles(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     contexto={
         'producto':producto,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias':Categorias.objects.all(),
         'subcategorias':Subcategorias.objects.all(),
         'marcas':Marca.objects.all(),
