@@ -198,10 +198,10 @@
         $("#cedula").val(cedula);
         $("#establecimiento").val(idEstablecimiento).trigger('change');
         if(estado == 'True'){
-            $("#sesion").iCheck('checked')
+            $("#sesion").iCheck('check')
         }
         else{
-            $("#sesion").iCheck('unchecked')
+            $("#sesion").iCheck('uncheck')
         }
         $("#frmModificar").attr("action","/users/"+id+"/")
     }
