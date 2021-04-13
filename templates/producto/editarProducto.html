@@ -79,8 +79,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br>
-                            <form id="formprecio" class="form-label-left input_mask" method="post"
-                                  action="/products/prices/{{ producto.id }}/">
+                            <form id="formprecio" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -365,8 +364,11 @@
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                                aria-haspopup="true" aria-expanded="false">Nuevos Precios</a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a class="dropdown-item" data-toggle="modal"
-                                                       data-target="#registroPrecios"><i
+                                                <li><a style="cursor:pointer;" id="nprecio" class="dropdown-item"
+                                                       data-toggle="modal"
+                                                       data-target="#registroPrecios"
+                                                        data-href="/products/prices/{{ producto.id }}/"
+                                                ><i
                                                         class="fa fa-plus-circle"> </i>
                                                     Agregar</a>
                                                 </li>
@@ -577,6 +579,9 @@
                 $("#web").checked(false)
             }
             $("#formPrecio").attr('action',$(this).data('href'))
+        })
+        $("#nprecio").click(function (){
+            $("#formPrecio").attr('action',$(this).data())
         })
     </script>
 {% endblock %}
