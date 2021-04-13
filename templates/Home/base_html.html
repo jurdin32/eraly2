@@ -72,8 +72,8 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-shopping-basket"></i> Mis tiendas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        {% for tienda in tiendas %}
-                                        <li><a target="_blank" href="/{{ tienda.establecimiento.slug }}">{{ tienda.establecimiento.nombreComercial }}</a></li>
+                                        {% for tienda in request.session.tiendas_usuario %}
+                                        <li><a target="_blank" href="/{{ tienda.slug }}">{{ tienda.nombre }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </li>
