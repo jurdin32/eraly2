@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
+import datetime
 # Create your views here.
-from Empresa.models import Establecimiento
+from Empresa.models import Establecimiento, UsuarioEmpresa
 from Home.models import Provincia
 from Personas.models import Clientes
 from django.contrib import messages
@@ -47,8 +48,20 @@ def deshabilitarCliente(request,id):
     return HttpResponseRedirect("/clients/0/")
 
 def registro_otrosUsuarios(request):
-    contexto={
+    if request.POST:
+        nombres=""
+        apellidos=""
 
+        username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
+        user=User.objects.create(username=username, email=request.POST.get('email'),first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
+                                 is_active=True,is_staff=True)
+        user.save()
+        user.set_password(request.POST.get('password'))
+        establecimiento=Establecimiento.objects.get(id=request.GET.get('establecimiento'))
+        usuario=UsuarioEmpresa.objects.create(establecimiento=establecimiento,user=user,nombreCompleto=nombres+" "+apellidos,cedula=request.POST.get('cedula'))
+        usuario.save()
+    contexto={
+        'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user)
     }
 
     return render(request, 'personas/otrosUsuarios.html',contexto)
