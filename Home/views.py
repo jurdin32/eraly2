@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 # Create your views here.
-from Empresa.models import Establecimiento
+from Empresa.models import Establecimiento, UsuarioEmpresa
 from Producto.models import Categorias
 
 
@@ -24,7 +24,7 @@ def index(request):
 
     if request.user.is_authenticated and request.user.is_staff:
         contexto={
-            'tiendas':Establecimiento.objects.filter(usuario=request.user)
+            'tiendas':UsuarioEmpresa.objects.filter(usuario=request.user)
         }
         return render(request, "Home/index2.html",contexto)
     else:

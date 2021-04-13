@@ -73,7 +73,7 @@
                                 <li><a><i class="fa fa-shopping-basket"></i> Mis tiendas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         {% for tienda in tiendas %}
-                                        <li><a target="_blank" href="/{{ tienda.slug }}">{{ tienda.nombreComercial }}</a></li>
+                                        <li><a target="_blank" href="/{{ tienda.establecimiento.slug }}">{{ tienda.establecimiento.nombreComercial }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </li>
