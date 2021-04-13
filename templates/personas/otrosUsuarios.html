@@ -203,15 +203,15 @@
         else{
             $("#sesion").iCheck('uncheck')
         }
-        $("#frmModificar").attr("action","/users/"+id+"/")
+        $("#frmModificar").attr("action","/business/user_register/edit/"+id+"/")
     }
 
     function eliminar_cliente(id){
-        $("#eliminarRegistro").attr("href","/users/disable/"+id+"/")
+        $("#eliminarRegistro").attr("href","/business/user_register/disable/"+id+"/")
     }
 
     $("#nuevoCliente").click(function (){
-        $("#frmModificar").attr("action","/users/")
+        $("#frmModificar").attr("action","/business/user_register/")
     })
 
     </script>
