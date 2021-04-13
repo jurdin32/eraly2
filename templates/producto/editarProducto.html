@@ -381,10 +381,12 @@
                                             <tbody>
                                             {% for precio in producto.precios_set.all %}
                                                 <tr style="background-color: #0b97c4; color: white">
-                                                    <td><a href="/products/prices/delete/{{ precio.id }}/"><i
-                                                            class="fa fa-trash" style="color: white"></i></a></td>
-                                                    <td><a data-target="#registroPrecios" data-toggle="modal" data-href="/products/prices/edit/{{ precio.id }}/"><i
-                                                            class="fa fa-edit" style="color: white"></i></a></td>
+                                                    <td>
+                                                        <a href="/products/prices/delete/{{ precio.id }}/"><i
+                                                            class="fa fa-trash" style="color: white"></i></a>
+                                                        <a data-target="#registroPrecios" data-toggle="modal" data-href="/products/prices/edit/{{ precio.id }}/"><i
+                                                            class="fa fa-edit" style="color: white"></i></a>
+                                                    </td>
                                                     <td>{{ precio.detalle }} {% if precio.web %} (Precio Web){% endif %} </td>
                                                     <td class="fs15 fw700 text-right">$ {{ precio.total }}</td>
                                                 </tr>
