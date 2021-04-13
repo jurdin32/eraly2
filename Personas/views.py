@@ -29,7 +29,7 @@ def registroCLientes(request,id=0):
         cliente.save()
 
     contexto={
-        'clientes':Clientes.objects.filter(establecimiento__usuario=request.user),
+        'clientes':Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user),
         'provincias':Provincia.objects.all(),
         'establecimientos':Establecimiento.objects.filter(usuario=request.user),
     }
