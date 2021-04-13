@@ -55,7 +55,7 @@ def registro_otrosUsuarios(request):
         apellidos=""
         activo=False
         establecimiento = Establecimiento.objects.get(id=request.POST.get('establecimiento'))
-        if request.GET.get("sesion")=='on':
+        if request.POST.get("sesion")=='on':
             activo=True
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         if request.GET.get("edit"):
