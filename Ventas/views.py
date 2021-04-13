@@ -8,7 +8,7 @@ from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
 from Store.models import DetalleCompraWeb
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
-from eraly2.snippers import render_pdf_view, export_pdf
+from eraly2.snippers import export_pdf
 from nlt import numlet as nl
 
 def proformas(request,id=0):
@@ -148,7 +148,7 @@ def editarDocumentos(request,id):
         'establecimiento':documento.establecimiento,
         'productos':Productos.objects.filter(establecimiento=documento.establecimiento),
         'clientes':Clientes.objects.filter(establecimiento=documento.establecimiento),
-        'precios':Precios.objects.filter(producto__establecimiento__usuario=request.user),
+        'precios':Precios.objects.filter(producto__establecimiento__usuarioempresa__user=request.user),
     }
     return render(request, 'Ventas/editDocumentos.html', contexto)
 
@@ -172,14 +172,15 @@ def cuentasCobrar(request):
         CuentasCobrar(cantidad=request.POST['cantidad'], cliente_id=request.POST['cliente'],factura_numero=request.POST['factura_numero']).save()
         messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
-        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user),
-        'clientes':Clientes.objects.filter(establecimiento__usuario=request.user)
+        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuarioempresa__user=request.user),
+        'clientes':Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user)
     }
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
 
 def abonos(request,id):
     if request.POST:
-        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
+        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],
+                numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
         messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
         'abonos': Recibos.objects.filter(cuenta_id = id),

@@ -47,7 +47,7 @@ def editarProveedor(request,id):
         messages.add_message(request, messages.INFO, "El registro se ha modificado éxitosamente..!")
     contexto={
         "proveedor":proveedor,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'provincias': Provincia.objects.all(),
     }
     return render(request, "producto/editarProveedores.html",contexto)
@@ -69,7 +69,7 @@ def actividadesProveedor(request,id):
     contexto={
         "proveedor": proveedor,
         'provincias': Provincia.objects.all(),
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
@@ -88,7 +88,7 @@ def tipoProveedor(request,id):
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
@@ -102,12 +102,13 @@ def eliminartipoProveedor(request,id):
 def direccionProveedor(request,id):
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
-        DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
+        DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],
+                                          direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
         messages.add_message(request, messages.SUCCESS, "Se ha registrado la nueva dirección..!")
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
@@ -134,7 +135,7 @@ def categorias(request):
     contexto={
         'subcategorias':cat,
         'iconos':iconos_text(),
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias':Categorias.objects.all().order_by('nombre')
     }
     return render(request, "producto/categorias.html",contexto)
@@ -175,7 +176,7 @@ def productos(request):
 
     contexto={
         "productos":productos,
-        "empresas":Establecimiento.objects.filter(usuario=request.user)
+        "empresas":Establecimiento.objects.filter(usuarioempresa__user=request.user)
     }
     return render(request, "producto/productos.html",contexto)
 
