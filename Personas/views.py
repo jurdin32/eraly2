@@ -59,7 +59,7 @@ def registro_otrosUsuarios(request):
                                  is_active=activo,is_staff=True)
         user.save()
         user.set_password(request.POST.get('password'))
-        establecimiento=Establecimiento.objects.get(id=request.GET.get('establecimiento'))
+        establecimiento=Establecimiento.objects.get(id=request.POST.get('establecimiento'))
         usuario=UsuarioEmpresa.objects.create(establecimiento=establecimiento,user=user,nombreCompleto=nombres+" "+apellidos,cedula=request.POST.get('cedula'))
         usuario.save()
     contexto={
