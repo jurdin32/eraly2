@@ -79,12 +79,12 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br>
-                            <form class="form-label-left input_mask" method="post"
+                            <form id="formprecio" class="form-label-left input_mask" method="post"
                                   action="/products/prices/{{ producto.id }}/">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
-                                        <input type="number" class="form-control" name="precio" max="999999999999999999"
+                                        <input type="number" class="form-control" name="precio" id="precio" max="999999999999999999"
                                                step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
@@ -94,7 +94,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <ul class="to_do">
                                             <li>
-                                                <input type="checkbox" class="flat" name="web" style="position: absolute; opacity: 0;"> Precio para la Web </p>
+                                                <input type="checkbox" class="flat" id="web" name="web" style="position: absolute; opacity: 0;"> Precio para la Web </p>
                                             </li>
                                         </ul>
                                     </div>
@@ -384,7 +384,12 @@
                                                     <td>
                                                         <a href="/products/prices/delete/{{ precio.id }}/"><i
                                                             class="fa fa-trash" style="color: white"></i></a>
-                                                        <a data-target="#registroPrecios" data-toggle="modal" data-href="/products/prices/edit/{{ precio.id }}/"><i
+                                                        <a class="dataprecio" style="cursor:pointer;" data-target="#registroPrecios" data-toggle="modal"
+                                                           data-href="/products/prices/edit/{{ precio.id }}/"
+                                                           data-web="{{ precio.web }}"
+                                                           data-precio="{{ precio.precioVenta }}"
+                                                           data-detalle="{{ precio.detalle }}"
+                                                        ><i
                                                             class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
                                                     <td>{{ precio.detalle }} {% if precio.web %} (Precio Web){% endif %} </td>
@@ -560,6 +565,16 @@
             $("#color_codigo").val($(this).data('codigo'));
             $("#nombre_color").val($(this).data('nombre'));
             console.log($(this).data('codigo'),$(this).data('nombre'))
+        })
+
+        $(".dataprecio").click(function (){
+            $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
+            if ($(this).data('web')=='true'){
+                $("#web").checked(true)
+            }
+            else{
+                $("#web").checked(false)
+            }
         })
     </script>
 {% endblock %}
