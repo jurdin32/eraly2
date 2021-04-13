@@ -63,6 +63,7 @@ def registro_otrosUsuarios(request):
             user=User.objects.get(id=request.POST.get("edit"))
             user.is_active = activo
             usuario=UsuarioEmpresa.objects.get(user=user)
+            messages.add_message(request,messages.SUCCESS,'El registro se ha modificado..!')
         user.username=username
         user.email=request.POST.get('email')
         user.first_name=request.POST.get('nombres')
@@ -72,11 +73,14 @@ def registro_otrosUsuarios(request):
         if request.POST.get('password'):
             user.set_password(request.POST.get('password'))
             user.save()
+            messages.add_message(request, messages.WARNING, 'La contraseña fué restablecida..!')
         usuario.establecimiento=establecimiento
         usuario.user=user
         usuario.nombreCompleto=nombres+" "+apellidos
         usuario.cedula=request.POST.get('cedula')
         usuario.save()
+        if not request.POST.get('edit'):
+            messages.add_message(request, messages.SUCCESS, 'El registro se ha creado exitosamente..!')
     contexto={
         'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
         'establecimientos':Establecimiento.objects.filter(usuario=request.user)
