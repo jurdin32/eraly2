@@ -570,6 +570,7 @@
         })
 
         $(".dataprecio").click(function (){
+            $("#formprecio").attr('action',$(this).data('enlace'))
             $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
             $("#detalle").val($(this).data('detalle'))
             if ($(this).data('web')=='true'){
@@ -578,7 +579,7 @@
             else{
                 $("#web").checked(false)
             }
-            $("#formprecio").attr('action',$(this).data('enlace'))
+
         })
         $("#nprecio").click(function (){
             $("#formprecio").attr('action',$(this).data('enlace'))
