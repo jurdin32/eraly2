@@ -25,8 +25,10 @@ def index(request):
         del request.session['tiendas_usuario']
 
     if request.user.is_authenticated and request.user.is_staff:
+        ti=[]
         for tiendas in UsuarioEmpresa.objects.filter(user=request.user):
-            request.session['tiendas_usuario'].append({'slug':tiendas.establecimiento.slug, 'nombre':tiendas.establecimiento.slug})
+            ti.append({'slug':tiendas.establecimiento.slug, 'nombre':tiendas.establecimiento.slug})
+        request.session['tiendas_usuario']=ti
         return render(request, "Home/index2.html")
     else:
         return HttpResponseRedirect("/store/")
