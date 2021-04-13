@@ -137,8 +137,6 @@
                                             <th>Establecimiento</th>
                                             <th>Nombres</th>
                                             <th>Cédula</th>
-                                            <th>Dirección</th>
-                                            <th>Teléfono</th>
                                             <th style="text-align: center">Estado</th>
                                             <th style="text-align: center">Editar</th>
                                             <th style="text-align: center">Deshabilitar</th>
@@ -150,9 +148,8 @@
                                                 <td style="vertical-align: middle">{{ user.id }}</td>
                                                 <td style="vertical-align: middle">{{ user.establecimiento }}</td>
                                                 <td style="vertical-align: middle">{{ user.user.get_full_name }}</td>
-                                                <td style="vertical-align: middle">{{ cliente.cedula }}</td>
-                                                <td style="vertical-align: middle">{{ cliente.telefono }}</td>
-                                                <td style="text-align: center; vertical-align: middle">{% if cliente.estado %}
+                                                <td style="vertical-align: middle">{{ user.cedula }}</td>
+                                                <td style="text-align: center; vertical-align: middle">{% if user.user.is_active %}
                                                     <span class="badge badge-info" style="font-size: 13px">Activo</span>
                                                 {% else %}
                                                     <span class="badge badge-danger" style="font-size: 13px">Deshabilitado</span>
