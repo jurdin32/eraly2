@@ -573,7 +573,7 @@
             $("#formprecio").attr('action',$(this).data('enlace'))
             $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
             $("#detalle").val($(this).data('detalle'))
-            if ($(this).data('web')=='true'){
+            if ($(this).data('web')=='True'){
                 $("#web").iCheck('check')
             }
             else{
