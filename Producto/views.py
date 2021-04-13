@@ -365,10 +365,11 @@ def subir_imagenes_producto(request,id):
 
 def promociones(request):
     promo=Promociones.objects.filter(precio__producto__establecimiento__usuario=request.user)
-    produc=Productos.objects.filter(establecimiento__usuario=request.user)
+    produc=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user,precios__web=True)
+
     if request.GET.get('establecimiento'):
         promo=Promociones.objects.filter(precio__producto__establecimiento_id= request.GET.get('establecimiento'))
-        produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'))
+        produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'),precios__web=True)
 
     if request.POST:
         Promociones(fechaInicio=request.POST.get('fecha_inicio'),fechaFinal=request.POST.get('fecha_fin'),precio_id=request.POST.get('precio'),
