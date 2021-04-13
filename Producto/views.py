@@ -206,7 +206,7 @@ def registarProducto(request):
         return HttpResponseRedirect("/products/edit/%s/?precio=on"%str(producto.id))
 
     contexto = {
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias': Categorias.objects.all().order_by('nombre'),
         'marcas': Marca.objects.all(),
         'subcategorias': Subcategorias.objects.all(),
