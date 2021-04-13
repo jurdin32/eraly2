@@ -13,6 +13,8 @@ def registroCLientes(request,id=0):
         if int(id) >0:
             cliente=Clientes.objects.get(id=id)
             messages.add_message(request, messages.SUCCESS, "El registro se ha modificado exitosamente..!")
+        else:
+            messages.add_message(request, messages.SUCCESS, "El registro se ha creado exitosamente..!")
         cliente.establecimiento_id=request.POST['establecimiento']
         cliente.cedula=request.POST['cedula']
         cliente.nombres=request.POST['nombres']
@@ -24,7 +26,7 @@ def registroCLientes(request,id=0):
         cliente.telefono=request.POST['telefono']
         cliente.email=request.POST['email']
         cliente.save()
-        messages.add_message(request, messages.SUCCESS, "El registro se ha creado exitosamente..!")
+
     contexto={
         'clientes':Clientes.objects.filter(establecimiento__usuario=request.user),
         'provincias':Provincia.objects.all(),
@@ -43,3 +45,4 @@ def deshabilitarCliente(request,id):
     cliente.save()
 
     return HttpResponseRedirect("/clients/0/")
+
