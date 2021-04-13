@@ -59,6 +59,7 @@ def registro_otrosUsuarios(request):
             activo=True
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         if request.POST.get("edit"):
+            print("entra a modificar")
             user=User.objects.get(id=request.POST.get("edit"))
             user.is_active = activo
             usuario=UsuarioEmpresa.objects.get(user=user)
