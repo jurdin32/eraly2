@@ -15,7 +15,7 @@ def proformas(request,id=0):
     establecimiento=None
     establecimientos=None
     productos=None
-    clientes=Clientes.objects.filter(establecimiento__usuario=request.user)
+    clientes=Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user)
     contadorDocumentos=""
     tipo=request.GET.get('tipo')
 
