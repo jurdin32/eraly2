@@ -48,19 +48,33 @@ def deshabilitarCliente(request,id):
     return HttpResponseRedirect("/clients/0/")
 
 def registro_otrosUsuarios(request):
+    user = User()
+    usuario = UsuarioEmpresa()
     if request.POST:
         nombres=""
         apellidos=""
         activo=False
+        establecimiento = Establecimiento.objects.get(id=request.POST.get('establecimiento'))
         if request.POST.get("sesion")=='on':
             activo=True
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
-        user=User.objects.create(username=username, email=request.POST.get('email'),first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
-                                 is_active=activo,is_staff=True)
+        if request.POST.get("edit"):
+            user=User.objects.get(id=request.POST.get("edit"))
+            user.is_active = activo
+            usuario=UsuarioEmpresa.objects.get(user=user)
+        user.username=username
+        user.email=request.POST.get('email')
+        user.first_name=request.POST.get('nombres')
+        user.last_name=request.POST.get('apellidos')
+        user.is_staff=True
         user.save()
-        user.set_password(request.POST.get('password'))
-        establecimiento=Establecimiento.objects.get(id=request.POST.get('establecimiento'))
-        usuario=UsuarioEmpresa.objects.create(establecimiento=establecimiento,user=user,nombreCompleto=nombres+" "+apellidos,cedula=request.POST.get('cedula'))
+        if request.POST.get('password'):
+            user.set_password(request.POST.get('password'))
+            user.save()
+        usuario.establecimiento=establecimiento
+        usuario.user=user
+        usuario.nombreCompleto=nombres+" "+apellidos
+        usuario.cedula=request.POST.get('cedula')
         usuario.save()
     contexto={
         'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
