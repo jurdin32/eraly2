@@ -49,7 +49,7 @@
                                 <div class="col-md-12 col-sm-12  form-group has-feedback">
                                        <ul class="to_do">
                                             <li>
-                                                <input type="checkbox" class="flat" id="web" name="web" style="position: absolute; opacity: 0;"> Puede Iniciar Sesión</p>
+                                                <input type="checkbox" class="flat" id="sesion" name="sesion" style="position: absolute; opacity: 0;"> Puede Iniciar Sesión</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -197,6 +197,12 @@
         $("#apellidos").val(apellidos);
         $("#cedula").val(cedula);
         $("#establecimiento").val(idEstablecimiento).trigger('change');
+        if(estado == 'True'){
+            $("#sesion").iCheck('checked')
+        }
+        else{
+            $("#sesion").iCheck('unchecked')
+        }
         $("#frmModificar").attr("action","/users/"+id+"/")
     }
 
