@@ -169,7 +169,7 @@ def editarSubCategoria(request,id):
 
 #------------ Productos ----------_#
 def productos(request):
-    productos=Productos.objects.filter(establecimiento__usuario=request.user)
+    productos=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get('empresa'):
         productos = Productos.objects.filter(establecimiento_id=request.GET.get('empresa'))
 
