@@ -198,7 +198,7 @@ def crearAbonosPDF(request, id):
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
 
 def autorizar_ComprasWeb(request):
-    compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
+    compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuarioempresa__user=request.user)
     contador=compras.count()
 
     if request.GET.get('establecimiento'):
