@@ -81,8 +81,8 @@ def registro_otrosUsuarios(request):
         if not request.GET.get('edit'):
             messages.add_message(request, messages.SUCCESS, 'El registro se ha creado exitosamente..!')
     contexto={
-        'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
+        'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuarioempresa__user=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user)
     }
 
     return render(request, 'personas/otrosUsuarios.html',contexto)
