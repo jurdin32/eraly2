@@ -306,6 +306,22 @@ def eliminarPrecios(request,id):
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
+def editarPrecios(request,id):
+    web=False
+    if request.POST:
+        if request.POST.get('web') == 'on':
+            web=True
+        else:
+            web =False
+        precio=Precios.objects.get(id=id)
+        precio.producto_id=id
+        precio.precioVenta=float(str(request.POST['precio']))
+        precio.detalle=request.POST['detalle']
+        precio.web=web
+        precio.save()
+        messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
+        return HttpResponseRedirect("/products/edit/%s/"%precio.producto_id)
+
 
 def kardex(request):
     kax=Productos.objects.filter(establecimiento__usuario=request.user)
