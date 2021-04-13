@@ -569,6 +569,7 @@
 
         $(".dataprecio").click(function (){
             $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
+            $("#detalle").val($(this).data('detalle'))
             if ($(this).data('web')=='true'){
                 $("#web").checked(true)
             }
