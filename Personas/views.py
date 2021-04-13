@@ -46,3 +46,10 @@ def deshabilitarCliente(request,id):
 
     return HttpResponseRedirect("/clients/0/")
 
+def registro_otrosUsuarios(request):
+    contexto={
+
+    }
+
+    return render(request, 'personas/otrosUsuarios.html',contexto)
+

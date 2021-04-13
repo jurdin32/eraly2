@@ -51,20 +51,14 @@ urlpatterns = [
     path("products/promo/edit/<int:id>/",editarPromocion),
     path("products/images/<int:id>/",subir_imagenes_producto),
 
-
-
     path("category/",categorias),
     path("category/edit/<int:id>/",editarCategoria),
     path("subcategory/edit/<int:id>/",editarSubCategoria),
-
-
-
     path("category/<int:id>/",subcategorias),
 
     path("suppliers/",proveedores),
     path("suppliers/edit/<int:id>/",editarProveedor),
     path("suppliers/delete/<int:id>/",eliminarProveedor),
-
     path("suppliers/activity/<int:id>/",actividadesProveedor),
     path("suppliers/activity/delete/<int:id>/",eliminarActividades),
     path("suppliers/type/<int:id>/",tipoProveedor),
@@ -79,26 +73,28 @@ urlpatterns = [
 
     path("business/remove/",eliminar_empresa),
     path("business/direcction/<int:idEmpresa>/",crear_direcciones),
+    path("business/user_register/",registro_otrosUsuarios),
+
     path("directions/edit/<int:id>/",modificar_direcciones),
     path("directions/delete/<int:id>/",eliminar_direcciones),
+
     path("proforms/<id>/",proformas),
     path("proforms/createCLient/<id>/",registroClienteFacturaProforma),
     path("proforms/create/<int:id>/",registrarDocumento),
     path("proforms/detall/<int:id>/",registrarDetallesFacturaProforma),
-    path("store/autority/",autorizar_ComprasWeb),
-
-    path("proforms/edit/<int:id>/",editarDocumentos),
-    path("giveBack/<int:id>/",anularDocumento),
-
-    path("billing/<id>/",proformas),
-
+    path("proforms/edit/<int:id>/", editarDocumentos),
     path("document/proform/<int:id>/",crearDocumentoPDF_Proforma),
     path("document/fac/<int:id>/",crearDocumentoPDF_Factura),
     path("document/list/",listaDocumentos),
+    path("billing/<id>/",proformas),
+
+    path("store/autority/",autorizar_ComprasWeb),
+
+
+    path("giveBack/<int:id>/",anularDocumento),
 
     path("clients/<int:id>/",registroCLientes),
     path("clients/disable/<int:id>/",deshabilitarCliente),
-
 
     path("accounts_receivable/",cuentasCobrar),
     path("accounts_receivable/<int:id>/",abonos),
@@ -106,7 +102,6 @@ urlpatterns = [
     path("logout_/",logout_),
 
     #tienda
-
     path("store/",tienda),
     path("store/products/",_productos),
     path("store/details/",_detalles),
@@ -114,9 +109,6 @@ urlpatterns = [
     path("store/category/",ver_subcategorias),
     path("<slug:slug>/",_tiendas),
     path("store/search/",ver_subcategorias),
-
-    path("store/ejemplo/", ejemplo),
-
     path("store/account/",account),
     path("store/register/",register),
     path("store/login/",login_store_user),
@@ -126,18 +118,14 @@ urlpatterns = [
     path("store/directory/",directorio),
     path("store/directory/delete/<int:n>/",eliminar_directorio),
     path("store/shopp/",misOrdenes),
-
     path("store/contact/",contact),
     path("store/checkout/",checkout),
     path("store/checkout/pay/",pay),
-
     #carrito de compras
     path("store/add/cart/",add_carrito),
     path("store/add/cart/deleteItem/",eliminar_item),
     path("store/view/cart/",ver_cart),
     path("store/view/cart/delete/",vaciar_carrito),
-
-
     #django restframework:
     path('api-auth/', include('rest_framework.urls')),
     path('api-auth/', include(routes.router.urls)),
