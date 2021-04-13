@@ -84,7 +84,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
                                         <input type="number" class="form-control" name="precio" id="precio" max="999999999999999999"
-                                               step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
+                                               step="0.01" required="required" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
                                     </div>
@@ -574,12 +574,11 @@
             $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
             $("#detalle").val($(this).data('detalle'))
             if ($(this).data('web')=='true'){
-                $("#web").checked(true)
+                $("#web").selected(true)
             }
             else{
-                $("#web").checked(false)
+                $("#web").selected(false)
             }
-
         })
         $("#nprecio").click(function (){
             $("#formprecio").attr('action',$(this).data('enlace'))

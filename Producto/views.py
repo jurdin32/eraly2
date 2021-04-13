@@ -314,12 +314,11 @@ def editarPrecios(request,id):
         else:
             web =False
         precio=Precios.objects.get(id=id)
-        precio.producto_id=id
         precio.precioVenta=float(str(request.POST['precio']))
         precio.detalle=request.POST['detalle']
         precio.web=web
         precio.save()
-        messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
+        messages.add_message(request, messages.INFO, "El registro se ha actualizado correctamente..!")
         return HttpResponseRedirect("/products/edit/%s/"%precio.producto_id)
 
 
