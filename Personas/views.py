@@ -61,7 +61,8 @@ def registro_otrosUsuarios(request):
         usuario=UsuarioEmpresa.objects.create(establecimiento=establecimiento,user=user,nombreCompleto=nombres+" "+apellidos,cedula=request.POST.get('cedula'))
         usuario.save()
     contexto={
-        'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user)
+        'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
     }
 
     return render(request, 'personas/otrosUsuarios.html',contexto)

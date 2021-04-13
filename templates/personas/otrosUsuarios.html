@@ -156,9 +156,9 @@
                                                 {% endif %}</td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     <a style="cursor: pointer"
-                                                       onclick="modificar_cliente('{{ cliente.id }}','{{ cliente.ciudad_id }}',
-                                                               '{{ cliente.establecimiento_id }}','{{ cliente.nombres }}','{{ cliente.apellidos }}',
-                                                               '{{ cliente.cedula }}','{{ cliente.direccion }}','{{ cliente.celular }}','{{ cliente.telefono }}','{{ cliente.email }}')"
+                                                       onclick="modificar_cliente('{{ user.id }}',
+                                                               '{{ user.establecimiento_id }}','{{ user.user.first_name }}','{{ user.user.last_name }}',
+                                                               '{{ user.cedula }}','{{ user.email }}',{{ user.user.is_active }})"
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
                                                     </a>
