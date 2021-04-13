@@ -120,9 +120,8 @@
                                             <th>Nombres</th>
                                             <th>Cédula</th>
                                             <th>E-mail</th>
-                                            <th style="text-align: center">Estado</th>
                                             <th style="text-align: center">Editar</th>
-                                            <th style="text-align: center">Deshabilitar</th>
+                                            <th style="text-align: center">Estado</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -133,11 +132,6 @@
                                                 <td style="vertical-align: middle">{{ user.user.get_full_name }}</td>
                                                 <td style="vertical-align: middle">{{ user.cedula }}</td>
                                             <td style="vertical-align: middle">{{ user.user.email }}</td>
-                                                <td style="text-align: center; vertical-align: middle">{% if user.user.is_active %}
-                                                    <span class="badge badge-info" style="font-size: 13px">Activo</span>
-                                                {% else %}
-                                                    <span class="badge badge-danger" style="font-size: 13px">Deshabilitado</span>
-                                                {% endif %}</td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     <a style="cursor: pointer"
                                                        onclick="modificar_cliente('{{ user.user.id }}',
@@ -149,10 +143,10 @@
                                                 </td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     {% if user.user.is_active %}
-                                                        <a href="" class="text-info eliminar btn btn-app">
+                                                        <a class="text-info eliminar btn btn-app">
                                                             <i data-toggle="tooltip" class="fa fa-check-circle"></i>Habilitado</a>
                                                     {% else %}
-                                                        <a href="" class="text-danger eliminar btn btn-app">
+                                                        <a class="text-danger eliminar btn btn-app">
                                                             <i data-toggle="tooltip" class="fa fa-close"></i>Deshabilitado</a>
                                                     {% endif %}
 
