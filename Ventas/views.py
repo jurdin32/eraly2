@@ -29,7 +29,7 @@ def proformas(request,id=0):
             contadorDocumentos = str(numero.facturas + Facturas.objects.filter(tipo=tipo, establecimiento=establecimiento).count()).zfill(10)
 
     else:
-        establecimientos = Establecimiento.objects.filter(usuario=request.user)
+        establecimientos = Establecimiento.objects.filter(usuarioempresa=request.user)
         contador=establecimientos.count()
         if contador == 1:
             for esta in establecimientos:
