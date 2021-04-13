@@ -23,7 +23,10 @@ def index(request):
             return render(request, "Home/login.html")
 
     if request.user.is_authenticated and request.user.is_staff:
-        return render(request, "Home/index2.html")
+        contexto={
+            'tiendas':Establecimiento.objects.filter(usuario=request.user)
+        }
+        return render(request, "Home/index2.html",contexto)
     else:
         return HttpResponseRedirect("/store/")
 
