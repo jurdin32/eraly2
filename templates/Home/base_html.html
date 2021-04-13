@@ -70,6 +70,17 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
+                                <li><a><i class="fa fa-home"></i> Lista de Establecimientos. <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        {% for tienda in mistiendas %}
+                                        <li><a href="/store/{{ tienda.slug }}">{{ tienda.nombreComercial }}</a></li>
+                                        {% endfor %}
+
+
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Config. <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/users/">Gestionar Usuarios</a></li>

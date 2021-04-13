@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 # Create your views here.
+from Empresa.models import Establecimiento
 from Producto.models import Categorias
 
 
@@ -22,6 +23,9 @@ def index(request):
             return render(request, "Home/login.html")
 
     if request.user.is_authenticated and request.user.is_staff:
+        if request.session.get('mistiendas'):
+            del request.session['mistiendas']
+        request.session['mistiendas'] = [{"id": tienda.id, "nombre": tienda.nombreComercial, 'slug': tienda.slug} for tienda in Establecimiento.objects.filter(usuario=request.user).order_by('slug')]
         return render(request, "Home/index2.html")
     else:
         return HttpResponseRedirect("/store/")
