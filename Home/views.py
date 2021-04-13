@@ -21,12 +21,13 @@ def index(request):
         else:
             messages.add_message(request, messages.ERROR, "Lo sentimos el usuario que has ingresado no es válido, o las credenciales de ingreso fallaron..!")
             return render(request, "Home/login.html")
+    if request.session.get('tiendas_usuario'):
+        del request.session['tiendas_usuario']
 
     if request.user.is_authenticated and request.user.is_staff:
-        contexto={
-            'tiendas':UsuarioEmpresa.objects.filter(user=request.user)
-        }
-        return render(request, "Home/index2.html",contexto)
+        for tiendas in UsuarioEmpresa.objects.filter(user=request.user):
+            request.session['tiendas_usuario'].append({'slug':tiendas.establecimiento.slug, 'nombre':tiendas.establecimiento.slug})
+        return render(request, "Home/index2.html")
     else:
         return HttpResponseRedirect("/store/")
 
