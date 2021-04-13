@@ -133,13 +133,18 @@
                                                 <td style="vertical-align: middle">{{ user.cedula }}</td>
                                             <td style="vertical-align: middle">{{ user.user.email }}</td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
-                                                    <a style="cursor: pointer"
+                                                    {% if user.user.is_superuser %}
+                                                        <i>Super Usuario</i>
+                                                    {% else %}
+                                                        <a style="cursor: pointer"
                                                        onclick="modificar_cliente('{{ user.user.id }}',
                                                                '{{ user.establecimiento_id }}','{{ user.user.first_name }}','{{ user.user.last_name }}',
                                                                '{{ user.cedula }}','{{ user.user.email }}','{{ user.user.is_active }}')"
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
                                                     </a>
+                                                    {% endif %}
+
                                                 </td>
                                                 <td style="text-align: center; font-size: 18px; vertical-align: middle">
                                                     {% if user.user.is_active %}
