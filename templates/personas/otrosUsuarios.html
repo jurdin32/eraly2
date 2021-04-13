@@ -46,6 +46,13 @@
                                                placeholder="Ingrese email">
                                         <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                     </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                       <ul class="to_do">
+                                            <li>
+                                                <input type="checkbox" class="flat" id="web" name="web" style="position: absolute; opacity: 0;"> Puede Iniciar Sesión</p>
+                                            </li>
+                                        </ul>
+                                    </div>
 
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
@@ -190,15 +197,15 @@
         $("#apellidos").val(apellidos);
         $("#cedula").val(cedula);
         $("#establecimiento").val(idEstablecimiento).trigger('change');
-        $("#frmModificar").attr("action","/clients/"+id+"/")
+        $("#frmModificar").attr("action","/users/"+id+"/")
     }
 
     function eliminar_cliente(id){
-        $("#eliminarRegistro").attr("href","/clients/disable/"+id+"/")
+        $("#eliminarRegistro").attr("href","/users/disable/"+id+"/")
     }
 
     $("#nuevoCliente").click(function (){
-        $("#frmModificar").attr("action","/clients/0/")
+        $("#frmModificar").attr("action","/users/")
     })
 
     </script>
