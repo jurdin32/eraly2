@@ -79,7 +79,7 @@ def registro_otrosUsuarios(request):
         usuario.nombreCompleto=nombres+" "+apellidos
         usuario.cedula=request.POST.get('cedula')
         usuario.save()
-        if not request.GET.get('edit') and not request.GET.get('disable'):
+        if not request.GET.get('edit'):
             messages.add_message(request, messages.SUCCESS, 'El registro se ha creado exitosamente..!')
     contexto={
         'usuarios':UsuarioEmpresa.objects.filter(establecimiento__usuario=request.user),
