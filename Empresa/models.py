@@ -29,7 +29,7 @@ class Establecimiento(models.Model):
     facebook=models.CharField(max_length=400,null=True,blank=True,default=" ")
     instagram=models.CharField(max_length=400, null=True, blank=True, default=" ")
     youtube = models.CharField(max_length=400,null=True,blank=True,default=" ")
-    
+    activo=models.BooleanField(default=False)
 
 
     def previa(self):

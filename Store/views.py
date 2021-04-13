@@ -22,7 +22,7 @@ def tienda(request):
     puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
     if request.session.get('tiendas'):
         del request.session['tiendas']
-    request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.all().order_by('slug')]
+    request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.filter(activo=True).order_by('slug')]
     print(request.session['tiendas'])
     paginator = Paginator(puntuados, 20)
     page = request.GET.get('page')
