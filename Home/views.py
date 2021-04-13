@@ -24,7 +24,7 @@ def index(request):
 
     if request.user.is_authenticated and request.user.is_staff:
         contexto={
-            'tiendas':UsuarioEmpresa.objects.filter(usuario=request.user)
+            'tiendas':UsuarioEmpresa.objects.filter(user=request.user)
         }
         return render(request, "Home/index2.html",contexto)
     else:
