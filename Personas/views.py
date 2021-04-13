@@ -51,10 +51,12 @@ def registro_otrosUsuarios(request):
     if request.POST:
         nombres=""
         apellidos=""
-
+        activo=False
+        if request.POST.get("sesion")=='on':
+            activo=True
         username=nombres[0:3]+apellidos[0:3]+str(datetime.datetime.now()).replace("-","").replace(" ","").replace(".","").replace(":","")
         user=User.objects.create(username=username, email=request.POST.get('email'),first_name=request.POST.get('nombres'),last_name=request.POST.get('apellidos'),
-                                 is_active=True,is_staff=True)
+                                 is_active=activo,is_staff=True)
         user.save()
         user.set_password(request.POST.get('password'))
         establecimiento=Establecimiento.objects.get(id=request.GET.get('establecimiento'))
