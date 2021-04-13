@@ -364,7 +364,7 @@ def subir_imagenes_producto(request,id):
     return HttpResponse("ok")
 
 def promociones(request):
-    promo=Promociones.objects.filter(precio__producto__establecimiento__usuario=request.user)
+    promo=Promociones.objects.filter(precio__producto__establecimiento__usuarioempresa__user=request.user)
     produc=Productos.objects.filter(establecimiento__usuario=request.user)
     if request.GET.get('establecimiento'):
         promo=Promociones.objects.filter(precio__producto__establecimiento_id= request.GET.get('establecimiento'))
