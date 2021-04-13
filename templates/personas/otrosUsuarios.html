@@ -145,13 +145,12 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for cliente in clientes %}
+                                        {% for user in usuarios %}
                                             <tr>
-                                                <td style="vertical-align: middle">{{ cliente.id }}</td>
-                                                <td style="vertical-align: middle">{{ cliente.establecimiento }}</td>
-                                                <td style="vertical-align: middle">{{ cliente.nombres }} {{  cliente.apellidos }}</td>
+                                                <td style="vertical-align: middle">{{ user.id }}</td>
+                                                <td style="vertical-align: middle">{{ user.establecimiento }}</td>
+                                                <td style="vertical-align: middle">{{ user.user.get_full_name }}</td>
                                                 <td style="vertical-align: middle">{{ cliente.cedula }}</td>
-                                                <td style="vertical-align: middle">{{ cliente.direccion }} - {{ cliente.ciudad }} - {{ cliente.ciudad.provincia }} - {{ cliente.ciudad.provincia.pais }}</td>
                                                 <td style="vertical-align: middle">{{ cliente.telefono }}</td>
                                                 <td style="text-align: center; vertical-align: middle">{% if cliente.estado %}
                                                     <span class="badge badge-info" style="font-size: 13px">Activo</span>
