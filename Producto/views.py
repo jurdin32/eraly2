@@ -11,7 +11,7 @@ from eraly2.snippers import Hash_parse
 
 
 def proveedores(request):
-    prov=Proveedor.objects.filter(establecimiento__usuario=request.user)
+    prov=Proveedor.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("q"):
         prov = Proveedor.objects.filter(establecimiento_id=request.GET.get("q"))
     if request.POST:

@@ -27,7 +27,6 @@ def registroCLientes(request,id=0):
         cliente.telefono=request.POST['telefono']
         cliente.email=request.POST['email']
         cliente.save()
-
     contexto={
         'clientes':Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user),
         'provincias':Provincia.objects.all(),
