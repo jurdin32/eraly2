@@ -27,7 +27,7 @@ def proveedores(request):
         except:
             messages.add_message(request, messages.ERROR, "Al parecer ocurrio un error..!")
     contexto={
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'proveedores': prov,
         'provincias': Provincia.objects.all(),
     }
