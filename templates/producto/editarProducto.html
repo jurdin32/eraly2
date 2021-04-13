@@ -574,10 +574,10 @@
             $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
             $("#detalle").val($(this).data('detalle'))
             if ($(this).data('web')=='true'){
-                $("#web").selected(true)
+                $("#web").iCheck('check')
             }
             else{
-                $("#web").selected(false)
+                $("#web").iCheck('uncheck')
             }
         })
         $("#nprecio").click(function (){
