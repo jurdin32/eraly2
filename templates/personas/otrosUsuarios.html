@@ -128,7 +128,7 @@
                                                     <a style="cursor: pointer"
                                                        onclick="modificar_cliente('{{ user.id }}',
                                                                '{{ user.establecimiento_id }}','{{ user.user.first_name }}','{{ user.user.last_name }}',
-                                                               '{{ user.cedula }}','{{ user.email }}',{{ user.user.is_active }})"
+                                                               '{{ user.cedula }}','{{ user.email }}','{{ user.user.is_active }}')"
                                                        data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
                                                         <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
                                                     </a>
@@ -182,7 +182,7 @@
         });
     </script>
     <script>
-   function modificar_cliente(id,idEstablecimiento,nombres,apellidos,cedula,email){
+   function modificar_cliente(id,idEstablecimiento,nombres,apellidos,cedula,email,estado){
         $("#nombres").val(nombres);
         $("#email").val(email);
         $("#apellidos").val(apellidos);
