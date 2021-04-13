@@ -103,7 +103,7 @@ def crear_direcciones(request,idEmpresa):
 
 def direcciones(request):
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
     }
     return render(request, "empresa/direcciones.html",contexto)
@@ -119,7 +119,7 @@ def modificar_direcciones(request,id):
         direccion.save()
         messages.add_message(request,messages.SUCCESS,"El registro de direcciones fue modificado existosamente..!")
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
     }
     return render(request, "empresa/direcciones.html",contexto)
@@ -135,7 +135,7 @@ def eliminar_direcciones(request,id):
     except:
         pass
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
         "mensaje":mensaje,
         "tipo":tipo,
