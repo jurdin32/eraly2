@@ -72,11 +72,9 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-product-hunt"></i> Mis tiendas <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        {% for tienda in mistiendas %}
-                                        <li><a href="/store/{{ tienda.slug }}">{{ tienda.nombre }}</a></li>
+                                        {% for tienda in request.user.establecimientos_set.all %}
+                                        <li><a href="/store/{{ tienda.slug }}">{{ tienda.nombreComercial }}</a></li>
                                         {% endfor %}
-
-
                                     </ul>
                                 </li>
                             </ul>
