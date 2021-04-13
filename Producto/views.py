@@ -287,9 +287,9 @@ def registrarPrecios(request,id):
         else:
             web =False
         try:
-            precio=Precios.objects.get(producto_id=id,web=web)
-            precio.web=False
-            precio.save()
+            preciot=Precios.objects.get(producto_id=id,web=web)
+            preciot.web=False
+            preciot.save()
             print("se registro")
             Precios.objects.create(producto_id=id, precioVenta=precio, detalle=request.POST['detalle'], web=web).save()
             messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
