@@ -377,7 +377,7 @@ def promociones(request):
         print(request.POST)
 
     contexto={
-        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
+        "establecimientos":Establecimiento.objects.filter(usuarioempresa__user=request.user),
         "promociones":promo,
         "productos":produc
     }
