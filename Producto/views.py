@@ -323,12 +323,12 @@ def editarPrecios(request,id):
 
 
 def kardex(request):
-    kax=Productos.objects.filter(establecimiento__usuario=request.user)
+    kax=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("establecimiento"):
         kax = Productos.objects.filter(establecimiento_id=request.GET.get("establecimiento"))
     contexto={
         'kardex':kax,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/kardex.html",contexto)
 
