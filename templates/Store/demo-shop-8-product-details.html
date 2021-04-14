@@ -278,19 +278,19 @@
                             </ul>
                             <div class="tab-content">
                                 <div id="product-desc" class="tab-pane active">
-                                    <div class="product-desc-area">
+                                    <div class="product-desc-area" style="line-height: 20px">
                                         {{ producto.descripcion|safe }}<br>
                                         {% if producto.marca %}
-                                            Marca: {{ producto.marca }}<br>
+                                           <strong> Marca:</strong> <i>{{ producto.marca }}</i><br>
                                         {% endif %}
                                         {% if producto.talla %}
-                                            Tallas: {{ producto.talla }}<br>
+                                            <strong>Tallas:</strong> <i>{{ producto.talla }}</i><br>
                                         {% endif %}
                                         {% if  producto.colores_set.all %}
-                                            Colores:
+                                            <strong>Colores:</strong>
                                             <ul>
                                                 {% for color in producto.colores_set.all %}
-                                                    <li>{{ color }}</li>
+                                                    <li><i>{{ color }}</i></li>
                                                 {% endfor %}
                                             </ul>
                                         {% endif %}
