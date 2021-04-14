@@ -58,7 +58,7 @@ class ResizeImageMixin:
         source_image = im.convert('RGB')
         source_image=source_image.resize(size)  # Resize to size
         output = BytesIO()
-        source_image.save(output, format='JPEG') # Save resize image to bytes
+        source_image.save(output, format='JPEG',optimize=True, quality=55) # Save resize image to bytes
         output.seek(0)
         content_file = ContentFile(output.read())  # Read output and create ContentFile in memory
         file = File(content_file)
