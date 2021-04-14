@@ -2,11 +2,11 @@
 {% load static %}
 {% load productosTags %}
 {% block metas %}
-<meta property="og:url"           content="{{ request.get_full_path }}" />
+<meta property="og:url"           content="{{ request.get_full_path }}"/>
 <meta property="og:type"          content="website"/>
-<meta property="og:title"         content="{{  producto.nombre }}" />
-<meta property="og:description"   content="{{ producto.descripcion|safe }}" />
-<meta property="og:image"         content="{{ producto.imagen }}" />
+<meta property="og:title"         content="{{  producto.nombre }}"/>
+<meta property="og:description"   content="{{ producto.descripcion|safe }}"/>
+<meta property="og:image"         content="{{ producto.imagen }}"/>
 {% endblock %}
 {% block content %}
     {% load humanize %}
