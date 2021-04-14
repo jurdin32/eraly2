@@ -1,5 +1,6 @@
 import random
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 # Create your views here.
@@ -9,7 +10,7 @@ from django.contrib import messages
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import Hash_parse
 
-
+@login_required(login_url='/store/login/')
 def proveedores(request):
     prov=Proveedor.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("q"):
@@ -33,6 +34,7 @@ def proveedores(request):
     }
     return render(request, "producto/proveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarProveedor(request,id):
     proveedor=Proveedor.objects.get(id=id)
     if request.POST:
@@ -52,15 +54,15 @@ def editarProveedor(request,id):
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarProveedor(request,id):
     proveedor=Proveedor.objects.get(id=id)
     proveedor.delete()
     messages.add_message(request, messages.WARNING, "El Proveedor se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/')
 
-
+@login_required(login_url='/store/login/')
 def actividadesProveedor(request,id):
-
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
         print(request.POST)
@@ -73,6 +75,7 @@ def actividadesProveedor(request,id):
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarActividades(request,id):
     actividad=ActividadProveedor.objects.get(id=id)
     proveedor = actividad.proveedor.id
@@ -80,6 +83,7 @@ def eliminarActividades(request,id):
     messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
+@login_required(login_url='/store/login/')
 def tipoProveedor(request,id):
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
@@ -92,6 +96,7 @@ def tipoProveedor(request,id):
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
+@login_required(login_url='/store/login/')
 def eliminartipoProveedor(request,id):
     tp=TipoProveedor.objects.get(id=id)
     proveedor=tp.proveedor.id
@@ -99,6 +104,7 @@ def eliminartipoProveedor(request,id):
     messages.add_message(request,messages.WARNING,"El registro se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
+@login_required(login_url='/store/login/')
 def direccionProveedor(request,id):
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
@@ -112,6 +118,7 @@ def direccionProveedor(request,id):
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarDireccionProveedores(request,id):
     tp=DireccionProveedor.objects.get(id=id)
     proveedor=tp.proveedor.id
@@ -126,6 +133,7 @@ def iconos_text():
         iconos.append(icono)
     return iconos
 
+@login_required(login_url='/store/login/')
 def categorias(request):
     cat = Subcategorias.objects.all()
     if request.POST:
@@ -140,6 +148,7 @@ def categorias(request):
     }
     return render(request, "producto/categorias.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarCategoria(request,id):
     if request.POST:
         print(request.POST)
@@ -160,6 +169,7 @@ def subcategorias(request,id):
     }
     return render(request, "producto/subcategorias.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarSubCategoria(request,id):
     categoria = Subcategorias_2.objects.get(id=id)
     if request.POST:
@@ -169,6 +179,7 @@ def editarSubCategoria(request,id):
     return  HttpResponseRedirect('/category/%s'%categoria.subcategoria_id)
 
 #------------ Productos ----------_#
+@login_required(login_url='/store/login/')
 def productos(request):
     productos=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get('empresa'):
@@ -180,6 +191,7 @@ def productos(request):
     }
     return render(request, "producto/productos.html",contexto)
 
+@login_required(login_url='/store/login/')
 def registarProducto(request):
     producto = Productos()
     if request.POST:
@@ -224,7 +236,7 @@ def colores():
     print(colores)
     return colores
 
-
+@login_required(login_url='/store/login/')
 def productos_detalles(request,id):
     producto=Productos.objects.get(id=id)
     if request.POST:
@@ -264,13 +276,14 @@ def recorrertallas(request):
         valores+=i+","
     return (valores)
 
+@login_required(login_url='/store/login/')
 def registrarColores(request,id):
     if request.POST:
         Colores.objects.create(producto_id=id, codigoColor=request.POST['color'],nombre=request.POST['nombre']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
-
+@login_required(login_url='/store/login/')
 def eliminarColorProducto(request,id):
     color=Colores.objects.get(id=id)
     producto=color.producto.id
@@ -278,6 +291,7 @@ def eliminarColorProducto(request,id):
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
+@login_required(login_url='/store/login/')
 def registrarPrecios(request,id):
     web=True
     if request.POST:
@@ -300,6 +314,7 @@ def registrarPrecios(request,id):
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
+@login_required(login_url='/store/login/')
 def eliminarPrecios(request,id):
     precio=Precios.objects.get(id=id)
     producto=precio.producto.id
@@ -307,6 +322,7 @@ def eliminarPrecios(request,id):
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
+@login_required(login_url='/store/login/')
 def editarPrecios(request,id):
     web=False
     if request.POST:
@@ -322,7 +338,7 @@ def editarPrecios(request,id):
         messages.add_message(request, messages.INFO, "El registro se ha actualizado correctamente..!")
         return HttpResponseRedirect("/products/edit/%s/"%precio.producto_id)
 
-
+@login_required(login_url='/store/login/')
 def kardex(request):
     kax=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("establecimiento"):
@@ -334,6 +350,7 @@ def kardex(request):
     return render(request, "producto/kardex.html",contexto)
 
 
+@login_required(login_url='/store/login/')
 def kardex_producto(request,id):
     contexto={
         'kardex':Kardex.objects.filter(producto_id=id),
@@ -341,6 +358,7 @@ def kardex_producto(request,id):
     }
     return render(request, "producto/kardex_producto.html",contexto)
 
+@login_required(login_url='/store/login/')
 def inventario(request):
     produc=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("establecimiento"):
@@ -355,6 +373,7 @@ def inventario(request):
     }
     return render(request, 'producto/inventario.html',contexto)
 
+@login_required(login_url='/store/login/')
 def subir_imagenes_producto(request,id):
     if request.POST:
         try:
@@ -364,6 +383,7 @@ def subir_imagenes_producto(request,id):
             print(e)
     return HttpResponse("ok")
 
+@login_required(login_url='/store/login/')
 def promociones(request):
     promo=Promociones.objects.filter(precio__producto__establecimiento__usuarioempresa__user=request.user)
     produc=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user,precios__web=True)
@@ -393,6 +413,7 @@ def return_precio_web(request,id):
     }
     return JsonResponse(data)
 
+@login_required(login_url='/store/login/')
 def editarPromocion(request,id):
     promo = Promociones.objects.get(id=id)
     if request.POST:
@@ -408,6 +429,7 @@ def editarPromocion(request,id):
     else:
         return HttpResponseRedirect("/products/promo/")
 
+@login_required(login_url='/store/login/')
 def eliminarPromocion(request,id):
     promo =Promociones.objects.get(id=id)
     establecimiento=promo.precio.producto.establecimiento_id

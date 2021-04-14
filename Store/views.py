@@ -451,6 +451,7 @@ def checkout(request):
     }
     return render(request, 'Store/demo-shop-8-checkout.html', contexto)
 
+@login_required(login_url='/store/login/')
 def pay(request):
     totalCarrito=0
     compra=None
@@ -477,7 +478,7 @@ def pay(request):
     }
     return render(request,'Store/demo-shop-8-pay.html',contexto)
 
-
+@login_required(login_url='/store/login/')
 def misOrdenes(request):
     usuario=request.user.usuariosweb_set.first()
     ordenes=None
@@ -536,6 +537,7 @@ def lista_favoritos(request):
 
     return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
 
+@login_required(login_url='/store/login/')
 def borrar_favoritos(request,slug):
     usuariow = UsuariosWeb.objects.get(usuario=request.user)
     try:
