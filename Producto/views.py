@@ -383,6 +383,16 @@ def subir_imagenes_producto(request,id):
             print(e)
     return HttpResponse("ok")
 
+def eliminar_imagen(reqeust,id):
+    id_producto=0
+    try:
+        img = ImagenesProducto.objects.get(id=id)
+        id_producto=img.producto_id
+    except:
+        pass
+    return HttpResponseRedirect("/products/edit/%s/"%str(id_producto))
+
+
 @login_required(login_url='/store/login/')
 def promociones(request):
     promo=Promociones.objects.filter(precio__producto__establecimiento__usuarioempresa__user=request.user)
