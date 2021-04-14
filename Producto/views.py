@@ -388,6 +388,7 @@ def eliminar_imagen(reqeust,id):
     try:
         img = ImagenesProducto.objects.get(id=id)
         id_producto=img.producto_id
+        messages.add_message(reqeust,messages.INFO, 'Se eliminó la imágen seleccionada..!')
     except:
         pass
     return HttpResponseRedirect("/products/edit/%s/"%str(id_producto))
