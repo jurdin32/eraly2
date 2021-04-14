@@ -68,5 +68,6 @@ def logout_(request):
     else:
         return HttpResponseRedirect('/')
 
-def politica():
+def politica(request):
+
     return HttpResponse("Politica de Uso")
