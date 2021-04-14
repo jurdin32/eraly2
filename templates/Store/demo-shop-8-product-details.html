@@ -2,11 +2,12 @@
 {% load static %}
 {% load productosTags %}
 {% block metas %}
-    <meta property="og:url" content="https://eraly.app{{ request.get_full_path }}"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="{{ producto.nombre }}"/>
-    <meta property="og:description" content="{{ producto.descripcion|striptags|safe }}"/>
-    <meta property="og:image" content="https://eraly.app/media/{{ producto.imagen }}"/>
+<meta property="og:url"           content="{{ request.get_full_path }}" />
+<meta property="og:type"          content="website"/>
+<meta property="og:title"         content="{{  producto.nombre }}" />
+<meta property="og:description"   content="{{ producto.descripcion|safe }}" />
+<meta property="og:image"         content="{{ producto.imagen }}" />
+
 {% endblock %}
 {% block content %}
     {% load humanize %}
@@ -177,18 +178,13 @@
                                     <div class="review-link" style="display: block">
                                         <a class="review-link-in" rel="nofollow">
                                             <span class="count"><strong>Tienda: </strong></span>
-                                            <a style="text-decoration: none"
-                                               href="/{{ producto.establecimiento.slug }}/">{{ producto.establecimiento.nombreComercial }}</a></a>
+                                            <a style="text-decoration: none" href="/{{ producto.establecimiento.slug }}/">{{ producto.establecimiento.nombreComercial }}</a></a>
                                     </div>
 
                                     <div class="review-link">
                                         <a href="/{{ producto.establecimiento.slug }}/" class="review-link-in"
                                            rel="nofollow">
                                             <span class="count"><strong>Ver toda la tienda </strong></span></a>
-                                    </div>
-                                    <br>
-                                    <div class="fb-like review-link" style="margin-left: -10px;margin-top: 10px;"
-                                         data-href="https://eraly.app{{  request.get_full_path }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
                                     </div>
 
                                     <div class="product-detail-info">
@@ -258,8 +254,7 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Agregar al Carrito</span>
                                                     </a>
-                                                    <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist"
-                                                       title="Add to Wishlist">
+                                                    <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist" title="Add to Wishlist">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
                                                 </div>
@@ -294,7 +289,7 @@
                                     <div class="product-desc-area" style="line-height: 23px">
                                         {{ producto.descripcion|safe }}
                                         {% if producto.marca %}
-                                            <strong> Marca:</strong> <i>{{ producto.marca }}</i><br>
+                                           <strong> Marca:</strong> <i>{{ producto.marca }}</i><br>
                                         {% endif %}
                                         {% if producto.talla %}
                                             <strong>Tallas:</strong> <i>{{ producto.talla }}</i><br>
@@ -319,8 +314,7 @@
                                     <div class="collateral-box">
                                         <ul class="list-unstyled">
                                             <span class="your-choice" style="">Según la opinión de los usuarios, se ha calificado el producto con: <div
-                                                    class='starrr'></div> (<span
-                                                    class="choic"></span> estrellas).</span>
+                                                    class='starrr'></div> (<span class="choic"></span> estrellas).</span>
                                         </ul>
                                     </div>
 
@@ -333,51 +327,36 @@
                                                     <td style="width: 100px">
                                                         <div>
                                                             {% if calificacion.rating == 0 %}
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
                                                             {% elif calificacion.rating <= 1.4 %}
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
                                                             {% elif calificacion.rating <= 2.4 %}
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
                                                             {% elif calificacion.rating <= 3.4 %}
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
 
                                                             {% elif calificacion.rating <= 4.4 %}
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
-                                                                <a style="text-decoration: none"
-                                                                   class="fa fa-star-o"></a>
+                                                                <a style="text-decoration: none" class="fa fa-star-o"></a>
                                                             {% else %}
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
                                                                 <a style="text-decoration: none" class="fa fa-star"></a>
@@ -428,8 +407,7 @@
                                     {% promocion_descuento product.id %}
                                 </figure>
                                 <div class="product-details-area">
-                                    <h2 class="product-name"><a href="#" title="Product Name">{{ product.nombre }}</a>
-                                    </h2>
+                                    <h2 class="product-name"><a href="#" title="Product Name">{{ product.nombre }}</a></h2>
                                     <div class="product-ratings">
                                         <div class="ratings-box">
                                             <div class="rating" style="width:60%"></div>
@@ -449,8 +427,7 @@
                                     </div>
 
                                     <div class="product-actions">
-                                        <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist"
-                                           title="Add to Wishlist">
+                                        <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist" title="Add to Wishlist">
                                             <i class="fa fa-heart"></i>
                                         </a>
                                         <a href="#" class="addtocart" title="Add to Cart">
