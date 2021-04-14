@@ -2,7 +2,7 @@
 {% load static %}
 {% load productosTags %}
 {% block metas %}
-    <meta property="og:url" content="https://eraly.app/{{ request.get_full_path }}"/>
+    <meta property="og:url" content="https://eraly.app{{ request.get_full_path }}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ producto.nombre }}"/>
     <meta property="og:description" content="{{ producto.descripcion|striptags|safe }}"/>
