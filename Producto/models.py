@@ -233,6 +233,11 @@ class ImagenesProducto(models.Model,ResizeImageMixin):
     def miniatura(self):
         return mark_safe("<img src='/media/%s'>" % self.thumbnail)
 
+    def delete(self, using=None, keep_parents=False):
+       storage, path = self.imagen.storage, self.imagen.path
+       super(ImagenesProducto, self).delete()
+       storage.delete(path)
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.resize(self.imagen, (600, 600))
