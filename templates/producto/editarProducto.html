@@ -463,9 +463,9 @@
                         {% for imagen in imagenes %}
                             <div class="col-md-2">
                             <div class="thumbnail">
-                                <div class="image view view-first">
+                                <div class="image view view-first" style="height: 100%">
                                     <img style="width: 100%" src="/media/{{ imagen.imagen}}" alt="image">
-                                    <div class="mask">
+                                    <div class="mask" style="height: 100%">
                                         <p>Imagen {{ forloop.counter }} para el producto {{ producto.nombre }}</p>
                                         <div class="tools tools-bottom">
                                             <a href="#"><i class="fa fa-times"></i></a>
