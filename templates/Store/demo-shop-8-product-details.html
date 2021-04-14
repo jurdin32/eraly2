@@ -2,11 +2,11 @@
 {% load static %}
 {% load productosTags %}
 {% block metas %}
-    <meta property="og:url" content="{{ request.get_full_path }}"/>
+    <meta property="og:url" content="https://eraly.app/{{ request.get_full_path }}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ producto.nombre }}"/>
     <meta property="og:description" content="{{ producto.descripcion|striptags|safe }}"/>
-    <meta property="og:image" content="{{ producto.imagen }}"/>
+    <meta property="og:image" content="https://eraly.app/media/{{ producto.imagen }}"/>
 {% endblock %}
 {% block content %}
     {% load humanize %}
@@ -187,7 +187,7 @@
                                             <span class="count"><strong>Ver toda la tienda </strong></span></a>
                                     </div>
                                     <div class="fb-like"
-                                         data-href="{{  request.get_full_path }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+                                         data-href="https://eraly.app{{  request.get_full_path }}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
                                     </div>
 
                                     <div class="product-detail-info">
