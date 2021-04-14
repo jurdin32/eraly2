@@ -129,6 +129,11 @@ class Productos(models.Model,ResizeImageMixin):
         else:
             return '%s'%(self.nombre)
 
+    def delete(self, using=None, keep_parents=False):
+       storage, path = self.imagen.storage, self.imagen.path
+       super(Productos, self).delete()
+       storage.delete(path)
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
 
