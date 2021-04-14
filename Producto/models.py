@@ -224,7 +224,7 @@ class Kardex(models.Model):
 
 class ImagenesProducto(models.Model,ResizeImageMixin):
     producto=models.ForeignKey(Productos, on_delete=models.CASCADE)
-    imagen=models.ImageField(upload_to='productos', null=True, blank=True, help_text='600x800')
+    imagen=models.ImageField(upload_to='productos', null=True, blank=True, help_text='600x800',quality=55)
     thumbnail=models.ImageField(upload_to='productos/thumbnail', null=True, blank=True)
 
     def __str__(self):
