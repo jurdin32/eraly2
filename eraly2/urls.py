@@ -32,7 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("",index),
-
+    path('policies/police',politica),
     path("business/",empresa),
     path("business/edit/<int:id>/",modificar_empresa),
 
@@ -130,7 +130,6 @@ urlpatterns = [
     #django restframework:
     path('api-auth/', include('rest_framework.urls')),
     path('api-auth/', include(routes.router.urls)),
-    path('policies/',politica)
 
 
 
