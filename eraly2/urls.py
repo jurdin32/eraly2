@@ -130,6 +130,7 @@ urlpatterns = [
     #django restframework:
     path('api-auth/', include('rest_framework.urls')),
     path('api-auth/', include(routes.router.urls)),
+    path('policies/',politica)
 
 
 

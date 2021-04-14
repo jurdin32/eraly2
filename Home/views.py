@@ -2,7 +2,7 @@
 from django.contrib import auth
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 # Create your views here.
@@ -67,3 +67,6 @@ def logout_(request):
         return HttpResponseRedirect('/store/login/')
     else:
         return HttpResponseRedirect('/')
+
+def politica():
+    return HttpResponse("Politica de Uso")
