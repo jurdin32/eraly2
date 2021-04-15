@@ -195,8 +195,7 @@ def generarTags(request):
     lista=[]
     for tags in Productos.objects.all():
         lista+=tags.etiquetas.split(',')
-    lista2=set(lista)
-    request.session['tags']=lista2
+    request.session['tags']=lista
 
 
 @login_required(login_url='/store/login/')
