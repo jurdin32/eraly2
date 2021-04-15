@@ -474,7 +474,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="caption" style="text-align: center">
+                            <div class="caption" style="text-align: center" >
                                     <p>Imagen {{ forloop.counter }}</p>
                                 </div>
                         </div>
@@ -594,8 +594,7 @@
                 {tag: '{{tag}}', value: '{{tag}}'},
                 {% endfor %}
             ],
-            backgrounds: ['#007bff'],
-	        colors: ['white'],
+            defaultTagClass: 'bg-primary text-light',
             whiteList: false
         });
     </script>
