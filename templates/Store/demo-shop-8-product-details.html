@@ -392,7 +392,7 @@
                                         <span class="your-choice" style="">Etiquetas</span>
                                         {% with producto.etiquetas|split:"," as etiquetas %}
                                             {% for tags in etiquetas %}
-                                                <span class="label label-danger">{{ tags }}</span>
+                                                <span class="label label-danger" style="font-size: 14px">{{ tags }}</span>
                                             {% endfor %}
                                         {% endwith %}
                                     </ul>
