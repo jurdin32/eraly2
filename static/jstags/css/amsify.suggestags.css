@@ -174,8 +174,8 @@ li.amsify-item-pad.active {
 
 .amsify-suggestags-input-area
 .disabled.amsify-select-tag {
-    background: #eaeaea;
-    color: #b9b9b9;
+    background: #4C8EDB;
+    color: white;
     pointer-events: none;
 }
 
