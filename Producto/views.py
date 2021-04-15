@@ -191,8 +191,17 @@ def productos(request):
     }
     return render(request, "producto/productos.html",contexto)
 
+def generarTags(request):
+    lista=[]
+    if not request.session.get('tags'):
+        for tags in Productos.objects.all():
+            lista+=tags.etiquetas.split(',')
+        request.session['tags']=lista
+
+
 @login_required(login_url='/store/login/')
 def registarProducto(request):
+    generarTags(request)
     producto = Productos()
     if request.POST:
         producto.establecimiento_id=request.POST['establecimiento']
@@ -238,6 +247,7 @@ def colores():
 
 @login_required(login_url='/store/login/')
 def productos_detalles(request,id):
+    generarTags(request)
     producto=Productos.objects.get(id=id)
     if request.POST:
         print(request.POST)
@@ -259,6 +269,7 @@ def productos_detalles(request,id):
             producto.imagen=request.FILES['imagen']
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
+    print(request.session['tags'])
     contexto={
         'producto':producto,
         'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),

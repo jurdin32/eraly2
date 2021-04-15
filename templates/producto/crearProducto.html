@@ -72,7 +72,8 @@
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
-                                        <input type="number" class="form-control" name="precio" max="999999999999999999" step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
+                                        <input type="number" class="form-control" name="precio" max="999999999999999999"
+                                               step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
                                     </div>
@@ -104,7 +105,8 @@
     </div>
 
     <div class="">
-        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post" action="/products/new/?precio=on"
+        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post"
+              action="/products/new/?precio=on"
               enctype="multipart/form-data">
             <div class="row">
                 {% csrf_token %}
@@ -120,7 +122,7 @@
                                     <select name="tipo" id="tipo" required="required"
                                             class="js-example-basic-single form-control" style="width: 100%" multiple>
                                         {% for categoria in categorias %}
-                                        <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
+                                            <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
                                         {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
@@ -145,8 +147,8 @@
                                 </div>
                             </div>
                             <div class="item form-group" id="codigo">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback" >
-                                    <input type="text"  name="codigo"
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input type="text" name="codigo"
                                            placeholder="Código de barra o codigo interno (Si aplica)"
                                            value="{{ producto.codigo }}" class="form-control">
                                     <span>Código de Barras o Código Interno</span>
@@ -175,7 +177,8 @@
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto o Servicio"
+                                    <input id="nombre" value="{{ producto.nombre }}"
+                                           placeholder="Nombre del Producto o Servicio"
                                            required="required" class="form-control" type="text" name="nombre">
                                     <span>El Nombre del Item es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
@@ -183,8 +186,8 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback"id="marca">
-                                    <select name="marca"  class="js-example-basic-single form-control"
+                                <div class="col-md-12 col-sm-12 form-group has-feedback" id="marca">
+                                    <select name="marca" class="js-example-basic-single form-control"
                                             style="width: 100%" multiple>
                                         {% for marca in marcas %}
                                             {% if producto.Marca == marca %}
@@ -201,9 +204,10 @@
                             </div>
                             <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
+                                    <select name="talla[]" class="js-example-basic-single2 form-control"
                                             style="width: 100%" multiple>
-                                         <option><option>
+                                        <option>
+                                        <option>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -253,25 +257,26 @@
                         <div class="x_content">
                             <div class="item form-group" id="dTecnicos">
                                 <div class="col-md-12 col-sm-12">
-                                    <textarea name="tecnicos" id="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
+                                    <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
                             <div class="item form-group" id="tags">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input value="{{ producto.etiquetas }}"
-                                           required="required" class="form-control" type="text"  id="etiquetas" name="etiquetas">
+                                    <input value="{{ producto.etiquetas }}" class="form-control" type="text"
+                                           id="etiquetas" name="etiquetas">
                                     <span>Escriba aquí todas las que considere necesario</span>
                                     <span class="fa fa-tags form-control-feedback right"
                                           aria-hidden="true"></span>
                                 </div>
                             </div>
-                                <div class="ln_solid"></div>
+                            <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                 </button>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                 </button>
-                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i>
+                                    Volver</a>
                             </div>
                         </div>
                     </div>
@@ -287,21 +292,22 @@
 
         let params = new URLSearchParams(location.search);
         var emp = params.get('empresa');
-        if (emp){
+        if (emp) {
             $("#establecimiento").val(emp).trigger('change')
-            $("#regresar").attr('href','/products/?empresa='+emp)
+            $("#regresar").attr('href', '/products/?empresa=' + emp)
         }
 
-       function ckeditor_(control){
-            CKEDITOR.replace(control,{
-            toolbar : [
-                ['TextColor', 'BGColor','-','Image', 'Table','-'],
-                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-            ]
-        });
+        function ckeditor_(control) {
+            CKEDITOR.replace(control, {
+                toolbar: [
+                    ['TextColor', 'BGColor', '-', 'Image', 'Table', '-'],
+                    ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                    ['-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+                ]
+            });
         }
+
         ckeditor_('tecnicos')
         ckeditor_('descripcion')
     </script>
@@ -318,10 +324,10 @@
             this.value = parseFloat(this.value).toFixed(2);
         }
 
-        $("#tipo").change(function(){
+        $("#tipo").change(function () {
             console.log($(this).val())
             let valor = $(this).val()
-            if(valor == "S"){
+            if (valor == "S") {
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
@@ -330,7 +336,7 @@
                 $("#colores").hide();
                 $("#stock").hide();
             }
-            if(valor == "P"){
+            if (valor == "P") {
                 $("#codigo").show();
                 $("#marca").show();
                 $("#talla").show();
@@ -339,12 +345,11 @@
                 $("#stock").show();
                 $("#detalles").show();
             }
-            if(valor == "V" || valor=="I"){
+            if (valor == "V" || valor == "I") {
                 $("#codigo").show();
-                if(valor=="V"){
+                if (valor == "V") {
                     $("#marca").show();
-                }
-                else{
+                } else {
                     $("#marca").hide();
                 }
                 $("#talla").hide();
@@ -359,22 +364,13 @@
     <script type="text/javascript" src="{% static 'jstags/js/jquery.amsify.suggestags.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'jstags/css/amsify.suggestags.css' %}">
     <script>
-    $("#etiquetas").amsifySuggestags({
-		suggestionsAction : {
-			url : '',
-			beforeSend : function() {
-				console.info('beforeSend');
-			},
-			success: function(data) {
-				console.info(data);
-			},
-			error: function() {
-				console.info('error');
-			},
-			complete: function(data) {
-				console.info('complete');
-			}
-		}
-	});
+        $("#etiquetas").amsifySuggestags({
+            suggestions: [
+                {% for tag in request.session.tags %}
+                {tag: '{{tag}}', value: '{{tag}}'},
+                {% endfor %}
+            ],
+            whiteList: false
+        });
     </script>
 {% endblock %}
