@@ -193,7 +193,8 @@ def productos(request):
 
 def generarTags(request):
     lista=[]
-    if not request.session.get('tags'):
+    if request.session.get('tags'):
+        del request.session['tags']
         for tags in Productos.objects.all():
             lista+=tags.etiquetas.split(',')
             lista=set(lista)
