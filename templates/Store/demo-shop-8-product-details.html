@@ -390,13 +390,12 @@
                                 <div id="product-etiquetas" class="tab-pane">
                                     <ul class="list-unstyled">
                                         <span class="your-choice" style="">Etiquetas</span>
-                                        <br>
-                                        {% with producto.etiquetas|split:"," as etiquetas %}
+                                    </ul>
+                                    {% with producto.etiquetas|split:"," as etiquetas %}
                                             {% for tags in etiquetas %}
                                                 <a href="/store/search/?q={{ tags }}" class="label label-danger" style="font-size: 14px">{{ tags }}</a>
                                             {% endfor %}
                                         {% endwith %}
-                                    </ul>
                                 </div>
                             </div>
                         </div>
