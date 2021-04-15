@@ -151,7 +151,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control" multiple>
                                     {% for categoria in categorias %}
                                         {% if categoria.nombre|slice:1 == producto.subcategoria.subcategoria.categoria.nombre|slice:1 %}
                                          <option selected="selected" value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre }}</option>
@@ -168,7 +168,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="establecimiento" id="establecimiento" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control" multiple>
                                         {% for establecimiento in establecimientos %}
                                             {% if producto.establecimiento.id == establecimiento.id %}
                                                 <option selected="selected"
@@ -194,7 +194,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
-                                            style="width: 100%" required="required" multiple>
+                                            required="required" multiple>
                                         {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
                                             {% for sub in categoria.subcategorias_2_set.all %}
@@ -223,7 +223,7 @@
                             <div class="item form-group" id="marca">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="marca"  class="js-example-basic-single form-control"
-                                            style="width: 100%" multiple>
+                                             multiple>
                                         {% for marca in marcas %}
                                             {% if producto.marca == marca %}
                                                 <option selected="selected"
@@ -239,8 +239,7 @@
                             </div>
                             <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
-                                            style="width: 100%" multiple>
+                                    <select name="talla[]"  class="js-example-basic-single2 form-control" multiple>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -516,9 +515,12 @@
         }
 
         $(".js-example-basic-single").select2({
-            maximumSelectionLength: 1
+            maximumSelectionLength: 1,
+             width: 'resolve'
         });
-        $(".js-example-basic-single2").select2();
+        $(".js-example-basic-single2").select2({
+                 width: 'resolve'
+        });
 
         tallas = '{{ producto.talla }}'.split(",");
         $(".js-example-basic-single2").val(tallas).trigger('change');
