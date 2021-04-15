@@ -390,7 +390,11 @@
                                 <div id="product-etiquetas" class="tab-pane">
                                     <ul class="list-unstyled">
                                         <span class="your-choice" style="">Etiquetas</span>
-                                        {{ producto.etiquetas }}
+                                        {% with producto.etiquetas|split:"," as etiquetas %}
+                                            {% for tags in etiquetas %}
+                                                <span class="label label-danger">{{ tags }}</span>
+                                            {% endfor %}
+                                        {% endwith %}
                                     </ul>
                                 </div>
                             </div>

@@ -93,3 +93,7 @@ def promocion_id(id):
 @register.simple_tag
 def ventas_store(id_establecimiento):
     return  DetalleCompraWeb.objects.filter(producto__establecimiento_id=id_establecimiento,autorizado=False).count()
+
+@register.filter(name='split')
+def split(value, key):
+    return value.split(key)
