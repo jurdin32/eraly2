@@ -197,7 +197,7 @@ def generarTags(request):
         del request.session['tags']
         for tags in Productos.objects.all():
             lista+=tags.etiquetas.split(',')
-            lista=set(lista)
+        lista=set(lista)
         request.session['tags']=lista
 
 
