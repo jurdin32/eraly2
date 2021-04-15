@@ -196,6 +196,7 @@ def generarTags(request):
     if not request.session.get('tags'):
         for tags in Productos.objects.all():
             lista+=tags.etiquetas.split(',')
+            lista=set(lista)
         request.session['tags']=lista
 
 
