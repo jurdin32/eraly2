@@ -194,7 +194,10 @@ def productos(request):
 def generarTags(request):
     lista=[]
     for tags in Productos.objects.all():
-        lista+=tags.etiquetas.split(',')
+        for t in tags.etiquetas.split(','):
+            if not t.replace(" ","") in lista:
+                lista.append(t)
+    print("mejorado",lista)
     request.session['tags']=lista
 
 
@@ -268,7 +271,6 @@ def productos_detalles(request,id):
             producto.imagen=request.FILES['imagen']
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
-    print(request.session['tags'])
     contexto={
         'producto':producto,
         'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
