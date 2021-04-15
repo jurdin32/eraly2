@@ -259,7 +259,7 @@
                             <div class="item form-group" id="tags">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <input value="{{ producto.etiquetas }}"
-                                           required="required" class="form-control" type="text" name="etiquetas">
+                                           required="required" class="form-control" type="text"  id="etiquetas" name="etiquetas">
                                     <span>Escriba aquí todas las que considere necesario</span>
                                     <span class="fa fa-tags form-control-feedback right"
                                           aria-hidden="true"></span>
@@ -355,5 +355,26 @@
             }
         }).change()
 
+    </script>
+    <script type="text/javascript" src="{% static 'jstags/js/jquery.amsify.suggestags.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jstags/css/amsify.suggestags.css' %}">
+    <script>
+    $("#etiquetas").amsifySuggestags({
+		suggestionsAction : {
+			url : '',
+			beforeSend : function() {
+				console.info('beforeSend');
+			},
+			success: function(data) {
+				console.info(data);
+			},
+			error: function() {
+				console.info('error');
+			},
+			complete: function(data) {
+				console.info('complete');
+			}
+		}
+	});
     </script>
 {% endblock %}
