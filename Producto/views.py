@@ -197,6 +197,7 @@ def generarTags(request):
         for t in tags.etiquetas.split(','):
             if not t.replace(" ","") in lista:
                 lista.append(t)
+    lista=list(sorted(set(lista)))
     print("mejorado",lista)
     request.session['tags']=lista
 
