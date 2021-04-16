@@ -350,7 +350,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-6 col-sm-6" id="precios_div">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2><small>Precios (Al menos 1)</small></h2>
@@ -531,6 +531,7 @@
                 $("#galeria").hide();
                 $("#nombre_div").show();
                 $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
             }
             if(valor == "P"){
                 $("#codigo").show();
@@ -542,6 +543,7 @@
                 $("#detalles").show()
                 $("#nombre_div").show();
                 $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
             }
             if(valor == "V" || valor=="I"){
                 $("#codigo").show();
@@ -556,6 +558,8 @@
                     $("#nombre_div").hide();
                     $("#nombre").removeAttr('required');
                     $("#colores").hide();
+                    $("#precios_div").removeClass('col-md-6 col-sm-6');
+                    $("#precios_div").add('col-md-12 col-sm-12');
                 }
                 $("#talla").hide();
                 $("#imagen").show();
