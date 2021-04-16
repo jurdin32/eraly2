@@ -288,6 +288,7 @@
 {% block script_index %}}
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="{% static 'ckeditor_custom.js' %}"></script>
     <script>
 
         let params = new URLSearchParams(location.search);
@@ -296,18 +297,6 @@
             $("#establecimiento").val(emp).trigger('change')
             $("#regresar").attr('href', '/products/?empresa=' + emp)
         }
-
-        function ckeditor_(control) {
-            CKEDITOR.replace(control, {
-                toolbar: [
-                    ['TextColor', 'BGColor', '-', 'Image', 'Table', '-'],
-                    ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-                    ['-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-                ]
-            });
-        }
-
         ckeditor_('tecnicos')
         ckeditor_('descripcion')
     </script>
@@ -327,33 +316,56 @@
             this.value = parseFloat(this.value).toFixed(2);
         }
 
-        $("#tipo").change(function () {
+        $("#tipo").change(function(){
             console.log($(this).val())
             let valor = $(this).val()
-            if (valor == "S") {
+            if(valor == "S"){
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
-                $("#imagen").show();
+                $("#imagen").hide();
                 $("#dTecnicos").hide();
                 $("#colores").hide();
-                $("#stock").hide();
+                $("#subirimagen").show();
+                $("#galeria").hide();
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
             }
-            if (valor == "P") {
+            if(valor == "P"){
                 $("#codigo").show();
                 $("#marca").show();
                 $("#talla").show();
                 $("#imagen").show();
                 $("#dTecnicos").show();
                 $("#stock").show();
-                $("#detalles").show();
+                $("#detalles").show()
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
+                $("#subirimagen").show();
             }
-            if (valor == "V" || valor == "I") {
+            if(valor == "V" || valor=="I"){
                 $("#codigo").show();
-                if (valor == "V") {
+                if(valor=="V"){
                     $("#marca").show();
-                } else {
+                    $("#nombre_div").show();
+                    $("#nombre").attr('required','required');
+                    $("#colores").show();
+                    $("#subirimagen").show();
+                }
+                else{
                     $("#marca").hide();
+                    $("#nombre_div").hide();
+                    $("#nombre").removeAttr('required');
+                    $("#colores").hide();
+                    $("#precios_div").removeClass('col-md-6 col-sm-6');
+                    $("#precios_div").addClass('col-md-12 col-sm-12');
+                    $("#subirimagen").show();
                 }
                 $("#talla").hide();
                 $("#imagen").show();
