@@ -198,19 +198,19 @@
                                                 <span class="old-price">
                                                     {% for precio in producto.precios_set.all %}
                                                         {% if precio.web %}
-                                                            $ {{ precio.precioVenta }}
+                                                            $ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i>
                                                         {% endif %}
                                                     {% endfor %}
                                                 </span>
                                                 <br>
                                                 <span class="product-price">
-                                                    $ {{ promocion.total }}
+                                                    $ {{ promocion.total }} <i style="font-size: 10px"> + IVA</i>
                                                 </span>
                                             {% else %}
                                                 <span class="product-price">
                                                 {% for precio in producto.precios_set.all %}
                                                     {% if precio.web %}
-                                                        $ {{ precio.precioVenta }}
+                                                        $ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i>
                                                     {% endif %}
                                                 {% endfor %}
                                             </span>
