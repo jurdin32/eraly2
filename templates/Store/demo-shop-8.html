@@ -419,7 +419,7 @@
                                                         <div class="product-price-box">
                                                             {% for precio in producto.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                    <span class="product-price">${{ precio.precioVenta }}<i> + IVA</i></span>
+                                                                    <span class="product-price">${{ precio.precioVenta }}<i style="font-size: 19px"> + IVA</i></span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
@@ -495,7 +495,7 @@
                                                         <div class="product-price-box">
                                                             {% for precio in puntuado.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                    <span class="product-price">${{ precio.precioVenta }}</span>
+                                                                    <span class="product-price">${{ precio.precioVenta }} <i style="font-size: 19px"> + IVA</i></span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
@@ -586,7 +586,7 @@
                                                         <div class="product-price-box">
                                                             {% for precio in nuevo.precios_set.all %}
                                                                 {% if precio.web %}
-                                                                    <span class="product-price">${{ precio.precioVenta }}</span>
+                                                                    <span class="product-price">${{ precio.precioVenta }} <i style="font-size: 19px"> + IVA</i></span>
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </div>
