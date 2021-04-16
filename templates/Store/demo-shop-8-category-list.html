@@ -135,7 +135,7 @@
                                     </div>
                                         {% for precio in producto.precios_set.all %}
                                             {% if precio.web %}
-                                                <span class="product-price">$ {{ precio.precioVenta }}</span>
+                                                <span class="product-price">$ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i></span>
                                             {% endif %}
                                         {% endfor %}
                                     </div>
