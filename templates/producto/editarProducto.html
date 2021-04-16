@@ -211,10 +211,9 @@
                                     <span class="fa fa-tags form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="nombre_div">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"
-                                           required="required" class="form-control" type="text" name="nombre">
+                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"  class="form-control" type="text" name="nombre">
                                     <span>El Nombre del Producto es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
                                           aria-hidden="true"></span>
@@ -531,6 +530,8 @@
                 $("#colores").hide();
                 $("#subirimagen").hide();
                 $("#galeria").hide();
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
             }
             if(valor == "P"){
                 $("#codigo").show();
@@ -540,14 +541,20 @@
                 $("#dTecnicos").show();
                 $("#stock").show();
                 $("#detalles").show()
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
             }
             if(valor == "V" || valor=="I"){
                 $("#codigo").show();
                 if(valor=="V"){
                     $("#marca").show();
+                    $("#nombre_div").show();
+                    $("#nombre").attr('required','required');
                 }
                 else{
                     $("#marca").hide();
+                    $("#nombre_div").hide();
+                    $("#nombre").removeAttr('required');
                 }
                 $("#talla").hide();
                 $("#imagen").show();
