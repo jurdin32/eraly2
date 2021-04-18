@@ -27,7 +27,7 @@ def tienda(request):
     page = request.GET.get('page')
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
-        'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
+        'productos':productos.order_by('-id'), # deben ir los destacados, los de mas puntuación,
         'puntuados':paginator.get_page(page),
         'nuevos':productos.filter(puntuacion__range=(0,2)).order_by('-puntuacion'),
 
