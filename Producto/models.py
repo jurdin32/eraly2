@@ -138,8 +138,6 @@ class Productos(models.Model,ResizeImageMixin):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        fecha=datetime.datetime.now()
-        self.hash = Hash_parse(str(fecha).replace(":","").replace(" ","").replace(".","").replace("-","")+str(self.establecimiento_id))
         if self.tipo=="P" and not self.imagen:
             self.imagen = 'noproducto.png'
 

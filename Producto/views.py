@@ -223,7 +223,8 @@ def registarProducto(request):
         if request.FILES:
             producto.imagen=request.FILES['imagen']
         producto.save()
-        producto.hash = Hash_parse(int(producto.id)+random.randint(1, 1000))
+        fecha=datetime.datetime.now()
+        producto.hash = Hash_parse(Hash_parse(str(fecha).replace(":","").replace(" ","").replace(".","").replace("-","")+str(producto.establecimiento_id)))
         producto.save()
         if int(request.POST.get("stock"))>0:
             Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
