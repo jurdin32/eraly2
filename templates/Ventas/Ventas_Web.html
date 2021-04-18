@@ -254,7 +254,7 @@
         function autorizar(hash, producto_id, nombre, precio) {
             $("#codigo_compra").val(hash)
             $("#ver_detalles_compra").attr('href',"/autority/"+hash)
-            $("#ver_detalles_compra").text(hash)
+            $("#ver_detalles_compra").text(hash.toUpperCase())
             $("#producto_id").val(producto_id)
             $("#nombre_producto").val($.trim(nombre))
             let precios = parseFloat(precio.replace(",", "."))
