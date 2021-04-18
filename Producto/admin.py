@@ -143,7 +143,7 @@ class AdminProductos(admin.ModelAdmin):
 
     list_display_links = ['hash','codigo','establecimiento','nombre','subcategoria','marca','_descripcion',]
     search_fields = ['hash']
-    # readonly_fields = ['hash']
+    readonly_fields = ['hash']
     formfield_overrides = {
         models.CharField: {
             'widget': TextInput(attrs={'style': 'width:90%'})
