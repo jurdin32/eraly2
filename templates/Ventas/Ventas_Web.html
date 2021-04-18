@@ -20,6 +20,7 @@
                                 <div class="x_content">
                                     <br>
                                     <div class="col-md-12 col-sm-12  form-group">
+                                        <a href="" id="ver_detalles_compra"></a>
                                         <input type="text" class="form-control has-feedback-left" readonly="readonly"
                                                id="codigo_compra" name="codigo_compra"
                                                placeholder="Codigo de la compra">
@@ -253,6 +254,7 @@
 
         function autorizar(hash, producto_id, nombre, precio) {
             $("#codigo_compra").val(hash)
+            $("#ver_detalles_compra").attr('href',"/autority/"+hash)
             $("#producto_id").val(producto_id)
             $("#nombre_producto").val($.trim(nombre))
             let precios = parseFloat(precio.replace(",", "."))
