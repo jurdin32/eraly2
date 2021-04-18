@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.files import File
 import uuid
 
@@ -11,7 +13,7 @@ from django.utils.safestring import mark_safe
 
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
-from eraly2.snippers import ResizeImageMixin
+from eraly2.snippers import ResizeImageMixin, Hash_parse
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
@@ -136,7 +138,8 @@ class Productos(models.Model,ResizeImageMixin):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
+        fecha=datetime.datetime.now()
+        self.hash = Hash_parse(str(fecha).replace(":","").replace(" ","").replace(".","").replace("-","")+str(self.nombre))
         if self.tipo=="P" and not self.imagen:
             self.imagen = 'noproducto.png'
 
