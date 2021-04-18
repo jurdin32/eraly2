@@ -6,7 +6,7 @@ from Empresa.models import Establecimiento, ConfigurarDocumentos
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
-from Store.models import DetalleCompraWeb
+from Store.models import DetalleCompraWeb, ComprasWeb
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
 from eraly2.snippers import export_pdf
 from nlt import numlet as nl
@@ -216,3 +216,9 @@ def autorizar_ComprasWeb(request):
         'total_compras':contador
     }
     return render(request,'Ventas/Ventas_Web.html',contexto)
+
+def info_cliente_compra(request,hash):
+    contexto={
+        'compra':ComprasWeb.objects.get(hash=hash)
+    }
+    return render(request,'',contexto)

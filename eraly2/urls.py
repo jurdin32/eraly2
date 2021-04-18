@@ -90,6 +90,7 @@ urlpatterns = [
     path("billing/<id>/",proformas),
 
     path("store/autority/",autorizar_ComprasWeb),
+    path("store/autority/<slug:slug>/",info_cliente_compra),
 
 
     path("giveBack/<int:id>/",anularDocumento),
