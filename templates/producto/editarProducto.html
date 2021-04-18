@@ -493,6 +493,11 @@
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <style>
+    .colorpicker.colorpicker-with-alpha .colorpicker-alpha{
+        visibility: hidden;
+    }
+    </style>
     <script>
         let params = new URLSearchParams(location.search);
         var pre = params.get('precio');
