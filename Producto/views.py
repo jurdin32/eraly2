@@ -244,8 +244,8 @@ def colores():
     aux=[]
     for color in Colores.objects.all():
         if not color.codigoColor in aux:
-            aux.append(str.upper(color.codigoColor))
-            colores.append(str.upper(color.codigoColor))
+            aux.append(color.codigoColor)
+            colores.append(color)
     print(colores)
     return colores
 
