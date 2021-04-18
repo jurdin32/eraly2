@@ -32,13 +32,20 @@
                                     </div>
 
                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                        <span>Código de Producto</span>
+                                        <input type="hidden" class="form-control has-feedback-left" readonly="readonly"
+                                               id="px" placeholder="Código del Producto">
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3  form-group has-feedback">
+                                        <span>Cantidad</span>
+                                        <input type="hidden" class="form-control has-feedback-left" readonly="readonly"
                                                id="producto_id"
-                                               style="text-align:center;"
                                                name="producto_id"
                                                placeholder="Código del Producto">
-                                        <span class="form-control-feedback left"
-                                              aria-hidden="true">C</span>
+
+                                        <input type="hidden" class="form-control has-feedback-left" readonly="readonly"
+                                               id="cantidad" placeholder="Código del Producto">
                                     </div>
                                     <div class="col-md-9 col-sm-9  form-group has-feedback"></div>
 
@@ -222,7 +229,7 @@
                                                            style="cursor:pointer;color: #007bff"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
-                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}')">
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}','{{ documento.cantidad }}','{{ documento.producto_id }}')">
                                                             <i class="fa fa-share-square-o"></i>Por Autorizar</a>
                                                     {% endif %}
 
@@ -256,10 +263,13 @@
             });
         });
 
-        function autorizar(hash, producto_id, nombre, precio) {
+        function autorizar(hash, producto_id, nombre, precio,cantidad,id_px) {
             $("#codigo_compra").val(hash)
             $("#ver_detalles_compra").attr('href',"/autority/"+hash)
             $("#ver_detalles_compra").text(hash.toUpperCase())
+            $("#px").val(id_px)
+            $("#cantidad").val(cantidad)
+            $("#producto_id").val(producto_id)
             $("#producto_id").val(producto_id)
             $("#nombre_producto").val($.trim(nombre))
             let precios = parseFloat(precio.replace(",", "."))
