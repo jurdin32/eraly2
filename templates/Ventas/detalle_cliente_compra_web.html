@@ -22,7 +22,7 @@
                                     </div>
                                     <div class="col-md-3 col-sm-3  form-group">
                                         <span>Numero de Items</span>
-                                        <input class="form-control" type="text" id="cosas" name="cosas" readonly="readonly">
+                                        <input class="form-control cosas" type="text" id="cosas" name="cosas" readonly="readonly">
                                     </div>
                                 </div>
                             </div>
@@ -207,6 +207,6 @@
     $("#subtotal").text(subtotal.toFixed(2))
     $("#iva").text(iva.toFixed(2))
     $("#total").text(total.toFixed(2))
-    $("#cosas").text(contador)
+    $(".cosas").text(contador)
     </script>
 {% endblock %}
