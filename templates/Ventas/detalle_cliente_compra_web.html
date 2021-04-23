@@ -162,7 +162,7 @@
     let total=0
     {% for detalle in compra.detallecompraweb_set.all %}
         {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
-            console.log('{{ detalle.precio_total|intcomma }}')
+            console.log(parseFloat('{{ detalle.precio_total|intcomma }}'))
         {% endif %}
     {% endfor %}
     </script>
