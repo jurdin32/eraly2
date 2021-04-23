@@ -264,7 +264,7 @@
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <input value="{{ producto.etiquetas }}" class="form-control" type="text"
                                            id="etiquetas" name="etiquetas">
-                                    <span>Escriba aquí todas las que considere necesario</span>
+                                    <span>Escriba aquí todas las que considere necesario, separe con comas o presione enter</span>
                                     <span class="fa fa-tags form-control-feedback right"
                                           aria-hidden="true"></span>
                                 </div>
@@ -388,5 +388,12 @@
             defaultTagClass: 'bg-primary text-light',
             whiteList: false
         });
+        $(".amsify-suggestags-input").attr('placeholder','Escriba etiquetas')
+        $("#etiquetas").keypress(function(e) {
+            console.log(e.keyCode)
+            if (e.keyCode == 13) {
+                return false;
+            }
+        })
     </script>
 {% endblock %}
