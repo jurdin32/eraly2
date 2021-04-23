@@ -213,7 +213,7 @@
     $(".cosas").val(contador)
 
     function cerrar(){
-        $(".empEnvio").text($("#transporte").val())
+        $(".empEnvio").val($("#transporte").val())
         envio = parseFloat($("#costo_envio").val())
         $("#envio").text(envio.toFixed(2))
         total =total+envio
