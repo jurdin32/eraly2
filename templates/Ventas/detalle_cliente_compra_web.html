@@ -39,7 +39,12 @@
                           Enviar a:
                           <address>
                               <strong>{{  compra.usuario.usuario.get_full_name }}</strong>
-                              <br>795 Freedom Ave, Suite 600
+                              <br>{% for direccion in compra.usuario.direccionesweb_set.all %}
+                                {% if direccion.envio %}
+                                    {{ direccion.direccion.ciudad.nombre }}
+                                {% endif %} 
+                              {% endfor %}
+                              
                               <br>New York, CA 94107
                               <br>Phone: 1 (804) 123-9876
                               <br>Email: jon@ironadmin.com
