@@ -25,25 +25,29 @@
                       <!-- info row -->
                       <div class="row invoice-info">
                         <div class="col-sm-4 invoice-col">
-                          From
+                          Enviar desde:
                           <address>
-                                          <strong>Iron Admin, Inc.</strong>
-                                          <br>795 Freedom Ave, Suite 600
-                                          <br>New York, CA 94107
-                                          <br>Phone: 1 (804) 123-9876
-                                          <br>Email: ironadmin.com
-                                      </address>
+                              {% for direccion in compra. %}
+
+                              {% endfor %}
+
+                              <strong>{{  }}</strong>
+                              <br>795 Freedom Ave, Suite 600
+                              <br>New York, CA 94107
+                              <br>Phone: 1 (804) 123-9876
+                              <br>Email: ironadmin.com
+                          </address>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
-                          To
+                          Enviar a:
                           <address>
-                                          <strong>John Doe</strong>
-                                          <br>795 Freedom Ave, Suite 600
-                                          <br>New York, CA 94107
-                                          <br>Phone: 1 (804) 123-9876
-                                          <br>Email: jon@ironadmin.com
-                                      </address>
+                              <strong>John Doe</strong>
+                              <br>795 Freedom Ave, Suite 600
+                              <br>New York, CA 94107
+                              <br>Phone: 1 (804) 123-9876
+                              <br>Email: jon@ironadmin.com
+                          </address>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
@@ -55,7 +59,7 @@
 
                       <!-- Table row -->
                       <div class="row">
-                        <div class="  table">
+                        <div class="table">
                           <table class="table table-striped">
                             <thead>
                               <tr>

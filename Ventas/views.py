@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
-from Empresa.models import Establecimiento, ConfigurarDocumentos
+from Empresa.models import Establecimiento, ConfigurarDocumentos, Direccion
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
@@ -218,7 +218,10 @@ def autorizar_ComprasWeb(request):
     return render(request,'Ventas/Ventas_Web.html',contexto)
 
 def info_cliente_compra(request,hash):
+    detalle=DetalleCompraWeb.objects.filter(compra__hash=hash).first()
+    direccion=detalle.producto.direccion_set.first
     contexto={
-        'compra':ComprasWeb.objects.get(hash=hash)
+        'compra':ComprasWeb.objects.get(hash=hash),
+        'direccion_establecimiento':direccion
     }
     return render(request, 'Ventas/detalle_cliente_compra_web.html', contexto)
