@@ -70,7 +70,7 @@
                                 <th>Id</th>
                                 <th>Cantidad</th>
                                 <th>Producto</th>
-                                <th style="width: 59%">DEescripción</th>
+                                <th style="width: 59%">Descripción</th>
                                 <th>Subtotal</th>
                                 <th>IVA</th>
                               <th>Total</th>
@@ -91,9 +91,9 @@
                                     , Color: {{ detalle.color }}
                                     {% endif %}
                                 </td>
-                                <td>$64.50</td>
-                                <td>$64.50</td>
-                                <td>$64.50</td>
+                                <td>{{ detalle.precio_total }}</td>
+                                <td>{{detalle.iva}}</td>
+                                <td>{{detalle.total_general}}</td>
                               </tr>
                             {% endfor %}
 
