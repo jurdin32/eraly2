@@ -1,3 +1,4 @@
+import datetime
 import hashlib
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -25,8 +26,13 @@ def Attr(cls):
     return cls.__doc__.replace(model, "").replace("(", "").replace(")", "").replace(" ", "").split(",")
 
 def Hash_parse(text):
+    fecha=str(datetime.datetime.now()).replace(' ','').replace(",","").replace(".","").replace(':','').replace('-','')
+    text =fecha+text
+    print(text)
     h = hashlib.sha256(str(text).encode('utf-8')).hexdigest()
     return h
+
+
 #no sirve
 def render_pdf_view(request,page,contexto={}):
     template_path = page
