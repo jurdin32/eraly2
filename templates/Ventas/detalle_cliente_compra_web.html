@@ -84,7 +84,12 @@
                                 <td style="text-align: center">{{ detalle.cantidad }}</td>
                                 <td>{{ detalle.producto.nombre }}</td>
                                 <td>
-                                    {{ detalle.talla }} {{ detalle.color }}
+                                    {% if detalle.talla %}
+                                        Talla: {{ detalle.talla }}
+                                    {% endif %}
+                                    {% if detalle.color %}
+                                    , Color: {{ detalle.color }}
+                                    {% endif %}
                                 </td>
                                 <td>$64.50</td>
                                 <td>$64.50</td>
