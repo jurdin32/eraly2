@@ -7,7 +7,7 @@
                 <form action="/store/autority/" method="post" class="form-label-left input_mask">
                     {% csrf_token %}
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Despachar Mercaderia</h4>
+                        <h4 class="modal-title" id="myModalLabel">Costos de Envio del Paquete</h4>
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                         </button>
                     </div>
@@ -17,58 +17,10 @@
                                 <div class="x_content">
                                     <br>
                                     <div class="col-md-12 col-sm-12  form-group">
-                                        <div class="alert alert-primary" style="font-weight: bold;">
-                                            <p>Clic en el enlace para ver los detalles del cliente
-                                                <a href="" target="_blank" id="ver_detalles_compra"></a>
-                                            </p>
-
-                                        </div>
                                         <input type="hidden" readonly="readonly"
                                                id="codigo_compra" name="codigo_compra"
                                                placeholder="Codigo de la compra">
                                     </div>
-
-                                    <div class="col-md-3 col-sm-3  form-group">
-                                        <span>Código de Producto</span>
-                                        <input type="text" class="form-control" readonly="readonly"
-                                               id="px" style="text-align: center" placeholder="Código del Producto">
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-3  form-group">
-                                        <span>Cantidad</span>
-                                        <input type="hidden" class="form-control has-feedback-left" readonly="readonly"
-                                               id="producto_id"
-                                               name="producto_id"
-                                               placeholder="Código del Producto">
-
-                                        <input type="text" class="form-control" readonly="readonly" style="text-align: center"
-                                               id="cantidad" placeholder="Código del Producto">
-                                    </div>
-                                    <div class="col-md-6 col-sm-6  form-group has-feedback"></div>
-
-                                    <div class="col-md-12 col-sm-12  form-group">
-                                        <span>Nombre del Producto</span>
-                                        <input type="text" class="form-control" readonly="readonly"
-                                               id="nombre_producto" name="nombre_producto"
-                                               placeholder="Nompre del Producto">
-                                    </div>
-
-                                    <div class="col-md-4 col-sm-4  form-group">
-                                        <span>Precio</span>
-                                        <input type="tel" class="form-control " readonly="readonly"
-                                               id="precio" name="precio" placeholder="Precio">
-                                    </div>
-                                    <div class="col-md-4 col-sm-4  form-group">
-                                        <span>IVA 12%</span>
-                                        <input type="tel" class="form-control" readonly id="iva"
-                                               name="iva" placeholder="IVA">
-                                    </div>
-                                    <div class="col-md-4 col-sm-4  form-group">
-                                        <span>Total</span>
-                                        <input type="tel" class="form-control" readonly id="total"
-                                               name="total" placeholder="Total">
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -222,7 +174,7 @@
                       <!-- this row will not appear when printing -->
                       <div class="row no-print">
                         <div class=" ">
-                          <a data-toggle="modal" data-target="#form_despachar" class="btn btn-danger"><i class="fa fa-money"></i> Costo Envío</a>
+                          <a data-toggle="modal" data-target="#form_despachar" href="#" class="btn btn-danger"><i class="fa fa-money"></i> Costo Envío</a>
                           <button class="btn btn-success pull-right" onclick=""><i class="fa fa-credit-card"></i> Autorizar Envío</button>
                           <button class="btn btn-primary pull-right" onclick="" style="margin-right: 5px;"><i class="fa fa-download"></i> Imprimir Talón</button>
                         </div>
