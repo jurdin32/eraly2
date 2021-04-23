@@ -1,5 +1,6 @@
 {% extends 'Home/index2.html' %}
 {% block contenido %}
+    {% load humanize %}
   <div class="">
             <div class="clearfix"></div>
 
@@ -161,7 +162,7 @@
     let total=0
     {% for detalle in compra.detallecompraweb_set.all %}
         {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
-            console.log({{ detalle.precio_total }})
+            console.log('{{ detalle.precio_total|intcomma }}')
         {% endif %}
     {% endfor %}
     </script>
