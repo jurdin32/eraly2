@@ -264,7 +264,7 @@
 
         function autorizar(hash, producto_id, nombre, precio,cantidad,id_px) {
             $("#codigo_compra").val(hash)
-            $("#ver_detalles_compra").attr('href',"/autority/"+hash)
+            $("#ver_detalles_compra").attr('href',"/store/autority/"+hash)
             $("#ver_detalles_compra").text(hash.toUpperCase())
             $("#px").val(id_px)
             $("#cantidad").val(cantidad)
