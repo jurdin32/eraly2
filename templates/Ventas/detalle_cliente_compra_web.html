@@ -93,6 +93,7 @@
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
                           <b>Orden No. # {{ compra.id|stringformat:"010d" }}</b>
+                            <div id="codigo"></div>
                         </div>
                         <!-- /.col -->
                       </div>
@@ -193,7 +194,9 @@
       </div>
 {% endblock %}
 {% block script %}
+    <script src="{% static 'vendors/JsBarcode.all.min.js' %}"></script>
     <script>
+    JsBarcode("#codigo", etiqueta);
     let subtotal=0
     let iva=0
     let envio =0
