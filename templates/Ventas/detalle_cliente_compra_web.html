@@ -19,6 +19,9 @@
                                     <div class="col-md-12 col-sm-12  form-group">
                                         <input class="form-control" type="text" id="transporte" name="transporte" placeholder="Ingrese el Nombre de la Compañia de transporte">
                                     </div>
+                                    <div class="col-md-12 col-sm-12  form-group">
+                                        <input class="form-control" type="text" id="cosas" name="cosas" readonly="readonly">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -190,15 +193,18 @@
     let iva=0
     let envio =0
     let total=0
+    let contador=0
     {% for detalle in compra.detallecompraweb_set.all %}
         {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
             subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
             iva+=parseFloat('{{ detalle.iva }}'.replace(",","."))
             total+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
+            contador+=1;
         {% endif %}
     {% endfor %}
     $("#subtotal").text(subtotal.toFixed(2))
     $("#iva").text(iva.toFixed(2))
     $("#total").text(total.toFixed(2))
+    $("#cosas").text(contador)
     </script>
 {% endblock %}
