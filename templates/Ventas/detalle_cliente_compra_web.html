@@ -146,7 +146,7 @@
                       <div class="row">
                         <!-- accepted payments column -->
                         <div class="col-md-9">
-                            <span>Empresa de Envio: </span><span id="empEnvio"></span>
+                            <span>Empresa de Envio: </span> <span id="empEnvio"></span>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-3">
@@ -214,7 +214,10 @@
 
     function cerrar(){
         $("#empEnvio").text($("#transporte").val())
-        $("#envio").text($("#costo_envio").val())
+        envio = parseFloat($("#costo_envio").val())
+        $("#envio").text(envio.toFixed(2))
+        total =total+envio
+        $("#total").text(total.toFixed(2))
     }
     </script>
 {% endblock %}
