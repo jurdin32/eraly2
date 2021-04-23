@@ -39,15 +39,15 @@
                           Enviar a:
                           <address>
                               <strong>{{  compra.usuario.usuario.get_full_name }}</strong>
-                              <br>{% for direccion in compra.usuario.direccionesweb_set.all %}
+                             {% for direccion in compra.usuario.direccionesweb_set.all %}
                                 {% if direccion.envio %}
-                                    {{ direccion.direccion.ciudad.nombre }}
+                                    <br>{{ direccion.ciudad.provincia.pais.nombre }} - {{ direccion.ciudad.provincia.nombre }} - {{ direccion.ciudad.nombre }}
+                                    <br>{{ direccion.direccion }}
+                                    <br>Teléfono: {{ direccion.telefono }}
+                                    <br>Email: {{ direccion.usuario.email }}
                                 {% endif %} 
                               {% endfor %}
-                              
-                              <br>New York, CA 94107
-                              <br>Phone: 1 (804) 123-9876
-                              <br>Email: jon@ironadmin.com
+
                           </address>
                         </div>
                         <!-- /.col -->
