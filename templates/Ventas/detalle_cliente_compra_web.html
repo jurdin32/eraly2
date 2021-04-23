@@ -93,7 +93,7 @@
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
                           <b>Orden No. # {{ compra.id|stringformat:"010d" }}</b>
-                            <div id="codigo"></div>
+                            <img id="codigo">
                         </div>
                         <!-- /.col -->
                       </div>
@@ -211,6 +211,7 @@
             etiqueta='{{ detalle.etiqueta }}'
         {% endif %}
     {% endfor %}
+    JsBarcode("#codigo", etiqueta);
     $("#subtotal").text(subtotal.toFixed(2))
     $("#iva").text(iva.toFixed(2))
     $("#total").text(total.toFixed(2))
@@ -234,6 +235,6 @@
         total =total+envio
         $("#total").text(total.toFixed(2))
     }
-    JsBarcode("#codigo", etiqueta);
+
     </script>
 {% endblock %}
