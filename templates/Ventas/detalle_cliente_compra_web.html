@@ -69,9 +69,9 @@
                                 <th style="text-align: center">Cantidad</th>
                                 <th style="width: 30%">Producto</th>
                                 <th style="width: 30%">Descripción</th>
-                                <th>Subtotal</th>
-                                <th>IVA</th>
-                              <th>Total</th>
+                                <th style="text-align: right">Subtotal</th>
+                                <th style="text-align: right">IVA</th>
+                              <th style="text-align: right">Total</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -89,9 +89,9 @@
                                     , Color: {{ detalle.color }}
                                     {% endif %}
                                 </td>
-                                <td>{{ detalle.precio_total }}</td>
-                                <td>{{detalle.iva}}</td>
-                                <td>{{detalle.total_general}}</td>
+                                <td style="text-align: right">{{ detalle.precio_total }}</td>
+                                <td style="text-align: right">{{detalle.iva}}</td>
+                                <td style="text-align: right">{{detalle.total_general}}</td>
                               </tr>
                                 {% endif %}
 
