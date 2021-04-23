@@ -33,8 +33,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger">Autorizar Envío</button>
+                        <button type="button" class="btn btn-success cerrar" onclick="cerrar()" data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -147,7 +146,7 @@
                       <div class="row">
                         <!-- accepted payments column -->
                         <div class="col-md-9">
-
+                            <span>Empresa de Envio: </span><span id="empEnvio"></span>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-3">
@@ -212,5 +211,10 @@
     $("#iva").text(iva.toFixed(2))
     $("#total").text(total.toFixed(2))
     $(".cosas").val(contador)
+
+    function cerrar(){
+        $("#empEnvio").text($("#transporte").val())
+        $("#envio").text($("#costo_envio").val())
+    }
     </script>
 {% endblock %}
