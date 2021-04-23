@@ -76,8 +76,8 @@
                             </thead>
                             <tbody>
                             {% for detalle in compra.detallecompraweb_set.all %}
-
-                              <tr>
+                                {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+                                <tr>
                                 <td>{{ detalle.producto.id }}</td>
                                 <td style="text-align: center">{{ detalle.cantidad }}</td>
                                 <td>{{ detalle.producto.nombre }}</td>
@@ -93,6 +93,8 @@
                                 <td>{{detalle.iva}}</td>
                                 <td>{{detalle.total_general}}</td>
                               </tr>
+                                {% endif %}
+
                             {% endfor %}
 
                             </tbody>
