@@ -116,11 +116,11 @@
                               <tbody>
                                 <tr>
                                   <th style="width:50%" >Subtotal:</th>
-                                  <td style="text-align: right" id="subtotal">{{  compra.subtotal }}</td>
+                                  <td style="text-align: right" id="subtotal">0.00</td>
                                 </tr>
                                 <tr>
                                   <th>IVA 12% </th>
-                                  <td style="text-align: right" id="iva">{{ compra.iva }}</td>
+                                  <td style="text-align: right" id="iva">0.00</td>
                                 </tr>
                                 <tr>
                                   <th>Envio:</th>
@@ -128,7 +128,7 @@
                                 </tr>
                                 <tr>
                                   <th>Total:</th>
-                                  <td style="text-align: right" id="total">{{ compra.total }}</td>
+                                  <td style="text-align: right" id="total">0.00</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -152,4 +152,17 @@
               </div>
             </div>
       </div>
+{% endblock %}
+{% block script %}
+    <script>
+    let subtotal=0
+    let iva=0
+    let envio =0
+    let total=0
+    {% for detalle in compra.detallecompraweb_set.all %}
+        {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+            console.log({{ detalle.precio_total }})
+        {% endif %}
+    {% endfor %}
+    </script>
 {% endblock %}
