@@ -216,6 +216,14 @@
         $(".empEnvio").val($("#transporte").val())
         envio = parseFloat($("#costo_envio").val())
         $("#envio").text(envio.toFixed(2))
+        {% for detalle in compra.detallecompraweb_set.all %}
+        {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+            subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
+            iva+=parseFloat('{{ detalle.iva }}'.replace(",","."))
+            total+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
+            contador+=1;
+        {% endif %}
+    {% endfor %}
         total =total+envio
         $("#total").text(total.toFixed(2))
     }
