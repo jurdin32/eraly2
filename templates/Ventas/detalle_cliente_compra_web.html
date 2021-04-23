@@ -27,6 +27,7 @@
                         <div class="col-sm-4 invoice-col">
                           Enviar desde:
                           <address>
+                              <strong>{{ direccion_establecimiento.establecimiento }}</strong>
                               <strong>{{ direccion_establecimiento.ciudad.provincia.pais.nombre }} - {{ direccion_establecimiento.ciudad.provincia.nombre }} - {{ direccion_establecimiento.ciudad.nombre }}</strong>
                               <br>{{ direccion_establecimiento.direccion }}
                               <br>Email: {{ direccion_establecimiento.establecimiento.correo_electronico }}
