@@ -162,8 +162,11 @@
     let total=0
     {% for detalle in compra.detallecompraweb_set.all %}
         {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
-            console.log(parseFloat('{{ detalle.precio_total }}'.replace(",",".")))
+            subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
+            subtotal+=parseFloat('{{ detalle.iva }}'.replace(",","."))
+            subtotal+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
         {% endif %}
     {% endfor %}
+    $("#subtotal").text(subtotal.toFixed(2))
     </script>
 {% endblock %}
