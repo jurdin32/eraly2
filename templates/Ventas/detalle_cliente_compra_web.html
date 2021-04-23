@@ -163,10 +163,12 @@
     {% for detalle in compra.detallecompraweb_set.all %}
         {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
             subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
-            subtotal+=parseFloat('{{ detalle.iva }}'.replace(",","."))
-            subtotal+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
+            iva+=parseFloat('{{ detalle.iva }}'.replace(",","."))
+            total+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
         {% endif %}
     {% endfor %}
     $("#subtotal").text(subtotal.toFixed(2))
+    $("#iva").text(iva.toFixed(2))
+    $("#total").text(total.toFixed(2))
     </script>
 {% endblock %}
