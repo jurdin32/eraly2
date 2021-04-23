@@ -221,4 +221,4 @@ def info_cliente_compra(request,hash):
     contexto={
         'compra':ComprasWeb.objects.get(hash=hash)
     }
-    return render(request,'',contexto)
+    return render(request, 'Ventas/detalle_cliente_compra_web.html', contexto)
