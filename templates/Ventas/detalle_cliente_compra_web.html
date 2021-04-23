@@ -79,7 +79,7 @@
                             {% for detalle in compra.detallecompraweb_set.all %}
                                 {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
                                 <tr>
-                                <td>{{ detalle.producto.id }}</td>
+                                <td>{{ detalle.producto.id }}- {{ detalle.etiqueta }}</td>
                                 <td style="text-align: center">{{ detalle.cantidad }}</td>
                                 <td>{{ detalle.producto.nombre }}</td>
                                 <td>
@@ -142,7 +142,7 @@
                       <!-- this row will not appear when printing -->
                       <div class="row no-print">
                         <div class=" ">
-                          <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+                          <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i>Costo Envío</button>
                           <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
                           <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
                         </div>
