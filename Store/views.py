@@ -389,7 +389,7 @@ def ver_subcategorias(request):
             min=max =nueva_lista[0]
         prod=prod.filter(precios__total__range=(float(min),float(max)))
 
-    prod = prod.order_by('puntuacion')
+    prod = prod.order_by('-puntuacion')
     if request.GET.get("list"):
         paginator = Paginator(prod, request.GET.get("list"))
     else:
