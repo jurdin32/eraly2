@@ -394,6 +394,7 @@ def ver_subcategorias(request):
     else:
         paginator = Paginator(prod, 12)
 
+    prod=prod.order_by('puntuacion')
     page = request.GET.get('page')
     contexto={
         'productos':paginator.get_page(page),
