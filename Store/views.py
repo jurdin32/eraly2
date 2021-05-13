@@ -1,19 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Avg
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-
+from simple_search import search_filter
 # Create your views here.
 from future.backports import datetime
 
-from Empresa.views import direcciones
-from Home.models import Provincia, Pais
+from Home.models import Provincia
 from Personas.models import *
-from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Subcategorias, Colores
+from Producto.models import Productos, Categorias, CalificacionProductos, Promociones, Precios, Colores
 from django.contrib import messages
 
-from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb
+from Store.models import Publicidad, ComprasWeb, DetalleCompraWeb, Favoritos
 from eraly2.snippers import Hash_parse
 
 
@@ -22,13 +21,13 @@ def tienda(request):
     puntuados = productos.filter(puntuacion__range=(2, 5)).order_by('-puntuacion')
     if request.session.get('tiendas'):
         del request.session['tiendas']
-    request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.all().order_by('slug')]
+    request.session['tiendas']=[{"id":tienda.id,"nombre":tienda.nombreComercial,'slug':tienda.slug} for tienda in Establecimiento.objects.filter(activo=True).order_by('slug')]
     print(request.session['tiendas'])
     paginator = Paginator(puntuados, 20)
     page = request.GET.get('page')
     contexto={
         'categorias':Categorias.objects.all().order_by('nombre'),
-        'productos':productos.order_by('id'), # deben ir los destacados, los de mas puntuación,
+        'productos':productos.order_by('-id'), # deben ir los destacados, los de mas puntuación,
         'puntuados':paginator.get_page(page),
         'nuevos':productos.filter(puntuacion__range=(0,2)).order_by('-puntuacion'),
 
@@ -70,6 +69,7 @@ def _detalles(request):
         'promocion':promo,
         'productos':productoss.filter(subcategoria=producto.subcategoria),
         'imagnes':Publicidad.objects.filter(estado=True),
+        'categorias': Categorias.objects.all().order_by('nombre'),
     }
     return render(request, 'Store/demo-shop-8-product-details.html', contexto)
 
@@ -197,7 +197,7 @@ def _obtener_categoria(id):
     for prod in Productos.objects.filter(establecimiento_id=id):
         if not prod.subcategoria.subcategoria.id in aux:
             aux.append(prod.subcategoria.subcategoria.id)
-            categorias.append({'id':prod.subcategoria.subcategoria.id,'nombre':prod.subcategoria.subcategoria.nombre,'imagen':prod.imagen,'subcat':prod.subcategoria.subcategoria.categoria_id},)
+            categorias.append({'id':prod.subcategoria.subcategoria.id,'nombre':prod.subcategoria.subcategoria.nombre,'imagen':prod.imagen,'subcat':prod.subcategoria.subcategoria.id},)
     print(categorias)
     return categorias
 
@@ -367,10 +367,9 @@ def ver_subcategorias(request):
 
     if request.GET.get("q"):
         q=request.GET.get("q")
-        prod = prod.filter(nombre__icontains=request.GET.get("q")) or prod.filter(subcategoria__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(etiquetas__icontains=request.GET.get("q")) or prod.filter(marca__nombre__icontains=request.GET.get("q")) or \
-               prod.filter(establecimiento__nombreComercial__icontains=request.GET.get("q")) or prod.filter(descripcion__icontains=request.GET.get("q")) or \
-               prod.filter(detallesTecnicos__icontains=request.GET.get("q"))
+        search_fields = ['nombre', 'subcategoria__nombre', 'etiquetas','marca__nombre','establecimiento__nombreComercial','descripcion','detallesTecnicos']
+        prod = prod.filter(search_filter(search_fields, q))
+
     if request.GET.get("ord"):
         if request.GET.get("ord") == "name":
             prod = prod.order_by('nombre')
@@ -390,10 +389,12 @@ def ver_subcategorias(request):
             min=max =nueva_lista[0]
         prod=prod.filter(precios__total__range=(float(min),float(max)))
 
+    prod = prod.order_by('-puntuacion')
     if request.GET.get("list"):
         paginator = Paginator(prod, request.GET.get("list"))
     else:
         paginator = Paginator(prod, 12)
+
 
     page = request.GET.get('page')
     contexto={
@@ -452,6 +453,7 @@ def checkout(request):
     }
     return render(request, 'Store/demo-shop-8-checkout.html', contexto)
 
+@login_required(login_url='/store/login/')
 def pay(request):
     totalCarrito=0
     compra=None
@@ -478,7 +480,7 @@ def pay(request):
     }
     return render(request,'Store/demo-shop-8-pay.html',contexto)
 
-
+@login_required(login_url='/store/login/')
 def misOrdenes(request):
     usuario=request.user.usuariosweb_set.first()
     ordenes=None
@@ -507,8 +509,46 @@ def contact(request):
     }
     return render(request, 'Store/demo-shop-8-contact-us.html', contexto)
 
+@login_required(login_url='/store/login/')
+def favoritos(request):
+    print(request.GET.get('hash'))
+    producto=Productos.objects.get(hash=request.GET.get('hash'))
+    print(producto)
+    isp=False
+    usuarioweb=UsuariosWeb.objects.get(usuario=request.user)
+    try:
+        Favoritos.objects.get(usuario=usuarioweb,producto=producto)
+        isp =True
+    except Favoritos.DoesNotExist:
+        isp=False
+    if not isp:
+        favorito= Favoritos.objects.create(usuario=usuarioweb,producto_id=producto.id)
+        favorito.save()
+        messages.add_message(request,messages.SUCCESS, "Se ha agregó a tus favoritos..!")
+    else:
+        messages.add_message(request,messages.WARNING, 'El producto ya está en favoritos')
 
+    return HttpResponseRedirect("/store/details/?hash=%s"%request.GET.get('hash'))
 
+@login_required(login_url='/store/login/')
+def lista_favoritos(request):
+    usuariow=UsuariosWeb.objects.get(usuario=request.user)
+    contexto={
+        'favoritos':Favoritos.objects.filter(usuario=usuariow)
+    }
+
+    return render(request, 'Store/demo-shop-8-wishlist.html',contexto)
+
+@login_required(login_url='/store/login/')
+def borrar_favoritos(request,slug):
+    usuariow = UsuariosWeb.objects.get(usuario=request.user)
+    try:
+        favoritos=Favoritos.objects.get(usuario=usuariow,producto__hash=slug)
+        favoritos.delete()
+        messages.add_message(request,messages.ERROR,"El producto se eliminó de su lista de deseos..!")
+    except Favoritos.DoesNotExist:
+        pass
+    return HttpResponseRedirect("/store/wishlist/")
 
 def ejemplo(request):
     contexto={

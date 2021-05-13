@@ -1,0 +1,223 @@
+{% extends 'Home/index2.html' %}
+{% block contenido_index %}
+    {%  load static %}
+    <!-- Modal para modificar direcciones -->
+     <div class="modal fade bs-example-modal-lg" id="modificar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Registro de Personas</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br>
+                            <form class="form-label-left input_mask" id="frmModificar" method="post">
+                                {% csrf_token %}
+                            <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <select class="js-establecimiento" style="width: 100%" required id="establecimiento" name="establecimiento" multiple>
+                                        {% for establecimiento in establecimientos %}
+                                                <option value="{{ establecimiento.id }}">{{ establecimiento }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="cedula"
+                                           id="cedula" required maxlength="13"
+                                           placeholder="Cedula o RUC">
+                                    <span class="fa fa-credit-card-alt form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="nombres"
+                                           id="nombres" required
+                                           placeholder="Ingrese Nombres">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" name="apellidos"
+                                           id="apellidos" required
+                                           placeholder="Ingrese Apellidos">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="email" class="form-control has-feedback-left" name="email" id="email"
+                                               placeholder="Ingrese email">
+                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                        <input type="password" class="form-control has-feedback-left" name="password" id="email"
+                                               placeholder="Ingrese password">
+                                        <span class="fa fa-user-secret form-control-feedback left" aria-hidden="true"></span>
+                                    </div>
+                                <div class="col-md-12 col-sm-12  form-group has-feedback">
+                                       <ul class="to_do">
+                                            <li>
+                                                <input type="checkbox" class="flat" id="sesion" name="sesion" style="position: absolute; opacity: 0;"> Puede Iniciar Sesión</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="ln_solid"></div>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Limpiar Formulario</button>
+                                        <button type="submit" class="btn btn-success">Registrar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para modificar direcciones -->
+    <div class="modal fade bs-example-modal-lg" id="eliminar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Advertencia!</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <i class="fa fa-exclamation-triangle" style="font-size: 50px; color: darkorange"></i><br>
+                    <p id="mensaje">Esta seguro que desea deshabilitar este registro, tenga en cuenta que todos los elementos relacionados no se Eliminarán.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <a href="" type="button" id="eliminarRegistro" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registro <small>de Usuarios</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                    <a id="nuevoCliente" class="btn btn-success" style="background-color: #26B99A; color: white" data-toggle="modal" data-target="#modificar" aria-expanded="false">Registrar</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table id="clientes" class="table table-striped table-bordered" style="width:100%">
+                                        <thead style="background-color: #415468; color: whitesmoke">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Establecimiento</th>
+                                            <th>Nombres</th>
+                                            <th>Cédula</th>
+                                            <th>E-mail</th>
+                                            <th style="text-align: center">Editar</th>
+                                            <th style="text-align: center">Estado</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in usuarios %}
+                                            <tr>
+                                                <td style="vertical-align: middle">{{ user.id }}</td>
+                                                <td style="vertical-align: middle">{{ user.establecimiento }}</td>
+                                                <td style="vertical-align: middle">{{ user.user.get_full_name }}</td>
+                                                <td style="vertical-align: middle">{{ user.cedula }}</td>
+                                            <td style="vertical-align: middle">{{ user.user.email }}</td>
+
+                                                    {% if user.user.is_superuser %}
+                                                        <td style="text-align: center; vertical-align: middle"><i>Super Usuario</i></td>
+                                                    {% else %}
+                                                        <td style="text-align: center; font-size: 18px; vertical-align: middle">
+                                                        <a style="cursor: pointer"
+                                                       onclick="modificar_cliente('{{ user.user.id }}',
+                                                               '{{ user.establecimiento_id }}','{{ user.user.first_name }}','{{ user.user.last_name }}',
+                                                               '{{ user.cedula }}','{{ user.user.email }}','{{ user.user.is_active }}')"
+                                                       data-toggle="modal" data-target="#modificar" class="text-primary modificar btn btn-app">
+                                                        <i data-toggle="tooltip"  data-placement="top" title="" data-original-title="Editar" class="fa fa-edit"></i>Editar
+                                                    </a>
+                                                        </td>
+                                                    {% endif %}
+
+                                                <td style="text-align: center; font-size: 18px; vertical-align: middle">
+                                                    {% if user.user.is_active %}
+                                                        <a class="text-info eliminar btn btn-app">
+                                                            <i data-toggle="tooltip" class="fa fa-check-circle"></i>Habilitado</a>
+                                                    {% else %}
+                                                        <a class="text-danger eliminar btn btn-app">
+                                                            <i data-toggle="tooltip" class="fa fa-close"></i>Deshabilitado</a>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script_index %}
+    <script>
+        $(document).ready(function () {
+            $("#clientes").DataTable({
+                language: {
+                    url: "{% static 'Spanish_dt.json' %}"
+                },
+                pageLength: 100,
+                 responsive: true
+            });
+        });
+    </script>
+    <script src="{% static 'select2/js/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <script>
+        $(".js-example-basic-single").select2({
+            maximumSelectionLength: 1,
+            placeholder: "Ciudad",
+        });
+        $(".js-establecimiento").select2({
+            maximumSelectionLength: 1,
+            placeholder:"Establecimiento",
+        });
+    </script>
+    <script>
+   function modificar_cliente(id,idEstablecimiento,nombres,apellidos,cedula,email,estado){
+        $("#nombres").val(nombres);
+        $("#email").val(email);
+        $("#apellidos").val(apellidos);
+        $("#cedula").val(cedula);
+        $("#establecimiento").val(idEstablecimiento).trigger('change');
+        if(estado == 'True'){
+            $("#sesion").iCheck('check')
+        }
+        else{
+            $("#sesion").iCheck('uncheck')
+        }
+        $("#frmModificar").attr("action","/business/user_register/?edit="+id+"")
+    }
+
+    function eliminar_cliente(id){
+        $("#eliminarRegistro").attr("href","/business/user_register/?disable="+id+"")
+    }
+
+    $("#nuevoCliente").click(function (){
+        $("#frmModificar").attr("action","/business/user_register/")
+    })
+
+    </script>
+{% endblock %}

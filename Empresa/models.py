@@ -13,6 +13,8 @@ class Establecimiento(models.Model):
     banner=models.ImageField(upload_to="banner/establecimientos",null=True,blank=True)
     pie_pagina=models.ImageField(upload_to="pie/establecimientos",null=True,blank=True)
     cabecera_tienda=models.ImageField(upload_to="logos/tienda",null=True,blank=True)
+    banner1=models.ImageField(upload_to="logos/tienda",null=True,blank=True)
+    banner2=models.ImageField(upload_to="logos/tienda",null=True,blank=True)
     color_encabezado_documentos=models.CharField(max_length=40, default="#ffffff")
     usuario=models.ForeignKey(User,on_delete=models.CASCADE)
     ruc=models.CharField(max_length=13)
@@ -27,7 +29,7 @@ class Establecimiento(models.Model):
     facebook=models.CharField(max_length=400,null=True,blank=True,default=" ")
     instagram=models.CharField(max_length=400, null=True, blank=True, default=" ")
     youtube = models.CharField(max_length=400,null=True,blank=True,default=" ")
-    
+    activo=models.BooleanField(default=False)
 
 
     def previa(self):

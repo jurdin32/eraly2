@@ -1,3 +1,4 @@
+import datetime
 import hashlib
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -25,8 +26,13 @@ def Attr(cls):
     return cls.__doc__.replace(model, "").replace("(", "").replace(")", "").replace(" ", "").split(",")
 
 def Hash_parse(text):
+    fecha=str(datetime.datetime.now()).replace(' ','').replace(",","").replace(".","").replace(':','').replace('-','')
+    text =fecha+text
+    print(text)
     h = hashlib.sha256(str(text).encode('utf-8')).hexdigest()
     return h
+
+
 #no sirve
 def render_pdf_view(request,page,contexto={}):
     template_path = page
@@ -58,7 +64,7 @@ class ResizeImageMixin:
         source_image = im.convert('RGB')
         source_image=source_image.resize(size)  # Resize to size
         output = BytesIO()
-        source_image.save(output, format='JPEG') # Save resize image to bytes
+        source_image.save(output, format='JPEG',optimize=True, quality=55) # Save resize image to bytes
         output.seek(0)
         content_file = ContentFile(output.read())  # Read output and create ContentFile in memory
         file = File(content_file)

@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.files import File
 import uuid
 
@@ -11,7 +13,7 @@ from django.utils.safestring import mark_safe
 
 from Empresa.models import Establecimiento
 from Home.models import Ciudad
-from eraly2.snippers import ResizeImageMixin
+from eraly2.snippers import ResizeImageMixin, Hash_parse
 
 contacto_chosse=(
     ('celular','celular'),('correo','correo'),('web','web')
@@ -129,9 +131,13 @@ class Productos(models.Model,ResizeImageMixin):
         else:
             return '%s'%(self.nombre)
 
+    def delete(self, using=None, keep_parents=False):
+       storage, path = self.imagen.storage, self.imagen.path
+       super(Productos, self).delete()
+       storage.delete(path)
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
         if self.tipo=="P" and not self.imagen:
             self.imagen = 'noproducto.png'
 
@@ -232,6 +238,11 @@ class ImagenesProducto(models.Model,ResizeImageMixin):
 
     def miniatura(self):
         return mark_safe("<img src='/media/%s'>" % self.thumbnail)
+
+    def delete(self, using=None, keep_parents=False):
+       storage, path = self.imagen.storage, self.imagen.path
+       super(ImagenesProducto, self).delete()
+       storage.delete(path)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

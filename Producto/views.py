@@ -1,5 +1,6 @@
 import random
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 # Create your views here.
@@ -9,9 +10,9 @@ from django.contrib import messages
 from eraly2.settings import BASE_DIR
 from eraly2.snippers import Hash_parse
 
-
+@login_required(login_url='/store/login/')
 def proveedores(request):
-    prov=Proveedor.objects.filter(establecimiento__usuario=request.user)
+    prov=Proveedor.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("q"):
         prov = Proveedor.objects.filter(establecimiento_id=request.GET.get("q"))
     if request.POST:
@@ -27,12 +28,13 @@ def proveedores(request):
         except:
             messages.add_message(request, messages.ERROR, "Al parecer ocurrio un error..!")
     contexto={
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'proveedores': prov,
         'provincias': Provincia.objects.all(),
     }
     return render(request, "producto/proveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarProveedor(request,id):
     proveedor=Proveedor.objects.get(id=id)
     if request.POST:
@@ -47,20 +49,20 @@ def editarProveedor(request,id):
         messages.add_message(request, messages.INFO, "El registro se ha modificado éxitosamente..!")
     contexto={
         "proveedor":proveedor,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'provincias': Provincia.objects.all(),
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarProveedor(request,id):
     proveedor=Proveedor.objects.get(id=id)
     proveedor.delete()
     messages.add_message(request, messages.WARNING, "El Proveedor se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/')
 
-
+@login_required(login_url='/store/login/')
 def actividadesProveedor(request,id):
-
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
         print(request.POST)
@@ -69,10 +71,11 @@ def actividadesProveedor(request,id):
     contexto={
         "proveedor": proveedor,
         'provincias': Provincia.objects.all(),
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html",contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarActividades(request,id):
     actividad=ActividadProveedor.objects.get(id=id)
     proveedor = actividad.proveedor.id
@@ -80,6 +83,7 @@ def eliminarActividades(request,id):
     messages.add_message(request, messages.WARNING, "El registro se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
+@login_required(login_url='/store/login/')
 def tipoProveedor(request,id):
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
@@ -88,10 +92,11 @@ def tipoProveedor(request,id):
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
+@login_required(login_url='/store/login/')
 def eliminartipoProveedor(request,id):
     tp=TipoProveedor.objects.get(id=id)
     proveedor=tp.proveedor.id
@@ -99,18 +104,21 @@ def eliminartipoProveedor(request,id):
     messages.add_message(request,messages.WARNING,"El registro se ha eliminado..!")
     return HttpResponseRedirect('/suppliers/edit/%s/' % proveedor)
 
+@login_required(login_url='/store/login/')
 def direccionProveedor(request,id):
     proveedor = Proveedor.objects.get(id=id)
     if request.POST:
-        DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
+        DireccionProveedor.objects.create(proveedor_id=id,ciudad_id=request.POST['ciudad'],
+                                          direccion=request.POST["direccion"],telefono=request.POST['telefono']).save()
         messages.add_message(request, messages.SUCCESS, "Se ha registrado la nueva dirección..!")
     contexto = {
         'provincias': Provincia.objects.all(),
         "proveedor": proveedor,
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/editarProveedores.html", contexto)
 
+@login_required(login_url='/store/login/')
 def eliminarDireccionProveedores(request,id):
     tp=DireccionProveedor.objects.get(id=id)
     proveedor=tp.proveedor.id
@@ -125,6 +133,7 @@ def iconos_text():
         iconos.append(icono)
     return iconos
 
+@login_required(login_url='/store/login/')
 def categorias(request):
     cat = Subcategorias.objects.all()
     if request.POST:
@@ -134,11 +143,12 @@ def categorias(request):
     contexto={
         'subcategorias':cat,
         'iconos':iconos_text(),
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias':Categorias.objects.all().order_by('nombre')
     }
     return render(request, "producto/categorias.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarCategoria(request,id):
     if request.POST:
         print(request.POST)
@@ -159,6 +169,7 @@ def subcategorias(request,id):
     }
     return render(request, "producto/subcategorias.html",contexto)
 
+@login_required(login_url='/store/login/')
 def editarSubCategoria(request,id):
     categoria = Subcategorias_2.objects.get(id=id)
     if request.POST:
@@ -168,18 +179,32 @@ def editarSubCategoria(request,id):
     return  HttpResponseRedirect('/category/%s'%categoria.subcategoria_id)
 
 #------------ Productos ----------_#
+@login_required(login_url='/store/login/')
 def productos(request):
-    productos=Productos.objects.filter(establecimiento__usuario=request.user)
+    productos=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get('empresa'):
         productos = Productos.objects.filter(establecimiento_id=request.GET.get('empresa'))
 
     contexto={
         "productos":productos,
-        "empresas":Establecimiento.objects.filter(usuario=request.user)
+        "empresas":Establecimiento.objects.filter(usuarioempresa__user=request.user)
     }
     return render(request, "producto/productos.html",contexto)
 
+def generarTags(request):
+    lista=[]
+    for tags in Productos.objects.all():
+        for t in tags.etiquetas.split(','):
+            if not t.replace(" ","") in lista:
+                lista.append(t)
+    lista=list(sorted(set(lista)))
+    print("mejorado",lista)
+    request.session['tags']=lista
+
+
+@login_required(login_url='/store/login/')
 def registarProducto(request):
+    generarTags(request)
     producto = Productos()
     if request.POST:
         producto.establecimiento_id=request.POST['establecimiento']
@@ -198,7 +223,8 @@ def registarProducto(request):
         if request.FILES:
             producto.imagen=request.FILES['imagen']
         producto.save()
-        producto.hash = Hash_parse(int(producto.id)+random.randint(1, 1000))
+        fecha=datetime.datetime.now()
+        producto.hash = Hash_parse(Hash_parse(str(fecha).replace(":","").replace(" ","").replace(".","").replace("-","")+str(producto.establecimiento_id)))
         producto.save()
         if int(request.POST.get("stock"))>0:
             Kardex(producto=producto, tipo="I",cantidad=request.POST.get('stock'),descripcion="Stock inicial debido a registro del producto No. %s"%producto.id).save()
@@ -206,7 +232,7 @@ def registarProducto(request):
         return HttpResponseRedirect("/products/edit/%s/?precio=on"%str(producto.id))
 
     contexto = {
-        'establecimientos': Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos': Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias': Categorias.objects.all().order_by('nombre'),
         'marcas': Marca.objects.all(),
         'subcategorias': Subcategorias.objects.all(),
@@ -223,8 +249,9 @@ def colores():
     print(colores)
     return colores
 
-
+@login_required(login_url='/store/login/')
 def productos_detalles(request,id):
+    generarTags(request)
     producto=Productos.objects.get(id=id)
     if request.POST:
         print(request.POST)
@@ -241,14 +268,13 @@ def productos_detalles(request,id):
         producto.codigo = request.POST['codigo']
         producto.etiquetas = request.POST['etiquetas']
         producto.detallesTecnicos=request.POST['tecnicos']
-        print(Hash_parse(producto.id))
         if request.FILES:
             producto.imagen=request.FILES['imagen']
         producto.save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha actualizado..!")
     contexto={
         'producto':producto,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
         'categorias':Categorias.objects.all(),
         'subcategorias':Subcategorias.objects.all(),
         'marcas':Marca.objects.all(),
@@ -263,13 +289,14 @@ def recorrertallas(request):
         valores+=i+","
     return (valores)
 
+@login_required(login_url='/store/login/')
 def registrarColores(request,id):
     if request.POST:
         Colores.objects.create(producto_id=id, codigoColor=request.POST['color'],nombre=request.POST['nombre']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
-
+@login_required(login_url='/store/login/')
 def eliminarColorProducto(request,id):
     color=Colores.objects.get(id=id)
     producto=color.producto.id
@@ -277,6 +304,7 @@ def eliminarColorProducto(request,id):
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
+@login_required(login_url='/store/login/')
 def registrarPrecios(request,id):
     web=True
     if request.POST:
@@ -286,10 +314,20 @@ def registrarPrecios(request,id):
             web=True
         else:
             web =False
-        Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle'],web=web).save()
+        try:
+            preciot=Precios.objects.get(producto_id=id,web=web)
+            preciot.web=False
+            preciot.save()
+            print("se registro")
+            Precios.objects.create(producto_id=id, precioVenta=precio, detalle=request.POST['detalle'], web=web).save()
+            messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
+        except Exception as error:
+            print(error)
+            Precios.objects.create(producto_id=id, precioVenta=precio,detalle=request.POST['detalle'],web=web).save()
         messages.add_message(request, messages.SUCCESS, "El registro se ha creado..!")
     return HttpResponseRedirect("/products/edit/%s/"%id)
 
+@login_required(login_url='/store/login/')
 def eliminarPrecios(request,id):
     precio=Precios.objects.get(id=id)
     producto=precio.producto.id
@@ -297,18 +335,35 @@ def eliminarPrecios(request,id):
     messages.add_message(request, messages.ERROR, "El registro se ha eliminado..!")
     return HttpResponseRedirect("/products/edit/%s/"%producto)
 
+@login_required(login_url='/store/login/')
+def editarPrecios(request,id):
+    web=False
+    if request.POST:
+        if request.POST.get('web') == 'on':
+            web=True
+        else:
+            web =False
+        precio=Precios.objects.get(id=id)
+        precio.precioVenta=float(str(request.POST['precio']))
+        precio.detalle=request.POST['detalle']
+        precio.web=web
+        precio.save()
+        messages.add_message(request, messages.INFO, "El registro se ha actualizado correctamente..!")
+        return HttpResponseRedirect("/products/edit/%s/"%precio.producto_id)
 
+@login_required(login_url='/store/login/')
 def kardex(request):
-    kax=Productos.objects.filter(establecimiento__usuario=request.user)
+    kax=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("establecimiento"):
         kax = Productos.objects.filter(establecimiento_id=request.GET.get("establecimiento"))
     contexto={
         'kardex':kax,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user),
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, "producto/kardex.html",contexto)
 
 
+@login_required(login_url='/store/login/')
 def kardex_producto(request,id):
     contexto={
         'kardex':Kardex.objects.filter(producto_id=id),
@@ -316,8 +371,9 @@ def kardex_producto(request,id):
     }
     return render(request, "producto/kardex_producto.html",contexto)
 
+@login_required(login_url='/store/login/')
 def inventario(request):
-    produc=Productos.objects.filter(establecimiento__usuario=request.user)
+    produc=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user)
     if request.GET.get("establecimiento"):
         produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'))
     if request.POST:
@@ -326,10 +382,11 @@ def inventario(request):
         messages.add_message(request, messages.SUCCESS, "Se ha registrado nuevo ingreso en kardex..!")
     contexto={
         'productos':produc,
-        'establecimientos':Establecimiento.objects.filter(usuario=request.user)
+        'establecimientos':Establecimiento.objects.filter(usuarioempresa__user=request.user)
     }
     return render(request, 'producto/inventario.html',contexto)
 
+@login_required(login_url='/store/login/')
 def subir_imagenes_producto(request,id):
     if request.POST:
         try:
@@ -339,12 +396,26 @@ def subir_imagenes_producto(request,id):
             print(e)
     return HttpResponse("ok")
 
+def eliminar_imagen(reqeust,id):
+    id_producto=0
+    try:
+        img = ImagenesProducto.objects.get(id=id)
+        id_producto=img.producto_id
+        img.delete()
+        messages.add_message(reqeust,messages.INFO, 'Se eliminó la imágen seleccionada..!')
+    except:
+        pass
+    return HttpResponseRedirect("/products/edit/%s/"%str(id_producto))
+
+
+@login_required(login_url='/store/login/')
 def promociones(request):
-    promo=Promociones.objects.filter(precio__producto__establecimiento__usuario=request.user)
-    produc=Productos.objects.filter(establecimiento__usuario=request.user)
+    promo=Promociones.objects.filter(precio__producto__establecimiento__usuarioempresa__user=request.user)
+    produc=Productos.objects.filter(establecimiento__usuarioempresa__user=request.user,precios__web=True)
+
     if request.GET.get('establecimiento'):
         promo=Promociones.objects.filter(precio__producto__establecimiento_id= request.GET.get('establecimiento'))
-        produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'))
+        produc = Productos.objects.filter(establecimiento_id=request.GET.get('establecimiento'),precios__web=True)
 
     if request.POST:
         Promociones(fechaInicio=request.POST.get('fecha_inicio'),fechaFinal=request.POST.get('fecha_fin'),precio_id=request.POST.get('precio'),
@@ -353,7 +424,7 @@ def promociones(request):
         print(request.POST)
 
     contexto={
-        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
+        "establecimientos":Establecimiento.objects.filter(usuarioempresa__user=request.user),
         "promociones":promo,
         "productos":produc
     }
@@ -367,6 +438,7 @@ def return_precio_web(request,id):
     }
     return JsonResponse(data)
 
+@login_required(login_url='/store/login/')
 def editarPromocion(request,id):
     promo = Promociones.objects.get(id=id)
     if request.POST:
@@ -382,6 +454,7 @@ def editarPromocion(request,id):
     else:
         return HttpResponseRedirect("/products/promo/")
 
+@login_required(login_url='/store/login/')
 def eliminarPromocion(request,id):
     promo =Promociones.objects.get(id=id)
     establecimiento=promo.precio.producto.establecimiento_id

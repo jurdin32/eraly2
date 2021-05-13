@@ -2,20 +2,20 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
-from Empresa.models import Establecimiento, ConfigurarDocumentos
+from Empresa.models import Establecimiento, ConfigurarDocumentos, Direccion
 from Home.models import Provincia
 from Personas.models import Clientes
 from Producto.models import Productos, Kardex, Precios
-from Store.models import DetalleCompraWeb
+from Store.models import DetalleCompraWeb, ComprasWeb
 from Ventas.models import Facturas, DetalleFactura, CuentasCobrar, Recibos
-from eraly2.snippers import render_pdf_view, export_pdf
+from eraly2.snippers import export_pdf
 from nlt import numlet as nl
 
 def proformas(request,id=0):
     establecimiento=None
     establecimientos=None
     productos=None
-    clientes=Clientes.objects.filter(establecimiento__usuario=request.user)
+    clientes=Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user)
     contadorDocumentos=""
     tipo=request.GET.get('tipo')
 
@@ -29,7 +29,7 @@ def proformas(request,id=0):
             contadorDocumentos = str(numero.facturas + Facturas.objects.filter(tipo=tipo, establecimiento=establecimiento).count()).zfill(10)
 
     else:
-        establecimientos = Establecimiento.objects.filter(usuario=request.user)
+        establecimientos = Establecimiento.objects.filter(usuarioempresa__user=request.user)
         contador=establecimientos.count()
         if contador == 1:
             for esta in establecimientos:
@@ -93,12 +93,15 @@ def registrarDetallesFacturaProforma(request,id):
 def registroClienteFacturaProforma(request,id):
     if request.POST:
         print(request.POST)
-        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'],
+        Clientes(establecimiento_id=id, cedula=request.POST['cedula'], nombres=request.POST['nombres'], email=request.POST['email'],
                  apellidos=request.POST['apellidos'],ciudad_id=request.POST['ciudad'],
                  direccion=request.POST['direccion'],
                  telefono=request.POST['telefono'],celular=request.POST['celular']).save()
         messages.add_message(request, messages.SUCCESS, "El registro se Creado..!")
-    return HttpResponseRedirect("/proforms/%s/"%id)
+    if request.GET.get('tipo'):
+        return HttpResponseRedirect("/proforms/%s/?tipo=%s"%(id,request.GET.get('tipo')))
+    else:
+        return HttpResponseRedirect("/clients/0/")
 
 def crearDocumentoPDF_Proforma(request, id):
     documento=Facturas.objects.get(id=id)
@@ -126,13 +129,13 @@ def crearDocumentoPDF_Factura(request, id):
 def listaDocumentos(request):
     documentos =None
     if int(request.GET["establecimiento"])==0:
-        documentos = Facturas.objects.filter(establecimiento__usuario=request.user)
+        documentos = Facturas.objects.filter(establecimiento__usuarioempresa__user=request.user)
     else:
         documentos=Facturas.objects.filter(establecimiento_id=request.GET["establecimiento"])
 
     contexto={
         'documentos':documentos,
-        "establecimientos":Establecimiento.objects.filter(usuario=request.user),
+        "establecimientos":Establecimiento.objects.filter(usuarioempresa__user=request.user),
     }
     return render(request, 'Ventas/ListaDocumentos.html',contexto)
 
@@ -145,7 +148,7 @@ def editarDocumentos(request,id):
         'establecimiento':documento.establecimiento,
         'productos':Productos.objects.filter(establecimiento=documento.establecimiento),
         'clientes':Clientes.objects.filter(establecimiento=documento.establecimiento),
-        'precios':Precios.objects.filter(producto__establecimiento__usuario=request.user),
+        'precios':Precios.objects.filter(producto__establecimiento__usuarioempresa__user=request.user),
     }
     return render(request, 'Ventas/editDocumentos.html', contexto)
 
@@ -169,14 +172,15 @@ def cuentasCobrar(request):
         CuentasCobrar(cantidad=request.POST['cantidad'], cliente_id=request.POST['cliente'],factura_numero=request.POST['factura_numero']).save()
         messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
-        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuario=request.user),
-        'clientes':Clientes.objects.filter(establecimiento__usuario=request.user)
+        'cuentas':CuentasCobrar.objects.filter(cliente__establecimiento__usuarioempresa__user=request.user),
+        'clientes':Clientes.objects.filter(establecimiento__usuarioempresa__user=request.user)
     }
     return render(request, 'Ventas/ListaCuentasCobrar.html',contexto)
 
 def abonos(request,id):
     if request.POST:
-        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
+        Recibos(cuenta_id=id,cantidad=request.POST['cantidad'],formaPago=request.POST['formaPago'],
+                numeroCheque=request.POST['cheque'],rebidoPor=request.user, recibiDe=request.POST['recibidoDe']).save()
         messages.add_message(request, messages.SUCCESS, "El Documento se ha registrado.!")
     contexto={
         'abonos': Recibos.objects.filter(cuenta_id = id),
@@ -195,7 +199,7 @@ def crearAbonosPDF(request, id):
     return export_pdf(request,'Ventas/rptAbonos.html',contexto)
 
 def autorizar_ComprasWeb(request):
-    compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuario=request.user)
+    compras=DetalleCompraWeb.objects.filter(producto__establecimiento__usuarioempresa__user=request.user)
     contador=compras.count()
 
     if request.GET.get('establecimiento'):
@@ -212,3 +216,12 @@ def autorizar_ComprasWeb(request):
         'total_compras':contador
     }
     return render(request,'Ventas/Ventas_Web.html',contexto)
+
+def info_cliente_compra(request,hash):
+    detalle=DetalleCompraWeb.objects.filter(compra__hash=hash).first()
+    direccion=detalle.producto.establecimiento.direccion_set.first
+    contexto={
+        'compra':ComprasWeb.objects.get(hash=hash),
+        'direccion_establecimiento':direccion
+    }
+    return render(request, 'Ventas/detalle_cliente_compra_web.html', contexto)

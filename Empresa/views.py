@@ -50,6 +50,12 @@ def modificar_empresa(request,id):
             establecimiento.cabecera_tienda=request.FILES['cabecera_tienda']
         except:
             pass
+        try:
+            establecimiento.banner1=request.FILES['banner1']
+        except: pass
+        try:
+            establecimiento.banner2=request.FILES['banner2']
+        except: pass
         establecimiento.ruc=request.POST['ruc']
         establecimiento.representateLegal=request.POST['representateLegal']
         establecimiento.nombreComercial=request.POST['nombreComercial']
@@ -97,7 +103,7 @@ def crear_direcciones(request,idEmpresa):
 
 def direcciones(request):
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
     }
     return render(request, "empresa/direcciones.html",contexto)
@@ -113,7 +119,7 @@ def modificar_direcciones(request,id):
         direccion.save()
         messages.add_message(request,messages.SUCCESS,"El registro de direcciones fue modificado existosamente..!")
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
     }
     return render(request, "empresa/direcciones.html",contexto)
@@ -129,7 +135,7 @@ def eliminar_direcciones(request,id):
     except:
         pass
     contexto={
-       "direcciones":Direccion.objects.filter(establecimiento__usuario=request.user),
+       "direcciones":Direccion.objects.filter(establecimiento__usuarioempresa__user=request.user),
         "provincias":Provincia.objects.all(),
         "mensaje":mensaje,
         "tipo":tipo,

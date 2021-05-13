@@ -1,0 +1,241 @@
+{% extends 'Home/index2.html' %}
+{% block contenido %}
+    {% load static %}
+    <div class="modal fade" id="form_despachar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="/store/autority/" method="post" class="form-label-left input_mask">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Costos de Envio del Paquete</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 ">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <br>
+                                    <div class="col-md-12 col-sm-12  form-group">
+                                        <span>Compañia de transportes</span>
+                                        <input class="form-control" type="text" id="transporte" name="transporte" value="Eraly Envíos" placeholder="Ingrese el Nombre de la Compañia de transporte">
+                                    </div>
+                                    <div class="col-md-3 col-sm-3  form-group">
+                                        <span>Numero de Items</span>
+                                        <input class="form-control cosas" type="text" id="cosas" name="cosas" readonly="readonly">
+                                    </div>
+                                    <div class="col-md-3 col-sm-3  form-group">
+                                        <span>Costo del Envío</span>
+                                        <input class="form-control" type="number" id="costo_envio" value="0.00" name="costo_envio" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success cerrar" onclick="cerrar()" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  <div class="">
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><small>Detalle de la Compra en Línea</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="invoice-header" style="padding-left: 12px">
+                          <h2>
+                            <i class="fa fa-calendar"></i> Fecha: {{ compra.fecha|date:"d M Y" }}
+                          </h2>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          Enviar desde:
+                          <address>
+                              <strong>{{ direccion_establecimiento.establecimiento }}</strong>
+                              <br><strong>{{ direccion_establecimiento.ciudad.provincia.pais.nombre }} - {{ direccion_establecimiento.ciudad.provincia.nombre }} - {{ direccion_establecimiento.ciudad.nombre }}</strong>
+                              <br>{{ direccion_establecimiento.direccion }}
+                              <br>Email: {{ direccion_establecimiento.establecimiento.usuario.email }}
+                              <br>Teléfono: {{ direccion_establecimiento.telefono }}
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          Enviar a:
+                          <address>
+                              <strong>{{  compra.usuario.usuario.get_full_name }}</strong>
+                             {% for direccion in compra.usuario.direccionesweb_set.all %}
+                                {% if direccion.envio %}
+                                    <br>{{ direccion.ciudad.provincia.pais.nombre }} - {{ direccion.ciudad.provincia.nombre }} - {{ direccion.ciudad.nombre }}
+                                    <br>{{ direccion.direccion }}
+                                    <br>Teléfono: {{ direccion.telefono }}
+                                    <br>Email: {{ direccion.usuarioWeb.usuario.email }}
+                                    <br>Observación: {{ direccion.observacion }}
+                                {% endif %} 
+                              {% endfor %}
+
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col" style="text-align: center">
+                          <strong>Orden No. # {{ compra.id|stringformat:"010d" }}</strong>
+                            <br>
+                            <img id="codigo" style="width: 40%">
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                            <thead>
+                              <tr style="background-color: #2A3F54; color: white">
+                                <th>Id</th>
+                                <th style="text-align: center">Cantidad</th>
+                                <th style="width: 30%">Producto</th>
+                                <th style="width: 30%">Descripción</th>
+                                <th style="text-align: right">Subtotal</th>
+                                <th style="text-align: right">IVA</th>
+                              <th style="text-align: right">Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {% for detalle in compra.detallecompraweb_set.all %}
+                                {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+                                <tr>
+                                <td>{{ detalle.producto.id }}- {{ detalle.etiqueta }}</td>
+                                <td style="text-align: center">{{ detalle.cantidad }}</td>
+                                <td>{{ detalle.producto.nombre }}</td>
+                                <td>
+                                    {% if detalle.talla %}
+                                        Talla: {{ detalle.talla }}
+                                    {% endif %}
+                                    {% if detalle.color %}
+                                    , Color: {{ detalle.color }}
+                                    {% endif %}
+                                </td>
+                                <td style="text-align: right">{{ detalle.precio_total }}</td>
+                                <td style="text-align: right">{{detalle.iva}}</td>
+                                <td style="text-align: right">{{detalle.total_general}}</td>
+                              </tr>
+                                {% endif %}
+
+                            {% endfor %}
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-md-9">
+                            <p><strong>Empresa de Envio:</strong> <input style="border: none; width: 80%" class="empEnvio" value="Eraly Envíos" name="empEnvio" type="text"></p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-3">
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%" >Subtotal:</th>
+                                  <td style="text-align: right" id="subtotal">0.00</td>
+                                </tr>
+                                <tr>
+                                  <th>IVA 12% </th>
+                                  <td style="text-align: right" id="iva">0.00</td>
+                                </tr>
+                                <tr>
+                                  <th>Envio:</th>
+                                  <td style="text-align: right" id="envio">0.00</td>
+                                </tr>
+                                <tr>
+                                  <th>Total:</th>
+                                  <td style="text-align: right" id="total">0.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class=" ">
+                          <a data-toggle="modal" data-target="#form_despachar" href="#" class="btn btn-danger"><i class="fa fa-money"></i> Costo Envío</a>
+                          <button class="btn btn-success pull-right" onclick=""><i class="fa fa-credit-card"></i> Autorizar Envío</button>
+                          <button class="btn btn-primary pull-right" onclick="" style="margin-right: 5px;"><i class="fa fa-download"></i> Imprimir Talón</button>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'vendors/JsBarcode.all.min.js' %}"></script>
+    <script>
+    let subtotal=0
+    let iva=0
+    let envio =0
+    let total=0
+    let contador=0
+    let etiqueta=""
+    {% for detalle in compra.detallecompraweb_set.all %}
+        {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+            subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
+            iva+=parseFloat('{{ detalle.iva }}'.replace(",","."))
+            total+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
+            contador+=1;
+            etiqueta='{{ detalle.etiqueta }}'
+        {% endif %}
+    {% endfor %}
+    JsBarcode("#codigo", etiqueta);
+    $("#subtotal").text(subtotal.toFixed(2))
+    $("#iva").text(iva.toFixed(2))
+    $("#total").text(total.toFixed(2))
+    $(".cosas").val(contador)
+
+    function cerrar(){
+        $(".empEnvio").val($("#transporte").val())
+        envio = parseFloat($("#costo_envio").val())
+        subtotal=0
+        iva=0
+        total=0
+        {% for detalle in compra.detallecompraweb_set.all %}
+            {% if detalle.producto.establecimiento == direccion_establecimiento.establecimiento %}
+                subtotal+=parseFloat('{{ detalle.precio_total }}'.replace(",","."))
+                iva+=parseFloat('{{ detalle.iva }}'.replace(",","."))
+                total+=parseFloat('{{ detalle.total_general }}'.replace(",","."))
+                contador+=1;
+            {% endif %}
+        {% endfor %}
+        $("#envio").text(envio.toFixed(2))
+        total =total+envio
+        $("#total").text(total.toFixed(2))
+    }
+
+    </script>
+{% endblock %}

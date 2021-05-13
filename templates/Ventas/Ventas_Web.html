@@ -7,8 +7,8 @@
     <div class="modal fade" id="from-despachar" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="/store/autority/" method="post" class="form-label-left input_mask">
-                    {% csrf_token %}
+                <form class="form-label-left input_mask">
+
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Despachar Mercaderia</h4>
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -20,45 +20,56 @@
                                 <div class="x_content">
                                     <br>
                                     <div class="col-md-12 col-sm-12  form-group">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                        <div class="alert alert-primary" style="font-weight: bold;">
+                                            <p>Clic en el enlace para ver los detalles del cliente
+                                                <a href="" target="_blank" id="ver_detalles_compra"></a>
+                                            </p>
+
+                                        </div>
+                                        <input type="hidden" readonly="readonly"
                                                id="codigo_compra" name="codigo_compra"
                                                placeholder="Codigo de la compra">
-                                        <span class="fa fa-code form-control-feedback left" aria-hidden="true"></span>
                                     </div>
 
-                                    <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                    <div class="col-md-3 col-sm-3  form-group">
+                                        <span>Código de Producto</span>
+                                        <input type="text" class="form-control" readonly="readonly"
+                                               id="px" style="text-align: center" placeholder="Código del Producto">
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3  form-group">
+                                        <span>Cantidad</span>
+                                        <input type="hidden" class="form-control has-feedback-left" readonly="readonly"
                                                id="producto_id"
-                                               style="text-align:center;background-color: #ff000f; color: white"
                                                name="producto_id"
                                                placeholder="Código del Producto">
-                                        <span class="fa fa-codepen form-control-feedback left"
-                                              aria-hidden="true"></span>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9  form-group has-feedback"></div>
 
-                                    <div class="col-md-12 col-sm-12  form-group has-feedback">
-                                        <input type="text" class="form-control has-feedback-left" readonly="readonly"
+                                        <input type="text" class="form-control" readonly="readonly" style="text-align: center"
+                                               id="cantidad" placeholder="Código del Producto">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6  form-group has-feedback"></div>
+
+                                    <div class="col-md-12 col-sm-12  form-group">
+                                        <span>Nombre del Producto</span>
+                                        <input type="text" class="form-control" readonly="readonly"
                                                id="nombre_producto" name="nombre_producto"
                                                placeholder="Nompre del Producto">
-                                        <span class="fa fa-product-hunt form-control-feedback left"
-                                              aria-hidden="true"></span>
                                     </div>
 
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly="readonly"
+                                    <div class="col-md-4 col-sm-4  form-group">
+                                        <span>Precio</span>
+                                        <input type="tel" class="form-control " readonly="readonly"
                                                id="precio" name="precio" placeholder="Precio">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                     </div>
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly id="iva"
+                                    <div class="col-md-4 col-sm-4  form-group">
+                                        <span>IVA 12%</span>
+                                        <input type="tel" class="form-control" readonly id="iva"
                                                name="iva" placeholder="IVA">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                     </div>
-                                    <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                        <input type="tel" class="form-control has-feedback-left" readonly id="total"
+                                    <div class="col-md-4 col-sm-4  form-group">
+                                        <span>Total</span>
+                                        <input type="tel" class="form-control" readonly id="total"
                                                name="total" placeholder="Total">
-                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                     </div>
 
                                 </div>
@@ -67,7 +78,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger">Autorizar Envío</button>
                     </div>
                 </form>
             </div>
@@ -217,7 +227,7 @@
                                                            style="cursor:pointer;color: #007bff"
                                                            data-target="#from-despachar" data-toggle="modal"
                                                            onclick="autorizar('{{ documento.compra.hash }}','{{ documento.id }}',
-                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}')">
+                                                                   '{{ documento.producto.nombre }}{% if documento.talla %}/Talla {{ documento.talla }}{% endif %}{% if documento.color %}/Color {{ documento.color }}{% endif %}','{{ documento.precio_total }}','{{ documento.cantidad }}','{{ documento.producto_id }}')">
                                                             <i class="fa fa-share-square-o"></i>Por Autorizar</a>
                                                     {% endif %}
 
@@ -251,8 +261,13 @@
             });
         });
 
-        function autorizar(hash, producto_id, nombre, precio) {
+        function autorizar(hash, producto_id, nombre, precio,cantidad,id_px) {
             $("#codigo_compra").val(hash)
+            $("#ver_detalles_compra").attr('href',"/store/autority/"+hash)
+            $("#ver_detalles_compra").text(hash.toUpperCase())
+            $("#px").val(id_px)
+            $("#cantidad").val(cantidad)
+            $("#producto_id").val(producto_id)
             $("#producto_id").val(producto_id)
             $("#nombre_producto").val($.trim(nombre))
             let precios = parseFloat(precio.replace(",", "."))

@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Eraly Desktop</title>
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="{% static '/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
@@ -35,7 +34,9 @@
             color: #e4c010;
         }
     </style>
+    {% block metas %}
 
+    {% endblock %}
 </head>
 
 <body class="nav-md">
@@ -70,9 +71,18 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
+                                <li><a><i class="fa fa-shopping-basket"></i> Mis tiendas <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        {% for tienda in request.session.tiendas_usuario %}
+                                        <li><a target="_blank" href="/{{ tienda.slug }}">{{ tienda.nombre }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Config. <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/users/">Gestionar Usuarios</a></li>
+                                        <li><a href="/business/user_register/">Gestionar Usuarios</a></li>
                                         <li><a href="/business/">Empresa</a></li>
                                         <li><a href="/directions/">Direcciones</a></li>
                                     </ul>

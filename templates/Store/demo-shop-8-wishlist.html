@@ -1,0 +1,76 @@
+{% extends 'Store/demo-shop-8-dashboard.html' %}
+
+{% load productosTags %}
+{% load humanize %}
+{% load mathfilters %}
+{% load static %}
+<div role="main" class="main">
+    {% block titulo %}Tú lista de deseos <i class="fa fa-smile-o"></i>{% endblock %}
+    {% block contenido %}
+        <div class="cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="cart-table-wrap">
+                            <table class="cart-table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for sess in favoritos %}
+                                    <tr>
+                                    <td class="product-action-td">
+                                            <a href="/store/wishlist/detelete/{{ sess.producto.hash }}/"
+                                               title="Remove product" class="btn-remove"><i
+                                                    class="fa fa-times"></i></a>
+                                        </td>
+
+                                        <td class="product-image-td">
+                                            <a href="/store/details/?hash={{ sess.producto.hash }}"
+                                               title="{{ sess.producto.nombre }}">
+                                                {% if sess.producto.imagen %}
+                                                    <img src="/media/{{ sess.producto.imagen }}"
+                                                         alt="{{ sess.producto.nombre }}">
+                                                {% else %}
+                                                    <img src="{% static 'noimagen.jpg' %}"
+                                                         alt="{{ sess.producto.nombre }}">
+                                                {% endif %}
+
+                                            </a>
+                                        </td>
+                                        <td class="product-name-td">
+                                            <h2 class="product-name">
+                                                <a href="/store/details/?hash={{ sess.producto.hash }}"
+                                                   style="text-decoration: none"
+                                                   title="Product Name">{{ sess.producto.nombre }}
+                                                    <i class="text-success">
+                                                        {% if sess.color != None %}
+                                                            , color  {{ sess.color }}
+                                                        {% endif %}
+                                                        {% if sess.talla != None %}
+                                                            , talla  {{ sess.talla }}
+                                                        {% endif %}
+                                                    </i>
+
+
+                                                </a>
+                                            </h2>
+                                        </td>
+                                        <td><i>{{ sess.producto.precios_set.all.last.total }}</i></td>
+                                        <td style="font-size: 20px;" class="text-danger"><i class="fa fa-heart"></i></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>

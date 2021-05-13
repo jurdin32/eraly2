@@ -157,6 +157,22 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Imagen para mostrar como publicidad en la tienda</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="file" name="banner1" id="banner1" class="form-control">
+                                    <span>Acualmente: </span>
+                                    <img style="width: 100%" src="/media/{{ establecimiento.banner1 }}" alt="">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Imagen para mostrar como publicidad en la tienda</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="file" name="banner2" id="banner2" class="form-control">
+                                    <span>Acualmente: </span>
+                                    <img style="width: 100%" src="/media/{{ establecimiento.banner2 }}" alt="">
+                                </div>
+                            </div>
+                            <div class="item form-group">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Sitio Web</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input type="text" name="web" value="{{ establecimiento.web }}" id="web" class="form-control">
@@ -206,6 +222,7 @@
                         <div class="dashboard-widget-content">
                             <ul class="list-unstyled timeline widget">
                                     <li style="padding: 20px">
+                                    <label for="">Cargue su logo</label>
                                         {% if establecimiento.logo %}
                                             <span>Logo Actual: {{ establecimiento.logo }}</span>
                                             <div style="padding: 10px;">
@@ -217,6 +234,7 @@
                                         <input type="file" name="logo" id="logo">
                                     </li>
                                     <li style="padding: 20px">
+                                        <label for="">Cargue su banner, se usa en facturación</label>
                                         {% if establecimiento.banner %}
                                             <span>Banner Actual: {{ establecimiento.banner }}</span><br>
                                             <div style="padding: 10px; text-align: center">
@@ -226,6 +244,7 @@
                                         <input type="file" name="banner" id="banner">
                                     </li>
                                     <li style="padding: 20px">
+                                    <label for="">Imágen al pie, se usa en facturación</label>
                                         {% if establecimiento.pie_pagina %}
                                             <span>Pie de Pagina Actual: {{ establecimiento.pie_pagina|truncatechars:70 }}</span><br>
                                             <div style="padding: 10px">

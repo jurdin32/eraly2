@@ -83,18 +83,17 @@
                                         <div class="product">
                                             <figure class="product-image-area"
                                                     style="margin: 30px ; border: 0px solid #ddd;">
-                                                <a href="/store/category/?categoria={{ ctienda.subcat }}" title="Product Name"
+                                                <a href="/store/category/?subcategoria={{ ctienda.subcat }}" title="Product Name"
 
                                                    class="product-image">
-                                                    <img src="/media/{{ ctienda.imagen }}"
-                                                         alt="Product Name" width="10px" height="10px">
+                                                    <img src="/media/{{ ctienda.imagen }}" style="border-radius: 20px">
                                                     {% comment %}<img src="{% static 'Store/img/demos/shop/products/shop8/product3-2.jpg' %}"
                                                      alt="Product Name" class="product-hover-image">{% endcomment %}
                                                 </a>
 
                                             </figure>
                                             <div class="product-details-area">
-                                                <h2 class="product-name"><a href="/store/category/?categoria={{ ctienda.subcat }}"
+                                                <h2 class="product-name"><a href="/store/category/?subcategoria={{ ctienda.subcat }}"
                                                                             title="Product Name">{{ ctienda.nombre }}</a>
                                                 </h2>
                                             </div>
@@ -112,8 +111,8 @@
     </div>
     <div class="container">
         <div class="banner-container">
-            <a href="#" class="banner">
-                <img src="/static/Store/img/demos/shop/banners/shop12/banner1.jpg" alt="Banner">
+            <a class="banner">
+                <img src="/media/{{ tienda.banner1 }}" alt="Banner">
                 <br>
             </a>
         </div>
@@ -153,7 +152,8 @@
                                                      <div class="col-md-6">
                                                          <div class="feature-box-info">
                                                              <span class="mb-sm">{{ estrella.nombre|upper }}</span>
-                                                            <p class="mb-lg">{{ estrella.descripcion|safe }}</p>
+                                                            <p class="mb-lg">{{ estrella.descripcion|safe|truncatechars:700 }} <a style="text-decoration: none; cursor: pointer"
+                                                                    href="/store/details/?hash={{ estrella.hash }}"><br>Ver más</a></p>
                                                         </div>
                                                      </div>
                                                  </div>
@@ -197,8 +197,8 @@
             </div>
             <div class="col-md-8">
                 <div class="banner-container">
-                    <a href="#" class="banner">
-                        <img src="/static/Store/img/1212.jpg" alt="Banner">
+                    <a class="banner">
+                        <img src="/media/{{ tienda.banner2 }}" alt="Banner">
                         <br>
                     </a>
                 </div>

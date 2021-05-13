@@ -72,7 +72,8 @@
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
-                                        <input type="number" class="form-control" name="precio" max="999999999999999999" step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
+                                        <input type="number" class="form-control" name="precio" max="999999999999999999"
+                                               step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
                                     </div>
@@ -104,7 +105,8 @@
     </div>
 
     <div class="">
-        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post" action="/products/new/?precio=on"
+        <form data-parsley-validate="" class="form-horizontal form-label-left" method="post"
+              action="/products/new/?precio=on"
               enctype="multipart/form-data">
             <div class="row">
                 {% csrf_token %}
@@ -118,9 +120,9 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control"  multiple>
                                         {% for categoria in categorias %}
-                                        <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
+                                            <option value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre|capfirst }}</option>
                                         {% endfor %}
                                     </select>
                                     <span>El tipo es Obligatorio</span>
@@ -130,7 +132,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="establecimiento" id="establecimiento" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control"  multiple>
                                         {% for establecimiento in establecimientos %}
                                             {% if producto.establecimiento.id == establecimiento.id %}
                                                 <option selected="selected"
@@ -145,8 +147,8 @@
                                 </div>
                             </div>
                             <div class="item form-group" id="codigo">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback" >
-                                    <input type="text"  name="codigo"
+                                <div class="col-md-12 col-sm-12 form-group has-feedback">
+                                    <input type="text" name="codigo"
                                            placeholder="Código de barra o codigo interno (Si aplica)"
                                            value="{{ producto.codigo }}" class="form-control">
                                     <span>Código de Barras o Código Interno</span>
@@ -156,7 +158,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
-                                            style="width: 100%" required="required" multiple>
+                                            required="required" multiple>
                                         {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
                                             {% for sub in categoria.subcategorias_2_set.all %}
@@ -175,7 +177,8 @@
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto o Servicio"
+                                    <input id="nombre" value="{{ producto.nombre }}"
+                                           placeholder="Nombre del Producto o Servicio"
                                            required="required" class="form-control" type="text" name="nombre">
                                     <span>El Nombre del Item es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
@@ -183,9 +186,9 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback"id="marca">
-                                    <select name="marca"  class="js-example-basic-single form-control"
-                                            style="width: 100%" multiple>
+                                <div class="col-md-12 col-sm-12 form-group has-feedback" id="marca">
+                                    <select name="marca" class="js-example-basic-single form-control"
+                                             multiple>
                                         {% for marca in marcas %}
                                             {% if producto.Marca == marca %}
                                                 <option selected="selected"
@@ -201,9 +204,10 @@
                             </div>
                             <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
-                                            style="width: 100%" multiple>
-                                         <option><option>
+                                    <select name="talla[]" class="js-example-basic-single2 form-control"
+                                           multiple>
+                                        <option>
+                                        <option>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -253,25 +257,26 @@
                         <div class="x_content">
                             <div class="item form-group" id="dTecnicos">
                                 <div class="col-md-12 col-sm-12">
-                                    <textarea name="tecnicos" id="tecnicos" >{{ producto.detallesTecnicos }}</textarea>
+                                    <textarea name="tecnicos" id="tecnicos">{{ producto.detallesTecnicos }}</textarea>
                                 </div>
                             </div>
                             <div class="item form-group" id="tags">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input value="{{ producto.etiquetas }}"
-                                           required="required" class="form-control" type="text" name="etiquetas">
-                                    <span>Escriba aquí todas las que considere necesario</span>
+                                    <input value="{{ producto.etiquetas }}" class="form-control" type="text"
+                                           id="etiquetas" name="etiquetas">
+                                    <span>Escriba aquí todas las que considere necesario, separe con comas o presione enter</span>
                                     <span class="fa fa-tags form-control-feedback right"
                                           aria-hidden="true"></span>
                                 </div>
                             </div>
-                                <div class="ln_solid"></div>
+                            <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <button class="btn btn-success" type="reset"><i class="fa fa-edit"> </i> Limpiar
                                 </button>
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-save"> </i> Guardar
                                 </button>
-                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i> Volver</a>
+                                <a href="/products/" id="regresar" class="btn btn-primary"><i class="fa fa-reply"> </i>
+                                    Volver</a>
                             </div>
                         </div>
                     </div>
@@ -283,24 +288,14 @@
 {% block script_index %}}
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="{% static 'ckeditor_custom.js' %}"></script>
     <script>
 
         let params = new URLSearchParams(location.search);
         var emp = params.get('empresa');
-        if (emp){
+        if (emp) {
             $("#establecimiento").val(emp).trigger('change')
-            $("#regresar").attr('href','/products/?empresa='+emp)
-        }
-
-       function ckeditor_(control){
-            CKEDITOR.replace(control,{
-            toolbar : [
-                ['TextColor', 'BGColor','-','Image', 'Table','-'],
-                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-            ]
-        });
+            $("#regresar").attr('href', '/products/?empresa=' + emp)
         }
         ckeditor_('tecnicos')
         ckeditor_('descripcion')
@@ -310,9 +305,12 @@
     <script>
         $(".js-example-basic-single").select2({
             maximumSelectionLength: 1,
-            placeholder: "Seleccione"
+            placeholder: "Seleccione",
+            width: 'resolve'
         });
-        $(".js-example-basic-single2").select2();
+        $(".js-example-basic-single2").select2({
+            width: 'resolve'
+        });
 
         function setTwoNumberDecimal(event) {
             this.value = parseFloat(this.value).toFixed(2);
@@ -325,10 +323,16 @@
                 $("#codigo").hide();
                 $("#marca").hide();
                 $("#talla").hide();
-                $("#imagen").show();
+                $("#imagen").hide();
                 $("#dTecnicos").hide();
                 $("#colores").hide();
-                $("#stock").hide();
+                $("#subirimagen").show();
+                $("#galeria").hide();
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
             }
             if(valor == "P"){
                 $("#codigo").show();
@@ -337,15 +341,31 @@
                 $("#imagen").show();
                 $("#dTecnicos").show();
                 $("#stock").show();
-                $("#detalles").show();
+                $("#detalles").show()
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
+                $("#subirimagen").show();
             }
             if(valor == "V" || valor=="I"){
                 $("#codigo").show();
                 if(valor=="V"){
                     $("#marca").show();
+                    $("#nombre_div").show();
+                    $("#nombre").attr('required','required');
+                    $("#colores").show();
+                    $("#subirimagen").show();
                 }
                 else{
                     $("#marca").hide();
+                    $("#nombre_div").hide();
+                    $("#nombre").removeAttr('required');
+                    $("#colores").hide();
+                    $("#precios_div").removeClass('col-md-6 col-sm-6');
+                    $("#precios_div").addClass('col-md-12 col-sm-12');
+                    $("#subirimagen").show();
                 }
                 $("#talla").hide();
                 $("#imagen").show();
@@ -355,5 +375,25 @@
             }
         }).change()
 
+    </script>
+    <script type="text/javascript" src="{% static 'jstags/js/jquery.amsify.suggestags.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jstags/css/amsify.suggestags.css' %}">
+    <script>
+        $("#etiquetas").amsifySuggestags({
+            suggestions: [
+                {% for tag in request.session.tags %}
+                {tag: '{{tag}}', value: '{{tag}}'},
+                {% endfor %}
+            ],
+            defaultTagClass: 'bg-primary text-light',
+            whiteList: false
+        });
+        $(".amsify-suggestags-input").attr('placeholder','Escriba etiquetas')
+        $("#etiquetas").keypress(function(e) {
+            console.log(e.keyCode)
+            if (e.keyCode == 13) {
+                return false;
+            }
+        })
     </script>
 {% endblock %}

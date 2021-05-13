@@ -1,6 +1,14 @@
 {% extends 'Store/demo-shop-8.html' %}
 {% load static %}
 {% load productosTags %}
+{% block metas %}
+<meta property="og:url"           content="https://eraly.app{{ request.get_full_path }}" />
+<meta property="og:type"          content="website"/>
+<meta property="og:title"         content="{{  producto.nombre }}" />
+<meta property="og:description"   content="{{ producto.descripcion|striptags|safe }}" />
+<meta property="og:image"         content="https://eraly.app/media/{{ producto.imagen }}" />
+
+{% endblock %}
 {% block content %}
     {% load humanize %}
     <style>
@@ -170,7 +178,7 @@
                                     <div class="review-link" style="display: block">
                                         <a class="review-link-in" rel="nofollow">
                                             <span class="count"><strong>Tienda: </strong></span>
-                                            {{ producto.establecimiento.nombreComercial }}</a>
+                                            <a style="text-decoration: none" href="/{{ producto.establecimiento.slug }}/">{{ producto.establecimiento.nombreComercial }}</a></a>
                                     </div>
 
                                     <div class="review-link">
@@ -178,31 +186,31 @@
                                            rel="nofollow">
                                             <span class="count"><strong>Ver toda la tienda </strong></span></a>
                                     </div>
+                                    <br>
+                                    <div class="fb-like review-link" style="margin-left: -10px;margin-top: 10px;"
+                                         data-href="https://eraly.app{{  request.get_full_path }}" data-width=""
+                                         data-layout="button_count" data-action="like" data-size="small" data-share="true">
 
-                                    <div class="product-short-desc" style="text-align: justify">
-
-                                        <p>{{ producto.descripcion|safe }}</p>
                                     </div>
-
                                     <div class="product-detail-info">
                                         <div class="product-price-box">
                                             {% if promocion %}
                                                 <span class="old-price">
                                                     {% for precio in producto.precios_set.all %}
                                                         {% if precio.web %}
-                                                            $ {{ precio.precioVenta }}
+                                                            $ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i>
                                                         {% endif %}
                                                     {% endfor %}
                                                 </span>
                                                 <br>
                                                 <span class="product-price">
-                                                    $ {{ promocion.total }}
+                                                    $ {{ promocion.total }} <i style="font-size: 10px"> + IVA</i>
                                                 </span>
                                             {% else %}
                                                 <span class="product-price">
                                                 {% for precio in producto.precios_set.all %}
                                                     {% if precio.web %}
-                                                        $ {{ precio.precioVenta }}
+                                                        $ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i>
                                                     {% endif %}
                                                 {% endfor %}
                                             </span>
@@ -251,7 +259,7 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Agregar al Carrito</span>
                                                     </a>
-                                                    <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                                    <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist" title="Add to Wishlist">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
                                                 </div>
@@ -267,7 +275,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tabs product-tabs">
+                        <div class="tabs product-tabs" style="padding-top: 30px">
                             <ul class="nav nav-tabs">
                                 <li class="active">
                                     <a href="#product-desc" data-toggle="tab">Descripción</a>
@@ -280,26 +288,25 @@
                                 <li>
                                     <a href="#product-reviews" data-toggle="tab">Calificaciones</a>
                                 </li>
+                                <li>
+                                    <a href="#product-etiquetas" data-toggle="tab">Etiquetas</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="product-desc" class="tab-pane active">
-                                    <div class="product-desc-area">
-                                        {{ producto.descripcion|safe }}<br>
+                                    <div class="product-desc-area" style="line-height: 23px">
+                                        {{ producto.descripcion|safe }}
                                         {% if producto.marca %}
-                                            Marca: {{ producto.marca }}<br>
+                                           <strong> Marca:</strong> <i>{{ producto.marca }}</i><br>
                                         {% endif %}
                                         {% if producto.talla %}
-                                            Tallas: {{ producto.talla }}<br>
-                                        {% endif %}
-
-                                        {% if producto.talla %}
-                                            Dimensiones: {{ producto.dimension }}<br>
+                                            <strong>Tallas:</strong> <i>{{ producto.talla }}</i><br>
                                         {% endif %}
                                         {% if  producto.colores_set.all %}
-                                            Colores:
+                                            <strong>Colores:</strong>
                                             <ul>
                                                 {% for color in producto.colores_set.all %}
-                                                    <li>{{ color }}</li>
+                                                    <li><i>{{ color }}</i></li>
                                                 {% endfor %}
                                             </ul>
                                         {% endif %}
@@ -380,6 +387,16 @@
 
                                     </div>
                                 </div>
+                                <div id="product-etiquetas" class="tab-pane">
+                                    <ul class="list-unstyled">
+                                        <span class="your-choice" style="">Etiquetas</span>
+                                    </ul>
+                                    {% with producto.etiquetas|split:"," as etiquetas %}
+                                            {% for tags in etiquetas %}
+                                                <a href="/store/search/?q={{ tags }}" class="label label-danger" style="font-size: 14px">{{ tags }}</a>
+                                            {% endfor %}
+                                        {% endwith %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -420,7 +437,7 @@
                                     <span class="product-price">
                                         {% for precio in product.precios_set.all %}
                                             {% if precio.web %}
-                                                $ {{ precio.total }}
+                                                $ {{ precio.precioVenta }} <i style="font-size: 10px"> + IVA</i>
                                             {% endif %}
                                         {% endfor %}
                                     </span>
@@ -428,16 +445,14 @@
                                     </div>
 
                                     <div class="product-actions">
-                                        <a href="#" class="addtowishlist" title="Add to Wishlist">
+                                        <a href="/store/fav/?hash={{ producto.hash }}" class="addtowishlist" title="Add to Wishlist">
                                             <i class="fa fa-heart"></i>
                                         </a>
                                         <a href="#" class="addtocart" title="Add to Cart">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Al Carrito</span>
                                         </a>
-                                        <a href="#" class="comparelink" title="Add to Compare">
-                                            <i class="glyphicon glyphicon-signal"></i>
-                                        </a>
+
                                     </div>
                                 </div>
                             </div>
@@ -469,6 +484,7 @@
                 </div>
 
                 <div class="feature-box feature-box-style-3">
+
                     <div class="feature-box-icon">
                         <i class="fa fa-support"></i>
                     </div>

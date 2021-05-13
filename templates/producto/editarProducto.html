@@ -27,7 +27,7 @@
                                             <label for="">Paleta</label>
                                             <div style="border: 1px solid lightgrey; height: 100%; padding: 10px">
                                             {% for color in colores %}
-                                                <i class="fa fa-square cx" data-nombre="{{ color.nombre }}" data-codigo="{{ color.codigoColor }}" style="color: {{ color.codigoColor }}; font-size: 18px; cursor: pointer" title="{{ color.nombre }}"></i>
+                                                <i class="fa fa-square cx" data-nombre="{{ color.nombre }}" data-codigo="{{ color.codigoColor }}" style="color: {{ color.codigoColor }}; font-size: 18px; cursor: pointer; border: lightgrey 1px solid" title="{{ color.nombre }}"></i>
                                             {% endfor %}
                                             </div>
                                         </div>
@@ -36,7 +36,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="input-group demo2" style="padding-left: 10px; padding-right: 10px">
-                                            <input type="text" value="#ffff" placeholder="#00000" name="color" id="color_codigo" readonly="readonly"
+                                            <input type="text" placeholder="#00000" name="color" id="color_codigo" readonly="readonly" required="required"
                                                    class="form-control"/>
                                             <span class="input-group-addon"><i></i></span>
                                         </div>
@@ -79,13 +79,12 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br>
-                            <form class="form-label-left input_mask" method="post"
-                                  action="/products/prices/{{ producto.id }}/">
+                            <form id="formprecio" action="/products/prices/{{ producto.id }}/" class="form-label-left input_mask" method="post">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <div class="col-md-12 col-sm-12">
-                                        <input type="number" class="form-control" name="precio" max="999999999999999999"
-                                               step="0.01" placeholder="0.00" onchange="setTwoNumberDecimal">
+                                        <input type="number" class="form-control" name="precio" id="precio" max="999999999999999999"
+                                               step="0.01" required="required" placeholder="0.00" onchange="setTwoNumberDecimal">
                                         <span class="fa fa-dollar form-control-feedback right"
                                               aria-hidden="true"></span>
                                     </div>
@@ -94,7 +93,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <ul class="to_do">
                                             <li>
-                                                <input type="checkbox" class="flat" name="web" style="position: absolute; opacity: 0;"> Precio para la Web </p>
+                                                <input type="checkbox" class="flat" id="web" name="web" style="position: absolute; opacity: 0;"> Precio para la Web </p>
                                             </li>
                                         </ul>
                                     </div>
@@ -152,7 +151,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="tipo" id="tipo" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control" multiple>
                                     {% for categoria in categorias %}
                                         {% if categoria.nombre|slice:1 == producto.subcategoria.subcategoria.categoria.nombre|slice:1 %}
                                          <option selected="selected" value="{{ categoria.nombre|slice:1 }}">{{ categoria.nombre }}</option>
@@ -169,7 +168,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="establecimiento" id="establecimiento" required="required"
-                                            class="js-example-basic-single form-control" style="width: 100%" multiple>
+                                            class="js-example-basic-single form-control" multiple>
                                         {% for establecimiento in establecimientos %}
                                             {% if producto.establecimiento.id == establecimiento.id %}
                                                 <option selected="selected"
@@ -195,7 +194,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="categoria" id="categoria" class="js-example-basic-single form-control"
-                                            style="width: 100%" required="required" multiple>
+                                            required="required" multiple>
                                         {% for categoria in subcategorias %}
                                             <optgroup label="{{ categoria.nombre }}"></optgroup>
                                             {% for sub in categoria.subcategorias_2_set.all %}
@@ -212,10 +211,9 @@
                                     <span class="fa fa-tags form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group" id="nombre_div">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"
-                                           required="required" class="form-control" type="text" name="nombre">
+                                    <input id="nombre" value="{{ producto.nombre }}" placeholder="Nombre del Producto"  class="form-control" type="text" name="nombre">
                                     <span>El Nombre del Producto es obligatorio</span>
                                     <span class="fa fa-shopping-basket form-control-feedback right"
                                           aria-hidden="true"></span>
@@ -224,7 +222,7 @@
                             <div class="item form-group" id="marca">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
                                     <select name="marca"  class="js-example-basic-single form-control"
-                                            style="width: 100%" multiple>
+                                             multiple>
                                         {% for marca in marcas %}
                                             {% if producto.marca == marca %}
                                                 <option selected="selected"
@@ -240,8 +238,7 @@
                             </div>
                             <div class="item form-group" id="talla">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <select name="talla[]"  class="js-example-basic-single2 form-control"
-                                            style="width: 100%" multiple>
+                                    <select name="talla[]"  class="js-example-basic-single2 form-control" multiple>
                                         <option value="XS">XS</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -258,11 +255,13 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input class="form-control" style="padding: -5px" type="file" name="imagen"
+                                <div class="col-md-1 col-sm-1" >
+                                    <img style="width: 100%" src="/media/{{ producto.imagen }}" alt="">
+                                </div>
+                                <div class="col-md-11 col-sm-11 form-group has-feedback" style="vertical-align: middle">
+                                    <input class="form-control" style="border: none" type="file" name="imagen"
                                            id="imagen"/>
                                     <span class="fa fa-image form-control-feedback right" aria-hidden="true"></span>
-                                    <span><strong>Actualmente:</strong> {{ producto.imagen }}</span>
                                 </div>
                             </div>
                             <div class="item form-group" id="detalles">
@@ -292,9 +291,8 @@
                             </div>
                         <div class="item form-group" id="tags">
                                 <div class="col-md-12 col-sm-12 form-group has-feedback">
-                                    <input value="{{ producto.etiquetas }}"
-                                           required="required" class="form-control" name="etiquetas">
-                                    <span>Escriba aquí todas las que considere necesario, separe con comas</span>
+                                    <input value="{{ producto.etiquetas }}" id="etiquetas" class="form-control" name="etiquetas">
+                                    <span>Escriba aquí todas las que considere necesario, separe con comas o presione enter</span>
                                     <span class="fa fa-tags form-control-feedback right"
                                           aria-hidden="true"></span>
                                 </div>
@@ -352,11 +350,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% if producto.tipo == "S" %}
-                        <div class="col-md-12 col-sm-12">
-                    {% else %}
-                        <div class="col-md-6 col-sm-6">
-                    {% endif %}
+                        <div class="col-md-6 col-sm-6" id="precios_div">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2><small>Precios (Al menos 1)</small></h2>
@@ -365,8 +359,11 @@
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                                aria-haspopup="true" aria-expanded="false">Nuevos Precios</a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a class="dropdown-item" data-toggle="modal"
-                                                       data-target="#registroPrecios"><i
+                                                <li><a style="cursor:pointer;" id="nprecio" class="dropdown-item"
+                                                       data-toggle="modal"
+                                                       data-target="#registroPrecios"
+                                                        data-enlace="/products/prices/{{ producto.id }}/"
+                                                ><i
                                                         class="fa fa-plus-circle"> </i>
                                                     Agregar</a>
                                                 </li>
@@ -376,29 +373,41 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <div class="item form-group">
-                                        <table class="countries_list" style="font-size: 16px">
+                                    <div class="item form-group table-responsive">
+                                        <table class="table">
                                             <tbody>
                                             {% for precio in producto.precios_set.all %}
                                                 <tr style="background-color: #0b97c4; color: white">
-                                                    <td><a href="/products/prices/delete/{{ precio.id }}/"><i
-                                                            class="fa fa-trash" style="color: white"></i></a></td>
+                                                    <td>
+                                                        <a href="/products/prices/delete/{{ precio.id }}/"><i
+                                                            class="fa fa-trash" style="color: white"></i></a>
+                                                        <a class="dataprecio" style="cursor:pointer;" data-target="#registroPrecios" data-toggle="modal"
+                                                           data-enlace="/products/prices/edit/{{ precio.id }}/"
+                                                           data-web="{{ precio.web }}"
+                                                           data-precio="{{ precio.precioVenta }}"
+                                                           data-detalle="{{ precio.detalle }}"
+                                                        ><i
+                                                            class="fa fa-edit" style="color: white"></i></a>
+                                                    </td>
                                                     <td>{{ precio.detalle }} {% if precio.web %} (Precio Web){% endif %} </td>
                                                     <td class="fs15 fw700 text-right">$ {{ precio.total }}</td>
                                                 </tr>
                                                 <tr>
+                                                <td></td>
                                                     <td>Precio sin Impuestos: </td>
-                                                    <td></td>
+
                                                     <td class="fs15 fw700 text-right">$ {{ precio.precioVenta }}</td>
                                                 </tr>
                                                 <tr>
+                                                <td></td>
                                                     <td>IVA:</td>
-                                                    <td></td>
+
                                                     <td class="fs15 fw700 text-right">$ {{ precio.iva }}</td>
                                                 </tr>
                                                 <tr>
+                                                <td></td>
                                                     <td>Total:</td>
-                                                    <td></td>
+
                                                     <td class="fs15 fw700 text-right">$ {{ precio.total }}</td>
                                                 </tr>
                                             {% endfor %}
@@ -452,19 +461,19 @@
                         {% for imagen in imagenes %}
                             <div class="col-md-2">
                             <div class="thumbnail">
-                                <div class="image view view-first">
-                                    <img style="width: 100%; display: block;" src="/media/{{ imagen.imagen}}" alt="image">
-                                    <div class="mask">
-                                        <p>Imagen {{ forloop.counter }} para el producto {{ producto.nombre }}</p>
+                                <div class="image view view-first" style="height: 100%">
+                                    <img style="width: 100%" src="/media/{{ imagen.imagen}}" alt="image">
+                                    <div class="mask" style="height: 100%">
+                                        <p style="padding-top: 24%">Imagen {{ forloop.counter }} para el producto {{ producto.nombre }}</p>
                                         <div class="tools tools-bottom">
-                                            <a href="#"><i class="fa fa-times"></i></a>
+                                            <a href="/products/images/delete/{{ imagen.id }}/"><i class="fa fa-trash-o"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="caption">
+                            </div>
+                            <div class="caption" style="text-align: center" >
                                     <p>Imagen {{ forloop.counter }}</p>
                                 </div>
-                            </div>
                         </div>
                         {% endfor %}
                     </div>
@@ -477,23 +486,21 @@
     <script src="/static/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script src="/static/vendors/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="{% static 'ckeditor_custom.js' %}"></script>
     <script>
-
-        function ckeditor_(control){
-            CKEDITOR.replace(control,{
-            toolbar : [
-                ['TextColor', 'BGColor','-','Image', 'Table','-'],
-                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-                ['-','NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-            ]
-        });
-        }
         ckeditor_('tecnicos')
         ckeditor_('descripcion')
     </script>
     <script src="{% static 'select2/js/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <style>
+    .colorpicker.colorpicker-with-alpha .colorpicker-alpha{
+        visibility: hidden;
+    }
+    .colorpicker-alpha, .colorpicker-hue {
+        width: 30px;
+    }
+    </style>
     <script>
         let params = new URLSearchParams(location.search);
         var pre = params.get('precio');
@@ -504,9 +511,12 @@
         }
 
         $(".js-example-basic-single").select2({
-            maximumSelectionLength: 1
+            maximumSelectionLength: 1,
+             width: 'resolve'
         });
-        $(".js-example-basic-single2").select2();
+        $(".js-example-basic-single2").select2({
+                 width: 'resolve'
+        });
 
         tallas = '{{ producto.talla }}'.split(",");
         $(".js-example-basic-single2").val(tallas).trigger('change');
@@ -525,8 +535,13 @@
                 $("#imagen").hide();
                 $("#dTecnicos").hide();
                 $("#colores").hide();
-                $("#subirimagen").hide();
+                $("#subirimagen").show();
                 $("#galeria").hide();
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
             }
             if(valor == "P"){
                 $("#codigo").show();
@@ -536,14 +551,30 @@
                 $("#dTecnicos").show();
                 $("#stock").show();
                 $("#detalles").show()
+                $("#nombre_div").show();
+                $("#nombre").attr('required','required');
+                $("#precios_div").addClass('col-md-6 col-sm-6');
+                $("#precios_div").removeClass('col-md-12 col-sm-12');
+                $("#colores").show();
+                $("#subirimagen").show();
             }
             if(valor == "V" || valor=="I"){
                 $("#codigo").show();
                 if(valor=="V"){
                     $("#marca").show();
+                    $("#nombre_div").show();
+                    $("#nombre").attr('required','required');
+                    $("#colores").show();
+                    $("#subirimagen").show();
                 }
                 else{
                     $("#marca").hide();
+                    $("#nombre_div").hide();
+                    $("#nombre").removeAttr('required');
+                    $("#colores").hide();
+                    $("#precios_div").removeClass('col-md-6 col-sm-6');
+                    $("#precios_div").addClass('col-md-12 col-sm-12');
+                    $("#subirimagen").show();
                 }
                 $("#talla").hide();
                 $("#imagen").show();
@@ -556,6 +587,41 @@
             $("#color_codigo").val($(this).data('codigo'));
             $("#nombre_color").val($(this).data('nombre'));
             console.log($(this).data('codigo'),$(this).data('nombre'))
+        })
+
+        $(".dataprecio").click(function (){
+            $("#formprecio").attr('action',$(this).data('enlace'))
+            $("#precio").val(parseFloat($(this).data('precio').replace(",",".")).toFixed(2))
+            $("#detalle").val($(this).data('detalle'))
+            if ($(this).data('web')=='True'){
+                $("#web").iCheck('check')
+            }
+            else{
+                $("#web").iCheck('uncheck')
+            }
+        })
+        $("#nprecio").click(function (){
+            $("#formprecio").attr('action',$(this).data('enlace'))
+        })
+    </script>
+    <script type="text/javascript" src="{% static 'jstags/js/jquery.amsify.suggestags.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jstags/css/amsify.suggestags.css' %}">
+    <script>
+        $("#etiquetas").amsifySuggestags({
+            suggestions: [
+                {% for tag in request.session.tags %}
+                {tag: '{{tag}}', value: '{{tag}}'},
+                {% endfor %}
+            ],
+            defaultTagClass: 'bg-primary text-light',
+            whiteList: false
+        });
+        $(".amsify-suggestags-input").attr('placeholder','Escriba etiquetas')
+        $("#etiquetas").keypress(function(e) {
+            console.log(e.keyCode)
+            if (e.keyCode == 13) {
+                return false;
+            }
         })
     </script>
 {% endblock %}

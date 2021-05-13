@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from Personas.models import UsuariosWeb
-from Producto.models import Productos
+from Producto.models import Productos, Precios
 from eraly2.snippers import ResizeImageMixin
 
 
@@ -43,12 +43,31 @@ class DetalleCompraWeb(models.Model):
     precio_promocion= models.DecimalField(max_digits=9, decimal_places=2, default=0)
     cantidad=models.IntegerField(default=0)
     precio_total= models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    iva=models.DecimalField(max_digits=9, decimal_places=2, default=0)
+    total_general=models.DecimalField(max_digits=9, decimal_places=2, default=0)
     autorizado=models.BooleanField(default=False)
     enviado=models.DateTimeField(null=True,blank=True,auto_now_add=True)
     etiqueta=models.CharField(max_length=100,null=True,blank=True)
     
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        self.iva=float(self.precio_total)*0.12
+        self.total_general=float(self.iva)+float(self.precio_total)
+
         self.etiqueta=str.upper(self.compra.hash[5:15])
         print(self.etiqueta)
         super(DetalleCompraWeb, self).save()
+
+class Favoritos(models.Model):
+    usuario=models.ForeignKey(UsuariosWeb,on_delete=models.CASCADE)
+    producto =models.ForeignKey(Productos,on_delete=models.CASCADE)
+    precio =models.DecimalField(default=0, max_digits=9, decimal_places=2)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        pre= Precios.objects.filter(producto=self.producto, web=True).last()
+        print("precio",pre)
+        if pre:
+            print(pre.precioVenta,pre.total)
+            self.precio=pre.total
+        super(Favoritos, self).save()
