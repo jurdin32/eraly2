@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'mathfilters',
     'rest_framework',
+    'rest_framework.authtoken',
     'ckeditor',
     'Empresa',
     'ckeditor_uploader',
