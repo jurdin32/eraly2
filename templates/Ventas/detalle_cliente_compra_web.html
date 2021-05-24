@@ -112,7 +112,8 @@
                                 <th style="width: 30%">Descripción</th>
                                 <th style="text-align: right">Subtotal</th>
                                 <th style="text-align: right">IVA</th>
-                              <th style="text-align: right">Total</th>
+                                <th style="text-align: right">Total</th>
+                                  <th style="text-align: right">Estado</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -133,6 +134,7 @@
                                 <td style="text-align: right">{{ detalle.precio_total }}</td>
                                 <td style="text-align: right">{{detalle.iva}}</td>
                                 <td style="text-align: right">{{detalle.total_general}}</td>
+                                <td style="">{{ detalle.autorizado }}</td>
                               </tr>
                                 {% endif %}
 
