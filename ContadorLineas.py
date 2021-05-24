@@ -43,8 +43,8 @@ for path in paths:
     print('Total de Lineas:',contador,'en el path:',path)
 
 print('Total de lineas:',total)
-print('Tiempo estimado, en horas:',total/30)
-print('Tiempo estimado, en dias:',(total/30)/24)
-print('Presupuesto:',total*.20)
+print('Tiempo estimado, en horas:',round(total/30))
+print('Tiempo estimado, en dias:',round((total/30)/24))
+print('Presupuesto:',round(total*.20,2))
 
 

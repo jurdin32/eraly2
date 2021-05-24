@@ -218,7 +218,7 @@ def autorizar_ComprasWeb(request):
     return render(request,'Ventas/Ventas_Web.html',contexto)
 
 def info_cliente_compra(request,hash):
-    detalle=DetalleCompraWeb.objects.filter(compra__hash=hash).first()
+    detalle=DetalleCompraWeb.objects.filter(compra__hash=hash,producto__establecimiento__usuario=request.user).first()
     direccion=detalle.producto.establecimiento.direccion_set.first
     contexto={
         'compra':ComprasWeb.objects.get(hash=hash),
