@@ -11,8 +11,6 @@
             size: A4 landscape;
             padding: 0;
             margin: 0;
-
-
         }
 
         body {
@@ -69,7 +67,8 @@
     <div style="height: 100%; width: 50%; float: left;">
     <table style="padding-left: 1cm; padding-right: 0.5cm;">
             <tr>
-                <td colspan="2">{{ documento.cliente.nombres|upper }} {{ documento.cliente.apellidos|upper }}</td>
+                <td>{{ documento.cliente.nombres|upper }} {{ documento.cliente.apellidos|upper }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td style=" width: 250px">{{ documento.cliente.cedula }}</td>
@@ -87,7 +86,8 @@
     <div style="height: 100%; width: 50%; float: right;">
         <table style="padding-left: 80px;">
             <tr>
-                <td colspan="2">{{ documento.cliente.nombres|upper }} {{ documento.cliente.apellidos|upper }}</td>
+                <td>{{ documento.cliente.nombres|upper }} {{ documento.cliente.apellidos|upper }}</td>
+                <td></td>
             </tr>
             <tr style="width: 100%">
                 <td style="width: 250px">{{ documento.cliente.cedula }}</td>
